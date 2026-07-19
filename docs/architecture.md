@@ -37,20 +37,38 @@ flowchart TD
 
 ## Cost cascade (why this beats a single-agent baseline)
 
-| Role | Model | Runs on |
-|---|---|---|
-| Solver x3 | `qwen3.6-flash` (cheapest) | every question |
-| Skeptic | `qwen3.7-plus` (mid) | only on disagreement |
-| Verifier | `qwen3.6-flash` (cheapest) | only on disagreement |
-| Judge | `qwen3.7-max` (flagship) | only on disagreement |
-| **Baseline** | `qwen3.7-max` (flagship) | every question, always |
+| Role | Model | Thinking | Runs on |
+|---|---|---|---|
+| Solver seat 1-2 | `qwen3.6-flash` (cheapest) | off | every question |
+| Solver seat 3 | `qwen3.7-plus` (mid) | off | every question |
+| Skeptic | `qwen3.7-plus` (mid) | off | only on disagreement |
+| Verifier | `qwen3.6-flash` (cheapest) | off | only on disagreement |
+| Judge | `qwen3.7-max` (flagship) | **on** | only on disagreement |
+| **Baseline** | `qwen3.7-max` (flagship) | on | every question, always |
 
-On a unanimous question, QuorumQA spends 3 cheap calls vs. the baseline's 1
-expensive call. On a split question, it spends those 3 cheap calls *plus*
-the escalation chain. The benchmark (`benchmark/run_benchmark.py` +
-`benchmark/score.py`) measures the actual blended cost-per-question and
-accuracy across a real GPQA-Diamond sample and reports both numbers
-side-by-side -- see `benchmark/results/summary.md` after a run.
+Two deliberate, measured design decisions here:
+
+**Thinking mode is a budget, spent only at the adjudication layer.** Qwen3
+hybrid models reason ("think") by default, billing reasoning tokens as
+output. Our first live smoke run showed three *thinking* flash solvers
+costing MORE than one thinking flagship call -- inverting the engine's
+whole premise. So the fast-voter roles run with `enable_thinking: false`
+(they exist to surface disagreement cheaply, not to deliberate), and the
+one role whose output is a final ruling -- the Judge -- keeps full
+reasoning. After this change, unanimous questions measured 2.5-6x cheaper
+than the baseline call.
+
+**The solver panel mixes model families** (flash/flash/plus) rather than
+running three clones of one model -- the Heter-MAD finding from the
+deliberation literature (arXiv:2502.08788): mixed-model panels beat
+same-model panels because their failure modes are less correlated. A
+unanimous-but-wrong panel is the one error this architecture cannot catch
+(nothing triggers escalation), so decorrelating the seats is what protects
+the accuracy floor.
+
+The benchmark (`benchmark/run_benchmark.py` + `benchmark/score.py`)
+measures the actual blended cost-per-question and accuracy across a real
+GPQA-Diamond sample -- see `benchmark/results/summary.md` after a run.
 
 ## Negotiation / conflict resolution
 
