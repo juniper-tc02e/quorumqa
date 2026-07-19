@@ -100,13 +100,13 @@ work, not a claim made here.
 
 ## Submission checklist
 
-- [ ] Repo public, MIT LICENSE visible in About section
-- [ ] Proof of Alibaba Cloud deployment: link to `deploy/oss_client.py`
-- [ ] Architecture diagram: `docs/architecture.md` (render the mermaid to PNG for the gallery)
+- [x] Repo public, MIT LICENSE visible in About section (github.com/juniper-tc02e/quorumqa)
+- [x] Proof of Alibaba Cloud deployment: `deploy/oss_client.py`, live-verified on ECS instance `magiachiral-prod` (`i-t4n5ukaobmzp3ckby557`, Singapore) — Qwen Cloud API call and OSS transcript upload both smoke-tested successfully from the instance, 2026-07-20
+- [x] Architecture diagram: `docs/architecture.md` (render the mermaid to PNG for the gallery)
 - [ ] Demo video ≤3 min, public on YouTube/Vimeo/Youku, link pasted
 - [ ] Track declared: Agent Society
 - [x] Final benchmark numbers inserted (n=90 complete run, 2026-07-19)
-- [ ] Testing access instructions in README (judges must be able to run it free)
+- [x] Testing access instructions in README (judges must be able to run it free)
 
 ## Demo video storyboard (≤3:00)
 
