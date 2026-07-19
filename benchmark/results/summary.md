@@ -1,10 +1,10 @@
 # QuorumQA Benchmark Results
 
-- Questions: 74
-- Baseline (single flagship-tier call) accuracy: 87.8%, $0.02323/question
-- QuorumQA accuracy: 79.7%, $0.02229/question
-- Self-consistency@5 (stretch baseline) accuracy: 63.5%, $0.00882/question
-- Escalation rate (questions needing Skeptic/Verifier/Judge): 41.9%
-- False-escalation rate (Judge invoked but only re-confirmed the plurality): 54.8%
-- Of 13 plurality overturns by the Judge, 12 were correct (92.3%)
-- QuorumQA cost delta vs baseline: -0.00094 USD/question (-4.1%)
+- Questions: 78
+- Baseline (single flagship-tier call) accuracy: 83.3%, $0.02499/question
+- QuorumQA accuracy: 78.2%, $0.02088/question
+- Self-consistency@5 (stretch baseline) accuracy: 59.0%, $0.00920/question
+- Escalation rate (questions needing Skeptic/Verifier/Judge): 35.9%
+- False-escalation rate (Judge invoked but only re-confirmed the plurality): 57.1%
+- Of 12 plurality overturns by the Judge, 9 were correct (75.0%)
+- QuorumQA cost delta vs baseline: -0.00411 USD/question (-16.4%)

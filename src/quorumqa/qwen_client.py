@@ -17,20 +17,34 @@ class JsonCallResult:
     usage: CallUsage
 
 
+def _loads_tolerant(payload: str) -> dict | list:
+    try:
+        return json.loads(payload)
+    except json.JSONDecodeError as exc:
+        if "Invalid \\escape" not in exc.msg:
+            raise
+        # GPQA answers are full of LaTeX (\Delta, \mu, \text{...}); models
+        # faithfully reproduce it inside JSON strings, where a lone
+        # backslash before anything but ["\\/bfnrtu] is illegal JSON.
+        # Escape those backslashes and retry -- deterministic, lossless.
+        sanitized = re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", payload)
+        return json.loads(sanitized)
+
+
 def _extract_json(text: str) -> dict:
     fenced = _FENCE_RE.search(text)
     candidate = fenced.group(1) if fenced else text
     start = candidate.find("{")
     end = candidate.rfind("}")
     if start != -1 and end != -1 and end > start:
-        return json.loads(candidate[start : end + 1])
+        return _loads_tolerant(candidate[start : end + 1])
     # Models sometimes answer a "list of claims" prompt with a bare JSON
     # array (e.g. '[]' when there is nothing to report) -- wrap it instead
     # of failing, callers read it via the "items" key.
     astart = candidate.find("[")
     aend = candidate.rfind("]")
     if astart != -1 and aend != -1 and aend > astart:
-        parsed = json.loads(candidate[astart : aend + 1])
+        parsed = _loads_tolerant(candidate[astart : aend + 1])
         if isinstance(parsed, list):
             return {"items": parsed}
     raise ValueError(f"No JSON object found in model output: {text[:300]!r}")
