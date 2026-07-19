@@ -22,9 +22,18 @@ def _extract_json(text: str) -> dict:
     candidate = fenced.group(1) if fenced else text
     start = candidate.find("{")
     end = candidate.rfind("}")
-    if start == -1 or end == -1 or end < start:
-        raise ValueError(f"No JSON object found in model output: {text[:300]!r}")
-    return json.loads(candidate[start : end + 1])
+    if start != -1 and end != -1 and end > start:
+        return json.loads(candidate[start : end + 1])
+    # Models sometimes answer a "list of claims" prompt with a bare JSON
+    # array (e.g. '[]' when there is nothing to report) -- wrap it instead
+    # of failing, callers read it via the "items" key.
+    astart = candidate.find("[")
+    aend = candidate.rfind("]")
+    if astart != -1 and aend != -1 and aend > astart:
+        parsed = json.loads(candidate[astart : aend + 1])
+        if isinstance(parsed, list):
+            return {"items": parsed}
+    raise ValueError(f"No JSON object found in model output: {text[:300]!r}")
 
 
 class QwenClient:

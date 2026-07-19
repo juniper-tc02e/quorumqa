@@ -35,7 +35,7 @@ def _extract_claims(client: QwenClient, question: str, solver_answers: list[Solv
         'for safe_calculate: {"expression": "..."})'
     )
     result = client.chat_json(model=VERIFIER_MODEL, system=EXTRACT_SYSTEM, user=user, role="verifier", thinking=False)
-    claims = result.data.get("claims", [])
+    claims = result.data.get("claims") or result.data.get("items") or []
     return (claims if isinstance(claims, list) else []), result.usage
 
 

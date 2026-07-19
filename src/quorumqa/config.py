@@ -25,6 +25,10 @@ MECHANICAL_MODEL = os.environ.get("QUORUMQA_MECHANICAL_MODEL", "qwen3.6-flash")
 # flagship-tier baseline call on cost. Skeptic/Verifier only run when
 # solvers split. Judge (most expensive) only runs on that same subset.
 SOLVER_MODEL = MECHANICAL_MODEL
+# Mixed-model solver panel (Heter-MAD finding: mixing model families beats
+# single-model panels): two flash seats + one plus seat, all thinking-free.
+# Index-aligned with SOLVER_LENSES.
+SOLVER_MODELS = [MECHANICAL_MODEL, MECHANICAL_MODEL, WORKER_MODEL]
 SKEPTIC_MODEL = WORKER_MODEL
 VERIFIER_MODEL = MECHANICAL_MODEL
 JUDGE_MODEL = ORCHESTRATOR_MODEL
