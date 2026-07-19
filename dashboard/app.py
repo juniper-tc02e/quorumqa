@@ -13,7 +13,9 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+_project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_project_root / "src"))
+sys.path.insert(0, str(_project_root))  # so `benchmark` (plain dir, not pip-installed) is importable
 
 from quorumqa.baseline import solve_single_agent
 from quorumqa.engine.orchestrator import run_question
@@ -110,7 +112,7 @@ def live_question_tab():
 
 def benchmark_tab():
     st.header("Benchmark scoreboard")
-    default_path = "benchmark/results/run.jsonl"
+    default_path = "benchmark/results/full_run2.jsonl"  # the final n=90 complete run
     path_str = st.text_input("Results file (from run_benchmark.py)", default_path)
     path = Path(path_str)
     if not path.exists():
