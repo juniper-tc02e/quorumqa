@@ -18,3 +18,11 @@ def test_bare_latex_array_wrapped():
     text = r'[{"claim": "\alpha decay"}]'
     data = _extract_json(text)
     assert data["items"][0]["claim"].endswith("decay")
+
+
+def test_backslash_runs_fixed_atomically():
+    # \\\d : escaped backslash followed by an invalid \d escape -- a naive
+    # left-to-right single-char sub corrupts this into a new invalid escape
+    text = r'{"reasoning": "regex \\\d matches digits, \Delta H too"}'
+    data = _extract_json(text)
+    assert "matches digits" in data["reasoning"]

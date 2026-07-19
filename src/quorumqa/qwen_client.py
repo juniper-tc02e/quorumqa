@@ -26,14 +26,31 @@ def _loads_tolerant(payload: str) -> dict | list:
         # GPQA answers are full of LaTeX (\Delta, \mu, \text{...}); models
         # faithfully reproduce it inside JSON strings, where a lone
         # backslash before anything but ["\\/bfnrtu] is illegal JSON.
-        # Escape those backslashes and retry -- deterministic, lossless.
-        sanitized = re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", payload)
+        # Fix per RUN of backslashes (a char-by-char sub would turn \\\d
+        # into a new invalid escape): an odd-length run followed by a
+        # non-escape char gains one backslash, making the whole run
+        # escaped-backslashes. Deterministic, lossless.
+        def _fix_run(m: re.Match) -> str:
+            run = m.group(0)
+            nxt = m.string[m.end() : m.end() + 1]
+            if len(run) % 2 == 1 and nxt not in '"\\/bfnrtu':
+                return run + "\\"
+            return run
+
+        sanitized = re.sub(r"\\+", _fix_run, payload)
         return json.loads(sanitized)
 
 
 def _extract_json(text: str) -> dict:
     fenced = _FENCE_RE.search(text)
-    candidate = fenced.group(1) if fenced else text
+    candidate = (fenced.group(1) if fenced else text).strip()
+    # Output that IS an array (e.g. a bare claims list) must take the
+    # array-wrap path first -- otherwise object-extraction would grab just
+    # the first element of a single-item array.
+    if candidate.startswith("["):
+        parsed = _loads_tolerant(candidate[: candidate.rfind("]") + 1])
+        if isinstance(parsed, list):
+            return {"items": parsed}
     start = candidate.find("{")
     end = candidate.rfind("}")
     if start != -1 and end != -1 and end > start:
