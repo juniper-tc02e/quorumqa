@@ -1,0 +1,11 @@
+openai>=1.40
+mcp>=1.2
+datasets>=2.19
+huggingface_hub>=0.24
+pydantic>=2.7
+python-dotenv>=1.0
+streamlit>=1.37
+pandas>=2.2
+oss2>=2.18
+pytest>=8.0
+pytest-asyncio>=0.23
