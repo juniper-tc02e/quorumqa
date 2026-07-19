@@ -25,11 +25,14 @@ MECHANICAL_MODEL = os.environ.get("QUORUMQA_MECHANICAL_MODEL", "qwen3.6-flash")
 # flagship-tier baseline call on cost. Skeptic/Verifier only run when
 # solvers split. Judge (most expensive) only runs on that same subset.
 SOLVER_MODEL = MECHANICAL_MODEL
-# Mixed-model solver panel (Heter-MAD finding: mixing model families beats
-# single-model panels): two flash seats + one plus seat, all thinking-free.
-# Index-aligned with SOLVER_LENSES.
-SOLVER_MODELS = [MECHANICAL_MODEL, MECHANICAL_MODEL, WORKER_MODEL]
-SKEPTIC_MODEL = WORKER_MODEL
+# All-flash solver panel. We TRIED the Heter-MAD mixed panel (flash/flash/
+# plus) first; the measured 74-question run showed the no-thinking plus seat
+# was both the weakest solver (54.1% vs flash's 66-72%) and the source of
+# every JSON-malformation drop. Panel diversity now comes from distinct
+# lenses + per-seat temperature (below) instead of model family.
+SOLVER_MODELS = [MECHANICAL_MODEL, MECHANICAL_MODEL, MECHANICAL_MODEL]
+SOLVER_TEMPERATURES = [0.3, 0.6, 0.9]
+SKEPTIC_MODEL = MECHANICAL_MODEL  # same measured reliability rationale
 VERIFIER_MODEL = MECHANICAL_MODEL
 JUDGE_MODEL = ORCHESTRATOR_MODEL
 BASELINE_MODEL = ORCHESTRATOR_MODEL  # the required single-agent baseline
