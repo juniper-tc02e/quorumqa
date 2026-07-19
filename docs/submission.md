@@ -84,6 +84,20 @@ second-opinion routing. GPQA is the proving ground because its public answer
 key makes every claim auditable — judges can re-run our benchmark script and
 check the numbers themselves.
 
+**Business model:** open-core. The adjudication engine (this repo,
+MIT-licensed) stays free and drives adoption; verticals with real appeal and
+audit exposure pay for vertical lens libraries, an escalation-integrity
+dashboard, and self-hosted/compliance-ready packaging — priced per-decision
+or as a platform license, not inference margin. The moat isn't the
+orchestration algorithm (a well-resourced lab will always out-engineer
+that) — it's the audit-artifact format and each customer's own accumulated
+calibration data becoming what reviewers and regulators come to trust.
+
+**Roadmap, stated honestly:** the engine and the n=90 benchmark above are
+real and independently reproducible. A pilot customer, a validated price
+point, and vertical-specific lens libraries are not — that's next-quarter
+work, not a claim made here.
+
 ## Submission checklist
 
 - [ ] Repo public, MIT LICENSE visible in About section
