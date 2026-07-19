@@ -16,9 +16,10 @@ def _solve_one(client: QwenClient, question: str, choices: list[str], lens: str)
     choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
     user = (
         f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}'
+        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
-    result = client.chat_json(model=SOLVER_MODEL, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver")
+    result = client.chat_json(model=SOLVER_MODEL, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False)
     letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
         letter=letter if letter in "ABCD" else "A",

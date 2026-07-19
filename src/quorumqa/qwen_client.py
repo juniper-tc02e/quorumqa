@@ -43,12 +43,18 @@ class QwenClient:
             base_url=base_url or DASHSCOPE_BASE_URL,
         )
 
-    def chat(self, model: str, messages: list[dict], role: str, temperature: float = 0.4, max_tokens: int = 1024) -> tuple[str, CallUsage]:
+    def chat(self, model: str, messages: list[dict], role: str, temperature: float = 0.4, max_tokens: int = 1024, thinking: bool = True) -> tuple[str, CallUsage]:
+        # Qwen3 hybrid models think by default, billing reasoning tokens as
+        # output. Cheap fast-voter roles (solvers/skeptic/verifier) disable
+        # it -- three thinking "cheap" calls otherwise cost more than one
+        # flagship call, inverting the engine's whole economic premise.
+        extra_body = {} if thinking else {"enable_thinking": False}
         resp = self._client.chat.completions.create(
             model=model,
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
+            extra_body=extra_body,
         )
         content = resp.choices[0].message.content or ""
         usage = price_call(
@@ -68,6 +74,7 @@ class QwenClient:
         temperature: float = 0.4,
         max_tokens: int = 1024,
         retries: int = 1,
+        thinking: bool = True,
     ) -> JsonCallResult:
         messages = [
             {"role": "system", "content": system + "\n\nRespond with ONLY a single valid JSON object. No markdown, no commentary before or after."},
@@ -77,7 +84,7 @@ class QwenClient:
         spent_input = spent_output = 0
         spent_cost = 0.0
         for attempt in range(retries + 1):
-            content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens)
+            content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
             spent_input += usage.input_tokens
             spent_output += usage.output_tokens
             spent_cost += usage.cost_usd
@@ -91,5 +98,5 @@ class QwenClient:
             except (ValueError, json.JSONDecodeError) as exc:
                 last_error = exc
                 messages.append({"role": "assistant", "content": content})
-                messages.append({"role": "user", "content": "That was not valid JSON. Respond again with ONLY the JSON object."})
+                messages.append({"role": "user", "content": "That was not valid JSON (it may have been cut off). Respond again with ONLY the complete JSON object, keeping every string value under 50 words."})
         raise ValueError(f"Model {model} failed to return parseable JSON after {retries + 1} attempts: {last_error}")

@@ -30,7 +30,7 @@ def rebut(
         '"disputed_step": "the specific inferential step you dispute", '
         '"argument": "your rebuttal argument"}'
     )
-    result = client.chat_json(model=SKEPTIC_MODEL, system=SKEPTIC_SYSTEM, user=user, role="skeptic")
+    result = client.chat_json(model=SKEPTIC_MODEL, system=SKEPTIC_SYSTEM, user=user, role="skeptic", thinking=False)
     rebuttal = SkepticRebuttal(
         target_letter=str(result.data.get("target_letter", plurality_letter)).strip().upper()[:1],
         disputed_step=str(result.data.get("disputed_step", "")),

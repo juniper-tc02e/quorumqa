@@ -34,7 +34,7 @@ def _extract_claims(client: QwenClient, question: str, solver_answers: list[Solv
         '"arguments": {...}}]} (arguments for lookup_constant: {"name": "..."}; '
         'for safe_calculate: {"expression": "..."})'
     )
-    result = client.chat_json(model=VERIFIER_MODEL, system=EXTRACT_SYSTEM, user=user, role="verifier")
+    result = client.chat_json(model=VERIFIER_MODEL, system=EXTRACT_SYSTEM, user=user, role="verifier", thinking=False)
     claims = result.data.get("claims", [])
     return (claims if isinstance(claims, list) else []), result.usage
 
@@ -48,7 +48,7 @@ def _finalize(client: QwenClient, executed: list[dict]) -> tuple[list[VerifierFi
         'JSON shape: {"findings": [{"claim": "...", "supports_claim": true/false, '
         '"explanation": "..."}]} (one entry per claim above, same order)'
     )
-    result = client.chat_json(model=VERIFIER_MODEL, system=FINALIZE_SYSTEM, user=user, role="verifier")
+    result = client.chat_json(model=VERIFIER_MODEL, system=FINALIZE_SYSTEM, user=user, role="verifier", thinking=False)
     findings_raw = result.data.get("findings", [])
     findings = []
     for c, f in zip(executed, findings_raw if isinstance(findings_raw, list) else []):

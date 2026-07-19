@@ -24,10 +24,17 @@ log = logging.getLogger(__name__)
 
 
 async def _run_one(client, tool_session, item, semaphore, include_self_consistency):
-    async with semaphore:
-        baseline = await asyncio.to_thread(solve_single_agent, client, item)
-        engine_result = await run_question(client, tool_session, item)
-        sc5 = await asyncio.to_thread(solve_self_consistency5, client, item) if include_self_consistency else None
+    # One question failing (e.g. persistent JSON truncation from a single
+    # role) must not kill the whole run -- log it, drop the question from
+    # BOTH systems (keeps the comparison fair), and continue.
+    try:
+        async with semaphore:
+            baseline = await asyncio.to_thread(solve_single_agent, client, item)
+            engine_result = await run_question(client, tool_session, item)
+            sc5 = await asyncio.to_thread(solve_self_consistency5, client, item) if include_self_consistency else None
+    except Exception:
+        log.exception("%s: DROPPED after unrecoverable error", item.question_id)
+        return None
     log.info(
         "%s: baseline=%s(%s) engine=%s(%s, escalated=%s) cost b=$%.5f e=$%.5f",
         item.question_id,
@@ -53,7 +60,13 @@ async def main(n: int, seed: int, concurrency: int, include_self_consistency: bo
             for item in items
         ]
         for coro in asyncio.as_completed(tasks):
-            results.append(await coro)
+            outcome = await coro
+            if outcome is not None:
+                results.append(outcome)
+
+    dropped = len(items) - len(results)
+    if dropped:
+        log.warning("%d/%d questions dropped due to unrecoverable errors -- see log above", dropped, len(items))
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:

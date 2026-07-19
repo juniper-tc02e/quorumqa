@@ -30,7 +30,7 @@ class FakeQwenClient:
         self._judge_verdict = judge_verdict
         self._verifier_call_count = 0
 
-    def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1):
+    def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
         if role == "solver":
             lens = next(l for l in SOLVER_LENSES if l in system)
             return JsonCallResult(

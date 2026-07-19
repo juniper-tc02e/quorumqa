@@ -11,13 +11,14 @@ BASELINE_SYSTEM = (
 )
 
 
-def _ask_once(client: QwenClient, model: str, item: GPQAItem, role: str):
+def _ask_once(client: QwenClient, model: str, item: GPQAItem, role: str, thinking: bool = True):
     choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", item.choices))
     user = (
         f"Question: {item.question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "reasoning": "..."}'
+        'JSON shape: {"letter": "A|B|C|D", "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences."
     )
-    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role)
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
     letter = str(result.data.get("letter", "")).strip().upper()[:1]
     return (letter if letter in "ABCD" else "A"), result.usage
 
@@ -44,7 +45,8 @@ def solve_self_consistency5(client: QwenClient, item: GPQAItem) -> BaselineResul
     letters = []
     calls = []
     for _ in range(5):
-        letter, usage = _ask_once(client, SOLVER_MODEL, item, role="baseline")
+        # thinking=False to mirror the engine's Solver configuration exactly
+        letter, usage = _ask_once(client, SOLVER_MODEL, item, role="baseline", thinking=False)
         letters.append(letter)
         calls.append(usage)
     final_letter = Counter(letters).most_common(1)[0][0]
