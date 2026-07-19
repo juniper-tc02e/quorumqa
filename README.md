@@ -8,10 +8,19 @@ tool-using Verifier (via a real MCP server), and a Judge escalate and
 resolve the disagreement -- and the Judge's ruling, including any unresolved
 dissent, is recorded verbatim, never papered over into false consensus.
 
-Benchmarked against a single flagship-model baseline on the same GPQA-Diamond
-questions: see [`docs/architecture.md`](docs/architecture.md) for the design
-and [`benchmark/results/summary.md`](benchmark/results/summary.md) (after
-running the benchmark) for the measured accuracy/cost numbers.
+**Measured on the full 90-question GPQA-Diamond set (complete run, no
+dropped questions):** organizing the same cheap models into a society lifts
+accuracy from 58.9% (self-consistency@5 ensemble) to **78.9%** — closing
+~78% of the gap to a thinking flagship agent (84.4%) at **11% lower cost**
+than the flagship ($0.0213 vs $0.0240/question). The Judge overturned the
+solver panel's plurality 14 times and was correct in 11 (78.6%).
+
+See [`docs/architecture.md`](docs/architecture.md) for the design,
+[`benchmark/results/summary.md`](benchmark/results/summary.md) for the full
+scorecard, and [`docs/submission.md`](docs/submission.md) for the hackathon
+submission text. Re-run everything yourself with the two commands in
+"Quickstart" below -- the dataset answer key is public, nothing is
+self-graded.
 
 ## Quickstart
 

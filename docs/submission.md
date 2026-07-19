@@ -45,15 +45,26 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
 - **Dialogue & negotiation:** the Skeptic's rebuttal, the minority solver's
   standing rationale, and the Verifier's tool-grounded evidence form a real
   adversarial exchange that the Judge adjudicates.
-- **Measurable efficiency gain:** benchmarked head-to-head against a single
-  `qwen3.7-max` agent on the same GPQA-Diamond sample with per-call token
-  and cost instrumentation. Reported metrics: accuracy, cost/question,
-  escalation rate, **false-escalation rate** (Judge invoked but merely
-  re-confirmed the plurality — the escalation paying for nothing), and
-  **overturn-and-correct rate** (Judge overruled the majority and was right
-  — the escalation earning its keep). Numbers come from a committed,
-  re-runnable benchmark script, not estimates.
-  **[INSERT FINAL NUMBERS FROM benchmark/results/summary.md BEFORE SUBMITTING]**
+- **Measurable efficiency gain (final numbers, n=90 GPQA-Diamond, complete
+  run, zero dropped questions, from the committed re-runnable script):**
+
+  | System | Accuracy | Cost/question |
+  |---|---|---|
+  | Self-consistency@5 — the same cheap tier, no society | 58.9% | $0.0093 |
+  | **QuorumQA — the same cheap tier, organized as a society** | **78.9%** | **$0.0213** |
+  | Single flagship agent (`qwen3.7-max`, thinking) | 84.4% | $0.0240 |
+
+  **Headline: organizing the same cheap models into a society buys +20.0
+  accuracy points over using them as a plain ensemble — closing ~78% of the
+  gap to the thinking flagship while costing 11% less than it.**
+
+  Escalation mechanics, measured: escalation rate 37.8% (62% of questions
+  never pay for the expensive roles at all; unanimous questions cost
+  ~$0.004 vs the baseline's ~$0.024); the Judge overturned the solver
+  plurality 14 times and was right in 11 (78.6%) — adjudication by argument
+  demonstrably beats majority vote; false-escalation rate 58.8% (reported
+  honestly: the cost of the escalations that merely re-confirmed the
+  panel).
 
 ### Qwen Cloud usage
 
@@ -80,7 +91,7 @@ check the numbers themselves.
 - [ ] Architecture diagram: `docs/architecture.md` (render the mermaid to PNG for the gallery)
 - [ ] Demo video ≤3 min, public on YouTube/Vimeo/Youku, link pasted
 - [ ] Track declared: Agent Society
-- [ ] Final benchmark numbers inserted (two places above)
+- [x] Final benchmark numbers inserted (n=90 complete run, 2026-07-19)
 - [ ] Testing access instructions in README (judges must be able to run it free)
 
 ## Demo video storyboard (≤3:00)
@@ -88,8 +99,8 @@ check the numbers themselves.
 | Time | Beat | On screen |
 |---|---|---|
 | 0:00–0:15 | Hook + generalization up front: "Vote cheap, escalate on disagreement — the pattern behind claims triage, moderation appeals, medical second opinions. We prove it on the hardest auditable ground there is: a Google-proof PhD exam." | Title card → dashboard |
-| 0:15–0:40 | Single flagship agent confidently answers a real GPQA question **wrong** — checked live against the public key | Baseline panel, red X |
-| 0:40–1:30 | Same question through the society: 3 solver cards → live 2–1 split highlight → Skeptic rebuttal streams in → Verifier's MCP tool call shown in the log ("every number forced through a tool, never memory") → Judge's Verdict Card renders with dissent quoted verbatim → green check | Dashboard live run |
+| 0:15–0:40 | Single flagship agent confidently answers a real GPQA question **wrong** — checked live against the public key. Use question `recBhnXrUyTJ6WHIR` (baseline wrong, society correct in the benchmark run) | Baseline panel, red X |
+| 0:40–1:30 | Same question through the society: 3 solver cards → live 2–1 split highlight → Skeptic rebuttal streams in → Verifier's MCP tool call shown in the log ("every number forced through a tool, never memory") → Judge's Verdict Card renders with dissent quoted verbatim → green check. For the overturn beat, `recIj8lR4tuDgrHou` (Quantum Mechanics, plurality D overruled to correct C) | Dashboard live run |
 | 1:30–2:10 | Scoreboard: accuracy bars (baseline vs QuorumQA), cost/question bars, escalation rate, false-escalation rate ("the expensive calls earn their keep") | Benchmark tab |
 | 2:10–2:45 | Zoom out: same engine, swap the domain — name the three verticals again; GPQA chosen because judges can re-run the script and audit every number | Architecture diagram |
 | 2:45–3:00 | Headline number + repo link | Close card |
