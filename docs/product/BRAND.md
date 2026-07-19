@@ -13,11 +13,12 @@ reference instead of wearing it as a costume.
 Legal guardrails (non-negotiable):
 - No Studio Khara/Gainax marks, logos, character art, or the NERV leaf.
 - No Matisse EB (the Eva title font — licensed); we use free stand-ins.
-- Seat names use the **biblical Magi** (Casper, Balthasar, Melchior) —
-  public domain; Evangelion itself borrowed them.
-- Anime references live in *subtext* (layout, color, motion), never in
-  copy. The product reads as a serious instrument to someone who has never
-  seen Eva, and as an obvious homage to someone who has.
+- Anime references live in *subtext* (layout, color, motion, the tri-hex
+  mark, the product name itself), never in copy or seat labels. Decided
+  2026-07-19: the biblical-Magi seat names (Casper/Balthasar/Melchior) were
+  cut for being too niche a reference for a general audience — see §5. The
+  product reads as a serious instrument to someone who has never seen Eva,
+  and as an obvious homage to someone who has.
 
 One-line brand: **"Three minds. One verdict. Dissent on the record."**
 
@@ -81,9 +82,9 @@ content surfaces; the accents do the work.
 | Surface | Name |
 |---|---|
 | Product | MagiAchiral |
-| Solver seats | **CASPER-1, BALTHASAR-2, MELCHIOR-3** (displayed in mono, with seat model underneath) |
+| Solver seats | **SEAT 1 · FIRST PRINCIPLES, SEAT 2 · ELIMINATION, SEAT 3 · RECALL** (displayed in mono, with model tier underneath) — named for each seat's actual reasoning lens (matches `SOLVER_LENSES` in the engine), not an arbitrary label. Decided 2026-07-19: cut the biblical-Magi names (Casper/Balthasar/Melchior) for being too niche; kept the three-seat structure and the tri-hex mark as the sole Eva-adjacent element |
 | Tiers | **Quorum** (default) / **Tribunal** |
-| Escalation roles | Skeptic, Verifier, Judge (plain English — clarity over lore; the lore lives in the seats) |
+| Escalation roles | Skeptic, Verifier, Judge (plain English) |
 | Answer artifact | **Verdict Card** |
 | Audit trail | Transcript |
 
