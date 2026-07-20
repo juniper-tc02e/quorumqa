@@ -5,9 +5,10 @@
 ## Elevator pitch (for the Devpost tagline field)
 
 An agent society that argues only when it's worth arguing: three cheap Qwen
-solvers vote independently; a Skeptic, a tool-using Verifier, and a Judge are
-summoned only on disagreement — matching flagship-model accuracy on
-"Google-proof" PhD-level science questions at a fraction of the cost.
+solvers vote independently, and a Skeptic, a tool-using Verifier and a flagship
+Judge are summoned only on the 37.8% of questions where they disagree — closing
+most of the gap to a flagship model on "Google-proof" PhD-level science
+questions while costing 11% less than running that flagship on everything.
 
 ## Text description (paste into "About the project")
 
@@ -51,12 +52,15 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
   | System | Accuracy | Cost/question |
   |---|---|---|
   | Self-consistency@5 — the same cheap tier, no society | 58.9% | $0.0093 |
-  | **QuorumQA — the same cheap tier, organized as a society** | **78.9%** | **$0.0213** |
+  | **QuorumQA — cheap panel, flagship Judge only on a split** | **78.9%** | **$0.0213** |
   | Single flagship agent (`qwen3.7-max`, thinking) | 84.4% | $0.0240 |
 
-  **Headline: organizing the same cheap models into a society buys +20.0
-  accuracy points over using them as a plain ensemble — closing ~78% of the
-  gap to the thinking flagship while costing 11% less than it.**
+  **Headline: +20.0 accuracy points over the identical cheap models run as a
+  plain ensemble, closing ~78% of the gap to the thinking flagship while
+  costing 11% less than it.** The Judge is that same `qwen3.7-max`, so the
+  result comes from *routing* the expensive model to the 37.8% of questions
+  that need it, not from doing without it. The flagship still wins outright on
+  accuracy by 5.5 points, and we say so on the site.
 
   Escalation mechanics, measured: escalation rate 37.8% (62% of questions
   never pay for the expensive roles at all; unanimous questions cost
@@ -113,19 +117,11 @@ work, not a claim made here.
 - [x] Final benchmark numbers inserted (n=90 complete run, 2026-07-19)
 - [x] Testing access instructions in README (judges must be able to run it free)
 
-## Demo video storyboard (≤3:00)
+## Demo video
 
-| Time | Beat | On screen |
-|---|---|---|
-| 0:00–0:15 | Hook + generalization up front: "Vote cheap, escalate on disagreement — the pattern behind claims triage, moderation appeals, medical second opinions. We prove it on the hardest auditable ground there is: a Google-proof PhD exam." | Title card → dashboard |
-| 0:15–0:40 | Single flagship agent confidently answers a real GPQA question **wrong** — checked live against the public key. Use question `recBhnXrUyTJ6WHIR` (baseline wrong, society correct in the benchmark run) | Baseline panel, red X |
-| 0:40–1:30 | Same question through the society: 3 solver cards → live 2–1 split highlight → Skeptic rebuttal streams in → Verifier's MCP tool call shown in the log ("every number forced through a tool, never memory") → Judge's Verdict Card renders with dissent quoted verbatim → green check. For the overturn beat, `recIj8lR4tuDgrHou` (Quantum Mechanics, plurality D overruled to correct C) | Dashboard live run |
-| 1:30–2:10 | Scoreboard: accuracy bars (baseline vs QuorumQA), cost/question bars, escalation rate, false-escalation rate ("the expensive calls earn their keep") | Benchmark tab |
-| 2:10–2:45 | Zoom out: same engine, swap the domain — name the three verticals again; GPQA chosen because judges can re-run the script and audit every number | Architecture diagram |
-| 2:45–3:00 | Headline number + repo link | Close card |
-
-**Recording notes:** screen-record the Streamlit dashboard (OBS or Xbox Game
-Bar, Win+Alt+R). Record the live-question segment against a question you've
-pre-checked produces a split + correct overturn (pick from the benchmark run
-log: any `escalated=True, overturned=True, correct=True` question). No
-copyrighted music. English narration or captions.
+The shot list, the word-for-word narration and the claims-to-avoid list live in
+[`docs/demo-script.md`](demo-script.md). It uses two distinct cases on purpose:
+`recIj8lR4tuDgrHou` shows majority voting failing and adjudication fixing it
+(the flagship also got that one right, so it is not a win over the flagship),
+and `recBhnXrUyTJ6WHIR` is one of the five where the cheap society beat the
+flagship outright.
