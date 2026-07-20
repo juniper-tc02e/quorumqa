@@ -101,6 +101,7 @@ work, not a claim made here.
 ## Submission checklist
 
 - [x] Repo public, MIT LICENSE visible in About section (github.com/juniper-tc02e/quorumqa)
+- [x] Live public site: https://magiachiral.higgsfield.app — replays real recorded deliberations from the n=90 run (scroll-scrubbed), publishes the full scoreboard including the numbers that do not flatter us, and exposes a filterable case gallery with every transcript, tool call and ruling
 - [x] Proof of Alibaba Cloud deployment: `deploy/oss_client.py`, live-verified on ECS instance `magiachiral-prod` (`i-t4n5ukaobmzp3ckby557`, Singapore) — Qwen Cloud API call and OSS transcript upload both smoke-tested successfully from the instance, 2026-07-20
 - [x] Architecture diagram: `docs/architecture.md` (render the mermaid to PNG for the gallery)
 - [ ] Demo video ≤3 min, public on YouTube/Vimeo/Youku, link pasted
