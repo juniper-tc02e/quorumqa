@@ -37,48 +37,46 @@ Record https://magiachiral.com (fixed replay, no live API calls). Streamlit dash
 | 11 | 2:43–2:51 | Reproduce section (#reproduce) | Show the terminal block with the two commands. |
 | 12 | 2:51–2:56 | Close card | Scroll to 'Answers you can audit' + tri-hex mark, hold. |
 
-## Narration script (370 words, ~2:28 of speech inside the 2:56 video)
+## Narration script (378 words, ~2:31 of speech inside the 2:56 video)
+
+Rewritten for spoken cadence — contractions, natural connective tissue, varied sentence length — instead of the clipped, list-like phrasing of the first pass. Every fact, case ID, and guardrail below is unchanged from the verified prior version; only the wording changed.
 
 **[Shot 1 — dark chamber]** *(running: 33 words)*
-> Ask three cheap language models a hard question and take the majority answer. That's the standard trick.
-> Two models said D. One said C. Majority wins — the answer is D.
-> D is wrong.
+> Ask three cheap models a hard question and go with the majority — that's the standard trick. Here, two said D, one said C. Majority wins, so the answer's D. Except D is wrong.
 
-**[Shot 2 — the three seat cards, highlight the 10%]** *(running: 66 words)*
-> Now look at the confidence. The seat that broke ranks was ninety-five percent sure. One of the majority was ten percent sure.
-> Majority voting counted those votes the same.
+**[Shot 2 — the three seat cards, highlight the 10%]** *(running: 68 words)*
+> But look closer at the confidence: the seat that broke ranks was ninety-five percent sure. One of the two in the majority? Ten percent. A plain vote counts those the same.
 > MagiAchiral doesn't count votes.
 
-**[Shot 3 — split detected, mark goes amber]** *(running: 92 words)*
-> Three cheap solvers answer independently, through different reasoning lenses. Agree, and the question costs two thirds of a cent. Split, and that disagreement is the signal.
+**[Shot 3 — split detected, mark goes amber]** *(running: 95 words)*
+> Three cheap solvers tackle the question independently, each through its own lens. Agree, and it costs two-thirds of a cent. Split — and that disagreement becomes the signal.
 
-**[Shot 4 — skeptic, disputed step]** *(running: 107 words)*
-> A Skeptic has to name the exact inferential step it disputes. It cannot simply object.
+**[Shot 4 — skeptic, disputed step]** *(running: 109 words)*
+> The Skeptic can't just object — it has to name the exact step it disputes.
 
-**[Shot 5 — the two MCP tool calls]** *(running: 157 words)*
-> Then a Verifier pulls out the checkable claims and runs each through a real MCP tool server. These energy sums aren't recalled from memory — they're computed. Ten E. Fifteen E. Both verified.
-> Only now does a flagship judge read the whole record and rule, weighing arguments instead of counting votes.
+**[Shot 5 — the two MCP tool calls]** *(running: 161 words)*
+> Then the Verifier pulls out the claims you can actually check and runs them through a real MCP tool server. These energy sums aren't recalled from memory — they're computed. Ten E, fifteen E, both verified.
+> Only then does the flagship judge read the whole record and rule — weighing arguments, not counting hands.
 
-**[Shot 6 — PANEL OVERRULED, hold]** *(running: 190 words)*
-> It rules C, and overturns its own panel. C is correct. The seat that stood alone was right, and the record says so permanently. That is the product. The disagreement is the artifact.
+**[Shot 6 — PANEL OVERRULED, hold]** *(running: 195 words)*
+> And it rules C — overturning its own panel. C is right. The one seat that stood alone gets vindicated, and the record keeps that, permanently. That's the product, honestly. The disagreement is the artifact.
 
-**[Shot 7 — scoreboard]** *(running: 249 words)*
-> Ninety GPQA Diamond questions, complete run. The same cheap models as a plain ensemble: fifty-nine percent. Organized this way: seventy-nine.
-> A single flagship model: eighty-four. It still wins on accuracy — we put that on the page. But we run eleven percent under its cost, and the judge is that same flagship. The saving is routing it, not avoiding it.
+**[Shot 7 — scoreboard]** *(running: 254 words)*
+> Ninety GPQA Diamond questions, full run. Those same cheap models voting as a plain ensemble: fifty-nine percent. Organized this way: seventy-nine. A single flagship model alone: eighty-four — it still wins on accuracy, and we say so. But we run eleven percent under the flagship's cost, and our judge is that flagship. The saving's in routing it, not avoiding it.
 
-**[Shot 8 — the uncomfortable number]** *(running: 266 words)*
-> We publish the number that hurts, too: fifty-eight point eight percent of escalations only re-confirm the panel.
+**[Shot 8 — the uncomfortable number]** *(running: 272 words)*
+> And we publish the number that stings too: fifty-eight point eight percent of escalations just re-confirm the panel.
 
-**[Shot 9 — Verdict Wall, filter to 'Beat the flagship', open the case]** *(running: 299 words)*
-> Ninety questions, one honeycomb — every hexagon a real result, agreed, split, or overruled. Filter to 'Beat the flagship': five cases. Here's one. The flagship said B. The society said D. D is correct.
+**[Shot 9 — Verdict Wall, filter to 'Beat the flagship', open the case]** *(running: 304 words)*
+> Ninety questions, one honeycomb — every hexagon a real result: agreed, split, or overruled. Filter for 'Beat the flagship': five cases. Here's one: the flagship said B, the society said D. D's correct.
 
-**[Shot 10 — Build Log: "We overrule ourselves, too"]** *(running: 339 words)*
-> The judge overturns its own panel and keeps the record. We hold the build to the same rule: a credential bug caught only in testing, a design we called ugly publicly, an architecture we tried and chose not to ship.
+**[Shot 10 — Build Log: "We overrule ourselves, too"]** *(running: 347 words)*
+> The judge overturns its panel and keeps the record; we hold the build to that standard — a credential bug we caught by testing the real login, a design we called ugly in public, and an architecture we tried, then chose not to ship.
 
-**[Shot 11 — reproduce block]** *(running: 359 words)*
-> That shape fits claims triage, moderation appeals, medical second opinions. Clone the repo, run two commands, check every number yourself.
+**[Shot 11 — reproduce block]** *(running: 367 words)*
+> This shape fits claims triage, moderation appeals, medical second opinions. Clone the repo, run two commands, check the numbers yourself.
 
-**[Shot 12 — close]** *(running: 370 words)*
+**[Shot 12 — close]** *(running: 378 words)*
 > Three minds. One verdict. Dissent on the record.
 > magiachiral dot com.
 
