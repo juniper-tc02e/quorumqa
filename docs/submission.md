@@ -108,7 +108,7 @@ work, not a claim made here.
 - [x] Live public site: **https://magiachiral.com** — replays real recorded deliberations from the n=90 run (the hero is a scroll-scrubbed film of a genuine 2-1 split that the Judge overturns), publishes the full scoreboard including the numbers that do not flatter us, and exposes a filterable gallery of 33 cases with every transcript, MCP tool call and ruling. Runs on Cloudflare Workers + D1; source in the same account as this repo
 - [x] Proof of Alibaba Cloud deployment: `deploy/oss_client.py`, live-verified on ECS instance `magiachiral-prod` (`i-t4n5ukaobmzp3ckby557`, Singapore) — Qwen Cloud API call and OSS transcript upload both smoke-tested successfully from the instance, 2026-07-20
 - [x] Architecture diagram: `docs/architecture.md` (render the mermaid to PNG for the gallery)
-- [ ] Demo video ≤3 min, public on YouTube/Vimeo/Youku, link pasted
+- [ ] Demo video ≤3 min, public on YouTube/Vimeo/Youku, link pasted (shot list + narration ready in `docs/demo-script.md`)
 - [ ] Track declared: Agent Society
 - [x] Final benchmark numbers inserted (n=90 complete run, 2026-07-19)
 - [x] Testing access instructions in README (judges must be able to run it free)
