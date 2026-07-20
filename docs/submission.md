@@ -23,7 +23,7 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
 2. **If they agree**, that's the answer. No further cost. This is the common
    case, and it's what makes the economics work.
 3. **If they split**, the society escalates:
-   - a **Skeptic** (`qwen3.7-plus`) attacks the plurality answer's weakest
+   - a **Skeptic** (`qwen3.6-flash`) attacks the plurality answer's weakest
      inferential step — it must name the specific step it disputes;
    - a **Verifier** (`qwen3.6-flash`) extracts checkable numeric/factual
      claims from the solver reasoning and grounds each one through a real
@@ -68,8 +68,12 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
 
 ### Qwen Cloud usage
 
-- `qwen3.7-max` / `qwen3.7-plus` / `qwen3.6-flash` via the OpenAI-compatible
-  DashScope endpoint — the three-tier price spread is the architecture.
+- `qwen3.6-flash` and `qwen3.7-max` via the OpenAI-compatible DashScope
+  endpoint. Every cheap role (3 solvers, Skeptic, Verifier) runs on flash; only
+  the Judge runs on max, and only on the 37.8% of questions that split. The
+  Judge is the *same* model as the single-agent baseline, so the saving comes
+  from routing it rather than from avoiding it. That price spread is the
+  architecture.
 - A custom **MCP server** (Model Context Protocol) provides the Verifier's
   tools — genuine MCP integration end-to-end, not a bespoke function shim.
 - Backend runs on **Alibaba Cloud ECS**; every deliberation transcript and

@@ -18,7 +18,7 @@ flowchart TD
 
     D -- yes --> F1[Final answer<br/>= plurality letter]
 
-    D -- no, split --> K[Skeptic<br/>qwen3.7-plus<br/>attacks plurality's weakest step]
+    D -- no, split --> K[Skeptic<br/>qwen3.6-flash<br/>attacks plurality's weakest step]
     D -- no, split --> V[Verifier<br/>qwen3.6-flash<br/>extracts checkable claims]
 
     V --> MCP[(MCP server<br/>lookup_constant / safe_calculate)]
@@ -39,12 +39,20 @@ flowchart TD
 
 | Role | Model | Thinking | Runs on |
 |---|---|---|---|
-| Solver seat 1-2 | `qwen3.6-flash` (cheapest) | off | every question |
-| Solver seat 3 | `qwen3.7-plus` (mid) | off | every question |
-| Skeptic | `qwen3.7-plus` (mid) | off | only on disagreement |
+| Solver seats 1-3 | `qwen3.6-flash` (cheapest) | off | every question |
+| Skeptic | `qwen3.6-flash` (cheapest) | off | only on disagreement |
 | Verifier | `qwen3.6-flash` (cheapest) | off | only on disagreement |
 | Judge | `qwen3.7-max` (flagship) | **on** | only on disagreement |
 | **Baseline** | `qwen3.7-max` (flagship) | on | every question, always |
+
+Only **two** model tiers are actually billed in the frozen run: `qwen3.6-flash`
+for all 270 solver, 34 skeptic and 53 verifier calls, and `qwen3.7-max` for the
+34 judge calls and the 90 baseline calls. The judge is the same model as the
+single-agent baseline, so the saving comes from *routing* that model to the
+37.8% of questions that need it, not from avoiding it. An earlier design put a
+`qwen3.7-plus` seat on the panel and in the skeptic role; it was dropped after
+the 74-question run showed that seat was both the weakest solver and the source
+of every JSON-malformation drop (see `SOLVER_MODELS` in `src/quorumqa/config.py`).
 
 Two deliberate, measured design decisions here:
 
