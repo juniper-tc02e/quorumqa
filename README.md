@@ -9,11 +9,20 @@ resolve the disagreement -- and the Judge's ruling, including any unresolved
 dissent, is recorded verbatim, never papered over into false consensus.
 
 **Measured on the full 90-question GPQA-Diamond set (complete run, no
-dropped questions):** organizing the same cheap models into a society lifts
-accuracy from 58.9% (self-consistency@5 ensemble) to **78.9%** — closing
-~78% of the gap to a thinking flagship agent (84.4%) at **11% lower cost**
-than the flagship ($0.0213 vs $0.0240/question). The Judge overturned the
-solver panel's plurality 14 times and was correct in 11 (78.6%).
+dropped questions):** three cheap solvers, plus a flagship Judge called only
+on the 37.8% of questions where they split, reach **78.9%** — against 58.9%
+for those same cheap models run as a plain self-consistency@5 ensemble, and
+84.4% for that flagship answering every question alone. So it closes ~78% of
+the gap to the flagship at **11% lower cost** ($0.0213 vs $0.0240/question).
+The saving comes from *routing* the expensive model to the questions that
+need it, not from avoiding it: the Judge and the baseline are the same
+`qwen3.7-max`. Every other role (3 solvers, Skeptic, Verifier) runs on
+`qwen3.6-flash`. The Judge overturned the solver panel's plurality 14 times
+and was correct in 11 (78.6%).
+
+**Live site:** [magiachiral.com](https://magiachiral.com) replays real
+recorded deliberations from this run, scoreboard and all 33 case transcripts
+included.
 
 See [`docs/architecture.md`](docs/architecture.md) for the design,
 [`benchmark/results/summary.md`](benchmark/results/summary.md) for the full
