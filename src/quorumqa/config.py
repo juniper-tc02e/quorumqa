@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 # silently overriding two rounds of key rotation in .env all session.
 load_dotenv(override=True)
 
+# Pay-as-you-go credentials -- kept for reference/rollback, no longer the
+# default QwenClient transport as of the Token Plan migration (2026-07-21).
 DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY", "")
 
 # Confirmed directly from the Qwen Cloud console's own "Pay-As-You-Go Base
@@ -20,6 +22,20 @@ DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY", "")
 # through a workspace-specific "*.maas.aliyuncs.com" URL (based on a
 # third-party search result, not official docs) was wrong -- reverted.
 DASHSCOPE_BASE_URL = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+
+# Token Plan credentials -- the DEFAULT QwenClient transport now. A
+# completely separate product/key from pay-as-you-go: this key 401s on
+# DASHSCOPE_BASE_URL above, and the pay-as-you-go key 401s on this endpoint.
+# Uses the Anthropic Messages API shape (x-api-key auth, {"content": [...]}
+# response blocks, top-level "system" field), not OpenAI chat.completions --
+# QwenClient's transport is written against this shape. Billed via Credits
+# against a 5-hour/7-day sliding quota, not per-token USD -- see the cost_usd
+# note on CallUsage calls made through this client.
+TOKEN_PLAN_API_KEY = os.environ.get("QUORUMQA_TOKEN_PLAN_API_KEY", "")
+TOKEN_PLAN_BASE_URL = os.environ.get(
+    "QUORUMQA_TOKEN_PLAN_BASE_URL",
+    "https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic",
+)
 
 # Qwen Cloud model tiers.
 ORCHESTRATOR_MODEL = os.environ.get("QUORUMQA_ORCHESTRATOR_MODEL", "qwen3.7-max")

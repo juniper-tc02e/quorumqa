@@ -2,10 +2,9 @@ import json
 import re
 from dataclasses import dataclass
 
-from openai import OpenAI
+import requests
 
-from quorumqa.config import DASHSCOPE_API_KEY, DASHSCOPE_BASE_URL
-from quorumqa.cost_tracker import price_call
+from quorumqa.config import TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
 from quorumqa.schemas import CallUsage
 
 _FENCE_RE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.DOTALL)
@@ -68,39 +67,75 @@ def _extract_json(text: str) -> dict:
 
 
 class QwenClient:
-    """Thin wrapper around the DashScope OpenAI-compatible endpoint.
+    """Thin wrapper around the Token Plan's Anthropic-Messages-API-compatible
+    endpoint (migrated from the pay-as-you-go DashScope OpenAI-compatible
+    endpoint 2026-07-21 -- see config.py's TOKEN_PLAN_* constants for why the
+    two are not interchangeable).
 
     Kept deliberately independent of any specific structured-output feature
-    (response_format json_schema support varies by compatible-mode model) --
-    every JSON call asks for JSON in the prompt and parses defensively, so it
-    works the same way regardless of what the currently deployed model
-    actually honors.
+    -- every JSON call asks for JSON in the prompt and parses defensively, so
+    it works the same way regardless of what the currently deployed model
+    actually honors. The public chat()/chat_json() signatures are unchanged
+    from the pre-migration client, so solver.py/skeptic.py/verifier.py/
+    judge.py/baseline.py needed zero changes -- none of them touch API-shape
+    details, tool-calling included (the Verifier's "tool calls" are plain
+    JSON-mode prompting plus a direct Python call to the real MCP server,
+    never the model API's native tool-use protocol either).
     """
 
     def __init__(self, api_key: str | None = None, base_url: str | None = None):
-        self._client = OpenAI(
-            api_key=api_key or DASHSCOPE_API_KEY,
-            base_url=base_url or DASHSCOPE_BASE_URL,
-        )
+        self._api_key = api_key or TOKEN_PLAN_API_KEY
+        self._messages_url = (base_url or TOKEN_PLAN_BASE_URL).rstrip("/") + "/v1/messages"
 
     def chat(self, model: str, messages: list[dict], role: str, temperature: float = 0.4, max_tokens: int = 1024, thinking: bool = True) -> tuple[str, CallUsage]:
+        # Anthropic Messages API takes system as a top-level field, not a
+        # "system"-role entry in messages -- split it out here so every
+        # caller (chat_json below) can keep building messages the OpenAI way.
+        system = None
+        chat_messages = []
+        for m in messages:
+            if m["role"] == "system":
+                system = (system + "\n\n" + m["content"]) if system else m["content"]
+            else:
+                chat_messages.append(m)
+
+        body = {"model": model, "max_tokens": max_tokens, "temperature": temperature, "messages": chat_messages}
+        if system:
+            body["system"] = system
         # Qwen3 hybrid models think by default, billing reasoning tokens as
         # output. Cheap fast-voter roles (solvers/skeptic/verifier) disable
-        # it -- three thinking "cheap" calls otherwise cost more than one
-        # flagship call, inverting the engine's whole economic premise.
-        extra_body = {} if thinking else {"enable_thinking": False}
-        resp = self._client.chat.completions.create(
+        # it via the real Anthropic-style {"type": "disabled"} shape (the
+        # DashScope-style enable_thinking:false flag this client used to
+        # send is silently ignored here -- verified live, the response still
+        # came back with a thinking block) -- three thinking "cheap" calls
+        # otherwise cost more than one flagship call, inverting the engine's
+        # whole economic premise.
+        if not thinking:
+            body["thinking"] = {"type": "disabled"}
+
+        headers = {
+            "x-api-key": self._api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        }
+        resp = requests.post(self._messages_url, headers=headers, json=body, timeout=120)
+        resp.raise_for_status()
+        data = resp.json()
+
+        content = "\n".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
+        usage_raw = data.get("usage", {})
+        usage = CallUsage(
             model=model,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            extra_body=extra_body,
-        )
-        content = resp.choices[0].message.content or ""
-        usage = price_call(
-            model=model,
-            input_tokens=resp.usage.prompt_tokens if resp.usage else 0,
-            output_tokens=resp.usage.completion_tokens if resp.usage else 0,
+            input_tokens=usage_raw.get("input_tokens", 0) or 0,
+            output_tokens=usage_raw.get("output_tokens", 0) or 0,
+            # Token Plan bills via Credits against a subscription's 5-hour/
+            # 7-day sliding quota, not per-token USD -- there is no published
+            # $/token rate to convert against, so there is no honest cost_usd
+            # figure to report here. Left at 0.0 rather than a fabricated
+            # number; input_tokens/output_tokens above are the real signal
+            # for anything comparing efficiency across calls made through
+            # this client.
+            cost_usd=0.0,
             role=role,
         )
         return content, usage
