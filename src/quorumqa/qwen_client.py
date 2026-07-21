@@ -118,7 +118,13 @@ class QwenClient:
             "anthropic-version": "2023-06-01",
             "content-type": "application/json",
         }
-        resp = requests.post(self._messages_url, headers=headers, json=body, timeout=120)
+        # 300s, not the original 120s: live-measured 2026-07-21, flagship
+        # thinking=True calls on genuinely hard questions (chem_flagship_gate
+        # lever) regularly exceeded 120s and were dropped -- and ALL 14 drops
+        # in that run were the exact subject the lever targets (Organic
+        # Chemistry), which would silently bias any accuracy figure computed
+        # from the survivors toward the easier, faster-answered questions.
+        resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
         resp.raise_for_status()
         data = resp.json()
 
