@@ -81,9 +81,17 @@ targeted.)
    Judge = qwen3.8-max-preview via Token Plan endpoint. Sonnet worker builds
    (TDD, offline tests first), then pilot at seed 42 for direct comparison
    with the frozen run. Biggest plausible single lever.
-3. **[RUNNING iter-1] HLE re-verification** — resolve the 0-3 compatibility
-   refutation: check text-only subset size, answer-key format, gating;
-   build loader if facts support it. Sonnet worker.
+3. ~~HLE re-verification~~ **[DONE iter-1: BLOCKED, deprioritized]** — the
+   0-3 refutation holds on stronger grounds: no choices column exists at all
+   (MC options are free text inside the question, 5+ of them), official
+   grading is LLM-judge semantic equivalence even for MC, and the dataset is
+   gated with our HF account not granted. Decision (autonomy grant): drop
+   HLE from the active backlog entirely rather than queue an access request
+   — even with access, the structural findings mean it needs a semantic-
+   grading path, a bigger change than any reachable benchmark requires.
+   Queued for Jun Kai (informational, not blocking): accepting the HF terms
+   on cais/hle would allow measuring the text-only∩MC joint count, the only
+   thing that could reopen this. See benchmark/results/hle_feasibility.md.
 4. **Terminal-Bench seed-2 sample (14 fresh tasks)** — validate the 54.5%
    baseline before Phase 2. Needs task-adaptive command timeout first
    (two-line change + test).
