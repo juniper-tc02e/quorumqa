@@ -127,9 +127,27 @@ targeted.)
 10. **MedQA load smoke-test + pilot** — medical second-opinion story fits
     the site's pitch; pilot-first per finding #3.
 
+## Validated results so far (the loop's scoreboard)
+
+- **chem_flagship_gate: VALIDATED at 3 seeds** (89.8/88.6/87.4, mean 88.6%)
+  — beats the flagship baseline (~85.5%) and every prior configuration at
+  every seed tested. The strongest configuration this project has produced.
+- **qwen38_judge: validated NEGATIVE** — judge quality is not the binding
+  constraint (9/9 overturns, zero net gain); escalation coverage is.
+- **HLE: confirmed unreachable** without a semantic-grading rebuild.
+
 ## Iteration log
 
-### Iteration 1 — 2026-07-21 (this session)
-- Launched: backlog items 1-3 (seed-777 replication direct; qwen38-judge
-  lever + HLE re-verification as Sonnet workers).
-- Results: pending.
+### Iteration 1 — 2026-07-21/22 overnight
+- chem seed-777: done, replicates (88.6%). HLE: closed (blocked).
+  qwen38_judge: built clean, pilot ran, negative result recorded.
+### Iteration 2 — 2026-07-22 ~02:00-02:30
+- chem seed-888: done, 87.4% — **3-seed validation bar met**, promoted to
+  validated in lever_findings.md.
+- Adaptive per-command timeout: built+committed (f1d8385), spot-checked.
+- Terminal-Bench seed-7 sample (14 fresh tasks, verified zero overlap with
+  the 15 already run): first launch failed instantly — Docker Desktop was
+  not running (stopped since the earlier pilot). Restarted Docker Desktop,
+  relaunched with an engine-readiness wait guard. Running.
+- Next when quota/pilot allow: stack test (chem_flagship_gate +
+  thinking_gate), SuperGPQA hardest-subset pilot.

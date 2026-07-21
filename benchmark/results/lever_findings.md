@@ -276,6 +276,29 @@ endpoint, where billing is quota-Credits and `cost_usd` is 0.0 by design
 (no published $/token rate -- tokens are the honest signal). Accuracy
 comparisons across the two seeds stand; USD cost comparisons do not.
 
+**Third seed (888): validation bar met.** n=87/90 (3 drops: 2 chem, 1 QM
+-- chem drop-bias band 78.8-84.8%), overall **87.4%**, chemistry 83.9%.
+The complete three-seed record:
+
+| Seed | Overall | Organic Chemistry | Escalation |
+|---|---|---|---|
+| 555 | 89.8% | 90.0% | 39.8% |
+| 777 | 88.6% | 82.1% (band 76.7-83.3) | 46.6% |
+| 888 | 87.4% | 83.9% (band 78.8-84.8) | 43.7% |
+| **mean** | **88.6%** | ~85.3% | ~43% |
+
+`chem_flagship_gate` is now validated at the same bar `thinking_gate` was
+held to: three independent seeds, never once below 87%, above the flagship
+baseline (84.4/86.5/85.6 at its three measured seeds, ~85.5 mean) and above
+`thinking_gate` (~85.5 mean) at every comparison point. The chemistry
+subject effect is real but smaller than seed-555 alone suggested (~85%
+mean vs the 72-78% band of every non-flagship configuration). This is the
+strongest validated configuration this project has produced: **a cheap
+panel that routes only its one diagnosed weak subject to flagship solvers
+beats the flagship-on-everything baseline at all three seeds tested.**
+Not folded into any shipped or published number -- research result,
+recorded here.
+
 ## Does the doubt-gate generalize past GPQA-Diamond?
 
 The LEXam and MMLU-Pro pilots (see `lexam_findings.md`, `mmlu_pro_findings.md`)
