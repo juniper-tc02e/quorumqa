@@ -1,0 +1,94 @@
+# MagiAchiral improvement loop — persistent state
+
+Started 2026-07-21. This doc is the loop's memory: every iteration reads it,
+acts on the top of the backlog, records what happened, and re-ranks. It is
+committed after every iteration so the loop survives session loss.
+
+## Standing constraints (set by Jun Kai, 2026-07-21)
+
+- **Budget:** no fixed cap; scale each experiment to its question; flag any
+  single run projected over ~$30 before launching it.
+- **Ship rights:** research + *additive* site updates only (new Build Log
+  entries, new research sections). The shipped engine defaults, the frozen
+  n=90 numbers, and existing site claims stay untouched until Devpost
+  judging ends (Aug 11, 2026).
+- **Worker routing:** Fable orchestrates/judges/synthesizes; Sonnet workers
+  execute (code, runs, analysis drafts); Opus only for judgment-heavy
+  verdicts or security-adjacent work. Per fable-sonnet-orchestrator.
+- **Honesty bar (non-negotiable, learned this session):** every run gets a
+  drop-bias check before its number is reported; single-seed results are
+  "promising", not "settled" — the bar is 3 independent seeds; negative
+  results get written up and committed with the same care as wins.
+
+## Benchmark reality (verified 2026-07-21, deep-research with adversarial verification)
+
+**Reachable now (single-turn QA):** GPQA-Diamond (primary), LEXam, MMLU-Pro,
+SuperGPQA, MedQA (needs load smoke-test), Minority-Sentinel six-pack.
+**Reachable via QuorumQAAgent (agent loop, built this session):**
+Terminal-Bench 2.1 (89 tasks, Harbor). Next: SWE-Bench Pro (public, ~23% SOTA).
+**Real but blocked:** FrontierCode (Cognition won't release tasks), GDPval-AA
+(AA-hosted), OSWorld-Verified (needs GUI control — different again from
+terminal), HealthBench Professional (rubric-graded, needs different judging),
+HLE (compatibility disputed 0-3 in verification — re-check queued below).
+**Not verifiable as real (re-check occasionally, don't chase):** GDP.pdf,
+Blueprint-Bench2, AutomationBench*, Legal Agent Benchmark*, BioMysteryBench,
+Agents' Last Exam, "Multi-Agent" variants of BrowseComp/SEC-Bench/T-Bench.
+(*likely = Zapier AutomationBench / Harvey LAB, both agentic; re-verify if
+targeted.)
+
+## Key empirical findings the backlog builds on
+
+1. **chem_flagship_gate: 89.8% overall / 90.0% chemistry at seed 555** — best
+   single-seed GPQA result. Subject-routed flagship panel fixes the
+   qwen3.6-flash chemistry blind spot that more thinking time couldn't.
+   1 seed; needs 2 more.
+2. **qwen3.8-max-preview scores 93.6% solo** (n=78/90, 12 API-timeout drops
+   disclosed) — far above qwen3.7-max's 85.6% at the same seed. It is NOT
+   usable as a solver panel (Token Plan endpoint, quota-limited, slow) but
+   as the *Judge only* (called on ~40% of questions, 1 call each) it's
+   plausibly the single biggest untested lever.
+3. **Escalation value needs flagship headroom.** LEXam (-14pts) and MMLU-Pro
+   (-12pts) both show: when the flagship baseline is near-ceiling (86-94%),
+   unanimous-wrong dominates and the engine loses. QuorumQA's niche is
+   question sets hard enough that the flagship itself errs (GPQA: 84-86%).
+   Pilot-first, and prefer hardest-subset sampling on any new benchmark.
+4. **Terminal-Bench single-agent baseline: 6/11 solved (54.5%)** of tasks
+   that complete; 3/14 blocked on two distinct timeout classes (slow builds
+   >300s; model-API ReadTimeout on hard reasoning turns). 1 seed, n=15/89.
+5. **Verifier tools are science-specific.** On LEXam, 7/9 escalations had
+   zero verifier findings — the tribunal degrades to Skeptic+Judge outside
+   STEM. Domain-appropriate verifier tools are an untested lever class.
+
+## Backlog (ranked; loop takes from the top)
+
+1. **[RUNNING iter-1] chem_flagship_gate seed-777 replication** — 2nd of 3
+   seeds toward validation. Existing code, ~$4.
+2. **[RUNNING iter-1] qwen38-judge lever** — new lever: shipped engine but
+   Judge = qwen3.8-max-preview via Token Plan endpoint. Sonnet worker builds
+   (TDD, offline tests first), then pilot at seed 42 for direct comparison
+   with the frozen run. Biggest plausible single lever.
+3. **[RUNNING iter-1] HLE re-verification** — resolve the 0-3 compatibility
+   refutation: check text-only subset size, answer-key format, gating;
+   build loader if facts support it. Sonnet worker.
+4. **Terminal-Bench seed-2 sample (14 fresh tasks)** — validate the 54.5%
+   baseline before Phase 2. Needs task-adaptive command timeout first
+   (two-line change + test).
+5. **Stack test: chem_flagship_gate + thinking_gate** — do the two validated
+   levers compose? (After #1 lands.)
+6. **Terminal-Bench Phase 2: best-of-N filtered by task verifier** — per
+   agentic-rebuild-scoping.md Option A. Size N against measured pilot costs.
+7. **SuperGPQA pilot (hardest-subset sample per finding #3)** — next
+   text-QA benchmark, structurally GPQA's sibling.
+8. **Legal verifier tool for LEXam retry** — statute-lookup MCP tool; tests
+   whether tribunal value returns with domain-appropriate grounding.
+9. **SWE-Bench Pro feasibility spike** — after Terminal-Bench Phase 2 shows
+   the loop works.
+10. **MedQA load smoke-test + pilot** — medical second-opinion story fits
+    the site's pitch; pilot-first per finding #3.
+
+## Iteration log
+
+### Iteration 1 — 2026-07-21 (this session)
+- Launched: backlog items 1-3 (seed-777 replication direct; qwen38-judge
+  lever + HLE re-verification as Sonnet workers).
+- Results: pending.
