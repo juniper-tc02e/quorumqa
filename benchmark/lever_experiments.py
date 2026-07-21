@@ -15,6 +15,14 @@ Levers:
                  on seed=42 would be circular.
   five        -- N_SOLVERS=5 instead of 3 (already-supported config knob;
                  lenses/temperatures cycle since only 3 of each are defined).
+  smart_gate  -- like thinking_gate, but seat 3 only pays the thinking
+                 premium on Organic Chemistry questions; universal doubt-gate
+                 otherwise. Tested at seed 123 (fresh): underperformed both
+                 thinking_gate AND the plain baseline, including on Organic
+                 Chemistry itself (72.2% vs 77.8% baseline) -- see
+                 lever_findings.md, "Third-seed validation" section. Kept in
+                 the harness as a documented negative result, not a
+                 candidate for shipping.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -100,6 +108,25 @@ async def solve_all_thinking_all(client, question, choices):
     return list(await asyncio.gather(*tasks))
 
 
+async def solve_all_smart_seat(client, question, choices, subject):
+    """Like solve_all_thinking_seat, but seat 3 only pays the thinking premium
+    on Organic Chemistry -- the one subject the diagnosis found carries a real,
+    systematic error rate (18.9% unanimous-wrong vs 0% for every physics
+    subject). Everywhere else seat 3 runs exactly as shipped (thinking=False).
+    Tests whether thinking_gate's gain can be kept at a fraction of its cost by
+    spending the expensive reasoning only where the diagnosis says it pays."""
+    lenses = _lenses_for(3)
+    seat3_thinking = subject == "Organic Chemistry"
+    tasks = [
+        asyncio.to_thread(_solve_one, client, question, choices, lenses[0], MECHANICAL_MODEL, 0.3),
+        asyncio.to_thread(_solve_one, client, question, choices, lenses[1], MECHANICAL_MODEL, 0.6),
+        asyncio.to_thread(_solve_one_thinking, client, question, choices, lenses[2], MECHANICAL_MODEL, 0.9)
+        if seat3_thinking else
+        asyncio.to_thread(_solve_one, client, question, choices, lenses[2], MECHANICAL_MODEL, 0.9),
+    ]
+    return list(await asyncio.gather(*tasks))
+
+
 async def solve_all_flagship_panel(client, question, choices):
     """All three seats run on the FLAGSHIP model (qwen3.7-max), thinking
     enabled -- matching how the flagship is used everywhere else in the
@@ -165,6 +192,8 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
 
     if lever in ("thinking", "combined", "thinking_gate"):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
+    elif lever == "smart_gate":
+        solver_pairs = await solve_all_smart_seat(client, item.question, item.choices, item.subject)
     elif lever == "thinking_all":
         solver_pairs = await solve_all_thinking_all(client, item.question, item.choices)
     elif lever == "five":
@@ -184,7 +213,7 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
-        elif lever in ("gate", "thinking_gate"):
+        elif lever in ("gate", "thinking_gate", "smart_gate"):
             doubt, reason, gate_usage = second_opinion_gate(client, item.question, item.choices, solver_answers, plurality_letter)
             calls.append(gate_usage)
             if doubt:
@@ -331,7 +360,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "flagship_panel", "flagship_panel_combined", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "flagship_panel", "flagship_panel_combined", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)

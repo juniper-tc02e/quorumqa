@@ -66,13 +66,18 @@ one role whose output is a final ruling -- the Judge -- keeps full
 reasoning. After this change, unanimous questions measured 2.5-6x cheaper
 than the baseline call.
 
-**The solver panel mixes model families** (flash/flash/plus) rather than
-running three clones of one model -- the Heter-MAD finding from the
-deliberation literature (arXiv:2502.08788): mixed-model panels beat
-same-model panels because their failure modes are less correlated. A
+**The solver panel decorrelates through reasoning lens, not model family.**
+The Heter-MAD finding from the deliberation literature (arXiv:2502.08788)
+motivated an early attempt at mixing model families (flash/flash/plus) so
+the three seats' failure modes would be less correlated -- but that plus
+seat measured as the weakest solver and the source of every JSON-malformation
+drop, and was dropped the same day (see the table above and `SOLVER_MODELS`
+in `src/quorumqa/config.py`). Decorrelation now comes from three seats on
+the same model, each answering through a distinct assigned reasoning lens
+and its own temperature, instead of from mixing model families. A
 unanimous-but-wrong panel is the one error this architecture cannot catch
-(nothing triggers escalation), so decorrelating the seats is what protects
-the accuracy floor.
+(nothing triggers escalation), so decorrelating the seats is still what
+protects the accuracy floor -- the mechanism just changed.
 
 The benchmark (`benchmark/run_benchmark.py` + `benchmark/score.py`)
 measures the actual blended cost-per-question and accuracy across a real

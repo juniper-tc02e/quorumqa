@@ -143,6 +143,71 @@ points (78.9% vs 84.4%). Breaking down exactly where:
    the "cheaper than flagship" story) -- the shipped, cost-optimized
    QuorumQA remains a separate configuration/tier.
 
+## Third-seed validation, and a targeting hypothesis that inverted
+
+`thinking_gate` was flagged above as needing "a third, still-unseen sample"
+before any public claim. That run happened at **seed 123** (never used to
+develop or tune any lever), alongside a fresh flagship baseline on the exact
+same 90 questions, and a new lever testing a natural follow-up hypothesis.
+
+**thinking_gate holds at a third independent seed:**
+
+| Seed | thinking_gate | Fresh baseline | Margin |
+|---|---|---|---|
+| 42 | 86.7% | 84.4% | +2.3pt |
+| 7 | 86.5% | 86.5% | tie |
+| 123 | 86.7% | 85.6% | +1.1pt |
+
+Three independent seeds, three matches-or-beats-the-flagship results. This
+closes the validation gap -- `thinking_gate` is no longer "promising, needs a
+third sample," it is a replicated result.
+
+**New lever tested: `smart_gate`.** The diagnosis earlier in this document
+found Organic Chemistry carries an 18.9% unanimous-wrong rate against 0% for
+every physics subject -- so the natural next hypothesis was: concentrate the
+expensive thinking-seat treatment specifically on Organic Chemistry (seat 3
+runs `thinking=True` only when `item.subject == "Organic Chemistry"`,
+otherwise identical to the shipped engine), keep the universal doubt-gate,
+and see if this captures most of `thinking_gate`'s gain at a fraction of the
+cost.
+
+It did not. `smart_gate` scored **83.1%** (n=89, one dropped question) at
+$0.0303/q -- worse than both `thinking_gate` (86.7%, $0.0346/q) and the
+plain flagship baseline (85.6%, $0.0250/q) at the same seed.
+
+Breaking both engines down by subject at seed 123 explains why, and it is
+not the explanation the hypothesis predicted:
+
+| | Organic Chemistry (n=36) | Everything else (n=53-54) |
+|---|---|---|
+| Baseline | 77.8% | 90.7% |
+| thinking_gate | 75.0% (escalated 25/36) | **94.4%** (escalated 19/54) |
+| smart_gate | 72.2% (escalated 26/36) | 90.6% (escalated 25/53) |
+
+`thinking_gate`'s entire net gain over baseline at this seed comes from
+subjects *outside* Organic Chemistry -- exactly the questions `smart_gate`
+deliberately left untreated (bare gate + shipped solvers there, which is why
+its "everything else" number lands right back at baseline, 90.6% vs 90.7%).
+On Organic Chemistry itself, both gated engines score *below* the plain
+baseline, despite escalating roughly seven in ten of those questions each
+way.
+
+The likely mechanism: the diagnosis was right that Organic Chemistry is
+where disagreement concentrates, but disagreement is a symptom of the
+underlying gap, not a target you can fix by pointing more reasoning time at
+it. All three solver seats, the Skeptic, and the Verifier share the same
+base model (`qwen3.6-flash`) -- if that model has a genuine conceptual blind
+spot in a subject, a thinking-enabled seat running the *same* model is prone
+to reproduce the same misconception with more confident-sounding reasoning
+attached, and the tribunal it escalates to has no fundamentally new
+information to correct it with. Outside chemistry, the disagreement a
+thinking seat surfaces looks more like execution-level slips -- exactly the
+kind a second, closer look from the same model family can actually catch.
+This reframes the earlier diagnosis: Organic Chemistry's error rate is a
+real, systematic weakness, but it is a knowledge gap, not an
+attention/effort gap, and this architecture's escalation mechanism is built
+to catch the latter, not the former.
+
 ## What this would take to ship
 
 Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:
@@ -150,10 +215,16 @@ Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:
   distinct seat config.
 - `orchestrator.py`: add the gate call in the unanimous branch before
   returning, matching `lever_experiments.py`'s `second_opinion_gate`.
-- A **fresh, larger benchmark run** (not a re-score of seed 42 or seed 7 --
-  both were used to develop and validate this lever; a genuine held-out
-  claim needs a third, still-unseen sample) before any public number is
-  published.
+- ~~A fresh, larger benchmark run on a third, still-unseen sample before any
+  public number is published~~ -- **done**: seed 123 above, 86.7% vs an
+  85.6% fresh baseline on that exact sample. Three independent seeds now
+  replicate the result (42, 7, 123). The remaining gap before a public
+  number is a *larger* n per seed, not another seed.
 - `recBhnXrUyTJ6WHIR` should be re-verified under the final shipped config
   before the demo video is recorded, since it broke under some (not all)
   of the tested variants.
+- Do not chase the Organic Chemistry gap by targeting reasoning effort at
+  it -- `smart_gate` tried exactly that and scored below the plain baseline
+  on chemistry itself (72.2% vs 77.8%). The chemistry gap looks like a
+  shared knowledge gap across the cheap tier, not something a same-model
+  thinking pass can catch.

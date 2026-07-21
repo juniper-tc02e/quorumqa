@@ -1,0 +1,189 @@
+2026-07-21 11:02:04,503 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-21 11:02:04,503 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-21 11:02:04,750 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 401 Unauthorized"
+Using the latest cached version of the dataset since Idavidrein/gpqa couldn't be found on the Hugging Face Hub
+2026-07-21 11:02:04,752 WARNING Using the latest cached version of the dataset since Idavidrein/gpqa couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'gpqa_diamond' at C:\Users\Ong Jun Kai\.cache\huggingface\datasets\Idavidrein___gpqa\gpqa_diamond\0.0.0\633f5ee89ab8ad4522a9f850766b73f62147ffdd (last modified on Mon Jul 20 17:24:32 2026).
+2026-07-21 11:02:04,753 WARNING Found the latest cached dataset configuration 'gpqa_diamond' at C:\Users\Ong Jun Kai\.cache\huggingface\datasets\Idavidrein___gpqa\gpqa_diamond\0.0.0\633f5ee89ab8ad4522a9f850766b73f62147ffdd (last modified on Mon Jul 20 17:24:32 2026).
+2026-07-21 11:02:16,123 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:16,129 INFO recNAiPUKOulQbKVP [baseline]: A(correct) cost=$0.00456
+2026-07-21 11:02:22,361 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:22,362 INFO recwW1A85nfyQpReG [baseline]: D(correct) cost=$0.00716
+2026-07-21 11:02:33,571 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:33,573 INFO recnjViFrqlZNL3fY [baseline]: C(correct) cost=$0.01178
+2026-07-21 11:02:35,961 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:35,963 INFO recjgMJaMxz4ESDF2 [baseline]: D(correct) cost=$0.00814
+2026-07-21 11:02:46,770 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:46,770 INFO recJZ3QEfRKjYw9a7 [baseline]: C(correct) cost=$0.01705
+2026-07-21 11:02:53,319 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:53,319 INFO recRhwQwHijW0gCLo [baseline]: D(correct) cost=$0.02045
+2026-07-21 11:02:56,318 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:02:56,319 INFO recb2M22zaD3tL6Qc [baseline]: A(correct) cost=$0.01484
+2026-07-21 11:03:02,315 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:02,318 INFO recIDiDKKrN61Auyr [baseline]: D(correct) cost=$0.00408
+2026-07-21 11:03:03,356 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:03,360 INFO recBXlqrZUCR897It [baseline]: C(correct) cost=$0.01314
+2026-07-21 11:03:11,571 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:11,571 INFO recXsuOHRBLcyenF2 [baseline]: B(correct) cost=$0.00520
+2026-07-21 11:03:29,017 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:29,018 INFO recD8oX1KevFbl7bL [baseline]: B(correct) cost=$0.00818
+2026-07-21 11:03:31,361 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:31,363 INFO recKm6LNWykGapmCr [baseline]: A(correct) cost=$0.01175
+2026-07-21 11:03:31,532 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:31,533 INFO recNuT2oSnO86bxOx [baseline]: B(correct) cost=$0.01835
+2026-07-21 11:03:41,701 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:41,701 INFO rec2UlKqC6RFHdcro [baseline]: D(correct) cost=$0.01682
+2026-07-21 11:03:49,600 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:49,601 INFO recw4rROcnHKNZhtK [baseline]: B(correct) cost=$0.00766
+2026-07-21 11:03:49,985 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:49,985 INFO recDytVnNYZe2HuUU [baseline]: A(correct) cost=$0.03114
+2026-07-21 11:03:51,318 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:03:51,318 INFO recdya6FuYraBU5Rh [baseline]: B(correct) cost=$0.00979
+2026-07-21 11:04:06,466 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:06,468 INFO recLSzwBUS3olCjhl [baseline]: D(correct) cost=$0.00730
+2026-07-21 11:04:07,670 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:07,671 INFO recRgabRzMaEoBRcM [baseline]: D(wrong) cost=$0.05092
+2026-07-21 11:04:10,250 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:10,251 INFO recV1nqYQvpII94oC [baseline]: D(correct) cost=$0.00876
+2026-07-21 11:04:12,365 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:12,366 INFO rec5eA17Qr1ucNLUf [baseline]: A(correct) cost=$0.01338
+2026-07-21 11:04:14,593 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:14,594 INFO recyPffUDqC2k7ZZO [baseline]: A(correct) cost=$0.01894
+2026-07-21 11:04:27,773 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:27,775 INFO recrNbtgTNoabJJi6 [baseline]: C(correct) cost=$0.01583
+2026-07-21 11:04:33,075 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:33,075 INFO rec9GugrngvsQR99A [baseline]: A(correct) cost=$0.00910
+2026-07-21 11:04:40,506 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:40,506 INFO recIj8lR4tuDgrHou [baseline]: A(correct) cost=$0.01289
+2026-07-21 11:04:45,102 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:45,102 INFO rec7C06XOB2h298ue [baseline]: B(correct) cost=$0.00740
+2026-07-21 11:04:57,457 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:57,458 INFO recxsX66ktJ1Lwt4f [baseline]: A(correct) cost=$0.00764
+2026-07-21 11:04:59,418 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:04:59,420 INFO recHVUd2DkoKfedJZ [baseline]: A(correct) cost=$0.02208
+2026-07-21 11:05:11,651 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:05:11,651 INFO recPSTGXK3P39yNYT [baseline]: C(correct) cost=$0.01650
+2026-07-21 11:05:29,172 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:05:29,174 INFO recI1ls9OXdxatHQn [baseline]: B(correct) cost=$0.01283
+2026-07-21 11:05:36,432 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:05:36,433 INFO recgM7o1tcc7tP778 [baseline]: A(correct) cost=$0.03452
+2026-07-21 11:06:00,427 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:06:00,428 INFO recUOePh79cp4T2Bg [baseline]: D(wrong) cost=$0.03254
+2026-07-21 11:06:44,758 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:06:44,759 INFO recBhnXrUyTJ6WHIR [baseline]: C(wrong) cost=$0.02569
+2026-07-21 11:06:52,777 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:06:52,777 INFO recyrk6XBVwugG5u8 [baseline]: B(correct) cost=$0.02217
+2026-07-21 11:06:57,599 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:06:57,600 INFO reca44yABeO2fx7UB [baseline]: B(correct) cost=$0.03425
+2026-07-21 11:07:33,751 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:07:33,752 INFO recs3PLPUEMiqg4P8 [baseline]: A(correct) cost=$0.02133
+2026-07-21 11:07:40,615 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:07:40,615 INFO recZWeueB7lSPR6wN [baseline]: B(correct) cost=$0.06850
+2026-07-21 11:07:44,850 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:07:44,850 INFO reck4G4xxv3YnpbtQ [baseline]: A(wrong) cost=$0.01457
+2026-07-21 11:07:57,494 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:07:57,497 INFO rec4r4KWNLrT7g2kR [baseline]: B(correct) cost=$0.09702
+2026-07-21 11:08:06,236 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:08:06,238 INFO recvlnu8BuLmXZhSX [baseline]: C(correct) cost=$0.01380
+2026-07-21 11:08:28,167 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:08:28,168 INFO rec6sE2CRtD4drtHg [baseline]: D(correct) cost=$0.01135
+2026-07-21 11:08:40,518 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:08:40,520 INFO recINSFEYLCyyd08m [baseline]: B(correct) cost=$0.01850
+2026-07-21 11:08:46,114 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:08:46,116 INFO recclFbsjbaiVVnnV [baseline]: D(correct) cost=$0.04799
+2026-07-21 11:09:04,639 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:04,640 INFO rec0VuKUjt1SZ7NYv [baseline]: D(correct) cost=$0.00786
+2026-07-21 11:09:07,665 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:07,666 INFO recoy9ZLBsc7HIRBy [baseline]: B(correct) cost=$0.01689
+2026-07-21 11:09:10,955 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:10,957 INFO recnTTKdBzfuoZ7w7 [baseline]: C(wrong) cost=$0.10640
+2026-07-21 11:09:25,264 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:25,266 INFO rec1zl5LvaatzGhFt [baseline]: A(correct) cost=$0.00898
+2026-07-21 11:09:31,523 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:31,525 INFO rec5rjeLsEq5Fg7Oj [baseline]: C(wrong) cost=$0.04492
+2026-07-21 11:09:38,789 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:38,790 INFO recS48OsU6kVadBPW [baseline]: C(correct) cost=$0.01093
+2026-07-21 11:09:45,283 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:45,284 INFO recatj4YXzbOaq3Ar [baseline]: D(correct) cost=$0.00609
+2026-07-21 11:09:59,647 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:09:59,647 INFO recl1UtgTVKishAq4 [baseline]: A(correct) cost=$0.03343
+2026-07-21 11:10:02,786 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:02,786 INFO recRTiyaRymerDJ4y [baseline]: D(correct) cost=$0.01034
+2026-07-21 11:10:07,948 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:07,948 INFO recr3VHM4zYf6dMFY [baseline]: D(correct) cost=$0.01009
+2026-07-21 11:10:10,441 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:10,441 INFO reczUoM8JsxU6pYxr [baseline]: B(correct) cost=$0.02655
+2026-07-21 11:10:13,680 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:13,680 INFO recAYkd96NNuNl1Ei [baseline]: D(wrong) cost=$0.00612
+2026-07-21 11:10:40,544 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:40,545 INFO recvZlMbpPz0yLDle [baseline]: B(correct) cost=$0.01594
+2026-07-21 11:10:44,644 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:44,644 INFO recXvQ6gWAmyakrpD [baseline]: C(correct) cost=$0.01357
+2026-07-21 11:10:50,245 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:10:50,247 INFO recGFKDUd8qgz81Zl [baseline]: A(correct) cost=$0.01797
+2026-07-21 11:11:14,160 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:11:14,162 INFO recZSGUkn56v9kEp1 [baseline]: B(correct) cost=$0.08941
+2026-07-21 11:11:24,324 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:11:24,325 INFO recJpyGtGIsxulevT [baseline]: B(correct) cost=$0.01684
+2026-07-21 11:11:25,904 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:11:25,905 INFO recReg13iV2HwJTaA [baseline]: D(correct) cost=$0.00539
+2026-07-21 11:11:51,630 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:11:51,631 INFO reczzzihL7btBH7RO [baseline]: D(wrong) cost=$0.01137
+2026-07-21 11:12:01,483 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:12:01,484 INFO recVvpD8miVjmmyfe [baseline]: D(correct) cost=$0.06533
+2026-07-21 11:12:10,089 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:12:10,090 INFO reczjcMtrB1YGS2fO [baseline]: B(correct) cost=$0.01932
+2026-07-21 11:12:14,648 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:12:14,649 INFO recFaL6j8UMhutXrc [baseline]: C(correct) cost=$0.03628
+2026-07-21 11:12:54,122 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:12:54,124 INFO rectlyG9pCAAuWhoB [baseline]: D(wrong) cost=$0.06882
+2026-07-21 11:13:05,050 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:13:05,051 INFO recZbxrocrxh9YENH [baseline]: A(correct) cost=$0.02681
+2026-07-21 11:13:40,562 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:13:40,564 INFO recZt4x514UQNnsgy [baseline]: B(correct) cost=$0.03800
+2026-07-21 11:13:46,783 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:13:46,785 INFO recyl3usDqb7ruXJx [baseline]: B(correct) cost=$0.04854
+2026-07-21 11:13:51,614 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:13:51,615 INFO rec4L69T0Y1AS4AFS [baseline]: C(wrong) cost=$0.02031
+2026-07-21 11:14:05,056 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:05,057 INFO reck1zKeCssmN82Ga [baseline]: C(correct) cost=$0.01035
+2026-07-21 11:14:05,175 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:05,177 INFO recPL4ZPpVYxgMu57 [baseline]: D(correct) cost=$0.00579
+2026-07-21 11:14:10,150 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:10,152 INFO recWzUUYBN0NuXO2k [baseline]: B(correct) cost=$0.01012
+2026-07-21 11:14:31,558 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:31,560 INFO recqGD3fxPCI59vPQ [baseline]: C(correct) cost=$0.01155
+2026-07-21 11:14:40,277 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:40,279 INFO recZ13cwgDQf9jRd9 [baseline]: A(wrong) cost=$0.06122
+2026-07-21 11:14:56,201 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:14:56,203 INFO recRZjaElf8ft7xTq [baseline]: C(correct) cost=$0.01922
+2026-07-21 11:15:20,002 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:20,003 INFO recLrRirj7iXoB0rU [baseline]: D(correct) cost=$0.01708
+2026-07-21 11:15:32,679 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:32,682 INFO recDj2Y2BbtV02Wv5 [baseline]: D(wrong) cost=$0.12200
+2026-07-21 11:15:34,616 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:34,617 INFO rechtUKxC6G67H7Pr [baseline]: B(correct) cost=$0.00636
+2026-07-21 11:15:48,659 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:48,660 INFO recypVp2NmPlBKVTp [baseline]: B(correct) cost=$0.00622
+2026-07-21 11:15:54,066 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:54,066 INFO recLAgwx9vbgB5EHk [baseline]: D(correct) cost=$0.03474
+2026-07-21 11:15:59,360 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:15:59,361 INFO recYCMJWH7IpcdqwE [baseline]: B(correct) cost=$0.02735
+2026-07-21 11:16:02,203 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:02,204 INFO rec32C1ZEapBnCC0E [baseline]: C(correct) cost=$0.01270
+2026-07-21 11:16:05,674 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:05,675 INFO reckYqR92oJkqJXkE [baseline]: D(correct) cost=$0.00730
+2026-07-21 11:16:17,918 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:17,919 INFO recihePFulRgNKsIn [baseline]: C(wrong) cost=$0.00694
+2026-07-21 11:16:22,682 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:22,685 INFO recINGR1z01Fh1Z3A [baseline]: C(correct) cost=$0.01013
+2026-07-21 11:16:47,548 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:47,550 INFO rec1oj2DveQWl9Rpw [baseline]: D(correct) cost=$0.01792
+2026-07-21 11:16:51,094 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:16:51,096 INFO recn3NhOhqAPLda16 [baseline]: A(correct) cost=$0.02424
+2026-07-21 11:17:15,695 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:17:15,696 INFO recb80OwMgNnceA9t [baseline]: C(correct) cost=$0.07981
+2026-07-21 11:17:33,604 INFO HTTP Request: POST https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-21 11:17:33,607 INFO recnawZPumSCLMVgp [baseline]: D(correct) cost=$0.11706
+2026-07-21 11:17:33,613 INFO Wrote 90 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\lever_baseline_seed123.jsonl
