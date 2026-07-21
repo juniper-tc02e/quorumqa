@@ -47,11 +47,19 @@ class QuorumQAAgent(BaseAgent):
     SUPPORTS_WINDOWS = False
 
     def __init__(self, logs_dir, model_name=None, logger=None, mcp_servers=None,
-                 skills_dir=None, *args, extra_env=None, client=None, max_turns=30, **kwargs):
+                 skills_dir=None, *args, extra_env=None, client=None, max_turns=30,
+                 command_timeout_sec=300, **kwargs):
         super().__init__(logs_dir, model_name=model_name, logger=logger, mcp_servers=mcp_servers,
                           skills_dir=skills_dir, *args, extra_env=extra_env, **kwargs)
         self._client = client or QwenClient()
         self._max_turns = max_turns
+        # 300s, not a shorter default: live-measured 2026-07-21 against a
+        # real 14-task Terminal-Bench pilot, a 60s command timeout killed
+        # 6/14 tasks with RuntimeError before the agent got a real chance --
+        # compiling, downloading a model, building a Cython extension all
+        # routinely exceed 60s. Same lesson already learned once today for
+        # qwen_client.py's own request timeout (120s -> 300s).
+        self._command_timeout_sec = command_timeout_sec
 
     @staticmethod
     def name() -> str:
@@ -85,7 +93,7 @@ class QuorumQAAgent(BaseAgent):
             if action.done or action.command is None:
                 break
 
-            exec_result = await environment.exec(action.command, timeout_sec=60)
+            exec_result = await environment.exec(action.command, timeout_sec=self._command_timeout_sec)
             transcript.append({
                 "command": action.command,
                 "stdout": exec_result.stdout or "",

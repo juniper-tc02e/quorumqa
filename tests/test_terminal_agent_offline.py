@@ -49,9 +49,11 @@ class FakeEnvironment:
     def __init__(self, scripted_results):
         self._scripted = list(scripted_results)
         self.commands_run = []
+        self.timeouts_used = []
 
     async def exec(self, command, cwd=None, env=None, timeout_sec=None, user=None):
         self.commands_run.append(command)
+        self.timeouts_used.append(timeout_sec)
         return self._scripted.pop(0)
 
 
@@ -115,3 +117,36 @@ def test_agent_stops_at_max_turns_even_if_model_never_says_done():
     asyncio.run(agent.run("Do something that never finishes.", fake_env, fake_context))
 
     assert len(fake_env.commands_run) == 3  # stopped by the turn budget, not by "done"
+
+
+def test_agent_uses_a_generous_default_command_timeout():
+    # Live 2026-07-21: a hardcoded 60s command timeout killed 6 of 14
+    # real Terminal-Bench tasks (compiling, downloading, building) with
+    # RuntimeError before the agent ever got a chance to finish -- not a
+    # capability ceiling, a too-aggressive default. Locks in the fix.
+    fake_env = FakeEnvironment([FakeExecResult(stdout="ok\n", stderr=None, return_code=0)])
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "make build", "summary": "building"},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Build the project.", fake_env, fake_context))
+
+    assert fake_env.timeouts_used == [300]  # generous default, not the old 60s
+
+
+def test_agent_command_timeout_is_configurable():
+    fake_env = FakeEnvironment([FakeExecResult(stdout="ok\n", stderr=None, return_code=0)])
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "quick-check", "summary": "checking"},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client,
+                           max_turns=5, command_timeout_sec=900)
+    asyncio.run(agent.run("Do a slow build.", fake_env, fake_context))
+
+    assert fake_env.timeouts_used == [900]
