@@ -2,7 +2,15 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
+# override=True: .env must always win over a same-named OS environment
+# variable. Without this, a credential already set at the OS level (e.g. a
+# persistent Windows User env var from an earlier setup) silently shadows
+# every .env edit -- rotating a key in .env then has no effect, with no
+# error, because load_dotenv() by default never overwrites an existing
+# os.environ entry. Found live 2026-07-21: a stale User-level
+# DASHSCOPE_API_KEY (the very first key ever used in this project) was
+# silently overriding two rounds of key rotation in .env all session.
+load_dotenv(override=True)
 
 DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY", "")
 
