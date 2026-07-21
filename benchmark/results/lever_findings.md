@@ -257,6 +257,25 @@ across three independent seeds (42, 7, 123); `chem_flagship_gate` needs the
 same treatment -- at least one more fresh seed -- before being treated as
 settled rather than a strong, promising single-run result.
 
+**Second seed (777, run overnight by the improvement loop): replicates
+overall, softer on chemistry.** n=88/90, overall **88.6%** (seed-555:
+89.8%) -- both seeds clearly above `thinking_gate`'s 86.7% best, so the
+overall effect looks real. Chemistry specifically: **82.1%** (23/28),
+down from seed-555's 90.0%. Drop-bias check: both dropped questions were
+chemistry, so the honest chemistry band is 76.7% (both would-be-wrong) to
+83.3% (both would-be-right) out of the sampled 30. That band still sits
+above every non-flagship configuration's chemistry rate (72-78%), but the
+per-subject effect size is smaller than seed-555 suggested -- consistent
+with a real improvement plus ordinary per-subject noise at n≈30/seed.
+Third seed queued before this is called settled.
+
+*Billing-regime note for anyone comparing costs across seeds:* seed-555
+ran on pay-as-you-go DashScope (real per-token USD in `cost_usd`);
+seed-777 ran after the client's migration to the Token Plan subscription
+endpoint, where billing is quota-Credits and `cost_usd` is 0.0 by design
+(no published $/token rate -- tokens are the honest signal). Accuracy
+comparisons across the two seeds stand; USD cost comparisons do not.
+
 ## Does the doubt-gate generalize past GPQA-Diamond?
 
 The LEXam and MMLU-Pro pilots (see `lexam_findings.md`, `mmlu_pro_findings.md`)

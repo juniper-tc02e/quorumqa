@@ -75,8 +75,17 @@ targeted.)
 
 ## Backlog (ranked; loop takes from the top)
 
-1. **[RUNNING iter-1] chem_flagship_gate seed-777 replication** — 2nd of 3
-   seeds toward validation. Existing code, ~$4.
+1. **[DONE iter-1] chem_flagship_gate seed-777 replication** — overall
+   88.6% (n=88/90), replicating seed-555's 89.8%; both seeds clearly beat
+   thinking_gate's 86.7%. Chemistry softer: 82.1%, honest drop-bias band
+   76.7-83.3% (both drops were chem) vs seed-555's 90.0% — real effect,
+   smaller per-subject size than one seed suggested. **Third seed (888)
+   queued — deliberately NOT launched concurrently with the qwen38_judge
+   pilot: both now draw on the same Token Plan 5-hour sliding quota (the
+   client migrated wholesale to the Token Plan endpoint; cost_usd=0.0 by
+   design there, tokens are the signal), and racing them risks quota
+   exhaustion mid-run corrupting both via mass drops.** Decision logged
+   per autonomy grant.
 2. **[BUILT iter-1, PILOT RUNNING] qwen38-judge lever** — worker delivered
    clean (RED→GREEN TDD, 25→29 tests, live smoke: 2 real Token Plan judge
    calls parsed, one overturn). Orchestrator verified prompt parity with
