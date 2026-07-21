@@ -23,6 +23,13 @@ Levers:
                  lever_findings.md, "Third-seed validation" section. Kept in
                  the harness as a documented negative result, not a
                  candidate for shipping.
+  qwen38_judge -- identical to the shipped engine (3 flash solvers, flash
+                 skeptic, flash verifier, escalate only on disagreement)
+                 EXCEPT the Judge call goes to qwen3.8-max-preview via the
+                 Token Plan Anthropic-Messages transport instead of
+                 qwen3.7-max via QwenClient/DashScope. Same judge system/
+                 user prompt and JSON contract as the shipped judge -- only
+                 the model and transport differ. See adjudicate_qwen38().
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -30,6 +37,7 @@ Usage:
   python -m benchmark.lever_experiments --lever five --n 90 --seed 42
   python -m benchmark.lever_experiments --lever subject --n 90 --seed 7
   python -m benchmark.lever_experiments --lever control --n 90 --seed 7   # fresh-seed control for subject
+  python -m benchmark.lever_experiments --lever qwen38_judge --n 90 --seed 42
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -37,18 +45,21 @@ import argparse
 import asyncio
 import json
 import logging
+import re
 import time
 from collections import Counter
 from pathlib import Path
 
+import requests
+
 from quorumqa.baseline import solve_single_agent
-from quorumqa.config import MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES
-from quorumqa.engine.judge import adjudicate
+from quorumqa.config import MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES, TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
+from quorumqa.engine.judge import JUDGE_SYSTEM, adjudicate
 from quorumqa.engine.skeptic import rebut
 from quorumqa.engine.solver import SOLVER_SYSTEM, _lenses_for, _solve_one, solve_all
 from quorumqa.engine.verifier import verify
 from quorumqa.qwen_client import QwenClient
-from quorumqa.schemas import GPQAItem, QuestionResult, SolverAnswer
+from quorumqa.schemas import CallUsage, GPQAItem, JudgeVerdict, QuestionResult, SkepticRebuttal, SolverAnswer, VerifierFinding
 from quorumqa.tools.mcp_client import VerifierToolSession, verifier_tool_session
 
 from benchmark.load_gpqa import load_benchmark_set
@@ -207,8 +218,118 @@ def second_opinion_gate(client, question, choices, solver_answers, plurality_let
     return doubt, str(result.data.get("reason", "")), result.usage
 
 
-async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start):
-    """The shipped escalation path (skeptic -> verifier -> judge), unchanged."""
+QWEN38_JUDGE_MODEL = "qwen3.8-max-preview"
+_QWEN38_MESSAGES_URL = TOKEN_PLAN_BASE_URL.rstrip("/") + "/v1/messages"
+
+
+def adjudicate_qwen38(
+    client: QwenClient,  # unused -- kept only so this has the exact same call
+                          # signature as quorumqa.engine.judge.adjudicate, so
+                          # _tribunal can treat the two adjudicators
+                          # interchangeably. This adjudicator bypasses
+                          # QwenClient/DashScope entirely; see module note below.
+    question: str,
+    choices: list[str],
+    solver_answers: list[SolverAnswer],
+    skeptic_rebuttal: SkepticRebuttal,
+    verifier_findings: list[VerifierFinding],
+) -> tuple[JudgeVerdict, CallUsage]:
+    """The qwen38_judge lever's judge call: qwen3.8-max-preview via the Token
+    Plan's Anthropic-Messages-API-compatible endpoint, copying the transport
+    pattern from benchmark/qwen38_baseline.py exactly (requests.post to
+    {TOKEN_PLAN_BASE_URL}/v1/messages, x-api-key header, anthropic-version
+    2023-06-01, 300s timeout, text extracted after skipping any non-text
+    content block such as "thinking").
+
+    JUDGE_SYSTEM is imported directly from quorumqa.engine.judge (it's a
+    module-level constant there) so the system prompt can never drift. The
+    user-prompt construction below, however, is NOT factored into a
+    reusable function in judge.py -- it is a VERBATIM copy of the body of
+    judge.adjudicate(). If that prompt ever changes, this copy must change
+    with it, or the qwen38_judge lever stops being an apples-to-apples
+    judge-model swap (same prompt, same JSON contract, different model/
+    transport only). Everything else about this lever -- solvers, skeptic,
+    verifier, escalation trigger -- is untouched from the shipped engine.
+    """
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    transcript = "\n\n".join(
+        f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
+    )
+    findings_block = "\n".join(
+        f"- claim: {f.claim} | tool: {f.tool_used}({f.tool_query}) -> {f.tool_result} | supports claim: {f.supports_claim}"
+        for f in verifier_findings
+    ) or "(no checkable claims were raised)"
+
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Solver transcript:\n{transcript}\n\n"
+        f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
+        f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
+        f"Verifier findings:\n{findings_block}\n\n"
+        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        '"dissent": "unresolved objection, or null if none", '
+        '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
+    )
+
+    headers = {
+        "x-api-key": TOKEN_PLAN_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+    }
+    body = {
+        "model": QWEN38_JUDGE_MODEL,
+        "max_tokens": 1024,
+        "system": JUDGE_SYSTEM,
+        "messages": [{"role": "user", "content": user}],
+    }
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+    resp.raise_for_status()
+    data = resp.json()
+
+    # Responses may carry a "thinking" content block before the "text"
+    # block -- skip any non-text block rather than assuming content[0] is
+    # the answer (same handling as benchmark/qwen38_baseline.py's _ask_once).
+    text_blocks = [b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"]
+    text = "\n".join(text_blocks)
+    match = re.search(r"\{.*\}", text, re.S)
+    if not match:
+        raise ValueError(f"No JSON object found in qwen38 judge response text: {text!r}")
+    parsed = json.loads(match.group(0))
+
+    letter = str(parsed.get("final_letter", "")).strip().upper()[:1]
+    dissent = parsed.get("dissent") or None
+    verdict = JudgeVerdict(
+        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        decisive_reasoning=str(parsed.get("decisive_reasoning", "")),
+        dissent=dissent,
+        overturned_plurality=bool(parsed.get("overturned_plurality", False)),
+        confidence=str(parsed.get("confidence", "medium")),
+    )
+
+    usage_raw = data.get("usage", {})
+    usage = CallUsage(
+        model=QWEN38_JUDGE_MODEL,
+        input_tokens=usage_raw.get("input_tokens", 0) or 0,
+        output_tokens=usage_raw.get("output_tokens", 0) or 0,
+        # The Token Plan has no published $/token rate (same situation as
+        # every other Token Plan call -- see qwen_client.py's chat() and
+        # benchmark/qwen38_baseline.py's module docstring). Never fold a
+        # fabricated USD number in here: qwen38-judge cost is quota-based
+        # and reported separately in tokens (input_tokens/output_tokens
+        # above are the real signal).
+        cost_usd=0.0,
+        role="judge",
+    )
+    return verdict, usage
+
+
+async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate):
+    """The shipped escalation path (skeptic -> verifier -> judge), unchanged
+    -- except WHICH function adjudicates is now a parameter. `adjudicator`
+    defaults to the shipped adjudicate() (qwen3.7-max via QwenClient/
+    DashScope); the qwen38_judge lever passes adjudicate_qwen38 instead
+    (qwen3.8-max-preview via the Token Plan transport). Skeptic and Verifier
+    are untouched either way."""
     skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
         rebut, client, item.question, item.choices, plurality_letter, solver_answers
     )
@@ -216,7 +337,7 @@ async def _tribunal(client, tool_session, item, solver_answers, plurality_letter
     verifier_findings, verifier_usages = await verify(client, tool_session, item.question, solver_answers)
     calls.extend(verifier_usages)
     verdict, judge_usage = await asyncio.to_thread(
-        adjudicate, client, item.question, item.choices, solver_answers, skeptic_rebuttal, verifier_findings
+        adjudicator, client, item.question, item.choices, solver_answers, skeptic_rebuttal, verifier_findings
     )
     calls.append(judge_usage)
     false_escalation = (verdict.final_letter == plurality_letter) and not verdict.overturned_plurality
@@ -270,7 +391,13 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
             calls=calls, latency_s=time.monotonic() - start,
         ), gate_note
 
-    result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
+    if lever == "qwen38_judge":
+        result = await _tribunal(
+            client, tool_session, item, solver_answers, plurality_letter, calls, start,
+            adjudicator=adjudicate_qwen38,
+        )
+    else:
+        result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
     return result, gate_note
 
 
@@ -403,7 +530,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "flagship_panel", "flagship_panel_combined", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
