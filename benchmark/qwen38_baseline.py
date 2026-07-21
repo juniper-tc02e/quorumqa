@@ -62,7 +62,7 @@ def _ask_once(question: str, choices: list[str]) -> tuple[str, dict]:
         "system": SYSTEM,
         "messages": [{"role": "user", "content": user}],
     }
-    resp = requests.post(MESSAGES_URL, headers=headers, json=body, timeout=120)
+    resp = requests.post(MESSAGES_URL, headers=headers, json=body, timeout=300)
     resp.raise_for_status()
     data = resp.json()
 
@@ -105,21 +105,28 @@ async def _run_one(item, semaphore):
         }
 
 
-async def main(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool):
+async def main(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, retry_missing: bool):
     items = load_benchmark_set(n=n, seed=seed, skip_huggingface=skip_huggingface)
     log.info("Loaded %d benchmark questions (seed=%d) for qwen3.8-max-preview baseline", len(items), seed)
 
+    existing = []
+    if retry_missing and out_path.exists():
+        existing = [json.loads(l) for l in out_path.open(encoding="utf-8")]
+        done_ids = {r["question_id"] for r in existing}
+        items = [it for it in items if it.question_id not in done_ids]
+        log.info("Retry mode: %d already done, %d missing, retrying only the missing ones with the longer timeout", len(existing), len(items))
+
     semaphore = asyncio.Semaphore(concurrency)
     tasks = [asyncio.ensure_future(_run_one(item, semaphore)) for item in items]
-    results = []
+    results = list(existing)
     for coro in asyncio.as_completed(tasks):
         outcome = await coro
         if outcome is not None:
             results.append(outcome)
 
-    dropped = len(items) - len(results)
+    dropped = (len(items) + len(existing)) - len(results)
     if dropped:
-        log.warning("%d/%d questions dropped due to unrecoverable errors", dropped, len(items))
+        log.warning("%d questions still dropped after this pass", dropped)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
@@ -144,6 +151,7 @@ if __name__ == "__main__":
     parser.add_argument("--concurrency", type=int, default=2)
     parser.add_argument("--out", type=str, default=None)
     parser.add_argument("--skip-huggingface", action="store_true")
+    parser.add_argument("--retry-missing", action="store_true", help="Only re-run question_ids not already present in --out, appending to it")
     args = parser.parse_args()
     out_path = Path(args.out) if args.out else RESULTS_DIR / f"qwen38_baseline_seed{args.seed}.jsonl"
-    asyncio.run(main(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface))
+    asyncio.run(main(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.retry_missing))
