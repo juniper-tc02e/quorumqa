@@ -9,3 +9,12 @@ pandas>=2.2
 oss2>=2.18
 pytest>=8.0
 pytest-asyncio>=0.23
+
+# Agentic-benchmark support (docs/agentic-rebuild-scoping.md, Phase 1).
+# litellm pinned below 1.90: 1.90+ ships a Rust extension (litellm-rust)
+# with no prebuilt Windows wheel, and this project's QuorumQAAgent never
+# routes model calls through Harbor's own multi-provider abstraction anyway
+# (it calls QwenClient directly) -- pinning older/pure-Python avoids a
+# multi-GB Visual Studio Build Tools install for a dependency we don't use.
+litellm<1.90
+harbor>=0.20
