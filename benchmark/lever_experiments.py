@@ -52,6 +52,19 @@ from quorumqa.schemas import GPQAItem, QuestionResult, SolverAnswer
 from quorumqa.tools.mcp_client import VerifierToolSession, verifier_tool_session
 
 from benchmark.load_gpqa import load_benchmark_set
+from benchmark.load_lexam import load_lexam_set
+from benchmark.load_mmlu_pro import load_mmlu_pro_set
+
+# Every lever is a pure function of (client, tool_session, item, lever_name)
+# -- none of them know or care which benchmark an item came from, since they
+# all consume the same GPQAItem shape. This makes every lever automatically
+# available on LEXam and MMLU-Pro too, for free, once a dataset is selected
+# here -- no lever-specific code needed per dataset.
+DATASET_LOADERS = {
+    "gpqa": lambda n, seed, skip_huggingface: load_benchmark_set(n=n, seed=seed, skip_huggingface=skip_huggingface),
+    "lexam": lambda n, seed, skip_huggingface: load_lexam_set(n=n, seed=seed),
+    "mmlu_pro": lambda n, seed, skip_huggingface: load_mmlu_pro_set(n=n, seed=seed),
+}
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -127,6 +140,34 @@ async def solve_all_smart_seat(client, question, choices, subject):
     return list(await asyncio.gather(*tasks))
 
 
+async def solve_all_chem_flagship(client, question, choices, subject):
+    """The direct follow-up to smart_gate's negative result. smart_gate gave
+    the SAME model (qwen3.6-flash) more thinking time on Organic Chemistry
+    and it made chemistry worse, not better -- evidence the gap is a
+    knowledge blind spot, not an effort gap. This lever tests the other half
+    of that hypothesis directly: if it's a knowledge gap, does a genuinely
+    DIFFERENT, stronger model (qwen3.7-max, the flagship) do better on the
+    same questions? All three solver seats switch to the flagship, thinking
+    enabled, ONLY for Organic Chemistry; every other subject is untouched,
+    identical to the shipped engine. Expensive on chemistry questions (3x
+    flagship calls instead of 3x cheap calls, on ~40% of the question set)
+    but that is the point -- this is a targeted diagnostic, not a
+    cost-optimized lever."""
+    lenses = _lenses_for(3)
+    if subject == "Organic Chemistry":
+        tasks = [
+            asyncio.to_thread(_solve_one_thinking, client, question, choices, lenses[i], ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES[i])
+            for i in range(3)
+        ]
+    else:
+        tasks = [
+            asyncio.to_thread(_solve_one, client, question, choices, lenses[0], MECHANICAL_MODEL, 0.3),
+            asyncio.to_thread(_solve_one, client, question, choices, lenses[1], MECHANICAL_MODEL, 0.6),
+            asyncio.to_thread(_solve_one, client, question, choices, lenses[2], MECHANICAL_MODEL, 0.9),
+        ]
+    return list(await asyncio.gather(*tasks))
+
+
 async def solve_all_flagship_panel(client, question, choices):
     """All three seats run on the FLAGSHIP model (qwen3.7-max), thinking
     enabled -- matching how the flagship is used everywhere else in the
@@ -194,6 +235,8 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
     elif lever == "smart_gate":
         solver_pairs = await solve_all_smart_seat(client, item.question, item.choices, item.subject)
+    elif lever == "chem_flagship_gate":
+        solver_pairs = await solve_all_chem_flagship(client, item.question, item.choices, item.subject)
     elif lever == "thinking_all":
         solver_pairs = await solve_all_thinking_all(client, item.question, item.choices)
     elif lever == "five":
@@ -213,7 +256,7 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
-        elif lever in ("gate", "thinking_gate", "smart_gate"):
+        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate"):
             doubt, reason, gate_usage = second_opinion_gate(client, item.question, item.choices, solver_answers, plurality_letter)
             calls.append(gate_usage)
             if doubt:
@@ -248,9 +291,9 @@ async def _run_one(client, tool_session, item, semaphore, lever):
     return result
 
 
-async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool):
-    items = load_benchmark_set(n=n, seed=seed, skip_huggingface=skip_huggingface)
-    log.info("Loaded %d benchmark questions (seed=%d) for lever=%s", len(items), seed, lever)
+async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa"):
+    items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
+    log.info("Loaded %d %s questions (seed=%d) for lever=%s", len(items), dataset, seed, lever)
 
     client = QwenClient()
     semaphore = asyncio.Semaphore(concurrency)
@@ -270,7 +313,7 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
         for r in results:
-            f.write(json.dumps({"engine": r.model_dump(), "lever": lever, "seed": seed}) + "\n")
+            f.write(json.dumps({"engine": r.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}) + "\n")
     log.info("Wrote %d results to %s", len(results), out_path)
 
 
@@ -286,11 +329,11 @@ async def _run_one_baseline(client, item, semaphore):
     return baseline
 
 
-async def main_baseline(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool):
+async def main_baseline(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa"):
     """Fresh-seed flagship baseline -- needed because the frozen baseline
     number only covers seed=42, and Lever 3/2 replication at seed=7 needs its
     own fair comparison point, not a cross-seed borrow."""
-    items = load_benchmark_set(n=n, seed=seed, skip_huggingface=skip_huggingface)
+    items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     client = QwenClient()
     semaphore = asyncio.Semaphore(concurrency)
     results = []
@@ -360,20 +403,24 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "flagship_panel", "flagship_panel_combined", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "flagship_panel", "flagship_panel_combined", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
     parser.add_argument("--out", type=str, default=None)
     parser.add_argument("--skip-huggingface", action="store_true")
+    parser.add_argument("--dataset", type=str, default="gpqa", choices=list(DATASET_LOADERS.keys()),
+                         help="Which question set to run the lever against. Every lever works on every "
+                              "dataset unchanged -- they only vary HOW a question already loaded as a "
+                              "GPQAItem gets answered, not where it came from.")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":
         out_path = Path(args.out) if args.out else RESULTS_DIR / "lever_gate_replay.jsonl"
         asyncio.run(main_gate_replay(RESULTS_DIR / "full_run2.jsonl", out_path))
     elif args.lever == "baseline":
-        out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_baseline_seed{args.seed}.jsonl"
-        asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface))
+        out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_baseline_{args.dataset}_seed{args.seed}.jsonl"
+        asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
     else:
-        out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_{args.lever}_seed{args.seed}.jsonl"
-        asyncio.run(main_live(args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface))
+        out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_{args.lever}_{args.dataset}_seed{args.seed}.jsonl"
+        asyncio.run(main_live(args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
