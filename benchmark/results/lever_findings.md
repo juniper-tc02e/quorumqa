@@ -257,6 +257,55 @@ across three independent seeds (42, 7, 123); `chem_flagship_gate` needs the
 same treatment -- at least one more fresh seed -- before being treated as
 settled rather than a strong, promising single-run result.
 
+## Does the doubt-gate generalize past GPQA-Diamond?
+
+The LEXam and MMLU-Pro pilots (see `lexam_findings.md`, `mmlu_pro_findings.md`)
+both showed the *shipped* engine losing to the flagship baseline by double
+digits, driven almost entirely by confident unanimous-wrong agreement --
+exactly the failure mode `thinking_gate` was built to catch on GPQA. The
+harness was generalized to run any lever against any dataset (pure plumbing,
+no lever-specific code) specifically to test this directly rather than
+guess. Same seed (42) as both plain-engine pilots, so these are a clean
+before/after:
+
+| Dataset | Plain engine | `thinking_gate` | Flagship baseline | Gap closed |
+|---|---|---|---|---|
+| GPQA-Diamond (seed 42, frozen) | 78.9% | 86.7% | 84.4% | full gap closed, engine wins |
+| MMLU-Pro (seed 42, n=50) | 82.0% | **92.0%** | 94.0% | 10 of 12 points |
+| LEXam (seed 42, n=50) | 72.0% | **80.0%** | 86.0% | 8 of 14 points |
+
+**The gate mechanism itself generalizes -- it helps on every domain tested
+so far, not just GPQA.** MMLU-Pro's unanimous-wrong count dropped from 7 to
+2, and all 5 overturns triggered were correct (100%). LEXam's unanimous-
+wrong barely moved (11 to 7) and overturn quality was weaker (9 overturns,
+6 correct, 67%) -- closing less of the gap than MMLU-Pro despite a bigger
+absolute improvement over its own plain-engine baseline (+8 points vs
++10).
+
+**Why LEXam still trails when MMLU-Pro nearly catches up: this confirms the
+mechanistic diagnosis from `lexam_findings.md`.** MMLU-Pro's sample includes
+plenty of STEM subjects (math, physics, chemistry, engineering) where the
+Verifier's actual tools (`lookup_constant`, `safe_calculate`) have real
+claims to check -- the same kind of grounding that makes escalation work on
+GPQA. LEXam's statement-based legal questions mostly don't -- 7 of 9
+escalations in the original plain-engine LEXam pilot produced zero Verifier
+findings. The gate can still make the panel escalate *more often* on LEXam
+(escalation rate rose to 34%, matching MMLU-Pro's 32%), but once escalated,
+the Judge on LEXam is working from a Skeptic's argument alone, without the
+tool-grounded evidence that makes GPQA's and MMLU-Pro's Judge calls
+reliable. More disagreement caught is not the same as more disagreement
+*resolved well* -- that second part needs a Verifier with tools that
+actually apply to the domain, which LEXam does not yet have (see
+`lexam_findings.md`'s "what this would take" section: a statute/case-lookup
+tool, not built here).
+
+**Practical read:** the doubt-gate is close to a domain-general win --
+adopt it and you gain real accuracy on GPQA, MMLU-Pro, and LEXam alike --
+but "close most of the gap to the flagship" specifically depends on the
+Verifier having something real to check in that domain. Single seed on the
+new-dataset numbers above; same replication caveat as everything else in
+this section.
+
 ## What this would take to ship
 
 Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:
