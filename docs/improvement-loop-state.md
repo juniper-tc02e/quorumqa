@@ -77,10 +77,14 @@ targeted.)
 
 1. **[RUNNING iter-1] chem_flagship_gate seed-777 replication** — 2nd of 3
    seeds toward validation. Existing code, ~$4.
-2. **[RUNNING iter-1] qwen38-judge lever** — new lever: shipped engine but
-   Judge = qwen3.8-max-preview via Token Plan endpoint. Sonnet worker builds
-   (TDD, offline tests first), then pilot at seed 42 for direct comparison
-   with the frozen run. Biggest plausible single lever.
+2. **[BUILT iter-1, PILOT RUNNING] qwen38-judge lever** — worker delivered
+   clean (RED→GREEN TDD, 25→29 tests, live smoke: 2 real Token Plan judge
+   calls parsed, one overturn). Orchestrator verified prompt parity with
+   judge.py directly (literal-by-literal: MATCH). n=90 seed-42 pilot
+   launched — same questions as the frozen submission run for direct
+   comparison. Note for scoring: judge cost_usd=0.0 by design (Token Plan
+   is quota-based, no published $/token) — report judge usage in tokens,
+   never a fake USD figure.
 3. ~~HLE re-verification~~ **[DONE iter-1: BLOCKED, deprioritized]** — the
    0-3 refutation holds on stronger grounds: no choices column exists at all
    (MC options are free text inside the question, 5+ of them), official
