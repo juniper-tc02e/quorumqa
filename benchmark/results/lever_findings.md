@@ -325,6 +325,47 @@ Verifier having something real to check in that domain. Single seed on the
 new-dataset numbers above; same replication caveat as everything else in
 this section.
 
+## qwen38_judge: a better judge is not the lever (negative result, mechanistically informative)
+
+Hypothesis: qwen3.8-max-preview scored 93.6% solo (far above qwen3.7-max's
+85.6%), so swapping it in as the Judge -- the one role that rules on every
+escalation -- should lift the engine. Tested at seed 42 (the frozen run's
+own questions, for a paired comparison), same engine otherwise.
+
+**Result: no measurable gain, and the diagnosis says why.**
+
+- n=76/90 surviving; headline 80.3% -- **biased upward**: all 14 drops were
+  300s ReadTimeouts on the Token Plan endpoint and 13/14 were Organic
+  Chemistry, the same survivorship pattern this file documents twice
+  already. No retry was run because the conclusion is robust without it:
+  even a perfect 14/14 on the dropped questions caps the run at 83.3%,
+  still below the flagship baseline (84.4%) and far below
+  chem_flagship_gate (88.6-89.8%).
+- Paired against the frozen run on the surviving 76: fixed 1, broke 3 --
+  net -2, inside the measured ±2.5pt sampling-noise floor. Statistically:
+  no change.
+- **The judge itself was flawless: 9/9 overturns correct** (the frozen
+  run's qwen3.7-max judge went 11/14). That is exactly what makes this
+  negative result informative rather than merely disappointing: judge
+  quality was never the binding constraint. 14 of the surviving set's
+  errors were unanimous-wrong -- confident three-way agreement on a wrong
+  answer that no judge, however good, ever gets to see. A better
+  adjudicator polishes a stage that was already performing; it cannot
+  reach the failure mode that actually dominates.
+
+This mechanistically corroborates, from the judge side, what the LEXam and
+MMLU-Pro pilots showed from the benchmark side and what chem_flagship_gate
+shows from the solver side: **the engine's ceiling is set by escalation
+coverage (what reaches the tribunal), not tribunal quality (what happens
+there).** Levers that diversify or strengthen the solver panel move the
+number; levers that improve adjudication of an already-good tribunal do
+not. Deprioritized accordingly; the harness keeps the lever as a documented
+negative result. (Untested, deliberately: stacking qwen38-judge on top of
+chem_flagship_gate -- plausible marginal upside on the ~47% of questions
+that escalate there, but the Token Plan latency fragility this run exposed
+applies to the stack too, and validating the proven lever's third seed was
+judged the better use of the same quota window.)
+
 ## What this would take to ship
 
 Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:

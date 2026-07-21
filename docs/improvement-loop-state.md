@@ -86,14 +86,17 @@ targeted.)
    design there, tokens are the signal), and racing them risks quota
    exhaustion mid-run corrupting both via mass drops.** Decision logged
    per autonomy grant.
-2. **[BUILT iter-1, PILOT RUNNING] qwen38-judge lever** — worker delivered
-   clean (RED→GREEN TDD, 25→29 tests, live smoke: 2 real Token Plan judge
-   calls parsed, one overturn). Orchestrator verified prompt parity with
-   judge.py directly (literal-by-literal: MATCH). n=90 seed-42 pilot
-   launched — same questions as the frozen submission run for direct
-   comparison. Note for scoring: judge cost_usd=0.0 by design (Token Plan
-   is quota-based, no published $/token) — report judge usage in tokens,
-   never a fake USD figure.
+2. **[DONE iter-1: NEGATIVE, mechanistically informative] qwen38-judge
+   lever** — no measurable gain (paired vs frozen run: fixed 1, broke 3,
+   inside the ±2.5pt noise floor; headline 80.3% biased up by 14 chem-heavy
+   ReadTimeout drops; even a perfect drop-retry caps at 83.3%, below
+   baseline). The judge itself went 9/9 on overturns — proving judge
+   quality was never the binding constraint; unanimous-wrong never reaches
+   any judge. Confirms from a third angle: escalation COVERAGE is the
+   ceiling, not tribunal quality. Full write-up in lever_findings.md.
+   Decision (autonomy grant): deprioritized; drop-retry skipped as
+   conclusion-robust; quota window given to chem_flagship_gate seed-888
+   instead (now RUNNING, iter-2).
 3. ~~HLE re-verification~~ **[DONE iter-1: BLOCKED, deprioritized]** — the
    0-3 refutation holds on stronger grounds: no choices column exists at all
    (MC options are free text inside the question, 5+ of them), official
