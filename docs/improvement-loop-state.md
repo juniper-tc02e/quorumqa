@@ -4,6 +4,20 @@ Started 2026-07-21. This doc is the loop's memory: every iteration reads it,
 acts on the top of the backlog, records what happened, and re-ranks. It is
 committed after every iteration so the loop survives session loss.
 
+## Hard stop: 2026-07-22 07:15 SGT
+
+Set by Jun Kai at 01:16 SGT. Wind-down protocol: no new long-running
+launches after ~06:30; final iteration writes a wrap-up section at the top
+of this doc (what was validated, what's still running/queued, recommended
+next actions) by 07:15, commits and pushes it, then stops the wakeup loop.
+
+**Autonomy grant for the window:** anything that would normally pause for
+approval → review the options, take the most-recommended approach, and log
+the decision + reasoning in the iteration log below. Exception: genuinely
+novel external actions (PRs to third-party repos, leaderboard submissions,
+anything published beyond this repo and additive magiachiral.com sections)
+are prepared and queued here for post-window review, not executed.
+
 ## Standing constraints (set by Jun Kai, 2026-07-21)
 
 - **Budget:** no fixed cap; scale each experiment to its question; flag any
