@@ -29,6 +29,37 @@ def test_parse_next_action_missing_command_defaults_to_done():
     assert action.done is True
 
 
+def test_parse_next_action_timeout_sec_absent_defaults_to_none():
+    # No timeout_sec in the model's JSON -- NextAction should carry None so
+    # the agent knows to fall back to its own configured default, not some
+    # parser-invented number.
+    data = {"done": False, "command": "ls", "summary": "listing"}
+    action = parse_next_action(data)
+    assert action.timeout_sec is None
+
+
+def test_parse_next_action_with_timeout_sec_in_range():
+    data = {"done": False, "command": "make build", "summary": "building", "timeout_sec": 600}
+    action = parse_next_action(data)
+    assert action.timeout_sec == 600
+
+
+def test_parse_next_action_timeout_sec_clamped_to_minimum():
+    # Model asks for something below the floor -- clamp up to 10, don't
+    # let a hung command get an effectively-zero timeout.
+    data = {"done": False, "command": "echo hi", "summary": "quick", "timeout_sec": 1}
+    action = parse_next_action(data)
+    assert action.timeout_sec == 10
+
+
+def test_parse_next_action_timeout_sec_clamped_to_maximum():
+    # Model asks for something above the ceiling -- clamp down to 1200 so
+    # one bad request can't eat an entire budgeted run.
+    data = {"done": False, "command": "make build", "summary": "building", "timeout_sec": 999999}
+    action = parse_next_action(data)
+    assert action.timeout_sec == 1200
+
+
 import asyncio
 from dataclasses import dataclass
 
@@ -150,3 +181,43 @@ def test_agent_command_timeout_is_configurable():
     asyncio.run(agent.run("Do a slow build.", fake_env, fake_context))
 
     assert fake_env.timeouts_used == [900]
+
+
+def test_agent_uses_model_requested_timeout_sec_per_command():
+    # 2026-07-21 pilot follow-up: compile-compcert and count-dataset-tokens
+    # need individual commands >300s while most commands finish in seconds --
+    # a flat higher default would waste a budgeted run on every hung command.
+    # The model can now request a per-command timeout_sec; when it does, the
+    # actual environment.exec call must receive that value, not the agent's
+    # configured default.
+    fake_env = FakeEnvironment([
+        FakeExecResult(stdout="ok\n", stderr=None, return_code=0),
+        FakeExecResult(stdout="ok\n", stderr=None, return_code=0),
+    ])
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "make compcert", "summary": "slow build", "timeout_sec": 900},
+        {"done": False, "command": "ls", "summary": "quick check"},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Build compcert.", fake_env, fake_context))
+
+    # First command's requested timeout is honored; second omits it and
+    # falls back to the agent's own configured default (300).
+    assert fake_env.timeouts_used == [900, 300]
+
+
+def test_agent_clamps_model_requested_timeout_sec_out_of_range():
+    fake_env = FakeEnvironment([FakeExecResult(stdout="ok\n", stderr=None, return_code=0)])
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "make compcert", "summary": "slow build", "timeout_sec": 50000},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Build compcert.", fake_env, fake_context))
+
+    assert fake_env.timeouts_used == [1200]  # clamped down to the ceiling

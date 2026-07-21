@@ -7,11 +7,19 @@ proves the integration point works."""
 from dataclasses import dataclass
 
 
+# Per-command timeout bounds for the model-requestable timeout_sec field --
+# floor keeps a hung command from ever getting an effectively-zero timeout,
+# ceiling keeps one bad request from eating an entire budgeted run.
+MIN_COMMAND_TIMEOUT_SEC = 10
+MAX_COMMAND_TIMEOUT_SEC = 1200
+
+
 @dataclass(frozen=True)
 class NextAction:
     done: bool
     command: str | None
     summary: str | None
+    timeout_sec: int | None = None
 
 
 def parse_next_action(data: dict) -> NextAction:
@@ -23,7 +31,12 @@ def parse_next_action(data: dict) -> NextAction:
         # command to run. Treat as done rather than looping forever or
         # crashing when this None reaches environment.exec().
         done = True
-    return NextAction(done=done, command=command, summary=summary)
+
+    timeout_sec = data.get("timeout_sec")
+    if timeout_sec is not None:
+        timeout_sec = max(MIN_COMMAND_TIMEOUT_SEC, min(MAX_COMMAND_TIMEOUT_SEC, int(timeout_sec)))
+
+    return NextAction(done=done, command=command, summary=summary, timeout_sec=timeout_sec)
 
 
 from harbor.agents.base import BaseAgent
@@ -37,7 +50,10 @@ AGENT_SYSTEM = (
     "You can run exactly one shell command per turn and you will be shown "
     "its stdout, stderr, and return code before choosing your next command. "
     "When the task is fully complete, respond with done=true and no command.\n\n"
-    'JSON shape: {"done": true|false, "command": "shell command or null", "summary": "one short sentence"}'
+    'JSON shape: {"done": true|false, "command": "shell command or null", '
+    '"summary": "one short sentence", "timeout_sec": optional integer}\n'
+    "Only set timeout_sec if you expect this specific command to be slow "
+    "(builds, downloads, long test suites); omit it otherwise to use the default timeout."
 )
 
 
@@ -93,7 +109,8 @@ class QuorumQAAgent(BaseAgent):
             if action.done or action.command is None:
                 break
 
-            exec_result = await environment.exec(action.command, timeout_sec=self._command_timeout_sec)
+            timeout_sec = action.timeout_sec if action.timeout_sec is not None else self._command_timeout_sec
+            exec_result = await environment.exec(action.command, timeout_sec=timeout_sec)
             transcript.append({
                 "command": action.command,
                 "stdout": exec_result.stdout or "",
