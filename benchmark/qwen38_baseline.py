@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
-API_KEY = os.environ["DASHSCOPE_API_KEY"]
+API_KEY = os.environ["QUORUMQA_TOKEN_PLAN_API_KEY"]
 BASE_URL = os.environ.get("QUORUMQA_TOKEN_PLAN_BASE_URL", "https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic")
 MESSAGES_URL = BASE_URL.rstrip("/") + "/v1/messages"
 MODEL = "qwen3.8-max-preview"
