@@ -109,8 +109,11 @@ targeted.)
    on cais/hle would allow measuring the text-only∩MC joint count, the only
    thing that could reopen this. See benchmark/results/hle_feasibility.md.
 4. **Terminal-Bench seed-2 sample (14 fresh tasks)** — validate the 54.5%
-   baseline before Phase 2. Needs task-adaptive command timeout first
-   (two-line change + test).
+   baseline before Phase 2. Prerequisite DONE (iter-2): model-requestable
+   per-command timeout_sec, clamped [10,1200], default 300 unchanged;
+   TDD 29→35 tests, commit f1d8385, diff spot-checked by orchestrator.
+   Ready to launch when the Token Plan quota window is clear of the chem
+   seed-888 run (both share it).
 5. **Stack test: chem_flagship_gate + thinking_gate** — do the two validated
    levers compose? (After #1 lands.)
 6. **Terminal-Bench Phase 2: best-of-N filtered by task verifier** — per
