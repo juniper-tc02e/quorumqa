@@ -208,6 +208,55 @@ real, systematic weakness, but it is a knowledge gap, not an
 attention/effort gap, and this architecture's escalation mechanism is built
 to catch the latter, not the former.
 
+## chem_flagship_gate: the follow-up hypothesis confirmed
+
+`smart_gate` showed that more *thinking time* on Organic Chemistry, still on
+`qwen3.6-flash`, didn't help -- it made chemistry slightly worse than the
+plain baseline. The natural next question: is the gap a knowledge blind
+spot specific to that model, or something more fundamental about the
+subject? Tested directly with a new lever, `chem_flagship_gate`: all three
+solver seats switch to the flagship (`qwen3.7-max`, thinking enabled) for
+Organic Chemistry only; every other subject is untouched, identical to the
+shipped engine; the universal doubt-gate still applies everywhere.
+
+**A genuinely different, stronger model fixes most of the gap.** Tested at
+a fresh seed (555, n=90):
+
+| | Organic Chemistry | Everything else | Overall |
+|---|---|---|---|
+| Baseline (flagship alone, seed 123 for reference) | 77.8% | 90.7% | 85.6% |
+| `smart_gate` (more thinking, same model) | 72.2% | 90.6% | 83.1% |
+| `chem_flagship_gate` (different, stronger model) | **90.0%** | 89.7% | **89.8%** |
+
+90.0% (27/30) on Organic Chemistry specifically, up from the 72-78% range
+every other tested configuration landed in -- and 89.8% overall is the best
+single-seed result of the whole ablation study, ahead of `thinking_gate`'s
+86.7% best. This confirms the reframed diagnosis from the `smart_gate`
+section above: the chemistry gap is a knowledge blind spot in
+`qwen3.6-flash` specifically, not an effort/attention gap, and it responds
+to a different model, not more time from the same one.
+
+**A real methodological lesson worth keeping on record.** The first run of
+this lever appeared to hit 100% on chemistry (18/18) -- but 14 of the 32
+sampled chemistry questions had silently dropped to a 120s request timeout,
+and 100% of the drops were chemistry (the subject routed to the slower,
+thinking-enabled flagship calls). That 100% was almost certainly inflated
+by exactly the same survivorship-bias mechanism already caught once this
+session on the `qwen3.8-max-preview` baseline: the hardest, slowest-to-
+answer questions were disproportionately the ones timing out and getting
+excluded from the "surviving" sample. Fixed by bumping the shared client's
+timeout to 300s and re-running the full 90 clean -- 88/90 completed, and
+the honest number (90.0%) is still an excellent result, just not the
+inflated one. Reported here as a reminder that an exciting first number is
+exactly when to check for this, not skip the check because the result looks
+good.
+
+**Not yet at the same validation bar as `thinking_gate`.** This is one
+seed. `thinking_gate` wasn't trusted as a real result until it replicated
+across three independent seeds (42, 7, 123); `chem_flagship_gate` needs the
+same treatment -- at least one more fresh seed -- before being treated as
+settled rather than a strong, promising single-run result.
+
 ## What this would take to ship
 
 Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:
