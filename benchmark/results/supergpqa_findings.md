@@ -169,3 +169,52 @@ validated on a benchmark beyond GPQA-Diamond. Deliberation with a
 competent solver panel beats the same flagship model running alone,
 consistently, on a broad hard-STEM benchmark: the strongest general-use
 evidence the project has.
+
+## qwen38_panel (strongest solver tier): a mechanistically clean NEGATIVE
+
+Tested whether an even stronger solver tier beats flagship_panel: all
+three seats on qwen3.8-max-preview (the model that scored 93.6% solo on
+GPQA-123). Seed 42, SuperGPQA-hard, concurrency 2.
+
+**It does not win — and it reveals why raw tier strength isn't the lever.**
+
+Two problems, both real:
+1. **30% timeout drop rate (27/90), all in the hard subjects** (Science
+   16, Engineering 10). qwen3.8 thinks heavily; on the hardest questions
+   it routinely exceeds the 300s cap. So the surviving 63 are the easier
+   tail — the pilot is INCONCLUSIVE on exactly the hard questions where a
+   stronger tier might matter most. Stated plainly, not hidden.
+2. **0% escalation — the panel NEVER split.** Three heavy-thinking 3.8
+   seats always agree, so nothing ever reaches the tribunal. qwen38_panel
+   is therefore not "deliberation on a strong tier" at all — it is 3×
+   qwen3.8 self-consistency with the entire Skeptic/Verifier/Judge
+   apparatus sitting idle.
+
+Apples-to-apples on the 58 items common to all four systems (note: this
+subset excludes qwen38's 27 drops, so it is the EASIER tail — the
+baseline reads 87.9% here vs 79.5% on the full set, and all systems
+cluster high):
+
+| System (58 easier-tail common items) | Accuracy |
+|---|---|
+| Cheap-panel | 79.3% |
+| Single-flagship baseline | 87.9% |
+| **Flagship-panel (3.7)** | **89.7%** |
+| qwen38-panel (3.8) | 87.9% |
+
+Even on the easier tail that favors it, the 3.8 panel ties the single
+baseline and TRAILS the validated 3.7 flagship_panel. A stronger,
+more-homogeneous tier bought nothing and cost more.
+
+**Why this matters (the reasoning-emphasis takeaway):** this is the
+top-tier confirmation of the panel-diversity principle already seen in
+the `thinking_all` negative (making every seat "smarter" collapses
+escalation and hurts). The value of QuorumQA's deliberation is
+*productive disagreement between differently-calibrated seats*, not raw
+per-seat capability. Push per-seat strength too high and the panel
+becomes unanimous, escalation dies, and you are left paying premium
+tokens for plain self-consistency. **flagship_panel (3.7) remains the
+validated hard-STEM profile;** qwen3.8's role is as a `single-call`
+option for the hardest routes or a candidate judge (already tested null),
+NOT as a homogeneous solver panel. Recorded as a documented negative,
+not a shipped lever.
