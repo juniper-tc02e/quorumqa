@@ -183,6 +183,15 @@ targeted.)
 - **Agent hardening: VALIDATED by same-sample rerun** — graded coverage
   36%→86% on seed-7, exceptions 9→2, two former infrastructure casualties
   now solve outright.
+- **REFINED THESIS (SuperGPQA-hard):** flagship headroom is necessary but
+  NOT sufficient — the engine lost −11.6 even with 79% flagship headroom,
+  because the cheap-tier-to-flagship GAP was too big (23% unanimous-wrong).
+  The MoO router must estimate that gap, not just difficulty.
+- **flagship_panel domain-routing GENERALIZES (SuperGPQA-hard, 1 seed):**
+  on 78 identical items, cheap-panel 67.9% → flagship-panel 83.3% (+3.8
+  over the single flagship baseline, +15.4 over cheap). chem_flagship_gate's
+  one-subject routing works across a whole broad-STEM benchmark. Needs
+  3-seed bar to become a validated MoO profile.
 
 - **chem_flagship_gate: VALIDATED at 3 seeds** (89.8/88.6/87.4, mean 88.6%)
   — beats the flagship baseline (~85.5%) and every prior configuration at
