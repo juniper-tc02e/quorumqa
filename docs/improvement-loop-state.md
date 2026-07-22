@@ -151,3 +151,18 @@ targeted.)
   relaunched with an engine-readiness wait guard. Running.
 - Next when quota/pilot allow: stack test (chem_flagship_gate +
   thinking_gate), SuperGPQA hardest-subset pilot.
+
+### Iteration 3 — 2026-07-22 ~09:06 (window extended by Jun Kai, live)
+- **5 hours lost overnight, disclosed:** the seed-7 T-Bench launch died
+  silently — Docker Desktop never finished starting, and the readiness
+  guard's `docker info` polls HUNG instead of failing fast (each poll
+  blocking on the half-started daemon), so the shell sat inside the wait
+  loop producing zero output until the session itself died. Lesson
+  applied: readiness checks now use `timeout 10 docker info`, and the
+  relaunch only happened after Docker was verified up. The 07:15 hard
+  stop passed during the outage; Jun Kai extended the window live at
+  ~09:06 with "Continue the loop."
+- Relaunched seed-7 T-Bench pilot (job dir confirmed created this time —
+  the previous failure mode is checked for, not assumed away).
+- Dispatched: chem_thinking_gate stack lever build (Sonnet worker, TDD).
+  Fresh-seeds-only note included — all six prior seeds are burned for it.
