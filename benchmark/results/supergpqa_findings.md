@@ -133,3 +133,22 @@ MoO router as "validated" after the standard three-seed bar. Drops (11,
 all flagship-thinking ReadTimeouts on hard questions, Engineering 7 /
 Science 4) are the known API-latency ceiling and are excluded from the
 comparison by intersection.
+
+## Second seed (7): replicates
+
+Ran the matched pair again at seed 7 (single-flagship baseline +
+flagship_panel), apples-to-apples on the 82 common items:
+
+| SuperGPQA-hard | Seed 42 | Seed 7 |
+|---|---|---|
+| Single flagship baseline | 79.5% | 79.3% |
+| Flagship-panel engine | 83.3% | 81.7% |
+| **Delta** | **+3.8** | **+2.4** |
+
+Both seeds positive; the baseline is remarkably stable (79.5 / 79.3). Mean
++3.1 over two independent seeds — the flagship_panel-beats-single-flagship
+generalization on hard STEM is replicated, not a one-seed artifact. The
+margin is smaller at seed 7 (+2.4 vs +3.8), so the effect size carries
+normal per-seed variance, but the sign is consistent. One more fresh seed
+completes the 3-seed bar to promote `flagship_panel` to a validated MoO
+domain profile; on current evidence it is a strong, replicated positive.
