@@ -22,7 +22,9 @@ levers are the work.
    for every other domain profile.
 4. **Coding** — Terminal-Bench (baseline 37.5% established) → best-of-N
    Phase 2; MBPP/HumanEval as single-turn checkable-code pilots.
-5. **Biology/Medicine** — MedQA (clean 4-option), MMLU-Pro health slice.
+5. **Biology/Medicine** — MedQA (clean 4-option): loader+runner BUILT and
+   committed (85c01b5), verified live (native 4-option, zero-warning full
+   split). Pilot queued behind SuperGPQA per Token-Plan serialization.
 6. **Data analytics** — needs a benchmark scout (DS-1000? tabular-QA?).
 7. **Auditing/security** — SEC-bench/ExploitBench are agentic (scoping
    doc covers the rebuild); a text-only security-MCQ pilot is the
