@@ -64,6 +64,25 @@ Levers:
                  tuning/validating thinking_gate and chem_flagship_gate
                  individually; reusing any of them here would double-count
                  that evidence rather than testing the stack honestly.
+  rag_presolve -- docs/recursive-rag-plan.md section 2, R1 (pre-solve
+                 retrieval). Identical to the shipped cheap engine (3 flash
+                 solvers, flash skeptic/verifier, qwen3.7-max judge,
+                 escalate only on split) EXCEPT before the solvers run,
+                 top-k passages are retrieved ONCE per question from the
+                 pre-embedded STEM-Wikipedia RAG index (docs/rag-corpus-
+                 notes.md) and prepended as a compact evidence block to
+                 every solver seat's user prompt. Solver system prompt and
+                 JSON contract are byte-for-byte unchanged; skeptic/
+                 verifier/judge/escalation trigger are untouched. Tests
+                 Bet 1: does cheap-panel + retrieval close the unanimous-
+                 wrong knowledge gap without paying for a flagship tier.
+                 Fails loudly at startup if the index DB doesn't exist (see
+                 open_rag_index) -- retrieval is the whole point of this
+                 lever, so it must never silently run without it. Index
+                 path/k are overridable via --rag-db/--rag-k or the
+                 QUORUMQA_RAG_DB env var. Firewall (section 4): every
+                 output row records rag="ON" and the exact rag_snapshot_id
+                 read from the open index (see _build_output_row).
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -74,6 +93,7 @@ Usage:
   python -m benchmark.lever_experiments --lever qwen38_judge --n 90 --seed 42
   python -m benchmark.lever_experiments --lever qwen38_panel --n 90 --seed 42
   python -m benchmark.lever_experiments --lever chem_thinking_gate --n 90 --seed <FRESH>  # never 42/7/123/555/777/888
+  python -m benchmark.lever_experiments --lever rag_presolve --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -81,9 +101,11 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import re
 import time
 from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 
 import requests
@@ -472,6 +494,182 @@ async def solve_all_qwen38_panel(client, question, choices):
     return list(await asyncio.gather(*tasks))
 
 
+# ---------------------------------------------------------------------------
+# rag_presolve (R1): pre-solve retrieval lever -- docs/recursive-rag-plan.md
+# section 2. Identical to the shipped cheap engine EXCEPT each solver seat's
+# user prompt is prefixed with a compact evidence block retrieved ONCE per
+# question (not once per seat) from the pre-embedded STEM-Wikipedia index
+# (docs/rag-corpus-notes.md). Solver system prompt + JSON contract are
+# byte-for-byte unchanged from quorumqa.engine.solver._solve_one -- retrieval
+# only touches the user turn. Skeptic/Verifier/Judge/escalation trigger are
+# completely untouched (this lever never appears in any gate-lever list
+# below), isolating "does injecting retrieved evidence before the panel
+# answers move the needle" as the only variable vs the shipped engine.
+#
+# FIREWALL (docs/recursive-rag-plan.md section 4): the index is the G0.5
+# STEM-Wikipedia corpus -- general encyclopedia content unrelated to any
+# benchmark's question set. Every output row this lever writes records
+# rag="ON" plus the exact rag_snapshot_id read from the OPEN index's
+# build_progress row (see _build_output_row), so a RAG-assisted number is
+# never presented next to a non-RAG baseline as if it were the same mode.
+# ---------------------------------------------------------------------------
+
+RAG_DB_ENV = "QUORUMQA_RAG_DB"
+DEFAULT_RAG_DB_PATH = Path(__file__).resolve().parent / "data" / "rag_index_preembedded.sqlite3"
+DEFAULT_RAG_K = 5
+# ~200 words total across ALL retrieved passages, split evenly across
+# however many were retrieved -- keeps the extra context lean per
+# docs/recursive-rag-plan.md's "keep snippets short" instruction, rather
+# than letting k passages each carry a full ~200-word snippet.
+RAG_EVIDENCE_WORD_BUDGET = 200
+
+# One RagIndex (+ its in-memory dense-vector cache) per resolved DB path,
+# reused for the lifetime of this process -- mirrors quorumqa.tools.
+# mcp_server._rag_index_cache's pattern. Unlike that cache, though, this
+# lever's missing-DB contract is the OPPOSITE of search_corpus's clean
+# no-op: see open_rag_index.
+_rag_index_cache: dict = {}
+
+
+@dataclass
+class RagPresolveConfig:
+    index: object  # quorumqa.rag.store.RagIndex -- typed loosely so this
+                    # module doesn't hard-depend on the rag package at
+                    # import time (matches mcp_server.py's lazy-import style)
+    embedder: object  # Callable[[str], np.ndarray] | None -- None means
+                       # dense deps are unavailable; retrieval degrades to
+                       # FTS5-only (same degrade path as mcp_server.search_corpus)
+    k: int
+    snapshot_id: str
+    db_path: Path
+
+
+def resolve_rag_db_path(cli_value: str | None = None) -> Path:
+    """CLI --rag-db wins over the QUORUMQA_RAG_DB env var, which wins over
+    the pre-embedded G0.5 corpus (docs/rag-corpus-notes.md) as the default."""
+    if cli_value:
+        return Path(cli_value)
+    env_value = os.environ.get(RAG_DB_ENV)
+    return Path(env_value) if env_value else DEFAULT_RAG_DB_PATH
+
+
+def open_rag_index(db_path: str | Path):
+    """Opens (once) and caches the RagIndex at db_path. Raises
+    FileNotFoundError immediately if the index doesn't exist -- rag_presolve
+    must fail loudly at startup rather than silently running the cheap panel
+    without retrieval, which would produce a result file that LOOKS like a
+    RAG pilot but isn't one. (Contrast quorumqa.tools.mcp_server.
+    search_corpus, whose missing-DB contract is a clean ok:False no-op --
+    correct for an OPTIONAL Verifier tool, wrong for a lever whose entire
+    point is retrieval.)"""
+    from quorumqa.rag import store
+
+    key = str(Path(db_path).resolve())
+    cached = _rag_index_cache.get(key)
+    if cached is not None:
+        return cached
+    if not Path(db_path).exists():
+        raise FileNotFoundError(
+            f"rag_presolve lever requires a built RAG index at {db_path}, but no file exists there. "
+            "Refusing to run rag_presolve without retrieval -- build the index first "
+            "(see docs/rag-corpus-notes.md, benchmark/build_rag_index_preembedded.py) or point "
+            f"--rag-db / the {RAG_DB_ENV} env var at an existing one."
+        )
+    index = store.RagIndex.open(db_path)
+    _rag_index_cache[key] = index
+    return index
+
+
+def build_rag_presolve_config(db_path: str | Path, k: int = DEFAULT_RAG_K) -> RagPresolveConfig:
+    """Opens the index (fail-loud, see open_rag_index) and resolves the
+    query embedder matching whichever embedding model the index was
+    actually built with -- the same quorumqa.rag.embeddings.get_query_embedder
+    dispatch quorumqa.tools.mcp_server.search_corpus uses, so the mxbai
+    encoder is picked automatically for the G0.5 pre-embedded corpus rather
+    than assuming the from-scratch build's default bge-small."""
+    from quorumqa.rag import store
+    from quorumqa.rag.embeddings import get_query_embedder
+
+    index = open_rag_index(db_path)
+    embedding_model = store.get_progress(index.conn).get("embedding_model")
+    try:
+        embedder = get_query_embedder(embedding_model)
+    except ImportError:
+        # Dense deps (sentence-transformers/torch) missing -- degrade to
+        # FTS5-only, same as mcp_server.search_corpus, rather than failing
+        # the whole lever over an optional dependency.
+        log.warning("rag_presolve: dense embedding deps unavailable, degrading to FTS5-only retrieval")
+        embedder = None
+    snapshot_id = store.get_progress(index.conn).get("snapshot_id") or "unknown"
+    return RagPresolveConfig(index=index, embedder=embedder, k=k, snapshot_id=snapshot_id, db_path=Path(db_path))
+
+
+def retrieve_rag_evidence(rag: RagPresolveConfig, question: str) -> list[dict]:
+    query_vector = rag.embedder(question) if rag.embedder is not None else None
+    return rag.index.search(question, query_vector, k=rag.k)
+
+
+def build_evidence_block(results: list[dict], word_budget: int = RAG_EVIDENCE_WORD_BUDGET) -> str:
+    """"Relevant reference passages (may or may not be useful):\\n[title]
+    snippet...\\n..." per docs/recursive-rag-plan.md's R1 spec. Snippets are
+    truncated to an even share of `word_budget` across however many
+    passages were retrieved, so total injected context stays bounded
+    regardless of k."""
+    if not results:
+        return ""
+    per_passage_budget = max(1, word_budget // len(results))
+    lines = ["Relevant reference passages (may or may not be useful):"]
+    for r in results:
+        snippet = " ".join(r["text"].split()[:per_passage_budget])
+        lines.append(f"[{r['title']}] {snippet}...")
+    return "\n".join(lines)
+
+
+def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHANICAL_MODEL, temperature=0.4):
+    """Identical to solver._solve_one -- same system prompt (SOLVER_SYSTEM +
+    lens), same model/thinking/temperature defaults, same JSON contract --
+    except the user turn is prefixed with the retrieved-evidence block (if
+    any). Verbatim copy of _solve_one's user-prompt construction plus the
+    prefix, same caveat as every other lever's copied solver helper in this
+    file: if solver.py's user-prompt shape ever changes, this copy must
+    change with it."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    evidence_prefix = f"{evidence_block}\n\n" if evidence_block else ""
+    user = (
+        f"{evidence_prefix}Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+    )
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+    letter = str(result.data.get("letter", "")).strip().upper()[:1]
+    answer = SolverAnswer(
+        letter=letter if letter in "ABCD" else "A",
+        confidence=float(result.data.get("confidence", 0.5)),
+        reasoning=str(result.data.get("reasoning", "")),
+        lens=lens,
+    )
+    return answer, result.usage
+
+
+async def solve_all_rag_presolve(client, question, choices, rag: RagPresolveConfig):
+    """Retrieves top-k passages for the QUESTION ONCE (not once per solver
+    seat), builds one evidence block, and gives every one of the three
+    shipped-tier solver seats (same model/lenses/temperatures as solve_all)
+    the same evidence block. Returns (solver_pairs, retrieved_titles) -- the
+    titles are for logging only (see run_question_lever), not part of the
+    QuestionResult schema."""
+    results = await asyncio.to_thread(retrieve_rag_evidence, rag, question)
+    evidence_block = build_evidence_block(results)
+    titles = [r["title"] for r in results]
+    lenses = _lenses_for(3)
+    tasks = [
+        asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[i], evidence_block, MECHANICAL_MODEL, SOLVER_TEMPERATURES[i])
+        for i in range(3)
+    ]
+    solver_pairs = list(await asyncio.gather(*tasks))
+    return solver_pairs, titles
+
+
 async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate):
     """The shipped escalation path (skeptic -> verifier -> judge), unchanged
     -- except WHICH function adjudicates is now a parameter. `adjudicator`
@@ -498,7 +696,7 @@ async def _tribunal(client, tool_session, item, solver_answers, plurality_letter
     )
 
 
-async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
+async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, rag: "RagPresolveConfig | None" = None):
     start = time.monotonic()
 
     if lever in ("thinking", "combined", "thinking_gate"):
@@ -517,6 +715,15 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
     elif lever == "qwen38_panel":
         solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
+    elif lever == "rag_presolve":
+        if rag is None:
+            raise ValueError(
+                "lever 'rag_presolve' requires a RagPresolveConfig -- pass rag=... "
+                "(see main_live/build_rag_presolve_config); refusing to silently run the cheap "
+                "panel without retrieval"
+            )
+        solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
+        log.info("%s: rag_presolve retrieved %d passage(s): %s", item.question_id, len(retrieved_titles), retrieved_titles)
     else:
         solver_pairs = await solve_all(client, item.question, item.choices)
 
@@ -554,10 +761,10 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
     return result, gate_note
 
 
-async def _run_one(client, tool_session, item, semaphore, lever):
+async def _run_one(client, tool_session, item, semaphore, lever, rag: "RagPresolveConfig | None" = None):
     try:
         async with semaphore:
-            result, note = await run_question_lever(client, tool_session, item, lever)
+            result, note = await run_question_lever(client, tool_session, item, lever, rag)
     except Exception:
         log.exception("%s: DROPPED after unrecoverable error", item.question_id)
         return None
@@ -571,16 +778,44 @@ async def _run_one(client, tool_session, item, semaphore, lever):
     return result
 
 
-async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa"):
+def _build_output_row(result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None) -> dict:
+    """The per-question JSONL row every lever writes. For rag_presolve,
+    also carries the firewall labeling required by docs/recursive-rag-
+    plan.md section 4: rag="ON" plus the exact rag_snapshot_id read from
+    the OPEN index's build_progress row at run start (see
+    build_rag_presolve_config) -- never fabricated, never presented next
+    to a non-RAG number as if it were the same mode. Every other lever's
+    row shape is completely unchanged (no "rag" key at all)."""
+    row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
+    if lever == "rag_presolve":
+        row["rag"] = "ON"
+        row["rag_snapshot_id"] = rag_config.snapshot_id if rag_config else None
+        row["rag_k"] = rag_config.k if rag_config else None
+        row["rag_db"] = str(rag_config.db_path) if rag_config else None
+    return row
+
+
+async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa", rag_db: str | None = None, rag_k: int = DEFAULT_RAG_K):
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     log.info("Loaded %d %s questions (seed=%d) for lever=%s", len(items), dataset, seed, lever)
 
     client = QwenClient()
     semaphore = asyncio.Semaphore(concurrency)
 
+    rag_config = None
+    if lever == "rag_presolve":
+        # Fail loudly HERE, before any solver call is made, if the index
+        # doesn't exist -- see open_rag_index's docstring.
+        resolved_rag_db = resolve_rag_db_path(rag_db)
+        rag_config = build_rag_presolve_config(resolved_rag_db, k=rag_k)
+        log.info(
+            "rag_presolve: index=%s snapshot=%s k=%d dense=%s",
+            resolved_rag_db, rag_config.snapshot_id, rag_k, rag_config.embedder is not None,
+        )
+
     results = []
     async with verifier_tool_session() as tool_session:
-        tasks = [asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever)) for item in items]
+        tasks = [asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config)) for item in items]
         for coro in asyncio.as_completed(tasks):
             outcome = await coro
             if outcome is not None:
@@ -593,7 +828,7 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
         for r in results:
-            f.write(json.dumps({"engine": r.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}) + "\n")
+            f.write(json.dumps(_build_output_row(r, lever, seed, dataset, rag_config)) + "\n")
     log.info("Wrote %d results to %s", len(results), out_path)
 
 
@@ -683,7 +918,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -693,6 +928,11 @@ if __name__ == "__main__":
                          help="Which question set to run the lever against. Every lever works on every "
                               "dataset unchanged -- they only vary HOW a question already loaded as a "
                               "GPQAItem gets answered, not where it came from.")
+    parser.add_argument("--rag-db", type=str, default=None,
+                         help=f"rag_presolve only: RAG index sqlite3 DB path (default: ${RAG_DB_ENV} env "
+                              f"var if set, else {DEFAULT_RAG_DB_PATH})")
+    parser.add_argument("--rag-k", type=int, default=DEFAULT_RAG_K,
+                         help=f"rag_presolve only: top-k passages retrieved per question (default {DEFAULT_RAG_K})")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":
@@ -703,4 +943,4 @@ if __name__ == "__main__":
         asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
     else:
         out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_{args.lever}_{args.dataset}_seed{args.seed}.jsonl"
-        asyncio.run(main_live(args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
+        asyncio.run(main_live(args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset, args.rag_db, args.rag_k))
