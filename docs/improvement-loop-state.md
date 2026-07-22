@@ -6,6 +6,24 @@ committed after every iteration so the loop survives session loss.
 
 ---
 
+## LOOP RESTARTED — 2026-07-22 evening, NO stop time (supersedes the wrap-up below)
+
+Jun Kai restarted the loop with no scheduled stop. Objective: beat
+benchmarks in all aspects with EMPHASIS ON REASONING — topping top
+models. Two standing workstreams:
+1. **Levers** (reasoning emphasis): seed-123 SuperGPQA flagship_panel
+   pair RUNNING (completes the 3-seed bar for the top validated-queue
+   item). Next reasoning levers queued: qwen3.8-tier solver panel on
+   hard STEM (its solo GPQA read was 93.6% vs 3.7-max's 85.6 — a panel
+   of them is the strongest untested reasoning lever), deliberation-depth
+   variants, panel-diversity variants.
+2. **Recursive RAG** (docs/recursive-rag-plan.md, written): Discovery
+   loop — router-gated pre-solve retrieval, disputed-step re-retrieval,
+   judge-ordered discovery, self-improving case-law/knowledge-card corpus
+   with a strict contamination firewall. Research pass verifying the
+   technique/OSS landscape is running; G0 (corpus+index+search_corpus
+   tool) is the first build item after it lands.
+
 ## WIND-DOWN WRAP-UP — 2026-07-22 window (read this first)
 
 Two unsupervised windows (overnight + a daytime extension) ran the loop
