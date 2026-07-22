@@ -365,3 +365,25 @@ EN-Wikipedia HF dataset (license-checked, e.g. a Cohere/Wikipedia-
 embeddings-class set), load into the same RagIndex/RRF store, verify
 search_corpus returns sensible STEM hits. Then G1 (verifier wiring) → R1
 pilot.
+
+## G0.5 COMPLETE + verified (2026-07-22 ~23:00)
+
+Pre-embedded corpus fix landed and works. Index at 115k+ passages
+(building toward the source's 518k), license-clean (CC-BY-SA-3.0,
+mxbai-embed-large-v1 1024-dim, Apache-2.0 local encoder). Retrieval
+verified against 5 STEM probes — all return on-topic hits with the
+correctly-matched query encoder (activation energy→Activation
+energy/Arrhenius; CRISPR→CRISPR/Cas9; thermodynamics→Thermodynamics/
+Temperature; etc.). search_corpus is production-usable.
+
+**NEXT (G1 → R1, dispatch to Sonnet worker):**
+- G1: wire search_corpus into the Verifier tool rack behind a `--rag`
+  flag (verifier.py EXTRACT_SYSTEM allowlist gains search_corpus; a new
+  R1-style pre-solve retrieval option feeds top-k passages to solvers as
+  context). TDD, no full pilot.
+- R1 pilot: cheap-panel + pre-solve RAG on SuperGPQA-hard seed 42,
+  apples-to-apples vs the cheap-panel baseline (67.9 on same items).
+  Pre-registered Bet-1 threshold: ≥ +4 to keep building. GPQA null
+  control (expect ~0, contamination tripwire). Benchmark-mode: index is
+  general Wikipedia, not benchmark-derived — firewall satisfied, but
+  label results RAG-ON and cite the snapshot ID.
