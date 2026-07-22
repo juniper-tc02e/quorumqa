@@ -283,6 +283,7 @@ targeted.)
   because the cheap-tier-to-flagship GAP was too big (23% unanimous-wrong).
   The MoO router must estimate that gap, not just difficulty.
 - **flagship_panel on SuperGPQA-hard: VALIDATED (3 seeds, +3.8/+2.4/+6.2, mean +4.1, never negative)** — third fully-validated lever, first beyond GPQA. Supersedes the 1-seed line below.
+- **qwen38_panel (strongest solver tier) on hard STEM: NEGATIVE** — ties the single baseline, TRAILS flagship_panel (3.7), 30% timeout drops, 0% escalation (a too-strong homogeneous panel never disagrees → expensive self-consistency, tribunal idle). Top-tier confirmation of the panel-diversity principle: the lever is productive disagreement, not raw per-seat strength. flagship_panel (3.7) stays the hard-STEM profile.
 - **flagship_panel domain-routing GENERALIZES (SuperGPQA-hard, 1 seed):**
   on 78 identical items, cheap-panel 67.9% → flagship-panel 83.3% (+3.8
   over the single flagship baseline, +15.4 over cheap). chem_flagship_gate's
