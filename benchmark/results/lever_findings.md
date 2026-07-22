@@ -389,6 +389,31 @@ that escalate there, but the Token Plan latency fragility this run exposed
 applies to the stack too, and validating the proven lever's third seed was
 judged the better use of the same quota window.)
 
+## chem_thinking_gate: the stack of both validated winners (first seed)
+
+Built and tested overnight by the improvement loop. Organic Chemistry
+questions get `chem_flagship_gate`'s three-flagship-thinking panel; every
+other subject gets `thinking_gate`'s thinking-seat panel; the universal
+doubt-gate applies everywhere. First fresh seed (314 -- all six prior
+seeds burned by the parents), with a matched same-seed flagship baseline
+run for direct comparison:
+
+| Seed 314 | Overall | Organic Chemistry | Escalation |
+|---|---|---|---|
+| Flagship baseline (n=89) | 86.5% | 83.3% | -- |
+| `chem_thinking_gate` (n=88) | **90.9%** | **91.2%** (band 86.1-91.7, 2 chem drops) | 34.1% |
+
+**+4.4 points over the matched flagship baseline at the same seed -- the
+largest same-seed margin this project has produced -- and the stack beats
+the flagship on chemistry itself** (91.2% vs 83.3%), the exact subject the
+whole diagnosis chain started from. Escalation rate (34.1%) is also the
+lowest of any accuracy-positive configuration, consistent with the
+thinking seat resolving some would-be splits before they escalate.
+
+Status: promising, not validated -- one seed. Needs two more fresh seeds
+(the bar every validated lever here has been held to). Not folded into any
+shipped or published number.
+
 ## What this would take to ship
 
 Adopting `thinking_gate` as a new tier (e.g. "Tribunal-max") would mean:
