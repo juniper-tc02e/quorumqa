@@ -4,7 +4,38 @@ Started 2026-07-21. This doc is the loop's memory: every iteration reads it,
 acts on the top of the backlog, records what happened, and re-ranks. It is
 committed after every iteration so the loop survives session loss.
 
-## Hard stop: 2026-07-22 07:15 SGT
+## Objective (broadened by Jun Kai, 2026-07-22 14:53)
+
+General-use excellence, NOT just GPQA: coding, auditing, research, data
+analytics, chemistry, math, biology. Keep testing all relevant benchmarks
+and developing levers per docs/mixture-of-orchestrations-plan.md. Each
+domain needs (a) a reachable benchmark with a pilot, (b) a diagnosis of
+where the flat engine loses, (c) a domain orchestration profile that
+closes it, validated at 3 seeds. The MoO plan is the frame; per-domain
+levers are the work.
+
+### Domain-coverage backlog (the broadened objective, ranked by reachability)
+1. **Math** — GSM8K (easy, saturation-check) + a hard math set; verifier
+   already computes, add SymPy tool → `math-verified` profile. Reachable now.
+2. **Science (broad)** — SuperGPQA hard (pilot RUNNING), MMLU-Pro STEM slice.
+3. **Chemistry** — DONE: chem_thinking_gate validated 90.9%. The template
+   for every other domain profile.
+4. **Coding** — Terminal-Bench (baseline 37.5% established) → best-of-N
+   Phase 2; MBPP/HumanEval as single-turn checkable-code pilots.
+5. **Biology/Medicine** — MedQA (clean 4-option), MMLU-Pro health slice.
+6. **Data analytics** — needs a benchmark scout (DS-1000? tabular-QA?).
+7. **Auditing/security** — SEC-bench/ExploitBench are agentic (scoping
+   doc covers the rebuild); a text-only security-MCQ pilot is the
+   reachable near-term proxy.
+8. **Research/reasoning-general** — the blended-workload router eval (MoO M1).
+
+## Hard stop: 2026-07-22 17:30 SGT (reset from 07:15; broadened-objective window)
+
+Original overnight window (07:15) was extended live. Now 17:30 SGT.
+Wind-down: no new long runs after ~17:00; final wrap-up at the top of this
+doc by 17:30.
+
+## Hard stop (superseded — kept for audit): 2026-07-22 07:15 SGT
 
 Set by Jun Kai at 01:16 SGT. Wind-down protocol: no new long-running
 launches after ~06:30; final iteration writes a wrap-up section at the top
