@@ -157,6 +157,21 @@ targeted.)
 - Next when quota/pilot allow: stack test (chem_flagship_gate +
   thinking_gate), SuperGPQA hardest-subset pilot.
 
+### Iteration 3 (continued) — agent hardening landed
+- All three T-Bench robustness fixes delivered TDD'd (41→47 tests, commit
+  7bcdc7d, pushed): command timeouts are now observations the model reacts
+  to (with a separate ERROR branch so non-timeout failures aren't
+  mislabeled), model-API ReadTimeout/ConnectionError get one retry in the
+  agent loop only (QA engine untouched), agent max_tokens 1024→4096.
+  Worker read Harbor's own source to pin the real exception mechanism
+  (asyncio.TimeoutError → RuntimeError in docker.py; backend-dependent,
+  hence justified broad catch).
+- **Queued behind the seed-314 stack pilot (quota rule): rerun the full
+  seed-7 T-Bench sample with the hardened agent** — same 14 tasks, direct
+  before/after on the exception rate (9 blocked pre-fix). No unbiased
+  solve-rate claim from that rerun alone; a fresh seed follows if the
+  hardening holds.
+
 ### Iteration 3 — 2026-07-22 ~09:06 (window extended by Jun Kai, live)
 - **5 hours lost overnight, disclosed:** the seed-7 T-Bench launch died
   silently — Docker Desktop never finished starting, and the readiness
