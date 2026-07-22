@@ -104,7 +104,7 @@ class FakeQwenClientForAgent:
         self.calls = []
 
     def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
-        self.calls.append({"system": system, "user": user})
+        self.calls.append({"system": system, "user": user, "max_tokens": max_tokens})
         from quorumqa.qwen_client import JsonCallResult
         from quorumqa.schemas import CallUsage
 
@@ -221,3 +221,211 @@ def test_agent_clamps_model_requested_timeout_sec_out_of_range():
     asyncio.run(agent.run("Build compcert.", fake_env, fake_context))
 
     assert fake_env.timeouts_used == [1200]  # clamped down to the ceiling
+
+
+# ---------------------------------------------------------------------------
+# Robustness fixes, 2026-07-22: 10/13 tasks in the last Terminal-Bench pilot
+# died on exceptions before grading. Three causes, three fixes below:
+#   1. environment.exec() timeouts (harbor's DockerEnvironment raises
+#      RuntimeError("Command timed out after {N} seconds") -- confirmed by
+#      reading .venv/Lib/site-packages/harbor/environments/docker/docker.py,
+#      not guessed) must become an observation fed back to the model, not a
+#      fatal crash of the whole run.
+#   2. requests.exceptions.ReadTimeout / ConnectionError from the model API
+#      call gets one retry in the agent loop before it's allowed to raise.
+#   3. Agent turns request max_tokens=4096, not the QwenClient default of
+#      1024, so verbose JSON responses don't get truncated mid-string.
+# ---------------------------------------------------------------------------
+
+import requests
+
+
+class FakeEnvironmentRaisesOnceThenSucceeds:
+    """Fake environment whose first exec() call raises (simulating a harbor
+    backend's timeout/exec failure) and whose subsequent calls return
+    scripted results -- proves the agent loop survives an exec exception
+    instead of dying, and that it can keep going afterward."""
+
+    def __init__(self, exc, then_results):
+        self._exc = exc
+        self._then = list(then_results)
+        self.commands_run = []
+        self.timeouts_used = []
+        self._calls = 0
+
+    async def exec(self, command, cwd=None, env=None, timeout_sec=None, user=None):
+        self.commands_run.append(command)
+        self.timeouts_used.append(timeout_sec)
+        self._calls += 1
+        if self._calls == 1:
+            raise self._exc
+        return self._then.pop(0)
+
+
+def test_agent_command_timeout_becomes_observation_not_fatal():
+    # Mirrors what harbor's DockerEnvironment actually raises on a command
+    # timeout (see docker.py's _collect_buffered_output /
+    # _collect_streamed_output): RuntimeError("Command timed out after
+    # {N} seconds"). The agent loop must not crash here -- it must feed the
+    # timeout back to the model as this turn's command result and continue.
+    fake_env = FakeEnvironmentRaisesOnceThenSucceeds(
+        RuntimeError("Command timed out after 300 seconds"),
+        [FakeExecResult(stdout="ok\n", stderr=None, return_code=0)],
+    )
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "sleep 999", "summary": "slow command"},
+        {"done": False, "command": "echo ok", "summary": "try a different approach"},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Run something that might hang.", fake_env, fake_context))
+
+    # The loop survived the exec exception and ran the second command too --
+    # a fatal crash would have stopped after the first exec() call.
+    assert fake_env.commands_run == ["sleep 999", "echo ok"]
+    # The next prompt sent to the model must describe the timeout so it can
+    # adapt (bigger timeout_sec, backgrounding, a different approach).
+    assert "TIMEOUT" in fake_client.calls[1]["user"]
+
+
+def test_agent_command_exec_error_that_is_not_a_timeout_still_becomes_an_observation():
+    # Not every exec() failure is a timeout -- a broad catch (per the task
+    # spec, since the exact exception type varies by harbor backend) must
+    # not mislabel a non-timeout failure as "TIMEOUT", but it must still
+    # surface the real error and keep the loop alive rather than crashing.
+    fake_env = FakeEnvironmentRaisesOnceThenSucceeds(
+        RuntimeError("Docker compose command failed for environment foo."),
+        [FakeExecResult(stdout="ok\n", stderr=None, return_code=0)],
+    )
+    fake_client = FakeQwenClientForAgent([
+        {"done": False, "command": "docker something", "summary": "try docker"},
+        {"done": False, "command": "echo ok", "summary": "try a different approach"},
+        {"done": True, "command": None, "summary": "done"},
+    ])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Run something that might fail.", fake_env, fake_context))
+
+    assert fake_env.commands_run == ["docker something", "echo ok"]
+    next_prompt = fake_client.calls[1]["user"]
+    assert "TIMEOUT" not in next_prompt
+    assert "Docker compose command failed for environment foo." in next_prompt
+
+
+class FakeQwenClientRaisesOnceThenSucceeds:
+    """Scripts chat_json to raise a given exception on its first call and
+    return scripted actions on subsequent calls -- proves the agent loop's
+    ReadTimeout retry actually re-invokes the client and keeps going."""
+
+    def __init__(self, exc, then_actions):
+        self._exc = exc
+        self._then = list(then_actions)
+        self.calls = []
+        self._call_count = 0
+
+    def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
+        self.calls.append({"system": system, "user": user, "max_tokens": max_tokens})
+        self._call_count += 1
+        if self._call_count == 1:
+            raise self._exc
+        from quorumqa.qwen_client import JsonCallResult
+        from quorumqa.schemas import CallUsage
+
+        action_data = self._then.pop(0)
+        return JsonCallResult(
+            data=action_data,
+            usage=CallUsage(model=model, input_tokens=100, output_tokens=50, cost_usd=0.0, role=role),
+        )
+
+
+class FakeQwenClientAlwaysRaises:
+    """Scripts chat_json to always raise -- proves that when the retry ALSO
+    fails, the turn still raises as it did before this fix (no infinite
+    retry loop, no swallowed failure)."""
+
+    def __init__(self, exc):
+        self._exc = exc
+        self.calls = 0
+
+    def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
+        self.calls += 1
+        raise self._exc
+
+
+def test_agent_retries_once_on_model_api_read_timeout_then_continues(monkeypatch):
+    import quorumqa.agents.terminal_agent as terminal_agent_module
+
+    slept = []
+    monkeypatch.setattr(terminal_agent_module.time, "sleep", lambda s: slept.append(s))
+
+    fake_env = FakeEnvironment([FakeExecResult(stdout="ok\n", stderr=None, return_code=0)])
+    fake_client = FakeQwenClientRaisesOnceThenSucceeds(
+        requests.exceptions.ReadTimeout("read timed out"),
+        [
+            {"done": False, "command": "ls", "summary": "listing"},
+            {"done": True, "command": None, "summary": "done"},
+        ],
+    )
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("List files.", fake_env, fake_context))
+
+    assert fake_env.commands_run == ["ls"]
+    # 3 chat_json invocations total: turn 1's failed attempt, turn 1's
+    # successful retry, then turn 2's "done".
+    assert len(fake_client.calls) == 3
+    assert len(slept) == 1  # retried after a short sleep, not a busy-loop
+
+
+def test_agent_retries_once_on_model_api_connection_error(monkeypatch):
+    import quorumqa.agents.terminal_agent as terminal_agent_module
+
+    monkeypatch.setattr(terminal_agent_module.time, "sleep", lambda s: None)
+
+    fake_env = FakeEnvironment([])
+    fake_client = FakeQwenClientRaisesOnceThenSucceeds(
+        requests.exceptions.ConnectionError("connection reset"),
+        [{"done": True, "command": None, "summary": "done"}],
+    )
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("List files.", fake_env, fake_context))
+
+    assert len(fake_client.calls) == 2  # failed attempt + successful retry
+
+
+def test_agent_read_timeout_retry_exhausted_still_raises(monkeypatch):
+    import quorumqa.agents.terminal_agent as terminal_agent_module
+
+    monkeypatch.setattr(terminal_agent_module.time, "sleep", lambda s: None)
+
+    fake_env = FakeEnvironment([])
+    fake_client = FakeQwenClientAlwaysRaises(requests.exceptions.ReadTimeout("read timed out"))
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    with pytest.raises(requests.exceptions.ReadTimeout):
+        asyncio.run(agent.run("List files.", fake_env, fake_context))
+
+    assert fake_client.calls == 2  # original attempt + one retry, then it raises
+
+
+def test_agent_passes_generous_max_tokens_for_agent_turns():
+    # The agent's own JSON turns are verbose (thinking + command + summary)
+    # and were getting truncated at the QwenClient default of 1024. The
+    # agent must ask for more headroom on every turn -- but only the agent,
+    # not the QA engine's roles (solver/skeptic/verifier/judge), which must
+    # keep inheriting QwenClient's own default.
+    fake_env = FakeEnvironment([])
+    fake_client = FakeQwenClientForAgent([{"done": True, "command": None, "summary": "done"}])
+    fake_context = FakeAgentContext()
+
+    agent = QuorumQAAgent(logs_dir=None, model_name="qwen/qwen3.7-max", client=fake_client, max_turns=5)
+    asyncio.run(agent.run("Do nothing.", fake_env, fake_context))
+
+    assert fake_client.calls[0]["max_tokens"] == 4096

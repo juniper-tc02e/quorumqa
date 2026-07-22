@@ -39,11 +39,27 @@ def parse_next_action(data: dict) -> NextAction:
     return NextAction(done=done, command=command, summary=summary, timeout_sec=timeout_sec)
 
 
+import time
+
+import requests
 from harbor.agents.base import BaseAgent
 from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 
 from quorumqa.qwen_client import QwenClient
+
+# Agent turns are JSON-shaped but verbose (thinking + command + summary) and
+# were getting truncated at QwenClient.chat_json's own default of 1024,
+# raising ValueError("failed to return parseable JSON after 2 attempts:
+# Unterminated ..."). Only the agent asks for this much headroom -- the QA
+# engine's roles (solver/skeptic/verifier/judge) keep inheriting the
+# QwenClient default unchanged.
+AGENT_MAX_TOKENS = 4096
+
+# Short pause before the single model-API retry below, not a busy-loop --
+# long enough to let a transient network blip clear, short enough not to
+# meaningfully eat into a budgeted run.
+API_RETRY_SLEEP_SEC = 2
 
 AGENT_SYSTEM = (
     "You are an agent operating a real Linux terminal to complete a task. "
@@ -98,10 +114,23 @@ class QuorumQAAgent(BaseAgent):
 
         for turn in range(self._max_turns):
             user_prompt = self._build_prompt(instruction, transcript)
-            result = self._client.chat_json(
-                model=model, system=AGENT_SYSTEM, user=user_prompt,
-                role="terminal_agent", thinking=True,
-            )
+            try:
+                result = self._client.chat_json(
+                    model=model, system=AGENT_SYSTEM, user=user_prompt,
+                    role="terminal_agent", thinking=True, max_tokens=AGENT_MAX_TOKENS,
+                )
+            except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError):
+                # Live 2026-07-21 pilot: 3/13 tasks died on ReadTimeout from
+                # the model API mid-loop, killing an otherwise-fine run over
+                # one slow response. One retry after a short pause; if that
+                # ALSO fails, this is a real outage/problem and the turn
+                # raises exactly as it did before this fix -- no infinite
+                # retrying, no swallowing a genuine failure.
+                time.sleep(API_RETRY_SLEEP_SEC)
+                result = self._client.chat_json(
+                    model=model, system=AGENT_SYSTEM, user=user_prompt,
+                    role="terminal_agent", thinking=True, max_tokens=AGENT_MAX_TOKENS,
+                )
             total_input_tokens += result.usage.input_tokens
             total_output_tokens += result.usage.output_tokens
 
@@ -110,13 +139,43 @@ class QuorumQAAgent(BaseAgent):
                 break
 
             timeout_sec = action.timeout_sec if action.timeout_sec is not None else self._command_timeout_sec
-            exec_result = await environment.exec(action.command, timeout_sec=timeout_sec)
-            transcript.append({
-                "command": action.command,
-                "stdout": exec_result.stdout or "",
-                "stderr": exec_result.stderr or "",
-                "return_code": exec_result.return_code,
-            })
+            try:
+                exec_result = await environment.exec(action.command, timeout_sec=timeout_sec)
+                transcript.append({
+                    "command": action.command,
+                    "stdout": exec_result.stdout or "",
+                    "stderr": exec_result.stderr or "",
+                    "return_code": exec_result.return_code,
+                })
+            except Exception as exc:
+                # Live 2026-07-21 pilot: 5/13 tasks died fatally on
+                # RuntimeError("Command timed out after {N} seconds") --
+                # confirmed by reading harbor's DockerEnvironment
+                # (_collect_buffered_output / _collect_streamed_output in
+                # environments/docker/docker.py), which raises exactly that
+                # on asyncio.TimeoutError after killing the process. Other
+                # harbor backends raise their own exception shapes for the
+                # same condition (e.g. runloop.py's APITimeoutError), so this
+                # catches broadly rather than pinning to one exception type,
+                # and folds the failure into an observation instead of
+                # crashing the whole run -- the model gets a turn to adapt
+                # (larger timeout_sec, backgrounding, a different approach)
+                # exactly as it does for a normal nonzero exit code.
+                message = str(exc)
+                if "timed out" in message.lower() or "timeout" in message.lower():
+                    stderr = (
+                        f"TIMEOUT: command still running after {timeout_sec}s and was "
+                        "killed. Choose a different approach, or re-run with a larger "
+                        "timeout_sec if it just needs more time."
+                    )
+                else:
+                    stderr = f"ERROR: command execution failed: {message}"
+                transcript.append({
+                    "command": action.command,
+                    "stdout": "",
+                    "stderr": stderr,
+                    "return_code": None,
+                })
 
             # Populate as we go, not just at the end, so a timeout or crash
             # mid-loop still leaves a real token count behind -- matching
