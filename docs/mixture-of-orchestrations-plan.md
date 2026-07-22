@@ -267,15 +267,89 @@ the loop's validation bar applied to any accuracy claim.
   submitted engine or numbers until after judging (Aug 11); MoO work
   lives beside it, same as every lever has.
 
-## Appendix A — verified open-source landscape (research in flight)
+## Appendix A — verified open-source landscape (adversarially verified 2026-07-22)
 
-A deep-research pass with adversarial verification is running to pin the
-current (mid-2026) state of: agent-memory frameworks (Mem0, Letta,
-Zep/Graphiti, A-MEM, cognee and newer entrants), case-based/trajectory
-memory techniques, prompt-caching best practices, lost-in-the-middle and
-context-compression evidence, and the self-host bucket (vLLM/SGLang
-prefix caching, LMCache-class persistence, StreamingLLM-class methods,
-speculative decoding for Qwen-family). This appendix gets the ranked
-adopt / evaluate / skip table with licenses, maintenance status, and
-QuorumQA-specific fit when that lands; nothing above depends on a
-specific framework choice.
+Every item below was verified against a live primary source with a
+3-vote adversarial pass. Maintenance facts are as of 2026-07-22 in a
+fast-moving space — re-check before adoption.
+
+### Bucket 1 — usable NOW against the hosted Qwen API
+
+**ADOPT-NOW (three moves, all evidence-backed, none require a framework):**
+
+1. **Prompt-cache engineering, designed around the real contract.** Cache
+   prefixes build in strict order tools → system → messages; any change
+   at a level invalidates that level and everything downstream, so
+   tool-definition churn nukes the whole cache. Put the breakpoint on the
+   last block identical across requests. **The load-bearing finding for
+   our 3-solver fan-out:** a cache entry only becomes available after the
+   first response *begins* — simultaneously-fired parallel calls sharing
+   a prefix all miss and all pay cache-write price (1.25×–2×). Fix: fire
+   a cheap warm-up call (or stagger the first solver) before the rest of
+   the panel. Verified against Anthropic's official docs AND replicated
+   on Alibaba's own Model Studio context-cache docs — but with regime
+   differences we must not paper over: **Alibaba documents 125% write /
+   10% read multipliers and 5-min-only TTL; the 1-hour TTL and automatic
+   top-level breakpoints are Anthropic-only and unverified on our Token
+   Plan endpoint.** Measure via the `cache_creation_input_tokens` /
+   `cache_read_input_tokens` fields we already log.
+   (platform.claude.com/docs/.../prompt-caching; alibabacloud.com Model Studio context-cache)
+
+2. **Judge-stage position-bias mitigation (randomize/swap answer order).**
+   LLM-judge position bias is systematic, not noise — peer-reviewed
+   (IJCNLP-AACL 2025, 15 judges, >150k evaluation instances), and
+   **strongest precisely in close-call disagreements**, which is
+   QuorumQA's exact escalation trigger. Mitigation: randomize or
+   swap-and-average answer order at the judge. Cheap to A/B on our saved
+   transcripts via the existing gate-replay path (no new solver spend).
+   (arxiv.org/abs/2406.07791)
+
+3. **Episodic case-memory as a PATTERN to borrow, not a framework to
+   adopt.** The pattern is validated (DS-Agent, Memento's Case Bank,
+   MemRL's two-phase semantic-then-utility retrieval) but the leading
+   implementations are research artifacts (Memento: MIT, arXiv 2508.16153;
+   MemRL: MIT, arXiv 2601.03192, commits through Jul 2026). Build our own
+   §5.2 case-law store on SQLite+embeddings using their retrieval shape,
+   don't take a dependency. (github.com/Memento-Teams/Memento; github.com/MemTensor/MemRL)
+
+**EVALUATE (one credible framework, still probably overkill):**
+- **Mem0** (Apache-2.0, actively maintained — release 2026-07-13, 61k
+  stars). Code-verified to genuinely fuse semantic + BM25 + entity-graph
+  retrieval in the OSS SDK (not just marketing). Two honest deflators:
+  time-aware ranking is platform-only (absent from OSS `scoring.py`), and
+  its headline benchmark numbers are the proprietary platform, not the
+  OSS SDK. Earns its complexity only if we specifically want BM25+entity
+  fusion out of the box; SQLite+embeddings covers most of our value.
+  (github.com/mem0ai/mem0)
+
+**SKIP (real, active, wrong-fit):**
+- **Graphiti/Zep** (Apache-2.0, active bi-temporal knowledge graph):
+  solves evolving-user-state, which QuorumQA doesn't have. Zep's
+  self-hosted Community Edition was deprecated April 2025.
+- **LangMem** (MIT, pre-1.0): LangGraph-coupled, functionally stalled
+  since Oct 2025.
+
+**UNVERIFIED from the original candidate list (treat as unknown, not
+safe):** A-MEM, MemoRAG, cognee (status not confirmed either way); the
+LLMLingua context-compression family's current state; and
+lost-in-the-middle mitigations beyond the judge position-bias finding.
+§6.1's compression idea therefore stays gated on a fresh verification
+pass before adoption.
+
+### Bucket 2 — self-hosting inference-level (UNRESEARCHED, do not assume fine)
+
+**Nothing in this bucket survived verification.** Zero confirmed claims
+on vLLM automatic prefix caching, SGLang RadixAttention, LMCache,
+StreamingLLM/attention sinks, sparse/linear attention adoption, or
+speculative decoding for Qwen-family models. This is a coverage gap, not
+a green light. §6.2's self-hosting work must open with its own verified
+research pass; the plan explicitly does NOT endorse any specific
+inference-stack technique yet, and the self-hosting decision doc (M5)
+owns that research.
+
+### Net effect on the plan
+The three adopt-now moves map exactly onto M3 (prompt-cache
+restructuring + judge ordering) and §5.2 (case-law store, now confirmed
+as build-our-own not adopt-a-framework). No plan phase depended on a
+framework we can't stand behind, and the one place the plan hand-waved
+("compression tools that work") is now correctly marked unverified.
