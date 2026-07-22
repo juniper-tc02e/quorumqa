@@ -61,3 +61,19 @@ would. That is a fact about distractor-MC, not about math reasoning.
   conclusion (a 100% ceiling leaves no room for a different verdict).
 - Real hard-math evaluation is deferred to the open-answer-grading engine
   change, not attempted via distractor-MC again.
+
+## GSM8K (easy math, distractor-MC) — the no-harm confirmation
+
+Ran GSM8K (grade-school word problems, the easy end) the same way. n=50,
+seed 42. Result: baseline 100%, engine 96.0%, −4.0 (2 questions).
+
+Identical shape to MATH-500 L5: the flagship saturates the distractor-MC
+framing (100% at BOTH easy and hard math, because distractors are
+computed-away regardless of problem difficulty), and the engine carries a
+small no-harm cost (−4 to −6) from the cheap panel occasionally tripping
+on an eliminable distractor. Two saturated math pilots, one conclusion:
+**distractor-MC cannot evaluate math deliberation for this model pair,
+and saturated domains are single-call routes.** The no-harm cost is
+consistently small (4-6 pts) but non-zero, which is the concrete argument
+for the router bypassing the cheap panel on saturated/easy traffic rather
+than always deliberating.
