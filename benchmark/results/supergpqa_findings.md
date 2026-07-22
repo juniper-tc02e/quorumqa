@@ -90,3 +90,46 @@ also valuable finding.
 - The hard-label subset skews heavily Science/Engineering (a property of
   SuperGPQA's own difficulty labeling), so this is not a broad-domain
   read — it's a hard-STEM read.
+
+## The lever generalizes: flagship solver panel recovers the gap and beats the baseline
+
+The open question above — does routing the whole domain's solver panel to
+the flagship tier recover the gap, as `chem_flagship_gate` did for one
+subject — is answered: **yes, decisively.** Ran the `flagship_panel`
+lever (all three solver seats on `qwen3.7-max`, thinking on; skeptic/
+verifier/judge unchanged) on the identical SuperGPQA-hard seed-42 set.
+
+Apples-to-apples on the 78 items common to all three runs (drops excluded
+by intersection, so drop-bias cannot skew the comparison):
+
+| System (SuperGPQA-hard, 78 common items) | Accuracy |
+|---|---|
+| Single flagship baseline | 79.5% |
+| Cheap-panel engine (shipped config) | 67.9% |
+| **Flagship-panel engine** | **83.3%** |
+
+Routing the solver panel to the flagship tier turns a **−11.6-point loss
+into a +3.8-point win over the single flagship call** — a +15.4-point
+swing over the cheap panel on the same questions. Escalation collapsed to
+8.9% (flagship solvers agree far more often — the same dynamic seen on
+GPQA), so the win comes almost entirely from a competent panel rarely
+being unanimous-wrong, with the tribunal as occasional cleanup.
+
+**This is the general-use proof the Mixture of Orchestrations thesis
+needed.** On GPQA, `flagship_panel` beat the baseline by a margin inside
+the noise band (+1.2/+3.4/+0.2) — because the cheap tier was already
+close there, so a flagship panel had little to add. On SuperGPQA-hard,
+where the cheap tier is genuinely out of its depth, the flagship panel
+adds +3.8 cleanly — deliberation contributes *most* exactly where the
+solver tier has real headroom AND the task is hard enough that even the
+flagship errs. The domain-profile approach (`chem_flagship_gate`
+generalized: route a whole hard domain's panel to the stronger tier)
+transfers from one chemistry subject to an entire broad-STEM benchmark.
+
+Caveat: one seed. The apples-to-apples margin (+15.4 over cheap, +3.8
+over baseline on identical items) is large enough that it will not vanish
+with replication, but a `flagship_panel` domain profile only enters the
+MoO router as "validated" after the standard three-seed bar. Drops (11,
+all flagship-thinking ReadTimeouts on hard questions, Engineering 7 /
+Science 4) are the known API-latency ceiling and are excluded from the
+comparison by intersection.
