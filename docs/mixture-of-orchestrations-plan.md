@@ -1,0 +1,281 @@
+# Mixture of Orchestrations: making QuorumQA excel in general use
+
+Written 2026-07-22. Design plan, not implementation. Every design choice
+below cites the measured finding that motivates it — this architecture is
+not speculative shape-drawing; it is the generalization our own data has
+been pointing at for two days.
+
+## 1. The core claim, and the evidence it stands on
+
+QuorumQA today is ONE orchestration: a fixed panel, fixed escalation
+trigger, fixed tribunal, applied identically to every question. The
+project's own results show that a single fixed orchestration cannot excel
+in general use, because the right orchestration is a function of the
+question:
+
+- **Routing by domain beats any flat configuration.**
+  `chem_thinking_gate` — flagship panel for Organic Chemistry, thinking
+  seat everywhere else — is validated at 90.9% mean (three fresh seeds,
+  0.2pt spread), ~+5 points over the flagship-on-everything baseline and
+  above BOTH of its flat parents. Routing is not an optimization; it is
+  where the accuracy came from.
+- **The same subject can need a different MODEL, not more effort.**
+  `smart_gate` (more thinking time on chemistry, same model) made
+  chemistry WORSE (72.2% vs 77.8% baseline); a different model fixed it
+  (90%+). An orchestration mixture must be able to switch model tier per
+  domain, not just reasoning depth.
+- **More capability per seat can subtract value.** `thinking_all`
+  underperformed a single thinking seat at both seeds tested, because
+  homogenizing the panel removes the disagreement that triggers useful
+  escalation. Orchestration parameters interact; profiles must be
+  validated as wholes, never composed by assuming monotonic improvements.
+- **Sometimes the right orchestration is NONE.** On LEXam (-14pts) and
+  MMLU-Pro (-12pts), deliberation lost to a single flagship call: the
+  flagship was near ceiling, so the panel's one uncatchable failure mode
+  (confident unanimous-wrong) dominated. A general-use system must be
+  able to route easy/saturated queries to a single call — the
+  "no-orchestration" profile is a first-class member of the mixture.
+- **The verifier's tools are domain equipment.** On LEXam, 7/9
+  escalations produced zero verifier findings — constant-lookup and
+  calculator simply don't apply to statute reasoning. Tribunal tooling
+  must be per-domain (statute lookup for law, symbolic math for math,
+  test-execution for code), or escalation silently degrades to
+  Skeptic+Judge.
+- **Agentic domains are a different orchestration shape entirely.**
+  Terminal-Bench work showed the QA pipeline doesn't transfer; the
+  right cyber/terminal orchestration is a hardened tool-loop agent
+  (37.5% baseline at 86% grading coverage) with verifier-filtered
+  best-of-N as the deliberation analog — because these domains carry
+  their own objective verifier, adjudication-by-argument is the wrong
+  spend there.
+
+**Mixture of Orchestrations (MoO):** a router classifies each incoming
+query and dispatches it to one of a registry of orchestration profiles;
+profiles are declarative configs over a shared engine; a memory layer
+(§5) makes both the router and the profiles improve from accumulated
+experience.
+
+## 2. The orchestration-profile abstraction
+
+Everything the ablation harness varies by hand today becomes one
+declarative object. A profile specifies:
+
+- **Panel**: number of seats; per-seat (model, thinking on/off,
+  temperature, reasoning lens). Existing points in this space: shipped
+  engine, thinking_gate, chem_flagship panel, five-solver (negative),
+  thinking_all (negative), flagship_panel.
+- **Acceptance policy**: what ends the question at the panel stage —
+  unanimity, unanimity+doubt-gate (gate model/prompt configurable), or
+  none (always escalate / never escalate).
+- **Tribunal roster**: skeptic on/off + model; verifier on/off + model +
+  TOOLSET (the per-domain equipment rack: `safe_calculate` +
+  `lookup_constant` today; statute-lookup, unit-checker, SymPy, code
+  runners as domain packs); judge model (validated finding: judge quality
+  above qwen3.7-max was NOT the binding constraint on GPQA — qwen38_judge
+  moved nothing — so profiles should not default to the most expensive
+  judge).
+- **Mode**: `deliberation` (single-turn QA) or `agent` (tool-loop, with
+  turn budget, per-command timeout policy, best-of-N width and the task's
+  own verifier as filter).
+- **Budget**: max cost/latency class, so the router can respect caller
+  constraints ("fast and cheap" legitimately selects a different profile
+  than "maximum accuracy").
+
+The existing `lever_experiments.py` dispatch-by-name IS the primitive
+version of this registry. M0 (§7) is the refactor that makes profiles
+data instead of code branches.
+
+### Initial profile registry (v1, all evidence-based)
+
+| Profile | When routed | Basis |
+|---|---|---|
+| `single-call` | easy/saturated queries, or caller wants cheap | LEXam/MMLU-Pro findings: deliberation subtracts value at ceiling |
+| `standard-tribunal` | default hard-question profile | frozen submission config, 78.9% on GPQA |
+| `thinking-gate` | hard questions, no diagnosed domain weakness | validated 3 seeds |
+| `stem-max` (= chem_thinking_gate generalized) | hard STEM where the cheap tier has a diagnosed blind spot | validated 3 seeds, 90.9% mean |
+| `law` | legal/regulatory reasoning | LEXam diagnosis; BLOCKED on statute-lookup verifier tool (build item) |
+| `terminal-agent` | shell/code/ops tasks | hardened baseline 37.5%; best-of-N is its Phase 2 |
+| `math-verified` | competition/calculation math | verifier already computes; add SymPy tool; untested — pilot required |
+
+Every new profile passes the loop's validation bar (three fresh seeds /
+samples, matched baseline, drop-bias checks, honest negatives recorded)
+before the router may select it in product mode.
+
+## 3. The router
+
+Three versions, shipped in order, each falling back to the previous:
+
+- **R0 (heuristic)**: caller-supplied domain tag or trivial keyword rules
+  → profile. This is what the benchmark harness already does implicitly
+  (item.subject). Zero risk, zero generality.
+- **R1 (classifier call)**: one `qwen3.6-flash` JSON call per query:
+  `{domain, difficulty_estimate, checkability, agentic}` → registry
+  lookup via explicit rules. Cost ~$0.0002/query — two orders of
+  magnitude below one deliberation. Failure mode to measure: router
+  misclassification sending hard questions to `single-call`; mitigated
+  by biasing uncertain classifications toward stronger profiles
+  (asymmetric loss: over-orchestrating wastes cents, under-orchestrating
+  costs correctness).
+- **R2 (calibrated)**: R1's features + the calibration memory (§5.1) as
+  a prior: per-(domain, profile) measured accuracy and cost decide the
+  dispatch by expected-utility, not fixed rules. This is where MoO
+  starts genuinely learning from its own history.
+
+**Ceiling analysis discipline:** every router evaluation reports three
+numbers — flat-best (best single profile on the blend), routed (actual),
+oracle (per-question best profile in hindsight). Routed value = distance
+from flat-best toward oracle. If oracle-minus-flat is small on a
+workload, MoO is not worth its complexity THERE, and we say so.
+
+## 4. Thinking-mode axis, settled empirically
+
+The mixture explicitly encodes what the ablations established rather than
+leaving reasoning depth to intuition:
+
+- Default: exactly ONE thinking seat (diversity > uniform capability;
+  thinking_all is a validated negative).
+- Full-thinking panels only where a domain blind spot is diagnosed AND
+  tier-swap validated (stem-max pattern).
+- Thinking off entirely for `single-call` easy routes and for cheap
+  fast-voter roles (the engine's founding economic premise).
+- Judge always thinking; gate never thinking (it's a cheap doubt
+  detector, validated as such).
+
+## 5. Memory architecture (orchestration layer — works against hosted APIs)
+
+Three memories, one firewall.
+
+### 5.1 Calibration memory (adopt first — highest value, lowest risk)
+A store of per-(profile, domain, difficulty) outcome statistics from
+every run the system executes: accuracy, escalation rate, overturn-
+correct rate, false-escalation rate, drop rate, cost tokens. This is
+literally what `lever_findings.md` has been accumulating by hand — the
+loop's scoreboard, productized. Feeds: R2 routing priors, profile
+regression alarms (a profile drifting below its validation band flags
+re-validation), and honest public reporting (the site's escalation-
+integrity numbers come from here).
+Implementation: SQLite + a writer in the shared result path. No
+framework needed.
+
+### 5.2 Episodic deliberation memory ("case law")
+Every deliberation transcript is already persisted (OSS bucket). Add an
+embedding index; at query time retrieve k similar past cases. Two
+consumers, in adoption order:
+1. **Router feature**: similarity to past cases whose outcomes are known
+   sharpens difficulty/domain estimates (cheap, no contamination risk in
+   product mode).
+2. **Judge precedent (experimental)**: the tribunal's judge sees "in a
+   similar past case, the panel's unanimous answer was overturned
+   because X" — fits the tribunal identity (case law), but MUST be
+   validated for whether it helps or anchors the judge wrongly. Pilot
+   with the same 3-seed bar before product adoption.
+
+### 5.3 Agent skill/trajectory memory (terminal-agent profile only)
+Store successful task trajectories; retrieve strategy sketches for
+similar tasks (Voyager-style skill library, current OSS state per
+research appendix). Bounded scope: strategy hints, never verbatim
+command replay.
+
+### The benchmark firewall (non-negotiable)
+**Product mode: memory ON. Benchmark mode: memory OFF, always.** A
+benchmark number produced with episodic memory of prior runs on the same
+benchmark is contaminated, full stop. The runner sets a single flag;
+every reported number states its mode. This discipline is what keeps our
+published claims auditable, and it goes in the code as an assertion, not
+a convention.
+
+## 6. Attention and context efficiency — the honest boundary
+
+We call hosted Qwen models. There is no access to attention internals on
+that path. What the user asked for splits cleanly into what we can do
+now versus what self-hosting would unlock, and the plan refuses to blur
+that line.
+
+### 6.1 Applicable NOW (hosted API)
+- **Prompt-cache engineering.** The Token Plan Anthropic-compatible
+  endpoint already returns `cache_creation_input_tokens` /
+  `cache_read_input_tokens` (observed in our own smoke tests). Panel
+  calls share a large static prefix (system prompt + lens preamble +
+  choice formatting rules). Restructure every role prompt as
+  [static shared prefix][per-question suffix] so 3-6 calls per question
+  hit the cache instead of re-prefilling. Expected effect: input-token
+  cost and latency reduction across every profile; measured, not
+  assumed, via the usage fields we already log. Same restructuring for
+  the agent's per-turn prompts (system + task statement stable across
+  15 turns).
+- **Judge context ordering.** The judge reads the longest context in the
+  system (full transcript). Lost-in-the-middle effects are real and
+  documented (research appendix pins current best practice); reorder the
+  tribunal record so the load-bearing pieces (dissenting rationale,
+  verifier findings) sit at the edges, and measure on a replay set —
+  judge-input reordering is free to A/B against saved transcripts
+  without new solver spend (the gate-replay pattern already built).
+- **Transcript compression for the judge.** Solver reasoning is
+  capped at 3 sentences by prompt, but agent trajectories and long
+  tribunal records aren't; evaluate a compression pass (LLMLingua-family
+  or successor per research appendix) ONLY if judge-context length is
+  shown to correlate with overturn errors on replay data.
+
+### 6.2 Gated on self-hosting open-weight Qwen (explicit decision, not
+drift)
+- Prefix KV-cache sharing across panel calls (vLLM/SGLang state per
+  research appendix) — the inference-level twin of §6.1, worth real
+  money at panel fan-out.
+- Long-trajectory attention management (StreamingLLM-class or current
+  successor) for the agent profile.
+- Speculative decoding for the cheap tier.
+**Gate condition:** self-hosting is justified only when monthly hosted
+spend or quota ceilings measurably constrain the roadmap (the Token Plan
+5h/7d sliding windows already serialized our experiments twice in one
+night — that pressure is real data for this decision). A one-page
+cost/benefit with measured numbers precedes any GPU commitment.
+
+## 7. Phasing
+
+- **M0 — Profile registry refactor.** Levers become declarative profiles;
+  one engine path consumes them; benchmark-mode flag + memory firewall
+  assertion land here. (Code motion, no new claims. TDD throughout.)
+- **M1 — Router R1 + `single-call` + blended-workload eval.** Build the
+  mixed benchmark blend (GPQA hard + SuperGPQA hard + MMLU-Pro slice +
+  LEXam slice + a saturated-easy slice); report flat-best / routed /
+  oracle. MoO earns its existence here or stops.
+- **M2 — Calibration memory + R2.** SQLite store, writer, router priors;
+  re-run M1 eval; regression alarms live.
+- **M3 — Prompt-cache restructuring + judge context ordering.** Measured
+  via existing usage logging and gate-replay A/Bs.
+- **M4 — Episodic memory (router feature first, judge precedent as
+  experiment) + law-profile verifier tool + math-profile pilot.**
+- **M5 (conditional) — self-hosting cost/benefit decision doc; only then
+  inference-level work.**
+
+Each phase ends with its numbers in `lever_findings.md`-style docs and
+the loop's validation bar applied to any accuracy claim.
+
+## 8. Risks, stated plainly
+
+- **Router misclassification** silently downgrades hard questions; the
+  asymmetric-loss bias (§3) plus calibration alarms are the mitigations,
+  and the oracle-gap metric makes the damage visible rather than
+  hidden.
+- **Profile proliferation** without validation discipline would turn the
+  registry into folklore; the 3-seed bar is the gate, and profiles the
+  data stops supporting get demoted to documented-negative status (the
+  registry keeps its negatives, like the harness does today).
+- **Memory-induced contamination** of public claims — handled by the
+  firewall assertion; any number published from product mode says so.
+- **Complexity vs. the frozen submission**: none of this touches the
+  submitted engine or numbers until after judging (Aug 11); MoO work
+  lives beside it, same as every lever has.
+
+## Appendix A — verified open-source landscape (research in flight)
+
+A deep-research pass with adversarial verification is running to pin the
+current (mid-2026) state of: agent-memory frameworks (Mem0, Letta,
+Zep/Graphiti, A-MEM, cognee and newer entrants), case-based/trajectory
+memory techniques, prompt-caching best practices, lost-in-the-middle and
+context-compression evidence, and the self-host bucket (vLLM/SGLang
+prefix caching, LMCache-class persistence, StreamingLLM-class methods,
+speculative decoding for Qwen-family). This appendix gets the ranked
+adopt / evaluate / skip table with licenses, maintenance status, and
+QuorumQA-specific fit when that lands; nothing above depends on a
+specific framework choice.
