@@ -166,3 +166,9 @@ targeted.)
   the previous failure mode is checked for, not assumed away).
 - Dispatched: chem_thinking_gate stack lever build (Sonnet worker, TDD).
   Fresh-seeds-only note included — all six prior seeds are burned for it.
+- **Two more launch stumbles on the seed-7 pilot, both caught by verifying
+  the job dir instead of trusting exit codes:** (1) `--task` is a
+  run-ONE-task flag (last one wins) — only sam-cell-seg ran (reward 0.0,
+  clean, counts as a valid seed-7 outcome); (2) `-i` include filters need
+  the `terminal-bench/` org prefix. Third launch (phase1-pilot-seed7c,
+  13 remaining tasks) verified live with 4 concurrent task dirs.
