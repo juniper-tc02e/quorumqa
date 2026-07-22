@@ -134,11 +134,14 @@ targeted.)
 
 ## Validated results so far (the loop's scoreboard)
 
-- **chem_thinking_gate (stack): 90.9% at first fresh seed (314)** — best
-  single-run overall number of the whole project (chem 91.2% with drop-band
-  86.1-91.7% [2 chem drops], non-chem 90.7%, escalation down to 34.1%).
-  PROMISING, NOT VALIDATED: one seed; matched seed-314 flagship baseline
-  running now; needs two more fresh seeds for the bar.
+- **chem_thinking_gate (stack): 90.9% (seed 314) and 91.0% (seed 217)** —
+  two fresh seeds, near-identical replication, both the best overall
+  numbers of the whole project. Matched seed-314 flagship baseline: 86.5%
+  (+4.4 margin). Chemistry 91.2%/90.0%, escalation 34-37%. Third fresh
+  seed (471) running — completes the validation bar.
+- **Agent hardening: VALIDATED by same-sample rerun** — graded coverage
+  36%→86% on seed-7, exceptions 9→2, two former infrastructure casualties
+  now solve outright.
 
 - **chem_flagship_gate: VALIDATED at 3 seeds** (89.8/88.6/87.4, mean 88.6%)
   — beats the flagship baseline (~85.5%) and every prior configuration at
