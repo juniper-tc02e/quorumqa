@@ -162,13 +162,77 @@ continues in the loop alongside this plan.
   the MoO registry (`+rag` variants), calibration memory learns where it
   pays.
 
-## Appendix A — verified technique/OSS landscape (research in flight)
+## Appendix A — verified technique/OSS landscape (verified 2026-07-22, two passes)
 
-The deep-research pass is verifying: iterative-retrieval patterns (IRCoT,
-FLARE, DRAGIN, Self-RAG, CRAG, Adaptive-RAG and 2026 successors — and
-which transfer to hosted APIs without training), the Search-R1 family
-(likely requires-training-skip, shapes may transfer), index choices
-(RAPTOR/GraphRAG/LightRAG vs hybrid+rerank evidence), open corpora with
-licenses, the closest published relatives to deliberation-driven
-retrieval (novelty check on the Discovery shape), and contamination
-standards. Lands here with adopt/adapt/skip verdicts.
+First pass: adversarial 3-vote verification (cut off mid-run by a session
+limit after 5 claims survived). Second pass: targeted primary-source
+verification of every remaining load-bearing claim. All quotes checked
+against live sources.
+
+### Adopt-now
+- **Hybrid BM25 + dense + reranker as the v1 index.** Systematic
+  evaluation (arXiv 2502.11371) confirms vanilla/hybrid RAG beats
+  GraphRAG-family on single-hop detail QA (NQ: 64.78 F1 vs 63.01) — and
+  QuorumQA's unanimous-wrong gaps are fact-lookup shaped, not multi-hop.
+  GraphRAG wins only multi-hop/global-summary, at prohibitive indexing
+  cost (Microsoft's own words; LazyGraphRAG is the watchlist item if
+  multi-hop traffic ever grows — vector-RAG-parity indexing cost, MSR
+  primary source).
+- **Reranker: Qwen3-Reranker-4B** (Apache-2.0, 32k context, 69.76 MTEB-R,
+  June 2025, actively adopted). Fallback: BGE-reranker-v2-m3 (Apache-2.0,
+  mature, integrated everywhere).
+- **Corpora v1: Wikipedia via HF `wikimedia/wikipedia`** (CC-BY-SA/GFDL,
+  turnkey parquet) + **peS2o v2** (ODC-BY, ~39M scientific docs — the open
+  science corpus §3 called for). **Medicine caveat verified:** raw PubMed
+  abstracts are NOT blanket-open (NLM: publishers/authors may hold
+  copyright) — use the **PMC Open Access commercial-use subset**
+  (CC0/CC-BY family) if a medicine corpus is added.
+
+### Adapt-as-pattern (mechanisms don't transfer to hosted APIs; shapes do)
+- **Dynamic-RAG taxonomy** (SIGIR 2025 tutorial, arXiv 2506.06704):
+  when/what-to-retrieve is decided by trained special tokens OR external
+  state monitoring — hosted APIs force the external-monitor family, which
+  is exactly what the Discovery loop is (deliberation state = the monitor).
+- **DRAG, Debate-Augmented RAG** (ACL 2025 main, arXiv 2505.18581,
+  training-free) — the closest published relative; see novelty verdict.
+- **HF Open Deep Research** (smolagents): proof a prompting-only search
+  agent works — 55% GAIA vs 67% for the trained product it reimplements.
+  Realistic ceiling-setting for orchestration-only agentic search.
+
+### Requires-training — skip
+- **Self-RAG** (trained reflection tokens), **FLARE** (decode-time
+  logprobs), **DRAGIN** (attention/entropy internals — training-free but
+  needs model internals hosted APIs don't expose).
+- **Search-R1, R1-Searcher, ReSearch, DeepResearcher** — all verified as
+  RL-training methods on the base model (primary sources quoted in the
+  verification report). Query-planning shapes copyable; methods not.
+
+### Novelty verdict on the Discovery shape
+DRAG retrieves for EVERY question (no competence-gated router skip), its
+debate argues about retrieval-QUERY adequacy rather than the object-level
+claim in dispute, its rounds are fixed (r=3; the paper names fixed
+response-debate rounds as its own limitation), and it has no
+self-improving corpus. QuorumQA's Discovery shape — retrieval gated by
+domain-competence routing (R1), queries derived from the Skeptic's named
+disputed step and the Verifier's checkable claims (R2), a judge-ordered
+bounded reopening on the pivotal claim (R3), and a provenance-tracked,
+family-firewalled case-law/knowledge-card corpus (R4) — **appears
+genuinely novel across both research passes.** Worth writing up properly
+once G1-G2 produce measured results.
+
+### Contamination standard: none exists — §4 is ahead of the field
+Verified: the decontamination literature targets *pretraining* corpora;
+no adopted community standard exists for excluding benchmark-derived
+documents from *retrieval indexes* (closest: one recent leakage-free-
+benchmark-generation paper, arXiv 2605.08838 — a proposal, not a norm).
+The §4 firewall is therefore a contribution, not a copy; state that
+plainly if this work is ever published.
+
+### DRAG's numbers, for calibration of expectations
+Llama-3.1-8B-Instruct, Wikipedia corpus: multi-hop wins (+6 EM
+2WikiMultihopQA, +3 HotpotQA vs best baselines) but LOSES to
+retrieval-optimized baselines on single-hop (its own "problem drift"
+admission). Lesson for our bets: debate-driven retrieval earns its keep
+on contested/multi-step questions — reinforcing the R2-on-splits design
+(retrieve harder exactly where the panel disagrees) over
+always-on-everything.
