@@ -78,3 +78,22 @@ of depth" diagnosis — RAG cheaper, flagship_panel higher-ceiling.
 - k=5, ~200-word evidence budget, unchanged solver prompts. No tuning of
   retrieval depth/formatting yet — G2 (disputed-step re-retrieval) and
   reranking are the next levers on top of this baseline.
+
+## Second seed (7): R1 replicates
+
+Apples-to-apples on 87 common items, cheap-panel (control) vs cheap+RAG:
+
+| SuperGPQA-hard | Seed 42 | Seed 7 |
+|---|---|---|
+| cheap-panel (no RAG) | 67.4% | 67.8% |
+| cheap-panel + RAG | 72.1% | 74.7% |
+| **Delta** | **+4.7** | **+6.9** |
+| unanimous-wrong floor | 20→14 | 18→15 |
+
+Both seeds positive, both cut the unanimous-wrong floor, mean **+5.8**.
+The retrieval mechanism is not a one-seed artifact — retrieved evidence
+consistently stops the cheap panel from confidently agreeing wrong on
+knowledge-heavy hard-STEM questions. One more fresh seed completes the
+3-seed bar to promote `rag_presolve` to a validated MoO profile; on two
+seeds it is already a strong, replicated positive and the cheapest of the
+three fixes for the unanimous-wrong floor (RAG < tier-swap in cost).

@@ -390,7 +390,7 @@ Temperature; etc.). search_corpus is production-usable.
 
 ## R1 BET-1 MET (2026-07-23 ~00:30) — retrieval is the third fix, domain-gated
 
-cheap-panel + pre-solve RAG on SuperGPQA-hard seed 42: **+4.7** over the
+cheap-panel + pre-solve RAG on SuperGPQA-hard: **+4.7 (s42) / +6.9 (s7)**, 2-seed replicated, over the
 cheap panel (72.1 vs 67.4), clears the pre-registered +4, ZERO drops, and
 cut the unanimous-wrong floor 20→14 (the designed mechanism). GPQA
 tripwire PASSED: −4.7 (negative = no contamination) and proves retrieval
