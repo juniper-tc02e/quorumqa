@@ -53,3 +53,31 @@ latency or quota-throttling interaction isn't distinguishable from our
 side; the retry fix will absorb either. The seed-42 pilot (2 concurrent,
 overnight discount window) saw 1 in 14 -- concurrency and time-of-day are
 both plausible contributors, neither provable from n=4 events.
+
+## Hardened-agent rerun (same 14 tasks, same day)
+
+The three-fix hardening pass rerun against the identical seed-7 sample,
+n=2 concurrency to keep API-timeout noise out of the measurement:
+
+| | Pre-fix | Post-fix |
+|---|---|---|
+| Graded outcomes | 5/14 (36%) | **12/14 (86%)** |
+| Blocked by exceptions | 9/14 | 2/14 (both double-ReadTimeout) |
+| Solved | 2 | **4** |
+
+The two newly-recovered solves are exactly the fix working as designed:
+mteb-retrieve died pre-fix on a fatal command timeout and now solves
+(the model reacted to the TIMEOUT observation); break-filter-js-from-html
+died pre-fix on a ReadTimeout and now grades 1.0 (reaching the agent-cap
+wire but with solved container state). The two remaining ReadTimeout
+deaths hit the timeout twice in a row (retry consumed) on heavy reasoning
+turns -- a real remaining ceiling, same class as the qwen38 baseline's
+12 undroppable questions, not fixable from the client side alone.
+
+Honest accounting note: solve-rate-among-graded went 2/5 (40%) -> 4/12
+(33%) -- these are not comparable numbers, since pre-fix grading was
+survivorship-biased toward tasks that happened to finish fast. 4/12 with
+86% grading coverage is the more trustworthy baseline read. Pooling
+hardened seed-7 with unhardened seed-42 would mix harness generations;
+a fresh-seed run under the hardened agent is the right next baseline
+sample, not a pool.
