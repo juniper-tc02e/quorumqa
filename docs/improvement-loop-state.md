@@ -347,3 +347,20 @@ targeted.)
   clean, counts as a valid seed-7 outcome); (2) `-i` include filters need
   the `terminal-bench/` org prefix. Third launch (phase1-pilot-seed7c,
   13 remaining tasks) verified live with 4 concurrent task dirs.
+
+## RAG index throughput constraint + decision (2026-07-22 ~19:50)
+
+The from-scratch G0 build embeds on CPU at ~1.6 articles/s (~800 kept
+after 26 min) — 200k articles would take ~100h, impractical. **DECISION
+(autonomy grant):** G0.5 switches to a PRE-EMBEDDED English-Wikipedia
+corpus from HuggingFace (embeddings already computed — skips the CPU
+bottleneck, gives full coverage) instead of grinding the from-scratch
+build. The current build keeps running as a small-index fallback for
+early G1 smoke, but the R1 accuracy pilot should WAIT for the
+pre-embedded corpus, because a small index that misses relevant passages
+would make RAG look worse than it is and confound the pre-registered
+Bet-1 test. G0.5 task (Sonnet worker): evaluate a current pre-embedded
+EN-Wikipedia HF dataset (license-checked, e.g. a Cohere/Wikipedia-
+embeddings-class set), load into the same RagIndex/RRF store, verify
+search_corpus returns sensible STEM hits. Then G1 (verifier wiring) → R1
+pilot.
