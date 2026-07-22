@@ -30,6 +30,27 @@ Levers:
                  qwen3.7-max via QwenClient/DashScope. Same judge system/
                  user prompt and JSON contract as the shipped judge -- only
                  the model and transport differ. See adjudicate_qwen38().
+  qwen38_panel -- all THREE solver seats run qwen3.8-max-preview via the
+                 Token Plan Anthropic-Messages transport (same transport
+                 pattern as adjudicate_qwen38 / benchmark/qwen38_baseline.py)
+                 instead of the shipped MECHANICAL_MODEL. Same SOLVER_SYSTEM
+                 + lens + JSON contract as _solve_one_thinking -- only the
+                 model and transport differ. Skeptic/Verifier/Judge are
+                 UNCHANGED from the shipped engine (flash skeptic, flash
+                 verifier, qwen3.7-max judge via QwenClient) -- solver tier
+                 is the ONLY variable vs the shipped engine, and vs
+                 flagship_panel (all-qwen3.7-max solvers) the only variable
+                 is the solver model: 3.7-max -> 3.8-max-preview.
+                 qwen3.8-max-preview thinks by default on this transport --
+                 no attempt is made to disable it (unlike the cheap-tier
+                 _solve_one, which explicitly sets thinking=False). See
+                 _solve_one_qwen38() / solve_all_qwen38_panel(). This lever
+                 was not tuned or validated on any prior seed, so the
+                 FRESH-SEED discipline that applies to seed-derived levers
+                 above does not apply the same way here -- seed 42 remains
+                 fine to use as the standard comparison seed (e.g. for
+                 SuperGPQA reference points); the orchestrator picks pilot
+                 seeds.
   chem_thinking_gate -- stacks the two validated winners together: Organic
                  Chemistry questions get chem_flagship_gate's three-
                  flagship-thinking panel; every OTHER subject gets
@@ -51,6 +72,7 @@ Usage:
   python -m benchmark.lever_experiments --lever subject --n 90 --seed 7
   python -m benchmark.lever_experiments --lever control --n 90 --seed 7   # fresh-seed control for subject
   python -m benchmark.lever_experiments --lever qwen38_judge --n 90 --seed 42
+  python -m benchmark.lever_experiments --lever qwen38_panel --n 90 --seed 42
   python -m benchmark.lever_experiments --lever chem_thinking_gate --n 90 --seed <FRESH>  # never 42/7/123/555/777/888
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
@@ -364,6 +386,92 @@ def adjudicate_qwen38(
     return verdict, usage
 
 
+def _solve_one_qwen38(client, question, choices, lens, temperature=0.4):
+    """One solver seat running qwen3.8-max-preview via the Token Plan's
+    Anthropic-Messages-API-compatible endpoint -- same transport pattern as
+    adjudicate_qwen38 / benchmark/qwen38_baseline.py (requests.post to
+    {TOKEN_PLAN_BASE_URL}/v1/messages, x-api-key header, anthropic-version
+    2023-06-01, 300s timeout, text extracted after skipping any non-text
+    content block such as "thinking"). `client` is accepted but unused --
+    kept only so this has the same call signature shape as
+    _solve_one/_solve_one_thinking, letting solve_all_qwen38_panel dispatch
+    it via asyncio.to_thread exactly like every other solver helper.
+
+    Same SOLVER_SYSTEM + lens system prompt and JSON contract as
+    _solve_one_thinking -- only the model and transport differ. This is a
+    VERBATIM copy of _solve_one_thinking's user-prompt construction, not a
+    shared helper; if that prompt ever changes, this copy must change with
+    it, same caveat as adjudicate_qwen38's docstring.
+
+    qwen3.8-max-preview thinks by default on the Token Plan transport -- no
+    attempt is made to disable it (there is no thinking=False knob on this
+    transport, unlike QwenClient.chat_json). Any "thinking" content block in
+    the response is simply skipped when extracting the answer JSON, same
+    handling as adjudicate_qwen38."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+    )
+    headers = {
+        "x-api-key": TOKEN_PLAN_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+    }
+    body = {
+        "model": QWEN38_JUDGE_MODEL,
+        "max_tokens": 1024,
+        "system": f"{SOLVER_SYSTEM}\n\n{lens}",
+        "messages": [{"role": "user", "content": user}],
+    }
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+    resp.raise_for_status()
+    data = resp.json()
+
+    text_blocks = [b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"]
+    text = "\n".join(text_blocks)
+    match = re.search(r"\{.*\}", text, re.S)
+    if not match:
+        raise ValueError(f"No JSON object found in qwen38 solver response text: {text!r}")
+    parsed = json.loads(match.group(0))
+
+    letter = str(parsed.get("letter", "")).strip().upper()[:1]
+    answer = SolverAnswer(
+        letter=letter if letter in "ABCD" else "A",
+        confidence=float(parsed.get("confidence", 0.5)),
+        reasoning=str(parsed.get("reasoning", "")),
+        lens=lens,
+    )
+
+    usage_raw = data.get("usage", {})
+    usage = CallUsage(
+        model=QWEN38_JUDGE_MODEL,
+        input_tokens=usage_raw.get("input_tokens", 0) or 0,
+        output_tokens=usage_raw.get("output_tokens", 0) or 0,
+        # Same quota-billing note as adjudicate_qwen38: the Token Plan has no
+        # published $/token rate, so never fold a fabricated USD number in
+        # here -- cost is quota-based and reported separately in tokens.
+        cost_usd=0.0,
+        role="solver",
+    )
+    return answer, usage
+
+
+async def solve_all_qwen38_panel(client, question, choices):
+    """All three solver seats run qwen3.8-max-preview via the Token Plan
+    transport instead of the shipped MECHANICAL_MODEL. Skeptic/Verifier/
+    Judge are untouched -- solver tier is the only variable vs the shipped
+    engine, and vs solve_all_flagship_panel the only variable is the solver
+    model (qwen3.7-max -> qwen3.8-max-preview)."""
+    lenses = _lenses_for(3)
+    tasks = [
+        asyncio.to_thread(_solve_one_qwen38, client, question, choices, lenses[i], SOLVER_TEMPERATURES[i])
+        for i in range(3)
+    ]
+    return list(await asyncio.gather(*tasks))
+
+
 async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate):
     """The shipped escalation path (skeptic -> verifier -> judge), unchanged
     -- except WHICH function adjudicates is now a parameter. `adjudicator`
@@ -407,6 +515,8 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         solver_pairs = await solve_all(client, item.question, item.choices, n=5)
     elif lever in ("flagship_panel", "flagship_panel_combined"):
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
+    elif lever == "qwen38_panel":
+        solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
     else:
         solver_pairs = await solve_all(client, item.question, item.choices)
 
@@ -573,7 +683,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
