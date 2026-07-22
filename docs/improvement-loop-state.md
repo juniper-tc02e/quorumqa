@@ -387,3 +387,20 @@ Temperature; etc.). search_corpus is production-usable.
   control (expect ~0, contamination tripwire). Benchmark-mode: index is
   general Wikipedia, not benchmark-derived — firewall satisfied, but
   label results RAG-ON and cite the snapshot ID.
+
+## R1 BET-1 MET (2026-07-23 ~00:30) — retrieval is the third fix, domain-gated
+
+cheap-panel + pre-solve RAG on SuperGPQA-hard seed 42: **+4.7** over the
+cheap panel (72.1 vs 67.4), clears the pre-registered +4, ZERO drops, and
+cut the unanimous-wrong floor 20→14 (the designed mechanism). GPQA
+tripwire PASSED: −4.7 (negative = no contamination) and proves retrieval
+must be router-gated (hurts on search-proof GPQA). RAG = a domain-gated
+lever like flagship_panel: help where the gap is retrievable knowledge,
+skip where search-proof. Cheaper than tier-swap.
+
+**NEXT:** R1 seed-7 + seed-123 replication for the 3-seed bar (running/
+queued); then G2 (disputed-step re-retrieval: the Skeptic's named step
+becomes a sharper second query for the Verifier) — the first RECURSIVE
+step, and the piece that also fixes the LEXam zero-verifier-findings
+diagnosis. Reasoning-lever track continues in parallel (flagship_panel on
+MMLU-Pro STEM slice; deliberation-depth variants).
