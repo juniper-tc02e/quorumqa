@@ -15,8 +15,16 @@ closes it, validated at 3 seeds. The MoO plan is the frame; per-domain
 levers are the work.
 
 ### Domain-coverage backlog (the broadened objective, ranked by reachability)
-1. **Math** — GSM8K (easy, saturation-check) + a hard math set; verifier
-   already computes, add SymPy tool → `math-verified` profile. Reachable now.
+1. **Math** — GSM8K + MATH-500 loaders+runners BUILT and committed
+   (c6ae818). Both use distractor-synthesis into A-D (documented
+   non-comparable to published open-answer scores). CAVEAT to weight when
+   reading pilot numbers: domain-agnostic numeric distractors can be
+   trivially eliminable (a mod-11 remainder can't be 90), so
+   distractor-MC math may read EASIER than the real open-answer task —
+   these pilots test the ENGINE's relative behavior, not absolute math
+   ability. MATH-500 excludes 27% of answers (non-numeric) as unsafe to
+   synthesize. Pilots queued behind SuperGPQA. `math-verified` profile
+   (add SymPy verifier tool) is the lever if the flat engine loses here.
 2. **Science (broad)** — SuperGPQA hard (pilot RUNNING), MMLU-Pro STEM slice.
 3. **Chemistry** — DONE: chem_thinking_gate validated 90.9%. The template
    for every other domain profile.
