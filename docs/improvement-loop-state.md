@@ -114,8 +114,13 @@ targeted.)
    TDD 29→35 tests, commit f1d8385, diff spot-checked by orchestrator.
    Ready to launch when the Token Plan quota window is clear of the chem
    seed-888 run (both share it).
-5. **Stack test: chem_flagship_gate + thinking_gate** — do the two validated
-   levers compose? (After #1 lands.)
+5. **[BUILT iter-3, pilot queued] Stack test: chem_thinking_gate** — worker
+   delivered clean (RED→GREEN, 35→41 tests, live smoke exercised all three
+   routing paths: chem+gate pass, chem+gate→tribunal, non-chem split→
+   tribunal). Commit ce048b4, pushed. Pilot at fresh seed 314 (999 lightly
+   exposed by the smoke; 42/7/123/555/777/888 burned) queued behind the
+   running T-Bench seed-7c job per the Token-Plan serialization rule —
+   launches on its completion notification.
 6. **Terminal-Bench Phase 2: best-of-N filtered by task verifier** — per
    agentic-rebuild-scoping.md Option A. Size N against measured pilot costs.
 7. **SuperGPQA pilot (hardest-subset sample per finding #3)** — next
