@@ -30,6 +30,19 @@ Levers:
                  qwen3.7-max via QwenClient/DashScope. Same judge system/
                  user prompt and JSON contract as the shipped judge -- only
                  the model and transport differ. See adjudicate_qwen38().
+  chem_thinking_gate -- stacks the two validated winners together: Organic
+                 Chemistry questions get chem_flagship_gate's three-
+                 flagship-thinking panel; every OTHER subject gets
+                 thinking_gate's thinking-seat panel (seats 1-2 plain flash,
+                 seat 3 thinking=True flash); the universal
+                 second_opinion_gate doubt-check applies to unanimous
+                 answers everywhere, as both parents do. Escalation
+                 machinery (skeptic/verifier/judge) is untouched. MUST be
+                 run against a FRESH seed only -- seeds 42/7/123/555/777/888
+                 are all burned for this lever, having already been spent
+                 tuning/validating thinking_gate and chem_flagship_gate
+                 individually; reusing any of them here would double-count
+                 that evidence rather than testing the stack honestly.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -38,6 +51,7 @@ Usage:
   python -m benchmark.lever_experiments --lever subject --n 90 --seed 7
   python -m benchmark.lever_experiments --lever control --n 90 --seed 7   # fresh-seed control for subject
   python -m benchmark.lever_experiments --lever qwen38_judge --n 90 --seed 42
+  python -m benchmark.lever_experiments --lever chem_thinking_gate --n 90 --seed <FRESH>  # never 42/7/123/555/777/888
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -177,6 +191,29 @@ async def solve_all_chem_flagship(client, question, choices, subject):
             asyncio.to_thread(_solve_one, client, question, choices, lenses[2], MECHANICAL_MODEL, 0.9),
         ]
     return list(await asyncio.gather(*tasks))
+
+
+async def solve_all_chem_thinking_gate(client, question, choices, subject):
+    """The chem_thinking_gate lever's solver panel: stacks chem_flagship_gate's
+    Organic Chemistry routing on top of thinking_gate's non-chemistry panel --
+    the combination of both validated winners, nothing new invented at the
+    solver level. Organic Chemistry -> the same three-flagship-thinking panel
+    as solve_all_chem_flagship's chemistry branch (routes through that
+    function directly, so the two levers can never drift apart on how
+    chemistry is solved). Every other subject -> solve_all_thinking_seat's
+    panel (seats 1-2 plain MECHANICAL_MODEL, seat 3 thinking=True
+    MECHANICAL_MODEL) -- NOT chem_flagship_gate's plain-everywhere-else
+    panel, since thinking_gate's whole point was that seat-3 thinking helps
+    broadly, not just on chemistry.
+
+    MUST be validated on a FRESH seed only: both parent levers were tuned/
+    validated on seeds 42/7/123/555/777/888, so every one of those seeds is
+    burned for this lever (reusing one would double-count evidence already
+    spent choosing thinking_gate and chem_flagship_gate in the first place).
+    """
+    if subject == "Organic Chemistry":
+        return await solve_all_chem_flagship(client, question, choices, subject)
+    return await solve_all_thinking_seat(client, question, choices)
 
 
 async def solve_all_flagship_panel(client, question, choices):
@@ -358,6 +395,8 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         solver_pairs = await solve_all_smart_seat(client, item.question, item.choices, item.subject)
     elif lever == "chem_flagship_gate":
         solver_pairs = await solve_all_chem_flagship(client, item.question, item.choices, item.subject)
+    elif lever == "chem_thinking_gate":
+        solver_pairs = await solve_all_chem_thinking_gate(client, item.question, item.choices, item.subject)
     elif lever == "thinking_all":
         solver_pairs = await solve_all_thinking_all(client, item.question, item.choices)
     elif lever == "five":
@@ -377,7 +416,7 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str):
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
-        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate"):
+        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate"):
             doubt, reason, gate_usage = second_opinion_gate(client, item.question, item.choices, solver_answers, plurality_letter)
             calls.append(gate_usage)
             if doubt:
@@ -530,7 +569,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
