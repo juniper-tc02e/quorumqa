@@ -81,3 +81,19 @@ survivorship-biased toward tasks that happened to finish fast. 4/12 with
 hardened seed-7 with unhardened seed-42 would mix harness generations;
 a fresh-seed run under the hardened agent is the right next baseline
 sample, not a pool.
+
+## Fresh-seed hardened baseline (seed-3 sample, 14 more tasks)
+
+12/14 graded (86% coverage -- replicates the hardened rerun's coverage on
+an untouched sample), 5/12 solved: code-from-image, nginx-request-logging,
+polyglot-c-py, sqlite-db-truncate, sqlite-with-gcov. Two ungraded: one
+JSON-parse failure surviving even the 4096-token budget, one new HTTP 400
+from the Token Plan API (first of its class; watch for recurrence before
+engineering around it).
+
+**The honest hardened-agent baseline, pooled across both hardened
+samples (28 tasks, 24 graded): 9/24 solved = 37.5%, at ~86% grading
+coverage.** This is the number Phase 2 (best-of-N filtered by each task's
+own verifier) should be sized against and measured from. Not comparable
+to the pre-hardening 54.5%-of-graded figure, which was survivorship-
+biased toward fast-finishing tasks.
