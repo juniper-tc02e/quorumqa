@@ -410,9 +410,31 @@ whole diagnosis chain started from. Escalation rate (34.1%) is also the
 lowest of any accuracy-positive configuration, consistent with the
 thinking seat resolving some would-be splits before they escalate.
 
-Status: promising, not validated -- one seed. Needs two more fresh seeds
-(the bar every validated lever here has been held to). Not folded into any
-shipped or published number.
+**VALIDATED: three fresh seeds, 0.2-point spread.**
+
+| Seed | Overall | Organic Chemistry | Escalation | Drops |
+|---|---|---|---|---|
+| 314 | 90.9% | 91.2% (band 86.1-91.7) | 34.1% | 2 (both chem) |
+| 217 | 91.0% | 90.0% (band 87.1-90.3) | 37.1% | 1 (chem) |
+| 471 | 90.8% | 90.3% (band 82.4-91.2) | 42.5% | 3 (all chem) |
+| **mean** | **90.9%** | ~90.5% | ~38% | |
+
+The tightest replication of any configuration tested in this project
+(compare chem_flagship_gate's 89.8/88.6/87.4 and thinking_gate's
+86.7/86.5/83.3). Against the flagship baseline's measured range across
+five seeds (84.4/86.5/85.6/86.5 at 42/7/123/314), the stack sits roughly
+**+5 points above the flagship-on-everything baseline** -- and the one
+matched same-seed comparison (314: 90.9 vs 86.5) shows +4.4 directly.
+Recurring caveat, disclosed every time: drops concentrate in Organic
+Chemistry (the slowest-reasoning questions hitting the API read-timeout
+ceiling; reckl6PkaEMWM50yZ and rec5rjeLsEq5Fg7Oj dropped at two different
+seeds each), so each seed's chemistry band is wider than its point
+estimate. Even at every seed's worst-case drop bound, the overall number
+never falls below 87.6%.
+
+Not folded into any shipped or published number. This is the
+configuration the post-judging engine upgrade should adopt if any is
+adopted -- it strictly dominates both its parents on the evidence above.
 
 ## What this would take to ship
 
