@@ -54,10 +54,10 @@ a whole benchmark — the general-use proof the MoO thesis needed).
   MedQA, GSM8K, MATH-500, Terminal-Bench), every lever runnable on each.
 
 ### Top recommended next actions (ranked, for Jun Kai)
-1. **Replicate flagship_panel on SuperGPQA-hard at 2 more seeds** → the
-   headline general-use finding is 1 seed; the 3-seed bar makes it a
-   validated MoO profile. Highest scientific value. (~2 runs/seed for
-   apples-to-apples baseline + panel.)
+1. **flagship_panel on SuperGPQA-hard: now 2-seed replicated (+3.8, +2.4,
+   mean +3.1) — run ONE more fresh seed to complete the 3-seed bar** and
+   promote it to a validated MoO domain profile. Strong, replicated
+   positive already; one run away from the full bar.
 2. **Build the MoO M0 refactor** — levers → declarative profiles + the
    benchmark-mode memory firewall assertion. Unblocks everything else.
 3. **Open-answer math grading path** (SymPy numeric-equivalence) — the
