@@ -62,12 +62,20 @@ def safe_calculate(expression: str) -> dict:
 @mcp.tool()
 def search_corpus(query: str, k: int = 5) -> dict:
     """Search the offline STEM-Wikipedia corpus (docs/recursive-rag-plan.md
-    G0) for passages relevant to `query`.
+    G0/G0.5) for passages relevant to `query`.
 
-    Hybrid retrieval: SQLite FTS5 BM25 + dense cosine similarity
-    (BAAI/bge-small-en-v1.5), fused by reciprocal rank fusion. Returns the
-    top-k fused passages, each with title, text, score, and provenance
-    (source article URL, corpus snapshot ID).
+    Hybrid retrieval: SQLite FTS5 BM25 + dense cosine similarity, fused by
+    reciprocal rank fusion. The dense query encoder is picked to match
+    whichever embedding model the OPEN index DB was actually built with
+    (recorded in its build_progress.embedding_model row at build time --
+    see quorumqa.rag.embeddings.get_query_embedder) rather than assuming a
+    single hardcoded model: the from-scratch build path
+    (benchmark/build_rag_index.py) uses BAAI/bge-small-en-v1.5 (384-dim);
+    the pre-embedded G0.5 corpus loader (benchmark/build_rag_index_
+    preembedded.py, docs/rag-corpus-notes.md) uses
+    mixedbread-ai/mxbai-embed-large-v1 (1024-dim). Returns the top-k fused
+    passages, each with title, text, score, and provenance (source article
+    URL, corpus snapshot ID).
 
     This is a no-op with a clear `ok: False` error -- it never raises --
     if the index DB hasn't been built yet (see benchmark/build_rag_index.py)
@@ -98,15 +106,23 @@ def search_corpus(query: str, k: int = 5) -> dict:
             return {"ok": False, "error": str(exc)}
         _rag_index_cache[cache_key] = index
 
+    embedding_model = store.get_progress(index.conn).get("embedding_model")
+
     query_vector = None
     try:
-        from quorumqa.rag.embeddings import embed_query
+        from quorumqa.rag.embeddings import get_query_embedder
 
-        query_vector = embed_query(query)
-    except ImportError as exc:
+        query_vector = get_query_embedder(embedding_model)(query)
+    except ImportError:
         # Dense deps (sentence-transformers/torch) missing -- degrade to
         # FTS5-only rather than failing the whole tool call.
         pass
+    except ValueError as exc:
+        # embedding_model is set but unrecognized (e.g. a DB built by a
+        # future loader this server predates) -- degrade to FTS5-only
+        # rather than guessing a mismatched encoder and returning
+        # meaningless dense scores.
+        return {"ok": False, "error": f"search_corpus failed: {exc}"}
 
     try:
         results = index.search(query, query_vector, k=k)
