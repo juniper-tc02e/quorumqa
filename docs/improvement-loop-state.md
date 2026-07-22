@@ -17,12 +17,18 @@ models. Two standing workstreams:
    hard STEM (its solo GPQA read was 93.6% vs 3.7-max's 85.6 — a panel
    of them is the strongest untested reasoning lever), deliberation-depth
    variants, panel-diversity variants.
-2. **Recursive RAG** (docs/recursive-rag-plan.md, written): Discovery
-   loop — router-gated pre-solve retrieval, disputed-step re-retrieval,
-   judge-ordered discovery, self-improving case-law/knowledge-card corpus
-   with a strict contamination firewall. Research pass verifying the
-   technique/OSS landscape is running; G0 (corpus+index+search_corpus
-   tool) is the first build item after it lands.
+2. **Recursive RAG** (docs/recursive-rag-plan.md): plan COMPLETE with
+   verified Appendix A (hybrid+rerank v1 confirmed by evidence; Discovery
+   shape verified genuinely novel vs DRAG/ACL-2025; no contamination
+   standard exists — our firewall is a contribution). **G0 BUILT**
+   (907d4f9): rag package, FTS5+dense+RRF, search_corpus MCP tool, 83
+   tests green, ~200ms/query. Full 200k-article index building in
+   background (resumable: benchmark/build_rag_index.py --max-articles
+   200000 --db-path benchmark/data/rag_index.sqlite3; log
+   benchmark/results/rag_full_build.log). Next: G1 = wire search_corpus
+   into the Verifier tool rack behind a flag + R1 pre-solve pilot on
+   SuperGPQA-hard (Bet 1 threshold: ≥+4 vs cheap-panel 67.9 on same
+   items).
 
 ## WIND-DOWN WRAP-UP — 2026-07-22 window (read this first)
 
