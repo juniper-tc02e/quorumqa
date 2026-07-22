@@ -18,3 +18,10 @@ pytest-asyncio>=0.23
 # multi-GB Visual Studio Build Tools install for a dependency we don't use.
 litellm<1.90
 harbor>=0.20
+
+# Recursive RAG G0 (docs/recursive-rag-plan.md) -- dense embeddings for the
+# hybrid retrieval index. Pulls in torch/transformers as transitive deps
+# (CPU-only usage here; see src/quorumqa/rag/embeddings.py for the model
+# choice rationale). FTS5 (BM25 half of the hybrid index) uses Python's
+# stdlib sqlite3 -- no separate package needed.
+sentence-transformers>=3.0
