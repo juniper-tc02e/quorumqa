@@ -141,3 +141,31 @@ def test_count_helpers(built_db):
     conn = store.open_for_read(built_db)
     assert store.count_articles(conn) == 3
     assert store.count_passages(conn) == 3
+
+
+def test_embedding_model_column_defaults_to_none(tmp_path):
+    db_path = tmp_path / "embmodel.sqlite3"
+    conn = store.open_for_build(db_path)
+    assert store.get_progress(conn).get("embedding_model") is None
+    conn.close()
+
+
+def test_embedding_model_roundtrips_via_set_progress(tmp_path):
+    db_path = tmp_path / "embmodel2.sqlite3"
+    conn = store.open_for_build(db_path)
+    store.set_progress(conn, embedding_model="mixedbread-ai/mxbai-embed-large-v1")
+    assert store.get_progress(conn)["embedding_model"] == "mixedbread-ai/mxbai-embed-large-v1"
+    conn.close()
+
+
+def test_ensure_schema_migration_is_idempotent(tmp_path):
+    # Calling open_for_build (which runs ensure_schema) twice against the
+    # same DB must not raise on the second "ALTER TABLE ADD COLUMN" --
+    # this is the guard that lets an old, pre-migration DB be reopened for
+    # a resumed build without erroring.
+    db_path = tmp_path / "migration.sqlite3"
+    conn1 = store.open_for_build(db_path)
+    conn1.close()
+    conn2 = store.open_for_build(db_path)  # re-runs ensure_schema
+    assert store.get_progress(conn2) is not None
+    conn2.close()

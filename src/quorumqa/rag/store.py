@@ -78,6 +78,17 @@ CREATE TABLE IF NOT EXISTS build_progress (
 );
 """
 
+# embedding_model was added after the initial G0 schema (see
+# quorumqa.rag.preembedded) -- it records which embedding model's vector
+# space the DB's `embeddings` table was populated in, so a reader (e.g.
+# mcp_server.search_corpus) can pick the matching query encoder instead of
+# assuming a single hardcoded default. ALTER TABLE ADD COLUMN has no
+# `IF NOT EXISTS` in the SQLite versions this project targets, so this is
+# applied as a guarded migration rather than folded into _SCHEMA.
+_MIGRATIONS: list[str] = [
+    "ALTER TABLE build_progress ADD COLUMN embedding_model TEXT",
+]
+
 
 class IndexNotFoundError(FileNotFoundError):
     """Raised when a caller asks to open a RAG index DB that hasn't been
@@ -87,6 +98,12 @@ class IndexNotFoundError(FileNotFoundError):
 
 def ensure_schema(conn: sqlite3.Connection) -> None:
     conn.executescript(_SCHEMA)
+    for migration in _MIGRATIONS:
+        try:
+            conn.execute(migration)
+        except sqlite3.OperationalError as exc:
+            if "duplicate column name" not in str(exc):
+                raise
     conn.execute("INSERT OR IGNORE INTO build_progress (id) VALUES (1)")
     conn.commit()
 

@@ -51,3 +51,24 @@ def test_search_corpus_against_real_built_index(tmp_path, monkeypatch):
     assert result["dense"] is True
     assert result["results"]
     assert result["results"][0]["title"] == "Photon"
+
+
+def test_search_corpus_reads_embedding_model_from_index_and_rejects_unknown(tmp_path, monkeypatch):
+    # An index tagged with a model this server doesn't recognize (e.g. a
+    # future loader this code predates) must fail cleanly rather than
+    # silently embedding the query with the wrong (default) model and
+    # returning meaningless dense scores -- see quorumqa.rag.embeddings.
+    # get_query_embedder and docs/rag-corpus-notes.md's "CRITICAL
+    # CONSTRAINT" section.
+    from quorumqa.rag import store
+
+    db_path = tmp_path / "rag_index.sqlite3"
+    conn = store.open_for_build(db_path)
+    store.set_progress(conn, embedding_model="some/unrecognized-model-v9")
+    conn.close()
+
+    monkeypatch.setenv("QUORUMQA_RAG_DB", str(db_path))
+    result = mcp_server.search_corpus("photon", k=3)
+
+    assert result["ok"] is False
+    assert "unrecognized-model-v9" in result["error"]
