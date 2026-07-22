@@ -4,6 +4,77 @@ Started 2026-07-21. This doc is the loop's memory: every iteration reads it,
 acts on the top of the backlog, records what happened, and re-ranks. It is
 committed after every iteration so the loop survives session loss.
 
+---
+
+## WIND-DOWN WRAP-UP — 2026-07-22 window (read this first)
+
+Two unsupervised windows (overnight + a daytime extension) ran the loop
+autonomously. What it produced, ranked by what Jun Kai should act on.
+
+### Validated wins (met the 3-seed bar)
+1. **chem_thinking_gate — 90.9% mean (seeds 314/217/471, 0.2pt spread),
+   +4.4 over the matched flagship baseline.** The best configuration this
+   project has produced; stacks the two prior validated levers
+   (thinking_gate + chem_flagship). Strictly dominates both parents. This
+   is the config the post-judging engine upgrade should adopt if any is.
+   [benchmark/results/lever_findings.md]
+2. **Agent hardening — graded coverage 36%→86%** on the same Terminal-Bench
+   sample (timeouts-as-observations, one API retry, bigger token budget).
+   Two former infrastructure casualties now solve outright.
+
+### The central intellectual result: WHEN deliberation helps
+Five non-GPQA benchmarks pinned down the predictor. It is NOT baseline
+height — it is the **cheap-tier-to-flagship gap, measured by the
+unanimous-wrong rate**:
+
+| Benchmark | Domain | Flagship base | Unan-wrong | Engine vs base | Right MoO route |
+|---|---|---|---|---|---|
+| GPQA-Diamond | phys/chem | 84-86% | ~11% | −5.5 (closes most) | thinking_gate / stem-max |
+| MedQA | medicine | 94% | **4%** | +2 (**tie**) | single-call / standard |
+| LEXam | law | 86% | elevated | −14 | single-call |
+| MMLU-Pro | broad | 94% | ~14% | −12 | single-call |
+| SuperGPQA-hard | hard STEM | 79% | **23%** | −11.6 → **+3.8** w/ flagship panel | flagship_panel |
+| MATH-500 / GSM8K | math | 100% | ~6% | −4 to −6 (saturated) | single-call |
+
+Low unanimous-wrong (cheap tier competent, e.g. medicine) → deliberation
+ties the flagship cheaply. High unanimous-wrong (out of depth, e.g. hard
+STEM) → route the panel to the flagship tier, which **flips −11.6 into
++3.8** (flagship_panel generalizes chem_flagship_gate from one subject to
+a whole benchmark — the general-use proof the MoO thesis needed).
+
+### Design delivered
+- **docs/mixture-of-orchestrations-plan.md** — full MoO architecture
+  (router + declarative profile registry + 3-memory system + benchmark-
+  mode memory firewall), every choice cited to a measured finding, with
+  an adversarially-verified OSS memory/attention appendix (3 adopt-now
+  hosted-API moves; self-hosting bucket honestly marked unresearched).
+- **docs/agentic-rebuild-scoping.md** — what Terminal-Bench/SWE-Bench
+  would take.
+- Benchmark infra now spans 8 datasets (GPQA, LEXam, MMLU-Pro, SuperGPQA,
+  MedQA, GSM8K, MATH-500, Terminal-Bench), every lever runnable on each.
+
+### Top recommended next actions (ranked, for Jun Kai)
+1. **Replicate flagship_panel on SuperGPQA-hard at 2 more seeds** → the
+   headline general-use finding is 1 seed; the 3-seed bar makes it a
+   validated MoO profile. Highest scientific value. (~2 runs/seed for
+   apples-to-apples baseline + panel.)
+2. **Build the MoO M0 refactor** — levers → declarative profiles + the
+   benchmark-mode memory firewall assertion. Unblocks everything else.
+3. **Open-answer math grading path** (SymPy numeric-equivalence) — the
+   real `math-verified` prerequisite; distractor-MC saturated and can't
+   test math deliberation.
+4. **Additive site Build Log entries** for the validated results (queued,
+   additive-only, safe before Aug 11 judging).
+5. Terminal-Bench Phase 2 (best-of-N filtered by the task verifier),
+   sized against the established 37.5% hardened baseline.
+
+### Nothing shipped to the submission
+Every result above is research in the repo. The frozen n=90 submission,
+its numbers, and the live site are untouched, per the additive-only
+constraint through Aug 11 judging.
+
+---
+
 ## Objective (broadened by Jun Kai, 2026-07-22 14:53)
 
 General-use excellence, NOT just GPQA: coding, auditing, research, data
