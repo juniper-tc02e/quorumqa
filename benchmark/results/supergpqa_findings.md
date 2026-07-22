@@ -152,3 +152,20 @@ margin is smaller at seed 7 (+2.4 vs +3.8), so the effect size carries
 normal per-seed variance, but the sign is consistent. One more fresh seed
 completes the 3-seed bar to promote `flagship_panel` to a validated MoO
 domain profile; on current evidence it is a strong, replicated positive.
+
+## Third seed (123): VALIDATION BAR MET
+
+| SuperGPQA-hard, apples-to-apples | Seed 42 | Seed 7 | Seed 123 |
+|---|---|---|---|
+| Single flagship baseline | 79.5% | 79.3% | 76.5% |
+| Flagship-panel engine | 83.3% | 81.7% | 82.7% |
+| **Delta** | **+3.8** | **+2.4** | **+6.2** |
+
+Mean **+4.1** across three fresh seeds, never negative, panel accuracy
+tightly clustered (81.7-83.3) while the baseline wobbles more (76.5-79.5).
+`flagship_panel` is now VALIDATED at the project's standard bar on
+SuperGPQA-hard — the third fully-validated lever overall, and the first
+validated on a benchmark beyond GPQA-Diamond. Deliberation with a
+competent solver panel beats the same flagship model running alone,
+consistently, on a broad hard-STEM benchmark: the strongest general-use
+evidence the project has.
