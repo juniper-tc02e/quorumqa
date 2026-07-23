@@ -104,6 +104,45 @@ Levers:
                  rag_r2="ON"/"OFF" (whether R2 actually fired for that
                  question), rag_r2_snapshot_id, rag_r2_query, rag_r2_titles
                  (see _build_output_row).
+  rag_thinking_gate -- the COMPOSITION test: do rag_presolve (retrieval) and
+                 thinking_gate (one thinking seat + doubt gate) stack, or
+                 merely overlap? Both are independently validated cheap-tier
+                 levers that attack different loss terms -- retrieval fixes
+                 the unanimous-wrong KNOWLEDGE floor (rag_r1_findings.md:
+                 +4.7/+6.9/+8.0 on SuperGPQA-hard, 3-seed validated);
+                 thinking_gate's extra reasoning depth + doubt gate improve
+                 REASONING/escalation quality. This lever runs both at once:
+                 rag_presolve's R1 pre-solve retrieval (top-k passages
+                 retrieved ONCE per question from the same pre-embedded
+                 STEM-Wikipedia index) feeds thinking_gate's panel shape --
+                 seats 1-2 plain MECHANICAL_MODEL (thinking=False), seat 3
+                 MECHANICAL_MODEL with thinking=True -- and the SAME
+                 retrieved evidence block is injected into ALL THREE seats'
+                 user prompts, including the thinking seat (see
+                 solve_all_rag_thinking_gate / _solve_one_rag's new
+                 `thinking` parameter). The universal second_opinion_gate
+                 doubt-check applies to unanimous answers, exactly as
+                 thinking_gate. Skeptic/Verifier/Judge and the escalation
+                 trigger are completely UNCHANGED -- deliberately NO R2
+                 (rag_recursive's disputed-step re-retrieval): R2 was not a
+                 validated gain on its own, so it is not carried into this
+                 stack. Same fail-loud missing-index contract as
+                 rag_presolve/rag_recursive (same RagPresolveConfig, same
+                 open_rag_index). Firewall: every output row carries
+                 rag_presolve's rag="ON"/rag_snapshot_id/rag_k/rag_db fields
+                 (see _build_output_row) -- no rag_r2 keys, since this lever
+                 never does R2.
+
+                 SEED DISCIPLINE: seeds 42/7/123 are BURNED for this lever
+                 -- both parents (rag_presolve and thinking_gate) were
+                 independently validated on them, so reusing any of the
+                 three here would double-count evidence already spent
+                 choosing each parent individually. Seeds 217/314/471/555/
+                 777/888 are in use by OTHER levers' validation runs (see
+                 chem_thinking_gate/flagship_panel/qwen38 pilots in
+                 benchmark/results/). This stack pilots on FRESH seed 271 --
+                 do not reuse 271 for anything else derived from looking at
+                 its own errors.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -116,6 +155,7 @@ Usage:
   python -m benchmark.lever_experiments --lever chem_thinking_gate --n 90 --seed <FRESH>  # never 42/7/123/555/777/888
   python -m benchmark.lever_experiments --lever rag_presolve --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever rag_recursive --n 90 --seed 42 --dataset supergpqa --rag-k 5
+  python -m benchmark.lever_experiments --lever rag_thinking_gate --n 90 --seed 271 --dataset supergpqa --rag-k 5  # FRESH seed only, never 42/7/123
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -654,14 +694,21 @@ def build_evidence_block(results: list[dict], word_budget: int = RAG_EVIDENCE_WO
     return "\n".join(lines)
 
 
-def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHANICAL_MODEL, temperature=0.4):
+def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHANICAL_MODEL, temperature=0.4, thinking=False):
     """Identical to solver._solve_one -- same system prompt (SOLVER_SYSTEM +
-    lens), same model/thinking/temperature defaults, same JSON contract --
-    except the user turn is prefixed with the retrieved-evidence block (if
-    any). Verbatim copy of _solve_one's user-prompt construction plus the
-    prefix, same caveat as every other lever's copied solver helper in this
-    file: if solver.py's user-prompt shape ever changes, this copy must
-    change with it."""
+    lens), same model/temperature defaults, same JSON contract -- except the
+    user turn is prefixed with the retrieved-evidence block (if any).
+    Verbatim copy of _solve_one's user-prompt construction plus the prefix,
+    same caveat as every other lever's copied solver helper in this file: if
+    solver.py's user-prompt shape ever changes, this copy must change with
+    it.
+
+    `thinking` defaults to False (rag_presolve's shipped behavior, byte-for-
+    byte unchanged for every existing caller). rag_thinking_gate passes
+    thinking=True for its seat 3, mirroring _solve_one_thinking's
+    role="solver_thinking" tag so downstream analysis can distinguish the
+    thinking seat's calls from the plain seats' the same way it already can
+    for thinking_gate/chem_thinking_gate."""
     choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
     evidence_prefix = f"{evidence_block}\n\n" if evidence_block else ""
     user = (
@@ -669,7 +716,8 @@ def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHAN
         'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
-    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+    role = "solver_thinking" if thinking else "solver"
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role=role, thinking=thinking, temperature=temperature, retries=2)
     letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
         letter=letter if letter in "ABCD" else "A",
@@ -708,6 +756,32 @@ async def solve_all_rag_presolve(client, question, choices, rag: RagPresolveConf
     tasks = [
         asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[i], evidence_block, MECHANICAL_MODEL, SOLVER_TEMPERATURES[i])
         for i in range(3)
+    ]
+    solver_pairs = list(await asyncio.gather(*tasks))
+    return solver_pairs, titles
+
+
+async def solve_all_rag_thinking_gate(client, question, choices, rag: RagPresolveConfig):
+    """The rag_thinking_gate lever's solver panel -- the composition test
+    between rag_presolve and thinking_gate. Retrieves top-k passages for the
+    QUESTION ONCE (identical single retrieval call to solve_all_rag_presolve,
+    same evidence block), then feeds that SAME evidence block into
+    thinking_gate's panel shape: seats 1-2 run MECHANICAL_MODEL with
+    thinking=False (temperatures 0.3/0.6, matching solve_all_thinking_seat),
+    seat 3 runs MECHANICAL_MODEL with thinking=True (temperature 0.9). The
+    thinking seat gets the evidence block too -- retrieval and the extra
+    reasoning depth are not alternatives here, they compose on every seat.
+    Returns (solver_pairs, retrieved_titles), same shape as
+    solve_all_rag_presolve so run_question_lever's logging is uniform across
+    every rag_* lever."""
+    results = await asyncio.to_thread(retrieve_rag_evidence, rag, question)
+    evidence_block = build_evidence_block(results)
+    titles = [r["title"] for r in results]
+    lenses = _lenses_for(3)
+    tasks = [
+        asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[0], evidence_block, MECHANICAL_MODEL, 0.3, False),
+        asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[1], evidence_block, MECHANICAL_MODEL, 0.6, False),
+        asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[2], evidence_block, MECHANICAL_MODEL, 0.9, True),
     ]
     solver_pairs = list(await asyncio.gather(*tasks))
     return solver_pairs, titles
@@ -782,18 +856,26 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
     elif lever == "qwen38_panel":
         solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
-    elif lever in ("rag_presolve", "rag_recursive"):
+    elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
         # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
         # same solve_all_rag_presolve call, same evidence block, same
-        # solver seats. The only difference between the two levers is what
-        # happens on escalation (see the tribunal dispatch below).
+        # solver seats. rag_thinking_gate reuses the same retrieval but
+        # dispatches through solve_all_rag_thinking_gate instead, which
+        # feeds the evidence block into thinking_gate's panel shape (seats
+        # 1-2 plain, seat 3 thinking=True) rather than three plain seats.
+        # The only difference between rag_presolve/rag_recursive is what
+        # happens on escalation (see the tribunal dispatch below);
+        # rag_thinking_gate never triggers R2 (see that branch).
         if rag is None:
             raise ValueError(
                 f"lever '{lever}' requires a RagPresolveConfig -- pass rag=... "
                 "(see main_live/build_rag_presolve_config); refusing to silently run the cheap "
                 "panel without retrieval"
             )
-        solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
+        if lever == "rag_thinking_gate":
+            solver_pairs, retrieved_titles = await solve_all_rag_thinking_gate(client, item.question, item.choices, rag)
+        else:
+            solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
         log.info("%s: %s retrieved %d passage(s) (R1 pre-solve): %s", item.question_id, lever, len(retrieved_titles), retrieved_titles)
     else:
         solver_pairs = await solve_all(client, item.question, item.choices)
@@ -808,7 +890,7 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
-        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate"):
+        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "rag_thinking_gate"):
             doubt, reason, gate_usage = second_opinion_gate(client, item.question, item.choices, solver_answers, plurality_letter)
             calls.append(gate_usage)
             if doubt:
@@ -856,19 +938,23 @@ async def _run_one(client, tool_session, item, semaphore, lever, rag: "RagPresol
 
 
 def _build_output_row(result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None) -> dict:
-    """The per-question JSONL row every lever writes. For rag_presolve and
-    rag_recursive, also carries the firewall labeling required by docs/
-    recursive-rag-plan.md section 4: rag="ON" plus the exact rag_snapshot_id
-    read from the OPEN index's build_progress row at run start (see
-    build_rag_presolve_config) -- never fabricated, never presented next
-    to a non-RAG number as if it were the same mode. rag_recursive ADDS a
-    second marker on top: rag_r2="ON"/"OFF" records whether the R2
-    disputed-step retrieval actually fired for THIS question (only escalated
-    questions ever trigger it -- see _tribunal), plus the R2 query/titles it
-    retrieved when it did. Every other lever's row shape is completely
-    unchanged (no "rag"/"rag_r2" keys at all)."""
+    """The per-question JSONL row every lever writes. For rag_presolve,
+    rag_recursive, and rag_thinking_gate, also carries the firewall labeling
+    required by docs/recursive-rag-plan.md section 4: rag="ON" plus the
+    exact rag_snapshot_id read from the OPEN index's build_progress row at
+    run start (see build_rag_presolve_config) -- never fabricated, never
+    presented next to a non-RAG number as if it were the same mode.
+    rag_recursive ADDS a second marker on top: rag_r2="ON"/"OFF" records
+    whether the R2 disputed-step retrieval actually fired for THIS question
+    (only escalated questions ever trigger it -- see _tribunal), plus the R2
+    query/titles it retrieved when it did. rag_thinking_gate deliberately
+    does NOT get rag_r2 keys -- it never does R2 (see solve_all_rag_
+    thinking_gate / run_question_lever's tribunal dispatch), so its rows
+    look exactly like rag_presolve's plus the rag_thinking_gate lever name.
+    Every other lever's row shape is completely unchanged (no "rag"/
+    "rag_r2" keys at all)."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
-    if lever in ("rag_presolve", "rag_recursive"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
         row["rag"] = "ON"
         row["rag_snapshot_id"] = rag_config.snapshot_id if rag_config else None
         row["rag_k"] = rag_config.k if rag_config else None
@@ -891,11 +977,12 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     semaphore = asyncio.Semaphore(concurrency)
 
     rag_config = None
-    if lever in ("rag_presolve", "rag_recursive"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
         # Fail loudly HERE, before any solver call is made, if the index
-        # doesn't exist -- see open_rag_index's docstring. rag_recursive
-        # reuses the exact same R1 index/config as rag_presolve; R2's
-        # top-k=3 is fixed (RAG_R2_K), not derived from rag_k.
+        # doesn't exist -- see open_rag_index's docstring. rag_recursive and
+        # rag_thinking_gate both reuse the exact same R1 index/config as
+        # rag_presolve; R2's top-k=3 is fixed (RAG_R2_K), not derived from
+        # rag_k, and rag_thinking_gate never triggers R2 at all.
         resolved_rag_db = resolve_rag_db_path(rag_db)
         rag_config = build_rag_presolve_config(resolved_rag_db, k=rag_k)
         log.info(
@@ -1008,7 +1095,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -1019,12 +1106,13 @@ if __name__ == "__main__":
                               "dataset unchanged -- they only vary HOW a question already loaded as a "
                               "GPQAItem gets answered, not where it came from.")
     parser.add_argument("--rag-db", type=str, default=None,
-                         help=f"rag_presolve/rag_recursive only: RAG index sqlite3 DB path (default: ${RAG_DB_ENV} env "
-                              f"var if set, else {DEFAULT_RAG_DB_PATH})")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate only: RAG index sqlite3 DB path "
+                              f"(default: ${RAG_DB_ENV} env var if set, else {DEFAULT_RAG_DB_PATH})")
     parser.add_argument("--rag-k", type=int, default=DEFAULT_RAG_K,
-                         help=f"rag_presolve/rag_recursive only: top-k passages retrieved per question for R1 "
-                              f"pre-solve retrieval (default {DEFAULT_RAG_K}). rag_recursive's R2 disputed-step "
-                              f"retrieval is always top-{RAG_R2_K}, fixed, not controlled by this flag.")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate only: top-k passages retrieved per "
+                              f"question for R1 pre-solve retrieval (default {DEFAULT_RAG_K}). rag_recursive's R2 "
+                              f"disputed-step retrieval is always top-{RAG_R2_K}, fixed, not controlled by this "
+                              f"flag; rag_thinking_gate never does R2.")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":
