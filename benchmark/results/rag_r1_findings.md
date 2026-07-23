@@ -97,3 +97,19 @@ knowledge-heavy hard-STEM questions. One more fresh seed completes the
 3-seed bar to promote `rag_presolve` to a validated MoO profile; on two
 seeds it is already a strong, replicated positive and the cheapest of the
 three fixes for the unanimous-wrong floor (RAG < tier-swap in cost).
+
+## Transparency note: concurrency fix (added retroactively)
+
+The R1 seed-42 and seed-7 pilots above ran BEFORE a concurrency bug was
+found and fixed (commit 609a1ab, store.py RLock): a cached RagIndex's
+single sqlite3 connection could corrupt under concurrent asyncio.to_thread
+reads and silently drop questions. Effect on the R1 findings: some of the
+"drops" attributed to timeouts may have been this bug instead. This does
+NOT bias the reported deltas — every number is scored apples-to-apples on
+the common-items intersection (rag vs control compared only on questions
+both runs completed), so a dropped question simply lowers n rather than
+skewing the comparison, and the control ran at the same concurrency. The
++4.7/+6.9 result is 2-seed replicated with a clean mechanism (floor
+20→14, 18→15). The R1 THIRD seed (123), which runs on the fixed code, is
+the clean confirmation — if it also lands +4 to +7, the earlier seeds were
+not artifacts of the concurrency bug. Flagged here rather than buried.
