@@ -410,3 +410,16 @@ the DIFFERENT test where R2 revives a dead verifier rather than augmenting
 a strong one; then R1 third seed (123) to complete the rag_presolve bar.
 Reasoning track continues (flagship_panel on MMLU-Pro STEM; deliberation
 variants).
+
+## Process-inspection correction (2026-07-23 ~12:30, important for loop ops)
+
+Two python.exe processes with IDENTICAL command lines and IDENTICAL
+creation times are a PARENT-CHILD LAUNCHER CHAIN (system python spawning
+the .venv python), i.e. ONE run — NOT duplicate runs racing on the same
+output. The earlier "duplicate rag_recursive pilot" diagnosis was wrong
+on this point (killing the "duplicate" parent cascaded and terminated the
+single legitimate pilot; harmless then since it had produced no output
+and was re-run, but the lesson stands). Rule for future iterations:
+before killing an apparent duplicate, check creation times — same-second
+creation + identical cmdline = one process tree; only genuinely
+different creation times indicate a real second launch.
