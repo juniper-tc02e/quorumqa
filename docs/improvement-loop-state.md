@@ -403,9 +403,14 @@ skip where search-proof. Cheaper than tier-swap.
 diagnostic — retrieved passages misled the panel into false consensus on
 10 questions). Stack finding (seed 271): thinking seat + gate RESIST
 evidence-misled consensus (floor 22→9, strongest cut measured) but
-tribunal broke even. Next retrieval lever: evidence-relevance gating
-(inject only above a score threshold) — targets the failure mode
-directly. R2 disputed-step recursion (G2) = Bet-2
+tribunal broke even. Evidence-relevance gating TESTED (offline, 350 questions): score-gating
+CANNOT fix it — regression/helped/neutral top-scores are statistically
+identical (0.0288/0.0290/0.0286), because the RRF score is retrieval
+CONFIDENCE not correctness-for-this-question; the failure is
+high-scoring-but-wrong passages. rag_gated_presolve kept as documented-
+ineffective. **The real mitigation already measured: rag_thinking_gate
+(thinking seat REASONS about evidence) cut the floor 22->9 at the same
+bad seed — now the priority to validate.** R2 disputed-step recursion (G2) = Bet-2
 NOT met: −1.2 vs R1, no gain, because R2 fires only on escalation and so
 structurally cannot touch the unanimous-wrong floor where the accuracy
 lives (see rag_r2_findings.md). Reinforces: binding constraint is upstream
