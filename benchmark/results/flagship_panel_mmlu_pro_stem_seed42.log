@@ -1,0 +1,79 @@
+2026-07-24 01:27:43,497 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-24 01:27:43,592 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/TIGER-Lab/MMLU-Pro/b189ec765aa7ed75c8acfea42df31fdae71f97be/README.md "HTTP/1.1 200 OK"
+2026-07-24 01:27:43,883 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:27:44,973 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/TIGER-Lab/MMLU-Pro/TIGER-Lab/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:27:45,334 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/revision/b189ec765aa7ed75c8acfea42df31fdae71f97be "HTTP/1.1 200 OK"
+2026-07-24 01:27:45,671 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-24 01:27:46,385 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=TIGER-Lab/MMLU-Pro "HTTP/1.1 200 OK"
+2026-07-24 01:27:46,765 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-24 01:27:47,111 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-24 01:27:47,582 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-24 01:27:47,806 INFO Loaded 60 MMLU-Pro items (category=None, categories=frozenset({'chemistry', 'math', 'physics', 'engineering', 'biology', 'computer science'}), seed=42, trimmed to 4 choices)
+2026-07-24 01:27:47,807 INFO Loaded 60 mmlu_pro_stem questions (seed=42) for lever=flagship_panel
+2026-07-24 01:28:02,348 INFO 2854 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:06,071 INFO 8486 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:06,295 INFO 10024 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:11,896 INFO 3079 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:13,052 INFO 11489 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:14,952 INFO 3320 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:23,488 INFO 8802 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:29,124 INFO 8930 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:32,404 INFO 11562 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:33,959 INFO 7847 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:50,541 INFO 9795 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:28:59,882 INFO 3739 [flagship_panel]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:04,928 INFO 10343 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:05,162 INFO 3917 [flagship_panel]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-24 01:29:08,563 INFO 10452 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:13,216 INFO 12104 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:14,674 INFO 8147 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:24,067 INFO 8676 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:31,516 INFO 12113 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:31,851 INFO 11847 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:37,216 INFO 11886 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:37,757 INFO 7807 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:50,465 INFO 3763 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:51,944 INFO 3878 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:51,968 INFO 10306 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:55,313 INFO 9030 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:29:57,386 INFO 11733 [flagship_panel]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:03,652 INFO 3944 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:08,220 INFO 8369 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:11,994 INFO 7793 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:14,721 INFO 10510 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:27,906 INFO 10582 [flagship_panel]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:30,617 INFO 4090 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:36,423 INFO 11879 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:37,678 INFO 7737 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:38,322 INFO 8266 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:43,096 INFO 11343 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:45,015 INFO 10478 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:52,290 INFO 3206 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:52,682 INFO 7771 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:55,426 INFO 9735 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:30:57,307 INFO 3454 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:09,662 INFO 12122 [flagship_panel]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-24 01:31:11,393 INFO 9350 [flagship_panel]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:15,329 INFO 4063 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:17,852 INFO 12183 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:20,412 INFO 8895 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:21,041 INFO 10520 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:22,568 INFO 4663 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:32,277 INFO 8024 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:40,404 INFO 7964 [flagship_panel]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:45,965 INFO 3364 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:57,035 INFO 3672 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:31:58,879 INFO 11899 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:32:00,137 INFO 12181 [flagship_panel]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-24 01:32:07,800 INFO 7804 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:32:11,475 INFO 10689 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-24 01:32:16,946 INFO 8638 [flagship_panel]: final=D(correct, escalated=False) cost=$0.00000
+[07/24/26 01:32:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-24 01:32:47,990 INFO 8955 [flagship_panel]: final=A(wrong, escalated=True) cost=$0.00000
+2026-07-24 01:33:56,310 INFO 11384 [flagship_panel]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-24 01:33:56,441 INFO Wrote 60 results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\lever_flagship_panel_mmlu_pro_stem_seed42.jsonl

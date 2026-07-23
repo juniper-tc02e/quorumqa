@@ -548,9 +548,47 @@ accuracy — no accuracy-win over-claim. This closes the MoO M1 arc honestly
 AND positively (on the right metric). Findings in
 benchmark/results/moo_m1_corrected_findings.md; commit e08f668.
 
+## flagship_panel / MMLU-Pro STEM (2026-07-24 ~01:40) — clean NULL, thesis CONFIRMED
+
+Third hard-STEM generalization pilot. `mmlu_pro_stem` = MMLU-Pro's six
+hard-STEM categories, 4-choice-trimmed, n=60 seed 42, apples-to-apples vs
+single flagship.
+
+| MMLU-Pro STEM seed 42 (n=60) | Acc |
+|---|---|
+| single flagship baseline | 96.7% |
+| flagship_panel engine | 96.7% |
+| **delta** | **+0.0** |
+| escalation | 3.3% (2/60) |
+| unanimous-wrong | 1.7% (1/60) |
+
+**Not a negative for flagship_panel — a PREDICTIVE confirmation of the
+unanimous-wrong-rate rule.** The flagship already scores 96.7%, so the gap
+is ~0 (unanimous-wrong 1.7% vs ~15-23% where flagship_panel wins) → the rule
+FORECASTS +0.0, and +0.0 is what came back. 4-choice-trimmed MMLU-Pro STEM
+is saturated for the flagship (same caveat as MATH-500/GSM8K distractor-MC):
+too easy to test hard-STEM deliberation. Two takeaways: (1) flagship_panel
+does ZERO harm on a saturated set (better than cheap deliberation's −4.0/−6.1
+saturated cost) → safe general-STEM default; (2) a real 3rd-benchmark
+generalization needs a harder slice — MMLU-Pro full 10-way (engine change to
+A–J) or a benchmark with real flagship headroom. SuperGPQA-hard (3-seed,
+mean +4.1) stays THE validated hard-STEM generalization.
+Findings: benchmark/results/flagship_panel_mmlu_pro_stem_findings.md.
+
+Also DONE this window: 5 additive Build Log entries deployed-pending on the
+MagiAchiral site (commit 80de3f1 in magiachiral-site) documenting the whole
+arc — all numbers verified against primary result files, typecheck clean.
+
 ## NEXT (ranked)
-1. Additive site Build Log entries documenting the whole arc (validated
-   levers + RAG + the honest MoO cost-win verdict) — additive-only, pre-Aug-11.
-2. Reasoning lever: flagship_panel on MMLU-Pro STEM (generalization of the
-   2-seed GPQA-hard + 2-seed SuperGPQA-hard domain-routing win to a third
-   hard-STEM benchmark). Paid pilot (~$5-10). Emphasis: REASONING.
+1. **Deploy the site Build Log additions** (higgsfield website deploy;
+   verify via `website status`, not browser — the *.higgsfield.app zone is
+   ISP-blocked here). Additive-only, within grant.
+2. **Open-answer numeric-equivalence grading path** — THE concrete
+   prerequisite (flagged 3×) to test deliberation on genuinely hard math
+   (MATH-500-hard / AIME) where the flagship has real headroom and
+   distractor-MC saturation doesn't block the test. Engine change: a math
+   loader that keeps open-answer ground truth + a sympy equivalence grader +
+   a solver/judge path that emits numeric answers, not A–D letters. The
+   highest-value REASONING lever left. Scope first, then build TDD.
+3. Calibration memory (§5.1) + R2 per-question router to chase the MoO
+   oracle gap (only worth it if #2 opens a new hard-reasoning surface).

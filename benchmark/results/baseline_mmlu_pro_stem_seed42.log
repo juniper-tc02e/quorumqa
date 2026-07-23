@@ -1,0 +1,72 @@
+2026-07-24 01:34:04,719 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-24 01:34:04,730 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/TIGER-Lab/MMLU-Pro/b189ec765aa7ed75c8acfea42df31fdae71f97be/README.md "HTTP/1.1 200 OK"
+2026-07-24 01:34:04,972 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:34:05,746 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/TIGER-Lab/MMLU-Pro/TIGER-Lab/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:34:06,004 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/revision/b189ec765aa7ed75c8acfea42df31fdae71f97be "HTTP/1.1 200 OK"
+2026-07-24 01:34:06,250 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-24 01:34:06,593 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=TIGER-Lab/MMLU-Pro "HTTP/1.1 200 OK"
+2026-07-24 01:34:06,843 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-24 01:34:07,089 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-24 01:34:07,341 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-24 01:34:07,693 INFO Loaded 60 MMLU-Pro items (category=None, categories=frozenset({'engineering', 'math', 'computer science', 'biology', 'chemistry', 'physics'}), seed=42, trimmed to 4 choices)
+2026-07-24 01:34:15,008 INFO 3320 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:34:15,548 INFO 8486 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:17,748 INFO 2854 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:34:18,607 INFO 10024 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:34:23,410 INFO 3079 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:34:32,527 INFO 8802 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:35,406 INFO 11489 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:34:38,130 INFO 8930 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:34:40,343 INFO 7847 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:47,430 INFO 11562 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:55,762 INFO 10343 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:56,027 INFO 9795 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:34:58,832 INFO 3917 [baseline]: A(wrong) cost=$0.00000
+2026-07-24 01:35:01,354 INFO 3739 [baseline]: C(correct) cost=$0.00000
+2026-07-24 01:35:02,438 INFO 10452 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:35:09,917 INFO 8147 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:15,633 INFO 8676 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:21,298 INFO 11847 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:26,572 INFO 12113 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:35:29,335 INFO 11886 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:35:33,528 INFO 7807 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:35:36,391 INFO 11733 [baseline]: C(correct) cost=$0.00000
+2026-07-24 01:35:36,727 INFO 12104 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:35:42,539 INFO 3763 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:47,940 INFO 10306 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:35:51,367 INFO 9030 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:51,630 INFO 3878 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:35:52,633 INFO 4090 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:56,793 INFO 7793 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:35:58,413 INFO 8369 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:00,226 INFO 10510 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:36:01,362 INFO 3944 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:04,068 INFO 12122 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:36:10,637 INFO 8266 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:10,691 INFO 10582 [baseline]: C(correct) cost=$0.00000
+2026-07-24 01:36:13,721 INFO 10478 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:14,242 INFO 7737 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:18,735 INFO 7771 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:36:21,822 INFO 3206 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:23,347 INFO 9735 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:36:25,889 INFO 3454 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:36:35,079 INFO 11879 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:41,005 INFO 11343 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:41,278 INFO 4663 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:36:42,774 INFO 9350 [baseline]: C(correct) cost=$0.00000
+2026-07-24 01:36:43,607 INFO 4063 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:36:48,191 INFO 8895 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:50,545 INFO 10520 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:36:52,616 INFO 12183 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:36:56,772 INFO 8024 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:37:02,562 INFO 12181 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:37:04,962 INFO 7964 [baseline]: C(correct) cost=$0.00000
+2026-07-24 01:37:06,382 INFO 3364 [baseline]: B(correct) cost=$0.00000
+2026-07-24 01:37:09,574 INFO 11384 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:37:13,601 INFO 3672 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:37:14,449 INFO 11899 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:37:17,960 INFO 7804 [baseline]: A(correct) cost=$0.00000
+2026-07-24 01:37:18,193 INFO 10689 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:37:29,354 INFO 8955 [baseline]: A(wrong) cost=$0.00000
+2026-07-24 01:37:43,485 INFO 8638 [baseline]: D(correct) cost=$0.00000
+2026-07-24 01:37:43,488 INFO Wrote 60 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\lever_baseline_mmlu_pro_stem_seed42.jsonl
