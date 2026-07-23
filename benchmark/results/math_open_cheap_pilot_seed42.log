@@ -1,0 +1,331 @@
+2026-07-24 02:30:38,781 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-24 02:30:38,790 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/HuggingFaceH4/MATH-500/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/README.md "HTTP/1.1 200 OK"
+2026-07-24 02:30:39,042 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-24 02:30:39,830 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/HuggingFaceH4/MATH-500/HuggingFaceH4/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-24 02:30:40,062 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/revision/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be "HTTP/1.1 200 OK"
+2026-07-24 02:30:40,303 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-24 02:30:40,644 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=HuggingFaceH4/MATH-500 "HTTP/1.1 200 OK"
+2026-07-24 02:30:40,887 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-24 02:30:41,136 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-24 02:30:41,469 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-24 02:30:41,631 INFO Loaded 60 MATH-500 OPEN-answer items (level=5, seed=42) -- raw open `answer` kept as gold_answer, no distractor synthesis, no MC framing
+2026-07-24 02:30:41,631 INFO Loaded 60 MATH-500 open-answer items (level=5, seed=42) -- panel solver_tier=cheap (qwen3.6-flash), judge always flagship
+2026-07-24 02:30:58,748 INFO test/number_theory/1128.json [baseline]: 2(correct)
+2026-07-24 02:30:59,209 INFO test/number_theory/769.json [baseline]: 9(correct)
+2026-07-24 02:30:59,887 INFO test/geometry/947.json [baseline]: -\frac{24}{25}(correct)
+2026-07-24 02:31:00,611 INFO test/algebra/2517.json [baseline]: -\dfrac{35}{9}(correct)
+2026-07-24 02:31:02,185 INFO test/geometry/1140.json [baseline]: \frac{3840}{289}(correct)
+2026-07-24 02:31:08,329 INFO test/prealgebra/1655.json [baseline]: \frac{17}{50}(correct)
+2026-07-24 02:31:08,569 INFO test/counting_and_probability/894.json [baseline]: 540(correct)
+2026-07-24 02:31:12,398 INFO test/prealgebra/1640.json [baseline]: 32(correct)
+2026-07-24 02:31:21,358 INFO test/precalculus/986.json [baseline]: 144(correct)
+2026-07-24 02:31:50,069 INFO test/algebra/892.json [baseline]: 2(correct)
+2026-07-24 02:31:50,958 INFO test/number_theory/1055.json [baseline]: 203(correct)
+2026-07-24 02:32:07,388 INFO test/geometry/965.json [baseline]: 28(correct)
+2026-07-24 02:32:10,038 INFO test/intermediate_algebra/662.json [baseline]: 1 + \sqrt{19}, 1 - \sqrt{19}(correct)
+2026-07-24 02:32:26,471 INFO test/algebra/297.json [baseline]: 1736(correct)
+2026-07-24 02:32:31,199 INFO test/algebra/733.json [baseline]: 6(correct)
+2026-07-24 02:32:36,955 INFO test/precalculus/398.json [baseline]: \begin{pmatrix} 1/5 \\ -18/5 \end{pmatrix}(correct)
+2026-07-24 02:33:11,025 INFO test/counting_and_probability/525.json [baseline]: 144(correct)
+2026-07-24 02:33:16,050 INFO test/intermediate_algebra/1197.json [baseline]: \frac{3}{56}(correct)
+2026-07-24 02:33:16,868 INFO test/prealgebra/1646.json [baseline]: 80(correct)
+2026-07-24 02:33:26,420 INFO test/intermediate_algebra/183.json [baseline]: (2, \infty)(correct)
+2026-07-24 02:33:33,550 INFO test/prealgebra/1423.json [baseline]: 12\pi(correct)
+2026-07-24 02:33:42,486 INFO test/intermediate_algebra/1791.json [baseline]: -\frac{3}{8}(correct)
+2026-07-24 02:33:43,500 INFO test/precalculus/1133.json [baseline]: 3R^2(correct)
+2026-07-24 02:33:52,393 INFO test/counting_and_probability/870.json [baseline]: \dfrac{1}{3}(correct)
+2026-07-24 02:33:52,649 INFO test/geometry/183.json [baseline]: 145(correct)
+2026-07-24 02:33:57,607 INFO test/prealgebra/1251.json [baseline]: 8(correct)
+2026-07-24 02:33:58,613 INFO test/prealgebra/1203.json [baseline]: 36(correct)
+2026-07-24 02:34:18,063 INFO test/precalculus/703.json [baseline]: 8\pi(correct)
+2026-07-24 02:34:27,951 INFO test/intermediate_algebra/1806.json [baseline]: \frac{13}{4}(correct)
+2026-07-24 02:34:37,637 INFO test/intermediate_algebra/1408.json [baseline]: -2(correct)
+2026-07-24 02:34:45,381 INFO test/precalculus/902.json [baseline]: \sqrt{66}(correct)
+2026-07-24 02:34:47,710 INFO test/number_theory/1000.json [baseline]: 44(correct)
+2026-07-24 02:34:49,884 INFO test/algebra/975.json [baseline]: -4(correct)
+2026-07-24 02:34:55,680 INFO test/intermediate_algebra/2152.json [baseline]: 0(correct)
+2026-07-24 02:34:59,058 INFO test/counting_and_probability/51.json [baseline]: \dfrac{13}{18}(correct)
+2026-07-24 02:35:01,594 INFO test/intermediate_algebra/1462.json [baseline]: 331(correct)
+2026-07-24 02:35:06,220 INFO test/algebra/1796.json [baseline]: 2\sqrt{5}(correct)
+2026-07-24 02:35:34,404 INFO test/precalculus/1172.json [baseline]: 7(correct)
+2026-07-24 02:35:34,778 INFO test/algebra/2277.json [baseline]: 0(correct)
+2026-07-24 02:36:00,882 ERROR test/geometry/880.json: baseline DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_math_open.py", line 49, in _run_baseline_one
+    result = await asyncio.to_thread(solve_single_math, client, item)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\math_open_engine.py", line 141, in solve_single_math
+    answer, reasoning, usage = solve_one_math(client, item.problem, BASELINE_LENS, temperature=0.3)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\math_open_engine.py", line 121, in solve_one_math
+    result = client.chat_json(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-24 02:36:04,270 INFO test/precalculus/768.json [baseline]: 3 + 2\sqrt{2}, 3 - 2\sqrt{2}, -3 + 2\sqrt{2}, -3 - 2\sqrt{2}(wrong)
+2026-07-24 02:36:18,883 INFO test/counting_and_probability/1009.json [baseline]: 28(correct)
+2026-07-24 02:36:44,475 INFO test/intermediate_algebra/232.json [baseline]: 81(correct)
+2026-07-24 02:36:58,222 INFO test/prealgebra/2066.json [baseline]: 23(wrong)
+2026-07-24 02:37:07,933 INFO test/intermediate_algebra/960.json [baseline]: \frac{17}{21}(correct)
+2026-07-24 02:37:12,595 INFO test/algebra/2486.json [baseline]: \left(\frac{3}{5}, \frac{8}{3}\right](correct)
+2026-07-24 02:37:18,749 INFO test/intermediate_algebra/956.json [baseline]: (6, 31, -1)(correct)
+2026-07-24 02:37:27,719 INFO test/algebra/2779.json [baseline]: 20(correct)
+2026-07-24 02:37:29,172 INFO test/algebra/1143.json [baseline]: 17(correct)
+2026-07-24 02:37:31,173 INFO test/algebra/2043.json [baseline]: (-\infty, 2) \cup (3, \infty)(correct)
+2026-07-24 02:37:35,227 INFO test/prealgebra/1961.json [baseline]: \frac{16}{27}(correct)
+2026-07-24 02:37:54,588 INFO test/algebra/2626.json [baseline]: 32348(correct)
+2026-07-24 02:38:01,858 INFO test/intermediate_algebra/1388.json [baseline]: -2, 1(correct)
+2026-07-24 02:38:06,868 INFO test/intermediate_algebra/1467.json [baseline]: 8n^2 + 4n + 1(correct)
+2026-07-24 02:38:09,151 INFO test/number_theory/13.json [baseline]: 64(correct)
+2026-07-24 02:38:24,466 INFO test/intermediate_algebra/2015.json [baseline]: \{-2, 1 + \sqrt{5}, 1 - \sqrt{5}\}(correct)
+2026-07-24 02:38:40,230 INFO test/counting_and_probability/1003.json [baseline]: 29(correct)
+2026-07-24 02:39:09,277 INFO test/intermediate_algebra/558.json [baseline]: (3, 4](correct)
+2026-07-24 02:39:13,975 INFO test/number_theory/769.json [panel]: 9(correct, escalated=False)
+2026-07-24 02:39:26,025 INFO test/intermediate_algebra/955.json [baseline]: 17(correct)
+2026-07-24 02:39:40,362 INFO test/algebra/2517.json [panel]: -\frac{35}{9}(correct, escalated=False)
+2026-07-24 02:39:40,541 INFO test/number_theory/1128.json [panel]: 2(correct, escalated=False)
+2026-07-24 02:39:58,747 INFO test/geometry/561.json [baseline]: \frac{7}{2}(correct)
+2026-07-24 02:40:05,103 INFO test/geometry/947.json [panel]: -\frac{24}{25}(correct, escalated=False)
+2026-07-24 02:40:13,488 INFO test/counting_and_probability/894.json [panel]: 540(correct, escalated=False)
+2026-07-24 02:40:23,330 INFO test/prealgebra/1640.json [panel]: 32(correct, escalated=False)
+2026-07-24 02:40:28,839 INFO test/prealgebra/1655.json [panel]: \frac{17}{50}(correct, escalated=False)
+2026-07-24 02:40:31,078 INFO test/geometry/1140.json [panel]: \frac{3840}{289}(correct, escalated=False)
+2026-07-24 02:41:32,182 INFO test/algebra/297.json [panel]: 1736(correct, escalated=False)
+2026-07-24 02:41:34,402 INFO test/precalculus/986.json [panel]: 144(correct, escalated=False)
+2026-07-24 02:41:57,647 INFO test/algebra/892.json [panel]: 2(correct, escalated=False)
+2026-07-24 02:42:02,458 INFO test/geometry/965.json [panel]: 28(correct, escalated=False)
+2026-07-24 02:42:14,323 INFO test/intermediate_algebra/662.json [panel]: 1-\sqrt{19}, 1+\sqrt{19}(correct, escalated=False)
+2026-07-24 02:42:42,396 INFO test/number_theory/1055.json [panel]: 203(correct, escalated=False)
+2026-07-24 02:43:10,878 INFO test/precalculus/398.json [panel]: \begin{pmatrix} 1/5 \\ -18/5 \end{pmatrix}(correct, escalated=False)
+2026-07-24 02:44:05,379 INFO test/algebra/733.json [panel]: 6(correct, escalated=False)
+2026-07-24 02:44:51,291 INFO test/precalculus/1133.json [panel]: 3R^2(correct, escalated=False)
+2026-07-24 02:45:05,497 ERROR test/geometry/880.json: panel DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_math_open.py", line 63, in _run_panel_one
+    result = await asyncio.to_thread(solve_panel_math, client, item, solver_model)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\math_open_engine.py", line 259, in solve_panel_math
+    triples = asyncio.run(_solve_panel_answers_async(client, item.problem, lenses, solver_model))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\math_open_engine.py", line 241, in _solve_panel_answers_async
+    return list(await asyncio.gather(*tasks))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\math_open_engine.py", line 121, in solve_one_math
+    result = client.chat_json(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-24 02:45:20,698 INFO test/intermediate_algebra/1197.json [panel]: \frac{3}{56}(correct, escalated=False)
+2026-07-24 02:45:21,024 INFO test/intermediate_algebra/183.json [panel]: (2, \infty)(correct, escalated=False)
+2026-07-24 02:45:28,159 INFO test/counting_and_probability/525.json [panel]: 144(correct, escalated=False)
+2026-07-24 02:45:32,627 INFO test/prealgebra/1423.json [panel]: 12\pi(correct, escalated=False)
+2026-07-24 02:45:43,857 INFO test/prealgebra/1646.json [panel]: 80^\circ(correct, escalated=False)
+2026-07-24 02:46:18,130 INFO test/prealgebra/1251.json [panel]: 8(correct, escalated=False)
+2026-07-24 02:46:35,473 INFO test/intermediate_algebra/1791.json [panel]: -\frac{3}{8}(correct, escalated=False)
+2026-07-24 02:46:52,702 INFO test/counting_and_probability/870.json [panel]: \frac{1}{3}(correct, escalated=False)
+2026-07-24 02:46:55,269 INFO test/prealgebra/1203.json [panel]: 36(correct, escalated=False)
+2026-07-24 02:47:12,397 INFO test/geometry/183.json [panel]: 145(correct, escalated=False)
+2026-07-24 02:47:23,293 INFO test/intermediate_algebra/1806.json [panel]: 13/4(correct, escalated=False)
+2026-07-24 02:48:04,330 INFO test/intermediate_algebra/2152.json [panel]: 0(correct, escalated=False)
+2026-07-24 02:48:11,282 INFO test/number_theory/1000.json [panel]: 44(correct, escalated=False)
+2026-07-24 02:48:13,064 INFO test/intermediate_algebra/1408.json [panel]: -2(correct, escalated=False)
+2026-07-24 02:48:19,886 INFO test/precalculus/703.json [panel]: 8\pi(correct, escalated=False)
+2026-07-24 02:48:29,732 INFO test/precalculus/902.json [panel]: \sqrt{66}(correct, escalated=False)
+2026-07-24 02:48:50,169 INFO test/counting_and_probability/51.json [panel]: \frac{13}{18}(correct, escalated=False)
+2026-07-24 02:48:55,942 INFO test/algebra/1796.json [panel]: 2\sqrt{5}(correct, escalated=False)
+2026-07-24 02:49:03,786 INFO test/intermediate_algebra/1462.json [panel]: 331(correct, escalated=False)
+2026-07-24 02:49:15,895 INFO test/algebra/975.json [panel]: -4(correct, escalated=False)
+2026-07-24 02:49:28,219 INFO test/precalculus/1172.json [panel]: 7(correct, escalated=False)
+2026-07-24 02:49:53,455 INFO test/algebra/2277.json [panel]: 0(correct, escalated=False)
+2026-07-24 02:50:10,759 INFO test/counting_and_probability/1009.json [panel]: 28(correct, escalated=False)
+2026-07-24 02:50:38,232 INFO test/algebra/2626.json [panel]: 32348(correct, escalated=False)
+2026-07-24 02:51:21,447 INFO test/precalculus/768.json [panel]: -3 - 2\sqrt{2}, 2\sqrt{2} - 3, 3 - 2\sqrt{2}, 3 + 2\sqrt{2}(wrong, escalated=False)
+2026-07-24 02:51:37,086 INFO test/prealgebra/2066.json [panel]: 22(correct, escalated=False)
+2026-07-24 02:51:42,376 INFO test/intermediate_algebra/960.json [panel]: 17/21(correct, escalated=False)
+2026-07-24 02:51:42,491 INFO test/intermediate_algebra/232.json [panel]: 81(correct, escalated=False)
+2026-07-24 02:51:44,644 INFO test/intermediate_algebra/956.json [panel]: (6, 31, -1)(correct, escalated=False)
+2026-07-24 02:51:55,724 INFO test/algebra/2043.json [panel]: (-\infty, 2) \cup (3, \infty)(correct, escalated=False)
+2026-07-24 02:52:09,369 INFO test/geometry/561.json [panel]: \frac{7}{2}(correct, escalated=False)
+2026-07-24 02:52:14,697 INFO test/algebra/1143.json [panel]: 17(correct, escalated=False)
+2026-07-24 02:52:33,364 INFO test/algebra/2486.json [panel]: \left(\frac{3}{5}, \frac{8}{3}\right](correct, escalated=False)
+2026-07-24 02:52:36,932 INFO test/prealgebra/1961.json [panel]: \frac{16}{27}(correct, escalated=False)
+2026-07-24 02:53:06,565 INFO test/algebra/2779.json [panel]: 20(correct, escalated=False)
+2026-07-24 02:53:10,579 INFO test/intermediate_algebra/2015.json [panel]: \{-2, 1-\sqrt{5}, 1+\sqrt{5}\}(correct, escalated=False)
+2026-07-24 02:53:41,955 INFO test/number_theory/13.json [panel]: 64(correct, escalated=False)
+2026-07-24 02:53:43,770 INFO test/intermediate_algebra/1388.json [panel]: -2, 1(correct, escalated=False)
+2026-07-24 02:53:55,210 INFO test/intermediate_algebra/1467.json [panel]: 8n^2 + 4n + 1(correct, escalated=False)
+2026-07-24 02:54:36,562 INFO test/intermediate_algebra/558.json [panel]: 3 < \lambda \le 4(wrong, escalated=False)
+2026-07-24 02:54:42,061 INFO test/counting_and_probability/1003.json [panel]: 29(correct, escalated=False)
+2026-07-24 02:56:23,290 INFO test/intermediate_algebra/955.json [panel]: 17(correct, escalated=False)
+2026-07-24 02:56:23,291 WARNING 1/60 baseline items dropped due to unrecoverable errors
+2026-07-24 02:56:23,291 WARNING 1/60 panel items dropped due to unrecoverable errors
+2026-07-24 02:56:23,297 INFO Wrote 59 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\math_open_baseline_seed42.jsonl
+2026-07-24 02:56:23,297 INFO Wrote 59 panel results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\math_open_panel_cheap_seed42.jsonl
+2026-07-24 02:56:23,297 INFO RESULTS (n=59 common items, seed=42, level=5): baseline=96.6% (57/59) panel=96.6% (57/59) delta=+0.0 pp escalation_rate=0.0% (0/59)

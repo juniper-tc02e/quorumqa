@@ -64,13 +64,41 @@ undercounts hard-math accuracy by ~7 points and manufactures illusory
 headroom; the delta survives (both arms re-graded identically) but the
 absolute numbers and the "headroom" story do not. Verified, not assumed.
 
-## Verdict
+## Follow-up: the SHIPPED-engine tier (cheap solvers + flagship judge) — DECISIVE
 
-**No math-deliberation win, and an honest reason why.** Deliberation neither
-helped (escalation never fired) nor hurt (+1 item, noise) on MATH-500 L5,
-because (a) the flagship is near-saturated there and (b) — the durable point —
-strong homogeneous solvers don't generate the disagreement the tribunal needs.
-The reusable assets are real: an open-answer math engine and a
-false-positive-free equivalence grader, both offline-tested, that make hard
-open-answer math *evaluable* at all. Not folded into any submitted number.
-seed 42, n=59; math_open_baseline_seed42.jsonl / math_open_panel_seed42.jsonl.
+The flagship-panel above wasn't the shipped engine's real design (the engine
+uses CHEAP solvers and escalates splits to the flagship). Hypothesis: weak
+flash solvers would disagree on hard math → escalation fires → the flagship
+judge recovers. Re-ran with `--solver-tier cheap` (3 qwen3.6-flash solvers +
+flagship judge), same 59 items:
+
+| MATH-500 L5, seed 42 (n=59) | Accuracy |
+|---|---|
+| Single flagship baseline | 96.6% (57/59) |
+| **Cheap panel (flash solvers + flagship judge)** | **96.6% (57/59)** |
+| Delta | **+0.0 pp** |
+| Escalation rate | **0.0% (0/59)** |
+
+The hypothesis was WRONG, and the reason is decisive: **qwen3.6-flash with
+thinking scores 96.6% on MATH-500 L5 — identical to the flagship** — and the 3
+flash solvers agree unanimously on 55/59 items (46 literally identical answer
+strings). MATH-500 L5 is saturated for BOTH tiers; the cheap-to-flagship gap
+is ~0, so by the unanimous-wrong-rate thesis deliberation cannot help, and it
+didn't (escalation never fired at either tier). This is a stronger negative
+than the flagship pilot: even the shipped engine's actual design is inert
+here, because the cheap tier isn't weak enough to create a gap.
+
+## Verdict (final for MATH-500)
+
+**MATH-500 — even level 5, even open-answer, even with cheap solvers — is
+saturated for modern thinking-enabled Qwen models at BOTH tiers, so it cannot
+test deliberation.** Two independent pilots (flagship-panel and cheap-panel),
+both 96.6% and 0% escalation, establish this. Deliberation neither helped nor
+hurt because there is no cheap-to-flagship gap to exploit — exactly what the
+central thesis predicts when the unanimous-wrong rate is ~0. To test math
+deliberation you need a benchmark where the CHEAP tier is genuinely weak (high
+unanimous-wrong rate) and the flagship is meaningfully better — AIME/Olympiad
+tier (flash ~10-40%, flagship ~50-70%). The tooling (open-answer engine, both
+tiers, FP-free grader) is ready to point there; the loader is the only new
+piece. Not folded into any submitted number. seed 42, n=59;
+math_open_{baseline,panel,panel_cheap}_seed42.jsonl.
