@@ -24,21 +24,39 @@ blind spots BEFORE interpreting any pilot number.
   *tolerance* (a differently-notated correct answer may be missed). That is a
   conservative **undercount**, never an overcount — the honest direction.
 
-## What the unparsed answers actually are
+## UPGRADE (2026-07-24): intervals / \pm / sets now handled
 
-- **Genuinely out of scope (correctly fail closed):** complex numbers
-  (`6-5i`, `1+2i`), intervals (`(3,4]`), equations (`y = 2x + 3`,
-  `5x-7y+11z+4=0`), `\text{}`-annotated answers (`\frac{270}7\text{ degrees}`).
-- **Cheap future refinement (NOT in level 5, so irrelevant to the pilot):**
-  the brace-less LaTeX fraction short-form (`\frac43`, `\frac 59`, `\frac9{19}`)
-  — latex2sympy2 needs `\frac{a}{b}`. Expanding `\frac AB` → `\frac{A}{B}` in
-  `_normalize` would push all-levels coverage above 95%. Deferred: every one
-  of these is in levels 1–4; level-5 coverage is already 96%.
+The first grader version fell back to fail-closed on intervals, `\pm`
+multi-valued answers, and sets — and the open-answer pilot revealed those are
+NOT rare at level 5: **4 of the 6 apparent flagship "errors" were grader
+false-negatives** on exactly these shapes (e.g. `(3, 4]` vs gold `(3,4]`;
+`1 + \sqrt{19}, 1 - \sqrt{19}` vs `1 \pm \sqrt{19}`; `\{-2, 1-\sqrt5, 1+\sqrt5\}`
+vs `\{1\pm\sqrt5,-2\}`). Left unfixed, the grader undercounted the flagship's
+MATH-500-L5 accuracy by ~7 points (89.8% → 96.6% corrected) and manufactured
+illusory "headroom".
+
+`grade()` now models three answer structures explicitly:
+- **Bracketed ordered sequences** (tuples/intervals): brackets AND order are
+  significant — `(3,4]` ≠ `[3,4]` ≠ `(3,4)`, `(a,b)` ≠ `(b,a)`.
+- **Order-insensitive sets / multi-valued answers** (`\{...\}`, bare
+  comma-lists, and `\pm`/`\mp` expansions), compared as multisets via `grade`.
+- **Scalars**: symbolic then numeric equivalence (unchanged).
+
+Re-validated after the upgrade: **0/4000** cross false-positives on real
+distinct answers (no over-matching introduced), level-5 gradeable coverage
+96% → **97%**. 35 grader tests (was 26), full suite 378.
+
+## Still out of scope (correctly fail closed)
+
+Complex numbers (`6-5i`, `1+2i`), equations (`y = 2x + 3`, `5x-7y+11z+4=0`),
+and `\text{}`-annotated answers. Also the brace-less `\frac43` short-form
+(levels 1–4 only, not L5). All fail CLOSED — undercount, never overcount.
 
 ## Bottom line for the pilot
 
-On the level-5 target the grader gives full-equivalence grading on 96% of
-questions and exact-match credit on the rest, with ~0 false-positive risk and
-a conservative (undercount) failure mode. Good enough to trust a
-deliberation-vs-baseline delta, as long as both arms are graded identically
-(they are — same `grade()` call).
+On the level-5 target the grader now gives full-equivalence grading on 97% of
+questions (including intervals/sets/±) and exact-match credit on the rest,
+with **0** false-positive risk and a conservative (undercount) failure mode.
+The pilot delta is trustworthy — both arms are graded by the identical
+`grade()` call, and the corrected absolute numbers are backed by re-grading
+the stored answers.

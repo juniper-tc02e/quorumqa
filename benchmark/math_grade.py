@@ -157,13 +157,9 @@ def _symbolic_equal(a, b) -> bool:
     return bool(_run_with_timeout(attempt, 3.0))
 
 
-def _split_tuple(s: str):
-    """If s is a top-level comma-separated list (optionally parenthesized),
-    return its element strings; else None."""
-    t = s.strip()
-    paren = t.startswith("(") and t.endswith(")")
-    brack = t.startswith("[") and t.endswith("]")
-    inner = t[1:-1] if (paren or brack) else t
+def _split_top(inner: str) -> list[str]:
+    """Split `inner` on top-level commas (depth-aware over ()[]{} — the
+    backslash in \\{ / \\} is just a char, the { / } drive the depth)."""
     parts, depth, cur = [], 0, ""
     for ch in inner:
         if ch in "([{":
@@ -176,10 +172,67 @@ def _split_tuple(s: str):
         else:
             cur += ch
     parts.append(cur)
-    parts = [p.strip() for p in parts if p.strip() != ""]
-    if len(parts) <= 1:
+    return [p.strip() for p in parts if p.strip() != ""]
+
+
+def _expand_pm(s: str) -> list[str]:
+    """Expand every \\pm / \\mp into its two variants (\\pm -> +/-, \\mp ->
+    -/+). No symbol -> [s]. Multiple symbols expand combinatorially (capped
+    by there being at most a couple in real answers)."""
+    stack, out = [s], []
+    while stack:
+        cur = stack.pop()
+        if "\\pm" in cur:
+            stack.append(cur.replace("\\pm", "+", 1))
+            stack.append(cur.replace("\\pm", "-", 1))
+        elif "\\mp" in cur:
+            stack.append(cur.replace("\\mp", "-", 1))
+            stack.append(cur.replace("\\mp", "+", 1))
+        else:
+            out.append(cur)
+    return out
+
+
+def _as_seq(s: str):
+    """A bracketed ORDERED sequence: coordinate tuple or interval. Returns
+    (open_char, close_char, [elements]) with >=2 elements, else None. Brackets
+    are significant — (3,4] is an interval distinct from [3,4] or (3,4)."""
+    t = s.strip()
+    if len(t) >= 2 and t[0] in "([" and t[-1] in ")]":
+        elems = _split_top(t[1:-1])
+        if len(elems) >= 2:
+            return (t[0], t[-1], elems)
+    return None
+
+
+def _as_multiset(s: str):
+    """An order-INSENSITIVE set of values: \\{...\\} / {...} braces, a bare
+    comma-separated multi-valued answer (roots), or a single \\pm/\\mp
+    expression. Each element is \\pm-expanded. Returns the flat value list, or
+    None if `s` is not set-like (scalars and bracketed seqs return None)."""
+    t = s.strip()
+    inner = None
+    if t.startswith("\\{") and t.endswith("\\}"):
+        inner = t[2:-2]
+    elif t.startswith("{") and t.endswith("}"):
+        inner = t[1:-1]
+    if inner is not None:
+        elems = _split_top(inner)
+    elif t[:1] in "([":
+        return None  # bracketed ordered sequence, handled by _as_seq
+    elif "," in t:
+        elems = _split_top(t)
+        if len(elems) < 2:
+            return None
+    elif "\\pm" in t or "\\mp" in t:
+        elems = [t]
+    else:
         return None
-    return parts
+    out: list[str] = []
+    for e in elems:
+        out.extend(_expand_pm(e))
+    out = [e.strip() for e in out if e.strip()]
+    return out or None
 
 
 def grade(gold: str, pred: str, tol: float = _TOL) -> bool:
@@ -192,16 +245,27 @@ def grade(gold: str, pred: str, tol: float = _TOL) -> bool:
     if g_raw == p_raw and g_raw != "":
         return True
 
-    # multi-valued / tuple answers: compare element sets (order-insensitive)
-    g_parts, p_parts = _split_tuple(g_raw), _split_tuple(p_raw)
-    if g_parts is not None or p_parts is not None:
-        if g_parts is None or p_parts is None or len(g_parts) != len(p_parts):
+    # 1) bracketed ordered sequences (tuples / intervals): brackets AND order
+    #    are significant -- (3,4] != [3,4] != (3,4), (a,b) != (b,a).
+    g_seq, p_seq = _as_seq(g_raw), _as_seq(p_raw)
+    if g_seq is not None or p_seq is not None:
+        if g_seq is None or p_seq is None:
             return False
-        used = [False] * len(p_parts)
-        for gp in g_parts:
+        (go, gc, ge), (po, pc, pe) = g_seq, p_seq
+        if go != po or gc != pc or len(ge) != len(pe):
+            return False
+        return all(grade(a, b, tol) for a, b in zip(ge, pe))
+
+    # 2) order-insensitive sets / multi-valued answers / \pm expansions
+    g_ms, p_ms = _as_multiset(g_raw), _as_multiset(p_raw)
+    if g_ms is not None or p_ms is not None:
+        if g_ms is None or p_ms is None or len(g_ms) != len(p_ms):
+            return False
+        used = [False] * len(p_ms)
+        for a in g_ms:
             hit = False
-            for j, pp in enumerate(p_parts):
-                if not used[j] and grade(gp, pp, tol):
+            for j, b in enumerate(p_ms):
+                if not used[j] and grade(a, b, tol):
                     used[j] = True
                     hit = True
                     break
@@ -209,6 +273,7 @@ def grade(gold: str, pred: str, tol: float = _TOL) -> bool:
                 return False
         return True
 
+    # 3) scalar expressions: symbolic then numeric equivalence
     ge, pe = _to_expr(g_raw), _to_expr(p_raw)
     if ge is None or pe is None:
         return False

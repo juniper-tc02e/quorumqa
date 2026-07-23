@@ -7,7 +7,7 @@ never True, so a lenient parse can never inflate measured accuracy.
 
 import pytest
 
-from benchmark.math_grade import grade, _normalize, _split_tuple
+from benchmark.math_grade import grade, _normalize, _as_seq, _as_multiset
 
 
 # (gold, pred, expected) -- equivalences a good grader must accept
@@ -26,6 +26,13 @@ EQUIVALENT = [
     (r"1,-2", r"-2,1"),            # multi-valued, order-insensitive
     (r"\frac{-3}{4}", r"-\frac{3}{4}"),
     (r"50\%", r"50"),
+    # --- real MATH-500 L5 shapes that the first grader version got WRONG
+    #     (found via the open-answer pilot; these are regression guards) ---
+    (r"(3,4]", r"(3, 4]"),                                        # interval, whitespace
+    (r"\left(\frac{3}{5},\frac{8}{3}\right]", r"\left(\frac{3}{5}, \frac{8}{3}\right]"),
+    (r"1 \pm \sqrt{19}", r"1 + \sqrt{19}, 1 - \sqrt{19}"),        # pm vs enumerated
+    (r"\{1\pm\sqrt{5},-2\}", r"\{-2, 1 - \sqrt{5}, 1 + \sqrt{5}\}"),  # set, pm, reorder
+    (r"3 \pm 2\sqrt{2}", r"3 - 2\sqrt{2}, 3 + 2\sqrt{2}"),        # pm, 2 values, reorder
 ]
 
 # (gold, pred) -- genuinely different answers the grader must reject
@@ -37,6 +44,12 @@ NON_EQUIVALENT = [
     (r"1,-2", r"1,2"),
     (r"x^2+2x+1", r"x^2+2x+2"),
     (r"12\pi", r"11\pi"),
+    # brackets are significant: interval != interval with different endpoints
+    (r"(3,4]", r"[3,4]"),                       # bracket-type mismatch
+    (r"(3,4]", r"(3,4)"),                       # bracket-type mismatch
+    (r"(1,2)", r"(2,1)"),                       # ordered tuple, order matters
+    # a 2-value pm answer must NOT equal a 4-value enumeration
+    (r"3 \pm 2\sqrt{2}", r"3 + 2\sqrt{2}, 3 - 2\sqrt{2}, -3 + 2\sqrt{2}, -3 - 2\sqrt{2}"),
 ]
 
 
@@ -77,9 +90,16 @@ def test_normalize_strips_decorations():
     assert _normalize(r"\$32,\!348") in ("32348", "32,348".replace(",", ""))
 
 
-def test_split_tuple():
-    assert _split_tuple("(6,31,-1)") == ["6", "31", "-1"]
-    assert _split_tuple("1,-2") == ["1", "-2"]
-    assert _split_tuple("5") is None
-    # nested parens must not split at inner commas
-    assert _split_tuple("(1,(2,3))") == ["1", "(2,3)"]
+def test_as_seq_and_as_multiset():
+    # bracketed ordered sequence (tuple / interval)
+    assert _as_seq("(6,31,-1)") == ("(", ")", ["6", "31", "-1"])
+    assert _as_seq("(3,4]") == ("(", "]", ["3", "4"])
+    assert _as_seq("5") is None            # scalar
+    assert _as_seq(r"\{1,2\}") is None     # set, not a bracketed seq
+    # order-insensitive set / multi-valued
+    assert _as_multiset("1,-2") == ["1", "-2"]
+    assert _as_multiset(r"\{-2, 3\}") == ["-2", "3"]
+    assert _as_multiset("(3,4]") is None   # bracketed seq is not a set
+    assert _as_multiset("5") is None       # scalar
+    # \pm expands to two values
+    assert sorted(_as_multiset(r"1 \pm \sqrt{19}")) == sorted([r"1 + \sqrt{19}", r"1 - \sqrt{19}"])
