@@ -140,3 +140,54 @@ different directions and the MoO router can choose by budget.
 GPQA tripwire (−4.7, no contamination) and the corpus-coverage boundary
 (LEXam: no Swiss law on a STEM shelf) complete the profile: retrieval is
 domain-gated, corpus-bound, and validated where both conditions hold.
+
+## Fourth seed (271): the streak breaks — and reveals the failure mode
+
+Run as the control arm of the composition test (same code, same index as
+seed 123 — verified: the index builder died the previous evening, so the
+corpus was byte-identical for both seeds):
+
+| SuperGPQA-hard | s42 | s7 | s123 | s271 |
+|---|---|---|---|---|
+| cheap-panel | 67.4% | 67.8% | 63.2% | 66.3% |
+| cheap+RAG | 72.1% | 74.7% | 71.3% | **60.7%** |
+| Delta | +4.7 | +6.9 | +8.0 | **−5.6** |
+| floor | 20→14 | 18→15 | 20→16 | **22→25** |
+
+**Four-seed record: mean +3.5, no longer the tidy +6.5.** The mechanism
+of the negative seed is diagnostic, not noise: of 13 regressions
+(control-right → RAG-wrong), **10 were unanimous-wrong UNDER RAG** — the
+retrieved passages actively misled the panel into confident false
+consensus. Retrieval can CREATE the exact failure mode it usually cuts,
+when the top-k passages are plausible-but-wrong-for-this-question.
+
+**Status revision (honest): `rag_presolve` is downgraded from
+"validated, robust" to "validated-with-variance"** — net positive on
+average (+3.5 over four seeds, 3 of 4 positive) but with a real tail
+risk of evidence-misled consensus on some samples. The 3-seed bar was
+met and then the 4th seed broke the streak; both facts stay on the
+record.
+
+### The composition test read in this light (seed 271, 89 common items)
+
+| | Accuracy | Unanimous-wrong | Escalation |
+|---|---|---|---|
+| control | 66.3% | 22 | 46% |
+| rag_presolve | 60.7% | 25 | 35% |
+| rag_thinking_gate (stack) | 66.3% | **9** | 62% |
+
+The stack's floor-cut (22→9) is the strongest ever measured — the
+thinking seat + doubt gate RESIST evidence-misled false consensus (the
+thinking seat reasons past bad passages; the gate catches residual
+unanimity). But conversion was poor at this seed: escalation surged to
+62% and the tribunal only broke even, so accuracy tied control. One
+seed; the stack's floor-resistance property is promising and needs its
+own replication before any claim.
+
+### The lever this generates: evidence-relevance gating
+The failure mode is injected evidence that is plausible but wrong for
+the question. The obvious counter is a relevance gate: only inject
+retrieval when the top passage's fused score clears a threshold (or an
+explicit cheap relevance check), otherwise run the plain panel. This
+targets exactly the 10-regression mechanism while keeping the +5 to +8
+upside seeds. Queued as the next retrieval lever.
