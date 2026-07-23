@@ -143,6 +143,35 @@ Levers:
                  benchmark/results/). This stack pilots on FRESH seed 271 --
                  do not reuse 271 for anything else derived from looking at
                  its own errors.
+  rag_gated_presolve -- benchmark/results/rag_r1_findings.md's "Fourth seed
+                 (271)" section found the failure mode rag_presolve cannot
+                 see coming: on seed 271 rag_presolve went -5.6, and 10 of
+                 13 regressions (control-right -> rag-wrong) were unanimous-
+                 wrong UNDER RAG -- the top-k retrieved passages were
+                 plausible-but-wrong-for-this-question and misled the panel
+                 into confident false consensus. This lever is IDENTICAL to
+                 rag_presolve (same solver seats/lenses/temperatures, same
+                 skeptic/verifier/judge/escalation trigger, same fail-loud
+                 missing-index contract) EXCEPT the evidence block is only
+                 injected into the solver prompts when the top fused RRF
+                 score (RagIndex.search's `score`, see quorumqa.rag.store/
+                 quorumqa.rag.fusion) clears --rag-score-threshold. Retrieval
+                 still fires ONCE per question either way -- the gate needs
+                 the score to act on -- but below threshold every solver
+                 seat runs on the PLAIN question, byte-identical to the
+                 shipped no-RAG cheap panel for that one question, rather
+                 than risk injecting a bad passage. See
+                 solve_all_rag_gated_presolve / benchmark/results/
+                 rag_gating_analysis.md for the offline calibration
+                 (recomputed top scores for every rag_presolve seed-42/7/
+                 123/271 regression vs win/neutral item) that justified the
+                 threshold value and DEFAULT_RAG_SCORE_THRESHOLD below.
+                 Output rows carry rag_presolve's usual rag="ON"/
+                 rag_snapshot_id/rag_k/rag_db fields (retrieval always
+                 fires, so that label stays accurate) PLUS rag_gate_
+                 threshold/rag_gate_applied ("ON"/"OFF")/rag_gate_top_score
+                 (see _build_output_row) -- no rag_r2 keys, since this lever
+                 never does R2 either.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -156,6 +185,7 @@ Usage:
   python -m benchmark.lever_experiments --lever rag_presolve --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever rag_recursive --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever rag_thinking_gate --n 90 --seed 271 --dataset supergpqa --rag-k 5  # FRESH seed only, never 42/7/123
+  python -m benchmark.lever_experiments --lever rag_gated_presolve --n 90 --seed 271 --dataset supergpqa --rag-k 5 --rag-score-threshold 0.02
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -589,6 +619,16 @@ RAG_R2_K = 3
 # than letting k passages each carry a full ~200-word snippet.
 RAG_EVIDENCE_WORD_BUDGET = 200
 
+# rag_gated_presolve only: minimum top fused RRF score (RagIndex.search's
+# `score`, reciprocal_rank_fusion -- see quorumqa.rag.fusion) required to
+# inject the retrieved evidence block. Calibrated offline (no paid API) by
+# recomputing the top score for every common item across the four existing
+# rag_presolve seeds (42/7/123/271) and comparing the regression
+# (control-right -> rag-wrong) score distribution against wins/neutrals --
+# see benchmark/results/rag_gating_analysis.md for the full calibration and
+# the reasoning behind this exact value. Overridable via --rag-score-threshold.
+DEFAULT_RAG_SCORE_THRESHOLD = 0.0141
+
 # One RagIndex (+ its in-memory dense-vector cache) per resolved DB path,
 # reused for the lifetime of this process -- mirrors quorumqa.tools.
 # mcp_server._rag_index_cache's pattern. Unlike that cache, though, this
@@ -787,7 +827,45 @@ async def solve_all_rag_thinking_gate(client, question, choices, rag: RagPresolv
     return solver_pairs, titles
 
 
-async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate, rag: "RagPresolveConfig | None" = None):
+async def solve_all_rag_gated_presolve(client, question, choices, rag: RagPresolveConfig, threshold: float):
+    """The rag_gated_presolve lever's solver panel -- identical to
+    solve_all_rag_presolve (same solver seats/lenses/temperatures, same
+    single retrieval call) EXCEPT the retrieved evidence block is only
+    injected into the solver prompts when the TOP fused RRF score (the
+    first, best-scoring result -- RagIndex.search already returns fused
+    results sorted best-first, see quorumqa.rag.store.RagIndex.search)
+    clears `threshold`. Retrieval still fires exactly ONCE per question
+    either way -- the gate needs a score to act on -- but below threshold
+    every seat gets evidence_block="" (byte-identical prompt to the plain
+    no-RAG cheap panel for this one question, see _solve_one_rag's
+    evidence_prefix handling of a falsy evidence_block).
+
+    Returns (solver_pairs, retrieved_titles, gate_applied, top_score):
+    `retrieved_titles` is empty when the gate did NOT inject (nothing
+    reached the solvers, so there is nothing meaningful to log as "used"),
+    `gate_applied` is None when nothing was retrieved at all (an empty
+    result list is a below-threshold gate-off, not an error -- same
+    degrade-gracefully posture as build_evidence_block's empty-results
+    case), and `top_score` is the top result's score, or None if nothing
+    was retrieved."""
+    results = await asyncio.to_thread(retrieve_rag_evidence, rag, question)
+    top_score = results[0]["score"] if results else None
+    gate_applied = top_score is not None and top_score >= threshold
+    evidence_block = build_evidence_block(results) if gate_applied else ""
+    titles = [r["title"] for r in results] if gate_applied else []
+    lenses = _lenses_for(3)
+    tasks = [
+        asyncio.to_thread(_solve_one_rag, client, question, choices, lenses[i], evidence_block, MECHANICAL_MODEL, SOLVER_TEMPERATURES[i])
+        for i in range(3)
+    ]
+    solver_pairs = list(await asyncio.gather(*tasks))
+    return solver_pairs, titles, gate_applied, top_score
+
+
+async def _tribunal(
+    client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate,
+    rag: "RagPresolveConfig | None" = None, rag_gate_applied: bool | None = None, rag_gate_top_score: float | None = None,
+):
     """The shipped escalation path (skeptic -> verifier -> judge), unchanged
     -- except WHICH function adjudicates is now a parameter, and (new, for
     rag_recursive) an optional `rag` config triggers R2 disputed-step
@@ -800,7 +878,10 @@ async def _tribunal(client, tool_session, item, solver_answers, plurality_letter
     caller -- the shipped engine, gate-replay, qwen38_judge -- is
     unaffected). Skeptic is untouched either way; Verifier gains ONLY the
     evidence_block grounding when rag is given -- its MCP tool calls still
-    fire exactly as shipped."""
+    fire exactly as shipped. `rag_gate_applied`/`rag_gate_top_score` are
+    pure passthrough onto the returned QuestionResult (rag_gated_presolve's
+    R1-stage gate decision, computed before this tribunal ever runs) --
+    both None for every other lever/caller."""
     skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
         rebut, client, item.question, item.choices, plurality_letter, solver_answers
     )
@@ -834,11 +915,17 @@ async def _tribunal(client, tool_session, item, solver_answers, plurality_letter
         verdict=verdict, final_letter=verdict.final_letter, correct=(verdict.final_letter == item.correct_letter),
         false_escalation=false_escalation, calls=calls, latency_s=time.monotonic() - start,
         rag_r2_query=r2_query, rag_r2_titles=r2_titles,
+        rag_gate_applied=rag_gate_applied, rag_gate_top_score=rag_gate_top_score,
     )
 
 
-async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, rag: "RagPresolveConfig | None" = None):
+async def run_question_lever(
+    client, tool_session, item: GPQAItem, lever: str, rag: "RagPresolveConfig | None" = None,
+    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+):
     start = time.monotonic()
+    rag_gate_applied = None
+    rag_gate_top_score = None
 
     if lever in ("thinking", "combined", "thinking_gate"):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
@@ -856,16 +943,20 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
     elif lever == "qwen38_panel":
         solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
-    elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
+    elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
         # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
         # same solve_all_rag_presolve call, same evidence block, same
         # solver seats. rag_thinking_gate reuses the same retrieval but
         # dispatches through solve_all_rag_thinking_gate instead, which
         # feeds the evidence block into thinking_gate's panel shape (seats
         # 1-2 plain, seat 3 thinking=True) rather than three plain seats.
-        # The only difference between rag_presolve/rag_recursive is what
-        # happens on escalation (see the tribunal dispatch below);
-        # rag_thinking_gate never triggers R2 (see that branch).
+        # rag_gated_presolve also reuses the same single retrieval call but
+        # dispatches through solve_all_rag_gated_presolve, which only
+        # injects the evidence block when the top fused score clears
+        # rag_gate_threshold (see that function's docstring). The only
+        # difference between rag_presolve/rag_recursive is what happens on
+        # escalation (see the tribunal dispatch below); rag_thinking_gate
+        # and rag_gated_presolve never trigger R2 (see those branches).
         if rag is None:
             raise ValueError(
                 f"lever '{lever}' requires a RagPresolveConfig -- pass rag=... "
@@ -874,9 +965,16 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
             )
         if lever == "rag_thinking_gate":
             solver_pairs, retrieved_titles = await solve_all_rag_thinking_gate(client, item.question, item.choices, rag)
+        elif lever == "rag_gated_presolve":
+            solver_pairs, retrieved_titles, rag_gate_applied, rag_gate_top_score = await solve_all_rag_gated_presolve(
+                client, item.question, item.choices, rag, rag_gate_threshold
+            )
         else:
             solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
         log.info("%s: %s retrieved %d passage(s) (R1 pre-solve): %s", item.question_id, lever, len(retrieved_titles), retrieved_titles)
+        if lever == "rag_gated_presolve":
+            log.info("%s: rag_gated_presolve gate_applied=%s top_score=%s (threshold=%s)",
+                      item.question_id, rag_gate_applied, rag_gate_top_score, rag_gate_threshold)
     else:
         solver_pairs = await solve_all(client, item.question, item.choices)
 
@@ -902,6 +1000,7 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
             item=item, solver_answers=solver_answers, plurality_letter=plurality_letter,
             escalated=False, final_letter=plurality_letter, correct=(plurality_letter == item.correct_letter),
             calls=calls, latency_s=time.monotonic() - start,
+            rag_gate_applied=rag_gate_applied, rag_gate_top_score=rag_gate_top_score,
         ), gate_note
 
     if lever == "qwen38_judge":
@@ -916,14 +1015,23 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
         # already raised ValueError if it were missing.
         result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, rag=rag)
     else:
-        result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
+        # rag_gated_presolve falls through here too (no R2, same as
+        # rag_presolve/rag_thinking_gate) -- its gate decision/score are
+        # threaded through as pure passthrough (None for every other lever).
+        result = await _tribunal(
+            client, tool_session, item, solver_answers, plurality_letter, calls, start,
+            rag_gate_applied=rag_gate_applied, rag_gate_top_score=rag_gate_top_score,
+        )
     return result, gate_note
 
 
-async def _run_one(client, tool_session, item, semaphore, lever, rag: "RagPresolveConfig | None" = None):
+async def _run_one(
+    client, tool_session, item, semaphore, lever, rag: "RagPresolveConfig | None" = None,
+    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+):
     try:
         async with semaphore:
-            result, note = await run_question_lever(client, tool_session, item, lever, rag)
+            result, note = await run_question_lever(client, tool_session, item, lever, rag, rag_gate_threshold)
     except Exception:
         log.exception("%s: DROPPED after unrecoverable error", item.question_id)
         return None
@@ -937,24 +1045,32 @@ async def _run_one(client, tool_session, item, semaphore, lever, rag: "RagPresol
     return result
 
 
-def _build_output_row(result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None) -> dict:
+def _build_output_row(
+    result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None,
+    rag_gate_threshold: float | None = None,
+) -> dict:
     """The per-question JSONL row every lever writes. For rag_presolve,
-    rag_recursive, and rag_thinking_gate, also carries the firewall labeling
-    required by docs/recursive-rag-plan.md section 4: rag="ON" plus the
-    exact rag_snapshot_id read from the OPEN index's build_progress row at
-    run start (see build_rag_presolve_config) -- never fabricated, never
-    presented next to a non-RAG number as if it were the same mode.
-    rag_recursive ADDS a second marker on top: rag_r2="ON"/"OFF" records
-    whether the R2 disputed-step retrieval actually fired for THIS question
-    (only escalated questions ever trigger it -- see _tribunal), plus the R2
-    query/titles it retrieved when it did. rag_thinking_gate deliberately
-    does NOT get rag_r2 keys -- it never does R2 (see solve_all_rag_
-    thinking_gate / run_question_lever's tribunal dispatch), so its rows
-    look exactly like rag_presolve's plus the rag_thinking_gate lever name.
-    Every other lever's row shape is completely unchanged (no "rag"/
-    "rag_r2" keys at all)."""
+    rag_recursive, rag_thinking_gate, and rag_gated_presolve, also carries
+    the firewall labeling required by docs/recursive-rag-plan.md section 4:
+    rag="ON" plus the exact rag_snapshot_id read from the OPEN index's
+    build_progress row at run start (see build_rag_presolve_config) --
+    never fabricated, never presented next to a non-RAG number as if it
+    were the same mode. rag_gated_presolve's rag="ON" stays accurate even
+    when the gate suppressed injection for a given question -- retrieval
+    itself always fires; see rag_gate_applied below for the per-question
+    injection verdict. rag_recursive ADDS a second marker on top:
+    rag_r2="ON"/"OFF" records whether the R2 disputed-step retrieval
+    actually fired for THIS question (only escalated questions ever
+    trigger it -- see _tribunal), plus the R2 query/titles it retrieved
+    when it did. rag_thinking_gate and rag_gated_presolve deliberately do
+    NOT get rag_r2 keys -- neither ever does R2 (see solve_all_rag_
+    thinking_gate/solve_all_rag_gated_presolve and run_question_lever's
+    tribunal dispatch), so their rows look exactly like rag_presolve's
+    plus their own lever name (and, for rag_gated_presolve, the gate
+    fields below). Every other lever's row shape is completely unchanged
+    (no "rag"/"rag_r2"/"rag_gate_*" keys at all)."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
-    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
         row["rag"] = "ON"
         row["rag_snapshot_id"] = rag_config.snapshot_id if rag_config else None
         row["rag_k"] = rag_config.k if rag_config else None
@@ -966,10 +1082,17 @@ def _build_output_row(result, lever: str, seed: int, dataset: str, rag_config: "
         row["rag_r2_k"] = RAG_R2_K
         row["rag_r2_query"] = result.rag_r2_query
         row["rag_r2_titles"] = result.rag_r2_titles
+    if lever == "rag_gated_presolve":
+        row["rag_gate_threshold"] = rag_gate_threshold
+        row["rag_gate_applied"] = "ON" if result.rag_gate_applied else "OFF"
+        row["rag_gate_top_score"] = result.rag_gate_top_score
     return row
 
 
-async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa", rag_db: str | None = None, rag_k: int = DEFAULT_RAG_K):
+async def main_live(
+    lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa",
+    rag_db: str | None = None, rag_k: int = DEFAULT_RAG_K, rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+):
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     log.info("Loaded %d %s questions (seed=%d) for lever=%s", len(items), dataset, seed, lever)
 
@@ -977,22 +1100,27 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     semaphore = asyncio.Semaphore(concurrency)
 
     rag_config = None
-    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
         # Fail loudly HERE, before any solver call is made, if the index
-        # doesn't exist -- see open_rag_index's docstring. rag_recursive and
-        # rag_thinking_gate both reuse the exact same R1 index/config as
-        # rag_presolve; R2's top-k=3 is fixed (RAG_R2_K), not derived from
-        # rag_k, and rag_thinking_gate never triggers R2 at all.
+        # doesn't exist -- see open_rag_index's docstring. rag_recursive,
+        # rag_thinking_gate, and rag_gated_presolve all reuse the exact same
+        # R1 index/config as rag_presolve; R2's top-k=3 is fixed (RAG_R2_K),
+        # not derived from rag_k, and rag_thinking_gate/rag_gated_presolve
+        # never trigger R2 at all.
         resolved_rag_db = resolve_rag_db_path(rag_db)
         rag_config = build_rag_presolve_config(resolved_rag_db, k=rag_k)
         log.info(
-            "%s: index=%s snapshot=%s k=%d dense=%s",
+            "%s: index=%s snapshot=%s k=%d dense=%s%s",
             lever, resolved_rag_db, rag_config.snapshot_id, rag_k, rag_config.embedder is not None,
+            f" gate_threshold={rag_gate_threshold}" if lever == "rag_gated_presolve" else "",
         )
 
     results = []
     async with verifier_tool_session() as tool_session:
-        tasks = [asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config)) for item in items]
+        tasks = [
+            asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config, rag_gate_threshold))
+            for item in items
+        ]
         for coro in asyncio.as_completed(tasks):
             outcome = await coro
             if outcome is not None:
@@ -1005,7 +1133,7 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
         for r in results:
-            f.write(json.dumps(_build_output_row(r, lever, seed, dataset, rag_config)) + "\n")
+            f.write(json.dumps(_build_output_row(r, lever, seed, dataset, rag_config, rag_gate_threshold)) + "\n")
     log.info("Wrote %d results to %s", len(results), out_path)
 
 
@@ -1095,7 +1223,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -1106,13 +1234,18 @@ if __name__ == "__main__":
                               "dataset unchanged -- they only vary HOW a question already loaded as a "
                               "GPQAItem gets answered, not where it came from.")
     parser.add_argument("--rag-db", type=str, default=None,
-                         help=f"rag_presolve/rag_recursive/rag_thinking_gate only: RAG index sqlite3 DB path "
-                              f"(default: ${RAG_DB_ENV} env var if set, else {DEFAULT_RAG_DB_PATH})")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve only: RAG index "
+                              f"sqlite3 DB path (default: ${RAG_DB_ENV} env var if set, else {DEFAULT_RAG_DB_PATH})")
     parser.add_argument("--rag-k", type=int, default=DEFAULT_RAG_K,
-                         help=f"rag_presolve/rag_recursive/rag_thinking_gate only: top-k passages retrieved per "
-                              f"question for R1 pre-solve retrieval (default {DEFAULT_RAG_K}). rag_recursive's R2 "
-                              f"disputed-step retrieval is always top-{RAG_R2_K}, fixed, not controlled by this "
-                              f"flag; rag_thinking_gate never does R2.")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve only: top-k passages "
+                              f"retrieved per question for R1 pre-solve retrieval (default {DEFAULT_RAG_K}). "
+                              f"rag_recursive's R2 disputed-step retrieval is always top-{RAG_R2_K}, fixed, not "
+                              f"controlled by this flag; rag_thinking_gate/rag_gated_presolve never do R2.")
+    parser.add_argument("--rag-score-threshold", type=float, default=DEFAULT_RAG_SCORE_THRESHOLD,
+                         help=f"rag_gated_presolve only: minimum top fused RRF score required to inject the "
+                              f"retrieved evidence block; below it, the panel runs on the plain question with no "
+                              f"evidence (default {DEFAULT_RAG_SCORE_THRESHOLD}, calibrated -- see "
+                              f"benchmark/results/rag_gating_analysis.md). Ignored by every other lever.")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":
@@ -1123,4 +1256,7 @@ if __name__ == "__main__":
         asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
     else:
         out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_{args.lever}_{args.dataset}_seed{args.seed}.jsonl"
-        asyncio.run(main_live(args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset, args.rag_db, args.rag_k))
+        asyncio.run(main_live(
+            args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset,
+            args.rag_db, args.rag_k, args.rag_score_threshold,
+        ))

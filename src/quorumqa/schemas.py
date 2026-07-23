@@ -67,6 +67,14 @@ class QuestionResult(BaseModel):
     # questions that never escalated (R1-only, no R2 retrieval fired).
     rag_r2_query: Optional[str] = None
     rag_r2_titles: list[str] = Field(default_factory=list)
+    # rag_gated_presolve only: whether the top fused RRF score cleared the
+    # gate's --rag-score-threshold (True = evidence was injected into every
+    # solver seat, same as rag_presolve; False = every seat ran on the
+    # plain question, no evidence). rag_gate_top_score is the score itself
+    # (None if nothing was retrieved at all). Both None for every other
+    # lever -- see benchmark.lever_experiments.solve_all_rag_gated_presolve.
+    rag_gate_applied: Optional[bool] = None
+    rag_gate_top_score: Optional[float] = None
 
     @property
     def total_cost_usd(self) -> float:
