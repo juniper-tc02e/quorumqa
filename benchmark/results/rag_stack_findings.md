@@ -38,9 +38,20 @@ cost. For the MoO router this is a distinct profile from raw rag_presolve:
 choose the stack when robustness matters and budget allows; raw R1 when
 cheapest-possible and the domain's retrieval is reliable.
 
-## Status
-Two seeds, both non-negative, floor cut both times — promising and clearly
-more robust than raw rag_presolve. Third fresh seed launched to complete
-the validation bar. If it holds, rag_thinking_gate is the retrieval
-profile the router should prefer over raw rag_presolve wherever the ~1.5×
-escalation cost is acceptable.
+## VALIDATED (3 seeds)
+
+| Stack vs control | s271 | s606 | s838 | mean |
+|---|---|---|---|---|
+| Accuracy delta | +0.0 | +4.6 | +4.5 | **+3.0** |
+| Floor (control→stack) | 22→9 | 15→5 | 17→6 | — |
+| Escalation | 62% | 69% | 55% | ~62% |
+
+**rag_thinking_gate is VALIDATED as the robust retrieval profile** — three
+seeds, never negative, unanimous-wrong floor cut to 5-9 every time. On the
+one seed shared with raw rag_presolve (271), the stack (+0.0) dominated
+raw R1 (−5.6). It trades a small mean vs raw rag_presolve (+3.0 vs R1's
++3.5, different seed sets) for eliminating the negative tail and much
+harder floor cuts, at ~1.5× escalation cost. **Router rule: prefer
+rag_thinking_gate over raw rag_presolve wherever the escalation budget
+allows; it is the retrieval profile that does not blow up on a bad
+retrieval draw.** Fifth validated profile.

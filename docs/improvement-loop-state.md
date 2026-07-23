@@ -408,9 +408,11 @@ CANNOT fix it — regression/helped/neutral top-scores are statistically
 identical (0.0288/0.0290/0.0286), because the RRF score is retrieval
 CONFIDENCE not correctness-for-this-question; the failure is
 high-scoring-but-wrong passages. rag_gated_presolve kept as documented-
-ineffective. **The real mitigation already measured: rag_thinking_gate
-(thinking seat REASONS about evidence) cut the floor 22->9 at the same
-bad seed — now the priority to validate.** R2 disputed-step recursion (G2) = Bet-2
+ineffective. **rag_thinking_gate VALIDATED (3 seeds: +0.0/+4.6/+4.5 vs control, never
+negative, floor cut to 5-9 every time) as the ROBUST retrieval profile —
+fixes raw rag_presolve's -5.6 tail by reasoning about evidence. 5th
+validated profile. ~1.5x escalation cost. Router prefers it over raw R1
+where budget allows.** R2 disputed-step recursion (G2) = Bet-2
 NOT met: −1.2 vs R1, no gain, because R2 fires only on escalation and so
 structurally cannot touch the unanimous-wrong floor where the accuracy
 lives (see rag_r2_findings.md). Reinforces: binding constraint is upstream
