@@ -11,7 +11,10 @@ before benchmark/run_moo_eval.py is allowed to spend a single real API call.
 
 import pytest
 
+from quorumqa.engine import calibration as calibration_module
 from quorumqa.engine import profiles
+from quorumqa.engine import router as router_module
+from quorumqa.engine.calibration import CalibrationEntry
 from quorumqa.engine.router import (
     BUDGETS,
     ROUTING_RULES,
@@ -44,23 +47,52 @@ def test_organic_chemistry_routes_to_stem_max_at_every_budget(budget):
 
 
 # ---------------------------------------------------------------------------
-# Rule 2: SuperGPQA hard-subset disciplines -> rag_thinking_gate / flagship_panel by budget
+# Rule 2: SuperGPQA hard-subset disciplines -> single-call (cheap) /
+# flagship_panel (balanced+quality) -- CORRECTED per moo_m1_corrected_
+# findings.md. moo_m1_findings.md's honest-negative diagnosis: the OLD rule
+# (rag_thinking_gate at cheap/balanced) sent this bucket to the escalation-
+# heavy stack that is BOTH less accurate and pricier than flagship_panel
+# here (measured: flagship_panel 84.6%@9553tok vs rag_thinking_gate's
+# 73.3%@17719tok, calibration table, n=26-30) -- "the escalation-heavy
+# 'cheap' stacks are the EXPENSIVE ones on hard STEM; flagship_panel is
+# both more accurate AND cheaper there."
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize("subject", ["Science", "Engineering"])
-def test_supergpqa_hard_stem_uses_rag_thinking_gate_when_not_quality(subject):
-    assert route(_item(subject), budget="cheap") == "rag_thinking_gate"
-    assert route(_item(subject), budget="balanced") == "rag_thinking_gate"
+def test_supergpqa_hard_stem_uses_single_call_at_cheap_budget(subject):
+    assert route(_item(subject), budget="cheap") == "single-call"
 
 
 @pytest.mark.parametrize("subject", ["Science", "Engineering"])
-def test_supergpqa_hard_stem_uses_flagship_panel_at_quality_budget(subject):
-    assert route(_item(subject), budget="quality") == "flagship_panel"
+@pytest.mark.parametrize("budget", ["balanced", "quality"])
+def test_supergpqa_hard_stem_uses_flagship_panel_above_cheap_budget(subject, budget):
+    assert route(_item(subject), budget=budget) == "flagship_panel"
+
+
+def test_supergpqa_hard_stem_no_longer_routes_to_rag_thinking_gate():
+    # The bug moo_m1_findings.md diagnosed: rag_thinking_gate was BOTH less
+    # accurate and pricier than flagship_panel on this bucket -- confirm
+    # the corrected router never picks it here at any budget.
+    for budget in BUDGETS:
+        assert route(_item("Science"), budget=budget) != "rag_thinking_gate"
+        assert route(_item("Engineering"), budget=budget) != "rag_thinking_gate"
 
 
 # ---------------------------------------------------------------------------
-# Rule 3: GPQA physics/chem-hard subdomains -> stem-max, never a RAG profile
+# Rule 3: GPQA physics/chem-hard subdomains (excluding Organic Chemistry,
+# its own separate rule) -> single-call (cheap) / flagship_panel (balanced+
+# quality), never a RAG profile -- CORRECTED per moo_m1_corrected_
+# findings.md. OLD rule routed here to stem-max, which on this bucket is
+# byte-identical to thinking_gate's panel (profiles.py: stem-max only
+# overrides Organic Chemistry) -- moo_m1_findings.md's per-bucket table
+# measured that choice WORSE and costlier than flagship_panel on the
+# coarser gpqa_hard workload bucket (85%@14426 vs 93%@12248). The router-
+# bucket-level calibration sample here is thin (n=4-5/profile) -- too small
+# to trust standalone -- so this fix leans on the coarser, more robust
+# gpqa_hard-bucket evidence plus consistency with the supergpqa_hard_stem
+# fix, not an independently robust fine-grained result (see the corrected
+# findings doc's honesty note).
 # ---------------------------------------------------------------------------
 
 
@@ -75,9 +107,24 @@ def test_supergpqa_hard_stem_uses_flagship_panel_at_quality_budget(subject):
         "Inorganic Chemistry",
     ],
 )
-@pytest.mark.parametrize("budget", BUDGETS)
-def test_gpqa_physics_chem_subdomains_route_to_stem_max(subject, budget):
-    assert route(_item(subject), budget=budget) == "stem-max"
+def test_gpqa_hard_stem_uses_single_call_at_cheap_budget(subject):
+    assert route(_item(subject), budget="cheap") == "single-call"
+
+
+@pytest.mark.parametrize(
+    "subject",
+    [
+        "Physics (general)",
+        "Astrophysics",
+        "High-energy particle physics",
+        "Condensed Matter Physics",
+        "Chemistry (general)",
+        "Inorganic Chemistry",
+    ],
+)
+@pytest.mark.parametrize("budget", ["balanced", "quality"])
+def test_gpqa_hard_stem_uses_flagship_panel_above_cheap_budget(subject, budget):
+    assert route(_item(subject), budget=budget) == "flagship_panel"
 
 
 @pytest.mark.parametrize(
@@ -295,3 +342,81 @@ def test_route_with_use_classifier_true_never_invents_a_bucket_outside_registry(
             client2 = FakeClassifierClient(classification)
             profile_name = route(_item(None), budget=budget, use_classifier=True, client=client2)
             assert profile_name in profiles.REGISTRY
+
+
+# ---------------------------------------------------------------------------
+# The cost-aware tie-break (moo_m1_corrected_findings.md item 2c): the two
+# corrected hard-STEM rules above resolve through
+# quorumqa.engine.calibration.cheapest_within_margin over
+# _default_calibration_table(), NOT a bare hardcoded string -- these tests
+# prove that wiring by swapping in a synthetic table (monkeypatch, offline,
+# no filesystem dependency) and checking the routing decision follows it.
+# ---------------------------------------------------------------------------
+
+
+def _fake_table(*entries: CalibrationEntry) -> dict:
+    return {(e.profile, e.bucket): e for e in entries}
+
+
+def test_supergpqa_hard_stem_follows_the_calibration_table_not_a_hardcoded_pick(monkeypatch):
+    # Flip which profile the calibration table says is the accuracy/cost
+    # winner for supergpqa_hard_stem -- the router's balanced-budget pick
+    # must follow it, proving _profile_for_bucket dispatches through
+    # cheapest_within_margin rather than a bare "return 'flagship_panel'".
+    fake_table = _fake_table(
+        CalibrationEntry("flagship_panel", "supergpqa_hard_stem", 30, 0.70, 9000, 0.1),
+        CalibrationEntry("rag_thinking_gate", "supergpqa_hard_stem", 30, 0.95, 4000, 0.1),
+    )
+    monkeypatch.setattr(router_module, "_default_calibration_table", lambda: fake_table)
+    assert route(_item("Science"), budget="balanced") == "rag_thinking_gate"
+
+
+def test_gpqa_hard_stem_follows_the_calibration_table_not_a_hardcoded_pick(monkeypatch):
+    fake_table = _fake_table(
+        CalibrationEntry("flagship_panel", "gpqa_hard_stem", 30, 0.70, 9000, 0.1),
+        CalibrationEntry("single-call", "gpqa_hard_stem", 30, 0.92, 2000, 0.0),
+    )
+    monkeypatch.setattr(router_module, "_default_calibration_table", lambda: fake_table)
+    assert route(_item("Physics (general)"), budget="balanced") == "single-call"
+
+
+def test_hard_stem_buckets_fall_back_to_flagship_panel_when_calibration_unavailable(monkeypatch):
+    # No calibration data at all (fresh clone before the table is built, or
+    # the CSV is missing) -- must still resolve to a real, registered
+    # profile via the hardcoded fallback, not crash or return None.
+    monkeypatch.setattr(router_module, "_default_calibration_table", lambda: {})
+    assert route(_item("Science"), budget="balanced") == "flagship_panel"
+    assert route(_item("Physics (general)"), budget="balanced") == "flagship_panel"
+
+
+def test_hard_stem_buckets_fall_back_to_flagship_panel_when_calibration_sample_too_thin(monkeypatch):
+    # Data present but n below cheapest_within_margin's min_n guard (e.g.
+    # gpqa_hard_stem's real n=4-5/profile) -- must fall back, not act on noise.
+    fake_table = _fake_table(
+        CalibrationEntry("single-call", "gpqa_hard_stem", 3, 1.0, 100, 0.0),
+    )
+    monkeypatch.setattr(router_module, "_default_calibration_table", lambda: fake_table)
+    assert route(_item("Physics (general)"), budget="balanced") == "flagship_panel"
+
+
+def test_default_calibration_table_loads_the_real_committed_csv():
+    # No live calls, no network: benchmark/results/moo_calibration_table.csv
+    # is checked into the repo (built offline by benchmark/build_moo_
+    # calibration.py from the already-recorded moo_m1_eval.jsonl). Confirms
+    # the router's default loader actually reads it rather than silently
+    # falling back to {} in the real, non-monkeypatched environment.
+    router_module._default_calibration_table.cache_clear()
+    table = router_module._default_calibration_table()
+    assert ("flagship_panel", "supergpqa_hard_stem") in table
+    assert table[("flagship_panel", "supergpqa_hard_stem")].n >= 20
+
+
+def test_supergpqa_hard_stem_resolves_to_flagship_panel_via_the_real_committed_calibration_table():
+    # End-to-end with the real checked-in CSV (not a monkeypatched fake):
+    # confirms the corrected rule actually lands where moo_m1_corrected_
+    # findings.md claims, driven by the measured data, not a coincidence of
+    # the hardcoded fallback (supergpqa_hard_stem's real n=26-30 clears the
+    # min_n guard, so this exercises the live tie-break path).
+    router_module._default_calibration_table.cache_clear()
+    assert route(_item("Science"), budget="balanced") == "flagship_panel"
+    assert route(_item("Engineering"), budget="balanced") == "flagship_panel"

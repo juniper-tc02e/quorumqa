@@ -1,0 +1,725 @@
+{
+  "budget": "balanced",
+  "routes": [
+    {
+      "question_id": "gpqa_hard:rechKl68Uc6H7vU0N",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recINSFEYLCyyd08m",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:rec0wZvZgiz320KRs",
+      "bucket": "gpqa_hard",
+      "subject": "Quantum Mechanics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recypVp2NmPlBKVTp",
+      "bucket": "gpqa_hard",
+      "subject": "Molecular Biology",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recnawZPumSCLMVgp",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:rec4r4KWNLrT7g2kR",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recVvpD8miVjmmyfe",
+      "bucket": "gpqa_hard",
+      "subject": "Molecular Biology",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:rec527dNeEtWJrYNl",
+      "bucket": "gpqa_hard",
+      "subject": "Molecular Biology",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recnTTKdBzfuoZ7w7",
+      "bucket": "gpqa_hard",
+      "subject": "Molecular Biology",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recQiWOxhkXRz9NVE",
+      "bucket": "gpqa_hard",
+      "subject": "Chemistry (general)",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "gpqa_hard:rec0yTRmO1o1xCA6H",
+      "bucket": "gpqa_hard",
+      "subject": "Electromagnetism and Photonics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recb80OwMgNnceA9t",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recDj2Y2BbtV02Wv5",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:rec6sE2CRtD4drtHg",
+      "bucket": "gpqa_hard",
+      "subject": "High-energy particle physics",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "gpqa_hard:recE2ihVfqEK4R9d0",
+      "bucket": "gpqa_hard",
+      "subject": "Quantum Mechanics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:rec5rjeLsEq5Fg7Oj",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:reczjcMtrB1YGS2fO",
+      "bucket": "gpqa_hard",
+      "subject": "Optics and Acoustics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recGFNRVl1qBZGwyU",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recpki12iG9RUGrz9",
+      "bucket": "gpqa_hard",
+      "subject": "High-energy particle physics",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "gpqa_hard:recIj8lR4tuDgrHou",
+      "bucket": "gpqa_hard",
+      "subject": "Quantum Mechanics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:rec260hNUCEj109Dj",
+      "bucket": "gpqa_hard",
+      "subject": "Quantum Mechanics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recLAgwx9vbgB5EHk",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recXvQ6gWAmyakrpD",
+      "bucket": "gpqa_hard",
+      "subject": "Astrophysics",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "gpqa_hard:recWPMm91mGDLXONm",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recOvqPKUtyy9ISA1",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recSBcGLPatKb3Ygu",
+      "bucket": "gpqa_hard",
+      "subject": "Physics (general)",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "gpqa_hard:recHVUd2DkoKfedJZ",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recnGEpF1srQpaqWq",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "gpqa_hard:recmI7EiLv72PxmYK",
+      "bucket": "gpqa_hard",
+      "subject": "Relativistic Mechanics",
+      "routed_profile": "thinking_gate"
+    },
+    {
+      "question_id": "gpqa_hard:recVEXvhYxAhELVqB",
+      "bucket": "gpqa_hard",
+      "subject": "Organic Chemistry",
+      "routed_profile": "stem-max"
+    },
+    {
+      "question_id": "supergpqa_hard:5b3ba5d082c74528ab9c60a12e0e3614",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:1d55d70bc081494da80f9c9735015376",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:4e711f17db254dd4953606570f0cc7a7",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:e313bac23c0a44a09b34da5cda7a7a5a",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:454028b0c0884f4192d16081e358d436",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:917d14354e104597ab763b7c98ec5098",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:f3dbbb1c935242e287d05399a283167a",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:bf79c60db17b4207957d40a5ada06a76",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:4e8a3894e41f4ca291c7b9d40a6bbe41",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:21de236f15e846ecaac90b5464aa6751",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:28b8e9105db04b8b9d3a7e2f6aedff5c",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:ef085846d5e74e358456de0a96fc049b",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:3aa8040fa0174d9ebee38e9a1f196d26",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:10306739cc6f4b94afa3336c48376be7",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:e78c81f946704e8ab0fb15182b6f8f68",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:21c8296790dc44c3b47308fe139b1378",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:f99d0c2438e347088abece7d58f4e3cc",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:8920a6411ede4a54af86c8ec5be736bd",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:fc86b86189fa4145bfc49c741a7d8387",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:c0aff61a5b0243628fe8d3684305f4cb",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:d3c2c6065bd540298bc50e5c2786cfd7",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:a7a3dc6d5b5b4d37a32c2839833a4d6c",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:644c9b34ba504b098e1f27a5343df847",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:cd59e82f9198404fad3b5e494c032544",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:2613e2e31a7f45d9bd02d6c09fdc898c",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:f4e38f53765c4c249769703d0ba24b3d",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:301e624803b94d4dad6828fb2310bdca",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:20fff2a5feb746d5a6614e360c9bec7d",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:469ab0b1358b48019d3a8f218edbf379",
+      "bucket": "supergpqa_hard",
+      "subject": "Engineering",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "supergpqa_hard:1e6267aed56a4fba91a50215560a698b",
+      "bucket": "supergpqa_hard",
+      "subject": "Science",
+      "routed_profile": "flagship_panel"
+    },
+    {
+      "question_id": "medqa:990",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:202",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1258",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:277",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:427",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:15",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1202",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1027",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:827",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:503",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:325",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:681",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:932",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:387",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:235",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:66",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:347",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:442",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1121",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:376",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:35",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:332",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:400",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1145",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:975",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:950",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:825",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:1030",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:845",
+      "bucket": "medqa",
+      "subject": "step1",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "medqa:802",
+      "bucket": "medqa",
+      "subject": "step2&3",
+      "routed_profile": "standard-tribunal"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:10024",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "physics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:5088",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "other",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7070",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "economics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:556",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "business",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:3320",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "biology",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:473",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "business",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:6570",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "health",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7562",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "economics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:2854",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "biology",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:8486",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:2503",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "psychology",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:688",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "business",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:5136",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "other",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:8930",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:3079",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "biology",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:10343",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "physics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:8802",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:783",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "business",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:5874",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "other",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7511",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "economics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7847",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:9795",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "physics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:2457",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "psychology",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:4906",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "history",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:5396",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "other",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:10452",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "computer science",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:8147",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:8676",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "math",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7497",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "economics",
+      "routed_profile": "single-call"
+    },
+    {
+      "question_id": "saturated_easy_mmlu:7490",
+      "bucket": "saturated_easy_mmlu",
+      "subject": "economics",
+      "routed_profile": "single-call"
+    }
+  ]
+}

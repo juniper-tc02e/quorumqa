@@ -1,11 +1,31 @@
 """The M1 router (docs/mixture-of-orchestrations-plan.md section 3, section 7
-"M1 -- Router R1 + `single-call` + blended-workload eval").
+"M1 -- Router R1 + `single-call` + blended-workload eval"), CORRECTED per
+benchmark/results/moo_m1_corrected_findings.md.
 
 route(item, budget="balanced") maps a GPQAItem to one of the M0 REGISTRY
 profile names (src/quorumqa/engine/profiles.py). This is where the Mixture
 of Orchestrations thesis is tested: every rule below is cited to a specific
 measured finding, not intuition, per the plan's discipline ("every design
 choice cites the measured finding that motivates it").
+
+The correction (benchmark/results/moo_m1_corrected_findings.md): the FIRST
+version of this router (moo_m1_findings.md) LOST to flat-best flagship_panel
+on the M1 blended-workload eval (-2.7pts, costing more) because its hard-
+STEM rules assumed "flagship_panel = expensive, avoid it, use the cheap-tier
+escalation-heavy stacks instead" -- an assumption the eval itself disproved:
+flagship_panel rarely escalates on hard STEM (~8% -> 3 solver calls) while
+the "cheap" rag_thinking_gate/thinking_gate stacks escalate 60-80% of the
+time into a full tribunal, making them BOTH less accurate AND pricier there.
+The gpqa_hard_stem and supergpqa_hard_stem rules below now route to
+flagship_panel (balanced/quality budget) instead, driven by a measured
+calibration table (quorumqa.engine.calibration, benchmark/results/
+moo_calibration_table.csv -- built offline from moo_m1_eval.jsonl's own
+recorded outcomes, no new paid calls) rather than a tier assumption, via a
+cost-aware tie-break (_cost_aware_hard_stem_pick / calibration.
+cheapest_within_margin): among profiles within ~1pt measured accuracy for a
+bucket, pick the cheapest by measured tokens. The medicine/saturated_easy/
+gpqa_organic_chem/unknown rules were already correct on the same eval (they
+tied flat-best accuracy at a fraction of the cost) and are unchanged.
 
 Two implementations, both reachable through the same route() entry point:
 
@@ -47,9 +67,11 @@ real-gap option.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import TYPE_CHECKING
 
 from quorumqa.config import MECHANICAL_MODEL
+from quorumqa.engine import calibration as _calibration
 from quorumqa.engine import profiles as _profiles
 
 if TYPE_CHECKING:
@@ -116,6 +138,37 @@ class RoutingRule:
     finding: str = ""
 
 
+@lru_cache(maxsize=1)
+def _default_calibration_table() -> _calibration.CalibrationTable:
+    """Lazily loads benchmark/results/moo_calibration_table.csv (built
+    offline by benchmark/build_moo_calibration.py from the already-recorded
+    moo_m1_eval.jsonl, no live API calls -- plan section 5.1's calibration
+    memory, simplest static form) exactly once per process. Returns {} if
+    the file is missing (e.g. a fresh clone before the table has been
+    built) rather than raising -- the hard-STEM cost-aware picks below
+    treat that identically to "no candidate has enough data", falling back
+    to their hardcoded default rather than failing to route at all."""
+    try:
+        return _calibration.load_calibration_table(_calibration.DEFAULT_CALIBRATION_CSV)
+    except FileNotFoundError:
+        return {}
+
+
+def _cost_aware_hard_stem_pick(router_bucket: str, candidates: tuple[str, ...], default: str) -> str:
+    """The corrected router's cost-aware tie-break (moo_m1_corrected_
+    findings.md item 2c): among `candidates`, defer to quorumqa.engine.
+    calibration.cheapest_within_margin over the measured calibration table
+    -- among profiles within ~1pt measured accuracy of each other for
+    `router_bucket`, pick the cheapest by measured tokens. Falls back to
+    `default` (the hardcoded, findings-cited pick) when the calibration
+    table has no entry, or too thin a sample (n < cheapest_within_margin's
+    min_n=10), for `router_bucket` -- e.g. gpqa_hard_stem's real n=4-5/
+    profile is deliberately NOT trusted standalone (see that rule's finding
+    text)."""
+    picked = _calibration.cheapest_within_margin(_default_calibration_table(), bucket=router_bucket, candidates=candidates)
+    return picked or default
+
+
 def _profile_for_bucket(bucket: str, budget: str) -> str:
     if bucket == "gpqa_organic_chem":
         # stem-max IS chem_thinking_gate: validated 90.9% mean (3 seeds,
@@ -127,34 +180,63 @@ def _profile_for_bucket(bucket: str, budget: str) -> str:
         # so "cheap" gets the same answer as "quality".
         return "stem-max"
     if bucket == "gpqa_hard_stem":
-        # stem-max's panel is BYTE-IDENTICAL to thinking_gate's for every
-        # subject except "Organic Chemistry" (profiles.py: stem-max's
-        # subject_overrides only has that one key) -- so routing GPQA
-        # physics/chem-hard questions here has no different EFFECT from
-        # thinking_gate today. Named as its own bucket/rule anyway (rather
-        # than silently falling through to "unknown") because it documents
-        # the intent explicitly and is forward-compatible with a future
-        # physics-specific stem-max override.
+        # CORRECTED per moo_m1_corrected_findings.md (M1's honest-negative
+        # diagnosis, moo_m1_findings.md): the OLD rule routed here to
+        # stem-max, whose panel is BYTE-IDENTICAL to thinking_gate's for
+        # every subject except "Organic Chemistry" (profiles.py: stem-max's
+        # subject_overrides only has that one key) -- so it had no
+        # different EFFECT from thinking_gate on this bucket, and
+        # moo_m1_findings.md's per-bucket table measured that choice WORSE
+        # AND costlier than flagship_panel on the coarser gpqa_hard
+        # workload bucket (85%@14426 vs flagship_panel's 93%@12248) -- the
+        # same "escalation-heavy stack is the expensive AND less accurate
+        # one" pattern diagnosed on supergpqa_hard_stem below. "cheap"
+        # takes the cheapest measured option (single-call, 86.2%@3739 tok
+        # on the gpqa_hard workload bucket -- close behind flagship_panel
+        # at a fraction of the cost); "balanced"/"quality" defer to the
+        # cost-aware tie-break (moo_m1_corrected_findings.md item 2c),
+        # falling back to flagship_panel since this router-bucket's own
+        # calibration sample is thin (n=4-5/profile -- see
+        # moo_calibration_table.csv -- too small to trust standalone; the
+        # fallback leans on the coarser, more robust gpqa_hard-bucket
+        # evidence instead).
         #
-        # Deliberately NEVER rag_presolve/rag_thinking_gate: the R1
-        # contamination tripwire (benchmark/results/rag_r1_findings.md)
-        # measured retrieval on GPQA-Diamond at -4.7 (search-proof by
-        # construction, injected passages are pure noise/distraction) --
-        # RAG profiles are gated OFF this bucket by construction (they are
-        # simply never named here), not merely deprioritized.
-        return "stem-max"
+        # Deliberately NEVER rag_presolve/rag_thinking_gate (not in the
+        # candidate list below): the R1 contamination tripwire (benchmark/
+        # results/rag_r1_findings.md) measured retrieval on GPQA-Diamond at
+        # -4.7 (search-proof by construction, injected passages are pure
+        # noise/distraction) -- RAG profiles are gated OFF this bucket by
+        # construction, not merely deprioritized. stem-max is also excluded
+        # from the candidate list: it is redundant with thinking_gate here
+        # by construction (see above) and thinking_gate itself already
+        # loses to flagship_panel on the evidence this fix is based on.
+        if budget == "cheap":
+            return "single-call"
+        return _cost_aware_hard_stem_pick(
+            "gpqa_hard_stem", ("flagship_panel", "thinking_gate", "single-call"), default="flagship_panel"
+        )
     if bucket == "supergpqa_hard_stem":
-        # Two validated fixes for the SAME diagnosed floor (supergpqa_
-        # findings.md: 23% unanimous-wrong, cheap panel -11.6 vs flagship),
-        # chosen by budget exactly as the plan prescribes (section 2,
-        # "Budget-tiered floor fixes"): rag_thinking_gate is the cheaper,
-        # never-negative retrieval profile (rag_stack_findings.md: mean
-        # +3.0 over 3 seeds, "prefer rag_thinking_gate over raw rag_
-        # presolve wherever the escalation budget allows"); flagship_panel
-        # is the higher-ceiling, ~3x-cost tier-swap (supergpqa_findings.md:
-        # mean +4.1 over 3 seeds, absolute accuracy 81.7-83.3 vs rag_
-        # thinking_gate's ~70-75).
-        return "flagship_panel" if budget == "quality" else "rag_thinking_gate"
+        # CORRECTED per moo_m1_corrected_findings.md: the OLD rule (rag_
+        # thinking_gate at cheap/balanced, supergpqa_findings.md/rag_stack_
+        # findings.md's validated-in-isolation picks) assumed "flagship_
+        # panel = expensive, avoid on hard STEM." moo_m1_findings.md's
+        # blended-workload eval proved that assumption false: flagship_
+        # panel rarely escalates here (~8% -> 3 solver calls), while rag_
+        # thinking_gate escalates 63% -> full tribunal -> nearly 2x the
+        # tokens. Calibration table (n=26-30/profile, moo_calibration_
+        # table.csv): flagship_panel 84.6%@9553tok vs rag_thinking_gate's
+        # 73.3%@17719tok -- flagship_panel is BOTH more accurate AND
+        # cheaper, not a quality-only upgrade. "cheap" takes single-call
+        # (79.3%@4106tok -- within a few points of flagship_panel at under
+        # half the tokens); "balanced"/"quality" resolve through the same
+        # cost-aware tie-break as gpqa_hard_stem above (this bucket's
+        # sample comfortably clears the tie-break's min_n=10 guard, so this
+        # is a live calibration-driven pick, not a thin-data fallback).
+        if budget == "cheap":
+            return "single-call"
+        return _cost_aware_hard_stem_pick(
+            "supergpqa_hard_stem", ("flagship_panel", "rag_thinking_gate", "thinking_gate", "single-call"), default="flagship_panel"
+        )
     if bucket == "medicine":
         # medqa_findings.md: 4% unanimous-wrong (vs SuperGPQA-hard's 23%)
         # -- the cheap tier is genuinely competent at medicine, so cheap
@@ -202,9 +284,13 @@ ROUTING_RULES: tuple[RoutingRule, ...] = (
         match="item.subject in {'Science', 'Engineering'} (SuperGPQA hard-subset disciplines)",
         profile_by_budget={b: _profile_for_bucket("supergpqa_hard_stem", b) for b in BUDGETS},
         finding=(
-            "benchmark/results/supergpqa_findings.md: 23% unanimous-wrong, cheap panel -11.6 vs "
-            "flagship baseline; flagship_panel validated +4.1 mean (3 seeds); rag_stack_findings.md: "
-            "rag_thinking_gate validated +3.0 mean (3 seeds, never negative), cheaper than flagship_panel."
+            "CORRECTED (benchmark/results/moo_m1_corrected_findings.md, diagnosed by "
+            "moo_m1_findings.md's honest-negative R1 eval): the prior rag_thinking_gate pick assumed "
+            "'flagship_panel = expensive, avoid on hard STEM' -- false. Calibration table (n=26-30/"
+            "profile, moo_calibration_table.csv): flagship_panel 84.6%@9553tok vs rag_thinking_gate's "
+            "73.3%@17719tok -- flagship_panel is BOTH more accurate AND cheaper (it rarely escalates "
+            "here, ~8%, while rag_thinking_gate escalates 63% into a full tribunal). Resolved via the "
+            "cost-aware tie-break (item 2c) over this calibration table, not a bare hardcoded string."
         ),
     ),
     RoutingRule(
@@ -212,9 +298,15 @@ ROUTING_RULES: tuple[RoutingRule, ...] = (
         match="item.subject contains 'chem' or 'physic' (case-insensitive; GPQA-Diamond Subdomain/High-level-domain)",
         profile_by_budget={b: _profile_for_bucket("gpqa_hard_stem", b) for b in BUDGETS},
         finding=(
-            "Byte-identical to thinking_gate's validated 3-seed behavior for every non-chemistry subject "
-            "(stem-max only overrides Organic Chemistry). RAG excluded: rag_r1_findings.md's GPQA tripwire "
-            "measured retrieval at -4.7 on GPQA-Diamond (search-proof by construction)."
+            "CORRECTED (benchmark/results/moo_m1_corrected_findings.md): the prior stem-max pick was "
+            "byte-identical to thinking_gate's panel here (stem-max only overrides Organic Chemistry) "
+            "and moo_m1_findings.md's per-bucket table measured that WORSE and costlier than "
+            "flagship_panel on the coarser gpqa_hard workload bucket (85%@14426 vs 93%@12248). This "
+            "router-bucket's own calibration sample is thin (n=4-5/profile) -- the fix leans on the "
+            "coarser evidence plus consistency with supergpqa_hard_stem's robust fix, flagged honestly "
+            "as thin-evidence rather than an independently robust result. RAG excluded: rag_r1_"
+            "findings.md's GPQA tripwire measured retrieval at -4.7 on GPQA-Diamond (search-proof by "
+            "construction)."
         ),
     ),
     RoutingRule(

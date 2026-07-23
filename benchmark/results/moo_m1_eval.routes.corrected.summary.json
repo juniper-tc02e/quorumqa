@@ -1,0 +1,119 @@
+{
+  "budget": "balanced",
+  "n_common": 111,
+  "n_total_distinct_questions": 120,
+  "drop_counts": {
+    "standard-tribunal": 0,
+    "thinking_gate": 0,
+    "stem-max": 3,
+    "flagship_panel": 7,
+    "rag_presolve": 0,
+    "rag_thinking_gate": 1,
+    "single-call": 2
+  },
+  "profile_accuracy": {
+    "standard-tribunal": 0.8558558558558559,
+    "thinking_gate": 0.9279279279279279,
+    "stem-max": 0.9009009009009009,
+    "flagship_panel": 0.9279279279279279,
+    "rag_presolve": 0.8918918918918919,
+    "rag_thinking_gate": 0.918918918918919,
+    "single-call": 0.918918918918919
+  },
+  "profile_avg_tokens": {
+    "standard-tribunal": 5615.558558558559,
+    "thinking_gate": 9040.153153153153,
+    "stem-max": 9087.450450450451,
+    "flagship_panel": 6624.540540540541,
+    "rag_presolve": 7326.504504504504,
+    "rag_thinking_gate": 10191.36036036036,
+    "single-call": 2009.2522522522522
+  },
+  "flat_best_profile": "thinking_gate",
+  "flat_best_accuracy": 0.9279279279279279,
+  "routed_accuracy": 0.9099099099099099,
+  "routed_avg_tokens": 6208.135135135135,
+  "oracle_accuracy": 0.963963963963964,
+  "routing_hit": 101,
+  "routing_miss": 6,
+  "bucket_summary": {
+    "gpqa_hard": {
+      "n": 27,
+      "profile_accuracy": {
+        "standard-tribunal": 0.8518518518518519,
+        "thinking_gate": 1.0,
+        "stem-max": 0.8518518518518519,
+        "flagship_panel": 0.9259259259259259,
+        "rag_presolve": 0.8888888888888888,
+        "rag_thinking_gate": 0.9259259259259259,
+        "single-call": 0.8888888888888888
+      },
+      "routed_accuracy": 0.8518518518518519,
+      "oracle_accuracy": 1.0,
+      "routed_profile_counts": {
+        "thinking_gate": 9,
+        "stem-max": 14,
+        "flagship_panel": 4
+      },
+      "routing_hit": 23,
+      "routing_miss": 4
+    },
+    "medqa": {
+      "n": 30,
+      "profile_accuracy": {
+        "standard-tribunal": 0.9666666666666667,
+        "thinking_gate": 0.9666666666666667,
+        "stem-max": 0.9666666666666667,
+        "flagship_panel": 0.9666666666666667,
+        "rag_presolve": 0.9666666666666667,
+        "rag_thinking_gate": 0.9666666666666667,
+        "single-call": 0.9666666666666667
+      },
+      "routed_accuracy": 0.9666666666666667,
+      "oracle_accuracy": 0.9666666666666667,
+      "routed_profile_counts": {
+        "standard-tribunal": 30
+      },
+      "routing_hit": 29,
+      "routing_miss": 0
+    },
+    "saturated_easy_mmlu": {
+      "n": 29,
+      "profile_accuracy": {
+        "standard-tribunal": 0.9310344827586207,
+        "thinking_gate": 0.9655172413793104,
+        "stem-max": 0.9655172413793104,
+        "flagship_panel": 0.9655172413793104,
+        "rag_presolve": 0.9655172413793104,
+        "rag_thinking_gate": 0.9655172413793104,
+        "single-call": 0.9655172413793104
+      },
+      "routed_accuracy": 0.9655172413793104,
+      "oracle_accuracy": 1.0,
+      "routed_profile_counts": {
+        "single-call": 29
+      },
+      "routing_hit": 28,
+      "routing_miss": 1
+    },
+    "supergpqa_hard": {
+      "n": 25,
+      "profile_accuracy": {
+        "standard-tribunal": 0.64,
+        "thinking_gate": 0.76,
+        "stem-max": 0.8,
+        "flagship_panel": 0.84,
+        "rag_presolve": 0.72,
+        "rag_thinking_gate": 0.8,
+        "single-call": 0.84
+      },
+      "routed_accuracy": 0.84,
+      "oracle_accuracy": 0.88,
+      "routed_profile_counts": {
+        "flagship_panel": 25
+      },
+      "routing_hit": 21,
+      "routing_miss": 1
+    }
+  }
+}
