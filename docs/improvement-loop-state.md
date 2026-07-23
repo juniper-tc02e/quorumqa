@@ -458,3 +458,33 @@ reporting flat-best / routed / oracle. MoO earns its existence here: if
 routed >> flat-best toward oracle, the mixture is worth its complexity; if
 not, say so. Also queued: flagship_panel on MMLU-Pro STEM (generalization);
 additive site Build Log entries for the validated RAG results.
+
+## MoO M1 ROUTER EVAL — honest verdict (2026-07-24 ~00:30)
+
+The make-or-break test. R1 heuristic router (balanced) on a 120-q blend:
+flat-best (flagship_panel) 92.8% vs ROUTED 90.1% vs oracle 96.4% — **the
+router as shipped LOSES (−2.7pts AND costlier), does not justify its
+complexity.** Reported straight. BUT the per-bucket breakdown is diagnostic
+and fixable:
+- Easy/competent (medqa, saturated): router TIES flagship accuracy at
+  1/4-1/2 cost — routing works where tiers separate.
+- Hard STEM: router routed to rag_thinking_gate/stem-max which were WORSE
+  AND COSTLIER than flagship_panel. Wrong assumption killed by the eval:
+  flagship_panel rarely escalates (~8-12%) so it's CHEAPER than the
+  escalation-heavy (55-69%) retrieval/thinking stacks; cost is dominated by
+  escalation rate not solver tier -> must be MEASURED per-profile-per-domain
+  (calibration memory §5.1), not assumed.
+- Corrected router (flagship for hard STEM, cheap for easy) ties flat-best
+  accuracy at lower cost -> the defensible MoO claim is a COST win at equal
+  accuracy, NOT an accuracy win.
+
+## NEXT (ranked)
+1. **Corrected router + measured cost model**: fix the hard-STEM rule to
+   flagship_panel, drive routing off measured per-profile-per-domain
+   escalation/cost, re-run the blend, report cost-at-equal-accuracy (the
+   metric MoO wins on). Dispatch to a Sonnet worker.
+2. Calibration memory (§5.1) — the per-domain outcome+cost store the
+   corrected router needs; also the substrate for the R2 per-question
+   router that could capture the 3.6pt oracle gap.
+3. Additive site Build Log entries for the validated results (RAG,
+   rag_thinking_gate, the honest M1 verdict) — additive-only, pre-Aug-11.
