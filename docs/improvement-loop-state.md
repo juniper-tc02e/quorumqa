@@ -605,17 +605,42 @@ comparison is fair) and ran a 3-question LIVE smoke: baseline 3/3 & panel 3/3
 on real MATH-500 L5, LaTeX-fraction answer -\dfrac{35}{9} graded correct,
 clustering found agreement (0 escalation) — real-API behavior confirmed.
 
-**Full n=60 L5 seed-42 pilot LAUNCHED** (task bu6p0pifd, ~$5-15, under the
-$30 flag). THE test of the reasoning thesis on hard math with real flagship
-headroom: does 3-solver+judge deliberation beat a single flagship call when
-distractor-MC saturation is removed? Result pending.
+## Hard-math pilot DONE (2026-07-24 ~02:30) — no win, honest reason why
+
+n=60 L5 seed 42 (n=59 common, 1 drop/arm). **Corrected**: baseline 96.6%
+(57/59), panel 98.3% (58/59), **delta +1.7pp (one question)**, **escalation
+0.0%**. Findings: benchmark/results/math_open_pilot_findings.md.
+
+TWO honest findings:
+1. **Deliberation is INERT on hard math** (the real result): 0% escalation —
+   57/59 all-3-agree, 2/59 two-agree, ZERO 3-way splits, so the judge never
+   fired. The +1.7 (1 item) is self-consistency@3 within noise, not
+   deliberation. Three strong homogeneous solvers converge → nothing triggers
+   the tribunal. SAME mechanism as the qwen38_panel negative; and the failure
+   it can't fix (all-3-agree-wrong) IS the central unanimous-wrong mode.
+2. **MATH-500 L5 is near-saturated for the flagship even open-answer** (96.6%,
+   not the 89.8% first reported). Open-answer did NOT expose big headroom.
+   Testing math deliberation needs a sub-90% surface (AIME/Olympiad) AND a
+   weaker/more-diverse solver pool that actually disagrees.
+
+METHODOLOGICAL CATCH (ultracode verification paid off): the FIRST grader
+reported 89.8% — but 4 of 6 "errors" were grader false-negatives on
+interval/±/set answers. Upgraded the grader (commit 40372fb; 0/4000
+false-positives, L5 96→97%), RE-GRADED the stored answers for free → 96.6/98.3.
+A naive grader undercounts hard-math by ~7pt and fabricates headroom. Caught
+before it became a recorded "finding."
+
+REUSABLE ASSETS delivered: open-answer math engine + false-positive-free
+equivalence grader, both offline-tested, that make hard open-answer math
+evaluable at all (nothing else in this repo could grade `\frac12`==`0.5`).
 
 ## NEXT (ranked)
-1. Score the n=60 pilot (runner reports it; also re-score from JSONL). If the
-   baseline shows real headroom (not saturated) AND panel > baseline → the
-   first hard-MATH deliberation win; replicate at a 2nd seed. If null → record
-   why (baseline saturated even open-answer? escalation too rare?).
-2. Optional grader refinement: expand brace-less \fracAB short-form in
-   _normalize (helps lower levels; NOT needed for L5, deferred until after the
-   pilot to keep runtime grading consistent).
+1. **Consolidate + document the reasoning arc** (free, additive): the
+   hard-math result completes the "when does deliberation help" story
+   (validated: hard STEM w/ high unanimous-wrong; inert: saturated math &
+   homogeneous strong panels). Consider one more additive site Build Log entry
+   on the honest math result. Additive-only, within grant.
+2. If pursuing math further: an AIME-tier open-answer pilot (flagship genuinely
+   <90%) with a MIXED solver pool (flash + flagship) so solvers disagree and
+   escalation can fire — the only way deliberation could show on math. Paid.
 3. Calibration memory (§5.1) + R2 per-question router for the MoO oracle gap.
