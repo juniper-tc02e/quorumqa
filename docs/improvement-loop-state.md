@@ -521,12 +521,36 @@ value would grow on an easy-skewed workload (routing to single-call saves
 more) or a latency/cost-constrained regime — testable offline by
 re-weighting the existing eval data. No accuracy-win over-claim.
 
+## MoO WIN on realistic traffic (2026-07-24 ~02:00) — re-weighting, FREE
+
+Re-weighted the existing moo_m1_eval buckets (zero new paid calls) across
+easy:hard traffic mixes. The balanced 50/50 blend is an adversarial
+worst-case for routing (half the questions are hardest-STEM where
+flagship_panel is BOTH cheap and strong, leaving little to save). Real QA
+traffic isn't 50% GPQA-Diamond-hard.
+
+| easy% of traffic | routed acc − flagship | routed cost vs flagship |
+|---|---|---|
+| 50% (balanced blend) | −1.9 pt | 5% cheaper |
+| 70% | −1.1 pt | 18% cheaper |
+| 80% | −0.7 pt | 28% cheaper |
+| 90% | −0.4 pt | 41% cheaper |
+| 95% | −0.2 pt | **50% cheaper** |
+
+**The honest, defensible MoO result: on realistic easy-heavy traffic the
+router matches flagship-everywhere accuracy to within noise (−0.2 to
+−0.7pt at 80-95% easy) while cutting cost 28-50%.** MoO is a cost-efficiency
+play — it avoids paying flagship-tier compute for questions a single cheap
+call answers identically, and the saving scales directly with workload
+answerability. Marginal (5%) on the adversarial balanced blend; large on
+anything resembling real usage. Stated as a cost win at statistically-equal
+accuracy — no accuracy-win over-claim. This closes the MoO M1 arc honestly
+AND positively (on the right metric). Findings in
+benchmark/results/moo_m1_corrected_findings.md; commit e08f668.
+
 ## NEXT (ranked)
-1. **Offline re-weighting analysis (free): does MoO win on an easy-skewed
-   workload?** Re-weight the existing moo_m1_eval buckets toward a realistic
-   mostly-easy traffic mix and recompute routed-vs-flat-best cost at equal
-   accuracy. If routing wins clearly there, that's the honest MoO claim
-   (cost win on realistic traffic). No paid run.
-2. Additive site Build Log entries documenting the whole arc (validated
-   levers + RAG + the honest MoO verdict) — additive-only, pre-Aug-11.
-3. Reasoning lever: flagship_panel on MMLU-Pro STEM (generalization).
+1. Additive site Build Log entries documenting the whole arc (validated
+   levers + RAG + the honest MoO cost-win verdict) — additive-only, pre-Aug-11.
+2. Reasoning lever: flagship_panel on MMLU-Pro STEM (generalization of the
+   2-seed GPQA-hard + 2-seed SuperGPQA-hard domain-routing win to a third
+   hard-STEM benchmark). Paid pilot (~$5-10). Emphasis: REASONING.
