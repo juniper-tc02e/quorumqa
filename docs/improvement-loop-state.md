@@ -488,3 +488,45 @@ and fixable:
    router that could capture the 3.6pt oracle gap.
 3. Additive site Build Log entries for the validated results (RAG,
    rag_thinking_gate, the honest M1 verdict) — additive-only, pre-Aug-11.
+
+## MoO M1 CORRECTED router (2026-07-24 ~01:00) — the honest MoO verdict
+
+Corrected router (flagship for hard STEM, cost-aware tie-break from a
+measured calibration table built offline from moo_m1_eval.jsonl — zero new
+paid calls). Independently re-verified (91.0% @ 6208 tok/q, n=111):
+
+| | Accuracy | Cost tok/q |
+|---|---|---|
+| flat-best (flagship_panel) | 92.8% | 6625 |
+| OLD R1 router | 90.1% | 7826 |
+| CORRECTED router | 91.0% | 6208 |
+| oracle | 96.4% | — |
+
+**Honest verdict: the corrected router clearly beats the naive router
+(+0.9pt AND 21% cheaper) but does NOT beat flat-best flagship_panel —
+1.8pt less accurate at ~6% lower cost.** On this balanced blend, MoO
+routing does not deliver a clean win over simply running the strongest
+single profile. The 1.8pt shortfall is in two noisy small-sample buckets
+(gpqa_organic_chem n=14, unknown n=9-11); on the robust-sample bucket
+(supergpqa_hard_stem) the fix works exactly as diagnosed (ties bucket
+flat-best at flagship cost). 328 tests.
+
+**The strategic truth, stated straight:** flagship_panel is a strong,
+surprisingly cheap generalist (rare escalation -> low cost, strong solvers
+-> high accuracy), which sets a bar domain-routing struggles to beat on a
+balanced 50/50 hard/easy blend. The individual profiles ARE validated
+niche wins (chem_thinking_gate, flagship_panel, rag_thinking_gate each beat
+their relevant baselines); ORCHESTRATING across them is marginal HERE. MoO's
+value would grow on an easy-skewed workload (routing to single-call saves
+more) or a latency/cost-constrained regime — testable offline by
+re-weighting the existing eval data. No accuracy-win over-claim.
+
+## NEXT (ranked)
+1. **Offline re-weighting analysis (free): does MoO win on an easy-skewed
+   workload?** Re-weight the existing moo_m1_eval buckets toward a realistic
+   mostly-easy traffic mix and recompute routed-vs-flat-best cost at equal
+   accuracy. If routing wins clearly there, that's the honest MoO claim
+   (cost win on realistic traffic). No paid run.
+2. Additive site Build Log entries documenting the whole arc (validated
+   levers + RAG + the honest MoO verdict) — additive-only, pre-Aug-11.
+3. Reasoning lever: flagship_panel on MMLU-Pro STEM (generalization).
