@@ -41,7 +41,21 @@ log = logging.getLogger(__name__)
 DATASET_ID = "TIGER-Lab/MMLU-Pro"
 
 
-def load_mmlu_pro_set(n: int = 90, seed: int = 42, category: str | None = None) -> list[GPQAItem]:
+# The hard-STEM core of MMLU-Pro's 14 categories, used for the flagship_panel
+# reasoning-generalization pilot: these are the disciplines where the cheap
+# tier's unanimous-wrong rate runs highest (the condition under which
+# deliberation demonstrably helps, per the GPQA-hard + SuperGPQA-hard finding).
+# Deliberately excludes the softer/knowledge-recall categories (law, history,
+# health, psychology, business, economics, philosophy, other).
+STEM_CATEGORIES = frozenset({"physics", "chemistry", "math", "engineering", "computer science", "biology"})
+
+
+def load_mmlu_pro_set(
+    n: int = 90,
+    seed: int = 42,
+    category: str | None = None,
+    categories: frozenset[str] | None = None,
+) -> list[GPQAItem]:
     ds = load_dataset(DATASET_ID, split="test")
     rng = random.Random(seed)
 
@@ -54,6 +68,8 @@ def load_mmlu_pro_set(n: int = 90, seed: int = 42, category: str | None = None) 
             break
         row = ds[i]
         if category is not None and row.get("category") != category:
+            continue
+        if categories is not None and row.get("category") not in categories:
             continue
 
         options = row["options"]
@@ -76,5 +92,15 @@ def load_mmlu_pro_set(n: int = 90, seed: int = 42, category: str | None = None) 
             )
         )
 
-    log.info("Loaded %d MMLU-Pro items (category=%s, seed=%d, trimmed to 4 choices)", len(items), category, seed)
+    log.info(
+        "Loaded %d MMLU-Pro items (category=%s, categories=%s, seed=%d, trimmed to 4 choices)",
+        len(items), category, categories, seed,
+    )
     return items
+
+
+def load_mmlu_pro_stem_set(n: int = 90, seed: int = 42) -> list[GPQAItem]:
+    """MMLU-Pro restricted to the hard-STEM core (STEM_CATEGORIES). Used for the
+    flagship_panel reasoning-generalization pilot — the third hard-STEM
+    benchmark after GPQA-hard and SuperGPQA-hard."""
+    return load_mmlu_pro_set(n=n, seed=seed, categories=STEM_CATEGORIES)
