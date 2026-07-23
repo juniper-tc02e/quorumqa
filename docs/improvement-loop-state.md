@@ -398,10 +398,14 @@ must be router-gated (hurts on search-proof GPQA). RAG = a domain-gated
 lever like flagship_panel: help where the gap is retrievable knowledge,
 skip where search-proof. Cheaper than tier-swap.
 
-**RAG results:** R1 pre-solve `rag_presolve` = **VALIDATED, 3-seed bar met**
-(+4.7/+6.9/+8.0, mean +6.5, floor cut every seed; 4th validated lever;
-cheapest floor fix — mean lift beats flagship_panel's +4.1 at a fraction
-of the cost, lower absolute ceiling; router chooses by budget). R2 disputed-step recursion (G2) = Bet-2
+**RAG results:** R1 `rag_presolve` = **validated-with-variance** (4 seeds:
++4.7/+6.9/+8.0/−5.6, mean +3.5; the negative seed's mechanism is
+diagnostic — retrieved passages misled the panel into false consensus on
+10 questions). Stack finding (seed 271): thinking seat + gate RESIST
+evidence-misled consensus (floor 22→9, strongest cut measured) but
+tribunal broke even. Next retrieval lever: evidence-relevance gating
+(inject only above a score threshold) — targets the failure mode
+directly. R2 disputed-step recursion (G2) = Bet-2
 NOT met: −1.2 vs R1, no gain, because R2 fires only on escalation and so
 structurally cannot touch the unanimous-wrong floor where the accuracy
 lives (see rag_r2_findings.md). Reinforces: binding constraint is upstream
