@@ -105,13 +105,16 @@ BASELINE_LENS = (
 )
 
 
-def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: float = 0.4, model: str = ORCHESTRATOR_MODEL) -> tuple[str, str, CallUsage]:
+def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: float = 0.4, model: str = ORCHESTRATOR_MODEL, thinking: bool = True) -> tuple[str, str, CallUsage]:
     """One solver call solving `problem` under the given lens/temperature.
     `model` defaults to the flagship (ORCHESTRATOR_MODEL); pass MECHANICAL_MODEL
     for the cheap-tier variant that mirrors the SHIPPED engine's actual solver
-    tier (flash solvers, flagship escalation). Returns (answer_str, reasoning,
-    usage). `answer_str` is already run through `extract_boxed`, so callers
-    never need to re-parse it."""
+    tier (flash solvers, flagship escalation). `thinking` defaults True; the
+    SHIPPED engine runs its cheap voter seats with thinking=False (fast, cheap,
+    and weak enough to genuinely disagree -- which is what triggers escalation),
+    so the cheap tier passes thinking=False here. Returns (answer_str,
+    reasoning, usage). `answer_str` is already run through `extract_boxed`, so
+    callers never need to re-parse it."""
     user = (
         f"Problem: {problem}\n\n"
         'JSON shape: {"reasoning": "...", "answer": "\\\\boxed{...}"}\n'
@@ -123,8 +126,9 @@ def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: flo
         system=f"{SOLVER_SYSTEM}\n\n{lens}",
         user=user,
         role="solver",
-        thinking=True,
+        thinking=thinking,
         temperature=temperature,
+        max_tokens=2048,
         retries=2,
     )
     reasoning = str(result.data.get("reasoning", ""))
@@ -230,18 +234,18 @@ def _cluster_answers(answers: list[str]) -> list[list[int]]:
     return list(groups.values())
 
 
-async def _solve_panel_answers_async(client: QwenClient, problem: str, lenses: list[str], solver_model: str) -> list[tuple[str, str, CallUsage]]:
+async def _solve_panel_answers_async(client: QwenClient, problem: str, lenses: list[str], solver_model: str, solver_thinking: bool) -> list[tuple[str, str, CallUsage]]:
     """Mirrors solve_all_flagship_panel's async gather structure: 3 solver
     seats, distinct lenses, SOLVER_TEMPERATURES, all on `solver_model`,
     dispatched concurrently via asyncio.to_thread."""
     tasks = [
-        asyncio.to_thread(solve_one_math, client, problem, lenses[i], SOLVER_TEMPERATURES[i], solver_model)
+        asyncio.to_thread(solve_one_math, client, problem, lenses[i], SOLVER_TEMPERATURES[i], solver_model, solver_thinking)
         for i in range(3)
     ]
     return list(await asyncio.gather(*tasks))
 
 
-def solve_panel_math(client: QwenClient, item: MathItem, solver_model: str = ORCHESTRATOR_MODEL) -> dict:
+def solve_panel_math(client: QwenClient, item: MathItem, solver_model: str = ORCHESTRATOR_MODEL, solver_thinking: bool = True) -> dict:
     """The ENGINE: 3 solvers (distinct lenses + SOLVER_TEMPERATURES, mirroring
     solve_all_flagship_panel), clustered by grade() equivalence. If the largest
     cluster has >=2 members, its answer is final and escalated=False. If all
@@ -256,7 +260,7 @@ def solve_panel_math(client: QwenClient, item: MathItem, solver_model: str = ORC
     panel, which never split -> 0% escalation)."""
     start = time.monotonic()
     lenses = _lenses_for(3)
-    triples = asyncio.run(_solve_panel_answers_async(client, item.problem, lenses, solver_model))
+    triples = asyncio.run(_solve_panel_answers_async(client, item.problem, lenses, solver_model, solver_thinking))
 
     answers = [t[0] for t in triples]
     calls: list[CallUsage] = [t[2] for t in triples]

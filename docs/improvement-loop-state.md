@@ -651,12 +651,23 @@ gap where, per the thesis, escalation should FIRE and the flagship judge
 recover. THE experiment that could produce a math-deliberation win. Result
 pending.
 
+## AIME cheap-tier run #1 = INVALID (survivorship bias, 2026-07-24 ~03:45)
+
+First AIME run is NOT a finding — 32/60 panel + 12/60 baseline items DROPPED
+(ReadTimeout ×56, 429 rate-limit ×30). AIME thinking traces exceed the 300s
+timeout AND concurrency-6 × (3 solvers+judge) tripped the rate limit; the
+HARDEST problems (longest traces, most likely wrong/disagreeing) dropped, so
+the n=26 survivors are a biased EASY subset → flash "100%", 0 escalation. Same
+survivorship trap as the early chem_flagship_gate run; caught, not reported.
+Root causes: (a) client retries only JSON-parse failures, transport errors
+(ReadTimeout/429) propagate → item drops; (b) concurrency too high.
+FIX: retry-with-backoff on transient errors in the runner + concurrency 2.
+
 ## NEXT (ranked)
-1. Score the AIME cheap-tier pilot. Key numbers: flash-solver accuracy (should
-   be low → real gap), ESCALATION rate (should finally be >0), and whether the
-   flagship judge recovers on escalated items (baseline vs cheap-panel delta).
-   If escalation fires + recovers → the first math-deliberation demonstration.
-   Also run AIME flagship-tier for the full picture.
+1. Re-run AIME cheap-tier VALID: runner retries transient errors, concurrency
+   2, then score escalation + judge-recovery. If drops persist even so, AIME is
+   infrastructure-blocked at the 300s timeout — record THAT honestly (don't
+   force a biased number).
 2. Consolidate the whole reasoning arc into an additive site Build Log entry
    (when does deliberation help: validated hard-STEM wins; inert on saturated
    math; the AIME result). Additive-only, within grant.

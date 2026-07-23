@@ -44,32 +44,45 @@ log = logging.getLogger(__name__)
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 
+# Transient transport failures (ReadTimeout, 429 rate-limit, 5xx) are the
+# dominant drop cause on hard/long problems -- and because the HARDEST problems
+# are the slowest, dropping-on-first-error silently biases the surviving set
+# toward easy questions (the AIME run #1 survivorship trap). The QwenClient
+# retries only JSON-parse failures, so the runner retries the whole item on any
+# exception with exponential backoff before giving up. Re-solving is idempotent.
+_MAX_ATTEMPTS = 4
+
+
+async def _attempt_with_retries(label, item, semaphore, fn):
+    for attempt in range(_MAX_ATTEMPTS):
+        try:
+            async with semaphore:
+                return await asyncio.to_thread(fn)
+        except Exception as exc:
+            if attempt == _MAX_ATTEMPTS - 1:
+                log.error("%s: %s DROPPED after %d attempts (%s: %s)",
+                          item.question_id, label, _MAX_ATTEMPTS, type(exc).__name__, str(exc)[:120])
+                return None
+            backoff = 5 * (2 ** attempt)  # 5, 10, 20s -- lets a rate-limit window clear
+            log.warning("%s: %s attempt %d/%d failed (%s), retrying in %ds",
+                        item.question_id, label, attempt + 1, _MAX_ATTEMPTS, type(exc).__name__, backoff)
+            await asyncio.sleep(backoff)
+    return None
+
+
 async def _run_baseline_one(client, item, semaphore):
-    try:
-        async with semaphore:
-            result = await asyncio.to_thread(solve_single_math, client, item)
-    except Exception:
-        log.exception("%s: baseline DROPPED after unrecoverable error", item.question_id)
-        return None
-    log.info(
-        "%s [baseline]: %s(%s)",
-        item.question_id, result["final_answer"], "correct" if result["correct"] else "wrong",
-    )
+    result = await _attempt_with_retries("baseline", item, semaphore, lambda: solve_single_math(client, item))
+    if result is not None:
+        log.info("%s [baseline]: %s(%s)", item.question_id, result["final_answer"],
+                 "correct" if result["correct"] else "wrong")
     return result
 
 
-async def _run_panel_one(client, item, semaphore, solver_model):
-    try:
-        async with semaphore:
-            result = await asyncio.to_thread(solve_panel_math, client, item, solver_model)
-    except Exception:
-        log.exception("%s: panel DROPPED after unrecoverable error", item.question_id)
-        return None
-    log.info(
-        "%s [panel]: %s(%s, escalated=%s)",
-        item.question_id, result["final_answer"],
-        "correct" if result["correct"] else "wrong", result["escalated"],
-    )
+async def _run_panel_one(client, item, semaphore, solver_model, solver_thinking):
+    result = await _attempt_with_retries("panel", item, semaphore, lambda: solve_panel_math(client, item, solver_model, solver_thinking))
+    if result is not None:
+        log.info("%s [panel]: %s(%s, escalated=%s)", item.question_id, result["final_answer"],
+                 "correct" if result["correct"] else "wrong", result["escalated"])
     return result
 
 
@@ -79,9 +92,14 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     else:
         items = load_math_open_set(n=n, seed=seed, level=level)
     solver_model = MECHANICAL_MODEL if solver_tier == "cheap" else ORCHESTRATOR_MODEL
+    # The SHIPPED engine runs its cheap voter seats with thinking OFF (fast,
+    # cheap, weak enough to genuinely disagree -> triggers escalation). The
+    # flagship judge always thinks. This also keeps flash calls short, avoiding
+    # the long-trace ReadTimeouts that biased AIME run #1.
+    solver_thinking = solver_tier != "cheap"
     log.info(
-        "Loaded %d %s open-answer items (level=%s, seed=%d) -- panel solver_tier=%s (%s), judge always flagship",
-        len(items), dataset, level, seed, solver_tier, solver_model,
+        "Loaded %d %s open-answer items (level=%s, seed=%d) -- panel solver_tier=%s (%s, thinking=%s), judge always flagship",
+        len(items), dataset, level, seed, solver_tier, solver_model, solver_thinking,
     )
 
     client = QwenClient()
@@ -93,7 +111,7 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     semaphore = asyncio.Semaphore(concurrency)
 
     baseline_tasks = [asyncio.ensure_future(_run_baseline_one(client, item, semaphore)) for item in items]
-    panel_tasks = [asyncio.ensure_future(_run_panel_one(client, item, semaphore, solver_model)) for item in items]
+    panel_tasks = [asyncio.ensure_future(_run_panel_one(client, item, semaphore, solver_model, solver_thinking)) for item in items]
 
     baseline_results = [r for r in await asyncio.gather(*baseline_tasks) if r is not None]
     panel_results = [r for r in await asyncio.gather(*panel_tasks) if r is not None]
