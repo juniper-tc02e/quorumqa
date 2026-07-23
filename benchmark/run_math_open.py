@@ -34,6 +34,7 @@ from pathlib import Path
 from quorumqa.config import MECHANICAL_MODEL, ORCHESTRATOR_MODEL
 from quorumqa.qwen_client import QwenClient
 
+from benchmark.load_aime import load_aime_set
 from benchmark.load_math_open import load_math_open_set
 from benchmark.math_open_engine import solve_panel_math, solve_single_math
 
@@ -72,12 +73,15 @@ async def _run_panel_one(client, item, semaphore, solver_model):
     return result
 
 
-async def main(n: int, seed: int, level: int | None, concurrency: int, solver_tier: str = "flagship") -> None:
-    items = load_math_open_set(n=n, seed=seed, level=level)
+async def main(n: int, seed: int, level: int | None, concurrency: int, solver_tier: str = "flagship", dataset: str = "math500") -> None:
+    if dataset == "aime":
+        items = load_aime_set(n=n, seed=seed)
+    else:
+        items = load_math_open_set(n=n, seed=seed, level=level)
     solver_model = MECHANICAL_MODEL if solver_tier == "cheap" else ORCHESTRATOR_MODEL
     log.info(
-        "Loaded %d MATH-500 open-answer items (level=%s, seed=%d) -- panel solver_tier=%s (%s), judge always flagship",
-        len(items), level, seed, solver_tier, solver_model,
+        "Loaded %d %s open-answer items (level=%s, seed=%d) -- panel solver_tier=%s (%s), judge always flagship",
+        len(items), dataset, level, seed, solver_tier, solver_model,
     )
 
     client = QwenClient()
@@ -104,10 +108,12 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     # The baseline is always a single flagship call (tier-independent), but the
     # panel varies by solver tier -- suffix the panel file so a cheap-tier run
-    # never overwrites a flagship-tier run's results.
-    baseline_path = RESULTS_DIR / f"math_open_baseline_seed{seed}.jsonl"
+    # never overwrites a flagship-tier run's results. Dataset prefixes the name
+    # so AIME never collides with MATH-500.
+    prefix = "aime_open" if dataset == "aime" else "math_open"
+    baseline_path = RESULTS_DIR / f"{prefix}_baseline_seed{seed}.jsonl"
     panel_suffix = "" if solver_tier == "flagship" else f"_{solver_tier}"
-    panel_path = RESULTS_DIR / f"math_open_panel{panel_suffix}_seed{seed}.jsonl"
+    panel_path = RESULTS_DIR / f"{prefix}_panel{panel_suffix}_seed{seed}.jsonl"
 
     with baseline_path.open("w", encoding="utf-8") as f:
         for r in baseline_results:
@@ -154,5 +160,7 @@ if __name__ == "__main__":
     parser.add_argument("--solver-tier", choices=["flagship", "cheap"], default="flagship",
                         help="panel solver tier: 'flagship' (qwen3.7-max, all-strong panel) or "
                              "'cheap' (qwen3.6-flash solvers + flagship judge -- the SHIPPED engine's real tier)")
+    parser.add_argument("--dataset", choices=["math500", "aime"], default="math500",
+                        help="'math500' (level-filtered MATH-500) or 'aime' (AIME 2024+2025, integer answers)")
     args = parser.parse_args()
-    asyncio.run(main(args.n, args.seed, args.level, args.concurrency, args.solver_tier))
+    asyncio.run(main(args.n, args.seed, args.level, args.concurrency, args.solver_tier, args.dataset))
