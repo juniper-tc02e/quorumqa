@@ -1,0 +1,21 @@
+2026-07-24 01:59:33,253 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-24 01:59:33,272 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/HuggingFaceH4/MATH-500/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/README.md "HTTP/1.1 200 OK"
+2026-07-24 01:59:33,632 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:59:34,608 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/HuggingFaceH4/MATH-500/HuggingFaceH4/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-24 01:59:34,871 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/revision/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be "HTTP/1.1 200 OK"
+2026-07-24 01:59:35,132 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-24 01:59:35,448 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=HuggingFaceH4/MATH-500 "HTTP/1.1 200 OK"
+2026-07-24 01:59:35,705 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-24 01:59:35,965 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-24 01:59:36,283 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-24 01:59:36,460 INFO Loaded 3 MATH-500 OPEN-answer items (level=5, seed=42) -- raw open `answer` kept as gold_answer, no distractor synthesis, no MC framing
+2026-07-24 01:59:36,460 INFO Loaded 3 MATH-500 open-answer items (level=5, seed=42)
+2026-07-24 01:59:52,249 INFO test/number_theory/1128.json [baseline]: 2(correct)
+2026-07-24 01:59:57,501 INFO test/number_theory/769.json [baseline]: 9(correct)
+2026-07-24 01:59:59,749 INFO test/algebra/2517.json [baseline]: -\dfrac{35}{9}(correct)
+2026-07-24 02:00:16,894 INFO test/number_theory/769.json [panel]: 9(correct, escalated=False)
+2026-07-24 02:00:20,155 INFO test/algebra/2517.json [panel]: -\dfrac{35}{9}(correct, escalated=False)
+2026-07-24 02:00:20,911 INFO test/number_theory/1128.json [panel]: 2(correct, escalated=False)
+2026-07-24 02:00:20,913 INFO Wrote 3 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\math_open_baseline_seed42.jsonl
+2026-07-24 02:00:20,913 INFO Wrote 3 panel results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\math_open_panel_seed42.jsonl
+2026-07-24 02:00:20,913 INFO RESULTS (n=3 common items, seed=42, level=5): baseline=100.0% (3/3) panel=100.0% (3/3) delta=+0.0 pp escalation_rate=0.0% (0/3)
