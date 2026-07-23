@@ -83,6 +83,27 @@ Levers:
                  QUORUMQA_RAG_DB env var. Firewall (section 4): every
                  output row records rag="ON" and the exact rag_snapshot_id
                  read from the open index (see _build_output_row).
+  rag_recursive -- docs/recursive-rag-plan.md section 2, R2 (disputed-step
+                 retrieval, the first RECURSION -- Bet 2). rag_presolve's R1
+                 pre-solve retrieval, PLUS, on escalation only: the Skeptic's
+                 named disputed_step + argument, and the divergent solver
+                 claims (plurality + dissent), become a second, sharper
+                 query (build_disputed_step_query); a second retrieval
+                 (fixed top-k=3, RAG_R2_K) fires against the SAME
+                 matched-encoder index R1 used; the results are injected as
+                 an evidence block into the Verifier's context (verify()'s
+                 new evidence_block parameter) ALONGSIDE its existing
+                 lookup_constant/safe_calculate MCP tool calls -- retrieval
+                 is ADDED grounding, never a replacement. Unanimous
+                 (non-escalated) questions never trigger R2 -- only R1 ran,
+                 identical to rag_presolve. Skeptic/Judge and the escalation
+                 trigger itself are completely untouched. Same fail-loud
+                 missing-index contract as rag_presolve (same RagPresolveConfig,
+                 same open_rag_index). Firewall: every output row carries
+                 rag_presolve's rag="ON"/rag_snapshot_id fields PLUS
+                 rag_r2="ON"/"OFF" (whether R2 actually fired for that
+                 question), rag_r2_snapshot_id, rag_r2_query, rag_r2_titles
+                 (see _build_output_row).
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -94,6 +115,7 @@ Usage:
   python -m benchmark.lever_experiments --lever qwen38_panel --n 90 --seed 42
   python -m benchmark.lever_experiments --lever chem_thinking_gate --n 90 --seed <FRESH>  # never 42/7/123/555/777/888
   python -m benchmark.lever_experiments --lever rag_presolve --n 90 --seed 42 --dataset supergpqa --rag-k 5
+  python -m benchmark.lever_experiments --lever rag_recursive --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -517,6 +539,10 @@ async def solve_all_qwen38_panel(client, question, choices):
 RAG_DB_ENV = "QUORUMQA_RAG_DB"
 DEFAULT_RAG_DB_PATH = Path(__file__).resolve().parent / "data" / "rag_index_preembedded.sqlite3"
 DEFAULT_RAG_K = 5
+# rag_recursive (R2) only: top-k for the disputed-step retrieval, fixed per
+# docs/recursive-rag-plan.md section 2 ("retrieve top-k (k=3) passages") --
+# not CLI-overridable like R1's k, since the spec pins this value.
+RAG_R2_K = 3
 # ~200 words total across ALL retrieved passages, split evenly across
 # however many were retrieved -- keeps the extra context lean per
 # docs/recursive-rag-plan.md's "keep snippets short" instruction, rather
@@ -604,9 +630,12 @@ def build_rag_presolve_config(db_path: str | Path, k: int = DEFAULT_RAG_K) -> Ra
     return RagPresolveConfig(index=index, embedder=embedder, k=k, snapshot_id=snapshot_id, db_path=Path(db_path))
 
 
-def retrieve_rag_evidence(rag: RagPresolveConfig, question: str) -> list[dict]:
+def retrieve_rag_evidence(rag: RagPresolveConfig, question: str, k: int | None = None) -> list[dict]:
+    """`k` overrides `rag.k` for this one call (used by rag_recursive's R2
+    retrieval, which is always top-3 regardless of R1's configured k); omit
+    it to keep R1's existing behavior (search at rag.k) unchanged."""
     query_vector = rag.embedder(question) if rag.embedder is not None else None
-    return rag.index.search(question, query_vector, k=rag.k)
+    return rag.index.search(question, query_vector, k=k if k is not None else rag.k)
 
 
 def build_evidence_block(results: list[dict], word_budget: int = RAG_EVIDENCE_WORD_BUDGET) -> str:
@@ -651,6 +680,20 @@ def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHAN
     return answer, result.usage
 
 
+def build_disputed_step_query(skeptic_rebuttal: SkepticRebuttal, solver_answers: list[SolverAnswer]) -> str:
+    """The R2 query (docs/recursive-rag-plan.md section 2): the Skeptic's
+    NAMED disputed step (plus its argument) and the solvers' divergent
+    claims -- the plurality and dissenting letters/reasoning already sitting
+    in solver_answers on a split -- concatenated into one query far sharper
+    than the raw question R1 retrieved against. This is the "recursive"
+    step: retrieval driven by deliberation state, not the original prompt."""
+    parts = [skeptic_rebuttal.disputed_step]
+    if skeptic_rebuttal.argument:
+        parts.append(skeptic_rebuttal.argument)
+    parts.extend(f"{a.letter}: {a.reasoning}" for a in solver_answers if a.reasoning)
+    return " ".join(p for p in parts if p).strip()
+
+
 async def solve_all_rag_presolve(client, question, choices, rag: RagPresolveConfig):
     """Retrieves top-k passages for the QUESTION ONCE (not once per solver
     seat), builds one evidence block, and gives every one of the three
@@ -670,18 +713,41 @@ async def solve_all_rag_presolve(client, question, choices, rag: RagPresolveConf
     return solver_pairs, titles
 
 
-async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate):
+async def _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate, rag: "RagPresolveConfig | None" = None):
     """The shipped escalation path (skeptic -> verifier -> judge), unchanged
-    -- except WHICH function adjudicates is now a parameter. `adjudicator`
-    defaults to the shipped adjudicate() (qwen3.7-max via QwenClient/
-    DashScope); the qwen38_judge lever passes adjudicate_qwen38 instead
-    (qwen3.8-max-preview via the Token Plan transport). Skeptic and Verifier
-    are untouched either way."""
+    -- except WHICH function adjudicates is now a parameter, and (new, for
+    rag_recursive) an optional `rag` config triggers R2 disputed-step
+    retrieval (docs/recursive-rag-plan.md section 2) between the skeptic and
+    verifier calls. `adjudicator` defaults to the shipped adjudicate()
+    (qwen3.7-max via QwenClient/DashScope); the qwen38_judge lever passes
+    adjudicate_qwen38 instead (qwen3.8-max-preview via the Token Plan
+    transport). `rag` defaults to None, in which case this function behaves
+    byte-for-byte as before (verify() gets evidence_block="", every existing
+    caller -- the shipped engine, gate-replay, qwen38_judge -- is
+    unaffected). Skeptic is untouched either way; Verifier gains ONLY the
+    evidence_block grounding when rag is given -- its MCP tool calls still
+    fire exactly as shipped."""
     skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
         rebut, client, item.question, item.choices, plurality_letter, solver_answers
     )
     calls.append(skeptic_usage)
-    verifier_findings, verifier_usages = await verify(client, tool_session, item.question, solver_answers)
+
+    evidence_block = ""
+    r2_query = None
+    r2_titles: list[str] = []
+    if rag is not None:
+        r2_query = build_disputed_step_query(skeptic_rebuttal, solver_answers)
+        r2_results = await asyncio.to_thread(retrieve_rag_evidence, rag, r2_query, RAG_R2_K)
+        evidence_block = build_evidence_block(r2_results)
+        r2_titles = [r["title"] for r in r2_results]
+        log.info(
+            "%s: rag_recursive R2 disputed-step query=%r retrieved %d passage(s): %s",
+            item.question_id, r2_query, len(r2_titles), r2_titles,
+        )
+
+    verifier_findings, verifier_usages = await verify(
+        client, tool_session, item.question, solver_answers, evidence_block=evidence_block
+    )
     calls.extend(verifier_usages)
     verdict, judge_usage = await asyncio.to_thread(
         adjudicator, client, item.question, item.choices, solver_answers, skeptic_rebuttal, verifier_findings
@@ -693,6 +759,7 @@ async def _tribunal(client, tool_session, item, solver_answers, plurality_letter
         escalated=True, skeptic_rebuttal=skeptic_rebuttal, verifier_findings=verifier_findings,
         verdict=verdict, final_letter=verdict.final_letter, correct=(verdict.final_letter == item.correct_letter),
         false_escalation=false_escalation, calls=calls, latency_s=time.monotonic() - start,
+        rag_r2_query=r2_query, rag_r2_titles=r2_titles,
     )
 
 
@@ -715,15 +782,19 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
     elif lever == "qwen38_panel":
         solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
-    elif lever == "rag_presolve":
+    elif lever in ("rag_presolve", "rag_recursive"):
+        # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
+        # same solve_all_rag_presolve call, same evidence block, same
+        # solver seats. The only difference between the two levers is what
+        # happens on escalation (see the tribunal dispatch below).
         if rag is None:
             raise ValueError(
-                "lever 'rag_presolve' requires a RagPresolveConfig -- pass rag=... "
+                f"lever '{lever}' requires a RagPresolveConfig -- pass rag=... "
                 "(see main_live/build_rag_presolve_config); refusing to silently run the cheap "
                 "panel without retrieval"
             )
         solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
-        log.info("%s: rag_presolve retrieved %d passage(s): %s", item.question_id, len(retrieved_titles), retrieved_titles)
+        log.info("%s: %s retrieved %d passage(s) (R1 pre-solve): %s", item.question_id, lever, len(retrieved_titles), retrieved_titles)
     else:
         solver_pairs = await solve_all(client, item.question, item.choices)
 
@@ -756,6 +827,12 @@ async def run_question_lever(client, tool_session, item: GPQAItem, lever: str, r
             client, tool_session, item, solver_answers, plurality_letter, calls, start,
             adjudicator=adjudicate_qwen38,
         )
+    elif lever == "rag_recursive":
+        # The R2 recursion: rag is passed through so _tribunal retrieves a
+        # SECOND time from the skeptic's disputed step before the verifier
+        # runs. rag is guaranteed non-None here -- the dispatch above
+        # already raised ValueError if it were missing.
+        result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, rag=rag)
     else:
         result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
     return result, gate_note
@@ -779,19 +856,30 @@ async def _run_one(client, tool_session, item, semaphore, lever, rag: "RagPresol
 
 
 def _build_output_row(result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None) -> dict:
-    """The per-question JSONL row every lever writes. For rag_presolve,
-    also carries the firewall labeling required by docs/recursive-rag-
-    plan.md section 4: rag="ON" plus the exact rag_snapshot_id read from
-    the OPEN index's build_progress row at run start (see
+    """The per-question JSONL row every lever writes. For rag_presolve and
+    rag_recursive, also carries the firewall labeling required by docs/
+    recursive-rag-plan.md section 4: rag="ON" plus the exact rag_snapshot_id
+    read from the OPEN index's build_progress row at run start (see
     build_rag_presolve_config) -- never fabricated, never presented next
-    to a non-RAG number as if it were the same mode. Every other lever's
-    row shape is completely unchanged (no "rag" key at all)."""
+    to a non-RAG number as if it were the same mode. rag_recursive ADDS a
+    second marker on top: rag_r2="ON"/"OFF" records whether the R2
+    disputed-step retrieval actually fired for THIS question (only escalated
+    questions ever trigger it -- see _tribunal), plus the R2 query/titles it
+    retrieved when it did. Every other lever's row shape is completely
+    unchanged (no "rag"/"rag_r2" keys at all)."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
-    if lever == "rag_presolve":
+    if lever in ("rag_presolve", "rag_recursive"):
         row["rag"] = "ON"
         row["rag_snapshot_id"] = rag_config.snapshot_id if rag_config else None
         row["rag_k"] = rag_config.k if rag_config else None
         row["rag_db"] = str(rag_config.db_path) if rag_config else None
+    if lever == "rag_recursive":
+        r2_fired = bool(result.rag_r2_query)
+        row["rag_r2"] = "ON" if r2_fired else "OFF"
+        row["rag_r2_snapshot_id"] = (rag_config.snapshot_id if rag_config else None) if r2_fired else None
+        row["rag_r2_k"] = RAG_R2_K
+        row["rag_r2_query"] = result.rag_r2_query
+        row["rag_r2_titles"] = result.rag_r2_titles
     return row
 
 
@@ -803,14 +891,16 @@ async def main_live(lever: str, n: int, seed: int, concurrency: int, out_path: P
     semaphore = asyncio.Semaphore(concurrency)
 
     rag_config = None
-    if lever == "rag_presolve":
+    if lever in ("rag_presolve", "rag_recursive"):
         # Fail loudly HERE, before any solver call is made, if the index
-        # doesn't exist -- see open_rag_index's docstring.
+        # doesn't exist -- see open_rag_index's docstring. rag_recursive
+        # reuses the exact same R1 index/config as rag_presolve; R2's
+        # top-k=3 is fixed (RAG_R2_K), not derived from rag_k.
         resolved_rag_db = resolve_rag_db_path(rag_db)
         rag_config = build_rag_presolve_config(resolved_rag_db, k=rag_k)
         log.info(
-            "rag_presolve: index=%s snapshot=%s k=%d dense=%s",
-            resolved_rag_db, rag_config.snapshot_id, rag_k, rag_config.embedder is not None,
+            "%s: index=%s snapshot=%s k=%d dense=%s",
+            lever, resolved_rag_db, rag_config.snapshot_id, rag_k, rag_config.embedder is not None,
         )
 
     results = []
@@ -918,7 +1008,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -929,10 +1019,12 @@ if __name__ == "__main__":
                               "dataset unchanged -- they only vary HOW a question already loaded as a "
                               "GPQAItem gets answered, not where it came from.")
     parser.add_argument("--rag-db", type=str, default=None,
-                         help=f"rag_presolve only: RAG index sqlite3 DB path (default: ${RAG_DB_ENV} env "
+                         help=f"rag_presolve/rag_recursive only: RAG index sqlite3 DB path (default: ${RAG_DB_ENV} env "
                               f"var if set, else {DEFAULT_RAG_DB_PATH})")
     parser.add_argument("--rag-k", type=int, default=DEFAULT_RAG_K,
-                         help=f"rag_presolve only: top-k passages retrieved per question (default {DEFAULT_RAG_K})")
+                         help=f"rag_presolve/rag_recursive only: top-k passages retrieved per question for R1 "
+                              f"pre-solve retrieval (default {DEFAULT_RAG_K}). rag_recursive's R2 disputed-step "
+                              f"retrieval is always top-{RAG_R2_K}, fixed, not controlled by this flag.")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":

@@ -61,6 +61,12 @@ class QuestionResult(BaseModel):
     false_escalation: bool = False  # escalated but judge just re-confirmed the plurality
     calls: list[CallUsage] = Field(default_factory=list)
     latency_s: float = 0.0
+    # rag_recursive (R2, docs/recursive-rag-plan.md section 2) only: the
+    # disputed-step query actually sent to the index, and the titles it
+    # retrieved. None/empty for every other lever, and for rag_recursive
+    # questions that never escalated (R1-only, no R2 retrieval fired).
+    rag_r2_query: Optional[str] = None
+    rag_r2_titles: list[str] = Field(default_factory=list)
 
     @property
     def total_cost_usd(self) -> float:

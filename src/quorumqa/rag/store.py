@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import re
 import sqlite3
+import threading
 from pathlib import Path
 
 import numpy as np
@@ -237,6 +238,36 @@ class RagIndex:
         self._dense_ids: np.ndarray | None = None
         self._dense_matrix: np.ndarray | None = None
         self._dense_count_at_cache = -1
+        # A single RagIndex (and its one sqlite3.Connection) is cached and
+        # reused across concurrent callers -- lever_experiments.py's
+        # _rag_index_cache and mcp_server.py's _rag_index_cache both cache
+        # ONE RagIndex per DB path for the life of the process, and every
+        # concurrent asyncio.to_thread(retrieve...) call hits that same
+        # object from a different OS thread. sqlite3 connections are NOT
+        # safe for concurrent multi-threaded query execution even when
+        # opened with check_same_thread=False (that flag only disables
+        # Python's same-thread assertion; it does not make the underlying
+        # C-level SQLite connection safe for simultaneous cursor use across
+        # threads). Live-reproduced 2026-07-23 running the rag_recursive
+        # lever at concurrency=4 -- two concurrent .search() calls (R1's
+        # pre-solve retrieval on one question racing R2's disputed-step
+        # retrieval on another, both hitting this same cached connection)
+        # intermittently corrupted reads: "TypeError: 'NoneType' object is
+        # not subscriptable" out of a plain COUNT(*) fetchone(), and
+        # "sqlite3.InterfaceError: bad parameter or other API misuse" out of
+        # a plain SELECT ... WHERE id IN (...). Both silently dropped the
+        # question (see benchmark.lever_experiments._run_one's except
+        # Exception), which is exactly the kind of concurrency-correlated
+        # drop-bias source docs/recursive-rag-plan.md's discipline calls
+        # out. An RLock (not a plain Lock) because search() calls
+        # fts_search/dense_search/fetch_passages internally -- the SAME
+        # thread must be able to re-enter without deadlocking itself; a
+        # different thread still blocks until the whole composite read
+        # completes. Same "correctness over throughput" tradeoff as
+        # quorumqa.rag.embeddings' _encode_lock: one query's worth of
+        # SQLite reads is milliseconds, dwarfed by the LLM API latency this
+        # project is already bottlenecked on.
+        self._lock = threading.RLock()
 
     @classmethod
     def open(cls, db_path: str | Path) -> "RagIndex":
@@ -246,21 +277,23 @@ class RagIndex:
         self.conn.close()
 
     def _ensure_dense_cache(self) -> None:
-        count = self.conn.execute("SELECT COUNT(*) FROM embeddings").fetchone()[0]
-        if self._dense_matrix is not None and count == self._dense_count_at_cache:
-            return
-        self._dense_ids, self._dense_matrix = _load_dense_matrix(self.conn)
-        self._dense_count_at_cache = count
+        with self._lock:
+            count = self.conn.execute("SELECT COUNT(*) FROM embeddings").fetchone()[0]
+            if self._dense_matrix is not None and count == self._dense_count_at_cache:
+                return
+            self._dense_ids, self._dense_matrix = _load_dense_matrix(self.conn)
+            self._dense_count_at_cache = count
 
     def fts_search(self, query: str, limit: int = 50) -> list[tuple[int, float]]:
         match_query = _fts_match_query(query)
         if not match_query:
             return []
-        rows = self.conn.execute(
-            "SELECT rowid AS passage_id, bm25(passages_fts) AS score "
-            "FROM passages_fts WHERE passages_fts MATCH ? ORDER BY score LIMIT ?",
-            (match_query, limit),
-        ).fetchall()
+        with self._lock:
+            rows = self.conn.execute(
+                "SELECT rowid AS passage_id, bm25(passages_fts) AS score "
+                "FROM passages_fts WHERE passages_fts MATCH ? ORDER BY score LIMIT ?",
+                (match_query, limit),
+            ).fetchall()
         # bm25() in SQLite FTS5 is a "cost": lower (more negative) = better
         # match, and the query above already ORDERs by it ascending, so
         # this is best-match-first exactly as reciprocal_rank_fusion wants.
@@ -291,10 +324,11 @@ class RagIndex:
         if not passage_ids:
             return {}
         placeholders = ",".join("?" for _ in passage_ids)
-        rows = self.conn.execute(
-            f"SELECT id, article_id, title, text, source_url, snapshot_id FROM passages WHERE id IN ({placeholders})",
-            passage_ids,
-        ).fetchall()
+        with self._lock:
+            rows = self.conn.execute(
+                f"SELECT id, article_id, title, text, source_url, snapshot_id FROM passages WHERE id IN ({placeholders})",
+                passage_ids,
+            ).fetchall()
         return {row["id"]: row for row in rows}
 
     def search(
@@ -309,14 +343,17 @@ class RagIndex:
         """Fuses FTS5 top-`fts_k` and dense top-`dense_k` via RRF, returns
         the fused top-`k` with title/text/score/provenance. If
         `query_vector` is None, falls back to FTS5-only (e.g. embeddings
-        unavailable)."""
-        fts_ranked = [pid for pid, _ in self.fts_search(query, fts_k)]
-        dense_ranked = [pid for pid, _ in self.dense_search(query_vector, dense_k)] if query_vector is not None else []
+        unavailable). The whole composite read is serialized under one lock
+        acquisition (see __init__) so concurrent callers never interleave
+        SQLite cursor operations on the shared connection."""
+        with self._lock:
+            fts_ranked = [pid for pid, _ in self.fts_search(query, fts_k)]
+            dense_ranked = [pid for pid, _ in self.dense_search(query_vector, dense_k)] if query_vector is not None else []
 
-        rankings = [r for r in (fts_ranked, dense_ranked) if r]
-        fused = reciprocal_rank_fusion(rankings, k=rrf_k)[:k] if rankings else []
+            rankings = [r for r in (fts_ranked, dense_ranked) if r]
+            fused = reciprocal_rank_fusion(rankings, k=rrf_k)[:k] if rankings else []
 
-        rows = self.fetch_passages([pid for pid, _ in fused])
+            rows = self.fetch_passages([pid for pid, _ in fused])
         results = []
         for pid, score in fused:
             row = rows.get(pid)

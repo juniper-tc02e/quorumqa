@@ -26,10 +26,13 @@ FINALIZE_SYSTEM = (
 )
 
 
-def _extract_claims(client: QwenClient, question: str, solver_answers: list[SolverAnswer]) -> tuple[list[dict], CallUsage]:
+def _extract_claims(
+    client: QwenClient, question: str, solver_answers: list[SolverAnswer], evidence_block: str = ""
+) -> tuple[list[dict], CallUsage]:
     transcript = "\n\n".join(f"[{a.lens}] {a.letter}: {a.reasoning}" for a in solver_answers)
+    evidence_prefix = f"{evidence_block}\n\n" if evidence_block else ""
     user = (
-        f"Question: {question}\n\nSolver reasoning:\n{transcript}\n\n"
+        f"{evidence_prefix}Question: {question}\n\nSolver reasoning:\n{transcript}\n\n"
         'JSON shape: {"claims": [{"claim": "...", "tool": "lookup_constant|safe_calculate", '
         '"arguments": {...}}]} (arguments for lookup_constant: {"name": "..."}; '
         'for safe_calculate: {"expression": "..."})'
@@ -39,12 +42,13 @@ def _extract_claims(client: QwenClient, question: str, solver_answers: list[Solv
     return (claims if isinstance(claims, list) else []), result.usage
 
 
-def _finalize(client: QwenClient, executed: list[dict]) -> tuple[list[VerifierFinding], CallUsage]:
+def _finalize(client: QwenClient, executed: list[dict], evidence_block: str = "") -> tuple[list[VerifierFinding], CallUsage]:
     lines = "\n".join(
         f"- claim: {c['claim']} | tool: {c['tool']}({c['arguments']}) -> {c['tool_result']}" for c in executed
     )
+    evidence_prefix = f"{evidence_block}\n\n" if evidence_block else ""
     user = (
-        f"{lines}\n\n"
+        f"{evidence_prefix}{lines}\n\n"
         'JSON shape: {"findings": [{"claim": "...", "supports_claim": true/false, '
         '"explanation": "..."}]} (one entry per claim above, same order)'
     )
@@ -69,8 +73,16 @@ async def verify(
     tool_session: VerifierToolSession,
     question: str,
     solver_answers: list[SolverAnswer],
+    evidence_block: str = "",
 ) -> tuple[list[VerifierFinding], list[CallUsage]]:
-    claims, extract_usage = await asyncio.to_thread(_extract_claims, client, question, solver_answers)
+    """`evidence_block` (docs/recursive-rag-plan.md section 2, R2): passages
+    retrieved from a disputed-step query, injected as ADDED grounding
+    context for both the claim-extraction and finalize calls -- the
+    Verifier's existing MCP tool calls (lookup_constant/safe_calculate) are
+    completely unchanged and still fire exactly as before. Default "" means
+    every existing caller (the shipped engine, every other lever) behaves
+    byte-for-byte identically to before this parameter existed."""
+    claims, extract_usage = await asyncio.to_thread(_extract_claims, client, question, solver_answers, evidence_block)
     usages = [extract_usage]
 
     if not claims:
@@ -88,6 +100,6 @@ async def verify(
     if not executed:
         return [], usages
 
-    findings, finalize_usage = await asyncio.to_thread(_finalize, client, executed)
+    findings, finalize_usage = await asyncio.to_thread(_finalize, client, executed, evidence_block)
     usages.append(finalize_usage)
     return findings, usages
