@@ -663,11 +663,33 @@ Root causes: (a) client retries only JSON-parse failures, transport errors
 (ReadTimeout/429) propagate → item drops; (b) concurrency too high.
 FIX: retry-with-backoff on transient errors in the runner + concurrency 2.
 
-## NEXT (ranked)
-1. Re-run AIME cheap-tier VALID: runner retries transient errors, concurrency
-   2, then score escalation + judge-recovery. If drops persist even so, AIME is
-   infrastructure-blocked at the 300s timeout — record THAT honestly (don't
-   force a biased number).
+## ⛔ TOKEN-PLAN QUOTA EXHAUSTED — all paid runs blocked until 2026-07-28 03:32 UTC
+
+Diagnosed 2026-07-24 ~03:52: every call now returns
+`429 Throttling.AllocationQuota — "Your token-plan 1-week quota has been
+exhausted. The quota will reset at 07-28 03:32:00 UTC."` The QwenClient routes
+through the Token Plan endpoint (token-plan.ap-southeast-1.maas.aliyuncs.com/
+apps/anthropic), whose **1-WEEK sliding quota** this session's pilots consumed
+(MATH-500 flagship + cheap + AIME run #1). **No paid benchmark work is
+possible until 2026-07-28 03:32 UTC (~4 days).**
+
+KEY LESSON (record for pacing): Token Plan bills against an opaque weekly
+quota with NO per-token USD meter (cost_usd is logged as 0.0), so the
+"flag >$30" rule can't be applied by watching dollars — the only signal is
+the quota-exhausted 429. Pace paid runs against the weekly quota, not USD.
+
+The AIME cheap-tier fixes (thinking=False flash, retry-with-backoff, max_tokens
+2048) are BUILT, committed, and offline-tested (suite 380) — ready to run the
+instant the quota resets. AIME run #1 stays INVALID (survivorship bias).
+
+## NEXT — FREE work only until the quota resets (2026-07-28)
+1. **When quota resets (07-28):** run the fixed AIME cheap-tier pilot (valid,
+   thinking=False flash + retries), score escalation + judge-recovery.
+2. Consolidate the reasoning arc into an additive site Build Log entry (the
+   honest "MATH-500 saturated at both tiers → deliberation needs a real
+   cheap→flagship gap" finding). FREE, additive, within grant.
+3. Offline analyses that need no API: MoO calibration §5.1 from existing eval
+   data; any re-scoring/re-analysis of committed JSONL.
 2. Consolidate the whole reasoning arc into an additive site Build Log entry
    (when does deliberation help: validated hard-STEM wins; inert on saturated
    math; the AIME result). Additive-only, within grant.
