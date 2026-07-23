@@ -113,3 +113,30 @@ skewing the comparison, and the control ran at the same concurrency. The
 20→14, 18→15). The R1 THIRD seed (123), which runs on the fixed code, is
 the clean confirmation — if it also lands +4 to +7, the earlier seeds were
 not artifacts of the concurrency bug. Flagged here rather than buried.
+
+## Third seed (123): VALIDATION BAR MET
+
+Run on the RLock-fixed code (see transparency note above) with near-full
+completion (control 88/90, rag 89/90 — confirming earlier drops were
+partly the concurrency bug, and that it did not manufacture the deltas):
+
+| SuperGPQA-hard | Seed 42 | Seed 7 | Seed 123 |
+|---|---|---|---|
+| cheap-panel (no RAG) | 67.4% | 67.8% | 63.2% |
+| cheap-panel + RAG | 72.1% | 74.7% | 71.3% |
+| **Delta** | **+4.7** | **+6.9** | **+8.0** |
+| unanimous-wrong floor | 20→14 | 18→15 | 20→16 |
+
+**Mean +6.5, never below +4.7, floor cut at every seed. `rag_presolve`
+is VALIDATED at the project's standard bar** — the fourth validated
+lever, and the cheapest fix for the unanimous-wrong knowledge floor
+(cheap tokens + free corpus lookups, vs flagship_panel's ~3× flagship
+spend for mean +4.1 on the same benchmark). Notably, on these three
+seeds cheap+RAG's mean lift (+6.5) EXCEEDS flagship_panel's (+4.1),
+at a fraction of the cost — though flagship_panel reaches a higher
+absolute ceiling (81.7-83.3 vs 71.3-74.7); they fix the floor from
+different directions and the MoO router can choose by budget.
+
+GPQA tripwire (−4.7, no contamination) and the corpus-coverage boundary
+(LEXam: no Swiss law on a STEM shelf) complete the profile: retrieval is
+domain-gated, corpus-bound, and validated where both conditions hold.
