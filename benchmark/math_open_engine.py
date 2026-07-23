@@ -34,7 +34,7 @@ import asyncio
 import re
 import time
 
-from quorumqa.config import ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES
+from quorumqa.config import MECHANICAL_MODEL, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES
 from quorumqa.engine.solver import _lenses_for
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import CallUsage
@@ -105,10 +105,13 @@ BASELINE_LENS = (
 )
 
 
-def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: float = 0.4) -> tuple[str, str, CallUsage]:
-    """One flagship call solving `problem` under the given lens/temperature.
-    Returns (answer_str, reasoning, usage). `answer_str` is already run
-    through `extract_boxed`, so callers never need to re-parse it."""
+def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: float = 0.4, model: str = ORCHESTRATOR_MODEL) -> tuple[str, str, CallUsage]:
+    """One solver call solving `problem` under the given lens/temperature.
+    `model` defaults to the flagship (ORCHESTRATOR_MODEL); pass MECHANICAL_MODEL
+    for the cheap-tier variant that mirrors the SHIPPED engine's actual solver
+    tier (flash solvers, flagship escalation). Returns (answer_str, reasoning,
+    usage). `answer_str` is already run through `extract_boxed`, so callers
+    never need to re-parse it."""
     user = (
         f"Problem: {problem}\n\n"
         'JSON shape: {"reasoning": "...", "answer": "\\\\boxed{...}"}\n'
@@ -116,7 +119,7 @@ def solve_one_math(client: QwenClient, problem: str, lens: str, temperature: flo
         "must end with the final result wrapped in \\boxed{}."
     )
     result = client.chat_json(
-        model=ORCHESTRATOR_MODEL,
+        model=model,
         system=f"{SOLVER_SYSTEM}\n\n{lens}",
         user=user,
         role="solver",
@@ -227,26 +230,33 @@ def _cluster_answers(answers: list[str]) -> list[list[int]]:
     return list(groups.values())
 
 
-async def _solve_panel_answers_async(client: QwenClient, problem: str, lenses: list[str]) -> list[tuple[str, str, CallUsage]]:
+async def _solve_panel_answers_async(client: QwenClient, problem: str, lenses: list[str], solver_model: str) -> list[tuple[str, str, CallUsage]]:
     """Mirrors solve_all_flagship_panel's async gather structure: 3 solver
-    seats, distinct lenses, SOLVER_TEMPERATURES, all on ORCHESTRATOR_MODEL,
+    seats, distinct lenses, SOLVER_TEMPERATURES, all on `solver_model`,
     dispatched concurrently via asyncio.to_thread."""
     tasks = [
-        asyncio.to_thread(solve_one_math, client, problem, lenses[i], SOLVER_TEMPERATURES[i])
+        asyncio.to_thread(solve_one_math, client, problem, lenses[i], SOLVER_TEMPERATURES[i], solver_model)
         for i in range(3)
     ]
     return list(await asyncio.gather(*tasks))
 
 
-def solve_panel_math(client: QwenClient, item: MathItem) -> dict:
-    """The ENGINE: 3 flagship solvers (distinct lenses + SOLVER_TEMPERATURES,
-    mirroring solve_all_flagship_panel), clustered by grade() equivalence.
-    If the largest cluster has >=2 members, its answer is final and
-    escalated=False. If all three are mutually inequivalent (3 singleton
-    clusters), escalated=True and a judge call decides the final answer."""
+def solve_panel_math(client: QwenClient, item: MathItem, solver_model: str = ORCHESTRATOR_MODEL) -> dict:
+    """The ENGINE: 3 solvers (distinct lenses + SOLVER_TEMPERATURES, mirroring
+    solve_all_flagship_panel), clustered by grade() equivalence. If the largest
+    cluster has >=2 members, its answer is final and escalated=False. If all
+    three are mutually inequivalent (3 singleton clusters), escalated=True and
+    a JUDGE call (always the flagship, ORCHESTRATOR_MODEL) decides the final
+    answer.
+
+    `solver_model` defaults to the flagship. Pass MECHANICAL_MODEL for the
+    cheap-solver variant that mirrors the SHIPPED engine's real tier structure
+    (cheap solvers, flagship escalation) -- on hard math the weaker solvers
+    disagree far more, so escalation actually fires (unlike the all-flagship
+    panel, which never split -> 0% escalation)."""
     start = time.monotonic()
     lenses = _lenses_for(3)
-    triples = asyncio.run(_solve_panel_answers_async(client, item.problem, lenses))
+    triples = asyncio.run(_solve_panel_answers_async(client, item.problem, lenses, solver_model))
 
     answers = [t[0] for t in triples]
     calls: list[CallUsage] = [t[2] for t in triples]
@@ -270,6 +280,7 @@ def solve_panel_math(client: QwenClient, item: MathItem) -> dict:
         "question_id": item.question_id,
         "gold_answer": item.gold_answer,
         "final_answer": final_answer,
+        "solver_model": solver_model,
         "escalated": escalated,
         "correct": correct,
         "solver_answers": [

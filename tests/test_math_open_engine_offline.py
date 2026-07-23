@@ -290,6 +290,53 @@ def test_panel_grades_correct_on_different_notation_against_gold():
     assert result["correct"] is True
 
 
+def test_panel_cheap_tier_uses_flash_solvers_but_flagship_judge():
+    # The shipped-engine tier: cheap flash solvers, flagship judge on split.
+    from quorumqa.config import MECHANICAL_MODEL, ORCHESTRATOR_MODEL
+
+    class _TierRecordingClient:
+        def __init__(self):
+            self.solver_models = []
+            self.judge_models = []
+
+        def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
+            if role == "solver":
+                self.solver_models.append(model)
+                # 3-way split so the judge is exercised too
+                lens = next(l for l in _lenses_for(3) if l in system)
+                ans = {_lenses_for(3)[0]: r"\boxed{1}", _lenses_for(3)[1]: r"\boxed{2}", _lenses_for(3)[2]: r"\boxed{3}"}[lens]
+                return JsonCallResult(data={"reasoning": "r", "answer": ans}, usage=_usage("solver"))
+            if role == "judge":
+                self.judge_models.append(model)
+                return JsonCallResult(data={"reasoning": "j", "answer": r"\boxed{2}"}, usage=_usage("judge"))
+            raise AssertionError(role)
+
+    client = _TierRecordingClient()
+    result = solve_panel_math(client, _item(gold_answer="2"), solver_model=MECHANICAL_MODEL)
+
+    assert client.solver_models == [MECHANICAL_MODEL] * 3   # cheap solvers
+    assert client.judge_models == [ORCHESTRATOR_MODEL]      # flagship judge (escalation)
+    assert result["solver_model"] == MECHANICAL_MODEL
+    assert result["escalated"] is True
+    assert result["correct"] is True
+
+
+def test_panel_default_tier_is_flagship_unchanged():
+    # Byte-compatible default: no solver_model arg -> flagship solvers.
+    from quorumqa.config import ORCHESTRATOR_MODEL
+
+    seen = []
+
+    class _C:
+        def chat_json(self, model, system, user, role, temperature=0.4, max_tokens=1024, retries=1, thinking=True):
+            seen.append((role, model))
+            return JsonCallResult(data={"reasoning": "r", "answer": r"\boxed{5}"}, usage=_usage(role))
+
+    result = solve_panel_math(_C(), _item(gold_answer="5"))
+    assert all(m == ORCHESTRATOR_MODEL for r, m in seen if r == "solver")
+    assert result["solver_model"] == ORCHESTRATOR_MODEL
+
+
 def test_panel_all_mutually_different_but_none_match_gold():
     client = FakePanelClient(
         _answers_by_lens([r"\boxed{1}", r"\boxed{2}", r"\boxed{3}"]),
