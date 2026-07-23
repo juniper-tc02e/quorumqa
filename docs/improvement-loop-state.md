@@ -579,16 +579,28 @@ Also DONE this window: 5 additive Build Log entries deployed-pending on the
 MagiAchiral site (commit 80de3f1 in magiachiral-site) documenting the whole
 arc — all numbers verified against primary result files, typecheck clean.
 
+## Open-answer math GRADER built (2026-07-24 ~02:30) — prerequisite DONE
+
+`benchmark/math_grade.py` + 26 tests (all green; suite 354). LaTeX→sympy
+equivalence grader so hard math can be graded open-answer (0.5 == \frac12,
+\sqrt20 == 2\sqrt5, 2π+18 == 18+2π), breaking the distractor-MC saturation
+that pinned the flagship at 100% on MATH-500/GSM8K. Key discovery:
+**HuggingFace math_verify is UNUSABLE on Windows** — its parse/verify path
+uses a multiprocessing timeout that spawn-storms (WinError 87) and returns
+[] for every input. Built instead on latex2sympy2-extended (works
+standalone) + sympy. Validated on real MATH-500: 95% parse coverage
+(477/500), ~0 false-positives (1/3000 distinct pairs, and that one is
+30°==30 by design), FAILS CLOSED. Commit 11a264a, pushed.
+
 ## NEXT (ranked)
-1. **Deploy the site Build Log additions** (higgsfield website deploy;
-   verify via `website status`, not browser — the *.higgsfield.app zone is
-   ISP-blocked here). Additive-only, within grant.
-2. **Open-answer numeric-equivalence grading path** — THE concrete
-   prerequisite (flagged 3×) to test deliberation on genuinely hard math
-   (MATH-500-hard / AIME) where the flagship has real headroom and
-   distractor-MC saturation doesn't block the test. Engine change: a math
-   loader that keeps open-answer ground truth + a sympy equivalence grader +
-   a solver/judge path that emits numeric answers, not A–D letters. The
-   highest-value REASONING lever left. Scope first, then build TDD.
-3. Calibration memory (§5.1) + R2 per-question router to chase the MoO
-   oracle gap (only worth it if #2 opens a new hard-reasoning surface).
+1. **Open-answer math ENGINE path** (dispatched to Sonnet worker): a
+   parallel eval path (NOT touching the shipped A–D engine) —
+   load_math_open.py (MATH-500 L5, keeps open gold), an open-answer panel
+   (3 flagship solvers → cluster answers by math_grade equivalence → plural
+   wins, split escalates to skeptic/verifier/judge who emits an open answer),
+   a single-flagship open-answer baseline, run_math_open.py. Offline-tested
+   with a fake client; NO paid API in the worker. Then I run the paid pilot
+   (~$5-10) and score with math_grade: does deliberation help on hard math
+   where the flagship has real headroom? THE remaining reasoning surface.
+2. Calibration memory (§5.1) + R2 per-question router to chase the MoO
+   oracle gap (only worth it after #1 opens the hard-math surface).
