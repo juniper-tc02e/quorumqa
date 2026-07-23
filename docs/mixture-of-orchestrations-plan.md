@@ -101,6 +101,35 @@ Every new profile passes the loop's validation bar (three fresh seeds /
 samples, matched baseline, drop-bias checks, honest negatives recorded)
 before the router may select it in product mode.
 
+### Registry updates from the validated record (2026-07-23)
+
+| Profile | Status | Evidence |
+|---|---|---|
+| `stem-max` (chem_thinking_gate) | **VALIDATED** | 90.9% mean, 3 seeds, +4.4 matched |
+| `flagship_panel` (hard-STEM tier-swap) | **VALIDATED** | +4.1 mean vs flagship-solo, 3 seeds, SuperGPQA-hard |
+| `rag_presolve` (cheap + pre-solve retrieval) | **VALIDATED** | +6.5 mean vs cheap, 3 seeds, floor cut every seed; GPQA tripwire clean |
+| `qwen38_panel` (max-tier homogeneous panel) | **NEGATIVE** | 0% escalation = expensive self-consistency; trails flagship_panel |
+| `rag_recursive` (R2 tribunal retrieval) | **NEGATIVE (no-gain)** | −1.2 vs R1; structurally can't reach the unanimous-wrong floor |
+| qwen38 judge swap | **NULL** | judge quality not the binding constraint |
+
+**Two new router inputs the original design missed, both measured:**
+1. **Corpus coverage** (from the LEXam G3 probe): RAG profiles are only
+   selectable where the indexed corpus actually covers the domain — the
+   same machinery that gains +6.5 on STEM moves nothing on Swiss law
+   because the shelf has no statutes. The registry must record, per RAG
+   profile, which domains its corpus snapshot covers.
+2. **Budget-tiered floor fixes**: `rag_presolve` (+6.5 mean, cheap) and
+   `flagship_panel` (+4.1 mean lift but higher absolute ceiling,
+   ~3× cost) fix the same diagnosed floor from different directions —
+   the router chooses by caller budget, not by which is "better."
+
+**Design principle now triple-confirmed** (thinking_all, qwen38_panel,
+qwen38_judge, R2): capability added downstream of the panel, or
+homogeneously across it, does not pay. The gains all come from upstream
+knowledge (retrieval, tier routing) or calibrated diversity (one thinking
+seat). New profile proposals should be screened against this before
+spending pilot budget.
+
 ## 3. The router
 
 Three versions, shipped in order, each falling back to the previous:
