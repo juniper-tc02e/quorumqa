@@ -398,9 +398,13 @@ must be router-gated (hurts on search-proof GPQA). RAG = a domain-gated
 lever like flagship_panel: help where the gap is retrievable knowledge,
 skip where search-proof. Cheaper than tier-swap.
 
-**NEXT:** R1 seed-7 + seed-123 replication for the 3-seed bar (running/
-queued); then G2 (disputed-step re-retrieval: the Skeptic's named step
-becomes a sharper second query for the Verifier) — the first RECURSIVE
-step, and the piece that also fixes the LEXam zero-verifier-findings
-diagnosis. Reasoning-lever track continues in parallel (flagship_panel on
-MMLU-Pro STEM slice; deliberation-depth variants).
+**RAG results so far:** R1 pre-solve = 2-seed validated positive (+4.7/+6.9,
+cuts the unanimous-wrong floor). R2 disputed-step recursion (G2) = Bet-2
+NOT met: −1.2 vs R1, no gain, because R2 fires only on escalation and so
+structurally cannot touch the unanimous-wrong floor where the accuracy
+lives (see rag_r2_findings.md). Reinforces: binding constraint is upstream
+solver knowledge, not the tribunal. **NEXT:** G3 LEXam retry (running) —
+the DIFFERENT test where R2 revives a dead verifier rather than augmenting
+a strong one; then R1 third seed (123) to complete the rag_presolve bar.
+Reasoning track continues (flagship_panel on MMLU-Pro STEM; deliberation
+variants).
