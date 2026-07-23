@@ -592,15 +592,30 @@ standalone) + sympy. Validated on real MATH-500: 95% parse coverage
 (477/500), ~0 false-positives (1/3000 distinct pairs, and that one is
 30°==30 by design), FAILS CLOSED. Commit 11a264a, pushed.
 
+## Open-answer math ENGINE path BUILT + smoke-validated (2026-07-24 ~02:00)
+
+Sonnet worker built 4 files (commit 96a12dd, pushed), NOT touching the
+shipped A–D engine: load_math_open.py (MATH-500 L5, keeps open gold),
+math_open_engine.py (3 flagship solvers → union-find cluster by math_grade
+equivalence → plurality wins, 3-way split escalates to a judge that
+re-derives + emits a boxed answer; single-flagship baseline), run_math_open.py
+(both arms extract+grade IDENTICALLY → fair delta), 15 offline tests. Suite
+369 green. Orchestrator reviewed the engine+runner (no correctness bug found;
+comparison is fair) and ran a 3-question LIVE smoke: baseline 3/3 & panel 3/3
+on real MATH-500 L5, LaTeX-fraction answer -\dfrac{35}{9} graded correct,
+clustering found agreement (0 escalation) — real-API behavior confirmed.
+
+**Full n=60 L5 seed-42 pilot LAUNCHED** (task bu6p0pifd, ~$5-15, under the
+$30 flag). THE test of the reasoning thesis on hard math with real flagship
+headroom: does 3-solver+judge deliberation beat a single flagship call when
+distractor-MC saturation is removed? Result pending.
+
 ## NEXT (ranked)
-1. **Open-answer math ENGINE path** (dispatched to Sonnet worker): a
-   parallel eval path (NOT touching the shipped A–D engine) —
-   load_math_open.py (MATH-500 L5, keeps open gold), an open-answer panel
-   (3 flagship solvers → cluster answers by math_grade equivalence → plural
-   wins, split escalates to skeptic/verifier/judge who emits an open answer),
-   a single-flagship open-answer baseline, run_math_open.py. Offline-tested
-   with a fake client; NO paid API in the worker. Then I run the paid pilot
-   (~$5-10) and score with math_grade: does deliberation help on hard math
-   where the flagship has real headroom? THE remaining reasoning surface.
-2. Calibration memory (§5.1) + R2 per-question router to chase the MoO
-   oracle gap (only worth it after #1 opens the hard-math surface).
+1. Score the n=60 pilot (runner reports it; also re-score from JSONL). If the
+   baseline shows real headroom (not saturated) AND panel > baseline → the
+   first hard-MATH deliberation win; replicate at a 2nd seed. If null → record
+   why (baseline saturated even open-answer? escalation too rare?).
+2. Optional grader refinement: expand brace-less \fracAB short-form in
+   _normalize (helps lower levels; NOT needed for L5, deferred until after the
+   pilot to keep runtime grading consistent).
+3. Calibration memory (§5.1) + R2 per-question router for the MoO oracle gap.
