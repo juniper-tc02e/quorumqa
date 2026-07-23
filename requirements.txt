@@ -25,3 +25,12 @@ harbor>=0.20
 # choice rationale). FTS5 (BM25 half of the hybrid index) uses Python's
 # stdlib sqlite3 -- no separate package needed.
 sentence-transformers>=3.0
+
+# Open-answer math grader (benchmark/math_grade.py) -- LaTeX->sympy so the
+# hard-math track can be graded on equivalence (0.5 == \frac12), not
+# distractor-MC (which saturates the flagship). We do NOT depend on
+# HuggingFace's math_verify: its parse/verify path uses a multiprocessing
+# timeout that is broken on Windows (spawn-storms, returns [] for every
+# input). latex2sympy2-extended works standalone; sympy does the comparison.
+sympy>=1.12
+latex2sympy2-extended>=1.11
