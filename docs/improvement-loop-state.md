@@ -634,13 +634,30 @@ REUSABLE ASSETS delivered: open-answer math engine + false-positive-free
 equivalence grader, both offline-tested, that make hard open-answer math
 evaluable at all (nothing else in this repo could grade `\frac12`==`0.5`).
 
+## MATH-500 cheap-tier DECISIVE + AIME pilot LAUNCHED (2026-07-24 ~03:00)
+
+Cheap-tier MATH-500 L5 (shipped-engine design: flash solvers + flagship
+judge): **flash 96.6% = flagship 96.6%, 0% escalation, 55/59 unanimous.**
+qwen3.6-flash+thinking is AS GOOD as the flagship on MATH-500 L5 → benchmark
+saturated at BOTH tiers → no cheap→flagship gap → deliberation can't help
+(and didn't). Two pilots close MATH-500 for good. Findings updated in
+math_open_pilot_findings.md, commit 109822a.
+
+Built AIME loader (2024+2025, 60 integer-answer problems, commit) + --dataset
+flag. **AIME cheap-tier pilot LAUNCHED** (task bh2nmup1m): flagship baseline
+vs cheap-panel(flash solvers + flagship judge). AIME is the regime where flash
+is genuinely weak (~10-40%) and the flagship better — a LARGE cheap→flagship
+gap where, per the thesis, escalation should FIRE and the flagship judge
+recover. THE experiment that could produce a math-deliberation win. Result
+pending.
+
 ## NEXT (ranked)
-1. **Consolidate + document the reasoning arc** (free, additive): the
-   hard-math result completes the "when does deliberation help" story
-   (validated: hard STEM w/ high unanimous-wrong; inert: saturated math &
-   homogeneous strong panels). Consider one more additive site Build Log entry
-   on the honest math result. Additive-only, within grant.
-2. If pursuing math further: an AIME-tier open-answer pilot (flagship genuinely
-   <90%) with a MIXED solver pool (flash + flagship) so solvers disagree and
-   escalation can fire — the only way deliberation could show on math. Paid.
+1. Score the AIME cheap-tier pilot. Key numbers: flash-solver accuracy (should
+   be low → real gap), ESCALATION rate (should finally be >0), and whether the
+   flagship judge recovers on escalated items (baseline vs cheap-panel delta).
+   If escalation fires + recovers → the first math-deliberation demonstration.
+   Also run AIME flagship-tier for the full picture.
+2. Consolidate the whole reasoning arc into an additive site Build Log entry
+   (when does deliberation help: validated hard-STEM wins; inert on saturated
+   math; the AIME result). Additive-only, within grant.
 3. Calibration memory (§5.1) + R2 per-question router for the MoO oracle gap.
