@@ -434,3 +434,27 @@ and was re-run, but the lesson stands). Rule for future iterations:
 before killing an apparent duplicate, check creation times — same-second
 creation + identical cmdline = one process tree; only genuinely
 different creation times indicate a real second launch.
+
+## MoO M0 DONE (2026-07-23 ~21:00) — router unblocked
+
+profiles.py: OrchestrationProfile registry (7 validated profiles:
+standard-tribunal, thinking_gate, stem-max, flagship_panel, rag_presolve,
+rag_thinking_gate, single-call), one run_profile() engine path, benchmark-
+mode memory firewall assertion (unconditional, tested to fire before the
+not-built stub). Equivalence proven offline: each profile's run_profile
+dispatch produces an identical MULTISET of full call fingerprints
+(role/model/thinking/temp/system/user) vs its source lever — byte-identical
+behavior, no paid pilot needed. 213 tests. Commit 4fa3b27.
+Follow-ups the worker flagged (non-blocking): profiles.py imports helpers
+from benchmark/lever_experiments.py (backwards dep, future cleanup);
+single-call uses a synthetic SolverAnswer placeholder; tribunal on/off +
+gate-model-swap declared-but-unwired (no validated profile needs them).
+
+## NEXT: MoO M1 — the router (where the thesis is tested)
+Dispatch: build the R1 router (heuristic/classifier: domain + gap
+estimate + checkability -> profile) over the registry, plus the blended-
+workload eval (GPQA-hard + SuperGPQA-hard + a saturated-easy slice)
+reporting flat-best / routed / oracle. MoO earns its existence here: if
+routed >> flat-best toward oracle, the mixture is worth its complexity; if
+not, say so. Also queued: flagship_panel on MMLU-Pro STEM (generalization);
+additive site Build Log entries for the validated RAG results.
