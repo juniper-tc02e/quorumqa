@@ -297,37 +297,25 @@ shipped engine's thesis (flash voters + routed flagship, 78.9% @ −11% cost),
 the MoO cost win (28-50% cheaper at equal accuracy on realistic traffic),
 and W1-W7's default framing. The claim is efficiency.
 
-**Track B — Ultra Agentic Scaling (cost-no-object).** Frontier models from
-*different labs* — e.g. GPT 5.6 Sol Ultra, Kimi K3, qwen3.8-max-preview,
-Claude — deliberating under QuorumQA's tribunal to exceed the best single
-frontier model. The claim is absolute capability.
+**Track B — Ultra Agentic Scaling, SAME-PROVIDER edition (cost-no-object).**
+Redirected by Jun Kai 2026-07-24: scale using agents of ONE provider only
+(the Qwen family). The research question: how far can manufactured
+within-provider diversity (tiers, thinking modes, sampling, prompts,
+permutation, pipeline topology) push a Qwen-only society past the best
+single Qwen model (qwen3.8-max-preview solo, 93.6%)? Research doc:
+`docs/same-provider-scaling-research.md`. The claim is absolute capability
+within one ecosystem — measured as "beats the best participating single
+model, apples-to-apples, 3-seed bar."
 
-**Why the evidence supports Track B rather than contradicting it:** our
-homogeneous-strength failures (qwen38_panel, the all-flagship math panel)
-were three copies of the SAME model — identical lineage, identical blind
-spots, 0% escalation. Cross-lab frontier models have different pretraining
-data, different RLHF regimes, and demonstrably different failure modes:
-that is *engineered decorrelation at the top tier*, exactly the mechanism
-the whole thesis says deliberation runs on. (The earlier mixed-model
-failure — a qwen3.7-plus seat — was a *weaker* seat dragging a panel, not
-peers of comparable strength from different lineages. Different case.)
-
-Track-B preconditions and honesty rules:
-1. **Provider-agnostic client** (free build): QwenClient is DashScope/
-   Token-Plan-specific. Need a thin adapter layer (OpenAI-compatible +
-   Anthropic-compatible transports cover OpenAI, Moonshot/Kimi, Qwen,
-   Claude) with per-provider retry/timeout profiles. Buildable now,
-   offline-testable with fake transports.
-2. **Keys**: only Qwen credentials exist in this repo today. OpenAI/
-   Moonshot keys are Jun Kai's to add via the safe methods (setx / edit
-   .env directly — never pasted in chat).
-3. **The claim is measured, not marketed**: "exceeds other labs" means
-   beats the best participating single model on the benchmarks we run,
-   apples-to-apples on identical items, 3-seed bar — never a general
-   leaderboard claim we didn't measure.
-4. **Diversity accounting**: log per-model disagreement/unanimous-wrong
-   rates so we can PROVE the cross-lab panel decorrelates (the number that
-   makes Track B more than a stunt).
+**CONSIDERED — PARKED (cross-vendor collaboration).** The earlier Track-B
+concept (GPT 5.6 Sol Ultra + Kimi K3 + Qwen + Claude deliberating together)
+is recorded as considered, not active. The evidence logic stands — our
+homogeneity failures were same-model copies, and cross-lab lineages would
+be engineered decorrelation at the top tier — but it needs a
+provider-agnostic client plus cross-vendor keys (none in this repo), and
+Jun Kai has directed the effort at same-provider scaling first. If revived:
+the preconditions and honesty rules (measured claims only, per-model
+diversity accounting) recorded in the git history of this section apply.
 
 **Considered-and-recorded config (from Jun Kai, 2026-07-24):** all-qwen3.7
 seats (solvers + skeptic + verifier + gate) with a qwen3.8-max-preview
