@@ -1,0 +1,4498 @@
+{
+  "inventory": [
+    {
+      "file": "adhoc_check.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 9,
+      "n_records": 27,
+      "note": ""
+    },
+    {
+      "file": "aime_open_baseline_seed42.jsonl",
+      "family": "math-open (flat)",
+      "n_lines": 48,
+      "n_records": 48,
+      "note": ""
+    },
+    {
+      "file": "aime_open_panel_cheap_seed42.jsonl",
+      "family": "math-open (flat)",
+      "n_lines": 28,
+      "n_records": 28,
+      "note": ""
+    },
+    {
+      "file": "full_run.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 74,
+      "n_records": 222,
+      "note": ""
+    },
+    {
+      "file": "full_run2.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 90,
+      "n_records": 270,
+      "note": ""
+    },
+    {
+      "file": "gsm8k_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 50,
+      "n_records": 100,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_gpqa_seed314.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_mmlu_pro_stem_seed42.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 60,
+      "n_records": 60,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_seed123.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_seed7.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed123.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 86,
+      "n_records": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed7.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed777.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed888.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_seed555.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed471.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_control_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_seed7_replicate.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed838.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_five_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_mmlu_pro_stem_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 60,
+      "n_records": 60,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed42_replicate.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 81,
+      "n_records": 81,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 79,
+      "n_records": 79,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 83,
+      "n_records": 83,
+      "note": ""
+    },
+    {
+      "file": "lever_gate_replay.jsonl",
+      "family": "EXCLUDED",
+      "n_lines": 0,
+      "n_records": 0,
+      "note": "gate-replay analysis artifact (was_unanimous_correct/gate_doubt/gate_cost_usd schema) -- not a config x item observation, excluded from F1/F2/F5."
+    },
+    {
+      "file": "lever_qwen38_judge_gpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 76,
+      "n_records": 76,
+      "note": ""
+    },
+    {
+      "file": "lever_qwen38_panel_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 63,
+      "n_records": 63,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_gpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 86,
+      "n_records": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_recursive_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_recursive_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed838.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_smart_gate_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_subject_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 50,
+      "n_records": 50,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_mmlu_pro_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 50,
+      "n_records": 50,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lexam_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 50,
+      "n_records": 100,
+      "note": ""
+    },
+    {
+      "file": "math500_hard_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 49,
+      "n_records": 98,
+      "note": ""
+    },
+    {
+      "file": "math_open_baseline_seed42.jsonl",
+      "family": "math-open (flat)",
+      "n_lines": 59,
+      "n_records": 59,
+      "note": ""
+    },
+    {
+      "file": "math_open_panel_cheap_seed42.jsonl",
+      "family": "math-open (flat)",
+      "n_lines": 59,
+      "n_records": 59,
+      "note": ""
+    },
+    {
+      "file": "math_open_panel_seed42.jsonl",
+      "family": "math-open (flat)",
+      "n_lines": 59,
+      "n_records": 59,
+      "note": ""
+    },
+    {
+      "file": "medqa_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 50,
+      "n_records": 100,
+      "note": ""
+    },
+    {
+      "file": "mmlu_pro_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 50,
+      "n_records": 100,
+      "note": ""
+    },
+    {
+      "file": "moo_m1_eval.jsonl",
+      "family": "moo (flat, profile/bucket)",
+      "n_lines": 827,
+      "n_records": 827,
+      "note": ""
+    },
+    {
+      "file": "qwen38_baseline_seed123.jsonl",
+      "family": "qwen38_baseline (flat)",
+      "n_lines": 78,
+      "n_records": 78,
+      "note": ""
+    },
+    {
+      "file": "smoke.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 2,
+      "n_records": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke2.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 2,
+      "n_records": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke3.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 6,
+      "n_records": 12,
+      "note": ""
+    },
+    {
+      "file": "supergpqa_hard_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_lines": 86,
+      "n_records": 172,
+      "note": ""
+    }
+  ],
+  "f1_floor": {
+    "GPQA-Diamond": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "chem_flagship_gate",
+        "chem_thinking_gate",
+        "combined",
+        "control",
+        "five",
+        "flagship_panel",
+        "moo:flagship_panel",
+        "moo:rag_presolve",
+        "moo:rag_thinking_gate",
+        "moo:single-call",
+        "moo:standard-tribunal",
+        "moo:stem-max",
+        "moo:thinking_gate",
+        "qwen3.8_solo",
+        "qwen38_judge",
+        "rag_presolve",
+        "self_consistency_5x",
+        "shipped_engine",
+        "smart_gate",
+        "subject",
+        "thinking",
+        "thinking_all",
+        "thinking_gate"
+      ],
+      "n_items_total": 197,
+      "n_attempted_by_2plus_configs": 192,
+      "n_floor_items": 4,
+      "floor_rate_of_multi": 0.020833333333333332,
+      "floor_question_ids": [
+        "rec7qmSnbud4FHSqL",
+        "recAYkd96NNuNl1Ei",
+        "recUOePh79cp4T2Bg",
+        "recf6ayQmL1SxKbvW"
+      ]
+    },
+    "AIME": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max_open",
+        "panel_open_cheap"
+      ],
+      "n_items_total": 50,
+      "n_attempted_by_2plus_configs": 26,
+      "n_floor_items": 0,
+      "floor_rate_of_multi": 0.0,
+      "floor_question_ids": []
+    },
+    "GSM8K": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "shipped_engine"
+      ],
+      "n_items_total": 50,
+      "n_attempted_by_2plus_configs": 50,
+      "n_floor_items": 0,
+      "floor_rate_of_multi": 0.0,
+      "floor_question_ids": []
+    },
+    "MMLU-Pro": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "flagship_panel",
+        "moo:flagship_panel",
+        "moo:rag_presolve",
+        "moo:rag_thinking_gate",
+        "moo:single-call",
+        "moo:standard-tribunal",
+        "moo:stem-max",
+        "moo:thinking_gate",
+        "shipped_engine",
+        "thinking_gate"
+      ],
+      "n_items_total": 83,
+      "n_attempted_by_2plus_configs": 83,
+      "n_floor_items": 2,
+      "floor_rate_of_multi": 0.024096385542168676,
+      "floor_question_ids": [
+        "1540",
+        "8955"
+      ]
+    },
+    "SuperGPQA-hard": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "control",
+        "flagship_panel",
+        "moo:flagship_panel",
+        "moo:rag_presolve",
+        "moo:rag_thinking_gate",
+        "moo:single-call",
+        "moo:standard-tribunal",
+        "moo:stem-max",
+        "moo:thinking_gate",
+        "qwen38_panel",
+        "rag_presolve",
+        "rag_recursive",
+        "rag_thinking_gate",
+        "shipped_engine"
+      ],
+      "n_items_total": 524,
+      "n_attempted_by_2plus_configs": 522,
+      "n_floor_items": 84,
+      "floor_rate_of_multi": 0.16091954022988506,
+      "floor_question_ids": [
+        "01ac3e46a5f04c48b3ad3d21e7a8eacd",
+        "01eb5d6dafa04f91b785e456c88d12d7",
+        "05ff75c957d445298164337f6fb16dce",
+        "0619ff74bac54d10a1912900ca5901d7",
+        "07178da056dd43c39d7f7aee51bdbff8",
+        "080a910849bd4aae8dbdeb3d7a6e835b",
+        "08a4102166144f5d922ce24ee38463d4",
+        "095ff35b087e416f9a2797a86611b4c2",
+        "0cec965e083d473b91baf8419e499266",
+        "10e238c23efe47cf85d9718dfea21752",
+        "15be8f8e252644028475951da8318593",
+        "1bb8a86a4ca34595bf2cc53e8c70d488",
+        "23ad44902ff945798a7ff404a3bb98d3",
+        "25d2d85093d3401b9883e0142407d0ee",
+        "2789bb6861f94992954c4df00ec8e656",
+        "2811febd3e9a4348a352c0c2b33ee464",
+        "28940f5e66204d6d8da272c94357c949",
+        "2a6cd8ccbd7d42ad9cf12e178c94b946",
+        "2e1d297065d247068eaa68f6585f9764",
+        "2ee372f987304fe882e13238d4c6925e",
+        "3bb9bdcf2aae48e5a62161a1578a5df5",
+        "3c4c69c60cc840138881e84e7dfc53c2",
+        "3f8989b3db06466787aa75da59bd29f5",
+        "405821e0aa2f42c594b673d3e1273026",
+        "4090034d344442a39f6ac38ffe2cc550",
+        "4284e998fada4c82963c98155b243a6d",
+        "438f43de355a46e982a21abda8d4f152",
+        "45ead910eb784c63aff46227f35006c1",
+        "469ab0b1358b48019d3a8f218edbf379",
+        "4ae91bc0704c4d16891bceda9518416c",
+        "4c53840b44904a97b04bf942e34ce522",
+        "4da6b094f021432e9f07bcff16c36b4e",
+        "4e711f17db254dd4953606570f0cc7a7",
+        "5a29ea2e0dde4ca89fc25d873f0783f0",
+        "5d0d7b5d79d448c7b2ffdee0247a0296",
+        "5dc0a21f75b44980b701d62896d3edcb",
+        "5df707865b404a0697d8fd1791bb9b0b",
+        "6012508b88a9421180551fdef0e17a13",
+        "784bc160afa34cc184a98687b152411a",
+        "7f8c9e5f1e554ad396060dbe085be0bc",
+        "811c704287184f8fa520358dc0ea2493",
+        "81bb88e7883d4fc7aae41299e7522a01",
+        "8220134735164021974f2c9cb3fe485e",
+        "83540adee86445058338548a07e2eacd",
+        "86ad4780d9e843f7b8a98e208abf3a52",
+        "8aca8b27a1674720bcb8271a46213d95",
+        "8cb1a3d68036488689cc6279ff47fd5a",
+        "8ed91874efe844458592ce5db5ba6aec",
+        "925edd1a51234c619cdd2f02bd90e0a3",
+        "9658dc48503c49cb840ccc27f9e10eb9",
+        "9a5556075b3047a18d44f2024d367249",
+        "9bffaf0a268949899e234cf7a4299f16",
+        "a05ccae7bcc14d9791e97e9f628ca88e",
+        "a38723e1b2ea48b9b8d6a723fc64d90d",
+        "a596b66d08484915a5c1996add9b104d",
+        "a9f34192579d4f448b378d733eb8d3bf",
+        "aa75f2e217f34054905f326269e5565f",
+        "b8de1171b4a44ba4bf85615dca222549",
+        "b9f43cc8a6ff4438ab18497fc9bf7cf0",
+        "ba3e6704deaf4503afd6d5cd103203c9",
+        "be091c3945a54db99326f44605f5aadf",
+        "c247b75bef6843a6bddb467b4f6530c7",
+        "c69b37c168c0442d8535be75e705658e",
+        "c8bf16ae628348ee96bd7127f5ae6bef",
+        "d0fc74cd11664ab2a3dbee8d055afb5d",
+        "d0fe7c1a74314662ac5ed5f2538e7b13",
+        "dae4002886484ca9b3f2e329a73e69f9",
+        "e086530f5eee4ec3b687fb2ef2bf1e18",
+        "e26b923888d1415f9c76de764ba146b0",
+        "e301bd85789b4c4fa02b60e3dba62e5c",
+        "e407e20ef9774016a7466c88610322ef",
+        "e4e11a5fc2714133b1c7af4a68f24b7c",
+        "e639f6eaf9a542f4a26c1358c0ef3f2c",
+        "e7ed8b4f392140368530a851521d82e0",
+        "ea96b2f056914d9e853e946a1d96987c",
+        "ecbdd9947fd94b588f3873caed11ffeb",
+        "f303c96caa884a1d83af52b6df8f2ae9",
+        "f3657e5a406947ddb8ad447219321aef",
+        "f3dbbb1c935242e287d05399a283167a",
+        "f9d8f390f4c348838f3d42e5c15fbb24",
+        "fb32edc392d24dc3815f58909cecdba4",
+        "fe7c522a688a4b3c952b4ae95a5d1ae8",
+        "fed1780eaf1f42a09ea63e89e1d18a41",
+        "ff672b02fbba48ccb76f12b73b438d37"
+      ]
+    },
+    "LEXam": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "control",
+        "rag_recursive",
+        "shipped_engine",
+        "thinking_gate"
+      ],
+      "n_items_total": 90,
+      "n_attempted_by_2plus_configs": 90,
+      "n_floor_items": 8,
+      "floor_rate_of_multi": 0.08888888888888889,
+      "floor_question_ids": [
+        "102d2e11-f391-44a7-b978-a3f83d882f74",
+        "1aa2d158-1f58-4671-ba73-78b7f64d04d3",
+        "70d58c55-71d9-400a-938a-d79bfa9856e0",
+        "72d45659-9250-4a9f-9818-3dc1132eb878",
+        "7fe55c7a-82d0-4cca-8b51-455539312689",
+        "ed64e65a-1ddc-4b6e-ba99-59018a14383f",
+        "f1bdfe14-a0bc-496c-b9ea-49ed1d6d03df",
+        "fcdfb402-3cd2-4483-922d-4b1a82d5ff55"
+      ]
+    },
+    "MATH-500-MC": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "shipped_engine"
+      ],
+      "n_items_total": 49,
+      "n_attempted_by_2plus_configs": 49,
+      "n_floor_items": 0,
+      "floor_rate_of_multi": 0.0,
+      "floor_question_ids": []
+    },
+    "MATH-500-open": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max_open",
+        "panel_open_cheap",
+        "panel_open_flagship"
+      ],
+      "n_items_total": 59,
+      "n_attempted_by_2plus_configs": 59,
+      "n_floor_items": 1,
+      "floor_rate_of_multi": 0.01694915254237288,
+      "floor_question_ids": [
+        "test/precalculus/768.json"
+      ]
+    },
+    "MedQA": {
+      "configs_covering_benchmark": [
+        "baseline_3.7max",
+        "moo:flagship_panel",
+        "moo:rag_presolve",
+        "moo:rag_thinking_gate",
+        "moo:single-call",
+        "moo:standard-tribunal",
+        "moo:stem-max",
+        "moo:thinking_gate",
+        "shipped_engine"
+      ],
+      "n_items_total": 50,
+      "n_attempted_by_2plus_configs": 50,
+      "n_floor_items": 2,
+      "floor_rate_of_multi": 0.04,
+      "floor_question_ids": [
+        "1142",
+        "202"
+      ]
+    }
+  },
+  "f1b_gpqa_deficit": {
+    "solo_n_attempted": 78,
+    "solo_n_correct": 73,
+    "solo_accuracy": 0.9358974358974359,
+    "society_files": [
+      "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+      "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+      "lever_chem_thinking_gate_gpqa_seed471.jsonl"
+    ],
+    "society_n_rows_total": 264,
+    "society_accuracy_pooled": 0.9090909090909091,
+    "society_per_seed_accuracy": {
+      "lever_chem_thinking_gate_gpqa_seed217.jsonl": {
+        "n": 89,
+        "correct": 81,
+        "accuracy": 0.9101123595505618
+      },
+      "lever_chem_thinking_gate_gpqa_seed314.jsonl": {
+        "n": 88,
+        "correct": 80,
+        "accuracy": 0.9090909090909091
+      },
+      "lever_chem_thinking_gate_gpqa_seed471.jsonl": {
+        "n": 87,
+        "correct": 79,
+        "accuracy": 0.9080459770114943
+      }
+    },
+    "n_shared_items_solo_and_society": 68,
+    "n_3.8_right_society_wrong": 2,
+    "n_never_escalated_blind_spot": 0,
+    "n_escalated_and_lost_selection_failure": 2,
+    "deficit_items": [
+      {
+        "question_id": "recVvpD8miVjmmyfe",
+        "society_observations": [
+          {
+            "seed_file": "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+            "correct": false,
+            "escalated": true
+          },
+          {
+            "seed_file": "lever_chem_thinking_gate_gpqa_seed471.jsonl",
+            "correct": false,
+            "escalated": true
+          }
+        ],
+        "classification": "escalated_and_lost"
+      },
+      {
+        "question_id": "recwW1A85nfyQpReG",
+        "society_observations": [
+          {
+            "seed_file": "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+            "correct": false,
+            "escalated": true
+          }
+        ],
+        "classification": "escalated_and_lost"
+      }
+    ]
+  },
+  "f2_frontier": {
+    "GPQA-Diamond": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 451,
+          "accuracy": 0.8669623059866962,
+          "mean_tokens_per_q": 3282.3348115299336,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            123,
+            314
+          ],
+          "source_files": [
+            "adhoc_check.jsonl",
+            "full_run.jsonl",
+            "full_run2.jsonl",
+            "lever_baseline_gpqa_seed314.jsonl",
+            "lever_baseline_seed123.jsonl",
+            "lever_baseline_seed7.jsonl",
+            "smoke.jsonl",
+            "smoke2.jsonl",
+            "smoke3.jsonl"
+          ]
+        },
+        {
+          "config": "moo:single-call",
+          "n": 29,
+          "accuracy": 0.8620689655172413,
+          "mean_tokens_per_q": 3739.0344827586205,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "qwen3.8_solo",
+          "n": 78,
+          "accuracy": 0.9358974358974359,
+          "mean_tokens_per_q": 4229.346153846154,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "qwen38_baseline_seed123.jsonl"
+          ]
+        },
+        {
+          "config": "self_consistency_5x",
+          "n": 173,
+          "accuracy": 0.6069364161849711,
+          "mean_tokens_per_q": 6204.774566473989,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "adhoc_check.jsonl",
+            "full_run.jsonl",
+            "full_run2.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 183,
+          "accuracy": 0.7978142076502732,
+          "mean_tokens_per_q": 8619.557377049181,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "adhoc_check.jsonl",
+            "full_run.jsonl",
+            "full_run2.jsonl",
+            "smoke.jsonl",
+            "smoke2.jsonl",
+            "smoke3.jsonl"
+          ]
+        },
+        {
+          "config": "control",
+          "n": 179,
+          "accuracy": 0.7653631284916201,
+          "mean_tokens_per_q": 8910.95530726257,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7
+          ],
+          "source_files": [
+            "lever_control_seed7.jsonl",
+            "lever_control_seed7_replicate.jsonl"
+          ]
+        },
+        {
+          "config": "qwen38_judge",
+          "n": 76,
+          "accuracy": 0.8026315789473685,
+          "mean_tokens_per_q": 9462.026315789473,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_qwen38_judge_gpqa_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:standard-tribunal",
+          "n": 30,
+          "accuracy": 0.8,
+          "mean_tokens_per_q": 10148.5,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "subject",
+          "n": 89,
+          "accuracy": 0.8314606741573034,
+          "mean_tokens_per_q": 10690.292134831461,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7
+          ],
+          "source_files": [
+            "lever_subject_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "rag_presolve",
+          "n": 86,
+          "accuracy": 0.7441860465116279,
+          "mean_tokens_per_q": 10760.802325581395,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_rag_presolve_gpqa_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "chem_flagship_gate",
+          "n": 263,
+          "accuracy": 0.8859315589353612,
+          "mean_tokens_per_q": 11368.498098859316,
+          "n_tokens_missing": 0,
+          "seeds": [
+            555,
+            777,
+            888
+          ],
+          "source_files": [
+            "lever_chem_flagship_gate_gpqa_seed777.jsonl",
+            "lever_chem_flagship_gate_gpqa_seed888.jsonl",
+            "lever_chem_flagship_gate_seed555.jsonl"
+          ]
+        },
+        {
+          "config": "flagship_panel",
+          "n": 270,
+          "accuracy": 0.8666666666666667,
+          "mean_tokens_per_q": 11468.222222222223,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42
+          ],
+          "source_files": [
+            "lever_flagship_panel_seed42.jsonl",
+            "lever_flagship_panel_seed42_replicate.jsonl",
+            "lever_flagship_panel_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "smart_gate",
+          "n": 89,
+          "accuracy": 0.8314606741573034,
+          "mean_tokens_per_q": 12014.011235955057,
+          "n_tokens_missing": 0,
+          "seeds": [
+            123
+          ],
+          "source_files": [
+            "lever_smart_gate_seed123.jsonl"
+          ]
+        },
+        {
+          "config": "thinking",
+          "n": 180,
+          "accuracy": 0.85,
+          "mean_tokens_per_q": 12369.672222222222,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42
+          ],
+          "source_files": [
+            "lever_thinking_seed42.jsonl",
+            "lever_thinking_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "moo:flagship_panel",
+          "n": 28,
+          "accuracy": 0.8928571428571429,
+          "mean_tokens_per_q": 12697.464285714286,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "chem_thinking_gate",
+          "n": 264,
+          "accuracy": 0.9090909090909091,
+          "mean_tokens_per_q": 12804.727272727272,
+          "n_tokens_missing": 0,
+          "seeds": [
+            217,
+            314,
+            471
+          ],
+          "source_files": [
+            "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+            "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+            "lever_chem_thinking_gate_gpqa_seed471.jsonl"
+          ]
+        },
+        {
+          "config": "thinking_gate",
+          "n": 269,
+          "accuracy": 0.8661710037174721,
+          "mean_tokens_per_q": 13068.085501858735,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42,
+            123
+          ],
+          "source_files": [
+            "lever_thinking_gate_seed123.jsonl",
+            "lever_thinking_gate_seed42.jsonl",
+            "lever_thinking_gate_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "combined",
+          "n": 178,
+          "accuracy": 0.8595505617977528,
+          "mean_tokens_per_q": 13426.314606741573,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42
+          ],
+          "source_files": [
+            "lever_combined_seed42.jsonl",
+            "lever_combined_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "five",
+          "n": 90,
+          "accuracy": 0.8111111111111111,
+          "mean_tokens_per_q": 13708.166666666666,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_five_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_presolve",
+          "n": 30,
+          "accuracy": 0.9,
+          "mean_tokens_per_q": 14012.233333333334,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:stem-max",
+          "n": 29,
+          "accuracy": 0.8275862068965517,
+          "mean_tokens_per_q": 16155,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_thinking_gate",
+          "n": 29,
+          "accuracy": 0.9310344827586207,
+          "mean_tokens_per_q": 16503.41379310345,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:thinking_gate",
+          "n": 30,
+          "accuracy": 0.9333333333333333,
+          "mean_tokens_per_q": 16967.533333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "thinking_all",
+          "n": 180,
+          "accuracy": 0.8444444444444444,
+          "mean_tokens_per_q": 18346.666666666668,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42
+          ],
+          "source_files": [
+            "lever_thinking_all_seed42.jsonl",
+            "lever_thinking_all_seed7.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:single-call",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8620689655172413,
+          "dominated_tok": 3739.0344827586205
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "self_consistency_5x",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.6069364161849711,
+          "dominated_tok": 6204.774566473989
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.7978142076502732,
+          "dominated_tok": 8619.557377049181
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "control",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.7653631284916201,
+          "dominated_tok": 8910.95530726257
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "qwen38_judge",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8026315789473685,
+          "dominated_tok": 9462.026315789473
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8,
+          "dominated_tok": 10148.5
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "subject",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 10690.292134831461
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8666666666666667,
+          "dominated_tok": 11468.222222222223
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "thinking",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.85,
+          "dominated_tok": 12369.672222222222
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "combined",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "five",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8669623059866962,
+          "dominant_tok": 3282.3348115299336,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "self_consistency_5x",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.6069364161849711,
+          "dominated_tok": 6204.774566473989
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.7978142076502732,
+          "dominated_tok": 8619.557377049181
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "control",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.7653631284916201,
+          "dominated_tok": 8910.95530726257
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "qwen38_judge",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8026315789473685,
+          "dominated_tok": 9462.026315789473
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8,
+          "dominated_tok": 10148.5
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "subject",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 10690.292134831461
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "thinking",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.85,
+          "dominated_tok": 12369.672222222222
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "combined",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "five",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8620689655172413,
+          "dominant_tok": 3739.0344827586205,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "self_consistency_5x",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.6069364161849711,
+          "dominated_tok": 6204.774566473989
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.7978142076502732,
+          "dominated_tok": 8619.557377049181
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "control",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.7653631284916201,
+          "dominated_tok": 8910.95530726257
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "qwen38_judge",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8026315789473685,
+          "dominated_tok": 9462.026315789473
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8,
+          "dominated_tok": 10148.5
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "subject",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 10690.292134831461
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "chem_flagship_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8859315589353612,
+          "dominated_tok": 11368.498098859316
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8666666666666667,
+          "dominated_tok": 11468.222222222223
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "thinking",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.85,
+          "dominated_tok": 12369.672222222222
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8928571428571429,
+          "dominated_tok": 12697.464285714286
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "chem_thinking_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.9090909090909091,
+          "dominated_tok": 12804.727272727272
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "combined",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "five",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.9,
+          "dominated_tok": 14012.233333333334
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.9310344827586207,
+          "dominated_tok": 16503.41379310345
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.9333333333333333,
+          "dominated_tok": 16967.533333333333
+        },
+        {
+          "dominant": "qwen3.8_solo",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.9358974358974359,
+          "dominant_tok": 4229.346153846154,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "shipped_engine",
+          "dominated": "control",
+          "dominant_acc": 0.7978142076502732,
+          "dominant_tok": 8619.557377049181,
+          "dominated_acc": 0.7653631284916201,
+          "dominated_tok": 8910.95530726257
+        },
+        {
+          "dominant": "shipped_engine",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7978142076502732,
+          "dominant_tok": 8619.557377049181,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "control",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7653631284916201,
+          "dominant_tok": 8910.95530726257,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "qwen38_judge",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.8026315789473685,
+          "dominant_tok": 9462.026315789473,
+          "dominated_acc": 0.8,
+          "dominated_tok": 10148.5
+        },
+        {
+          "dominant": "qwen38_judge",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8026315789473685,
+          "dominant_tok": 9462.026315789473,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8,
+          "dominant_tok": 10148.5,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "subject",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 10690.292134831461,
+          "dominated_acc": 0.7441860465116279,
+          "dominated_tok": 10760.802325581395
+        },
+        {
+          "dominant": "subject",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 10690.292134831461,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "subject",
+          "dominated": "five",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 10690.292134831461,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "subject",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 10690.292134831461,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8666666666666667,
+          "dominated_tok": 11468.222222222223
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "thinking",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.85,
+          "dominated_tok": 12369.672222222222
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "combined",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "five",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "chem_flagship_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8859315589353612,
+          "dominant_tok": 11368.498098859316,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "smart_gate",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8314606741573034,
+          "dominated_tok": 12014.011235955057
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "thinking",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.85,
+          "dominated_tok": 12369.672222222222
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "combined",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "five",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8666666666666667,
+          "dominant_tok": 11468.222222222223,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "smart_gate",
+          "dominated": "five",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 12014.011235955057,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "smart_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8314606741573034,
+          "dominant_tok": 12014.011235955057,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "thinking",
+          "dominated": "five",
+          "dominant_acc": 0.85,
+          "dominant_tok": 12369.672222222222,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "thinking",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.85,
+          "dominant_tok": 12369.672222222222,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "thinking",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.85,
+          "dominant_tok": 12369.672222222222,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "combined",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "five",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8661710037174721,
+          "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "combined",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "five",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.9,
+          "dominated_tok": 14012.233333333334
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "thinking_gate",
+          "dominated": "combined",
+          "dominant_acc": 0.8661710037174721,
+          "dominant_tok": 13068.085501858735,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "thinking_gate",
+          "dominated": "five",
+          "dominant_acc": 0.8661710037174721,
+          "dominant_tok": 13068.085501858735,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "thinking_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8661710037174721,
+          "dominant_tok": 13068.085501858735,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "thinking_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8661710037174721,
+          "dominant_tok": 13068.085501858735,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "combined",
+          "dominated": "five",
+          "dominant_acc": 0.8595505617977528,
+          "dominant_tok": 13426.314606741573,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "combined",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8595505617977528,
+          "dominant_tok": 13426.314606741573,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "combined",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8595505617977528,
+          "dominant_tok": 13426.314606741573,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9,
+          "dominant_tok": 14012.233333333334,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.9,
+          "dominant_tok": 14012.233333333334,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "moo:rag_thinking_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.9310344827586207,
+          "dominant_tok": 16503.41379310345,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.9333333333333333,
+          "dominant_tok": 16967.533333333333,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 451,
+          "accuracy": 0.8669623059866962,
+          "mean_tokens_per_q": 3282.3348115299336,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            123,
+            314
+          ],
+          "source_files": [
+            "adhoc_check.jsonl",
+            "full_run.jsonl",
+            "full_run2.jsonl",
+            "lever_baseline_gpqa_seed314.jsonl",
+            "lever_baseline_seed123.jsonl",
+            "lever_baseline_seed7.jsonl",
+            "smoke.jsonl",
+            "smoke2.jsonl",
+            "smoke3.jsonl"
+          ]
+        },
+        {
+          "config": "qwen3.8_solo",
+          "n": 78,
+          "accuracy": 0.9358974358974359,
+          "mean_tokens_per_q": 4229.346153846154,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "qwen38_baseline_seed123.jsonl"
+          ]
+        }
+      ]
+    },
+    "AIME": {
+      "configs": [
+        {
+          "config": "baseline_3.7max_open",
+          "n": 48,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 5327.041666666667,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "aime_open_baseline_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "panel_open_cheap",
+          "n": 28,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 73233.64285714286,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "aime_open_panel_cheap_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max_open",
+          "dominated": "panel_open_cheap",
+          "dominant_acc": 1.0,
+          "dominant_tok": 5327.041666666667,
+          "dominated_acc": 1.0,
+          "dominated_tok": 73233.64285714286
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max_open",
+          "n": 48,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 5327.041666666667,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "aime_open_baseline_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "GSM8K": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 655.84,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "gsm8k_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 50,
+          "accuracy": 0.96,
+          "mean_tokens_per_q": 1746.4,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "gsm8k_pilot_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 1.0,
+          "dominant_tok": 655.84,
+          "dominated_acc": 0.96,
+          "dominated_tok": 1746.4
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 655.84,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "gsm8k_pilot_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "MMLU-Pro": {
+      "configs": [
+        {
+          "config": "moo:single-call",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 918.7666666666667,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "baseline_3.7max",
+          "n": 110,
+          "accuracy": 0.9545454545454546,
+          "mean_tokens_per_q": 1201.5,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_baseline_mmlu_pro_stem_seed42.jsonl",
+            "mmlu_pro_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:flagship_panel",
+          "n": 29,
+          "accuracy": 0.9655172413793104,
+          "mean_tokens_per_q": 3027.655172413793,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_presolve",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 3182,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:standard-tribunal",
+          "n": 30,
+          "accuracy": 0.9333333333333333,
+          "mean_tokens_per_q": 3427.0666666666666,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 50,
+          "accuracy": 0.82,
+          "mean_tokens_per_q": 4154.38,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "mmlu_pro_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "flagship_panel",
+          "n": 60,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 4394.783333333334,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_flagship_panel_mmlu_pro_stem_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:stem-max",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 4664.4,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:thinking_gate",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 5441.333333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_thinking_gate",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 5704.466666666666,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "thinking_gate",
+          "n": 50,
+          "accuracy": 0.92,
+          "mean_tokens_per_q": 6334.02,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_thinking_gate_mmlu_pro_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "moo:single-call",
+          "dominated": "baseline_3.7max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9545454545454546,
+          "dominated_tok": 1201.5
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9655172413793104,
+          "dominated_tok": 3027.655172413793
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3182
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9333333333333333,
+          "dominated_tok": 3427.0666666666666
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.82,
+          "dominated_tok": 4154.38
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4394.783333333334
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4664.4
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5441.333333333333
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5704.466666666666
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 918.7666666666667,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9545454545454546,
+          "dominant_tok": 1201.5,
+          "dominated_acc": 0.9333333333333333,
+          "dominated_tok": 3427.0666666666666
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9545454545454546,
+          "dominant_tok": 1201.5,
+          "dominated_acc": 0.82,
+          "dominated_tok": 4154.38
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9545454545454546,
+          "dominant_tok": 1201.5,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9655172413793104,
+          "dominant_tok": 3027.655172413793,
+          "dominated_acc": 0.9333333333333333,
+          "dominated_tok": 3427.0666666666666
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9655172413793104,
+          "dominant_tok": 3027.655172413793,
+          "dominated_acc": 0.82,
+          "dominated_tok": 4154.38
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9655172413793104,
+          "dominant_tok": 3027.655172413793,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.9333333333333333,
+          "dominated_tok": 3427.0666666666666
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.82,
+          "dominated_tok": 4154.38
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4394.783333333334
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4664.4
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5441.333333333333
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5704.466666666666
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3182,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9333333333333333,
+          "dominant_tok": 3427.0666666666666,
+          "dominated_acc": 0.82,
+          "dominated_tok": 4154.38
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9333333333333333,
+          "dominant_tok": 3427.0666666666666,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4394.783333333334,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4664.4
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4394.783333333334,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5441.333333333333
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4394.783333333334,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5704.466666666666
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4394.783333333334,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4664.4,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5441.333333333333
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4664.4,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5704.466666666666
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4664.4,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 5441.333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 5704.466666666666
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 5441.333333333333,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        },
+        {
+          "dominant": "moo:rag_thinking_gate",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 5704.466666666666,
+          "dominated_acc": 0.92,
+          "dominated_tok": 6334.02
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "moo:single-call",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 918.7666666666667,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        }
+      ]
+    },
+    "SuperGPQA-hard": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 260,
+          "accuracy": 0.7730769230769231,
+          "mean_tokens_per_q": 3150.9384615384615,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            123
+          ],
+          "source_files": [
+            "lever_baseline_supergpqa_seed123.jsonl",
+            "lever_baseline_supergpqa_seed7.jsonl",
+            "supergpqa_hard_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:single-call",
+          "n": 29,
+          "accuracy": 0.7931034482758621,
+          "mean_tokens_per_q": 4105.6551724137935,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "qwen38_panel",
+          "n": 63,
+          "accuracy": 0.873015873015873,
+          "mean_tokens_per_q": 7583.746031746032,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_qwen38_panel_supergpqa_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:flagship_panel",
+          "n": 26,
+          "accuracy": 0.8461538461538461,
+          "mean_tokens_per_q": 9553.23076923077,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "flagship_panel",
+          "n": 243,
+          "accuracy": 0.8271604938271605,
+          "mean_tokens_per_q": 10114.20987654321,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42,
+            123
+          ],
+          "source_files": [
+            "lever_flagship_panel_supergpqa_seed123.jsonl",
+            "lever_flagship_panel_supergpqa_seed42.jsonl",
+            "lever_flagship_panel_supergpqa_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 86,
+          "accuracy": 0.6744186046511628,
+          "mean_tokens_per_q": 10342.93023255814,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "supergpqa_hard_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "control",
+          "n": 447,
+          "accuracy": 0.6845637583892618,
+          "mean_tokens_per_q": 10491.09619686801,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            123,
+            271,
+            606,
+            838
+          ],
+          "source_files": [
+            "lever_control_supergpqa_seed123.jsonl",
+            "lever_control_supergpqa_seed271.jsonl",
+            "lever_control_supergpqa_seed606.jsonl",
+            "lever_control_supergpqa_seed7.jsonl",
+            "lever_control_supergpqa_seed838.jsonl"
+          ]
+        },
+        {
+          "config": "moo:standard-tribunal",
+          "n": 30,
+          "accuracy": 0.5666666666666667,
+          "mean_tokens_per_q": 10727.033333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_presolve",
+          "n": 30,
+          "accuracy": 0.7333333333333333,
+          "mean_tokens_per_q": 12514.7,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "rag_recursive",
+          "n": 89,
+          "accuracy": 0.7078651685393258,
+          "mean_tokens_per_q": 12727.269662921348,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_rag_recursive_supergpqa_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "rag_presolve",
+          "n": 446,
+          "accuracy": 0.7017937219730942,
+          "mean_tokens_per_q": 12907.789237668161,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            42,
+            123,
+            271,
+            606
+          ],
+          "source_files": [
+            "lever_rag_presolve_supergpqa_seed123.jsonl",
+            "lever_rag_presolve_supergpqa_seed271.jsonl",
+            "lever_rag_presolve_supergpqa_seed42.jsonl",
+            "lever_rag_presolve_supergpqa_seed606.jsonl",
+            "lever_rag_presolve_supergpqa_seed7.jsonl"
+          ]
+        },
+        {
+          "config": "moo:thinking_gate",
+          "n": 30,
+          "accuracy": 0.7333333333333333,
+          "mean_tokens_per_q": 15881.566666666668,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:stem-max",
+          "n": 28,
+          "accuracy": 0.75,
+          "mean_tokens_per_q": 16094.07142857143,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "rag_thinking_gate",
+          "n": 265,
+          "accuracy": 0.7283018867924528,
+          "mean_tokens_per_q": 17110.856603773584,
+          "n_tokens_missing": 0,
+          "seeds": [
+            271,
+            606,
+            838
+          ],
+          "source_files": [
+            "lever_rag_thinking_gate_supergpqa_seed271.jsonl",
+            "lever_rag_thinking_gate_supergpqa_seed606.jsonl",
+            "lever_rag_thinking_gate_supergpqa_seed838.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_thinking_gate",
+          "n": 30,
+          "accuracy": 0.7333333333333333,
+          "mean_tokens_per_q": 17719.233333333334,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.6744186046511628,
+          "dominated_tok": 10342.93023255814
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "control",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.6845637583892618,
+          "dominated_tok": 10491.09619686801
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 12514.7
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.75,
+          "dominated_tok": 16094.07142857143
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.7730769230769231,
+          "dominant_tok": 3150.9384615384615,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.6744186046511628,
+          "dominated_tok": 10342.93023255814
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "control",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.6845637583892618,
+          "dominated_tok": 10491.09619686801
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 12514.7
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.75,
+          "dominated_tok": 16094.07142857143
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.8461538461538461,
+          "dominated_tok": 9553.23076923077
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.8271604938271605,
+          "dominated_tok": 10114.20987654321
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.6744186046511628,
+          "dominated_tok": 10342.93023255814
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "control",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.6845637583892618,
+          "dominated_tok": 10491.09619686801
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 12514.7
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.75,
+          "dominated_tok": 16094.07142857143
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "flagship_panel",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.8271604938271605,
+          "dominated_tok": 10114.20987654321
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.6744186046511628,
+          "dominated_tok": 10342.93023255814
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "control",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.6845637583892618,
+          "dominated_tok": 10491.09619686801
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 12514.7
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.75,
+          "dominated_tok": 16094.07142857143
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.6744186046511628,
+          "dominated_tok": 10342.93023255814
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "control",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.6845637583892618,
+          "dominated_tok": 10491.09619686801
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 12514.7
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.75,
+          "dominated_tok": 16094.07142857143
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "shipped_engine",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.6744186046511628,
+          "dominant_tok": 10342.93023255814,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "control",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.6845637583892618,
+          "dominant_tok": 10491.09619686801,
+          "dominated_acc": 0.5666666666666667,
+          "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.7078651685393258,
+          "dominated_tok": 12727.269662921348
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 15881.566666666668
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "rag_recursive",
+          "dominated": "rag_presolve",
+          "dominant_acc": 0.7078651685393258,
+          "dominant_tok": 12727.269662921348,
+          "dominated_acc": 0.7017937219730942,
+          "dominated_tok": 12907.789237668161
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 15881.566666666668,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 15881.566666666668,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "rag_thinking_gate",
+          "dominant_acc": 0.75,
+          "dominant_tok": 16094.07142857143,
+          "dominated_acc": 0.7283018867924528,
+          "dominated_tok": 17110.856603773584
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.75,
+          "dominant_tok": 16094.07142857143,
+          "dominated_acc": 0.7333333333333333,
+          "dominated_tok": 17719.233333333334
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 260,
+          "accuracy": 0.7730769230769231,
+          "mean_tokens_per_q": 3150.9384615384615,
+          "n_tokens_missing": 0,
+          "seeds": [
+            7,
+            123
+          ],
+          "source_files": [
+            "lever_baseline_supergpqa_seed123.jsonl",
+            "lever_baseline_supergpqa_seed7.jsonl",
+            "supergpqa_hard_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:single-call",
+          "n": 29,
+          "accuracy": 0.7931034482758621,
+          "mean_tokens_per_q": 4105.6551724137935,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "qwen38_panel",
+          "n": 63,
+          "accuracy": 0.873015873015873,
+          "mean_tokens_per_q": 7583.746031746032,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_qwen38_panel_supergpqa_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "LEXam": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 0.86,
+          "mean_tokens_per_q": 1285.02,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "lexam_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 50,
+          "accuracy": 0.72,
+          "mean_tokens_per_q": 3480.28,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "lexam_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "control",
+          "n": 90,
+          "accuracy": 0.7444444444444445,
+          "mean_tokens_per_q": 4466.9,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_control_lexam_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "thinking_gate",
+          "n": 50,
+          "accuracy": 0.8,
+          "mean_tokens_per_q": 6264.12,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_thinking_gate_lexam_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "rag_recursive",
+          "n": 90,
+          "accuracy": 0.7666666666666667,
+          "mean_tokens_per_q": 6311.377777777778,
+          "n_tokens_missing": 0,
+          "seeds": [
+            42
+          ],
+          "source_files": [
+            "lever_rag_recursive_lexam_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.86,
+          "dominant_tok": 1285.02,
+          "dominated_acc": 0.72,
+          "dominated_tok": 3480.28
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "control",
+          "dominant_acc": 0.86,
+          "dominant_tok": 1285.02,
+          "dominated_acc": 0.7444444444444445,
+          "dominated_tok": 4466.9
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "thinking_gate",
+          "dominant_acc": 0.86,
+          "dominant_tok": 1285.02,
+          "dominated_acc": 0.8,
+          "dominated_tok": 6264.12
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.86,
+          "dominant_tok": 1285.02,
+          "dominated_acc": 0.7666666666666667,
+          "dominated_tok": 6311.377777777778
+        },
+        {
+          "dominant": "thinking_gate",
+          "dominated": "rag_recursive",
+          "dominant_acc": 0.8,
+          "dominant_tok": 6264.12,
+          "dominated_acc": 0.7666666666666667,
+          "dominated_tok": 6311.377777777778
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 0.86,
+          "mean_tokens_per_q": 1285.02,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "lexam_pilot_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "MATH-500-MC": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 49,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 1639.6530612244899,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math500_hard_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 49,
+          "accuracy": 0.9387755102040817,
+          "mean_tokens_per_q": 5654.591836734694,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math500_hard_pilot_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "shipped_engine",
+          "dominant_acc": 1.0,
+          "dominant_tok": 1639.6530612244899,
+          "dominated_acc": 0.9387755102040817,
+          "dominated_tok": 5654.591836734694
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 49,
+          "accuracy": 1.0,
+          "mean_tokens_per_q": 1639.6530612244899,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math500_hard_pilot_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "MATH-500-open": {
+      "configs": [
+        {
+          "config": "baseline_3.7max_open",
+          "n": 59,
+          "accuracy": 0.9661016949152542,
+          "mean_tokens_per_q": 2703.322033898305,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math_open_baseline_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "panel_open_flagship",
+          "n": 59,
+          "accuracy": 0.9152542372881356,
+          "mean_tokens_per_q": 6408.6949152542375,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math_open_panel_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "panel_open_cheap",
+          "n": 59,
+          "accuracy": 0.9661016949152542,
+          "mean_tokens_per_q": 32560.86440677966,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math_open_panel_cheap_seed42.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "baseline_3.7max_open",
+          "dominated": "panel_open_flagship",
+          "dominant_acc": 0.9661016949152542,
+          "dominant_tok": 2703.322033898305,
+          "dominated_acc": 0.9152542372881356,
+          "dominated_tok": 6408.6949152542375
+        },
+        {
+          "dominant": "baseline_3.7max_open",
+          "dominated": "panel_open_cheap",
+          "dominant_acc": 0.9661016949152542,
+          "dominant_tok": 2703.322033898305,
+          "dominated_acc": 0.9661016949152542,
+          "dominated_tok": 32560.86440677966
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max_open",
+          "n": 59,
+          "accuracy": 0.9661016949152542,
+          "mean_tokens_per_q": 2703.322033898305,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "math_open_baseline_seed42.jsonl"
+          ]
+        }
+      ]
+    },
+    "MedQA": {
+      "configs": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 0.94,
+          "mean_tokens_per_q": 1064.52,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "medqa_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:single-call",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 1072.3333333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:standard-tribunal",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 1682.8666666666666,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "shipped_engine",
+          "n": 50,
+          "accuracy": 0.96,
+          "mean_tokens_per_q": 2047.68,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "medqa_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_presolve",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 3183.233333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:flagship_panel",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 3367.266666666667,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:thinking_gate",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 3970.3333333333335,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:stem-max",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 4026.0666666666666,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_thinking_gate",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 4923.333333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        }
+      ],
+      "dominance_pairs": [
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:standard-tribunal",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 1682.8666666666666
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.96,
+          "dominated_tok": 2047.68
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3183.233333333333
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3367.266666666667
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3970.3333333333335
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4026.0666666666666
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1072.3333333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "shipped_engine",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.96,
+          "dominated_tok": 2047.68
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "moo:rag_presolve",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3183.233333333333
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3367.266666666667
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3970.3333333333335
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4026.0666666666666
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 1682.8666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:flagship_panel",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3183.233333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3367.266666666667
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3183.233333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3970.3333333333335
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3183.233333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4026.0666666666666
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3183.233333333333,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3367.266666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 3970.3333333333335
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3367.266666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4026.0666666666666
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3367.266666666667,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3970.3333333333335,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4026.0666666666666
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 3970.3333333333335,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "moo:rag_thinking_gate",
+          "dominant_acc": 0.9666666666666667,
+          "dominant_tok": 4026.0666666666666,
+          "dominated_acc": 0.9666666666666667,
+          "dominated_tok": 4923.333333333333
+        }
+      ],
+      "pareto_frontier": [
+        {
+          "config": "baseline_3.7max",
+          "n": 50,
+          "accuracy": 0.94,
+          "mean_tokens_per_q": 1064.52,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "medqa_pilot_seed42.jsonl"
+          ]
+        },
+        {
+          "config": "moo:single-call",
+          "n": 30,
+          "accuracy": 0.9666666666666667,
+          "mean_tokens_per_q": 1072.3333333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        }
+      ]
+    }
+  },
+  "f5_moo_map": {
+    "gpqa_hard": {
+      "n_common_items": 27,
+      "single_call_accuracy": 0.8888888888888888,
+      "profiles": [
+        {
+          "profile": "flagship_panel",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.9259259259259259,
+          "delta_vs_single_call_pp": 3.703703703703709,
+          "delta_vs_single_call_items": 1
+        },
+        {
+          "profile": "rag_presolve",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.8888888888888888,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_thinking_gate",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.9259259259259259,
+          "delta_vs_single_call_pp": 3.703703703703709,
+          "delta_vs_single_call_items": 1
+        },
+        {
+          "profile": "single-call",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.8888888888888888,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "standard-tribunal",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.8518518518518519,
+          "delta_vs_single_call_pp": -3.703703703703698,
+          "delta_vs_single_call_items": -1
+        },
+        {
+          "profile": "stem-max",
+          "n_common_items": 27,
+          "accuracy_on_common": 0.8518518518518519,
+          "delta_vs_single_call_pp": -3.703703703703698,
+          "delta_vs_single_call_items": -1
+        },
+        {
+          "profile": "thinking_gate",
+          "n_common_items": 27,
+          "accuracy_on_common": 1.0,
+          "delta_vs_single_call_pp": 11.111111111111116,
+          "delta_vs_single_call_items": 3
+        }
+      ]
+    },
+    "supergpqa_hard": {
+      "n_common_items": 25,
+      "single_call_accuracy": 0.84,
+      "profiles": [
+        {
+          "profile": "flagship_panel",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.84,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_presolve",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.72,
+          "delta_vs_single_call_pp": -12.0,
+          "delta_vs_single_call_items": -3
+        },
+        {
+          "profile": "rag_thinking_gate",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.8,
+          "delta_vs_single_call_pp": -3.9999999999999925,
+          "delta_vs_single_call_items": -1
+        },
+        {
+          "profile": "single-call",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.84,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "standard-tribunal",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.64,
+          "delta_vs_single_call_pp": -19.999999999999996,
+          "delta_vs_single_call_items": -5
+        },
+        {
+          "profile": "stem-max",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.8,
+          "delta_vs_single_call_pp": -3.9999999999999925,
+          "delta_vs_single_call_items": -1
+        },
+        {
+          "profile": "thinking_gate",
+          "n_common_items": 25,
+          "accuracy_on_common": 0.76,
+          "delta_vs_single_call_pp": -7.9999999999999964,
+          "delta_vs_single_call_items": -2
+        }
+      ]
+    },
+    "medqa": {
+      "n_common_items": 30,
+      "single_call_accuracy": 0.9666666666666667,
+      "profiles": [
+        {
+          "profile": "flagship_panel",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_presolve",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_thinking_gate",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "single-call",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "standard-tribunal",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "stem-max",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "thinking_gate",
+          "n_common_items": 30,
+          "accuracy_on_common": 0.9666666666666667,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        }
+      ]
+    },
+    "saturated_easy_mmlu": {
+      "n_common_items": 29,
+      "single_call_accuracy": 0.9655172413793104,
+      "profiles": [
+        {
+          "profile": "flagship_panel",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_presolve",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "rag_thinking_gate",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "single-call",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "standard-tribunal",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9310344827586207,
+          "delta_vs_single_call_pp": -3.4482758620689724,
+          "delta_vs_single_call_items": -1
+        },
+        {
+          "profile": "stem-max",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        },
+        {
+          "profile": "thinking_gate",
+          "n_common_items": 29,
+          "accuracy_on_common": 0.9655172413793104,
+          "delta_vs_single_call_pp": 0.0,
+          "delta_vs_single_call_items": 0
+        }
+      ]
+    }
+  },
+  "f5_subject_breakdown": [
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Astrophysics",
+      "n": 7,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Chemistry (general)",
+      "n": 14,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.9285714285714286,
+      "delta_pp": -7.14285714285714,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Electromagnetism and Photonics",
+      "n": 5,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.6,
+      "delta_pp": -40.0,
+      "delta_items": -2
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "High-energy particle physics",
+      "n": 6,
+      "baseline_acc": 0.8333333333333334,
+      "engine_acc": 1.0,
+      "delta_pp": 16.666666666666664,
+      "delta_items": 1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Inorganic Chemistry",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.0,
+      "delta_pp": -100.0,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Molecular Biology",
+      "n": 18,
+      "baseline_acc": 0.6666666666666666,
+      "engine_acc": 0.7222222222222222,
+      "delta_pp": 5.555555555555558,
+      "delta_items": 1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Optics and Acoustics",
+      "n": 2,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.5,
+      "delta_pp": -50.0,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Organic Chemistry",
+      "n": 86,
+      "baseline_acc": 0.8604651162790697,
+      "engine_acc": 0.7209302325581395,
+      "delta_pp": -13.953488372093027,
+      "delta_items": -12
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Physics (general)",
+      "n": 17,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Quantum Mechanics",
+      "n": 22,
+      "baseline_acc": 0.9090909090909091,
+      "engine_acc": 0.9545454545454546,
+      "delta_pp": 4.545454545454552,
+      "delta_items": 1
+    },
+    {
+      "benchmark": "GPQA-Diamond",
+      "subject": "Relativistic Mechanics",
+      "n": 5,
+      "baseline_acc": 0.6,
+      "engine_acc": 0.6,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "GSM8K",
+      "subject": "unknown",
+      "n": 50,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.96,
+      "delta_pp": -4.0000000000000036,
+      "delta_items": -2
+    },
+    {
+      "benchmark": "LEXam",
+      "subject": "Interdisciplinary",
+      "n": 42,
+      "baseline_acc": 0.8571428571428571,
+      "engine_acc": 0.6904761904761905,
+      "delta_pp": -16.666666666666664,
+      "delta_items": -7
+    },
+    {
+      "benchmark": "LEXam",
+      "subject": "Private",
+      "n": 7,
+      "baseline_acc": 0.8571428571428571,
+      "engine_acc": 0.8571428571428571,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "LEXam",
+      "subject": "Public",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Algebra",
+      "n": 9,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.7777777777777778,
+      "delta_pp": -22.22222222222222,
+      "delta_items": -2
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Counting & Probability",
+      "n": 8,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Geometry",
+      "n": 4,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Intermediate Algebra",
+      "n": 10,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Number Theory",
+      "n": 7,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Prealgebra",
+      "n": 7,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MATH-500-MC",
+      "subject": "Precalculus",
+      "n": 4,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.75,
+      "delta_pp": -25.0,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "biology",
+      "n": 3,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "business",
+      "n": 5,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "chemistry",
+      "n": 4,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.75,
+      "delta_pp": -25.0,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "computer science",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "economics",
+      "n": 5,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "engineering",
+      "n": 7,
+      "baseline_acc": 0.8571428571428571,
+      "engine_acc": 0.42857142857142855,
+      "delta_pp": -42.857142857142854,
+      "delta_items": -3
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "health",
+      "n": 2,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "history",
+      "n": 1,
+      "baseline_acc": 0.0,
+      "engine_acc": 0.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "law",
+      "n": 3,
+      "baseline_acc": 0.6666666666666666,
+      "engine_acc": 0.3333333333333333,
+      "delta_pp": -33.33333333333333,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "math",
+      "n": 8,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "other",
+      "n": 4,
+      "baseline_acc": 1.0,
+      "engine_acc": 0.75,
+      "delta_pp": -25.0,
+      "delta_items": -1
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "philosophy",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "physics",
+      "n": 4,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MMLU-Pro",
+      "subject": "psychology",
+      "n": 2,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "MedQA",
+      "subject": "step1",
+      "n": 24,
+      "baseline_acc": 0.9583333333333334,
+      "engine_acc": 1.0,
+      "delta_pp": 4.1666666666666625,
+      "delta_items": 1
+    },
+    {
+      "benchmark": "MedQA",
+      "subject": "step2&3",
+      "n": 26,
+      "baseline_acc": 0.9230769230769231,
+      "engine_acc": 0.9230769230769231,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "subject": "Economics",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "subject": "Engineering",
+      "n": 25,
+      "baseline_acc": 0.88,
+      "engine_acc": 0.76,
+      "delta_pp": -12.0,
+      "delta_items": -3
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "subject": "Literature and Arts",
+      "n": 1,
+      "baseline_acc": 0.0,
+      "engine_acc": 0.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "subject": "Philosophy",
+      "n": 1,
+      "baseline_acc": 1.0,
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "subject": "Science",
+      "n": 58,
+      "baseline_acc": 0.7586206896551724,
+      "engine_acc": 0.6379310344827587,
+      "delta_pp": -12.06896551724137,
+      "delta_items": -7
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+question_id,classification,society_observations
+recVvpD8miVjmmyfe,escalated_and_lost,"[{""seed_file"": ""lever_chem_thinking_gate_gpqa_seed217.jsonl"", ""correct"": false, ""escalated"": true}, {""seed_file"": ""lever_chem_thinking_gate_gpqa_seed471.jsonl"", ""correct"": false, ""escalated"": true}]"
+recwW1A85nfyQpReG,escalated_and_lost,"[{""seed_file"": ""lever_chem_thinking_gate_gpqa_seed314.jsonl"", ""correct"": false, ""escalated"": true}]"
