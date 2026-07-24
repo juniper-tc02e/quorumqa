@@ -682,14 +682,33 @@ The AIME cheap-tier fixes (thinking=False flash, retry-with-backoff, max_tokens
 2048) are BUILT, committed, and offline-tested (suite 380) — ready to run the
 instant the quota resets. AIME run #1 stays INVALID (survivorship bias).
 
+## Same-provider scaling research LANDED (2026-07-24) — Track B redefined
+
+Jun Kai redirected Track B: cross-vendor parked as CONSIDERED; active
+question = scale with **Qwen-family agents only**. 5-angle research fan-out +
+synthesis produced `docs/same-provider-scaling-research.md`: 28-technique
+map (validated / planned / NEW / do-not-spend), a NEW test ladder (F1-F6
+free rungs, P1-P11 paid riders ranked by info-per-quota-token), the honest
+ceiling section (correlated-error floor, verifier gap, self-preference
+bias, tool-checkable cap), and Track B restated as a measurable claim:
+**beat qwen3.8-max-preview solo on shared items/seeds, net ≥ +3/90
+discordant, 3-seed bar, diversity accounting mandatory.** Key status: GPQA
+society (90.9%) is −2.7pt UNDER the 3.8-solo bar (93.6%); SuperGPQA-hard
+bar unmeasured → P1 (3.8-solo paired baselines) is the first new paid spend.
+
 ## NEXT — FREE work only until the quota resets (2026-07-28)
-1. **When quota resets (07-28):** run the fixed AIME cheap-tier pilot (valid,
-   thinking=False flash + retries), score escalation + judge-recovery.
-2. Consolidate the reasoning arc into an additive site Build Log entry (the
-   honest "MATH-500 saturated at both tiers → deliberation needs a real
-   cheap→flagship gap" finding). FREE, additive, within grant.
-3. Offline analyses that need no API: MoO calibration §5.1 from existing eval
-   data; any re-scoring/re-analysis of committed JSONL.
+1. **F1-F6 free rungs** (same-provider-scaling-research.md §3): family
+   blind-spot intersection + 3.8-deficit decomposition (F1), compute-
+   allocation frontier (F2), W5 distribution-feature upgrade (F3), adaptive
+   early-stop build+replay (F4), non-monotonicity map (F5), rigor wiring
+   (F6: seed/thinking_budget params, tool-checkable-fraction of the
+   unanimous-wrong pools). Plus the plan §2 free list (token-audit, W1/W2/W3
+   lever builds, W5 mining).
+2. **When quota resets (07-28):** AIME pilot ① first, then W1+W2-arm-0 on
+   SuperGPQA-hard with P1 (3.8-solo baselines) and P7 as riders — per the
+   research doc's dependency chain.
+3. Additive site Build Log entry once AIME closes the math arc. FREE, within
+   grant.
 2. Consolidate the whole reasoning arc into an additive site Build Log entry
    (when does deliberation help: validated hard-STEM wins; inert on saturated
    math; the AIME result). Additive-only, within grant.
