@@ -295,3 +295,133 @@ def solve_panel_math(client: QwenClient, item: MathItem, solver_model: str = ORC
         "calls": [c.model_dump() for c in calls],
         "latency_s": time.monotonic() - start,
     }
+
+
+# ---------------------------------------------------------------------------
+# W3: self-consistency@N with grade-equivalence clustering (docs/reasoning-
+# supercharge-plan.md W3, docs/same-provider-scaling-research.md F4).
+#
+# Unlike solve_panel_math (3 DISTINCT-lens solvers, one temperature each),
+# self-consistency samples the SAME prompt (BASELINE_LENS) repeatedly at
+# VARIED temperature -- diversity comes from resampling, not from lens
+# framing (that axis is the panel's job, and is exactly what the do-not-
+# spend list's "standalone temperature/sampling-param diversity (falsified
+# in-repo)" rules out as a STANDALONE lever; here it "rides W3 free" as the
+# resampling mechanism self-consistency needs by construction, not as a
+# thing being validated on its own).
+#
+# cluster_margin (top cluster size - runner-up cluster size) is used as a
+# CONTINUOUS escalation dial: big margin -> accept the cheap cluster answer;
+# small/no margin -> flagship judge over the distinct cluster
+# representatives (reusing judge_math as-is, per the plan -- its "three
+# solvers" framing in JUDGE_SYSTEM is a cosmetic mismatch when the escalated
+# set has a different number of clusters, harmless to the adjudication
+# itself since the transcript it's given is self-describing).
+# ---------------------------------------------------------------------------
+
+# 5-value cycle (not just SOLVER_TEMPERATURES repeated) so a run with more
+# than 3 samples still gets genuinely spread-out temperatures rather than
+# silently reusing SOLVER_TEMPERATURES's exact 3 values every lap.
+SC_TEMPERATURE_SCHEDULE = [0.3, 0.6, 0.9, 0.45, 0.75]
+
+
+def _sc_cluster_margin(answers: list[str]) -> tuple[list[list[int]], int]:
+    """Clusters `answers` via _cluster_answers and returns (groups sorted
+    largest-first, margin) where margin = top-cluster size - runner-up
+    size (0 if there is only one cluster so far)."""
+    groups = sorted(_cluster_answers(answers), key=len, reverse=True)
+    runner_up = len(groups[1]) if len(groups) > 1 else 0
+    margin = len(groups[0]) - runner_up
+    return groups, margin
+
+
+def solve_selfconsistency_math(
+    client: QwenClient,
+    item: MathItem,
+    n: int = 5,
+    margin_threshold: int = 2,
+    solver_model: str = ORCHESTRATOR_MODEL,
+    solver_thinking: bool = True,
+    early_stop: bool = True,
+) -> dict:
+    """Self-consistency@N: sample up to `n` solutions to `item.problem` (same
+    lens, SC_TEMPERATURE_SCHEDULE-cycled temperature, all on `solver_model`/
+    `solver_thinking`), cluster by grade() equivalence, and use the cluster
+    MARGIN (top cluster size - runner-up size) as the escalation dial: margin
+    >= margin_threshold -> accept the top cluster's answer cheaply
+    (escalated=False); otherwise escalate to judge_math over the distinct
+    cluster representatives (escalated=True), judge's answer final.
+
+    F4 EARLY STOP (early_stop=True, the default): samples are drawn
+    SEQUENTIALLY, and sampling stops the moment the current leader's margin
+    is mathematically unassailable -- i.e. even if every one of the
+    remaining draws piled onto the current runner-up (the worst case for the
+    leader), the final margin could not drop below margin_threshold. With
+    `remaining` draws left and current `lead` = top - runner-up:
+        worst-case final lead = lead - remaining
+    so it is safe to stop once:
+        lead - remaining >= margin_threshold
+        <=>  lead > remaining + (margin_threshold - 1)
+    which is exactly the acceptance condition (lead >= margin_threshold)
+    once remaining reaches 0, so early stopping never changes the accept/
+    escalate OUTCOME versus the fixed-N run on the samples actually drawn --
+    it only skips draws whose result cannot change that outcome.
+    `samples_used` records how many draws it actually took (== n when
+    early_stop=False, or whenever the margin never becomes unassailable
+    before the last draw)."""
+    start = time.monotonic()
+    lens = BASELINE_LENS
+    answers: list[str] = []
+    reasonings: list[str] = []
+    calls: list[CallUsage] = []
+    samples_used = 0
+
+    for i in range(n):
+        temperature = SC_TEMPERATURE_SCHEDULE[i % len(SC_TEMPERATURE_SCHEDULE)]
+        answer, reasoning, usage = solve_one_math(client, item.problem, lens, temperature, solver_model, solver_thinking)
+        answers.append(answer)
+        reasonings.append(reasoning)
+        calls.append(usage)
+        samples_used = i + 1
+
+        remaining = n - samples_used
+        if early_stop and remaining > 0:
+            _, lead = _sc_cluster_margin(answers)
+            if lead > remaining + (margin_threshold - 1):
+                break
+
+    groups, margin = _sc_cluster_margin(answers)
+    top_group = groups[0]
+
+    escalated = margin < margin_threshold
+    judge_reasoning = None
+    if escalated:
+        # One representative (answer, reasoning) per distinct cluster --
+        # the first sample landing in each cluster stands in for it.
+        reps = [(answers[g[0]], reasonings[g[0]]) for g in groups]
+        judge_answer, judge_reasoning, judge_usage = judge_math(client, item.problem, reps)
+        calls.append(judge_usage)
+        final_answer = judge_answer
+    else:
+        final_answer = answers[top_group[0]]
+
+    correct = grade(item.gold_answer, final_answer)
+    return {
+        "question_id": item.question_id,
+        "gold_answer": item.gold_answer,
+        "final_answer": final_answer,
+        "solver_model": solver_model,
+        "correct": correct,
+        "escalated": escalated,
+        "n_requested": n,
+        "samples_used": samples_used,
+        "clusters": [
+            {"size": len(g), "representative_answer": answers[g[0]]}
+            for g in groups
+        ],
+        "margin": margin,
+        "margin_threshold": margin_threshold,
+        "judge_reasoning": judge_reasoning,
+        "calls": [c.model_dump() for c in calls],
+        "latency_s": time.monotonic() - start,
+    }

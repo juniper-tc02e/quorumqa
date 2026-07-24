@@ -87,7 +87,17 @@ class QwenClient:
         self._api_key = api_key or TOKEN_PLAN_API_KEY
         self._messages_url = (base_url or TOKEN_PLAN_BASE_URL).rstrip("/") + "/v1/messages"
 
-    def chat(self, model: str, messages: list[dict], role: str, temperature: float = 0.4, max_tokens: int = 1024, thinking: bool = True) -> tuple[str, CallUsage]:
+    def chat(
+        self,
+        model: str,
+        messages: list[dict],
+        role: str,
+        temperature: float = 0.4,
+        max_tokens: int = 1024,
+        thinking: bool = True,
+        seed: int | None = None,
+        thinking_budget: int | None = None,
+    ) -> tuple[str, CallUsage]:
         # Anthropic Messages API takes system as a top-level field, not a
         # "system"-role entry in messages -- split it out here so every
         # caller (chat_json below) can keep building messages the OpenAI way.
@@ -112,6 +122,29 @@ class QwenClient:
         # whole economic premise.
         if not thinking:
             body["thinking"] = {"type": "disabled"}
+        elif thinking_budget is not None:
+            # F6 rigor wiring (docs/same-provider-scaling-research.md F6):
+            # a DashScope-compatible "budget_tokens" knob layered on top of
+            # the real Anthropic-style enabled/disabled thinking shape --
+            # ENDPOINT-DEPENDENT (the Token Plan's Anthropic-Messages-API-
+            # compatible endpoint accepts it; a strictly spec-following
+            # Anthropic endpoint would ignore the extra field). Only sent
+            # when thinking=True (a budget on a disabled thinking block is
+            # meaningless) and only when the caller explicitly asks for it
+            # -- thinking_budget=None (the default) leaves the body exactly
+            # as before this param existed. Unknown/unsupported params are
+            # safely ignored server-side, per this endpoint's observed
+            # behavior (see the enable_thinking:false note above).
+            body["thinking"] = {"type": "enabled", "budget_tokens": thinking_budget}
+        # else: thinking=True, thinking_budget=None -- no "thinking" key at
+        # all, BYTE-IDENTICAL to the body sent before thinking_budget
+        # existed (the model's own default thinking behavior applies).
+
+        if seed is not None:
+            # Same F6 rigor wiring, same endpoint-dependent caveat: a
+            # DashScope-compatible reproducibility knob, sent only when the
+            # caller explicitly opts in (default None -> body unchanged).
+            body["seed"] = seed
 
         headers = {
             "x-api-key": self._api_key,
@@ -156,6 +189,8 @@ class QwenClient:
         max_tokens: int = 1024,
         retries: int = 1,
         thinking: bool = True,
+        seed: int | None = None,
+        thinking_budget: int | None = None,
     ) -> JsonCallResult:
         messages = [
             {"role": "system", "content": system + "\n\nRespond with ONLY a single valid JSON object. No markdown, no commentary before or after."},
@@ -165,7 +200,10 @@ class QwenClient:
         spent_input = spent_output = 0
         spent_cost = 0.0
         for attempt in range(retries + 1):
-            content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+            content, usage = self.chat(
+                model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking,
+                seed=seed, thinking_budget=thinking_budget,
+            )
             spent_input += usage.input_tokens
             spent_output += usage.output_tokens
             spent_cost += usage.cost_usd

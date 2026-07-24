@@ -36,7 +36,7 @@ from quorumqa.qwen_client import QwenClient
 
 from benchmark.load_aime import load_aime_set
 from benchmark.load_math_open import load_math_open_set
-from benchmark.math_open_engine import solve_panel_math, solve_single_math
+from benchmark.math_open_engine import solve_panel_math, solve_selfconsistency_math, solve_single_math
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -86,7 +86,25 @@ async def _run_panel_one(client, item, semaphore, solver_model, solver_thinking)
     return result
 
 
-async def main(n: int, seed: int, level: int | None, concurrency: int, solver_tier: str = "flagship", dataset: str = "math500") -> None:
+async def _run_sc_one(client, item, semaphore, solver_model, solver_thinking, sc_n, sc_margin, early_stop):
+    result = await _attempt_with_retries(
+        "sc", item, semaphore,
+        lambda: solve_selfconsistency_math(
+            client, item, n=sc_n, margin_threshold=sc_margin,
+            solver_model=solver_model, solver_thinking=solver_thinking, early_stop=early_stop,
+        ),
+    )
+    if result is not None:
+        log.info("%s [sc]: %s(%s, escalated=%s, samples_used=%d/%d)", item.question_id, result["final_answer"],
+                 "correct" if result["correct"] else "wrong", result["escalated"],
+                 result["samples_used"], result["n_requested"])
+    return result
+
+
+async def main(
+    n: int, seed: int, level: int | None, concurrency: int, solver_tier: str = "flagship", dataset: str = "math500",
+    mode: str = "panel", sc_n: int = 5, sc_margin: int = 2, early_stop: bool = True,
+) -> None:
     if dataset == "aime":
         items = load_aime_set(n=n, seed=seed)
     else:
@@ -98,12 +116,14 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     # the long-trace ReadTimeouts that biased AIME run #1.
     solver_thinking = solver_tier != "cheap"
     log.info(
-        "Loaded %d %s open-answer items (level=%s, seed=%d) -- panel solver_tier=%s (%s, thinking=%s), judge always flagship",
-        len(items), dataset, level, seed, solver_tier, solver_model, solver_thinking,
+        "Loaded %d %s open-answer items (level=%s, seed=%d) -- mode=%s solver_tier=%s (%s, thinking=%s), judge always flagship",
+        len(items), dataset, level, seed, mode, solver_tier, solver_model, solver_thinking,
     )
+    if mode == "sc":
+        log.info("sc params: n=%d margin_threshold=%d early_stop=%s", sc_n, sc_margin, early_stop)
 
     client = QwenClient()
-    # ONE shared semaphore across baseline AND panel tasks, mirroring
+    # ONE shared semaphore across baseline AND panel/sc tasks, mirroring
     # main_live's single semaphore -- bounds TOTAL concurrent flagship-call
     # groups (baseline calls count for 1 flagship call each, panel calls
     # count for up to 4 -- 3 solvers + optional judge -- but each group only
@@ -111,7 +131,13 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     semaphore = asyncio.Semaphore(concurrency)
 
     baseline_tasks = [asyncio.ensure_future(_run_baseline_one(client, item, semaphore)) for item in items]
-    panel_tasks = [asyncio.ensure_future(_run_panel_one(client, item, semaphore, solver_model, solver_thinking)) for item in items]
+    if mode == "sc":
+        panel_tasks = [
+            asyncio.ensure_future(_run_sc_one(client, item, semaphore, solver_model, solver_thinking, sc_n, sc_margin, early_stop))
+            for item in items
+        ]
+    else:
+        panel_tasks = [asyncio.ensure_future(_run_panel_one(client, item, semaphore, solver_model, solver_thinking)) for item in items]
 
     baseline_results = [r for r in await asyncio.gather(*baseline_tasks) if r is not None]
     panel_results = [r for r in await asyncio.gather(*panel_tasks) if r is not None]
@@ -131,7 +157,10 @@ async def main(n: int, seed: int, level: int | None, concurrency: int, solver_ti
     prefix = "aime_open" if dataset == "aime" else "math_open"
     baseline_path = RESULTS_DIR / f"{prefix}_baseline_seed{seed}.jsonl"
     panel_suffix = "" if solver_tier == "flagship" else f"_{solver_tier}"
-    panel_path = RESULTS_DIR / f"{prefix}_panel{panel_suffix}_seed{seed}.jsonl"
+    # mode_tag defaults to "panel" -- byte-identical filename to before
+    # --mode existed -- and only changes to "sc" when --mode sc is passed.
+    mode_tag = "sc" if mode == "sc" else "panel"
+    panel_path = RESULTS_DIR / f"{prefix}_{mode_tag}{panel_suffix}_seed{seed}.jsonl"
 
     with baseline_path.open("w", encoding="utf-8") as f:
         for r in baseline_results:
@@ -180,5 +209,17 @@ if __name__ == "__main__":
                              "'cheap' (qwen3.6-flash solvers + flagship judge -- the SHIPPED engine's real tier)")
     parser.add_argument("--dataset", choices=["math500", "aime"], default="math500",
                         help="'math500' (level-filtered MATH-500) or 'aime' (AIME 2024+2025, integer answers)")
+    parser.add_argument("--mode", choices=["panel", "sc"], default="panel",
+                         help="'panel' (default, unchanged: solve_panel_math -- 3 distinct-lens solvers) or "
+                              "'sc' (solve_selfconsistency_math -- W3 self-consistency@N with grade-equivalence "
+                              "clustering and cluster-margin escalation)")
+    parser.add_argument("--sc-n", type=int, default=5, help="--mode sc only: number of self-consistency samples")
+    parser.add_argument("--sc-margin", type=int, default=2,
+                         help="--mode sc only: cluster-margin threshold below which the judge is escalated to")
+    parser.add_argument("--no-early-stop", action="store_true",
+                         help="--mode sc only: disable F4 early stopping (always draw the full --sc-n samples)")
     args = parser.parse_args()
-    asyncio.run(main(args.n, args.seed, args.level, args.concurrency, args.solver_tier, args.dataset))
+    asyncio.run(main(
+        args.n, args.seed, args.level, args.concurrency, args.solver_tier, args.dataset,
+        args.mode, args.sc_n, args.sc_margin, not args.no_early_stop,
+    ))
