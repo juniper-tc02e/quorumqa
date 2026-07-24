@@ -172,6 +172,66 @@ Levers:
                  threshold/rag_gate_applied ("ON"/"OFF")/rag_gate_top_score
                  (see _build_output_row) -- no rag_r2 keys, since this lever
                  never does R2 either.
+  verified_gate_flaw -- docs/reasoning-supercharge-plan.md W1 Arm A
+                 (flaw-finder, primary). Panel runs the SHIPPED cheap
+                 config (3 flash solvers, thinking=False, byte-identical
+                 seat prompts to solve_all) -- this pre-gate vote is logged
+                 verbatim (output row field `pre_gate_votes`) as W2's paired
+                 control. On a UNANIMOUS plurality, one ORCHESTRATOR_MODEL
+                 thinking=True call (flaw_finder_gate_check) reviews the
+                 panel's answer framed as VERIFICATION, not solving --
+                 escalates to the shipped tribunal (skeptic/verifier/judge,
+                 unchanged) only if it names a concrete flaw; otherwise the
+                 unanimous answer is accepted as-is. A non-unanimous
+                 (split) plurality behaves exactly like the shipped engine
+                 (escalates without ever calling the gate). Output rows
+                 additionally carry arm="flaw", unanimous, gate_fired,
+                 gate_reason (see _build_output_row's `note` handling).
+  verified_gate_cas -- W1 Arm B (computational check, quantitative items
+                 only). Same shipped cheap panel + pre_gate_votes logging
+                 as verified_gate_flaw. On a UNANIMOUS plurality, one
+                 MECHANICAL_MODEL extraction call (cas_gate_check, mirrors
+                 engine/verifier.py's extract pattern) turns the panel's
+                 answer into {checkable, relation, candidate}; if checkable,
+                 the NEW deterministic sympy_check MCP tool (tools/
+                 mcp_server.py, called locally -- no model call, no
+                 network) checks it. check-fail escalates to the shipped
+                 tribunal; check-pass or not-checkable accepts. sympy_check
+                 FAILS SAFE: an unparseable relation is treated exactly
+                 like not-checkable (accept, never block on a tool
+                 limitation). Non-unanimous behaves like the shipped engine,
+                 same as verified_gate_flaw. Same extra output-row fields
+                 (arm="cas", unanimous, gate_fired, gate_reason,
+                 pre_gate_votes).
+  permuted_panel -- docs/reasoning-supercharge-plan.md W2 Arm 0
+                 (decorrelation by construction, run first -- near-zero
+                 marginal cost). Identical to the shipped cheap panel
+                 EXCEPT each of the 3 seats sees an INDEPENDENTLY shuffled
+                 choice order (seeded per question for reproducibility:
+                 random.Random(f"{seed}:{question_id}:{seat_index}"), see
+                 _permute_choices) -- the seat's returned letter (a position
+                 in ITS shuffled order) is mapped back to the canonical
+                 original letter before voting, so plurality/escalation
+                 operate on canonical letters exactly like every other
+                 lever. The task itself is unchanged, so per-seat accuracy
+                 cannot degrade by construction -- this directly tests
+                 whether unanimity survives a presentation-invariance
+                 perturbation. No gate call (identical to the shipped
+                 engine's plain unanimous-accept/split-escalate). Output
+                 rows carry the per-seat permutation + canonical-letter
+                 record (field `seat_permutations`).
+  method_panel -- W2 Arm 1 (method-diversity, conditional -- run only if
+                 permuted_panel alone doesn't move the unanimous-wrong
+                 rate). Same model/temperatures as the shipped panel, but
+                 the shipped per-seat LENS is replaced by a distinct
+                 solving PROCEDURE: seat 1 solves forward analytically
+                 step by step; seat 2 verifies by candidate (evaluates
+                 each option against the question's constraints,
+                 eliminating); seat 3 estimates first (order-of-magnitude/
+                 limiting-case analysis, then refines). Which method each
+                 seat used is logged via SolverAnswer.lens (holding the
+                 method name instead of a lens description). No gate call,
+                 same accept/escalate behavior as the shipped engine.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -186,6 +246,10 @@ Usage:
   python -m benchmark.lever_experiments --lever rag_recursive --n 90 --seed 42 --dataset supergpqa --rag-k 5
   python -m benchmark.lever_experiments --lever rag_thinking_gate --n 90 --seed 271 --dataset supergpqa --rag-k 5  # FRESH seed only, never 42/7/123
   python -m benchmark.lever_experiments --lever rag_gated_presolve --n 90 --seed 271 --dataset supergpqa --rag-k 5 --rag-score-threshold 0.02
+  python -m benchmark.lever_experiments --lever verified_gate_flaw --n 90 --seed 42 --dataset supergpqa
+  python -m benchmark.lever_experiments --lever verified_gate_cas --n 90 --seed 42 --dataset supergpqa
+  python -m benchmark.lever_experiments --lever permuted_panel --n 90 --seed 42 --dataset supergpqa
+  python -m benchmark.lever_experiments --lever method_panel --n 90 --seed 42 --dataset supergpqa
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -194,6 +258,7 @@ import asyncio
 import json
 import logging
 import os
+import random
 import re
 import time
 from collections import Counter
@@ -211,6 +276,7 @@ from quorumqa.engine.verifier import verify
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import CallUsage, GPQAItem, JudgeVerdict, QuestionResult, SkepticRebuttal, SolverAnswer, VerifierFinding
 from quorumqa.tools.mcp_client import VerifierToolSession, verifier_tool_session
+from quorumqa.tools.mcp_server import sympy_check
 
 from benchmark.load_gpqa import load_benchmark_set
 from benchmark.load_lexam import load_lexam_set
@@ -588,6 +654,238 @@ async def solve_all_qwen38_panel(client, question, choices):
 
 
 # ---------------------------------------------------------------------------
+# W1 -- verified_gate (docs/reasoning-supercharge-plan.md): attack
+# unanimous-wrong head-on. Both arms run the SHIPPED cheap panel (solve_all
+# -- byte-identical seat prompts to the plain "gate" lever) so the logged
+# pre-gate vote is a fair paired control for W2. On a unanimous plurality,
+# ONE extra call decides whether to trust it or escalate to the shipped
+# tribunal (skeptic/verifier/judge, completely unchanged). A non-unanimous
+# (split) plurality is never gated -- it escalates exactly like the shipped
+# engine, same as every other lever in this file.
+# ---------------------------------------------------------------------------
+
+FLAW_FINDER_SYSTEM = (
+    "You are an expert reviewer auditing a panel's UNANIMOUS answer to a "
+    "hard graduate-level science question. This is VERIFICATION, not "
+    "solving -- do not silently re-derive the answer from scratch and grade "
+    "it against your own; read the panel's chosen answer and its stated "
+    "reasoning, and hunt specifically for a concrete, checkable flaw: a "
+    "wrong fact, a skipped case, a misapplied formula or law, a common "
+    "misconception the question is designed to trap. If you find one, name "
+    "it precisely. If the reasoning genuinely holds up under scrutiny, "
+    "confirm it -- do not manufacture doubt just because the question is "
+    "hard."
+)
+
+
+def flaw_finder_gate_check(client, question, choices, solver_answers, plurality_letter):
+    """W1 Arm A's verification call: ONE ORCHESTRATOR_MODEL thinking=True
+    call, framed as reviewing a fixed candidate answer rather than solving
+    from scratch -- the stronger sibling of the validated second_opinion_
+    gate (which used a cheap model and opinion-only framing, no reasoning
+    depth). Runs once per unanimous plurality; the caller escalates to the
+    shipped tribunal iff flaw_found is true."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    transcript = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in solver_answers)
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Panel's unanimous answer: {plurality_letter}\n\nReasoning given:\n{transcript}\n\n"
+        'JSON shape: {"flaw_found": true|false, "flaw": "the specific flaw found, or empty '
+        'string if none", "confidence": 0.0-1.0}'
+    )
+    result = client.chat_json(
+        model=ORCHESTRATOR_MODEL, system=FLAW_FINDER_SYSTEM, user=user, role="verified_gate_flaw",
+        thinking=True, temperature=0.3, retries=2,
+    )
+    flaw_found = bool(result.data.get("flaw_found", False))
+    flaw = str(result.data.get("flaw", "") or "")
+    confidence = float(result.data.get("confidence", 0.5))
+    return flaw_found, flaw, confidence, result.usage
+
+
+CAS_EXTRACT_SYSTEM = (
+    "You are the CAS (computer-algebra) extractor for a science-exam panel "
+    "that just gave a UNANIMOUS answer. Decide whether that answer can be "
+    "verified by a symbolic/arithmetic equality check -- it is the numeric "
+    "result of a calculation, satisfies an equation, or matches a formula "
+    "evaluated with the quantities given in the question. If so, write the "
+    "check as ONE sympy-parseable equation (\"LHS = RHS\") with the chosen "
+    "answer's numeric value already substituted in wherever possible (e.g. "
+    "\"2 * 3.0 + 4 = 10\"); if a variable must remain because the answer IS "
+    "that variable's value, leave that ONE symbol in the equation and also "
+    "report its numeric value as `candidate`. NEVER invent a check for a "
+    "conceptual, qualitative, or multi-step-judgment question -- report "
+    "checkable=false instead of guessing."
+)
+
+
+def cas_gate_check(client, question, choices, solver_answers, plurality_letter):
+    """W1 Arm B's extraction call: ONE MECHANICAL_MODEL call mirroring the
+    shipped Verifier's extract->tool->finalize pattern (engine/verifier.py's
+    _extract_claims) -- turns the panel's unanimous answer into a
+    {checkable, relation, candidate} JSON triple. The check itself is NOT
+    performed here (it must stay deterministic/local, no model call) -- the
+    caller runs the new sympy_check MCP tool (tools/mcp_server.py) against
+    the returned relation/candidate."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    transcript = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in solver_answers)
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Panel's unanimous answer: {plurality_letter}\n\nReasoning given:\n{transcript}\n\n"
+        'JSON shape: {"checkable": true|false, "relation": "sympy-parseable equation, '
+        "e.g. 'LHS = RHS', empty string if not checkable\", \"candidate\": \"the chosen "
+        'answer\'s numeric value as a plain string, empty string if not checkable"}'
+    )
+    result = client.chat_json(
+        model=MECHANICAL_MODEL, system=CAS_EXTRACT_SYSTEM, user=user, role="verified_gate_cas",
+        thinking=False, temperature=0.2, retries=2,
+    )
+    checkable = bool(result.data.get("checkable", False))
+    relation = str(result.data.get("relation", "") or "")
+    candidate = str(result.data.get("candidate", "") or "")
+    return checkable, relation, candidate, result.usage
+
+
+# ---------------------------------------------------------------------------
+# W2 -- decorrelation by construction (docs/reasoning-supercharge-plan.md).
+# Arm 0 (permuted_panel): shuffle each seat's choice order independently,
+# map letters back to canonical before voting. Arm 1 (method_panel):
+# replace lens diversity with procedure diversity.
+# ---------------------------------------------------------------------------
+
+
+def _permute_choices(choices: list[str], seed: int, question_id: str, seat_index: int):
+    """Returns (shuffled_choices, perm) where perm[i] is the ORIGINAL
+    canonical index of the choice now sitting at shuffled position i.
+    Seeded per question+seat (random.Random(f"{seed}:{question_id}:
+    {seat_index}")) so a run is fully reproducible, and every seat sees an
+    INDEPENDENT shuffle of the same question (decorrelating any shared
+    position/first-plausible-option bias across seats)."""
+    rng = random.Random(f"{seed}:{question_id}:{seat_index}")
+    perm = list(range(len(choices)))
+    rng.shuffle(perm)
+    shuffled = [choices[i] for i in perm]
+    return shuffled, perm
+
+
+def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat_index, model=MECHANICAL_MODEL, temperature=0.4):
+    """Identical to solver._solve_one (same system prompt, model default,
+    JSON contract, user-prompt shape) EXCEPT this seat is shown an
+    independently shuffled choice order (see _permute_choices). The model's
+    returned letter refers to a POSITION in the shuffled list; it is mapped
+    back to the canonical original letter before being returned as a
+    SolverAnswer, so downstream plurality voting/escalation always operate
+    on canonical letters exactly like every other lever. Returns
+    (answer, usage, permutation_record) -- permutation_record is the
+    logging-only detail (field `seat_permutations` in the output row)."""
+    shuffled_choices, perm = _permute_choices(choices, seed, question_id, seat_index)
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", shuffled_choices))
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+    )
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+    shuffled_letter = str(result.data.get("letter", "")).strip().upper()[:1]
+    if shuffled_letter not in "ABCD":
+        shuffled_letter = "A"
+    shuffled_index = "ABCD".index(shuffled_letter)
+    canonical_index = perm[shuffled_index]
+    canonical_letter = "ABCD"[canonical_index]
+    answer = SolverAnswer(
+        letter=canonical_letter,
+        confidence=float(result.data.get("confidence", 0.5)),
+        reasoning=str(result.data.get("reasoning", "")),
+        lens=lens,
+    )
+    permutation_record = {
+        "seat_index": seat_index,
+        "shuffled_order": perm,  # perm[i] = canonical index shown at shuffled position i
+        "shuffled_letter": shuffled_letter,
+        "canonical_letter": canonical_letter,
+    }
+    return answer, result.usage, permutation_record
+
+
+async def solve_all_permuted_panel(client, question, choices, seed, question_id):
+    """W2 Arm 0: same model/lenses/temperatures as the shipped cheap panel
+    (solve_all) -- the ONLY variable is that each seat gets an
+    INDEPENDENTLY shuffled choice order. Returns (solver_pairs,
+    seat_permutations): solver_pairs matches every other lever's
+    (SolverAnswer, CallUsage) shape (already mapped back to canonical
+    letters -- run_question_lever's plurality/escalation logic needs no
+    changes to consume it), seat_permutations is the per-seat
+    permutation/mapping record for logging."""
+    lenses = _lenses_for(3)
+    tasks = [
+        asyncio.to_thread(_solve_one_permuted, client, question, choices, lenses[i], seed, question_id, i, MECHANICAL_MODEL, SOLVER_TEMPERATURES[i])
+        for i in range(3)
+    ]
+    triples = list(await asyncio.gather(*tasks))
+    solver_pairs = [(a, u) for a, u, _ in triples]
+    seat_permutations = [p for _, _, p in triples]
+    return solver_pairs, seat_permutations
+
+
+METHOD_FORWARD = (
+    "Method: solve forward analytically, step by step. Derive the answer "
+    "from first principles or known formulas in a clear logical sequence, "
+    "then match your result to the closest choice."
+)
+METHOD_VERIFY_BY_CANDIDATE = (
+    "Method: verify by candidate. Evaluate EACH answer choice against the "
+    "question's stated constraints in turn, eliminating any that fail, and "
+    "select the one that survives (or fits best)."
+)
+METHOD_ESTIMATE_FIRST = (
+    "Method: estimate first. Start from an order-of-magnitude estimate or "
+    "a limiting-case/sanity check, then refine that estimate with exact "
+    "reasoning to pick the closest choice."
+)
+METHOD_PROMPTS = [METHOD_FORWARD, METHOD_VERIFY_BY_CANDIDATE, METHOD_ESTIMATE_FIRST]
+METHOD_NAMES = ["solve_forward", "verify_by_candidate", "estimate_first"]
+
+
+def _solve_one_method(client, question, choices, method_prompt, method_name, model=MECHANICAL_MODEL, temperature=0.4):
+    """Identical to solver._solve_one (same model default, JSON contract,
+    user-prompt shape) EXCEPT the per-seat LENS is replaced by a METHOD
+    system prompt -- W2 Arm 1's procedure diversity instead of the shipped
+    framing-lens diversity. The method NAME (not the shipped lens text) is
+    stored in SolverAnswer.lens so downstream logging/analysis can see
+    which method each seat used, the same field every other lever already
+    uses for its lens/method label."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+    )
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{method_prompt}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+    letter = str(result.data.get("letter", "")).strip().upper()[:1]
+    answer = SolverAnswer(
+        letter=letter if letter in "ABCD" else "A",
+        confidence=float(result.data.get("confidence", 0.5)),
+        reasoning=str(result.data.get("reasoning", "")),
+        lens=method_name,
+    )
+    return answer, result.usage
+
+
+async def solve_all_method_panel(client, question, choices):
+    """W2 Arm 1 (conditional -- run only if permuted_panel alone doesn't
+    move the unanimous-wrong rate): three seats run distinct solving
+    PROCEDURES (solve-forward / verify-by-candidate / estimate-first)
+    instead of the shipped lens+temperature diversity. Same model
+    (MECHANICAL_MODEL) and per-seat temperatures as the shipped panel --
+    method is the only variable."""
+    tasks = [
+        asyncio.to_thread(_solve_one_method, client, question, choices, METHOD_PROMPTS[i], METHOD_NAMES[i], MECHANICAL_MODEL, SOLVER_TEMPERATURES[i])
+        for i in range(3)
+    ]
+    return list(await asyncio.gather(*tasks))
+
+
+# ---------------------------------------------------------------------------
 # rag_presolve (R1): pre-solve retrieval lever -- docs/recursive-rag-plan.md
 # section 2. Identical to the shipped cheap engine EXCEPT each solver seat's
 # user prompt is prefixed with a compact evidence block retrieved ONCE per
@@ -922,11 +1220,12 @@ async def _tribunal(
 
 async def run_question_lever(
     client, tool_session, item: GPQAItem, lever: str, rag: "RagPresolveConfig | None" = None,
-    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD, seed: int = 42,
 ):
     start = time.monotonic()
     rag_gate_applied = None
     rag_gate_top_score = None
+    seat_permutations = None
 
     if lever in ("thinking", "combined", "thinking_gate"):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
@@ -944,6 +1243,10 @@ async def run_question_lever(
         solver_pairs = await solve_all_flagship_panel(client, item.question, item.choices)
     elif lever == "qwen38_panel":
         solver_pairs = await solve_all_qwen38_panel(client, item.question, item.choices)
+    elif lever == "permuted_panel":
+        solver_pairs, seat_permutations = await solve_all_permuted_panel(client, item.question, item.choices, seed, item.question_id)
+    elif lever == "method_panel":
+        solver_pairs = await solve_all_method_panel(client, item.question, item.choices)
     elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
         # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
         # same solve_all_rag_presolve call, same evidence block, same
@@ -977,14 +1280,32 @@ async def run_question_lever(
             log.info("%s: rag_gated_presolve gate_applied=%s top_score=%s (threshold=%s)",
                       item.question_id, rag_gate_applied, rag_gate_top_score, rag_gate_threshold)
     else:
+        # Covers the shipped default panel, the plain "gate" lever, and
+        # BOTH verified_gate arms (verified_gate_flaw/verified_gate_cas) --
+        # all three run the byte-identical shipped cheap panel (3 flash
+        # solvers, thinking=False). For verified_gate this pre-gate vote IS
+        # W2's paired control (see pre_gate_votes below).
         solver_pairs = await solve_all(client, item.question, item.choices)
 
     solver_answers = [a for a, _ in solver_pairs]
     calls = [u for _, u in solver_pairs]
     plurality_letter, unanimous = _plurality(solver_answers)
 
+    pre_gate_votes = None
+    if lever in ("verified_gate_flaw", "verified_gate_cas"):
+        # Logged regardless of unanimity -- the shipped panel's per-seat
+        # vote before any gate ever runs (docs/reasoning-supercharge-plan.md
+        # W1's build note: "this logged pre-gate plurality is W2's paired
+        # control").
+        pre_gate_votes = [
+            {"letter": a.letter, "lens": a.lens, "confidence": a.confidence, "reasoning": a.reasoning}
+            for a in solver_answers
+        ]
+
     force_escalate = False
     gate_note = None
+    gate_fired = False
+    gate_reason = None
     if unanimous:
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
@@ -995,6 +1316,44 @@ async def run_question_lever(
             if doubt:
                 force_escalate = True
                 gate_note = f"gate-flagged: {reason}"
+        elif lever == "verified_gate_flaw":
+            flaw_found, flaw, confidence, gate_usage = flaw_finder_gate_check(
+                client, item.question, item.choices, solver_answers, plurality_letter
+            )
+            calls.append(gate_usage)
+            gate_fired = flaw_found
+            gate_reason = flaw if flaw_found else f"no flaw found (confidence={confidence:.2f})"
+            if flaw_found:
+                force_escalate = True
+        elif lever == "verified_gate_cas":
+            checkable, relation, candidate, extract_usage = cas_gate_check(
+                client, item.question, item.choices, solver_answers, plurality_letter
+            )
+            calls.append(extract_usage)
+            if not checkable:
+                gate_reason = "not checkable"
+            else:
+                check = sympy_check(relation, candidate)
+                if check["status"] == "fail":
+                    gate_fired = True
+                    gate_reason = f"CAS check failed: {check['detail']}"
+                    force_escalate = True
+                elif check["status"] == "pass":
+                    gate_reason = f"CAS check passed: {check['detail']}"
+                else:  # "unparseable" -- fail safe, treat exactly like not-checkable
+                    gate_reason = f"CAS check unparseable, fail-safe accept: {check['detail']}"
+
+    note = gate_note
+    if lever in ("verified_gate_flaw", "verified_gate_cas"):
+        note = {
+            "arm": "flaw" if lever == "verified_gate_flaw" else "cas",
+            "unanimous": unanimous,
+            "gate_fired": gate_fired,
+            "gate_reason": gate_reason,
+            "pre_gate_votes": pre_gate_votes,
+        }
+    elif lever == "permuted_panel":
+        note = {"seat_permutations": seat_permutations}
 
     if unanimous and not force_escalate:
         return QuestionResult(
@@ -1002,7 +1361,7 @@ async def run_question_lever(
             escalated=False, final_letter=plurality_letter, correct=(plurality_letter == item.correct_letter),
             calls=calls, latency_s=time.monotonic() - start,
             rag_gate_applied=rag_gate_applied, rag_gate_top_score=rag_gate_top_score,
-        ), gate_note
+        ), note
 
     if lever == "qwen38_judge":
         result = await _tribunal(
@@ -1019,20 +1378,23 @@ async def run_question_lever(
         # rag_gated_presolve falls through here too (no R2, same as
         # rag_presolve/rag_thinking_gate) -- its gate decision/score are
         # threaded through as pure passthrough (None for every other lever).
+        # verified_gate_flaw/verified_gate_cas (unanimous+gate-fired, or a
+        # non-unanimous split) also fall through here -- the shipped
+        # tribunal, completely unchanged.
         result = await _tribunal(
             client, tool_session, item, solver_answers, plurality_letter, calls, start,
             rag_gate_applied=rag_gate_applied, rag_gate_top_score=rag_gate_top_score,
         )
-    return result, gate_note
+    return result, note
 
 
 async def _run_one(
     client, tool_session, item, semaphore, lever, rag: "RagPresolveConfig | None" = None,
-    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+    rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD, seed: int = 42,
 ):
     try:
         async with semaphore:
-            result, note = await run_question_lever(client, tool_session, item, lever, rag, rag_gate_threshold)
+            result, note = await run_question_lever(client, tool_session, item, lever, rag, rag_gate_threshold, seed)
     except Exception:
         log.exception("%s: DROPPED after unrecoverable error", item.question_id)
         return None
@@ -1043,12 +1405,12 @@ async def _run_one(
         f", {note}" if note else "",
         result.total_cost_usd,
     )
-    return result
+    return result, note
 
 
 def _build_output_row(
     result, lever: str, seed: int, dataset: str, rag_config: "RagPresolveConfig | None" = None,
-    rag_gate_threshold: float | None = None,
+    rag_gate_threshold: float | None = None, note=None,
 ) -> dict:
     """The per-question JSONL row every lever writes. For rag_presolve,
     rag_recursive, rag_thinking_gate, and rag_gated_presolve, also carries
@@ -1069,7 +1431,18 @@ def _build_output_row(
     tribunal dispatch), so their rows look exactly like rag_presolve's
     plus their own lever name (and, for rag_gated_presolve, the gate
     fields below). Every other lever's row shape is completely unchanged
-    (no "rag"/"rag_r2"/"rag_gate_*" keys at all)."""
+    (no "rag"/"rag_r2"/"rag_gate_*" keys at all).
+
+    `note` (new): the second element run_question_lever/`_run_one` return
+    alongside `result`. It stays a plain human-readable string (or None)
+    for every pre-existing lever that already used it that way (subject-
+    forced/gate-flagged levers) and is NOT folded into the row -- exactly
+    the same as before this parameter existed, so every existing caller/
+    test that omits it (or passes None) sees byte-identical output. For the
+    two NEW lever families that need extra per-question data no
+    QuestionResult field carries, `note` is instead a dict:
+    verified_gate_flaw/verified_gate_cas fold in arm/unanimous/gate_fired/
+    gate_reason/pre_gate_votes; permuted_panel folds in seat_permutations."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
     if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
         row["rag"] = "ON"
@@ -1087,6 +1460,14 @@ def _build_output_row(
         row["rag_gate_threshold"] = rag_gate_threshold
         row["rag_gate_applied"] = "ON" if result.rag_gate_applied else "OFF"
         row["rag_gate_top_score"] = result.rag_gate_top_score
+    if lever in ("verified_gate_flaw", "verified_gate_cas") and isinstance(note, dict):
+        row["arm"] = note.get("arm")
+        row["unanimous"] = note.get("unanimous")
+        row["gate_fired"] = note.get("gate_fired")
+        row["gate_reason"] = note.get("gate_reason")
+        row["pre_gate_votes"] = note.get("pre_gate_votes")
+    if lever == "permuted_panel" and isinstance(note, dict):
+        row["seat_permutations"] = note.get("seat_permutations")
     return row
 
 
@@ -1119,7 +1500,7 @@ async def main_live(
     results = []
     async with verifier_tool_session() as tool_session:
         tasks = [
-            asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config, rag_gate_threshold))
+            asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config, rag_gate_threshold, seed))
             for item in items
         ]
         for coro in asyncio.as_completed(tasks):
@@ -1133,8 +1514,8 @@ async def main_live(
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
-        for r in results:
-            f.write(json.dumps(_build_output_row(r, lever, seed, dataset, rag_config, rag_gate_threshold)) + "\n")
+        for r, note in results:
+            f.write(json.dumps(_build_output_row(r, lever, seed, dataset, rag_config, rag_gate_threshold, note)) + "\n")
     log.info("Wrote %d results to %s", len(results), out_path)
 
 
@@ -1224,7 +1605,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
