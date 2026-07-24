@@ -287,6 +287,57 @@ noise. So every criterion is a discordant-item count or a 3-seed mean:
   9/9, adding no decorrelated information (recorded here so a future
   session doesn't re-derive it).
 
+## 5b. The two-track product strategy (directive from Jun Kai, 2026-07-24)
+
+QuorumQA runs two angles, and every lever above serves one or both:
+
+**Track A — the price model (current portfolio).** Cheaper models organized
+by QuorumQA match or beat a single flagship at lower cost. This is the
+shipped engine's thesis (flash voters + routed flagship, 78.9% @ −11% cost),
+the MoO cost win (28-50% cheaper at equal accuracy on realistic traffic),
+and W1-W7's default framing. The claim is efficiency.
+
+**Track B — Ultra Agentic Scaling (cost-no-object).** Frontier models from
+*different labs* — e.g. GPT 5.6 Sol Ultra, Kimi K3, qwen3.8-max-preview,
+Claude — deliberating under QuorumQA's tribunal to exceed the best single
+frontier model. The claim is absolute capability.
+
+**Why the evidence supports Track B rather than contradicting it:** our
+homogeneous-strength failures (qwen38_panel, the all-flagship math panel)
+were three copies of the SAME model — identical lineage, identical blind
+spots, 0% escalation. Cross-lab frontier models have different pretraining
+data, different RLHF regimes, and demonstrably different failure modes:
+that is *engineered decorrelation at the top tier*, exactly the mechanism
+the whole thesis says deliberation runs on. (The earlier mixed-model
+failure — a qwen3.7-plus seat — was a *weaker* seat dragging a panel, not
+peers of comparable strength from different lineages. Different case.)
+
+Track-B preconditions and honesty rules:
+1. **Provider-agnostic client** (free build): QwenClient is DashScope/
+   Token-Plan-specific. Need a thin adapter layer (OpenAI-compatible +
+   Anthropic-compatible transports cover OpenAI, Moonshot/Kimi, Qwen,
+   Claude) with per-provider retry/timeout profiles. Buildable now,
+   offline-testable with fake transports.
+2. **Keys**: only Qwen credentials exist in this repo today. OpenAI/
+   Moonshot keys are Jun Kai's to add via the safe methods (setx / edit
+   .env directly — never pasted in chat).
+3. **The claim is measured, not marketed**: "exceeds other labs" means
+   beats the best participating single model on the benchmarks we run,
+   apples-to-apples on identical items, 3-seed bar — never a general
+   leaderboard claim we didn't measure.
+4. **Diversity accounting**: log per-model disagreement/unanimous-wrong
+   rates so we can PROVE the cross-lab panel decorrelates (the number that
+   makes Track B more than a stunt).
+
+**Considered-and-recorded config (from Jun Kai, 2026-07-24):** all-qwen3.7
+seats (solvers + skeptic + verifier + gate) with a qwen3.8-max-preview
+judge. Never run. Prediction from the validated record: the 3.8-judge half
+is marginal (judge quality is not the bottleneck — 9/9 overturns already);
+the genuinely untested half is flagship-tier skeptic/verifier/gate, which
+is what W1's flaw-finder tests in targeted form. If W1's screen passes, a
+Track-B variant of this config (cross-lab judge over flagship seats) enters
+the week-2+ queue rather than being re-derived.
+
 ## 5. Kill-discipline
 
 Half this session's value was honest negatives (R2, score-gating,
