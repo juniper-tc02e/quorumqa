@@ -710,8 +710,13 @@ All free rungs executed, reviewed, committed, pushed. Suite: **443 passed.**
 | W1+W2 builds | verified_gate_flaw / verified_gate_cas (+ sympy_check/substitute_check MCP tools) / permuted_panel / method_panel — 37 tests, pre-gate votes logged with byte-identical shipped prompts (W2's control provenance secured). |
 | W3+F6 builds | solve_selfconsistency_math (grade-clustering, margin dial, F4 early-stop verified exact) + --mode sc; qwen_client seed/thinking_budget (byte-identical defaults, captured-request tested); **W1-B cap committed pre-run**: GPQA 53% checkable, SuperGPQA-hard 87% (heuristic ceiling, honestly flagged). |
 
-Remaining optional free items: W4/W6 shelf-builds (conditional levers — build
-only if W1/W2 screen positive, per plan demotion). NOT built yet by design.
+Shelf-builds DONE too (Jun Kai directive, 2026-07-24): `tribunal_debate`
+(W4 — rebuttal round on split escalations, BOTH rulings logged per item →
+one run = the paired frozen-set comparison) and `rag_r3_targeted` (W6 —
+disputed-claim extraction → targeted retrieval → evidence to verifier+judge)
++ the FROZEN relevance rubric (blinded majority-of-3, >50% off-topic = kill,
+committed pre-run). 30 tests; suite **473**. Their RUNS stay conditional on
+W1/W2 screening positive — only the build gate was lifted.
 
 ## NEXT — everything is READY-TO-FIRE at quota reset (2026-07-28 03:32 UTC)
 1. AIME pilot ① (queued, fixed, paired design) — always first.
