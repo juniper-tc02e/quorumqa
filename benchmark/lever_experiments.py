@@ -1945,6 +1945,31 @@ async def main_live(
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     log.info("Loaded %d %s questions (seed=%d) for lever=%s", len(items), dataset, seed, lever)
 
+    # SILENT-DEGENERACY GUARD (added 2026-07-24 after an audit caught this).
+    # The chem levers branch on an EXACT subject string match,
+    # `subject == "Organic Chemistry"` (solve_all_chem_flagship /
+    # solve_all_chem_thinking_gate). That string only exists in GPQA's
+    # fine-grained subject labels. SuperGPQA's loader stores
+    # `subject=row.get("discipline")` (load_supergpqa.py:117) -- only 8-13
+    # COARSE values in practice ("Science", "Engineering", "Medicine", ...) --
+    # and MMLU-Pro/MedQA/LEXam are coarser still. On any of those datasets the
+    # chemistry branch can never fire, so the lever degenerates BYTE-IDENTICALLY
+    # to thinking_gate while still being logged under a chem lever name. That
+    # would buy a mislabelled duplicate arm at full flagship price and quietly
+    # corrupt the record. Our committed chem results are all `--dataset gpqa`
+    # (seeds 217/314/471) and are unaffected; this guard keeps it that way.
+    # Fails loudly BEFORE any paid call.
+    if lever in ("chem_flagship_gate", "chem_thinking_gate", "subject", "smart_gate") and dataset != "gpqa":
+        subjects = {getattr(i, "subject", None) for i in items}
+        if "Organic Chemistry" not in subjects:
+            raise ValueError(
+                f"Lever {lever!r} branches on subject == 'Organic Chemistry', but dataset "
+                f"{dataset!r} never emits that value (saw {sorted(s for s in subjects if s)[:8]}...). "
+                f"The chemistry branch would never fire and this run would silently be plain "
+                f"thinking_gate logged under a chem lever name. Use --dataset gpqa, or extend the "
+                f"loader to persist a fine-grained subject/field before running this lever here."
+            )
+
     client = QwenClient()
     semaphore = asyncio.Semaphore(concurrency)
 
