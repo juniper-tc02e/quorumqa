@@ -696,19 +696,34 @@ discordant, 3-seed bar, diversity accounting mandatory.** Key status: GPQA
 society (90.9%) is −2.7pt UNDER the 3.8-solo bar (93.6%); SuperGPQA-hard
 bar unmeasured → P1 (3.8-solo paired baselines) is the first new paid spend.
 
-## NEXT — FREE work only until the quota resets (2026-07-28)
-1. **F1-F6 free rungs** (same-provider-scaling-research.md §3): family
-   blind-spot intersection + 3.8-deficit decomposition (F1), compute-
-   allocation frontier (F2), W5 distribution-feature upgrade (F3), adaptive
-   early-stop build+replay (F4), non-monotonicity map (F5), rigor wiring
-   (F6: seed/thinking_budget params, tool-checkable-fraction of the
-   unanimous-wrong pools). Plus the plan §2 free list (token-audit, W1/W2/W3
-   lever builds, W5 mining).
-2. **When quota resets (07-28):** AIME pilot ① first, then W1+W2-arm-0 on
-   SuperGPQA-hard with P1 (3.8-solo baselines) and P7 as riders — per the
-   research doc's dependency chain.
-3. Additive site Build Log entry once AIME closes the math arc. FREE, within
-   grant.
+## FREE SPRINT COMPLETE (2026-07-24, orchestrator + 4 Sonnet workers)
+
+All free rungs executed, reviewed, committed, pushed. Suite: **443 passed.**
+
+| Rung | Verdict / deliverable |
+|---|---|
+| #0 Token-audit | Weekly quota ≈ **43.8M logged tokens** (lower bound) — corrects the "~3 pilots/week" fear; week-1 schedule ≈ 8-11% of quota. Rule: ≤25% before mid-week re-check. |
+| F1 floor + deficit | Family floor MUCH smaller than single-run unanimous-wrong (GPQA 2.1% vs 11%; SuperGPQA 16.1% vs 23%) → addressable pool bigger than feared. GPQA 3.8-deficit: **0 blind-spot / 2 escalated-and-lost** (small-n, one-sided) → GPQA effort goes to SELECTION levers (P2/P4/P5), not coverage. |
+| F2 frontier | On 6/9 benchmarks a bare flagship call Pareto-dominates every logged lever; levers pay only on large-gap surfaces. 2 survivorship-contaminated rows annotated before commit (qwen38_panel 87.3% survivors-only; AIME invalidated 100%). |
+| F5 map | moo-bucket flags: never route large-gap items to standard-tribunal/rag_presolve (small-n paired; respect in routing, not a contradiction of 3-seed records). |
+| W5+F3 predictor | **BAND (median LOBO AUC 0.625)** — W7 cost-router input ONLY. F3 distribution features NEGATIVE (ΔAUC −0.026). P(wrong\|unanimous) unmeasured pending instability features (W2-arm0/P6 produce them). Secondary 0.751 annotated for unanimity-leakage. |
+| W1+W2 builds | verified_gate_flaw / verified_gate_cas (+ sympy_check/substitute_check MCP tools) / permuted_panel / method_panel — 37 tests, pre-gate votes logged with byte-identical shipped prompts (W2's control provenance secured). |
+| W3+F6 builds | solve_selfconsistency_math (grade-clustering, margin dial, F4 early-stop verified exact) + --mode sc; qwen_client seed/thinking_budget (byte-identical defaults, captured-request tested); **W1-B cap committed pre-run**: GPQA 53% checkable, SuperGPQA-hard 87% (heuristic ceiling, honestly flagged). |
+
+Remaining optional free items: W4/W6 shelf-builds (conditional levers — build
+only if W1/W2 screen positive, per plan demotion). NOT built yet by design.
+
+## NEXT — everything is READY-TO-FIRE at quota reset (2026-07-28 03:32 UTC)
+1. AIME pilot ① (queued, fixed, paired design) — always first.
+2. W1 verified_gate screen (flaw-finder arm) on SuperGPQA-hard, 1 fresh seed
+   — logs the pre-gate control W2 needs. Note F1's arbitration: GPQA gap is
+   selection-side, so W1's screen runs on SuperGPQA (bigger coverage pool,
+   16.1% floor) where coverage levers still have targets.
+3. W2 arm-0 permuted_panel at the same seeds (rides W1's control; produces
+   the instability features W5's conditional predictor needs).
+4. P1 qwen3.8-solo paired baselines (SuperGPQA n=86 + AIME n=60) — sets the
+   Track-B family bar. Riders: P7 if headroom.
+Total ≈ 4-5M tokens ≈ 10% of measured quota.
 2. Consolidate the whole reasoning arc into an additive site Build Log entry
    (when does deliberation help: validated hard-STEM wins; inert on saturated
    math; the AIME result). Additive-only, within grant.
