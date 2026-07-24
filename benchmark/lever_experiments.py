@@ -232,6 +232,45 @@ Levers:
                  seat used is logged via SolverAnswer.lens (holding the
                  method name instead of a lens description). No gate call,
                  same accept/escalate behavior as the shipped engine.
+  tribunal_debate -- docs/reasoning-supercharge-plan.md W4 (escalation-only
+                 debate round). CONDITIONAL: built now, run only if W1/W2
+                 screen positive. Base = thinking_gate (same solver panel +
+                 second_opinion_gate doubt check). Every escalation still
+                 runs the shipped one-shot tribunal first (skeptic/verifier/
+                 judge, unchanged) and that ruling is logged as the ONE-SHOT
+                 ruling. Only escalations with a genuine MINORITY (>=1 seat
+                 differing from the plurality -- unanimous-but-gate-fired
+                 escalations have none) get a structured rebuttal round:
+                 each minority seat gets one call ("you answered X, the
+                 majority answered Y") and returns concede/reason/counter_
+                 argument; a SECOND judge call then rules on the full
+                 exchange. Final answer = the post-debate ruling (equals the
+                 one-shot ruling when no debate ran). Both rulings, the
+                 minority seats, per-seat concessions, concession_rate, and
+                 ruling_changed are logged via the `note` dict (see
+                 _tribunal_debate / _build_output_row). See docs/reasoning-
+                 supercharge-plan.md W4 for the bar/kill.
+  rag_r3_targeted -- docs/reasoning-supercharge-plan.md W6 (targeted
+                 escalation-stage retrieval). CONDITIONAL: built now, run
+                 only if W1/W2 screen positive. Base = rag_thinking_gate (R1
+                 pre-solve retrieval + thinking_gate panel shape),
+                 completely unchanged. On EVERY escalation (no minority
+                 precondition, unlike tribunal_debate): one MECHANICAL_MODEL
+                 extraction call turns the skeptic's rebuttal into a single
+                 disputed_claim (<=30 words); one retrieval against that
+                 claim (top-k=5, RAG_R3_K, via the same retrieve_rag_
+                 evidence/RagIndex.search plumbing R1/R2 use -- never
+                 crashes on a missing/failed index, degrades to no evidence
+                 instead, see retrieve_r3_evidence); the retrieved passages
+                 are passed to verify()'s evidence_block parameter AND
+                 appended to the judge's prompt (adjudicate_with_r3_
+                 evidence). Non-escalated items are byte-identical to
+                 rag_thinking_gate. disputed_claim/r3_query_fired/
+                 r3_passages/r3_evidence_used_by are logged via the `note`
+                 dict (see _tribunal_r3 / _build_output_row). The relevance
+                 of what R3 retrieves is scored offline by benchmark/
+                 score_r3_relevance.py against the frozen rubric in
+                 benchmark/r3_relevance_rubric.md -- W6's kill criterion.
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -250,6 +289,8 @@ Usage:
   python -m benchmark.lever_experiments --lever verified_gate_cas --n 90 --seed 42 --dataset supergpqa
   python -m benchmark.lever_experiments --lever permuted_panel --n 90 --seed 42 --dataset supergpqa
   python -m benchmark.lever_experiments --lever method_panel --n 90 --seed 42 --dataset supergpqa
+  python -m benchmark.lever_experiments --lever tribunal_debate --n 90 --seed 42 --dataset supergpqa  # CONDITIONAL, W1/W2-gated
+  python -m benchmark.lever_experiments --lever rag_r3_targeted --n 90 --seed 42 --dataset supergpqa --rag-k 5  # CONDITIONAL, W1/W2-gated
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -268,7 +309,7 @@ from pathlib import Path
 import requests
 
 from quorumqa.baseline import solve_single_agent
-from quorumqa.config import MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES, TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
+from quorumqa.config import JUDGE_MODEL, MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES, TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
 from quorumqa.engine.judge import JUDGE_SYSTEM, adjudicate
 from quorumqa.engine.skeptic import rebut
 from quorumqa.engine.solver import SOLVER_SYSTEM, _lenses_for, _solve_one, solve_all
@@ -1161,6 +1202,389 @@ async def solve_all_rag_gated_presolve(client, question, choices, rag: RagPresol
     return solver_pairs, titles, gate_applied, top_score
 
 
+# ---------------------------------------------------------------------------
+# W4 -- tribunal_debate (docs/reasoning-supercharge-plan.md, CONDITIONAL --
+# built now, run only if W1/W2 screen positive). Base solver panel =
+# thinking_gate's (solve_all_thinking_seat + the universal
+# second_opinion_gate doubt check on a unanimous plurality) -- completely
+# unchanged from thinking_gate. Every escalation (unanimous+gate-fired, or a
+# natural split) still runs the shipped tribunal FIRST (skeptic -> verifier
+# -> judge, unchanged prompts/contracts) and that ruling is recorded
+# verbatim as the ONE-SHOT ruling, so a tribunal_debate run reproduces
+# thinking_gate's numbers exactly if the debate round below is ignored.
+#
+# ONLY when the escalation carries a genuine MINORITY -- at least one
+# solver seat's letter differs from the plurality letter -- does a
+# structured rebuttal round run next: each minority seat gets exactly ONE
+# call, framed as "you answered X, the panel majority answered Y", shown
+# the majority's reasoning and the verifier's findings, and returns
+# {"concede": bool, "reason": "...", "counter_argument": "..."}
+# (counter_argument required when concede is false, <=4 sentences). A
+# SECOND judge call then rules on the FULL exchange -- original transcript +
+# verifier findings + every minority seat's concession-or-counter -- using
+# the exact same JUDGE_SYSTEM/JSON contract as the shipped judge (role is
+# tagged "post_debate_judge" purely for logging; the prompt CONTRACT is
+# identical). Unanimous-but-gate-fired escalations have NO minority by
+# construction (every seat agrees with the plurality) -- they skip the
+# debate round entirely and are logged debate_applicable=false, with the
+# post-debate ruling equal to the (untouched) one-shot ruling.
+#
+# Final answer = the post-debate ruling (identical to the one-shot ruling
+# when no debate ran). Both rulings are logged in full (note dict:
+# one_shot_ruling/post_debate_ruling) so ONE run yields the paired
+# one-shot-vs-debate comparison the plan's frozen-set design calls for, via
+# within-run pairing on identical items rather than a second replay run.
+# This feeds the pre-registered kill: concession-rate > 90% AND zero ruling
+# changes = sycophancy, not debate.
+# ---------------------------------------------------------------------------
+
+
+def minority_rebuttal_check(
+    client, question, choices, minority_answer: SolverAnswer, plurality_letter: str,
+    majority_reasoning_block: str, verifier_findings: list[VerifierFinding],
+):
+    """W4's structured rebuttal call: ONE MECHANICAL_MODEL call per minority
+    seat, framed as that seat defending or conceding its own answer after
+    seeing the majority's reasoning and the verifier's grounded findings.
+    Returns (concede, reason, counter_argument, usage) -- counter_argument
+    is expected empty when concede is true (requested in the prompt, not
+    enforced -- same defensive-parsing posture as every other JSON contract
+    in this file)."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    findings_block = "\n".join(
+        f"- claim: {f.claim} | tool: {f.tool_used}({f.tool_query}) -> {f.tool_result} | supports claim: {f.supports_claim}"
+        for f in verifier_findings
+    ) or "(no checkable claims were raised)"
+    system = (
+        f"You are the solver who answered {minority_answer.letter} while the panel majority "
+        f"answered {plurality_letter}. Review the majority's reasoning and the verifier's "
+        "findings below with an open mind -- your job now is to judge the argument, not defend "
+        "your original pick out of stubbornness. If the majority's case (or the verifier's "
+        "findings) genuinely holds up, concede. If you still believe your original answer is "
+        "right, give ONE concise counter-argument addressing the majority's strongest point."
+    )
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Your original answer: {minority_answer.letter}\nYour original reasoning: {minority_answer.reasoning}\n\n"
+        f"Majority answer ({plurality_letter}) -- reasoning:\n{majority_reasoning_block}\n\n"
+        f"Verifier findings:\n{findings_block}\n\n"
+        'JSON shape: {"concede": true|false, "reason": "why you concede or hold your position", '
+        '"counter_argument": "required if concede is false, at most 4 sentences; empty string if conceding"}'
+    )
+    result = client.chat_json(
+        model=MECHANICAL_MODEL, system=system, user=user, role="minority_rebuttal",
+        thinking=False, temperature=0.4, retries=2,
+    )
+    concede = bool(result.data.get("concede", False))
+    reason = str(result.data.get("reason", "") or "")
+    counter_argument = str(result.data.get("counter_argument", "") or "")
+    return concede, reason, counter_argument, result.usage
+
+
+def adjudicate_post_debate(
+    client, question, choices, solver_answers: list[SolverAnswer], skeptic_rebuttal: SkepticRebuttal,
+    verifier_findings: list[VerifierFinding], debate_exchanges: list[dict],
+):
+    """W4's second judge call. VERBATIM copy of quorumqa.engine.judge.
+    adjudicate's prompt-building body (same JUDGE_SYSTEM import, same JSON
+    contract) with ONE addition: a "Debate round" section listing each
+    minority seat's concession or counter-argument, appended after the
+    verifier findings. If the shipped adjudicate() prompt ever changes,
+    this copy must change with it -- same caveat as adjudicate_qwen38's
+    docstring. role="post_debate_judge" only distinguishes this call from
+    the one-shot judge call in logging/tests; the JSON contract is
+    identical to the shipped judge's."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    transcript = "\n\n".join(
+        f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
+    )
+    findings_block = "\n".join(
+        f"- claim: {f.claim} | tool: {f.tool_used}({f.tool_query}) -> {f.tool_result} | supports claim: {f.supports_claim}"
+        for f in verifier_findings
+    ) or "(no checkable claims were raised)"
+    debate_block = "\n".join(
+        f"- Seat {d['letter']}: " + (f"CONCEDED -- {d['reason']}" if d["concede"] else f"MAINTAINED -- {d['counter_argument']}")
+        for d in debate_exchanges
+    ) or "(no minority seats)"
+
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Solver transcript:\n{transcript}\n\n"
+        f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
+        f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
+        f"Verifier findings:\n{findings_block}\n\n"
+        f"Debate round -- each minority seat's response after seeing the majority's reasoning "
+        f"and the verifier's findings:\n{debate_block}\n\n"
+        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        '"dissent": "unresolved objection, or null if none", '
+        '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
+    )
+    result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="post_debate_judge")
+    letter = str(result.data.get("final_letter", "")).strip().upper()[:1]
+    dissent = result.data.get("dissent") or None
+    verdict = JudgeVerdict(
+        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        decisive_reasoning=str(result.data.get("decisive_reasoning", "")),
+        dissent=dissent,
+        overturned_plurality=bool(result.data.get("overturned_plurality", False)),
+        confidence=str(result.data.get("confidence", "medium")),
+    )
+    return verdict, result.usage
+
+
+async def _tribunal_debate(client, tool_session, item, solver_answers, plurality_letter, calls, start):
+    """W4's full escalation path: the shipped tribunal (skeptic -> verifier
+    -> judge, completely unchanged) runs first and its verdict is the
+    ONE-SHOT ruling; then, only if the escalation has a genuine minority
+    (>=1 seat differing from the plurality), a structured rebuttal round
+    (minority_rebuttal_check per minority seat) followed by a SECOND judge
+    call (adjudicate_post_debate) on the full exchange. Returns
+    (QuestionResult, note) -- note is ALWAYS a dict for this lever (see
+    run_question_lever), carrying both rulings plus the debate bookkeeping
+    fields docs/reasoning-supercharge-plan.md's W4 build spells out."""
+    skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
+        rebut, client, item.question, item.choices, plurality_letter, solver_answers
+    )
+    calls.append(skeptic_usage)
+
+    verifier_findings, verifier_usages = await verify(client, tool_session, item.question, solver_answers)
+    calls.extend(verifier_usages)
+
+    one_shot_verdict, one_shot_usage = await asyncio.to_thread(
+        adjudicate, client, item.question, item.choices, solver_answers, skeptic_rebuttal, verifier_findings
+    )
+    calls.append(one_shot_usage)
+
+    minority_seats = [a for a in solver_answers if a.letter != plurality_letter]
+    debate_applicable = len(minority_seats) > 0
+
+    concessions: list[dict] = []
+    post_debate_verdict = one_shot_verdict
+    ruling_changed = False
+
+    if debate_applicable:
+        majority_answers = [a for a in solver_answers if a.letter == plurality_letter]
+        majority_reasoning_block = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in majority_answers) or "(no majority reasoning available)"
+        debate_exchanges: list[dict] = []
+        for minority in minority_seats:
+            concede, reason, counter_argument, rebuttal_usage = await asyncio.to_thread(
+                minority_rebuttal_check, client, item.question, item.choices, minority, plurality_letter,
+                majority_reasoning_block, verifier_findings,
+            )
+            calls.append(rebuttal_usage)
+            concessions.append({"letter": minority.letter, "concede": concede, "reason": reason})
+            debate_exchanges.append({"letter": minority.letter, "concede": concede, "reason": reason, "counter_argument": counter_argument})
+
+        post_debate_verdict, post_debate_usage = await asyncio.to_thread(
+            adjudicate_post_debate, client, item.question, item.choices, solver_answers, skeptic_rebuttal,
+            verifier_findings, debate_exchanges,
+        )
+        calls.append(post_debate_usage)
+        ruling_changed = post_debate_verdict.final_letter != one_shot_verdict.final_letter
+
+    concession_rate = (sum(1 for c in concessions if c["concede"]) / len(concessions)) if concessions else None
+    false_escalation = (post_debate_verdict.final_letter == plurality_letter) and not post_debate_verdict.overturned_plurality
+
+    note = {
+        "debate_applicable": debate_applicable,
+        "minority_seats": [m.letter for m in minority_seats],
+        "concessions": concessions,
+        "concession_rate": concession_rate,
+        "ruling_changed": ruling_changed,
+        "one_shot_ruling": one_shot_verdict.model_dump(),
+        "post_debate_ruling": post_debate_verdict.model_dump(),
+    }
+    result = QuestionResult(
+        item=item, solver_answers=solver_answers, plurality_letter=plurality_letter,
+        escalated=True, skeptic_rebuttal=skeptic_rebuttal, verifier_findings=verifier_findings,
+        verdict=post_debate_verdict, final_letter=post_debate_verdict.final_letter,
+        correct=(post_debate_verdict.final_letter == item.correct_letter),
+        false_escalation=false_escalation, calls=calls, latency_s=time.monotonic() - start,
+    )
+    return result, note
+
+
+# ---------------------------------------------------------------------------
+# W6 -- rag_r3_targeted (docs/reasoning-supercharge-plan.md, CONDITIONAL --
+# built now, run only if W1/W2 screen positive). Base = rag_thinking_gate
+# (R1 pre-solve retrieval feeding thinking_gate's panel shape, plus the
+# universal second_opinion_gate doubt check) -- completely unchanged. On
+# EVERY escalation (unanimous+gate-fired or a natural split -- unlike W4,
+# there is no minority precondition here), three extra steps run between
+# the skeptic and the verifier:
+#   1. ONE MECHANICAL_MODEL extraction call turns the skeptic's rebuttal
+#      into the single most load-bearing DISPUTED CLAIM (<=30 words).
+#   2. ONE retrieval against that claim (top-k=5), via the SAME
+#      retrieve_rag_evidence/RagIndex.search plumbing R1/R2 already use --
+#      never a second index, never search_corpus's MCP-tool indirection.
+#      Never crashes: a failed/unavailable index is caught, logged, and the
+#      question proceeds with no evidence (r3_query_fired=false), unlike
+#      the R1 pre-solve retrieval's fail-LOUD contract at run start (see
+#      open_rag_index) -- by the time a question reaches R3 the run already
+#      proved the index was reachable, so this only guards a later,
+#      transient failure.
+#   3. The retrieved passages become an evidence block, passed to verify()
+#      via its existing evidence_block parameter (ADDED grounding
+#      alongside the Verifier's unchanged MCP tool calls, same posture as
+#      rag_recursive's R2) AND appended as an "EVIDENCE (retrieved for the
+#      disputed claim)" section on the judge's user prompt
+#      (adjudicate_with_r3_evidence -- a verbatim copy of the shipped
+#      adjudicate() body plus that one section, same caveat as
+#      adjudicate_qwen38's docstring).
+# Non-escalated items are byte-identical to rag_thinking_gate -- no
+# extraction, no R3 retrieval; note stays whatever rag_thinking_gate would
+# have logged (gate_note, a plain string or None).
+# ---------------------------------------------------------------------------
+
+RAG_R3_K = 5  # fixed per docs/reasoning-supercharge-plan.md W6's spec
+              # ("search_corpus(disputed_claim, k=5)-style retrieval") --
+              # not CLI-overridable, same posture as RAG_R2_K.
+
+R3_EXTRACT_SYSTEM = (
+    "You are extracting the single most load-bearing factual claim in dispute from a Skeptic's "
+    "rebuttal of a science-exam panel's plurality answer. Read the disputed step and argument "
+    "below and identify ONE specific, checkable factual claim -- a fact, mechanism, constant, or "
+    "relationship -- whose truth or falsity would settle the disputed step. State it as a short, "
+    "self-contained factual statement (at most 30 words) suitable as a search query, not phrased "
+    "as a question."
+)
+
+
+def r3_extract_disputed_claim(client, question: str, skeptic_rebuttal: SkepticRebuttal):
+    """W6's extraction call: ONE MECHANICAL_MODEL call, thinking=False,
+    turning the skeptic's disputed_step + argument into a single searchable
+    disputed_claim. Returns (disputed_claim, usage)."""
+    user = (
+        f"Question: {question}\n\nSkeptic's disputed step: {skeptic_rebuttal.disputed_step}\n"
+        f"Skeptic's argument: {skeptic_rebuttal.argument}\n\n"
+        'JSON shape: {"disputed_claim": "..."} (at most 30 words, a statement, not a question)'
+    )
+    result = client.chat_json(
+        model=MECHANICAL_MODEL, system=R3_EXTRACT_SYSTEM, user=user, role="r3_extract",
+        thinking=False, temperature=0.2, retries=2,
+    )
+    disputed_claim = str(result.data.get("disputed_claim", "") or "")
+    return disputed_claim, result.usage
+
+
+def retrieve_r3_evidence(rag: "RagPresolveConfig", disputed_claim: str, k: int = RAG_R3_K):
+    """W6's targeted escalation-stage retrieval: the SAME retrieve_rag_
+    evidence/RagIndex.search plumbing R1 (solve_all_rag_presolve) and R2
+    (rag_recursive's build_disputed_step_query hop) already use -- queried
+    against the skeptic's disputed claim instead of the raw question.
+    Returns (results, fired): fired=False means the retrieval ATTEMPT
+    itself failed (index unavailable/missing, or any other exception) and
+    was caught here rather than propagated -- this lever must never crash
+    a question over a later, transient retrieval failure the way rag_
+    presolve's fail-LOUD startup contract (open_rag_index) intentionally
+    does for the initial R1 retrieval. fired=True with an empty results
+    list is a normal "nothing relevant found" outcome, not a failure."""
+    try:
+        return retrieve_rag_evidence(rag, disputed_claim, k=k), True
+    except Exception as exc:
+        log.warning(
+            "rag_r3_targeted: R3 retrieval failed for disputed_claim=%r (%s) -- proceeding without evidence",
+            disputed_claim, exc,
+        )
+        return [], False
+
+
+def adjudicate_with_r3_evidence(
+    client, question, choices, solver_answers: list[SolverAnswer], skeptic_rebuttal: SkepticRebuttal,
+    verifier_findings: list[VerifierFinding], evidence_block: str,
+):
+    """W6's judge call. VERBATIM copy of quorumqa.engine.judge.adjudicate's
+    prompt-building body (same JUDGE_SYSTEM import, same JSON contract)
+    with ONE addition: an "EVIDENCE (retrieved for the disputed claim)"
+    section appended when evidence_block is non-empty. Same drift caveat as
+    adjudicate_qwen38's docstring -- if the shipped adjudicate() prompt
+    ever changes, this copy must change with it. role stays "judge" (this
+    IS the lever's only judge call, nothing to disambiguate in logs)."""
+    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    transcript = "\n\n".join(
+        f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
+    )
+    findings_block = "\n".join(
+        f"- claim: {f.claim} | tool: {f.tool_used}({f.tool_query}) -> {f.tool_result} | supports claim: {f.supports_claim}"
+        for f in verifier_findings
+    ) or "(no checkable claims were raised)"
+    evidence_section = f"\n\nEVIDENCE (retrieved for the disputed claim):\n{evidence_block}" if evidence_block else ""
+
+    user = (
+        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Solver transcript:\n{transcript}\n\n"
+        f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
+        f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
+        f"Verifier findings:\n{findings_block}"
+        f"{evidence_section}\n\n"
+        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        '"dissent": "unresolved objection, or null if none", '
+        '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
+    )
+    result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="judge")
+    letter = str(result.data.get("final_letter", "")).strip().upper()[:1]
+    dissent = result.data.get("dissent") or None
+    verdict = JudgeVerdict(
+        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        decisive_reasoning=str(result.data.get("decisive_reasoning", "")),
+        dissent=dissent,
+        overturned_plurality=bool(result.data.get("overturned_plurality", False)),
+        confidence=str(result.data.get("confidence", "medium")),
+    )
+    return verdict, result.usage
+
+
+async def _tribunal_r3(client, tool_session, item, solver_answers, plurality_letter, calls, start, rag: "RagPresolveConfig"):
+    """W6's full escalation path: skeptic (unchanged) -> [extraction -> R3
+    retrieval] -> verifier (evidence-grounded via evidence_block) -> judge
+    (evidence-grounded via adjudicate_with_r3_evidence). Returns
+    (QuestionResult, note) -- note is ALWAYS a dict when this function
+    runs (i.e. whenever the item escalated), carrying disputed_claim/
+    r3_query_fired/r3_passages/r3_evidence_used_by per docs/reasoning-
+    supercharge-plan.md's W6 build spec."""
+    skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
+        rebut, client, item.question, item.choices, plurality_letter, solver_answers
+    )
+    calls.append(skeptic_usage)
+
+    disputed_claim, extract_usage = await asyncio.to_thread(r3_extract_disputed_claim, client, item.question, skeptic_rebuttal)
+    calls.append(extract_usage)
+
+    r3_results, r3_query_fired = await asyncio.to_thread(retrieve_r3_evidence, rag, disputed_claim, RAG_R3_K)
+    evidence_block = build_evidence_block(r3_results) if r3_results else ""
+    r3_passages = [{"title": r.get("title"), "id": r.get("passage_id"), "score": r.get("score")} for r in r3_results]
+    log.info(
+        "%s: rag_r3_targeted disputed_claim=%r fired=%s retrieved %d passage(s): %s",
+        item.question_id, disputed_claim, r3_query_fired, len(r3_passages), [p["title"] for p in r3_passages],
+    )
+
+    verifier_findings, verifier_usages = await verify(
+        client, tool_session, item.question, solver_answers, evidence_block=evidence_block
+    )
+    calls.extend(verifier_usages)
+
+    verdict, judge_usage = await asyncio.to_thread(
+        adjudicate_with_r3_evidence, client, item.question, item.choices, solver_answers, skeptic_rebuttal,
+        verifier_findings, evidence_block,
+    )
+    calls.append(judge_usage)
+
+    false_escalation = (verdict.final_letter == plurality_letter) and not verdict.overturned_plurality
+    note = {
+        "disputed_claim": disputed_claim,
+        "r3_query_fired": r3_query_fired,
+        "r3_passages": r3_passages,
+        "r3_evidence_used_by": ["verifier", "judge"] if evidence_block else [],
+    }
+    result = QuestionResult(
+        item=item, solver_answers=solver_answers, plurality_letter=plurality_letter,
+        escalated=True, skeptic_rebuttal=skeptic_rebuttal, verifier_findings=verifier_findings,
+        verdict=verdict, final_letter=verdict.final_letter, correct=(verdict.final_letter == item.correct_letter),
+        false_escalation=false_escalation, calls=calls, latency_s=time.monotonic() - start,
+    )
+    return result, note
+
+
 async def _tribunal(
     client, tool_session, item, solver_answers, plurality_letter, calls, start, adjudicator=adjudicate,
     rag: "RagPresolveConfig | None" = None, rag_gate_applied: bool | None = None, rag_gate_top_score: float | None = None,
@@ -1227,7 +1651,7 @@ async def run_question_lever(
     rag_gate_top_score = None
     seat_permutations = None
 
-    if lever in ("thinking", "combined", "thinking_gate"):
+    if lever in ("thinking", "combined", "thinking_gate", "tribunal_debate"):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
     elif lever == "smart_gate":
         solver_pairs = await solve_all_smart_seat(client, item.question, item.choices, item.subject)
@@ -1247,27 +1671,31 @@ async def run_question_lever(
         solver_pairs, seat_permutations = await solve_all_permuted_panel(client, item.question, item.choices, seed, item.question_id)
     elif lever == "method_panel":
         solver_pairs = await solve_all_method_panel(client, item.question, item.choices)
-    elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
+    elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "rag_r3_targeted"):
         # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
         # same solve_all_rag_presolve call, same evidence block, same
         # solver seats. rag_thinking_gate reuses the same retrieval but
         # dispatches through solve_all_rag_thinking_gate instead, which
         # feeds the evidence block into thinking_gate's panel shape (seats
         # 1-2 plain, seat 3 thinking=True) rather than three plain seats.
-        # rag_gated_presolve also reuses the same single retrieval call but
-        # dispatches through solve_all_rag_gated_presolve, which only
-        # injects the evidence block when the top fused score clears
-        # rag_gate_threshold (see that function's docstring). The only
-        # difference between rag_presolve/rag_recursive is what happens on
-        # escalation (see the tribunal dispatch below); rag_thinking_gate
-        # and rag_gated_presolve never trigger R2 (see those branches).
+        # rag_r3_targeted's R1 pre-solve step is IDENTICAL to rag_thinking_
+        # gate's (same solve_all_rag_thinking_gate call) -- W6 only adds
+        # machinery on escalation (see the tribunal dispatch below), never
+        # touching R1. rag_gated_presolve also reuses the same single
+        # retrieval call but dispatches through solve_all_rag_gated_
+        # presolve, which only injects the evidence block when the top
+        # fused score clears rag_gate_threshold (see that function's
+        # docstring). The only difference between rag_presolve/rag_
+        # recursive/rag_r3_targeted is what happens on escalation (see the
+        # tribunal dispatch below); rag_thinking_gate and rag_gated_presolve
+        # never trigger R2 or R3 (see those branches).
         if rag is None:
             raise ValueError(
                 f"lever '{lever}' requires a RagPresolveConfig -- pass rag=... "
                 "(see main_live/build_rag_presolve_config); refusing to silently run the cheap "
                 "panel without retrieval"
             )
-        if lever == "rag_thinking_gate":
+        if lever in ("rag_thinking_gate", "rag_r3_targeted"):
             solver_pairs, retrieved_titles = await solve_all_rag_thinking_gate(client, item.question, item.choices, rag)
         elif lever == "rag_gated_presolve":
             solver_pairs, retrieved_titles, rag_gate_applied, rag_gate_top_score = await solve_all_rag_gated_presolve(
@@ -1310,7 +1738,7 @@ async def run_question_lever(
         if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
-        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "rag_thinking_gate"):
+        elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "rag_thinking_gate", "tribunal_debate", "rag_r3_targeted"):
             doubt, reason, gate_usage = second_opinion_gate(client, item.question, item.choices, solver_answers, plurality_letter)
             calls.append(gate_usage)
             if doubt:
@@ -1354,6 +1782,16 @@ async def run_question_lever(
         }
     elif lever == "permuted_panel":
         note = {"seat_permutations": seat_permutations}
+    elif lever == "tribunal_debate":
+        # Default shape for the ACCEPTED (non-escalated) case -- no tribunal
+        # ever ran, so there is no one-shot/post-debate ruling to log.
+        # Overwritten below with the real debate bookkeeping whenever this
+        # item actually escalates (see the _tribunal_debate dispatch).
+        note = {
+            "debate_applicable": False, "minority_seats": [], "concessions": [],
+            "concession_rate": None, "ruling_changed": False,
+            "one_shot_ruling": None, "post_debate_ruling": None,
+        }
 
     if unanimous and not force_escalate:
         return QuestionResult(
@@ -1374,6 +1812,19 @@ async def run_question_lever(
         # runs. rag is guaranteed non-None here -- the dispatch above
         # already raised ValueError if it were missing.
         result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start, rag=rag)
+    elif lever == "tribunal_debate":
+        # W4: replaces the pre-computed `note` (the accept-path default set
+        # above) with the real debate bookkeeping -- one_shot_ruling/
+        # post_debate_ruling/concessions/etc -- from the actual tribunal run.
+        result, note = await _tribunal_debate(client, tool_session, item, solver_answers, plurality_letter, calls, start)
+    elif lever == "rag_r3_targeted":
+        # W6: rag is guaranteed non-None here -- the dispatch above already
+        # raised ValueError if it were missing. `note` is replaced with the
+        # R3 bookkeeping dict (disputed_claim/r3_query_fired/r3_passages/
+        # r3_evidence_used_by); non-escalated items never reach this branch,
+        # so they keep whatever gate_note the pre-computed `note` held
+        # (byte-identical to rag_thinking_gate).
+        result, note = await _tribunal_r3(client, tool_session, item, solver_answers, plurality_letter, calls, start, rag=rag)
     else:
         # rag_gated_presolve falls through here too (no R2, same as
         # rag_presolve/rag_thinking_gate) -- its gate decision/score are
@@ -1439,12 +1890,15 @@ def _build_output_row(
     forced/gate-flagged levers) and is NOT folded into the row -- exactly
     the same as before this parameter existed, so every existing caller/
     test that omits it (or passes None) sees byte-identical output. For the
-    two NEW lever families that need extra per-question data no
-    QuestionResult field carries, `note` is instead a dict:
-    verified_gate_flaw/verified_gate_cas fold in arm/unanimous/gate_fired/
-    gate_reason/pre_gate_votes; permuted_panel folds in seat_permutations."""
+    lever families that need extra per-question data no QuestionResult field
+    carries, `note` is instead a dict: verified_gate_flaw/verified_gate_cas
+    fold in arm/unanimous/gate_fired/gate_reason/pre_gate_votes;
+    permuted_panel folds in seat_permutations; tribunal_debate (W4) folds in
+    debate_applicable/minority_seats/concessions/concession_rate/
+    ruling_changed/one_shot_ruling/post_debate_ruling; rag_r3_targeted (W6)
+    folds in disputed_claim/r3_query_fired/r3_passages/r3_evidence_used_by."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
-    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "rag_r3_targeted"):
         row["rag"] = "ON"
         row["rag_snapshot_id"] = rag_config.snapshot_id if rag_config else None
         row["rag_k"] = rag_config.k if rag_config else None
@@ -1468,6 +1922,19 @@ def _build_output_row(
         row["pre_gate_votes"] = note.get("pre_gate_votes")
     if lever == "permuted_panel" and isinstance(note, dict):
         row["seat_permutations"] = note.get("seat_permutations")
+    if lever == "tribunal_debate" and isinstance(note, dict):
+        row["debate_applicable"] = note.get("debate_applicable")
+        row["minority_seats"] = note.get("minority_seats")
+        row["concessions"] = note.get("concessions")
+        row["concession_rate"] = note.get("concession_rate")
+        row["ruling_changed"] = note.get("ruling_changed")
+        row["one_shot_ruling"] = note.get("one_shot_ruling")
+        row["post_debate_ruling"] = note.get("post_debate_ruling")
+    if lever == "rag_r3_targeted" and isinstance(note, dict):
+        row["disputed_claim"] = note.get("disputed_claim")
+        row["r3_query_fired"] = note.get("r3_query_fired")
+        row["r3_passages"] = note.get("r3_passages")
+        row["r3_evidence_used_by"] = note.get("r3_evidence_used_by")
     return row
 
 
@@ -1482,13 +1949,14 @@ async def main_live(
     semaphore = asyncio.Semaphore(concurrency)
 
     rag_config = None
-    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve"):
+    if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "rag_r3_targeted"):
         # Fail loudly HERE, before any solver call is made, if the index
         # doesn't exist -- see open_rag_index's docstring. rag_recursive,
-        # rag_thinking_gate, and rag_gated_presolve all reuse the exact same
-        # R1 index/config as rag_presolve; R2's top-k=3 is fixed (RAG_R2_K),
-        # not derived from rag_k, and rag_thinking_gate/rag_gated_presolve
-        # never trigger R2 at all.
+        # rag_thinking_gate, rag_gated_presolve, and rag_r3_targeted all
+        # reuse the exact same R1 index/config as rag_presolve; R2's
+        # top-k=3 is fixed (RAG_R2_K) and R3's top-k=5 is fixed (RAG_R3_K),
+        # neither derived from rag_k. rag_thinking_gate/rag_gated_presolve
+        # never trigger R2 or R3 at all; rag_r3_targeted never triggers R2.
         resolved_rag_db = resolve_rag_db_path(rag_db)
         rag_config = build_rag_presolve_config(resolved_rag_db, k=rag_k)
         log.info(
@@ -1605,7 +2073,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "tribunal_debate", "rag_r3_targeted", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -1616,13 +2084,15 @@ if __name__ == "__main__":
                               "dataset unchanged -- they only vary HOW a question already loaded as a "
                               "GPQAItem gets answered, not where it came from.")
     parser.add_argument("--rag-db", type=str, default=None,
-                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve only: RAG index "
-                              f"sqlite3 DB path (default: ${RAG_DB_ENV} env var if set, else {DEFAULT_RAG_DB_PATH})")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve/rag_r3_targeted only: "
+                              f"RAG index sqlite3 DB path (default: ${RAG_DB_ENV} env var if set, else {DEFAULT_RAG_DB_PATH})")
     parser.add_argument("--rag-k", type=int, default=DEFAULT_RAG_K,
-                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve only: top-k passages "
-                              f"retrieved per question for R1 pre-solve retrieval (default {DEFAULT_RAG_K}). "
-                              f"rag_recursive's R2 disputed-step retrieval is always top-{RAG_R2_K}, fixed, not "
-                              f"controlled by this flag; rag_thinking_gate/rag_gated_presolve never do R2.")
+                         help=f"rag_presolve/rag_recursive/rag_thinking_gate/rag_gated_presolve/rag_r3_targeted only: "
+                              f"top-k passages retrieved per question for R1 pre-solve retrieval (default "
+                              f"{DEFAULT_RAG_K}). rag_recursive's R2 disputed-step retrieval is always "
+                              f"top-{RAG_R2_K}, fixed; rag_r3_targeted's R3 disputed-claim retrieval is always "
+                              f"top-{RAG_R3_K}, fixed -- neither controlled by this flag. rag_thinking_gate/"
+                              f"rag_gated_presolve never do R2 or R3.")
     parser.add_argument("--rag-score-threshold", type=float, default=DEFAULT_RAG_SCORE_THRESHOLD,
                          help=f"rag_gated_presolve only: minimum top fused RRF score required to inject the "
                               f"retrieved evidence block; below it, the panel runs on the plain question with no "
