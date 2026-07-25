@@ -1,0 +1,89 @@
+2026-07-21 14:05:41,879 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-21 14:05:41,896 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/TIGER-Lab/MMLU-Pro/b189ec765aa7ed75c8acfea42df31fdae71f97be/README.md "HTTP/1.1 200 OK"
+2026-07-21 14:05:42,163 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-21 14:05:42,929 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/TIGER-Lab/MMLU-Pro/TIGER-Lab/MMLU-Pro.py "HTTP/1.1 404 Not Found"
+2026-07-21 14:05:43,163 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/revision/b189ec765aa7ed75c8acfea42df31fdae71f97be "HTTP/1.1 200 OK"
+2026-07-21 14:05:43,429 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-21 14:05:43,713 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=TIGER-Lab/MMLU-Pro "HTTP/1.1 200 OK"
+2026-07-21 14:05:43,963 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-21 14:05:44,230 INFO HTTP Request: GET https://huggingface.co/api/datasets/TIGER-Lab/MMLU-Pro/tree/b189ec765aa7ed75c8acfea42df31fdae71f97be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-21 14:05:44,513 INFO HTTP Request: HEAD https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-21 14:05:44,546 INFO Loaded 50 MMLU-Pro items (category=None, seed=42, trimmed to 4 choices)
+2026-07-21 14:05:44,549 INFO Loaded 50 MMLU-Pro questions
+2026-07-21 14:05:52,048 INFO 7070 [economics]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:06:05,124 INFO 5088 [other]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:06:19,132 INFO 1496 [law]: baseline=D(correct) engine=B(wrong, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Processing request of type CallToolRequest
+2026-07-21 14:06:27,328 INFO 3320 [biology]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 14:06:33,843 INFO 556 [business]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:06:35,679 INFO 10024 [physics]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 14:06:42,567 INFO 6570 [health]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 14:06:43,579 INFO 7562 [economics]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:06:50,548 INFO 2854 [biology]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:06:51,796 INFO 8486 [math]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:06:59,455 INFO 2503 [psychology]: baseline=A(correct) engine=A(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:07:25,316 INFO 11489 [engineering]: baseline=A(correct) engine=C(wrong, escalated=False)
+2026-07-21 14:07:33,308 INFO 688 [business]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-21 14:07:38,380 INFO 5136 [other]: baseline=A(correct) engine=D(wrong, escalated=False)
+2026-07-21 14:07:54,553 INFO 3079 [biology]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 14:07:57,592 INFO 473 [business]: baseline=D(correct) engine=D(correct, escalated=True)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:08:46,486 INFO 10343 [physics]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:08:54,353 INFO 8802 [math]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:09:04,664 INFO 8930 [math]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-21 14:09:14,466 INFO 5874 [other]: baseline=C(correct) engine=C(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:09:34,313 INFO 7511 [economics]: baseline=D(correct) engine=D(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:09:53,429 INFO 3917 [chemistry]: baseline=D(correct) engine=A(wrong, escalated=False)
+2026-07-21 14:10:12,567 INFO 11562 [engineering]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 14:10:14,204 INFO 783 [business]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-21 14:10:26,703 INFO 7847 [math]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:10:50,028 INFO 12113 [engineering]: baseline=B(correct) engine=C(wrong, escalated=True)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:11:06,528 INFO 9795 [physics]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-21 14:11:20,506 INFO 2457 [psychology]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:11:39,110 INFO 3739 [chemistry]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-21 14:11:45,844 INFO 12104 [engineering]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:11:51,794 INFO 5396 [other]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:11:58,596 INFO 4906 [history]: baseline=C(wrong) engine=C(wrong, escalated=False)
+2026-07-21 14:12:02,446 INFO 1290 [law]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:12:09,564 INFO 10452 [computer science]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:12:18,530 INFO 8147 [math]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 14:12:31,531 INFO 11886 [engineering]: baseline=D(correct) engine=C(wrong, escalated=False)
+2026-07-21 14:12:44,332 INFO 11847 [engineering]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:12:50,480 INFO 1540 [law]: baseline=B(wrong) engine=B(wrong, escalated=False)
+2026-07-21 14:12:52,064 INFO 8676 [math]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 14:13:06,065 INFO 7497 [economics]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 14:13:21,464 INFO 7490 [economics]: baseline=C(correct) engine=C(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:14:06,114 INFO 3763 [chemistry]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 14:14:15,592 INFO 6035 [health]: baseline=D(correct) engine=D(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:14:57,436 INFO 281 [business]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 14:15:12,414 INFO 4090 [chemistry]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 14:15:18,216 INFO 10852 [philosophy]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:15:20,481 INFO 7807 [math]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 14:15:37,430 INFO 10306 [physics]: baseline=D(correct) engine=D(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 14:15:56,614 INFO 11733 [engineering]: baseline=A(wrong) engine=A(wrong, escalated=True)
+2026-07-21 14:16:01,081 INFO 9030 [math]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-21 14:16:01,181 INFO Wrote 50 results to benchmark\results\mmlu_pro_pilot_seed42.jsonl
+2026-07-21 14:16:01,181 INFO SUMMARY n=50 baseline_accuracy=94.0% engine_accuracy=82.0% escalation_rate=26.0%

@@ -1,0 +1,1377 @@
+2026-07-22 01:22:42,080 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+2026-07-22 01:22:42,330 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 01:22:43,048 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Idavidrein/gpqa/Idavidrein/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 01:22:43,353 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/revision/633f5ee89ab8ad4522a9f850766b73f62147ffdd "HTTP/1.1 200 OK"
+2026-07-22 01:22:43,597 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 01:22:43,881 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Idavidrein/gpqa "HTTP/1.1 200 OK"
+2026-07-22 01:22:44,148 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/tree/633f5ee89ab8ad4522a9f850766b73f62147ffdd?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 01:22:44,397 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 01:22:44,448 INFO Loaded 90 gpqa questions (seed=42) for lever=qwen38_judge
+2026-07-22 01:22:48,372 INFO recypVp2NmPlBKVTp [qwen38_judge]: final=A(correct, escalated=False) cost=$0.00000
+[07/22/26 01:23:03] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 01:23:10] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:24:18,042 INFO rec0wZvZgiz320KRs [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:24:27,885 INFO rec4r4KWNLrT7g2kR [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:24:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:26:56,848 INFO rechKl68Uc6H7vU0N [qwen38_judge]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 01:27:54,780 INFO recVvpD8miVjmmyfe [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 01:27:57,219 INFO recnawZPumSCLMVgp [qwen38_judge]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 01:28:05,235 INFO recnTTKdBzfuoZ7w7 [qwen38_judge]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:28:08,270 INFO rec0yTRmO1o1xCA6H [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:28:09,647 INFO recQiWOxhkXRz9NVE [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:28:12,971 ERROR recINSFEYLCyyd08m: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:28:19,891 INFO rec6sE2CRtD4drtHg [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:28:20,765 INFO recDj2Y2BbtV02Wv5 [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:28:24,675 INFO recE2ihVfqEK4R9d0 [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:28:29,863 INFO rec5rjeLsEq5Fg7Oj [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:28:39] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:30:24,248 INFO reczjcMtrB1YGS2fO [qwen38_judge]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 01:30:30,871 INFO recpki12iG9RUGrz9 [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:30:41,171 INFO recIj8lR4tuDgrHou [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:30:44,761 INFO rec260hNUCEj109Dj [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:30:54,707 INFO recLAgwx9vbgB5EHk [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 01:31:03,960 INFO recXvQ6gWAmyakrpD [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 01:31:06,180 INFO rec527dNeEtWJrYNl [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:31:18,935 INFO recGFNRVl1qBZGwyU [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:31:24,895 INFO recSBcGLPatKb3Ygu [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:31:43] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:33:20,168 ERROR recb80OwMgNnceA9t: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:36:18,729 ERROR recWPMm91mGDLXONm: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:36:25,749 ERROR recOvqPKUtyy9ISA1: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 01:36:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 01:36:43] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:36:46,090 ERROR recHVUd2DkoKfedJZ: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 01:37:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:37:30,790 INFO recmI7EiLv72PxmYK [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:37:34,773 INFO recPSTGXK3P39yNYT [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:37:47,719 INFO recIlghoOw5VbY4Zh [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:37:53,425 INFO recatj4YXzbOaq3Ar [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:38:05,170 INFO recEmTBhx2hgw6tPQ [qwen38_judge]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:38:16,031 INFO recL9MFV5zmdlle5T [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:38:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:38:34,375 ERROR recnGEpF1srQpaqWq: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:38:44,257 INFO recMicVBcqy1xM1jq [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:39:12,458 INFO recwW1A85nfyQpReG [qwen38_judge]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 01:39:23,732 INFO recNuT2oSnO86bxOx [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:40:27,895 INFO recVEXvhYxAhELVqB [qwen38_judge]: final=A(correct, escalated=True) cost=$0.00000
+[07/22/26 01:41:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:41:49,794 INFO reczzzihL7btBH7RO [qwen38_judge]: final=C(wrong, escalated=True) cost=$0.00000
+2026-07-22 01:42:02,279 INFO recooG6bivTUJpDBz [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+[07/22/26 01:42:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:43:10,829 INFO recdya6FuYraBU5Rh [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:43:13,045 INFO rec4L69T0Y1AS4AFS [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:43:20,930 INFO recwlwlcPvXVNPmvl [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:43:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:43:30,388 INFO rectXfsCM1dj4Kv2c [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:43:41,771 INFO reccOKzFNmyqeJ6ry [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:43:53,126 INFO recs3PLPUEMiqg4P8 [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:44:04,599 INFO recO3hvCWRGiG0odN [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 01:44:09,090 INFO rec06pnAkLOr2t2mp [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 01:44:50,102 ERROR recGee5m84dg5FZkc: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:44:52,320 INFO rec7C06XOB2h298ue [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:45:26,359 INFO recaXdGn3FAIkxLGM [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 01:46:04,140 ERROR recJZ3QEfRKjYw9a7: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:46:10,849 INFO reckEnrOPFT9Ru7tW [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:46:16,196 INFO recoiTJPGUmzAkief [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 01:46:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 01:46:36] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:46:57,249 INFO rechgQucGlrnt8KRV [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 01:50:07,885 ERROR reck4G4xxv3YnpbtQ: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:50:13,481 INFO recI1ls9OXdxatHQn [qwen38_judge]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 01:50:18,019 INFO recmkvk6EFAmqyMxR [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 01:50:24,886 INFO recIOlKBsOeEcgkA1 [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:50:28,679 INFO reczUoM8JsxU6pYxr [qwen38_judge]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 01:50:32,962 INFO rechtUKxC6G67H7Pr [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:50:36,050 INFO rec8y3ZrBOcLgNEkE [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 01:50:44] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:50:46,027 ERROR reccVFW11Elovnf8T: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 01:51:06] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:51:20,572 INFO rec5eA17Qr1ucNLUf [qwen38_judge]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 01:51:23,379 INFO recINGR1z01Fh1Z3A [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:51:34,148 INFO recRZjaElf8ft7xTq [qwen38_judge]: final=C(correct, escalated=True) cost=$0.00000
+[07/22/26 01:51:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:52:11,834 ERROR recclFbsjbaiVVnnV: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 01:52:17,122 INFO reczkBiPPNrNN49Hp [qwen38_judge]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 01:52:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:53:18,468 INFO recPL4ZPpVYxgMu57 [qwen38_judge]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 01:53:20,531 INFO recJJcOHhFeSaRpl4 [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 01:53:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:53:47,448 INFO recPIzpnuYpB4yvmp [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 01:53:57,619 INFO recUOePh79cp4T2Bg [qwen38_judge]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:54:08,551 INFO recLSzwBUS3olCjhl [qwen38_judge]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 01:54:12,464 INFO recv7GsQg3f0fvB1f [qwen38_judge]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 01:54:43,144 INFO receo3UUzRvWCqyfA [qwen38_judge]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 01:55:53,366 INFO recuYEkVjdVUwA3c0 [qwen38_judge]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 01:55:55,355 INFO recf6ayQmL1SxKbvW [qwen38_judge]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:55:57,916 INFO recihePFulRgNKsIn [qwen38_judge]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-22 01:56:26,509 INFO receYQxnUBvxPcvbQ [qwen38_judge]: final=B(correct, escalated=True) cost=$0.00000
+[07/22/26 01:56:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 01:58:20,407 INFO recn3NhOhqAPLda16 [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 01:58:32,016 INFO rec8nshandHARTkrg [qwen38_judge]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-22 02:00:01,700 ERROR recjJ54TXc04enRkZ: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 02:00:12,284 INFO reckl6PkaEMWM50yZ [qwen38_judge]: final=A(wrong, escalated=False) cost=$0.00000
+[07/22/26 02:00:32] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 02:01:05,602 INFO recrNbtgTNoabJJi6 [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 02:01:26,181 INFO recOkA2zsy4GSMD9R [qwen38_judge]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 02:01:27,984 INFO recXsuOHRBLcyenF2 [qwen38_judge]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 02:01:40,712 INFO recBhnXrUyTJ6WHIR [qwen38_judge]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-22 02:01:55,209 ERROR recFaL6j8UMhutXrc: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 02:02:00,493 INFO recfTlTMjZBuOducT [qwen38_judge]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 02:03:55,293 ERROR recr3VHM4zYf6dMFY: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 407, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 395, in run_question_lever
+    result = await _tribunal(
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 339, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 285, in adjudicate_qwen38
+    resp = requests.post(_QWEN38_MESSAGES_URL, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 02:03:55,408 WARNING 14/90 questions dropped due to unrecoverable errors
+2026-07-22 02:03:55,413 INFO Wrote 76 results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\lever_qwen38_judge_gpqa_seed42.jsonl

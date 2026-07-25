@@ -1,0 +1,90 @@
+2026-07-22 16:11:33,693 INFO HTTP Request: HEAD https://huggingface.co/datasets/openai/gsm8k/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-22 16:11:33,857 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/openai/gsm8k/740312add88f781978c0658806c59bc2815b9866/README.md "HTTP/1.1 200 OK"
+2026-07-22 16:11:34,258 INFO HTTP Request: HEAD https://huggingface.co/datasets/openai/gsm8k/resolve/740312add88f781978c0658806c59bc2815b9866/gsm8k.py "HTTP/1.1 404 Not Found"
+2026-07-22 16:11:35,057 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/openai/gsm8k/openai/gsm8k.py "HTTP/1.1 404 Not Found"
+2026-07-22 16:11:35,318 INFO HTTP Request: GET https://huggingface.co/api/datasets/openai/gsm8k/revision/740312add88f781978c0658806c59bc2815b9866 "HTTP/1.1 200 OK"
+2026-07-22 16:11:35,576 INFO HTTP Request: HEAD https://huggingface.co/datasets/openai/gsm8k/resolve/740312add88f781978c0658806c59bc2815b9866/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 16:11:35,860 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=openai/gsm8k "HTTP/1.1 200 OK"
+2026-07-22 16:11:36,112 INFO HTTP Request: GET https://huggingface.co/api/datasets/openai/gsm8k/tree/740312add88f781978c0658806c59bc2815b9866/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-22 16:11:36,372 INFO HTTP Request: GET https://huggingface.co/api/datasets/openai/gsm8k/tree/740312add88f781978c0658806c59bc2815b9866?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 16:11:36,741 INFO HTTP Request: HEAD https://huggingface.co/datasets/openai/gsm8k/resolve/740312add88f781978c0658806c59bc2815b9866/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 16:11:36,777 INFO Loaded 50 GSM8K items (seed=42, distractor-synthesized MC -- NOT comparable to published open-answer GSM8K accuracy)
+2026-07-22 16:11:36,777 INFO Loaded 50 GSM8K questions
+2026-07-22 16:11:47,360 INFO 1214 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:11:48,426 INFO 588 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:11:48,474 INFO 906 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:11:49,342 INFO 57 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:11:53,611 INFO 1252 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:11:53,811 INFO 599 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:11:59,817 INFO 618 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:12:00,126 INFO 400 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:12:00,383 INFO 289 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:12:04,260 INFO 608 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:12:08,042 INFO 237 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:12:18,176 INFO 1132 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+[07/22/26 16:12:23] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:12:24,310 INFO 672 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:27,973 INFO 222 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+[07/22/26 16:12:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:12:34,942 INFO 616 [None]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 16:12:35,426 INFO 238 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:12:39,910 INFO 945 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:12:43,426 INFO 55 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:44,159 INFO 730 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:48,141 INFO 463 [None]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 16:12:50,640 INFO 176 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:51,377 INFO 772 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:57,099 INFO 15 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:12:58,791 INFO 66 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+[07/22/26 16:13:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:13:02,259 INFO 479 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:13:09,729 INFO 1005 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:13:11,256 INFO 480 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:13:13,141 INFO 896 [None]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 16:13:13,223 INFO 1122 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:13:21,985 INFO 921 [None]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 16:13:23,178 INFO 275 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:13:25,641 INFO 868 [None]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:13:25,810 INFO 187 [None]: baseline=B(correct) engine=C(wrong, escalated=False)
+2026-07-22 16:13:32,174 INFO 562 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:13:36,141 INFO 770 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:13:37,217 INFO 172 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:13:40,134 INFO 1191 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+[07/22/26 16:13:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 16:13:54] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:13:54,686 INFO 1082 [None]: baseline=A(correct) engine=A(correct, escalated=True)
+[07/22/26 16:13:55] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:14:03,731 INFO 1308 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:14:04,208 INFO 1154 [None]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 16:14:09,357 INFO 537 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:14:14,361 INFO 280 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:14:15,447 INFO 413 [None]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 16:14:22,358 INFO 677 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:14:24,145 INFO 177 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:14:27,525 INFO 923 [None]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:14:33,162 INFO 454 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:14:37,341 INFO 970 [None]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:14:40,207 INFO 21 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:14:50,201 INFO 1176 [None]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:14:50,280 INFO Wrote 50 results to benchmark\results\gsm8k_pilot_seed42.jsonl
+2026-07-22 16:14:50,280 INFO SUMMARY n=50 baseline_accuracy=100.0% engine_accuracy=96.0% escalation_rate=12.0%

@@ -1,0 +1,188 @@
+2026-07-22 10:40:47,855 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+2026-07-22 10:40:48,182 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 10:40:49,012 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Idavidrein/gpqa/Idavidrein/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 10:40:49,314 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/revision/633f5ee89ab8ad4522a9f850766b73f62147ffdd "HTTP/1.1 200 OK"
+2026-07-22 10:40:49,612 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 10:40:49,943 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Idavidrein/gpqa "HTTP/1.1 200 OK"
+2026-07-22 10:40:50,224 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/tree/633f5ee89ab8ad4522a9f850766b73f62147ffdd?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 10:40:50,521 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 10:41:02,828 INFO recNAiPUKOulQbKVP [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:41:04,878 INFO recAYkd96NNuNl1Ei [baseline]: A(wrong) cost=$0.00000
+2026-07-22 10:41:11,354 INFO rec4JrWy7Il8ho5vk [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:41:11,872 INFO rec8y3ZrBOcLgNEkE [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:41:13,715 INFO reck1zKeCssmN82Ga [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:41:30,449 INFO rec9GugrngvsQR99A [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:41:33,749 INFO recwW1A85nfyQpReG [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:41:42,048 INFO recnjViFrqlZNL3fY [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:41:47,466 INFO recRhwQwHijW0gCLo [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:41:56,593 INFO recSBcGLPatKb3Ygu [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:41:56,987 INFO recJJcOHhFeSaRpl4 [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:41:59,459 INFO recqLRu4BcJvlSANc [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:42:13,415 INFO rec260hNUCEj109Dj [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:42:27,781 INFO recO3hvCWRGiG0odN [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:42:31,799 INFO recJZ3QEfRKjYw9a7 [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:42:43,349 INFO recMicVBcqy1xM1jq [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:42:53,325 INFO rec7qmSnbud4FHSqL [baseline]: A(wrong) cost=$0.00000
+2026-07-22 10:42:55,478 INFO recNFJjE5PPTqVJGv [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:43:04,273 INFO recakFKZioXUuldcd [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:43:05,513 INFO recypVp2NmPlBKVTp [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:43:25,687 INFO recz3MfYHPRhsEQkW [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:43:31,519 INFO recLB0EkQ54bYVhnd [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:43:52,673 INFO recZt4x514UQNnsgy [baseline]: D(wrong) cost=$0.00000
+2026-07-22 10:44:00,300 INFO rec9W28HgpEUeUN8k [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:44:14,711 INFO recZWeueB7lSPR6wN [baseline]: B(wrong) cost=$0.00000
+2026-07-22 10:44:18,279 INFO recINGR1z01Fh1Z3A [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:44:31,221 INFO recQ8oxSY2aCwFRS8 [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:44:32,292 INFO rec8nshandHARTkrg [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:44:34,299 INFO rec7C06XOB2h298ue [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:44:37,869 INFO recafnH3RRnMBXEb1 [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:44:54,518 INFO recXsYa3i2UhGF5fe [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:05,211 INFO recS48OsU6kVadBPW [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:45:06,931 INFO recXvQ6gWAmyakrpD [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:09,479 INFO receYQxnUBvxPcvbQ [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:45:13,501 INFO recG1ljJQcVy6CbSl [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:19,129 INFO reca44yABeO2fx7UB [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:45:30,826 INFO recrs0kUo7Ua1xhKO [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:38,458 INFO recVE8cUNHpHZIAvL [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:46,054 INFO recmI7EiLv72PxmYK [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:46,441 INFO recRZjaElf8ft7xTq [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:45:50,955 INFO recPzW1WqRnPs57D6 [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:46:31,958 INFO recGFNRVl1qBZGwyU [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:46:42,093 INFO recooG6bivTUJpDBz [baseline]: C(wrong) cost=$0.00000
+2026-07-22 10:47:07,319 INFO recvlnu8BuLmXZhSX [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:47:16,081 INFO recvZlMbpPz0yLDle [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:47:24,496 INFO recZ13cwgDQf9jRd9 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 10:47:53,690 ERROR recQiWOxhkXRz9NVE: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 489, in _run_one_baseline
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 10:47:58,859 INFO rec47oNPXudlTIk4y [baseline]: A(wrong) cost=$0.00000
+2026-07-22 10:48:01,717 INFO recIDiDKKrN61Auyr [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:48:19,485 INFO recPSTGXK3P39yNYT [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:48:30,874 INFO recAAJoHMW45Lv5je [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:48:39,234 INFO recyl3usDqb7ruXJx [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:48:57,615 INFO recGFKDUd8qgz81Zl [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:49:13,245 INFO recb80OwMgNnceA9t [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:49:16,747 INFO recK9F5aqdaybl8bb [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:49:21,009 INFO recw4rROcnHKNZhtK [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:49:32,419 INFO recrNbtgTNoabJJi6 [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:49:33,000 INFO recqFDvYKKRmbnoUb [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:49:40,113 INFO reco8WSc71p8zAv4q [baseline]: B(wrong) cost=$0.00000
+2026-07-22 10:49:43,980 INFO rec2UlKqC6RFHdcro [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:49:46,534 INFO recatj4YXzbOaq3Ar [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:49:56,307 INFO recBtVK8rBVtIlXDq [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:49:59,077 INFO recnGEpF1srQpaqWq [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:50:05,260 INFO recPIzpnuYpB4yvmp [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:50:08,398 INFO recIMcQfaQNa6vzsT [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:50:18,928 INFO reckEnrOPFT9Ru7tW [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:50:25,750 INFO rectXfsCM1dj4Kv2c [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:50:25,910 INFO recIOlKBsOeEcgkA1 [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:50:42,740 INFO recxsX66ktJ1Lwt4f [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:50:45,096 INFO reciuppdQde4FGX1z [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:50:46,128 INFO recZbxrocrxh9YENH [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:51:01,447 INFO rect4iLrSfUwkNTno [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:51:45,303 INFO recVEXvhYxAhELVqB [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:51:51,023 INFO recUBgVlkKzcRPDdK [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:51:55,088 INFO recnTTKdBzfuoZ7w7 [baseline]: C(wrong) cost=$0.00000
+2026-07-22 10:51:57,272 INFO recReg13iV2HwJTaA [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:51:58,626 INFO recYCMJWH7IpcdqwE [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:52:27,593 INFO recyPffUDqC2k7ZZO [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:52:51,299 INFO recEmTBhx2hgw6tPQ [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:52:52,541 INFO recBhnXrUyTJ6WHIR [baseline]: A(correct) cost=$0.00000
+2026-07-22 10:52:59,067 INFO recDj2Y2BbtV02Wv5 [baseline]: B(wrong) cost=$0.00000
+2026-07-22 10:53:11,838 INFO rec4L69T0Y1AS4AFS [baseline]: B(wrong) cost=$0.00000
+2026-07-22 10:53:12,553 INFO recBGxVySx1pkrO1i [baseline]: B(correct) cost=$0.00000
+2026-07-22 10:53:17,151 INFO rec0Arme2jcXQZnAW [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:53:24,122 INFO receo3UUzRvWCqyfA [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:53:41,334 INFO recE2ihVfqEK4R9d0 [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:53:41,743 INFO reccVFW11Elovnf8T [baseline]: C(correct) cost=$0.00000
+2026-07-22 10:53:53,423 INFO recxTy0x7M6T9ikc0 [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:53:54,120 INFO recOvqPKUtyy9ISA1 [baseline]: D(correct) cost=$0.00000
+2026-07-22 10:54:01,336 INFO reck4G4xxv3YnpbtQ [baseline]: A(wrong) cost=$0.00000
+2026-07-22 10:54:01,336 WARNING 1/90 questions dropped
+2026-07-22 10:54:01,341 INFO Wrote 89 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\lever_baseline_gpqa_seed314.jsonl

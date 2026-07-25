@@ -1,0 +1,70 @@
+2026-07-22 15:54:21,623 INFO HTTP Request: HEAD https://huggingface.co/datasets/GBaker/MedQA-USMLE-4-options/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-22 15:54:21,630 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/GBaker/MedQA-USMLE-4-options/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18/README.md "HTTP/1.1 200 OK"
+2026-07-22 15:54:21,876 INFO HTTP Request: HEAD https://huggingface.co/datasets/GBaker/MedQA-USMLE-4-options/resolve/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18/MedQA-USMLE-4-options.py "HTTP/1.1 404 Not Found"
+2026-07-22 15:54:22,611 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/GBaker/MedQA-USMLE-4-options/GBaker/MedQA-USMLE-4-options.py "HTTP/1.1 404 Not Found"
+2026-07-22 15:54:22,898 INFO HTTP Request: GET https://huggingface.co/api/datasets/GBaker/MedQA-USMLE-4-options/revision/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18 "HTTP/1.1 200 OK"
+2026-07-22 15:54:23,210 INFO HTTP Request: HEAD https://huggingface.co/datasets/GBaker/MedQA-USMLE-4-options/resolve/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 15:54:23,710 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=GBaker/MedQA-USMLE-4-options "HTTP/1.1 200 OK"
+2026-07-22 15:54:23,994 INFO HTTP Request: GET https://huggingface.co/api/datasets/GBaker/MedQA-USMLE-4-options/tree/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-22 15:54:24,243 INFO HTTP Request: GET https://huggingface.co/api/datasets/GBaker/MedQA-USMLE-4-options/tree/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 15:54:24,577 INFO HTTP Request: HEAD https://huggingface.co/datasets/GBaker/MedQA-USMLE-4-options/resolve/0fb93dd23a7339b6dcd27e241cb9b5eca62d4d18/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 15:54:24,615 INFO Loaded 50 MedQA items (seed=42, native 4-option, no trimming)
+2026-07-22 15:54:24,615 INFO Loaded 50 MedQA questions
+2026-07-22 15:54:40,324 INFO 1258 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:54:42,950 INFO 990 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:54:46,104 INFO 277 [step1]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:54:50,396 INFO 427 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:54:54,281 INFO 1202 [step1]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:55:01,194 INFO 15 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:55:08,997 INFO 827 [step1]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:55:14,527 INFO 202 [step2&3]: baseline=D(wrong) engine=D(wrong, escalated=False)
+2026-07-22 15:55:17,922 INFO 503 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:55:18,494 INFO 325 [step1]: baseline=C(correct) engine=C(correct, escalated=False)
+[07/22/26 15:55:23] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:55:29,688 INFO 681 [step1]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:55:33,809 INFO 387 [step2&3]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:55:36,193 INFO 932 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:55:42,343 INFO 1027 [step1]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 15:55:43,609 INFO 66 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:55:46,045 INFO 235 [step1]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:55:48,027 INFO 347 [step1]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:55:51,726 INFO 442 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:56:05,976 INFO 332 [step1]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:56:06,987 INFO 376 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:56:09,109 INFO 35 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:56:14,180 INFO 1121 [step2&3]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:56:17,611 INFO 1145 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:56:18,177 INFO 975 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:56:27,176 INFO 950 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:56:27,960 INFO 400 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:56:38,774 INFO 845 [step1]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:56:39,365 INFO 1030 [step2&3]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:56:40,125 INFO 825 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:56:52,978 INFO 650 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:56:53,282 INFO 802 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:57:01,291 INFO 540 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:57:02,142 INFO 796 [step1]: baseline=A(wrong) engine=D(correct, escalated=False)
+2026-07-22 15:57:06,261 INFO 2 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:07,341 INFO 715 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:15,288 INFO 464 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:16,978 INFO 331 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:21,114 INFO 959 [step2&3]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:57:23,292 INFO 395 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:57:30,897 INFO 761 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:33,577 INFO 920 [step2&3]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:57:39,161 INFO 107 [step1]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:57:43,858 INFO 528 [step2&3]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:57:48,837 INFO 1166 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:57:51,444 INFO 187 [step1]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:58:04,177 INFO 997 [step1]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 15:58:06,149 INFO 371 [step2&3]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 15:58:29,583 INFO 454 [step1]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 15:58:42,242 INFO 823 [step1]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 15:58:53,260 INFO 1142 [step2&3]: baseline=D(wrong) engine=D(wrong, escalated=False)
+2026-07-22 15:58:53,347 INFO Wrote 50 results to benchmark\results\medqa_pilot_seed42.jsonl
+2026-07-22 15:58:53,347 INFO SUMMARY n=50 baseline_accuracy=94.0% engine_accuracy=96.0% escalation_rate=6.0%

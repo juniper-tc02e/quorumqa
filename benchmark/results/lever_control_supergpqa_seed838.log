@@ -1,0 +1,269 @@
+2026-07-23 19:56:40,795 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 19:56:40,795 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/m-a-p/SuperGPQA/4430d4458112c7d4497fdcf94d7cc223313d6acf/README.md "HTTP/1.1 200 OK"
+2026-07-23 19:56:41,044 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-23 19:56:41,777 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/m-a-p/SuperGPQA/m-a-p/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-23 19:56:42,016 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/revision/4430d4458112c7d4497fdcf94d7cc223313d6acf "HTTP/1.1 200 OK"
+2026-07-23 19:56:42,261 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-23 19:56:42,573 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=m-a-p/SuperGPQA "HTTP/1.1 200 OK"
+2026-07-23 19:56:42,810 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-23 19:56:43,062 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-23 19:56:43,361 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-23 19:56:43,574 INFO Loaded 90 SuperGPQA items (difficulty=hard, seed=838, trimmed to 4 choices)
+2026-07-23 19:56:43,577 INFO Loaded 90 supergpqa questions (seed=838) for lever=control
+2026-07-23 19:56:54,976 INFO 8212116814624ac3ab3c645bb720a0de [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 19:56:55,427 INFO 65e18d5ebc6d481f92372a02f7346d7e [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:56:58,918 INFO 2901fd9282834a269854bd1c929c2d27 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:56:59,512 INFO b1292883447c4964834d2f93d9ad6866 [control]: final=C(correct, escalated=False) cost=$0.00000
+[07/23/26 19:57:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 19:57:14,512 INFO 784bc160afa34cc184a98687b152411a [control]: final=A(wrong, escalated=False) cost=$0.00000
+[07/23/26 19:57:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:57:25] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 19:57:26,627 INFO ad9b69d4627741a1a953880f089b14f0 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:57:40,561 INFO ff08acf886a048119cc4651bd9185258 [control]: final=A(correct, escalated=True) cost=$0.00000
+[07/23/26 19:57:49] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:57:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 19:57:53,793 INFO 662dee3f92714e84a08098c31a9dfede [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:04,744 INFO c5836da9034249b4b27508d97f2fef48 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:58:08,161 INFO 42ff314467d2496490c62c7064c0d6cc [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:12,260 INFO 6afbc30d68f940abbb7fe92128c3cf86 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 19:58:14,863 INFO 6c14595204824c9fb7a2ad000c332e37 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:18,194 INFO 47f09ff7d66a4742ba76601ea67539d8 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:58:22,844 INFO 27b0cc6c758649ecb4fb058ecdad4757 [control]: final=D(wrong, escalated=False) cost=$0.00000
+[07/23/26 19:58:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:58:31] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:58:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 19:58:53,311 INFO 495126540259474fb0700bf7fe2a837f [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:54,275 INFO 2f6042eca8834ba78cec6a229e21e89b [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:55,979 INFO b370dd1899e24b37b27c4eec64ca2de9 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 19:58:59,677 INFO c247b75bef6843a6bddb467b4f6530c7 [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 19:59:00,530 INFO 9d29c330b74a4c878301338bfaa022f7 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 19:59:02,476 INFO 7642c7abd7554d85a9ad74550cc95428 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 19:59:04,277 INFO e9850e7c1b5744b19cdf700c4bbac0ab [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 19:59:15,327 INFO 5d0d7b5d79d448c7b2ffdee0247a0296 [control]: final=D(wrong, escalated=False) cost=$0.00000
+[07/23/26 19:59:18] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:59:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:59:26] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 19:59:32] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 19:59:53,394 INFO 5f1d14b7898843078179131808d8b102 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:00:06,311 INFO 37bee659d0f24b6bbb7cf0019b18266b [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:00:15,028 INFO b232c347b66641feb655e8089ad3236c [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:00:16,411 INFO 45ead910eb784c63aff46227f35006c1 [control]: final=B(wrong, escalated=True) cost=$0.00000
+[07/23/26 20:00:27] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:00:30] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:00:31,743 INFO 1f7eebad0c1b4d7bada8526fc5eca57a [control]: final=B(correct, escalated=True) cost=$0.00000
+[07/23/26 20:00:32] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:00:44,744 INFO 76baec1d98e94e2aaa91e9e07bafc4ee [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 20:00:54,604 INFO 5dc0a21f75b44980b701d62896d3edcb [control]: final=B(wrong, escalated=True) cost=$0.00000
+[07/23/26 20:01:07] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:01:19,728 INFO f89ec3f159cd40c385b7f26813b62486 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:01:28,313 INFO 029f7e87aa534e76b95b143ca61b8051 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:01:39,094 INFO 92158717e4684fbc960d84d858017ff8 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:01:47,162 INFO 8e58552045574cd082ae3ea220ee55d9 [control]: final=D(wrong, escalated=True) cost=$0.00000
+2026-07-23 20:02:00,427 INFO be529e4267c8488f8df3970620cef40e [control]: final=D(wrong, escalated=False) cost=$0.00000
+[07/23/26 20:02:03] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:02:18] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:02:27,545 INFO 8286c21c723f421cae07723ee28f793c [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 20:02:28,177 INFO aa75f2e217f34054905f326269e5565f [control]: final=C(wrong, escalated=True) cost=$0.00000
+2026-07-23 20:02:34,594 INFO 52d60b890b534b4090eb911da9632d13 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:02:48,544 INFO 6be198f958ef4516852dc9c0b0f93766 [control]: final=A(wrong, escalated=False) cost=$0.00000
+[07/23/26 20:02:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:02:56,993 INFO 4706d9d11ac74f13bb26c4e243a9fedd [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:03:00,327 INFO d651ee6a2c05458abcfa6fc4f2701660 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 20:03:06,960 INFO b6bb5716a3e04e67b34e8675a3eddde3 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:03:11,427 INFO 25139c83331f4efead0a39063294e6d1 [control]: final=C(correct, escalated=False) cost=$0.00000
+[07/23/26 20:03:20] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:03:34] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:03:48,011 INFO 8bec621e6eae43f59459dacaebd4cc42 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 20:03:50,078 INFO f0ad3ea70b04422fbf89443a247fd4c6 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:03:50,283 INFO 450173d7e21e4b66a618097c366a3755 [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:04:06] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:04:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:04:09] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:04:28,071 INFO f7b30d755ce94690aee11d8246a70df3 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 20:04:34,561 INFO c9820d674f5e49148ebf9a5211482572 [control]: final=B(correct, escalated=True) cost=$0.00000
+[07/23/26 20:04:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:04:48,245 INFO 6debc81571924be3a4b1fb060efa5d28 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:04:50,862 INFO 2e0a1bdc84054c3886f8f6dcad5d123d [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:04:55] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:05:04] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:05:10] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:05:23,961 INFO 774540d412ae4311b7aa433bf2f64b10 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:05:28,594 INFO e4e11a5fc2714133b1c7af4a68f24b7c [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:05:28,618 INFO 3f48e266da744ae6b9e99e762b67954f [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:05:36,661 INFO e13b5563e1eb450d94962f013c3ae36a [control]: final=D(wrong, escalated=True) cost=$0.00000
+2026-07-23 20:05:41,478 INFO 1b003811eaf443e492e6717fa934b15b [control]: final=B(correct, escalated=False) cost=$0.00000
+[07/23/26 20:05:44] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:05:44,711 INFO 4da6b094f021432e9f07bcff16c36b4e [control]: final=D(wrong, escalated=False) cost=$0.00000
+[07/23/26 20:06:02] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:06:13,563 INFO 71af5cfedc1849cd9c99e9d4904c1d97 [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:06:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:06:21,628 INFO 7fe42cc3bf84464993ffb660dac2653f [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:06:25,127 INFO 4c53840b44904a97b04bf942e34ce522 [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:06:29,664 INFO 4ae91bc0704c4d16891bceda9518416c [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:06:38,660 INFO 7038ebb226d241c69e0370492f042a10 [control]: final=A(correct, escalated=False) cost=$0.00000
+[07/23/26 20:06:45] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:07:04,860 INFO f7cfee802ef34c3688d63c879ffd007b [control]: final=D(correct, escalated=True) cost=$0.00000
+[07/23/26 20:07:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:07:25,712 INFO 4317af96cdb445fe8d23e95bbf487c6d [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 20:07:35,561 INFO 6f48814bd0a14a67bb76a67dfff57723 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 20:07:37,744 INFO 29e041d1e6384f738d9582ca5d67d584 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 20:07:38,828 INFO fab25aad3a89427aaf6cdffc0295360e [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 20:07:39,845 INFO e286dac07362459cb41b0c9adca02747 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:07:50,256 INFO 5df707865b404a0697d8fd1791bb9b0b [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:07:51,160 INFO b9f43cc8a6ff4438ab18497fc9bf7cf0 [control]: final=A(wrong, escalated=True) cost=$0.00000
+[07/23/26 20:07:56] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:08:00,378 INFO a33d9512c6ab4a3eb4e172e2e2255293 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 20:08:03,308 INFO 7adc0c3199974e778dbb75b22c3406d4 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 20:08:06,205 INFO b8de1171b4a44ba4bf85615dca222549 [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:08:15,130 INFO e639f6eaf9a542f4a26c1358c0ef3f2c [control]: final=B(wrong, escalated=False) cost=$0.00000
+[07/23/26 20:08:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:08:17,127 INFO cf53bf592b244cb1ad02b684eda29e3b [control]: final=C(correct, escalated=False) cost=$0.00000
+[07/23/26 20:08:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:08:31] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:08:33,795 INFO 8aa00695f3ed4b3a9d445fec8513b65b [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:08:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:08:59,147 INFO 1667a63ffa874e25950f004d0bfe0199 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:09:12,815 INFO 59964f9268c240609796de021ca97aff [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:09:18,878 INFO e8716931ede04137a3dfa8794d456d57 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 20:09:20,015 INFO 85fd7a86245d412e865fda1920b02b2a [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 20:09:30,794 INFO f63cf000cb004ff989417e027221c056 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 20:09:32,227 INFO a38723e1b2ea48b9b8d6a723fc64d90d [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:09:35,078 INFO 6bff44235adb4f219d4c041c565f5faf [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 20:09:38,444 INFO e9e1fba9d67a424abefb846d7aa58857 [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:09:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:09:51] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 20:09:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:10:06,711 INFO 6d9c551019b94cf6bf31b3e5189c4607 [control]: final=B(correct, escalated=True) cost=$0.00000
+[07/23/26 20:10:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:10:15,111 INFO 791dcce8a03d4e438922d47882148a8c [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:10:28,677 INFO 4ec7fd279abe4399b72a91acb406fa9e [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 20:10:33,844 INFO 75137178e29747f9975dc7624cca3109 [control]: final=C(correct, escalated=False) cost=$0.00000
+[07/23/26 20:10:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:10:44,810 INFO 388a3c0ff6bb403b89f8fa9441989e29 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:10:45,397 INFO a42ce4ef47314d43bdcb8f6e33bae8be [control]: final=C(correct, escalated=True) cost=$0.00000
+[07/23/26 20:10:53] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 20:11:10,544 INFO cb587d9fecd8447b9a8c98f3c1b1ff3e [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 20:11:46,994 INFO 84644f66158b4fdaaddb6fc86aa19a3b [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 20:11:47,093 INFO Wrote 90 results to benchmark\results\lever_control_supergpqa_seed838.jsonl

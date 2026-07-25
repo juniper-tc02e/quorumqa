@@ -1,0 +1,615 @@
+2026-07-23 01:17:31,854 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:31,867 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/m-a-p/SuperGPQA/4430d4458112c7d4497fdcf94d7cc223313d6acf/README.md "HTTP/1.1 200 OK"
+2026-07-23 01:17:32,111 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:32,891 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/m-a-p/SuperGPQA/m-a-p/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:33,162 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/revision/4430d4458112c7d4497fdcf94d7cc223313d6acf "HTTP/1.1 200 OK"
+2026-07-23 01:17:33,430 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:33,734 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=m-a-p/SuperGPQA "HTTP/1.1 200 OK"
+2026-07-23 01:17:34,003 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:34,255 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-23 01:17:34,843 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:35,451 INFO Loaded 90 SuperGPQA items (difficulty=hard, seed=7, trimmed to 4 choices)
+2026-07-23 01:17:35,455 INFO Loaded 90 supergpqa questions (seed=7) for lever=rag_presolve
+2026-07-23 01:17:35,469 INFO rag_presolve: index=C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\data\rag_index_preembedded.sqlite3 snapshot=Laz4rz/wikipedia_stem_small_rag_embeddings@e51169b853c6f03b256521d535a991826c8a4bbf k=5 dense=True
+2026-07-23 01:17:57,418 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:57,433 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/modules.json "HTTP/1.1 200 OK"
+2026-07-23 01:17:57,694 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:57,711 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-07-23 01:17:57,716 INFO Loading SentenceTransformer model from mixedbread-ai/mxbai-embed-large-v1.
+2026-07-23 01:17:57,967 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:57,980 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-07-23 01:17:58,227 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:58,244 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/README.md "HTTP/1.1 200 OK"
+2026-07-23 01:17:58,579 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:58,592 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/modules.json "HTTP/1.1 200 OK"
+2026-07-23 01:17:58,854 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:58,865 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-07-23 01:17:59,165 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:17:59,431 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:17:59,444 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  47%|####7     | 185/391 [00:00<00:00, 1833.34it/s]Loading weights: 100%|##########| 391/391 [00:00<00:00, 1976.15it/s]
+2026-07-23 01:18:00,364 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:18:00,663 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:18:00,937 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:18:01,224 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-07-23 01:18:01,512 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:18:01,526 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-23 01:18:01,791 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:18:01,810 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/config.json "HTTP/1.1 200 OK"
+2026-07-23 01:18:02,071 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:18:02,121 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/config.json "HTTP/1.1 200 OK"
+2026-07-23 01:18:02,691 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:18:02,759 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-23 01:18:03,027 INFO HTTP Request: GET https://huggingface.co/api/models/mixedbread-ai/mxbai-embed-large-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-23 01:18:03,290 INFO HTTP Request: GET https://huggingface.co/api/models/mixedbread-ai/mxbai-embed-large-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-23 01:18:03,632 INFO HTTP Request: HEAD https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 01:18:03,647 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/mixedbread-ai/mxbai-embed-large-v1/b33106f585b9ce46904ad7443a3b52b7a63e231c/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-07-23 01:18:05,956 INFO HTTP Request: GET https://huggingface.co/api/models/mixedbread-ai/mxbai-embed-large-v1 "HTTP/1.1 200 OK"
+2026-07-23 01:18:16,318 INFO Loaded 1 prompt with these keys: ['query']
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:03<00:00,  3.53s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.53s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.28s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.28s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.00s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.00s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:16<00:00, 16.12s/it]Batches: 100%|##########| 1/1 [00:16<00:00, 16.12s/it]
+2026-07-23 01:19:42,177 INFO 8a331a10506a4ff6b543fc5b2ac2502f: rag_presolve retrieved 5 passage(s): ['Energy profile (chemistry)', 'Thomson problem', 'Nanogenerator', 'Thomson problem', 'Pattern language (formal languages)']
+2026-07-23 01:19:49,500 INFO b278c269529d444e97014e86de71b135: rag_presolve retrieved 5 passage(s): ['Shoelace formula', 'Supertoroid', 'Shoelace formula', 'Maple (software)', 'Paden–Kahan subproblems']
+2026-07-23 01:19:49,500 INFO b278c269529d444e97014e86de71b135 [rag_presolve]: final=C(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:19:53,499 INFO 811c704287184f8fa520358dc0ea2493: rag_presolve retrieved 5 passage(s): ['Radioactive decay', 'Radioactive decay', 'Radioactive decay', 'Decay chain', 'Superheavy element']
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.41s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.41s/it]
+2026-07-23 01:19:56,920 INFO b389bd8fda16458da390b0aeefa9328c: rag_presolve retrieved 5 passage(s): ['Semiconductor memory', 'Harvard architecture', 'Directory-based cache coherence', 'Trace cache', 'Memory hierarchy']
+[07/23/26 01:19:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 01:20:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:20:11,621 INFO 843e623807884c63a38376e9bd6d6f14: rag_presolve retrieved 5 passage(s): ['Derivation of the Routh array', 'Seventh Edition Unix terminal interface', 'Algorithm characterizations', 'Detection theory', 'Algorithm']
+[07/23/26 01:20:12] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:20:21,199 INFO 8a331a10506a4ff6b543fc5b2ac2502f [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.45s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.46s/it]
+2026-07-23 01:20:46,696 INFO 749c18edf45840fca90d356bbed0fe5b: rag_presolve retrieved 5 passage(s): ['Geophysical MASINT', 'Decibel', 'Geophysical MASINT', 'Geophysical MASINT', 'Surface wave']
+2026-07-23 01:20:46,696 INFO 749c18edf45840fca90d356bbed0fe5b [rag_presolve]: final=D(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.98s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.98s/it]
+2026-07-23 01:21:08,207 INFO a14c016f261f4b46a1f62c1a4096bd86: rag_presolve retrieved 5 passage(s): ['Fixed-point arithmetic', 'Scale factor (computer science)', '3SUM', 'Maximum term method', 'Monge array']
+2026-07-23 01:21:13,187 INFO b389bd8fda16458da390b0aeefa9328c [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:21:17,058 INFO 811c704287184f8fa520358dc0ea2493 [rag_presolve]: final=B(wrong, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:06<00:00,  6.10s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.10s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:03<00:00,  3.96s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.96s/it]
+[07/23/26 01:21:23] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:21:34,456 INFO a63462f4ff9e44289d3c9e4a91314250: rag_presolve retrieved 5 passage(s): ['Vitamin D', 'Calciphylaxis', 'Dysplasia', 'Canadian health claims for food', 'Gerty Cori']
+2026-07-23 01:21:34,456 INFO a63462f4ff9e44289d3c9e4a91314250 [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.24s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.24s/it]
+2026-07-23 01:21:43,370 INFO b68e89ad898246c4bc116ff4d353e4b9: rag_presolve retrieved 5 passage(s): ['Kinetic isotope effect', 'Morse potential', 'Helium atom', 'Spherical basis', 'Interatomic potential']
+[07/23/26 01:21:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:21:51,768 INFO a14c016f261f4b46a1f62c1a4096bd86 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:21:54,429 INFO c9aaec36dd7d48d0b90c34c9955bdf1b: rag_presolve retrieved 5 passage(s): ['Organotin chemistry', 'Molecular vibration', 'Standard enthalpy of formation', 'Sigmatropic reaction', 'Ilya Moiseev']
+2026-07-23 01:21:54,430 INFO c9aaec36dd7d48d0b90c34c9955bdf1b [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:14<00:00, 14.05s/it]Batches: 100%|##########| 1/1 [00:14<00:00, 14.05s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:22:08,393 INFO 843e623807884c63a38376e9bd6d6f14 [rag_presolve]: final=A(wrong, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:08<00:00,  8.65s/it]Batches: 100%|##########| 1/1 [00:08<00:00,  8.65s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:02<00:00,  2.46s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.46s/it]
+2026-07-23 01:23:03,066 INFO b68e89ad898246c4bc116ff4d353e4b9 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.17s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.17s/it]
+2026-07-23 01:24:02,509 INFO 4068f6cb89214b0a86c16c2497caeb6e: rag_presolve retrieved 5 passage(s): ['Vancomycin', 'Chloracne', 'Ibrutinib', 'Pityriasis rosea', 'Henoch–Schönlein purpura']
+2026-07-23 01:24:02,510 INFO 4068f6cb89214b0a86c16c2497caeb6e [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:03<00:00,  3.44s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.44s/it]
+2026-07-23 01:24:09,807 INFO 2ee8b1af76f04527a574124df6476a8d: rag_presolve retrieved 5 passage(s): ['Numerical analysis', 'Maple (software)', 'Symbolic integration', 'Riemannian metric and Lie bracket in computational anatomy', 'Cnoidal wave']
+2026-07-23 01:24:11,385 INFO 2499f7cec22b4bda8f96d061a1fae7af: rag_presolve retrieved 5 passage(s): ['Tree (data structure)', 'Derivation of the Routh array', 'Complexity function', "Chaitin's constant", 'Computable number']
+2026-07-23 01:24:11,472 INFO cb1f3d75e5a9402a9bb7755b6f6a029c: rag_presolve retrieved 5 passage(s): ['Imaging biomarker', 'Berylliosis', 'Obliterative bronchiolitis', 'Death of Gloria Ramirez', 'Sarcoidosis']
+2026-07-23 01:24:11,472 INFO cb1f3d75e5a9402a9bb7755b6f6a029c [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:24:13,716 INFO ff414ca699a74f7484650a3595512055: rag_presolve retrieved 5 passage(s): ['Complex plane', 'Convex analysis', 'Hilbert transform', 'Spherical basis', 'Complex plane']
+2026-07-23 01:24:13,717 INFO ff414ca699a74f7484650a3595512055 [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.93s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.93s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:24:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 01:24:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.48s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.48s/it]
+2026-07-23 01:24:30,128 INFO 5d4e9507100c48c89db59015820c6059: rag_presolve retrieved 5 passage(s): ['Integer factorization', 'Variable-length quantity', 'Integer (computer science)', 'Discrete logarithm', 'Gödel numbering']
+2026-07-23 01:24:30,128 INFO 5d4e9507100c48c89db59015820c6059 [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:24:31,720 INFO 2cf2296143904690a6c6f376236839d2: rag_presolve retrieved 5 passage(s): ['SN1 reaction', 'Integer factorization', 'Supertoroid', 'Direct function', 'Lyapunov–Malkin theorem']
+Batches: 100%|##########| 1/1 [00:05<00:00,  5.76s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.76s/it]
+2026-07-23 01:24:45,428 INFO 7c20fd3e214f4e438614b091fccce433: rag_presolve retrieved 5 passage(s): ['Subderivative', 'Dirac comb', 'Fractional cascading', 'Complex plane', 'Anonymous function']
+2026-07-23 01:24:45,428 INFO 7c20fd3e214f4e438614b091fccce433 [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:24:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:07<00:00,  7.17s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.17s/it]
+2026-07-23 01:25:07,029 INFO 2ee8b1af76f04527a574124df6476a8d [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:25:07,400 INFO 711025f0562b41118c0c383afdc77215: rag_presolve retrieved 5 passage(s): ['Discrete logarithm', 'Discrete logarithm', 'One-way function', 'Bentley–Ottmann algorithm', 'Crystallographic restriction theorem']
+Batches: 100%|##########| 1/1 [00:08<00:00,  8.71s/it]Batches: 100%|##########| 1/1 [00:08<00:00,  8.71s/it]
+[07/23/26 01:25:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:25:38,652 INFO 32d56386e78f4e16bfe38d9ea73fd02a: rag_presolve retrieved 5 passage(s): ['Permeability (Earth sciences)', 'Aquifer properties', 'Lugeon', 'Hydrology', 'Porosity']
+2026-07-23 01:25:38,652 INFO 32d56386e78f4e16bfe38d9ea73fd02a [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:03<00:00,  3.45s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.45s/it]
+2026-07-23 01:25:57,120 INFO 24b548b324684a8490d46d476bde792c: rag_presolve retrieved 5 passage(s): ['Integer factorization', 'Busy beaver', 'Busy beaver', 'CC system', 'Crystallographic restriction theorem']
+2026-07-23 01:25:57,120 INFO 24b548b324684a8490d46d476bde792c [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:25:58,935 INFO 2cf2296143904690a6c6f376236839d2 [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:03<00:00,  3.48s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.48s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:06<00:00,  6.01s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.01s/it]
+2026-07-23 01:26:07,097 INFO d0fe7c1a74314662ac5ed5f2538e7b13: rag_presolve retrieved 5 passage(s): ['Drooling', 'Flexible Endoscopic Evaluation of Swallowing with Sensory Testing', 'Flexible Endoscopic Evaluation of Swallowing with Sensory Testing', 'Flexible Endoscopic Evaluation of Swallowing with Sensory Testing', 'Saliva']
+2026-07-23 01:26:07,097 INFO d0fe7c1a74314662ac5ed5f2538e7b13 [rag_presolve]: final=C(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:26:11,692 INFO 711025f0562b41118c0c383afdc77215 [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.66s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.66s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.74s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.74s/it]
+2026-07-23 01:26:33,924 INFO 077aea7da31e4b94886be9713580db0d: rag_presolve retrieved 5 passage(s): ['Harmonic', 'Harmonic', 'Standing wave ratio', 'Coherent anti-Stokes Raman spectroscopy', 'String (computer science)']
+2026-07-23 01:26:35,725 INFO 8fb8ca1cd7114cd8b8dcad3953f68a44: rag_presolve retrieved 5 passage(s): ['Kantrowitz limit', 'Sampson flow', 'Venturi effect', 'Discharge coefficient', 'Orifice plate']
+2026-07-23 01:26:35,725 INFO 8fb8ca1cd7114cd8b8dcad3953f68a44 [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:26:39,622 INFO 413f8d70916547989ed51d1116a4551a: rag_presolve retrieved 5 passage(s): ['Bioreactor', 'KinITC', 'Residence time', 'Rate equation', 'Molar heat capacity']
+Batches: 100%|##########| 1/1 [00:08<00:00,  8.76s/it]Batches: 100%|##########| 1/1 [00:08<00:00,  8.77s/it]
+[07/23/26 01:26:49] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 01:26:53] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:27:10,737 INFO 077aea7da31e4b94886be9713580db0d [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:27:12,251 INFO 5f0bde5deeae40a88762eea520849455: rag_presolve retrieved 5 passage(s): ['Piston motion equations', 'Inverted pendulum', 'Screw axis', 'Work (physics)', 'Inverted pendulum']
+Batches: 100%|##########| 1/1 [00:07<00:00,  7.65s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.65s/it]
+[07/23/26 01:27:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:27:35,894 INFO 413f8d70916547989ed51d1116a4551a [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:27:36,972 INFO 920d5a4aae764dc8962d36ff4d95710a: rag_presolve retrieved 5 passage(s): ['Plug flow', 'Moody chart', 'Darcy–Weisbach equation', 'Pipe flow', 'Reynolds number']
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.13s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.13s/it]
+[07/23/26 01:27:45] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:27:55,947 INFO d9f3da47d50840a79c51096169d25583: rag_presolve retrieved 5 passage(s): ['NGC 755', 'NGC 3077', 'Freeman law', 'NGC 3077', "Turing's proof"]
+2026-07-23 01:27:55,948 INFO d9f3da47d50840a79c51096169d25583 [rag_presolve]: final=C(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.02s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.02s/it]
+2026-07-23 01:28:15,312 INFO facd6dd1e2074073adcfcac48eab3afb: rag_presolve retrieved 5 passage(s): ['Exact cover', 'Pattern language (formal languages)', 'Boolean satisfiability problem', 'Simulation preorder', 'Boolean satisfiability problem']
+2026-07-23 01:28:15,312 INFO facd6dd1e2074073adcfcac48eab3afb [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.21s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.21s/it]
+2026-07-23 01:28:40,340 INFO 5f0bde5deeae40a88762eea520849455 [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.93s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.93s/it]
+2026-07-23 01:28:58,372 INFO 10f542902dfa44d795fba244e7f1a69c: rag_presolve retrieved 5 passage(s): ['Impedance matching', 'Acoustic metamaterial', 'Transfer function matrix', 'Acoustic metamaterial', 'Impedance matching']
+2026-07-23 01:28:58,372 INFO 10f542902dfa44d795fba244e7f1a69c [rag_presolve]: final=B(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:02<00:00,  2.51s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.51s/it]
+2026-07-23 01:29:04,712 INFO de43b1c48f7b410695b2a4daf5fe3f31: rag_presolve retrieved 5 passage(s): ['Flow measurement', 'Flow measurement', 'Flow measurement', 'Flow measurement', 'Flow measurement']
+2026-07-23 01:29:04,713 INFO de43b1c48f7b410695b2a4daf5fe3f31 [rag_presolve]: final=A(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.65s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.65s/it]
+2026-07-23 01:29:14,272 INFO fc9a01ab2a2344cabfe9c2bd94be487f: rag_presolve retrieved 5 passage(s): ['Tidal tensor', 'Paczy\u0144ski–Wiita potential', 'Specific force', 'Eric Poisson', 'Virtual black hole']
+2026-07-23 01:29:21,137 ERROR 2499f7cec22b4bda8f96d061a1fae7af: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 767, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever, rag)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 760, in run_question_lever
+    result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 686, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\judge.py", line 46, in adjudicate
+    result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="judge")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:29:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:29:24,222 INFO 8f9ae9b94a0a4e66ab56225f7a356fd1: rag_presolve retrieved 5 passage(s): ['Molecular vibration', 'Heat transfer physics', "Hooke's atom", 'Normal mode', 'Molecular Hamiltonian']
+2026-07-23 01:29:24,223 INFO 8f9ae9b94a0a4e66ab56225f7a356fd1 [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.69s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.69s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.48s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.48s/it]
+2026-07-23 01:29:34,618 INFO 920d5a4aae764dc8962d36ff4d95710a [rag_presolve]: final=D(wrong, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.19s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.19s/it]
+2026-07-23 01:29:40,221 INFO 05edf34d21464999ad82c54bad66a005: rag_presolve retrieved 5 passage(s): ['Mosco convergence', 'Hilbert transform', 'Subderivative', 'Convex analysis', 'Subderivative']
+2026-07-23 01:29:40,222 INFO 05edf34d21464999ad82c54bad66a005 [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.21s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.21s/it]
+2026-07-23 01:29:55,930 INFO f8e740921e964dfc9922e08b7f5e815b: rag_presolve retrieved 5 passage(s): ["Planck's law", "Planck's law", "Planck's law", 'Spectral flux density', 'Rayleigh–Jeans law']
+2026-07-23 01:29:55,931 INFO f8e740921e964dfc9922e08b7f5e815b [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:29:56,780 INFO fc9a01ab2a2344cabfe9c2bd94be487f [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 01:30:01,107 INFO ccbff2992c7f49c48a8fe254e1fff783: rag_presolve retrieved 5 passage(s): ['Close-packing of equal spheres', 'Shoelace formula', 'Spherical harmonics', 'Diamond cubic', 'Spherical basis']
+2026-07-23 01:30:01,368 INFO 5cbfbf1108434eca91c070d1ed1c0bc6: rag_presolve retrieved 5 passage(s): ['Euclidean plane isometry', 'Boltzmann equation', 'Linear canonical transformation', 'Helium atom', 'Quadrature mirror filter']
+Batches: 100%|##########| 1/1 [00:05<00:00,  5.80s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.80s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:30:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:09<00:00,  9.36s/it]Batches: 100%|##########| 1/1 [00:09<00:00,  9.36s/it]
+[07/23/26 01:30:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:30:19,426 INFO 5fe6a509598c4dd5aec2c8f7abc0d259: rag_presolve retrieved 5 passage(s): ['Hydrogen', 'Hydrogen', 'Hydrogen sulfide', 'Microbial electrolysis cell', 'Hydrogen fuel']
+2026-07-23 01:30:19,426 INFO 5fe6a509598c4dd5aec2c8f7abc0d259 [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:02<00:00,  2.82s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.82s/it]
+2026-07-23 01:30:26,862 INFO fa49b578c45543d8847bac91a1e14045: rag_presolve retrieved 5 passage(s): ['Molar heat capacity', 'Molar heat capacity', 'Heat transfer physics', 'Standard molar entropy', 'Gas']
+[07/23/26 01:30:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:30:35,332 INFO ea9364829af04d188546f8d369483d46: rag_presolve retrieved 5 passage(s): ['Transfer function', 'Transfer function', 'Transfer function', 'Resonance', 'Linear time-invariant system']
+2026-07-23 01:30:35,333 INFO ea9364829af04d188546f8d369483d46 [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:01<00:00,  1.48s/it]Batches: 100%|##########| 1/1 [00:01<00:00,  1.48s/it]
+2026-07-23 01:30:45,743 INFO c8be6f10c6b04b879a5fe393fb1b38f8: rag_presolve retrieved 5 passage(s): ['Brownian motion', 'Molar heat capacity', 'Heat transfer physics', 'Joule expansion', 'Ideal gas law']
+[07/23/26 01:30:59] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:31:09,107 INFO 5cbfbf1108434eca91c070d1ed1c0bc6 [rag_presolve]: final=A(wrong, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.32s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.33s/it]
+2026-07-23 01:31:28,866 INFO ccbff2992c7f49c48a8fe254e1fff783 [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.55s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.55s/it]
+2026-07-23 01:31:35,347 INFO 0a3895b8a5cc4239a2a6e96c1289011d: rag_presolve retrieved 5 passage(s): ['Specific heat capacity', 'Specific heat capacity', 'Specific heat capacity', 'Phase-change material', 'Heat capacity']
+2026-07-23 01:31:40,120 INFO fa49b578c45543d8847bac91a1e14045 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:31:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:05<00:00,  5.47s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.47s/it]
+2026-07-23 01:31:49,330 INFO b81111afa517415f8f5b91a17ac991ce: rag_presolve retrieved 5 passage(s): ['Discrete logarithm', 'Discrete logarithm', 'Factorization of polynomials over finite fields', 'Spherical basis', 'Chester L. Sutula']
+2026-07-23 01:31:49,330 INFO b81111afa517415f8f5b91a17ac991ce [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:31:50,214 INFO c8be6f10c6b04b879a5fe393fb1b38f8 [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:07<00:00,  7.14s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.14s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:06<00:00,  6.65s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.65s/it]
+2026-07-23 01:32:06,543 INFO bfba15ab92174bf5b537cadc675dafdb: rag_presolve retrieved 5 passage(s): ['Settling', 'Oil drop experiment', "Stokes' law", 'Terminal velocity', "Stokes' law"]
+2026-07-23 01:32:17,874 INFO 1d1666032573496f84efe333d572f1e2: rag_presolve retrieved 5 passage(s): ['Double-slit experiment', 'Double-slit experiment', 'Double-slit experiment', 'Double-slit experiment', 'Double-slit experiment']
+[07/23/26 01:32:20] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:32:21,123 INFO 2789bb6861f94992954c4df00ec8e656: rag_presolve retrieved 5 passage(s): ['Iron', 'Evolution of metal ions in biological systems', 'Standard electrode potential', 'Flerovium', 'Permanganometry']
+[07/23/26 01:32:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 01:32:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:32:50,111 INFO 1d1666032573496f84efe333d572f1e2 [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:32:54,979 INFO 0a3895b8a5cc4239a2a6e96c1289011d [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:09<00:00,  9.38s/it]Batches: 100%|##########| 1/1 [00:09<00:00,  9.38s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.95s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.95s/it]
+2026-07-23 01:33:08,591 INFO 2789bb6861f94992954c4df00ec8e656 [rag_presolve]: final=B(wrong, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.90s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.90s/it]
+2026-07-23 01:33:17,660 INFO fe7c522a688a4b3c952b4ae95a5d1ae8: rag_presolve retrieved 5 passage(s): ['Zinc chloride', 'Zinc chloride hydroxide monohydrate', 'Zinc chloride hydroxide monohydrate', 'Zinc hydroxide', 'Zinc chloride hydroxide monohydrate']
+2026-07-23 01:33:17,661 INFO fe7c522a688a4b3c952b4ae95a5d1ae8 [rag_presolve]: final=A(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:33:23,096 INFO bfba15ab92174bf5b537cadc675dafdb [rag_presolve]: final=B(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:09<00:00,  9.66s/it]Batches: 100%|##########| 1/1 [00:09<00:00,  9.66s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:33:30,671 INFO 93218c202d734e8cacaa4dff4cd9a761: rag_presolve retrieved 5 passage(s): ['Discrete logarithm', 'Integer factorization', 'Integer factorization', 'Integer (computer science)', 'Integer (computer science)']
+2026-07-23 01:33:30,761 INFO e301bd85789b4c4fa02b60e3dba62e5c: rag_presolve retrieved 5 passage(s): ['Oil drop experiment', "Stokes' law", 'Terminal velocity', 'Terminal velocity', 'Terminal velocity']
+2026-07-23 01:33:30,761 INFO e301bd85789b4c4fa02b60e3dba62e5c [rag_presolve]: final=D(wrong, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:06<00:00,  6.89s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.89s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:03<00:00,  3.84s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.84s/it]
+[07/23/26 01:33:56] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:33:56,768 ERROR 4cd0be5521844b3781d88e8a29433b39: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 767, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever, rag)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 725, in run_question_lever
+    solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 661, in solve_all_rag_presolve
+    results = await asyncio.to_thread(retrieve_rag_evidence, rag, question)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 609, in retrieve_rag_evidence
+    return rag.index.search(question, query_vector, k=rag.k)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\rag\store.py", line 319, in search
+    rows = self.fetch_passages([pid for pid, _ in fused])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\rag\store.py", line 294, in fetch_passages
+    rows = self.conn.execute(
+           ^^^^^^^^^^^^^^^^^^
+sqlite3.InterfaceError: bad parameter or other API misuse
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.25s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.25s/it]
+2026-07-23 01:34:05,228 INFO 2e1d297065d247068eaa68f6585f9764: rag_presolve retrieved 0 passage(s): []
+2026-07-23 01:34:05,228 INFO 2e1d297065d247068eaa68f6585f9764 [rag_presolve]: final=C(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:34:09,197 INFO 05ac97570c2a40ab94f83a5cf3aa09df: rag_presolve retrieved 5 passage(s): ['Vitrimers', 'Dynamical heterogeneity', 'Flory–Fox equation', 'Polymer', 'Flory–Huggins solution theory']
+Batches: 100%|##########| 1/1 [00:06<00:00,  6.02s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.02s/it]
+2026-07-23 01:34:19,419 INFO e020184788314d25a2ea1828d568538a: rag_presolve retrieved 5 passage(s): ['Asymptotic gain model', "Ohm's law", "Ohm's law", 'Shunt (electrical)', "Ohm's law"]
+2026-07-23 01:34:19,420 INFO e020184788314d25a2ea1828d568538a [rag_presolve]: final=A(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:34:20,687 INFO 12a6d09d1179401498c2cae7d2d886a8: rag_presolve retrieved 5 passage(s): ['Subderivative', 'Maxima and minima', 'Maxima and minima', 'Cnoidal wave', 'Convex analysis']
+2026-07-23 01:34:20,688 INFO 12a6d09d1179401498c2cae7d2d886a8 [rag_presolve]: final=A(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.81s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.81s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:34:26] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:07<00:00,  7.17s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.17s/it]
+2026-07-23 01:34:38,886 INFO 93218c202d734e8cacaa4dff4cd9a761 [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:34:42,222 INFO 492ac21c1ff94ba49de684cfb6527930: rag_presolve retrieved 5 passage(s): ['Chemical equilibrium', 'Equilibrium constant', 'Equilibrium constant', 'Chemical equilibrium', 'Vapor–liquid equilibrium']
+Batches: 100%|##########| 1/1 [00:05<00:00,  5.81s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.81s/it]
+2026-07-23 01:34:50,862 INFO 18aa367ae47744199ba63308b5c581bf: rag_presolve retrieved 5 passage(s): ["Pollard's kangaroo algorithm", 'Algorithm characterizations', 'Overlapping distribution method', 'Algorithm', 'List of unsaturated fatty acids']
+2026-07-23 01:34:50,863 INFO 18aa367ae47744199ba63308b5c581bf [rag_presolve]: final=A(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:34:56] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:10<00:00, 10.33s/it]Batches: 100%|##########| 1/1 [00:10<00:00, 10.33s/it]
+2026-07-23 01:35:03,319 INFO 54bfc8311916428a8f2a43c17ca17c7a: rag_presolve retrieved 5 passage(s): ['Coalescer', 'Petroleum', 'Oil drop experiment', 'Blue whale', 'Oil drop experiment']
+[07/23/26 01:35:09] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:35:20,096 INFO 492ac21c1ff94ba49de684cfb6527930 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:35:20,846 INFO 01ac3e46a5f04c48b3ad3d21e7a8eacd: rag_presolve retrieved 5 passage(s): ['Particle filter', 'Synchronization (computer science)', 'Primitive recursive function', 'Symbolic execution', 'Supertoroid']
+2026-07-23 01:35:20,847 INFO 01ac3e46a5f04c48b3ad3d21e7a8eacd [rag_presolve]: final=D(wrong, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.64s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.64s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.08s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.08s/it]
+2026-07-23 01:35:36,088 INFO 54bfc8311916428a8f2a43c17ca17c7a [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.73s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.73s/it]
+2026-07-23 01:35:50,055 INFO 515b67c43f064c15bb0154d546f88277: rag_presolve retrieved 5 passage(s): ['Discrete logarithm', 'Discrete logarithm', 'Integer (computer science)', 'Discrete logarithm', 'Rounding']
+2026-07-23 01:35:51,800 INFO abf7231db16a4ccfa58e0973e98e91c1: rag_presolve retrieved 5 passage(s): ['Complexity function', 'Fractional cascading', 'Algorithm characterizations', 'Fractional cascading', 'Algorithm']
+2026-07-23 01:35:51,800 INFO abf7231db16a4ccfa58e0973e98e91c1 [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:36:04,200 INFO a9ab2cd572f04f88b629deb59e486adf: rag_presolve retrieved 5 passage(s): ['Bending', 'Hydrostatic stress', 'Strength of materials', 'Specific strength', 'Influence line']
+[07/23/26 01:36:04] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:12<00:00, 12.83s/it]Batches: 100%|##########| 1/1 [00:12<00:00, 12.83s/it]
+[07/23/26 01:36:11] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:36:28,043 INFO d7f9b5a785a94530a9e737656ec0dcaa: rag_presolve retrieved 5 passage(s): ['Quantum yield', 'Chemical equilibrium', 'Impedance control', 'Equilibrium chemistry', 'Solubility equilibrium']
+2026-07-23 01:36:30,784 INFO a9ab2cd572f04f88b629deb59e486adf [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:06<00:00,  6.47s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.47s/it]
+2026-07-23 01:36:40,940 INFO 515b67c43f064c15bb0154d546f88277 [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:36:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:02<00:00,  2.75s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.75s/it]
+2026-07-23 01:36:49,471 INFO e8e40ae579384b51b006d7d50d8d039d: rag_presolve retrieved 5 passage(s): ['Pullback (differential geometry)', 'Pullback (differential geometry)', 'Tensor', 'Schur–Weyl duality', 'Multivector']
+2026-07-23 01:36:49,472 INFO e8e40ae579384b51b006d7d50d8d039d [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.53s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.53s/it]
+2026-07-23 01:36:57,569 INFO 8aca8b27a1674720bcb8271a46213d95: rag_presolve retrieved 5 passage(s): ['Atomic packing factor', 'Sodium', 'Gladstone–Dale relation', 'Ionic radius', 'Sodium']
+2026-07-23 01:36:57,569 INFO 8aca8b27a1674720bcb8271a46213d95 [rag_presolve]: final=A(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:07<00:00,  7.56s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.56s/it]
+2026-07-23 01:37:20,244 INFO 9da468facb58464982465242468c9a13: rag_presolve retrieved 5 passage(s): ['Specific heat capacity', 'Specific heat capacity', 'Specific heat capacity', 'Heat capacity', 'Heat transfer physics']
+2026-07-23 01:37:21,913 INFO 9ae52f5b63d9459a833c6e10c0539a4d: rag_presolve retrieved 5 passage(s): ['Nuclear fusion', 'Nuclear fuel', 'Control rod', 'Quantum yield', 'Control rod']
+2026-07-23 01:37:21,913 INFO 9ae52f5b63d9459a833c6e10c0539a4d [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:37:24,055 INFO 05ac97570c2a40ab94f83a5cf3aa09df [rag_presolve]: final=B(wrong, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:13<00:00, 13.01s/it]Batches: 100%|##########| 1/1 [00:13<00:00, 13.01s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:37:39] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:05<00:00,  5.77s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.77s/it]
+2026-07-23 01:38:20,137 INFO d7f9b5a785a94530a9e737656ec0dcaa [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:38:25,315 INFO 933f999d89984b4ea9c59bffad3405ef: rag_presolve retrieved 5 passage(s): ['Split-brain', 'Atherosclerosis', 'Daptomycin', 'Atherosclerosis', 'Guy T. McBride']
+2026-07-23 01:38:25,315 INFO 933f999d89984b4ea9c59bffad3405ef [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.40s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.40s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:06<00:00,  6.65s/it]Batches: 100%|##########| 1/1 [00:06<00:00,  6.65s/it]
+2026-07-23 01:38:33,915 INFO c4f6b8482b184c0b98b6d72d00204932: rag_presolve retrieved 5 passage(s): ['OpenQASM', 'System of polynomial equations', 'Median graph', 'System of polynomial equations', 'Crystal structure of boron-rich metal borides']
+[07/23/26 01:38:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:38:48,392 INFO 6b347be4d8ba43e2b425fd504ad16f4c: rag_presolve retrieved 5 passage(s): ['Worm-like chain', 'Reptation', 'Wedge prism', 'Screw theory', 'Self-healing hydrogels']
+2026-07-23 01:38:48,393 INFO 6b347be4d8ba43e2b425fd504ad16f4c [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:38:49,782 INFO 5272de2f504946d1beff3dbb51bea3f3: rag_presolve retrieved 5 passage(s): ['Van der Waals equation', 'Alkane stereochemistry', 'Van der Waals equation', 'Heat of formation group additivity', 'Van der Waals equation']
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.10s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.10s/it]
+[07/23/26 01:39:02] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:39:12,004 INFO 080a910849bd4aae8dbdeb3d7a6e835b: rag_presolve retrieved 5 passage(s): ['Complexity function', 'Lagrangian coherent structure', 'Algorithm characterizations', 'Zeeman effect', 'Algorithm']
+2026-07-23 01:39:15,474 INFO c4f6b8482b184c0b98b6d72d00204932 [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:39:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:08<00:00,  8.29s/it]Batches: 100%|##########| 1/1 [00:08<00:00,  8.29s/it]
+2026-07-23 01:39:40,360 INFO 9da468facb58464982465242468c9a13 [rag_presolve]: final=A(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:39:41,118 INFO 5272de2f504946d1beff3dbb51bea3f3 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 01:39:44,314 INFO 776b536a60e241f2b75b94accc6dff2c: rag_presolve retrieved 5 passage(s): ['Voltmeter', 'Voltmeter', 'Thiele/Small parameters', 'Phantom power', 'Decibel']
+2026-07-23 01:39:44,314 INFO 776b536a60e241f2b75b94accc6dff2c [rag_presolve]: final=B(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.94s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.94s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.88s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.88s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:39:59,630 INFO 4f85b84235914d259dbdd8931be5d3a9: rag_presolve retrieved 5 passage(s): ['Superellipsoid', 'Inexact differential', 'Anonymous function', 'Symbolic integration', 'Maple (software)']
+2026-07-23 01:39:59,630 INFO 4f85b84235914d259dbdd8931be5d3a9 [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:10<00:00, 10.37s/it]Batches: 100%|##########| 1/1 [00:10<00:00, 10.37s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.05s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.05s/it]
+2026-07-23 01:40:22,463 ERROR 7a71c086988a45f6823dbb8748e89f66: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 767, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever, rag)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 725, in run_question_lever
+    solver_pairs, retrieved_titles = await solve_all_rag_presolve(client, item.question, item.choices, rag)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 661, in solve_all_rag_presolve
+    results = await asyncio.to_thread(retrieve_rag_evidence, rag, question)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 609, in retrieve_rag_evidence
+    return rag.index.search(question, query_vector, k=rag.k)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\rag\store.py", line 319, in search
+    rows = self.fetch_passages([pid for pid, _ in fused])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\rag\store.py", line 294, in fetch_passages
+    rows = self.conn.execute(
+           ^^^^^^^^^^^^^^^^^^
+sqlite3.InterfaceError: bad parameter or other API misuse
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:02<00:00,  2.36s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.36s/it]
+2026-07-23 01:40:29,743 INFO b06afc3997974662986e009c41226c9c: rag_presolve retrieved 5 passage(s): ['Meiosis', 'Somatic cell', 'Immature ovum', 'Ploidy', 'Ploidy']
+2026-07-23 01:40:29,743 INFO b06afc3997974662986e009c41226c9c [rag_presolve]: final=C(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:40:29,932 INFO f1c5fbceb2124a8bb11963f76c8771b3: rag_presolve retrieved 5 passage(s): ['Nusselt number', 'Supersonic flow over a flat plate', 'Blasius boundary layer', 'Blasius boundary layer', 'Reynolds number']
+2026-07-23 01:40:34,843 INFO a462a6fe458b4b6e8b609cf0ef896b52: rag_presolve retrieved 0 passage(s): []
+2026-07-23 01:40:34,843 INFO a462a6fe458b4b6e8b609cf0ef896b52 [rag_presolve]: final=D(wrong, escalated=False) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:07<00:00,  7.75s/it]Batches: 100%|##########| 1/1 [00:07<00:00,  7.75s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s][07/23/26 01:40:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.23s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.23s/it]
+2026-07-23 01:40:55,000 INFO e286dac07362459cb41b0c9adca02747: rag_presolve retrieved 5 passage(s): ['GF method', 'Characteristic polynomial', 'Eigenvector slew', 'Polynomial greatest common divisor', 'Eckart conditions']
+2026-07-23 01:40:55,001 INFO e286dac07362459cb41b0c9adca02747 [rag_presolve]: final=A(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:40:59,650 INFO 080a910849bd4aae8dbdeb3d7a6e835b [rag_presolve]: final=C(wrong, escalated=True) cost=$0.00000
+2026-07-23 01:41:00,386 INFO 3f48e266da744ae6b9e99e762b67954f: rag_presolve retrieved 5 passage(s): ['Acquired characteristic', 'Lagrange multiplier', 'Fasting', 'Bayesian experimental design', 'Controllability']
+Batches: 100%|##########| 1/1 [00:08<00:00,  8.32s/it]Batches: 100%|##########| 1/1 [00:08<00:00,  8.32s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:02<00:00,  2.42s/it]Batches: 100%|##########| 1/1 [00:02<00:00,  2.42s/it]
+[07/23/26 01:41:09] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:41:14,795 INFO a9f34192579d4f448b378d733eb8d3bf: rag_presolve retrieved 5 passage(s): ['Lyapunov–Malkin theorem', 'Rate-determining step', '2-Pyridone (data page)', 'Rate equation', 'Pullback (differential geometry)']
+2026-07-23 01:41:14,796 INFO a9f34192579d4f448b378d733eb8d3bf [rag_presolve]: final=A(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.45s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.45s/it]
+2026-07-23 01:41:20,966 INFO 0e4c4ac2694d4b88b43bf6bbd6f4c356: rag_presolve retrieved 5 passage(s): ['Analog signal processing', 'Chirp spectrum', 'Wavelet transform', 'Analog signal processing', 'Time–frequency analysis']
+[07/23/26 01:41:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:41:35,104 INFO 2811febd3e9a4348a352c0c2b33ee464: rag_presolve retrieved 5 passage(s): ['Photoelectric effect', 'Photoelectric effect', 'Photoelectrochemical process', "Kramers' law", 'Photoelectric effect']
+2026-07-23 01:41:35,104 INFO 2811febd3e9a4348a352c0c2b33ee464 [rag_presolve]: final=B(wrong, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:41:36,068 INFO f1c5fbceb2124a8bb11963f76c8771b3 [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.45s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.45s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.16s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.16s/it]
+2026-07-23 01:42:03,826 INFO 15e29ed7c9d1459484348074abe10661: rag_presolve retrieved 5 passage(s): ['Crystal optics', 'Smith chart', 'Euclidean plane isometry', 'Transformation matrix', 'Gradient-index optics']
+2026-07-23 01:42:03,904 INFO 8c293442d9444277866f493968187325: rag_presolve retrieved 5 passage(s): ['Cyclotron resonance', 'Effective mass (solid-state physics)', 'Electron cyclotron resonance', 'OpenQASM', 'Larmor formula']
+2026-07-23 01:42:05,995 INFO 3f48e266da744ae6b9e99e762b67954f [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.24s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.24s/it]
+[07/23/26 01:42:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:42:19,447 INFO 9b67dac06fc448afa19a33728a469cec: rag_presolve retrieved 5 passage(s): ['Complex plane', 'Maple (software)', 'Anonymous function', 'Symbolic integration', 'Gradient descent']
+2026-07-23 01:42:19,447 INFO 9b67dac06fc448afa19a33728a469cec [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:05<00:00,  5.12s/it]Batches: 100%|##########| 1/1 [00:05<00:00,  5.12s/it]
+[07/23/26 01:42:26] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:42:38,815 INFO 0e4c4ac2694d4b88b43bf6bbd6f4c356 [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:42:43,483 INFO 1b003811eaf443e492e6717fa934b15b: rag_presolve retrieved 5 passage(s): ["Abramov's algorithm", 'Seventh Edition Unix terminal interface', 'Markov algorithm', 'Similarities between Wiener and LMS', 'Algorithm']
+Batches: 100%|##########| 1/1 [00:04<00:00,  4.83s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.83s/it]
+[07/23/26 01:42:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:43:01,583 INFO 620f491d9a9542fca57a62d2799d97a6: rag_presolve retrieved 5 passage(s): ['Tree (data structure)', 'Tree (data structure)', 'Similarities between Wiener and LMS', 'Range tree', 'Network analysis (electrical circuits)']
+[07/23/26 01:43:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:43:34,819 INFO 8c293442d9444277866f493968187325 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-23 01:43:36,274 INFO 15e29ed7c9d1459484348074abe10661 [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+Batches: 100%|##########| 1/1 [00:03<00:00,  3.49s/it]Batches: 100%|##########| 1/1 [00:03<00:00,  3.49s/it]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:09<00:00,  9.81s/it]Batches: 100%|##########| 1/1 [00:09<00:00,  9.81s/it]
+2026-07-23 01:43:52,203 INFO ec301d7b596f4f45afef08dc4448910c: rag_presolve retrieved 5 passage(s): ['Stumpff function', 'Boltzmann equation', 'Symbolic integration', 'Wavelet transform', 'Cnoidal wave']
+[07/23/26 01:44:00] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 01:44:17,894 INFO 2761d3d5298f4a4a8b52db20fc0343cb: rag_presolve retrieved 5 passage(s): ['Quantum yield', 'Rate equation', 'Impedance control', 'Conversion (chemistry)', 'Solubility equilibrium']
+2026-07-23 01:44:17,895 INFO 2761d3d5298f4a4a8b52db20fc0343cb [rag_presolve]: final=D(correct, escalated=False) cost=$0.00000
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|##########| 1/1 [00:04<00:00,  4.22s/it]Batches: 100%|##########| 1/1 [00:04<00:00,  4.23s/it]
+2026-07-23 01:44:29,981 INFO ec301d7b596f4f45afef08dc4448910c [rag_presolve]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 01:44:34,710 INFO 1b003811eaf443e492e6717fa934b15b [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 01:44:35,948 INFO f9d8f390f4c348838f3d42e5c15fbb24: rag_presolve retrieved 5 passage(s): ['Transition state theory', 'Transition state theory', 'Conformational isomerism', 'Activation energy', 'Enthalpy of neutralization']
+2026-07-23 01:44:35,948 INFO f9d8f390f4c348838f3d42e5c15fbb24 [rag_presolve]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 01:47:18,667 INFO 620f491d9a9542fca57a62d2799d97a6 [rag_presolve]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 01:47:18,929 WARNING 3/90 questions dropped due to unrecoverable errors
+2026-07-23 01:47:18,949 INFO Wrote 87 results to benchmark\results\lever_rag_presolve_supergpqa_seed7.jsonl

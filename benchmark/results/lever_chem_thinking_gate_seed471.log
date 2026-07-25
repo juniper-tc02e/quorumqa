@@ -1,0 +1,494 @@
+2026-07-22 13:13:28,723 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+2026-07-22 13:13:29,078 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 13:13:29,885 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Idavidrein/gpqa/Idavidrein/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 13:13:30,228 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/revision/633f5ee89ab8ad4522a9f850766b73f62147ffdd "HTTP/1.1 200 OK"
+2026-07-22 13:13:30,478 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 13:13:30,782 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Idavidrein/gpqa "HTTP/1.1 200 OK"
+2026-07-22 13:13:31,071 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/tree/633f5ee89ab8ad4522a9f850766b73f62147ffdd?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 13:13:31,378 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 13:13:31,619 INFO Loaded 90 gpqa questions (seed=471) for lever=chem_thinking_gate
+2026-07-22 13:13:48,892 INFO recypVp2NmPlBKVTp [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:13:57,368 INFO recG1ljJQcVy6CbSl [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:14:04] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:14:17] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:14:29,530 INFO recAAJoHMW45Lv5je [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:14:40,874 INFO recIj8lR4tuDgrHou [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+[07/22/26 13:14:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:14:54,008 INFO reciuppdQde4FGX1z [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:14:59,308 INFO recBtVK8rBVtIlXDq [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:15:03,243 INFO recD8oX1KevFbl7bL [chem_thinking_gate]: final=B(correct, escalated=True, gate-flagged: Mutant 2 has TAA at codon 3, but Mutant 4 is a frameshift likely causing earlier truncation or nonsense-mediated decay, making it equally or more effective. The panel's reasoning that Mutant 2 is 'most probably' correct over others without comparing truncation timing is weak.) cost=$0.00000
+2026-07-22 13:15:16,888 INFO recBXlqrZUCR897It [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:15:20,760 INFO recnjViFrqlZNL3fY [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+[07/22/26 13:15:27] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:15:55] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:15:57,145 INFO recE2ihVfqEK4R9d0 [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:16:37,667 INFO rec9ubQihAh6g9bft [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:17:11,795 INFO recL9MFV5zmdlle5T [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 13:17:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:18:10,517 INFO recPIzpnuYpB4yvmp [chem_thinking_gate]: final=D(correct, escalated=True, gate-flagged: Solver 1 incorrectly identifies the P=0 eigenvector as (0,0,1). The correct eigenvector is (1,0,-1), making the probability calculation coincidentally correct but reasoning flawed.) cost=$0.00000
+2026-07-22 13:18:24,961 INFO recJZ3QEfRKjYw9a7 [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:18:26,724 INFO recIDiDKKrN61Auyr [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 13:18:51] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:19:56,116 INFO recGFNRVl1qBZGwyU [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:20:21,737 ERROR reckl6PkaEMWM50yZ: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 446, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 399, in run_question_lever
+    solver_pairs = await solve_all_chem_thinking_gate(client, item.question, item.choices, item.subject)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 215, in solve_all_chem_thinking_gate
+    return await solve_all_chem_flagship(client, question, choices, subject)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 193, in solve_all_chem_flagship
+    return list(await asyncio.gather(*tasks))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 115, in _solve_one_thinking
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver_thinking", thinking=True, temperature=temperature, retries=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 13:20:31,117 INFO recNAiPUKOulQbKVP [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:20:31,117 INFO reca44yABeO2fx7UB [chem_thinking_gate]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-22 13:21:00,502 INFO rec32C1ZEapBnCC0E [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 13:21:02] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:21:26,180 INFO recakFKZioXUuldcd [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:21:29,495 INFO recpJmTOXx6T48nDJ [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:21:41,328 INFO recXsuOHRBLcyenF2 [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:21:54] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:22:14,113 INFO recyl3usDqb7ruXJx [chem_thinking_gate]: final=D(correct, escalated=True, gate-flagged: Anti-dihydroxylation of (E)-alkene yields meso; (Z) yields racemate. Panel reversed these assignments.) cost=$0.00000
+2026-07-22 13:22:22,756 INFO rec8nshandHARTkrg [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:22:29,241 INFO recqGD3fxPCI59vPQ [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 13:23:14,104 INFO recb4cGsC6BJUCU3V [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:24:05,776 INFO recs3PLPUEMiqg4P8 [chem_thinking_gate]: final=D(correct, escalated=True, gate-flagged: Hydride shift yields aldehyde; methyl shift yields ketone. Ketones are more stable than aldehydes.) cost=$0.00000
+2026-07-22 13:24:27,175 INFO recf6ayQmL1SxKbvW [chem_thinking_gate]: final=A(wrong, escalated=False) cost=$0.00000
+[07/22/26 13:25:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:25:20] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:26:03,556 INFO recYA3LPsCvF1fTMI [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:27:02,428 INFO recihePFulRgNKsIn [chem_thinking_gate]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-22 13:27:03,285 INFO recl1UtgTVKishAq4 [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:27:09,218 INFO recclFbsjbaiVVnnV [chem_thinking_gate]: final=A(correct, escalated=True, gate-flagged: Step iii performs Friedel-Crafts acylation on aniline, which fails due to catalyst complexation.) cost=$0.00000
+2026-07-22 13:27:16,344 INFO recgM7o1tcc7tP778 [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+[07/22/26 13:27:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:28:02] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:28:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:28:18,772 INFO recIMcQfaQNa6vzsT [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:28:28,878 INFO rechKl68Uc6H7vU0N [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:28:31,307 INFO recqLRu4BcJvlSANc [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:28:43,487 INFO recDDxpS9s8cwkqfq [chem_thinking_gate]: final=B(correct, escalated=True, gate-flagged: Question states dye emits 2.3393 eV (green). Absorbed color is complementary to emitted, which is red. Answer B is correct.) cost=$0.00000
+2026-07-22 13:29:44,204 INFO recQiWOxhkXRz9NVE [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:29:57,622 INFO recnawZPumSCLMVgp [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:29:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:30:10,323 INFO recSBcGLPatKb3Ygu [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 13:30:17] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:30:26,329 INFO rec4JrWy7Il8ho5vk [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:30:48,548 INFO rec9W28HgpEUeUN8k [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:31:07,453 INFO rec06pnAkLOr2t2mp [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:31:22,002 INFO recafnH3RRnMBXEb1 [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:31:41,255 INFO recooG6bivTUJpDBz [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 13:31:59,033 INFO recjgMJaMxz4ESDF2 [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 13:32:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:32:26,724 INFO recVvpD8miVjmmyfe [chem_thinking_gate]: final=D(wrong, escalated=True) cost=$0.00000
+[07/22/26 13:32:30] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:32:46,783 INFO reczjcMtrB1YGS2fO [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:32:49,841 INFO receYQxnUBvxPcvbQ [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:33:01,313 INFO recS48OsU6kVadBPW [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:33:41,385 INFO recb2M22zaD3tL6Qc [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 13:33:52,564 INFO recKcjTwONILZqHAX [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:34:31,793 INFO reck1zKeCssmN82Ga [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:34:49,391 INFO recK9F5aqdaybl8bb [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:34:59,400 INFO rec7C06XOB2h298ue [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:35:17,170 INFO recyrk6XBVwugG5u8 [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+[07/22/26 13:35:48] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:36:12,847 INFO recNu3MXkvWUzHZr9 [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:36:35,095 INFO reczQ4I0VpENdMtIj [chem_thinking_gate]: final=C(wrong, escalated=False) cost=$0.00000
+[07/22/26 13:36:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:37:08,204 INFO receo3UUzRvWCqyfA [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:37:52,146 INFO recQ8oxSY2aCwFRS8 [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:38:15,001 INFO reco8WSc71p8zAv4q [chem_thinking_gate]: final=A(correct, escalated=True, gate-flagged: Reasoning contradicts itself: first claims exo is major, then endo is major. Endo is typically major for maleic anhydride.) cost=$0.00000
+2026-07-22 13:38:33,211 INFO reckEnrOPFT9Ru7tW [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:38:49,796 INFO recLSzwBUS3olCjhl [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:39:05,260 INFO recOkA2zsy4GSMD9R [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:39:24,480 INFO reczkBiPPNrNN49Hp [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:39:53,475 INFO recHVUd2DkoKfedJZ [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:40:00,354 ERROR rec5rjeLsEq5Fg7Oj: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 446, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 399, in run_question_lever
+    solver_pairs = await solve_all_chem_thinking_gate(client, item.question, item.choices, item.subject)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 215, in solve_all_chem_thinking_gate
+    return await solve_all_chem_flagship(client, question, choices, subject)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 193, in solve_all_chem_flagship
+    return list(await asyncio.gather(*tasks))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 115, in _solve_one_thinking
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver_thinking", thinking=True, temperature=temperature, retries=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 13:40:44] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:41:16,890 INFO reccOKzFNmyqeJ6ry [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:41:23,916 INFO recCJJOeBGERaHYax [chem_thinking_gate]: final=C(correct, escalated=True, gate-flagged: LDA methylation of 2-benzyl-3-phenylcyclohexanone occurs at C2, not C6.) cost=$0.00000
+2026-07-22 13:41:38,432 INFO recReg13iV2HwJTaA [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:41:42,488 ERROR recOvqPKUtyy9ISA1: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 446, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 439, in run_question_lever
+    result = await _tribunal(client, tool_session, item, solver_answers, plurality_letter, calls, start)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 376, in _tribunal
+    verdict, judge_usage = await asyncio.to_thread(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\judge.py", line 46, in adjudicate
+    result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="judge")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 13:41:54,894 INFO rec260hNUCEj109Dj [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:41:56,642 INFO recMicVBcqy1xM1jq [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:42:27,711 INFO recXvQ6gWAmyakrpD [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:42:27] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:43:03,148 INFO recGee5m84dg5FZkc [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:43:09,327 INFO recgXxEgllSGEpELP [chem_thinking_gate]: final=D(correct, escalated=True, gate-flagged: Star1 at Dec -75 is not visible from Paranal (latitude ~-24), invalidating the panel's exclusion logic.) cost=$0.00000
+[07/22/26 13:43:31] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:43:54] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:44:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:45:22,786 INFO recRhwQwHijW0gCLo [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+[07/22/26 13:46:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:47:14,106 INFO rect4iLrSfUwkNTno [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:47:28,650 INFO recEmTBhx2hgw6tPQ [chem_thinking_gate]: final=D(wrong, escalated=True) cost=$0.00000
+2026-07-22 13:47:31,202 INFO recuyeuT5rQ6qDt8F [chem_thinking_gate]: final=B(wrong, escalated=True, gate-flagged: A1 is IF5, not IF7. IF5 decomposes to IF3 and F2. A4 is IF5 (MW 222), which reacts with I2 to form I2[IF4]2.) cost=$0.00000
+2026-07-22 13:47:51,794 INFO recTs7qzfJs6kfLUK [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 13:47:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:47:59,585 INFO recZt4x514UQNnsgy [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:48:11,160 INFO recrHBEJJoDTV05JR [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:48:18,120 INFO recywRj5a8EEjj2Ib [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:48:18,120 INFO rec4UqStf9WUVif1f [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:48:44,646 INFO recPzW1WqRnPs57D6 [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:49:00,932 INFO recVE8cUNHpHZIAvL [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 13:49:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:49:07,372 INFO recnTTKdBzfuoZ7w7 [chem_thinking_gate]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-22 13:49:20,625 INFO recKm6LNWykGapmCr [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:49:20,870 WARNING 3/90 questions dropped due to unrecoverable errors
+2026-07-22 13:49:20,888 INFO Wrote 87 results to benchmark\results\lever_chem_thinking_gate_gpqa_seed471.jsonl

@@ -1,0 +1,70 @@
+2026-07-21 13:04:45,281 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-21 13:04:45,281 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/LEXam-Benchmark/LEXam/31e57ae395f92ed7284a4c28d278c55da892b898/README.md "HTTP/1.1 200 OK"
+2026-07-21 13:04:45,648 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/LEXam.py "HTTP/1.1 404 Not Found"
+2026-07-21 13:04:46,449 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/LEXam-Benchmark/LEXam/LEXam-Benchmark/LEXam.py "HTTP/1.1 404 Not Found"
+2026-07-21 13:04:46,697 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/revision/31e57ae395f92ed7284a4c28d278c55da892b898 "HTTP/1.1 200 OK"
+2026-07-21 13:04:46,949 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-21 13:04:47,401 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=LEXam-Benchmark/LEXam "HTTP/1.1 200 OK"
+2026-07-21 13:04:47,696 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898/mcq_16_choices?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-21 13:04:47,965 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-21 13:04:48,230 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-21 13:04:48,497 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898/mcq_4_choices?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-21 13:04:48,524 INFO Loaded 50 LEXam items (config=mcq_4_choices, language=en, seed=42)
+2026-07-21 13:04:48,524 INFO Loaded 50 LEXam questions
+2026-07-21 13:05:04,147 INFO 09a2eebe-6c96-4f10-bc76-689eec854b43 [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:05:19,226 INFO 53bbecbc-ef12-4b60-9645-04015eeaa4ae [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:05:21,729 INFO b9785176-6859-42c9-829d-0312609916ae [Private]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 13:05:34,214 INFO 736a05d4-da8a-4177-8bd9-03d4257ff68f [Interdisciplinary]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 13:05:52,013 INFO 866f89e9-c8fd-4bef-bf85-e92a7b992cf7 [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:06:19,645 INFO 38783200-42e6-465a-98b8-410a27eb4f56 [Interdisciplinary]: baseline=B(wrong) engine=B(wrong, escalated=True)
+2026-07-21 13:06:19,780 INFO 26263099-799d-4319-baac-3acf978c7c0a [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-21 13:06:28,959 INFO 8afbc6d1-fa2b-4e02-a0f3-af802c5320c3 [Private]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 13:06:41,055 INFO f1bdfe14-a0bc-496c-b9ea-49ed1d6d03df [Interdisciplinary]: baseline=B(wrong) engine=B(wrong, escalated=True)
+Processing request of type CallToolRequest
+Processing request of type ListToolsRequest
+Processing request of type CallToolRequest
+2026-07-21 13:06:57,230 INFO e7273a6a-d416-452a-9b8c-6998c58fced2 [Interdisciplinary]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 13:07:13,980 INFO d60d8887-e23a-4219-be7a-f1f29c281c53 [Interdisciplinary]: baseline=A(correct) engine=D(wrong, escalated=False)
+2026-07-21 13:07:24,863 INFO 102d2e11-f391-44a7-b978-a3f83d882f74 [Interdisciplinary]: baseline=B(wrong) engine=D(wrong, escalated=False)
+2026-07-21 13:07:30,080 INFO 8f4ae013-cbd7-4563-9d97-26686b88ea14 [Interdisciplinary]: baseline=B(correct) engine=C(wrong, escalated=True)
+2026-07-21 13:07:48,261 INFO 0ad0edf4-dc5f-40a3-9ec3-ae70daaa271e [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:07:52,379 INFO 842abce3-39e3-43a5-8730-a4318fd1c3f1 [Interdisciplinary]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 13:07:58,296 INFO 2cdd4813-3450-4626-8aca-773dfea1f607 [Interdisciplinary]: baseline=B(correct) engine=C(wrong, escalated=False)
+2026-07-21 13:08:04,913 INFO ee9c501e-8d41-49d3-85bc-a4a1e8f6a57c [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:08:18,130 INFO 2f078222-29e9-47ce-b441-66921b51b3e7 [Interdisciplinary]: baseline=A(wrong) engine=A(wrong, escalated=False)
+2026-07-21 13:08:21,543 INFO 6500b177-e1e0-47f7-b550-8224fba100cf [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:08:33,228 INFO 1ac7dcee-1599-464e-949e-8464745c0177 [Interdisciplinary]: baseline=D(correct) engine=C(wrong, escalated=False)
+2026-07-21 13:08:37,013 INFO b218966a-d22d-412b-b3d1-cffa3755872d [Interdisciplinary]: baseline=B(correct) engine=B(correct, escalated=False)
+Processing request of type CallToolRequest
+Processing request of type CallToolRequest
+2026-07-21 13:09:07,463 INFO a32c143b-f4e0-4c32-9f06-cf4cbf9579b6 [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:09:30,596 INFO 5515aed1-568b-4a32-ac6d-8a41c70f878e [Interdisciplinary]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 13:09:31,945 INFO b9948b7c-c704-456f-bd02-c1bdf8cc17ba [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-21 13:09:42,079 INFO 7d1ed894-dea7-4d33-88b9-efccb20333a4 [Interdisciplinary]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-21 13:09:50,140 INFO 99c5edda-c827-4430-8f45-5d0cb7412e4c [Private]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 13:09:54,822 INFO 7d9a3bb7-c8cf-4a4f-a502-b0c8ea44eef6 [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:10:03,112 INFO e2d75efc-b65e-40d1-9fa7-e47d05b2653d [Private]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:10:10,918 INFO ca114601-0baa-4ada-8b10-26d0ece00f7e [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:10:17,830 INFO a58581c7-2ffe-412b-819c-9938459733b1 [Interdisciplinary]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-21 13:10:47,394 INFO e4f77fd4-cd04-4b47-821c-9c969dfc1f80 [Interdisciplinary]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 13:10:49,550 INFO 8449146d-90ee-4ee9-abe4-94e1beaa0ac2 [Interdisciplinary]: baseline=A(correct) engine=C(wrong, escalated=False)
+2026-07-21 13:10:57,047 INFO e1440aa0-1770-4750-8c8e-69cb5dae0df7 [Interdisciplinary]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-21 13:11:10,930 INFO 045fd390-346e-4d5a-a82c-5c620a53d207 [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:11:16,230 INFO 430dc3d6-009b-4da6-8eba-a01f1c58589c [Interdisciplinary]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:11:29,530 INFO e7ce2112-cb65-469b-a6ae-fe9b49ebc8f9 [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:11:32,730 INFO 568814d7-2e54-41ab-ac2c-c14f7e17f054 [Public]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:11:50,814 INFO c72132c6-8bcb-4d4c-9d5b-2acbd0cd42e8 [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:11:53,730 INFO 1aa2d158-1f58-4671-ba73-78b7f64d04d3 [Interdisciplinary]: baseline=D(wrong) engine=B(wrong, escalated=False)
+2026-07-21 13:11:54,713 INFO bffa4b3e-2917-424e-a915-9b277f58f54e [Interdisciplinary]: baseline=D(correct) engine=A(wrong, escalated=False)
+2026-07-21 13:12:20,573 INFO b766bab3-7116-42ee-853e-2eb3f01c0c15 [Interdisciplinary]: baseline=C(correct) engine=B(wrong, escalated=False)
+2026-07-21 13:12:21,647 INFO 79b8e5fe-3c1c-434e-8ab4-3f7c6ea87e32 [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:12:23,013 INFO 4eadfed1-062d-441f-b86f-a3407bc282e7 [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:12:38,113 INFO 02d7f932-337e-4f51-b72b-a3054d726c48 [Private]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:12:38,725 INFO 53e67d91-df72-4136-b78c-4be1b900eaae [Interdisciplinary]: baseline=B(correct) engine=C(wrong, escalated=False)
+2026-07-21 13:12:56,830 INFO 70d58c55-71d9-400a-938a-d79bfa9856e0 [Private]: baseline=B(wrong) engine=B(wrong, escalated=False)
+2026-07-21 13:13:02,942 INFO 658ad4b8-1fb2-4ddf-be33-75064c459692 [Interdisciplinary]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-21 13:13:11,379 INFO 9abc219b-82f3-4c7c-91d7-653ae4960d02 [Private]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-21 13:13:35,229 INFO f14962d2-fa9c-436a-b283-daf4b770e9cf [Interdisciplinary]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-21 13:13:37,113 INFO 0e6fe784-81bc-454f-9d8c-f3c339fc5205 [Interdisciplinary]: baseline=D(wrong) engine=B(correct, escalated=True)
+2026-07-21 13:13:37,183 INFO Wrote 50 results to benchmark\results\lexam_pilot_seed42.jsonl
+2026-07-21 13:13:37,183 INFO SUMMARY n=50 baseline_accuracy=86.0% engine_accuracy=72.0% escalation_rate=18.0%

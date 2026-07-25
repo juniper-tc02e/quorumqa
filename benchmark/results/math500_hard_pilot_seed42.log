@@ -1,0 +1,127 @@
+2026-07-22 16:00:23,113 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-22 16:00:23,159 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/HuggingFaceH4/MATH-500/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/README.md "HTTP/1.1 200 OK"
+2026-07-22 16:00:23,476 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-22 16:00:24,241 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/HuggingFaceH4/MATH-500/HuggingFaceH4/MATH-500.py "HTTP/1.1 404 Not Found"
+2026-07-22 16:00:24,491 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/revision/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be "HTTP/1.1 200 OK"
+2026-07-22 16:00:24,741 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 16:00:25,206 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=HuggingFaceH4/MATH-500 "HTTP/1.1 200 OK"
+2026-07-22 16:00:25,461 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-22 16:00:25,747 INFO HTTP Request: GET https://huggingface.co/api/datasets/HuggingFaceH4/MATH-500/tree/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 16:00:26,092 INFO HTTP Request: HEAD https://huggingface.co/datasets/HuggingFaceH4/MATH-500/resolve/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 16:00:26,126 INFO Loaded 50 MATH-500 items (level=5, seed=42, numeric-eligible subset only -- 24 rows skipped for expression-shaped answers; NOT comparable to published MATH/MATH-500 open-answer accuracy)
+2026-07-22 16:00:26,126 INFO Loaded 50 MATH-500 questions
+2026-07-22 16:00:42,973 INFO test/number_theory/1128.json [Number Theory]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:00:54,143 INFO test/algebra/2517.json [Algebra]: baseline=C(correct) engine=B(wrong, escalated=False)
+2026-07-22 16:00:57,276 INFO test/number_theory/769.json [Number Theory]: baseline=A(correct) engine=A(correct, escalated=False)
+[07/22/26 16:01:00] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+[07/22/26 16:01:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:01:11,663 INFO test/prealgebra/1655.json [Prealgebra]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:01:18,143 INFO test/geometry/1140.json [Geometry]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:01:20,742 INFO test/counting_and_probability/894.json [Counting & Probability]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 16:01:25,631 INFO test/geometry/947.json [Geometry]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 16:01:37,899 INFO test/prealgebra/1640.json [Prealgebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:01:40,060 INFO test/precalculus/986.json [Precalculus]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:02:02,358 INFO test/number_theory/1055.json [Number Theory]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:02:11,741 INFO test/algebra/892.json [Algebra]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:02:29,111 ERROR test/geometry/965.json: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_math.py", line 35, in _run_one
+    engine_result = await run_question(client, tool_session, item)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\orchestrator.py", line 23, in run_question
+    solver_pairs = await solve_all(client, item.question, item.choices)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\solver.py", line 48, in solve_all
+    return list(await asyncio.gather(*tasks))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\solver.py", line 22, in _solve_one
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 183, in chat_json
+    raise ValueError(f"Model {model} failed to return parseable JSON after {retries + 1} attempts: {last_error}")
+ValueError: Model qwen3.6-flash failed to return parseable JSON after 3 attempts: Expecting value: line 1 column 2 (char 1)
+[07/22/26 16:02:39] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 16:02:43] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:02:55,910 INFO test/prealgebra/1646.json [Prealgebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:03:06,032 INFO test/counting_and_probability/525.json [Counting & Probability]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:03:19,639 INFO test/algebra/733.json [Algebra]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 16:03:43,874 INFO test/intermediate_algebra/1791.json [Intermediate Algebra]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:03:44,481 INFO test/algebra/297.json [Algebra]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 16:03:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:04:05,047 INFO test/prealgebra/1251.json [Prealgebra]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:04:15,517 INFO test/counting_and_probability/870.json [Counting & Probability]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 16:04:35,922 INFO test/intermediate_algebra/1806.json [Intermediate Algebra]: baseline=D(correct) engine=D(correct, escalated=False)
+[07/22/26 16:04:48] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:04:54,278 INFO test/intermediate_algebra/2152.json [Intermediate Algebra]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:05:06,569 INFO test/intermediate_algebra/1408.json [Intermediate Algebra]: baseline=D(correct) engine=D(correct, escalated=True)
+[07/22/26 16:05:07] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:05:10,399 INFO test/number_theory/1000.json [Number Theory]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:05:23,293 INFO test/algebra/975.json [Algebra]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:05:27,744 INFO test/intermediate_algebra/1462.json [Intermediate Algebra]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 16:05:53] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:06:09,954 INFO test/counting_and_probability/51.json [Counting & Probability]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 16:06:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:06:50,376 INFO test/algebra/2277.json [Algebra]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 16:07:03,604 INFO test/precalculus/1172.json [Precalculus]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:07:05,750 INFO test/counting_and_probability/1009.json [Counting & Probability]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:07:30,713 INFO test/intermediate_algebra/960.json [Intermediate Algebra]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:07:31,167 INFO test/geometry/561.json [Geometry]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:07:38,609 INFO test/intermediate_algebra/232.json [Intermediate Algebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:07:43,294 INFO test/algebra/2779.json [Algebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:07:47,342 INFO test/prealgebra/2066.json [Prealgebra]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:07:52,524 INFO test/algebra/1143.json [Algebra]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:07:55,046 INFO test/prealgebra/1961.json [Prealgebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:07:55,350 INFO test/intermediate_algebra/1197.json [Intermediate Algebra]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 16:08:17,658 INFO test/number_theory/13.json [Number Theory]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:08:30,407 INFO test/intermediate_algebra/955.json [Intermediate Algebra]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 16:08:37,678 INFO test/counting_and_probability/1003.json [Counting & Probability]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:08:48,992 INFO test/counting_and_probability/181.json [Counting & Probability]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:08:49,157 INFO test/precalculus/675.json [Precalculus]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 16:09:14,465 INFO test/intermediate_algebra/966.json [Intermediate Algebra]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 16:09:14,521 INFO test/precalculus/1202.json [Precalculus]: baseline=A(correct) engine=A(correct, escalated=False)
+[07/22/26 16:09:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:09:29,946 INFO test/counting_and_probability/188.json [Counting & Probability]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:09:34,178 INFO test/prealgebra/1128.json [Prealgebra]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 16:09:35,104 INFO test/algebra/686.json [Algebra]: baseline=A(correct) engine=B(wrong, escalated=False)
+[07/22/26 16:09:59] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 16:10:03,775 INFO test/number_theory/1002.json [Number Theory]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 16:10:17,297 INFO test/number_theory/820.json [Number Theory]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 16:10:20,761 INFO test/geometry/817.json [Geometry]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 16:10:20,843 WARNING 1/50 questions dropped due to unrecoverable errors
+2026-07-22 16:10:20,843 INFO Wrote 49 results to benchmark\results\math500_hard_pilot_seed42.jsonl
+2026-07-22 16:10:20,843 INFO SUMMARY n=49 baseline_accuracy=100.0% engine_accuracy=93.9% escalation_rate=24.5%

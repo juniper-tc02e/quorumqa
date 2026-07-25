@@ -1,0 +1,532 @@
+2026-07-22 14:31:54,843 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-22 14:31:54,853 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/m-a-p/SuperGPQA/4430d4458112c7d4497fdcf94d7cc223313d6acf/README.md "HTTP/1.1 200 OK"
+2026-07-22 14:31:55,107 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-22 14:31:55,860 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/m-a-p/SuperGPQA/m-a-p/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-22 14:31:56,106 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/revision/4430d4458112c7d4497fdcf94d7cc223313d6acf "HTTP/1.1 200 OK"
+2026-07-22 14:31:56,423 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 14:31:56,871 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=m-a-p/SuperGPQA "HTTP/1.1 200 OK"
+2026-07-22 14:31:57,136 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-22 14:31:57,408 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 14:31:58,047 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 14:31:58,209 INFO Loaded 90 SuperGPQA items (difficulty=hard, seed=42, trimmed to 4 choices)
+2026-07-22 14:31:58,216 INFO Loaded 90 SuperGPQA questions
+[07/22/26 14:32:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:32:54,429 INFO 5b3ba5d082c74528ab9c60a12e0e3614 [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 14:33:36] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:33:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:33:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:34:37,998 INFO 454028b0c0884f4192d16081e358d436 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 14:35:09,476 INFO 4e711f17db254dd4953606570f0cc7a7 [Science]: baseline=D(wrong) engine=D(wrong, escalated=True)
+2026-07-22 14:35:21,159 INFO 917d14354e104597ab763b7c98ec5098 [Engineering]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 14:35:44,130 INFO bf79c60db17b4207957d40a5ada06a76 [Science]: baseline=A(correct) engine=B(wrong, escalated=False)
+2026-07-22 14:35:46,815 INFO f3dbbb1c935242e287d05399a283167a [Science]: baseline=C(wrong) engine=C(wrong, escalated=False)
+2026-07-22 14:36:12,955 INFO e313bac23c0a44a09b34da5cda7a7a5a [Engineering]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 14:36:39] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:36:51,443 INFO 28b8e9105db04b8b9d3a7e2f6aedff5c [Science]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 14:37:00,838 ERROR 1d55d70bc081494da80f9c9735015376: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_supergpqa.py", line 32, in _run_one
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 14:37:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:38:02,055 INFO 21de236f15e846ecaac90b5464aa6751 [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 14:38:04] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:38:18,139 INFO ef085846d5e74e358456de0a96fc049b [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 14:38:32,095 INFO 10306739cc6f4b94afa3336c48376be7 [Science]: baseline=A(correct) engine=D(wrong, escalated=False)
+2026-07-22 14:38:55,913 INFO e78c81f946704e8ab0fb15182b6f8f68 [Science]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 14:39:07,104 INFO 3aa8040fa0174d9ebee38e9a1f196d26 [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 14:39:21,713 INFO f99d0c2438e347088abece7d58f4e3cc [Engineering]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 14:39:55,587 INFO 21c8296790dc44c3b47308fe139b1378 [Science]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 14:40:04,049 INFO fc86b86189fa4145bfc49c741a7d8387 [Engineering]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 14:40:09,151 INFO c0aff61a5b0243628fe8d3684305f4cb [Science]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 14:40:44,885 ERROR 4e8a3894e41f4ca291c7b9d40a6bbe41: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_supergpqa.py", line 32, in _run_one
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+[07/22/26 14:40:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:41:44,732 INFO 8920a6411ede4a54af86c8ec5be736bd [Science]: baseline=C(correct) engine=D(wrong, escalated=True)
+2026-07-22 14:42:21,329 INFO d3c2c6065bd540298bc50e5c2786cfd7 [Engineering]: baseline=C(wrong) engine=D(correct, escalated=True)
+2026-07-22 14:42:58,094 INFO cd59e82f9198404fad3b5e494c032544 [Science]: baseline=B(correct) engine=D(wrong, escalated=False)
+2026-07-22 14:43:09,726 INFO a7a3dc6d5b5b4d37a32c2839833a4d6c [Science]: baseline=A(wrong) engine=A(wrong, escalated=True)
+2026-07-22 14:43:12,337 INFO 2613e2e31a7f45d9bd02d6c09fdc898c [Engineering]: baseline=B(correct) engine=B(correct, escalated=False)
+[07/22/26 14:43:55] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:44:17,468 INFO 20fff2a5feb746d5a6614e360c9bec7d [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+[07/22/26 14:44:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:44:51,914 INFO 469ab0b1358b48019d3a8f218edbf379 [Engineering]: baseline=C(wrong) engine=C(wrong, escalated=True)
+[07/22/26 14:45:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:45:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:46:02,835 INFO 1e6267aed56a4fba91a50215560a698b [Science]: baseline=C(wrong) engine=C(wrong, escalated=False)
+2026-07-22 14:47:00,285 INFO 644c9b34ba504b098e1f27a5343df847 [Engineering]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 14:47:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:48:10,759 INFO f4e38f53765c4c249769703d0ba24b3d [Science]: baseline=C(wrong) engine=C(wrong, escalated=True)
+[07/22/26 14:49:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:49:31,455 INFO 301e624803b94d4dad6828fb2310bdca [Science]: baseline=C(wrong) engine=B(correct, escalated=True)
+2026-07-22 14:49:45,624 INFO 1948e331b8ba410b9717275eff8958ed [Engineering]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 14:49:45,645 INFO 562abaf94b0e4999a6a2b27104ef8297 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 14:49:57,085 INFO 396c4ac5d5784036865383281513d239 [Science]: baseline=C(wrong) engine=D(wrong, escalated=False)
+2026-07-22 14:50:00,050 INFO 54feae1e9cf54ae985fc5b07a79d864d [Science]: baseline=A(correct) engine=B(wrong, escalated=False)
+2026-07-22 14:50:27,952 INFO 8cb1a3d68036488689cc6279ff47fd5a [Literature and Arts]: baseline=C(wrong) engine=C(wrong, escalated=False)
+[07/22/26 14:50:56] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:51:11,167 INFO 468c654c940f438dafebc19b7ab77b1a [Science]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 14:51:36,168 INFO a782760c647f4ed8b56277449bbec5fa [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 14:51:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:52:13,987 INFO a90f5627afb840dcb32c78b91d72bb9d [Science]: baseline=A(correct) engine=A(correct, escalated=True)
+[07/22/26 14:52:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:53:05] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:53:18,942 INFO 624ccf3cf3e144ccbe8f18ec921d686a [Engineering]: baseline=D(correct) engine=C(wrong, escalated=False)
+2026-07-22 14:53:57,326 INFO 8c05de6e528f4219a5ca0f2c4d0ad747 [Engineering]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 14:53:57,337 INFO bba0149a0e4e4fb2b289442bc74883ee [Engineering]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 14:54:26,063 INFO 09f8f51f6b3b41d6b53b58f8232dfc20 [Science]: baseline=B(wrong) engine=C(correct, escalated=False)
+[07/22/26 14:54:34] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:54:45,899 ERROR 1b5146ef461741a1a68490564550fce3: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_supergpqa.py", line 32, in _run_one
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 14:55:16,712 INFO 9be741c434a348ef9eed758bb0b69347 [Engineering]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 14:55:22,837 INFO b0c962e65001442ea12ea33cf2ab3c25 [Engineering]: baseline=A(correct) engine=A(correct, escalated=True)
+[07/22/26 14:55:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:56:09,352 INFO 4da750a1226341988c648c97d601821e [Science]: baseline=C(correct) engine=A(wrong, escalated=False)
+2026-07-22 14:56:10,218 INFO 42432d79d0af4c2fa1612e6ca53f2882 [Engineering]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 14:56:37,650 INFO f94991ad92ec4a2793686b5fc3b6f5d1 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 14:56:44,950 INFO 8015afe9ebfa45388f4c8ec8d990e431 [Science]: baseline=A(correct) engine=A(correct, escalated=False)
+2026-07-22 14:57:01,850 INFO e015103613d84a6489a1867aa85f4f65 [Engineering]: baseline=D(correct) engine=D(correct, escalated=False)
+2026-07-22 14:57:13,301 INFO bb5212d584224509ab73a3304e906859 [Science]: baseline=A(correct) engine=A(correct, escalated=False)
+[07/22/26 14:58:00] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:58:07] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:58:08] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:58:09,016 INFO 20ef016bd2514deeb9fc7667952dfb58 [Engineering]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 14:58:43,382 INFO e4650932081741f68c95ce460a1cb60b [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 14:58:50,209 INFO 9149453edaf0461db9a37d0816015e3a [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 14:58:51,583 INFO f7a2f5fbb748428baff111afe4464ab5 [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 14:59:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 14:59:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 14:59:38,350 INFO 06eb007eee9f4e29a75bb5537d94bfba [Science]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 14:59:43,116 INFO 73a3ff299dc040ad8e5ac743c66a1050 [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 14:59:43,982 INFO ca2b68f8198e4c41befc4a3ceee1a9bc [Science]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 14:59:54,466 INFO 64a792c9306c4d659f4796d4abed795a [Engineering]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 15:00:03] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:00:16,399 INFO 438f43de355a46e982a21abda8d4f152 [Science]: baseline=C(wrong) engine=C(wrong, escalated=False)
+2026-07-22 15:00:18,869 INFO 983cda51b83847a8bf05440abd38e194 [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 15:00:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:00:45,755 INFO fb9042d1b91d4037b436629fccc2e322 [Science]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:01:07,032 INFO e8f3f3605af14100a15b8c0a8c2f89fa [Science]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 15:01:10,316 INFO 89c81fa5104e4d2580f05c3dc32fa11d [Engineering]: baseline=C(correct) engine=D(wrong, escalated=False)
+2026-07-22 15:01:33,084 INFO 446a334636724901bdafdaa3501bbb49 [Science]: baseline=B(correct) engine=B(correct, escalated=False)
+[07/22/26 15:01:55] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:02:07,115 INFO 23ad44902ff945798a7ff404a3bb98d3 [Science]: baseline=D(wrong) engine=D(wrong, escalated=False)
+[07/22/26 15:02:16] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:02:28,270 INFO 9706c4ed64d346bdb4326a3951d46dbf [Engineering]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:02:55,500 INFO a596b66d08484915a5c1996add9b104d [Engineering]: baseline=D(wrong) engine=D(wrong, escalated=True)
+2026-07-22 15:03:14,266 INFO 325534796b254b3499202862368c0f5c [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+[07/22/26 15:03:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:03:52,751 INFO 5cf02070572d4b8da047af4b587897e1 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 15:03:58,449 INFO d8f80bece1864043a27ed1179ff8fe9f [Science]: baseline=C(correct) engine=C(correct, escalated=True)
+[07/22/26 15:04:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:04:38,702 INFO 14e7a5802c464cfc9e28aafee9fdfd42 [Engineering]: baseline=A(correct) engine=D(wrong, escalated=True)
+[07/22/26 15:04:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:04:46,902 INFO 980ca009cc1f4003b4647f0a9bb0289c [Engineering]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:05:10,812 INFO b4824b77747748cf8486b9e948899ef8 [Economics]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 15:05:21,121 INFO 095ff35b087e416f9a2797a86611b4c2 [Science]: baseline=B(wrong) engine=B(wrong, escalated=False)
+2026-07-22 15:05:23,012 INFO c83eb03cf4be49dcb0b470fb5da66009 [Science]: baseline=B(correct) engine=B(correct, escalated=False)
+2026-07-22 15:05:42,014 INFO 02606f10da9b4a91a734948a2f8f8cab [Science]: baseline=C(correct) engine=C(correct, escalated=False)
+2026-07-22 15:05:57,177 INFO b278c269529d444e97014e86de71b135 [Science]: baseline=C(correct) engine=C(correct, escalated=False)
+[07/22/26 15:06:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:06:16,681 INFO fed1780eaf1f42a09ea63e89e1d18a41 [Science]: baseline=A(wrong) engine=B(wrong, escalated=False)
+2026-07-22 15:06:48,668 INFO e1b314d091334b5dbc93a0053e1313d5 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 15:07:02,021 INFO 30ca59713f1b4dc8a6f9e2be9261e168 [Science]: baseline=C(correct) engine=A(wrong, escalated=False)
+[07/22/26 15:07:09] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:07:47,884 ERROR 16b1ffdff66c4c48ac0b5d2209a5af64: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\run_supergpqa.py", line 33, in _run_one
+    engine_result = await run_question(client, tool_session, item)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\orchestrator.py", line 41, in run_question
+    skeptic_rebuttal, skeptic_usage = await asyncio.to_thread(
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\engine\skeptic.py", line 33, in rebut
+    result = client.chat_json(model=SKEPTIC_MODEL, system=SKEPTIC_SYSTEM, user=user, role="skeptic", thinking=False, retries=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 183, in chat_json
+    raise ValueError(f"Model {model} failed to return parseable JSON after {retries + 1} attempts: {last_error}")
+ValueError: Model qwen3.6-flash failed to return parseable JSON after 3 attempts: Unterminated string starting at: line 4 column 13 (char 98)
+[07/22/26 15:08:34] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:08:48,364 INFO 8de4e96a88f546c78038f13b06b2a747 [Engineering]: baseline=A(correct) engine=D(wrong, escalated=False)
+2026-07-22 15:08:52,000 INFO 2ee372f987304fe882e13238d4c6925e [Science]: baseline=A(wrong) engine=A(wrong, escalated=True)
+2026-07-22 15:08:54,731 INFO 1bd477364f034265bdfe60d0b00b219a [Science]: baseline=B(correct) engine=B(correct, escalated=True)
+2026-07-22 15:09:10,883 INFO f67699a734ca477eb153ad6d4f7f30e0 [Engineering]: baseline=A(correct) engine=A(correct, escalated=True)
+[07/22/26 15:09:27] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:09:37,957 INFO a909c0719f3e43b1a44afdbedc66cf68 [Philosophy]: baseline=C(correct) engine=C(correct, escalated=True)
+2026-07-22 15:09:55,983 INFO 3a1dc503ec92489c8b0dcbcf77e5b7ea [Science]: baseline=A(correct) engine=A(correct, escalated=True)
+2026-07-22 15:10:06,001 INFO 4817837b472e4795aa76b5e9b2dc1cc2 [Science]: baseline=A(wrong) engine=C(correct, escalated=False)
+[07/22/26 15:10:09] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 15:10:42,380 INFO 68a4b9f37a0a432886fe2c90c0c90466 [Science]: baseline=D(correct) engine=D(correct, escalated=True)
+2026-07-22 15:10:42,506 WARNING 4/90 questions dropped due to unrecoverable errors
+2026-07-22 15:10:42,512 INFO Wrote 86 results to benchmark\results\supergpqa_hard_pilot_seed42.jsonl
+2026-07-22 15:10:42,512 INFO SUMMARY n=86 baseline_accuracy=79.1% engine_accuracy=67.4% escalation_rate=51.2%

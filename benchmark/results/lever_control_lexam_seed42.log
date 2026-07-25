@@ -1,0 +1,130 @@
+2026-07-23 11:19:47,689 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-23 11:19:47,705 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/LEXam-Benchmark/LEXam/31e57ae395f92ed7284a4c28d278c55da892b898/README.md "HTTP/1.1 200 OK"
+2026-07-23 11:19:47,961 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/LEXam.py "HTTP/1.1 404 Not Found"
+2026-07-23 11:19:48,833 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/LEXam-Benchmark/LEXam/LEXam-Benchmark/LEXam.py "HTTP/1.1 404 Not Found"
+2026-07-23 11:19:49,158 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/revision/31e57ae395f92ed7284a4c28d278c55da892b898 "HTTP/1.1 200 OK"
+2026-07-23 11:19:49,398 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-23 11:19:49,677 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=LEXam-Benchmark/LEXam "HTTP/1.1 200 OK"
+2026-07-23 11:19:49,932 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898/mcq_16_choices?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-23 11:19:50,208 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-23 11:19:50,483 INFO HTTP Request: HEAD https://huggingface.co/datasets/LEXam-Benchmark/LEXam/resolve/31e57ae395f92ed7284a4c28d278c55da892b898/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-23 11:19:50,722 INFO HTTP Request: GET https://huggingface.co/api/datasets/LEXam-Benchmark/LEXam/tree/31e57ae395f92ed7284a4c28d278c55da892b898/mcq_4_choices?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-23 11:19:51,199 INFO Loaded 90 LEXam items (config=mcq_4_choices, language=en, seed=42)
+2026-07-23 11:19:51,199 INFO Loaded 90 lexam questions (seed=42) for lever=control
+2026-07-23 11:19:56,548 INFO 09a2eebe-6c96-4f10-bc76-689eec854b43 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:19:59,370 INFO b9785176-6859-42c9-829d-0312609916ae [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:20:00,888 INFO 736a05d4-da8a-4177-8bd9-03d4257ff68f [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:20:00,964 INFO 53bbecbc-ef12-4b60-9645-04015eeaa4ae [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:20:07,298 INFO 866f89e9-c8fd-4bef-bf85-e92a7b992cf7 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:20:10,023 INFO 8afbc6d1-fa2b-4e02-a0f3-af802c5320c3 [control]: final=B(correct, escalated=False) cost=$0.00000
+[07/23/26 11:20:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 11:20:35,836 INFO f1bdfe14-a0bc-496c-b9ea-49ed1d6d03df [control]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:20:36,317 INFO 26263099-799d-4319-baac-3acf978c7c0a [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:20:39,108 INFO e7273a6a-d416-452a-9b8c-6998c58fced2 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:20:42,263 INFO d60d8887-e23a-4219-be7a-f1f29c281c53 [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:20:52,932 INFO 842abce3-39e3-43a5-8730-a4318fd1c3f1 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:03,045 INFO 0ad0edf4-dc5f-40a3-9ec3-ae70daaa271e [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:07,150 INFO 38783200-42e6-465a-98b8-410a27eb4f56 [control]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:21:09,799 INFO 8f4ae013-cbd7-4563-9d97-26686b88ea14 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 11:21:09,837 INFO 2f078222-29e9-47ce-b441-66921b51b3e7 [control]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:21:13,798 INFO ee9c501e-8d41-49d3-85bc-a4a1e8f6a57c [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:14,622 INFO 2cdd4813-3450-4626-8aca-773dfea1f607 [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:21:16,818 INFO 6500b177-e1e0-47f7-b550-8224fba100cf [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:17,765 INFO b218966a-d22d-412b-b3d1-cffa3755872d [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:17,883 INFO 102d2e11-f391-44a7-b978-a3f83d882f74 [control]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:21:22,094 INFO 1ac7dcee-1599-464e-949e-8464745c0177 [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:21:30,590 INFO b9948b7c-c704-456f-bd02-c1bdf8cc17ba [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:21:33,341 INFO 5515aed1-568b-4a32-ac6d-8a41c70f878e [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:36,194 INFO 99c5edda-c827-4430-8f45-5d0cb7412e4c [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:41,107 INFO ca114601-0baa-4ada-8b10-26d0ece00f7e [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:43,881 INFO e2d75efc-b65e-40d1-9fa7-e47d05b2653d [control]: final=A(correct, escalated=False) cost=$0.00000
+[07/23/26 11:21:48] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 11:21:57,066 INFO e1440aa0-1770-4750-8c8e-69cb5dae0df7 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:21:59,781 INFO a58581c7-2ffe-412b-819c-9938459733b1 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:10,435 INFO 7d1ed894-dea7-4d33-88b9-efccb20333a4 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 11:22:18,248 INFO e4f77fd4-cd04-4b47-821c-9c969dfc1f80 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:20,978 INFO a32c143b-f4e0-4c32-9f06-cf4cbf9579b6 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:22:23,025 INFO 045fd390-346e-4d5a-a82c-5c620a53d207 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:25,566 INFO 7d9a3bb7-c8cf-4a4f-a502-b0c8ea44eef6 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:22:26,330 INFO 430dc3d6-009b-4da6-8eba-a01f1c58589c [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:29,633 INFO 1aa2d158-1f58-4671-ba73-78b7f64d04d3 [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:22:30,606 INFO 568814d7-2e54-41ab-ac2c-c14f7e17f054 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:33,361 INFO e7ce2112-cb65-469b-a6ae-fe9b49ebc8f9 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:39,847 INFO 4eadfed1-062d-441f-b86f-a3407bc282e7 [control]: final=C(correct, escalated=False) cost=$0.00000
+[07/23/26 11:22:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 11:22:41,629 INFO bffa4b3e-2917-424e-a915-9b277f58f54e [control]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:22:42,248 INFO b766bab3-7116-42ee-853e-2eb3f01c0c15 [control]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:22:52,914 INFO 79b8e5fe-3c1c-434e-8ab4-3f7c6ea87e32 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:55,747 INFO 02d7f932-337e-4f51-b72b-a3054d726c48 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:22:58,369 INFO 53e67d91-df72-4136-b78c-4be1b900eaae [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:23:11,181 INFO 8449146d-90ee-4ee9-abe4-94e1beaa0ac2 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:23:14,631 INFO 658ad4b8-1fb2-4ddf-be33-75064c459692 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:23:17,174 INFO 9abc219b-82f3-4c7c-91d7-653ae4960d02 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:23:20,891 INFO c72132c6-8bcb-4d4c-9d5b-2acbd0cd42e8 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:23:30,780 INFO 70d58c55-71d9-400a-938a-d79bfa9856e0 [control]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:23:35,510 INFO 5a6dba84-0a81-48a5-ab34-74049fde90df [control]: final=B(wrong, escalated=False) cost=$0.00000
+[07/23/26 11:23:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 11:23:44,418 INFO 0e6fe784-81bc-454f-9d8c-f3c339fc5205 [control]: final=D(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:24:03,260 INFO f14962d2-fa9c-436a-b283-daf4b770e9cf [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:24:06,315 INFO 087bd6d4-e66b-4e93-b4b0-eabd3000221a [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:07,665 INFO fec50c1a-a039-4132-a084-c36540d87d9b [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:24:09,039 INFO 976c31fb-9a6c-4048-b82c-1103ca9359ae [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:10,314 INFO c26390d0-3935-4006-a24e-6dfaf39cef80 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:10,447 INFO b21b13ee-ceae-4883-949a-ca9b4f6c20e1 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 11:24:13,441 INFO 85eef1a1-ec5c-4708-b96f-1c231cf70de6 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:16,091 INFO 9975be1d-0c23-4dba-850f-b6e4319c3b4d [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:27,746 INFO ba413a41-1ebb-4c03-94e7-17e0445511d5 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:37,047 INFO 4d0236c9-d3f2-4c60-8257-7225cddc1be6 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:24:38,047 INFO b4ead004-85e3-466a-b962-2aae328bcdb4 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:24:39,810 INFO de1c1c2a-bd46-4d81-b319-0fb93481797d [control]: final=A(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:24:49,456 INFO 8b9b4ae4-41fd-42d1-99e5-556b8e900d0d [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:24:51,897 INFO 5c5b901c-f9f1-4c80-965b-1f9e0b39d3f6 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:25:06,590 INFO 35e36767-b938-46f1-83db-ea9ad2a3ddc8 [control]: final=D(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:25:09,789 INFO 7fe55c7a-82d0-4cca-8b51-455539312689 [control]: final=C(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:25:12,569 INFO 3745876e-f1aa-45d4-95e7-515fd94bb067 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:25:16,628 INFO 1f971333-c7a9-4e08-b7d5-ba53f5d2ab96 [control]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-23 11:25:19,366 INFO c1b40f1a-b273-4ba1-9ec2-3f0e3665096b [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:25:25,385 INFO 72d45659-9250-4a9f-9818-3dc1132eb878 [control]: final=A(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:25:38,781 INFO f56522b5-2e36-4188-ad2e-66e5c429cd9a [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:26:03,191 INFO 00694d7e-6eb2-4f13-af22-1dc87d8194a5 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 11:26:08,687 INFO 321d143a-8bc8-4403-a4a7-f7507c124281 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:26:10,933 INFO 5dc69e0f-1ad8-4f6c-bc29-4c03eef68fbd [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:26:12,596 INFO 398441e4-df09-4b8d-8d12-7a7bbfc317ef [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:26:15,674 INFO 85f1cc1d-6881-4ce7-8706-1de83450e79a [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:26:15,788 INFO f8ec52b4-b134-48ae-9018-59c104a29796 [control]: final=B(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:26:18,887 INFO 1701d694-bddc-4f42-9bb1-b376a7317ce9 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:26:27,355 INFO fcdfb402-3cd2-4483-922d-4b1a82d5ff55 [control]: final=D(wrong, escalated=False) cost=$0.00000
+2026-07-23 11:26:28,066 INFO 1ed14de1-4b52-423e-98d0-bb9027a17240 [control]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-23 11:26:29,806 INFO 3c051a4b-8387-4378-9c2c-b97e8113918e [control]: final=D(correct, escalated=False) cost=$0.00000
+[07/23/26 11:26:41] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/23/26 11:26:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-23 11:26:57,557 INFO ed64e65a-1ddc-4b6e-ba99-59018a14383f [control]: final=C(wrong, escalated=True) cost=$0.00000
+2026-07-23 11:27:01,302 INFO 9526a1f2-7704-4cb5-9d5f-bac3a623a495 [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:27:06,379 INFO 3c169f97-dc08-40a7-b647-79705eca9fe0 [control]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-23 11:27:10,054 INFO 7f312059-c871-4aae-9f44-9eb4fc8625a1 [control]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-23 11:27:11,912 INFO 2fd8b61d-1c5b-4a09-818c-2780c6d50921 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:27:15,197 INFO 362a46c3-5a62-4fa8-815e-3212b38d5826 [control]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-23 11:27:15,484 INFO e49934e7-16cc-455f-b5e7-efef5a34c270 [control]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-23 11:27:17,098 INFO 7020eae4-7abf-48e7-9074-d064e34d30c3 [control]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-23 11:28:09,324 INFO 7f1e923a-ba29-47c6-b42f-497cf1ae387d [control]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-23 11:28:09,482 INFO Wrote 90 results to benchmark\results\lever_control_lexam_seed42.jsonl

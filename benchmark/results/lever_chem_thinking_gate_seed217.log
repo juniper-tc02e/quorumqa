@@ -1,0 +1,277 @@
+2026-07-22 12:41:44,604 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/main/README.md "HTTP/1.1 200 OK"
+2026-07-22 12:41:44,889 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 12:41:45,723 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Idavidrein/gpqa/Idavidrein/gpqa.py "HTTP/1.1 404 Not Found"
+2026-07-22 12:41:46,016 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/revision/633f5ee89ab8ad4522a9f850766b73f62147ffdd "HTTP/1.1 200 OK"
+2026-07-22 12:41:46,327 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 12:41:46,816 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Idavidrein/gpqa "HTTP/1.1 200 OK"
+2026-07-22 12:41:47,092 INFO HTTP Request: GET https://huggingface.co/api/datasets/Idavidrein/gpqa/tree/633f5ee89ab8ad4522a9f850766b73f62147ffdd?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 12:41:47,451 INFO HTTP Request: HEAD https://huggingface.co/datasets/Idavidrein/gpqa/resolve/633f5ee89ab8ad4522a9f850766b73f62147ffdd/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 12:41:47,739 INFO Loaded 90 gpqa questions (seed=217) for lever=chem_thinking_gate
+2026-07-22 12:42:00,464 INFO rec7C06XOB2h298ue [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:42:25,989 INFO recjgMJaMxz4ESDF2 [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:42:44,832 INFO rec2UlKqC6RFHdcro [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 12:43:30] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 12:43:31] INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:44:06,853 INFO recA1i5ZAh0Uzclxp [chem_thinking_gate]: final=A(correct, escalated=True, gate-flagged: Ether oxygen traps carbocation to form oxonium, not chromane. Chromane requires C-alkylation, which is kinetically disfavored over O-alkylation.) cost=$0.00000
+2026-07-22 12:44:10,817 INFO recL9MFV5zmdlle5T [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 12:44:23,156 INFO recIOlKBsOeEcgkA1 [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:44:25,003 INFO recgC4GJ8wUemlUQD [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:44:41,318 INFO recdya6FuYraBU5Rh [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:44:53,504 INFO rec47oNPXudlTIk4y [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 12:44:55,242 INFO rec5eA17Qr1ucNLUf [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:44:59,141 INFO recyl3usDqb7ruXJx [chem_thinking_gate]: final=D(correct, escalated=True, gate-flagged: Reasoning incorrectly assigns meso to E-alkene and racemic to Z-alkene for anti-dihydroxylation.) cost=$0.00000
+2026-07-22 12:45:05,354 INFO recIDiDKKrN61Auyr [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:46:01,946 INFO reczQ4I0VpENdMtIj [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 12:46:20,045 INFO recGFNRVl1qBZGwyU [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 12:46:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:47:12,440 INFO recRZjaElf8ft7xTq [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 12:47:34,805 INFO recPzW1WqRnPs57D6 [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:47:47,713 INFO reca44yABeO2fx7UB [chem_thinking_gate]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-22 12:47:56,434 INFO recINGR1z01Fh1Z3A [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:48:23,206 INFO recKm6LNWykGapmCr [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 12:48:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 12:48:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:49:04,569 INFO recBXlqrZUCR897It [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 12:49:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:50:06,326 ERROR recZ13cwgDQf9jRd9: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 446, in _run_one
+    result, note = await run_question_lever(client, tool_session, item, lever)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 399, in run_question_lever
+    solver_pairs = await solve_all_chem_thinking_gate(client, item.question, item.choices, item.subject)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 215, in solve_all_chem_thinking_gate
+    return await solve_all_chem_flagship(client, question, choices, subject)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 193, in solve_all_chem_flagship
+    return list(await asyncio.gather(*tasks))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 115, in _solve_one_thinking
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver_thinking", thinking=True, temperature=temperature, retries=2)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 12:50:15,373 INFO recZSGUkn56v9kEp1 [chem_thinking_gate]: final=C(correct, escalated=True, gate-flagged: Ozonolysis of the cyclopentene ring yields a dicarboxylic acid, not a keto-acid.) cost=$0.00000
+2026-07-22 12:50:36,364 INFO recb2M22zaD3tL6Qc [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 12:50:46,425 INFO rec6sE2CRtD4drtHg [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:50:53,124 INFO recgXxEgllSGEpELP [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:51:00,220 INFO recReg13iV2HwJTaA [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:51:04,211 INFO recw4rROcnHKNZhtK [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:51:19,324 INFO rec1oj2DveQWl9Rpw [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 12:51:21,519 INFO recNFJjE5PPTqVJGv [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 12:51:32] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:51:38,300 INFO rec527dNeEtWJrYNl [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:51:43,958 INFO recPL4ZPpVYxgMu57 [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 12:51:52,719 INFO recpJmTOXx6T48nDJ [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+[07/22/26 12:52:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:52:15,893 INFO recBGxVySx1pkrO1i [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 12:52:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:52:34,941 INFO recn3NhOhqAPLda16 [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:52:39,990 INFO recE2ihVfqEK4R9d0 [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 12:52:58,903 INFO rec4JrWy7Il8ho5vk [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:53:09,257 INFO recD8oX1KevFbl7bL [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 12:53:31,530 INFO rec0yTRmO1o1xCA6H [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 12:53:38,540 INFO recXvQ6gWAmyakrpD [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 12:53:40,367 INFO recXsuOHRBLcyenF2 [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:54:08,402 INFO recyPffUDqC2k7ZZO [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:54:23,364 INFO recIlghoOw5VbY4Zh [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:54:36,136 INFO rec260hNUCEj109Dj [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:54:59,224 INFO rec32C1ZEapBnCC0E [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 12:55:23,910 INFO recJJcOHhFeSaRpl4 [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+[07/22/26 12:55:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 12:55:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:56:20,172 INFO rec0wZvZgiz320KRs [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 12:56:50,878 INFO recYCMJWH7IpcdqwE [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 12:57:00,490 INFO recPIzpnuYpB4yvmp [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:57:24,027 INFO reck1zKeCssmN82Ga [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 12:57:25,929 INFO rec0VuKUjt1SZ7NYv [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:57:25,929 INFO recVvpD8miVjmmyfe [chem_thinking_gate]: final=C(wrong, escalated=True) cost=$0.00000
+2026-07-22 12:57:37,639 INFO recb80OwMgNnceA9t [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 12:58:00,070 INFO recVE8cUNHpHZIAvL [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 12:58:11] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 12:58:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 12:58:57,941 INFO recGFKDUd8qgz81Zl [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 12:59:15,775 INFO rechgQucGlrnt8KRV [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+[07/22/26 12:59:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:00:15,583 INFO recpki12iG9RUGrz9 [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:00:49,331 INFO receo3UUzRvWCqyfA [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:01:03,526 INFO reckl6PkaEMWM50yZ [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:01:31,464 INFO rec7qmSnbud4FHSqL [chem_thinking_gate]: final=B(wrong, escalated=False) cost=$0.00000
+2026-07-22 13:02:02,831 INFO reck4G4xxv3YnpbtQ [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:02:19,257 INFO recv7GsQg3f0fvB1f [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:02:30,937 INFO recINSFEYLCyyd08m [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:02:41,031 INFO recnGEpF1srQpaqWq [chem_thinking_gate]: final=D(correct, escalated=True) cost=$0.00000
+2026-07-22 13:02:54,170 INFO recV1nqYQvpII94oC [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:03:01,757 INFO recgI6tUQ7RLJRWGx [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+[07/22/26 13:03:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:03:12,964 INFO recAYkd96NNuNl1Ei [chem_thinking_gate]: final=B(wrong, escalated=False) cost=$0.00000
+[07/22/26 13:03:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:04:03,950 INFO recRTiyaRymerDJ4y [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:04:10,007 INFO recaXdGn3FAIkxLGM [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+[07/22/26 13:04:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:04:38,481 INFO recr3VHM4zYf6dMFY [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:04:47,986 INFO recuYEkVjdVUwA3c0 [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:04:53,416 INFO recNAiPUKOulQbKVP [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:05:02,414 INFO recPSTGXK3P39yNYT [chem_thinking_gate]: final=B(correct, escalated=False) cost=$0.00000
+2026-07-22 13:05:51,110 INFO rectlyG9pCAAuWhoB [chem_thinking_gate]: final=A(wrong, escalated=True) cost=$0.00000
+2026-07-22 13:06:15,674 INFO recs3PLPUEMiqg4P8 [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:06:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:06:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:07:00,301 INFO recDj2Y2BbtV02Wv5 [chem_thinking_gate]: final=A(wrong, escalated=True, gate-flagged: Nitration of toluene yields a mixture of ortho and para isomers, not exclusively p-nitrotoluene.) cost=$0.00000
+2026-07-22 13:07:38,347 INFO reczzzihL7btBH7RO [chem_thinking_gate]: final=C(wrong, escalated=True) cost=$0.00000
+[07/22/26 13:07:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:08:11,370 INFO recZt4x514UQNnsgy [chem_thinking_gate]: final=B(correct, escalated=True) cost=$0.00000
+2026-07-22 13:08:26,455 INFO reco8WSc71p8zAv4q [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:08:35,995 INFO recQiWOxhkXRz9NVE [chem_thinking_gate]: final=A(wrong, escalated=True) cost=$0.00000
+2026-07-22 13:08:50,645 INFO reciuppdQde4FGX1z [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:08:54,625 INFO rechtUKxC6G67H7Pr [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:08:56,445 INFO recFaL6j8UMhutXrc [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:08:58,307 INFO recixxJmdux0d8LZQ [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:09:06,214 INFO recWXwn9v4IG9ZrM6 [chem_thinking_gate]: final=D(correct, escalated=False) cost=$0.00000
+2026-07-22 13:09:12,612 INFO recBtVK8rBVtIlXDq [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+2026-07-22 13:09:14,488 INFO recywRj5a8EEjj2Ib [chem_thinking_gate]: final=C(correct, escalated=False) cost=$0.00000
+[07/22/26 13:09:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[07/22/26 13:09:56] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+2026-07-22 13:10:23,846 INFO recooG6bivTUJpDBz [chem_thinking_gate]: final=A(correct, escalated=True) cost=$0.00000
+2026-07-22 13:10:31,577 INFO recoy9ZLBsc7HIRBy [chem_thinking_gate]: final=C(correct, escalated=True) cost=$0.00000
+2026-07-22 13:10:34,933 INFO recO3hvCWRGiG0odN [chem_thinking_gate]: final=A(correct, escalated=False) cost=$0.00000
+2026-07-22 13:12:39,688 INFO recRgabRzMaEoBRcM [chem_thinking_gate]: final=A(correct, escalated=True, gate-flagged: Benzyne undergoes [4+2] Diels-Alder with norbornadiene, not [2+2]. The proposed intermediate and final product structures are chemically incorrect.) cost=$0.00000
+2026-07-22 13:12:39,942 WARNING 1/90 questions dropped due to unrecoverable errors
+2026-07-22 13:12:39,958 INFO Wrote 89 results to benchmark\results\lever_chem_thinking_gate_gpqa_seed217.jsonl

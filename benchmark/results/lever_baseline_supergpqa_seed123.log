@@ -1,0 +1,455 @@
+2026-07-22 18:33:04,197 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-07-22 18:33:04,328 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/m-a-p/SuperGPQA/4430d4458112c7d4497fdcf94d7cc223313d6acf/README.md "HTTP/1.1 200 OK"
+2026-07-22 18:33:04,726 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-22 18:33:05,875 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/m-a-p/SuperGPQA/m-a-p/SuperGPQA.py "HTTP/1.1 404 Not Found"
+2026-07-22 18:33:06,164 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/revision/4430d4458112c7d4497fdcf94d7cc223313d6acf "HTTP/1.1 200 OK"
+2026-07-22 18:33:06,413 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-07-22 18:33:06,712 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=m-a-p/SuperGPQA "HTTP/1.1 200 OK"
+2026-07-22 18:33:06,975 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-07-22 18:33:07,231 INFO HTTP Request: GET https://huggingface.co/api/datasets/m-a-p/SuperGPQA/tree/4430d4458112c7d4497fdcf94d7cc223313d6acf?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-07-22 18:33:07,645 INFO HTTP Request: HEAD https://huggingface.co/datasets/m-a-p/SuperGPQA/resolve/4430d4458112c7d4497fdcf94d7cc223313d6acf/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-07-22 18:33:07,907 INFO Loaded 90 SuperGPQA items (difficulty=hard, seed=123, trimmed to 4 choices)
+2026-07-22 18:33:30,332 INFO 28940f5e66204d6d8da272c94357c949 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:34:05,276 INFO 325534796b254b3499202862368c0f5c [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:34:18,840 INFO ea4794c5a4774d66b38264b39f2fe72d [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:34:39,260 INFO f3dbbb1c935242e287d05399a283167a [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:34:39,954 INFO c4f6b8482b184c0b98b6d72d00204932 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:35:09,125 INFO 3379eb264f7a44fcbb8967c1257d8ef1 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:35:45,040 INFO a171bbfccbe24401a400031c59b4af26 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:36:24,807 INFO cef6e3a767534afab6be3925eee3908f [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:36:40,383 INFO e459d523e32a40e483fa37877ae37dd7 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:36:54,261 INFO 10e238c23efe47cf85d9718dfea21752 [baseline]: D(wrong) cost=$0.00000
+2026-07-22 18:37:11,226 INFO 8e138fad2c6a4a5d94d6c17aa87bd47e [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:37:34,997 INFO 93fb85fa16e54fffb106e0e8b6ea0a41 [baseline]: B(wrong) cost=$0.00000
+2026-07-22 18:38:08,625 ERROR 10189f626a71458193ceb74c22288670: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 493, in _run_one_baseline
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 18:38:40,695 INFO 9bffaf0a268949899e234cf7a4299f16 [baseline]: D(wrong) cost=$0.00000
+2026-07-22 18:38:57,609 INFO 03ccb89aa12341928fc94ffc1721820d [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:39:34,773 INFO 23e717d973b547e1839a1e41467174ad [baseline]: B(wrong) cost=$0.00000
+2026-07-22 18:39:40,431 INFO b586d22adc1340dcb0af3966063009ee [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:40:07,779 INFO 43b85949f89c4ced866cc8222329c0d5 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:40:36,066 INFO e7ed8b4f392140368530a851521d82e0 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:40:51,561 INFO 53185f05190546179a849bb17515c3b5 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:41:01,827 INFO 27a902f1fd954aef804640412578914b [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:41:03,925 INFO 937e75090a8a4e4f8dd14f6330f14ed4 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:41:41,848 INFO 345786092a354c1e90c6b2004b9d5719 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:41:43,578 INFO 4a0b44d076df4b458538e29e594ab4a8 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:41:54,510 ERROR dff99ba339964cb9b6ab381b618355b5: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 493, in _run_one_baseline
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 18:42:18,620 INFO b389bd8fda16458da390b0aeefa9328c [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:42:34,045 INFO 0798fd9db4e14572a71233e3b6e3acbd [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:43:29,362 INFO 287b698ee9404cd9bca05074a5f2e382 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:43:43,994 INFO b3743d924802472a989b477f6b0345af [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:43:57,931 ERROR a6d224d814c74b14b05cbc915f94c318: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 493, in _run_one_baseline
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 18:44:17,164 INFO 7a9df24be1fa4c2ebb1d80d46daf7203 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:44:20,495 INFO 2dc1e5336b3c4da59b7bdd773371ed9b [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:44:25,998 INFO 45337265a83048bc99fd9c20a79a4937 [baseline]: D(wrong) cost=$0.00000
+2026-07-22 18:44:49,069 INFO 2e1738795281443cbc6067913cc2162b [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:44:56,446 INFO 0c5b12065dff42d386db06e43ed8b632 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:44:59,041 INFO f36a5f7ac1104f8f976b65b4bb352cc6 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:45:41,327 INFO f0cb01ea21ce4febb636008055080398 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:45:57,579 INFO 01eb5d6dafa04f91b785e456c88d12d7 [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:45:58,409 INFO c7d8cdb8547648f0aebb0de1e9d33105 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:46:15,135 INFO 904a4aeefbb644f684bed204a8647109 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:46:19,212 INFO f5746a6b252a42cdb64cd25fe623a7b6 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:46:29,662 INFO 7becb6c49d3d402686a0eafc9041a91f [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:46:41,806 INFO 0619ff74bac54d10a1912900ca5901d7 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:46:42,396 INFO 405821e0aa2f42c594b673d3e1273026 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:46:53,772 INFO abcb96943b3241f5bda9f3b6765fe5a0 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:47:03,074 INFO 5e20b93a9d8e4171836aa1e0e5320730 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:47:12,414 INFO 60568684a6c7436cb002aaaae1224044 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:47:15,264 INFO 48de38a79dd148da89ca4bf92c8bddd1 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:47:31,781 INFO 67737a767408432796a707a8a10d859b [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:47:49,781 INFO f4c026d1f3e945a5a3829d02351a7560 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:47:50,226 INFO a4c88f95e21f4fb4bcb82fb49377a5d5 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:48:22,296 INFO 5e95ac70fd304758a6bd82c6230f0ebc [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:48:27,852 INFO d008e4e5fa3740599a6cdbb6afef7e06 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:48:36,880 INFO 505cf024c3d34a8cad5631b7c487733c [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:48:37,014 INFO b41fbe0149264bc98901fdcaa06e84d7 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:49:04,463 INFO 7cba4178aa2b47d8abd5c11113bcd92f [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:49:18,847 INFO 3f8989b3db06466787aa75da59bd29f5 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:49:49,280 INFO 00f8026cfff64ca1b556ed8e3ee5084b [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:50:09,327 INFO a4d720c59e7844a792c74c8f11f39f32 [baseline]: B(wrong) cost=$0.00000
+2026-07-22 18:50:13,966 INFO 3c4c69c60cc840138881e84e7dfc53c2 [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:50:30,910 INFO 4284e998fada4c82963c98155b243a6d [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:50:42,267 INFO 1bc58f1386a149d9978e41488ed96e44 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:50:53,693 INFO 7753d398f364454d84d42d1d81b3537b [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:50:56,131 INFO 19216cc8085c4e9089ba5d9e765fc373 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:51:24,561 INFO d99bd9be83bd49ea8a9da3bf863bbd5f [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:51:27,892 INFO 88525de50e7d4b47830c6eb98c9f17d2 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:51:35,983 INFO c134c966d6d04da0b1d6b1a268a70744 [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:51:42,615 ERROR 210b3664e51b43bbab0d4b1bfa4668d0: DROPPED after unrecoverable error
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\lever_experiments.py", line 493, in _run_one_baseline
+    baseline = await asyncio.to_thread(solve_single_agent, client, item)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 29, in solve_single_agent
+    letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\baseline.py", line 21, in _ask_once
+    result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 168, in chat_json
+    content, usage = self.chat(model, messages, role=role, temperature=temperature, max_tokens=max_tokens, thinking=thinking)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\qwen_client.py", line 127, in chat
+    resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\.venv\Lib\site-packages\requests\adapters.py", line 742, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300)
+2026-07-22 18:51:45,249 INFO a1fe1674694645b8914102f518ba1dbd [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:52:01,799 INFO be49b5e8f608434db1b5147ca20fb19b [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:52:27,115 INFO e1fab0b4cf6d474bb0f67c5b31a8820a [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:52:39,169 INFO 80ecabf1688e4be3bb3f9c0181947167 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:52:42,531 INFO e26b923888d1415f9c76de764ba146b0 [baseline]: C(wrong) cost=$0.00000
+2026-07-22 18:52:49,508 INFO b3d0389dfc294bc2a3a305710907635c [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:53:08,748 INFO c417a559e8b44c698489454d49cfc72f [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:53:16,565 INFO 3fe28bc716c245ed80ddac64604a5d82 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:53:18,743 INFO ebe13c146960463e8ea8c439076c0f1f [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:53:40,120 INFO 98273697cfe64c44b258fcf337adbd0e [baseline]: B(correct) cost=$0.00000
+2026-07-22 18:53:41,381 INFO 64a904ae6727433ea41ef31690ba0711 [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:53:41,764 INFO 24e2c4692bdf48ea9323dc867b09f891 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:54:18,783 INFO bf42bdb404084228996458cc4ff2e9dd [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:54:24,548 INFO 9f8ccb34f3cf4eb1b8459927abbbca9c [baseline]: D(wrong) cost=$0.00000
+2026-07-22 18:54:26,914 INFO 095e4a649d634eef99b6be4b39625b09 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:54:34,114 INFO 2810b2b7944c4905b3dcb543060e32c4 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:54:45,049 INFO e086530f5eee4ec3b687fb2ef2bf1e18 [baseline]: D(wrong) cost=$0.00000
+2026-07-22 18:55:07,049 INFO ca835c9753b3495881d157093a494969 [baseline]: D(correct) cost=$0.00000
+2026-07-22 18:55:11,914 INFO 1f3d33e572a44b1681f2a328042e2218 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:55:27,299 INFO 90295a93faf14a3fb0a9a42dc7a54ee0 [baseline]: C(correct) cost=$0.00000
+2026-07-22 18:56:14,628 INFO afe0ed4d48c54836b7c7290a88c48c6a [baseline]: A(correct) cost=$0.00000
+2026-07-22 18:56:16,966 INFO 1d20f67dc3f848e791ee5d1ea58acba2 [baseline]: A(wrong) cost=$0.00000
+2026-07-22 18:56:16,966 WARNING 4/90 questions dropped
+2026-07-22 18:56:16,971 INFO Wrote 86 baseline results to benchmark\results\lever_baseline_supergpqa_seed123.jsonl
