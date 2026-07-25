@@ -72,6 +72,38 @@ SOLVER_LENSES = [
     "Answer by recalling the single most relevant fact, law, or formula, then checking each choice against it.",
 ]
 
+# Panel-scaling coprime factorial (docs/experiment-spec-book.md section 2.2):
+# five PROCEDURE prompts, deliberately a period-5 list against
+# SOLVER_TEMPERATURES' period-3 list, so a seat index cycled through both
+# (procedure = SOLVER_PROCEDURES[i % 5], temperature = SOLVER_TEMPERATURES
+# [i % 3]) lands on a unique (procedure, temperature) cell for every i in
+# 0..14 -- gcd(5, 3) == 1. This is the fix for the N=5 confound: with only 3
+# lenses and 3 temperatures both cycling on period 3, seat 4 was a
+# byte-identical config to seat 1. Entries 1-3 reuse the exact semantics of
+# benchmark/lever_experiments.py's METHOD_PROMPTS (solve-forward
+# analytically, verify-by-candidate/eliminate, estimate-first/order-of-
+# magnitude); entries 4-5 are new. Additive only -- SOLVER_LENSES,
+# SOLVER_TEMPERATURES, and N_SOLVERS above are unchanged, so every existing
+# lever's behavior stays byte-identical.
+SOLVER_PROCEDURES = [
+    "Method: solve forward analytically, step by step. Derive the answer "
+    "from first principles or known formulas in a clear logical sequence, "
+    "then match your result to the closest choice.",
+    "Method: verify by candidate. Evaluate EACH answer choice against the "
+    "question's stated constraints in turn, eliminating any that fail, and "
+    "select the one that survives (or fits best).",
+    "Method: estimate first. Start from an order-of-magnitude estimate or "
+    "a limiting-case/sanity check, then refine that estimate with exact "
+    "reasoning to pick the closest choice.",
+    "Method: dimensional analysis. Identify the units and scales involved "
+    "first, then check each answer choice for dimensional and order-of-"
+    "magnitude consistency, ruling out any choice whose units or scale "
+    "cannot be right before picking among what remains.",
+    "Method: analogy to a canonical problem. Recall the single most similar "
+    "well-known textbook problem or pattern, solve that pattern first, then "
+    "adapt the result to this question's specific numbers and wording.",
+]
+
 # USD per 1M tokens, midpoint of Qwen Cloud's published tiered ranges as of
 # 2026-07. Re-check against https://docs.qwencloud.com pricing before
 # reporting benchmark $ figures publicly -- tiered pricing changes with

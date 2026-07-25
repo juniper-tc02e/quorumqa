@@ -271,6 +271,48 @@ Levers:
                  of what R3 retrieves is scored offline by benchmark/
                  score_r3_relevance.py against the frozen rubric in
                  benchmark/r3_relevance_rubric.md -- W6's kill criterion.
+  diversified_panel -- docs/experiment-spec-book.md section 2, S1 (PRIMARY
+                 panel-scaling lever). The coprime-factorial fix for the
+                 N=5 confound (section 2.1): SOLVER_LENSES/SOLVER_TEMPERATURES
+                 both cycle on period 3, so the old `five` lever's seat 4 was
+                 a byte-identical config to seat 1. Here seat i (0-indexed)
+                 gets PROCEDURE config.SOLVER_PROCEDURES[i % 5], TEMPERATURE
+                 SOLVER_TEMPERATURES[i % 3], and an INDEPENDENTLY shuffled
+                 choice order seeded on (seed, question_id, i) (reuses
+                 _permute_choices/_solve_one_permuted, same canonical-letter
+                 remap as permuted_panel) -- since gcd(5, 3) == 1, all N<=15
+                 seats occupy a UNIQUE (procedure, temperature) cell, no two
+                 seats are duplicate configs by construction. `--solver-tier`
+                 selects cheap (MECHANICAL_MODEL, thinking=False, the
+                 default) or flagship (ORCHESTRATOR_MODEL, thinking=True).
+                 `--no-tribunal` (the vote-only mode this family is priced
+                 around) runs exactly N solver calls, records the plurality,
+                 and returns immediately -- NO second_opinion_gate,
+                 skeptic, verifier, or judge call ever fires, regardless of
+                 unanimity. Without `--no-tribunal` the shipped fallthrough
+                 applies instead: unanimous accepts as-is, a split escalates
+                 to the unchanged shipped tribunal. Every output row logs
+                 the ordered per-seat detail (`seat_answers`: list of
+                 {seat_index, letter, confidence, procedure_or_lens,
+                 temperature, permutation}) so every intermediate odd N can
+                 be reconstructed OFFLINE by nested-prefix subsampling (see
+                 benchmark/analyze_panel_scaling.py) from a single N=15
+                 harvest -- this is what makes the N-curve affordable at all.
+  cycled_panel -- section 2, S2 (CONFOUND CONTROL). Deliberately
+                 reproduces the OLD confound at arbitrary N instead of
+                 fixing it: seat i gets LENS config.SOLVER_LENSES[i % 3] and
+                 TEMPERATURE SOLVER_TEMPERATURES[i % 3], no permutation --
+                 seat i is a byte-identical config to seat i-3 by
+                 construction, same as the original `five` lever. Its
+                 3-seat prefix at `--solver-tier cheap` (the default) is
+                 byte-identical in config to the shipped panel (same lenses,
+                 same temperatures, thinking=False). Exists to answer S2's
+                 question directly: is diversified_panel's gain (if any)
+                 coming from genuinely decorrelated seats, or would ANY
+                 seat count -- duplicates included -- buy the same gain?
+                 Same `--n-solvers`/`--no-tribunal`/`--solver-tier` flags and
+                 `seat_answers` logging as diversified_panel (permutation is
+                 always null here, since this lever never shuffles choices).
 
 Usage:
   python -m benchmark.lever_experiments --lever gate --n 90 --seed 42
@@ -291,6 +333,8 @@ Usage:
   python -m benchmark.lever_experiments --lever method_panel --n 90 --seed 42 --dataset supergpqa
   python -m benchmark.lever_experiments --lever tribunal_debate --n 90 --seed 42 --dataset supergpqa  # CONDITIONAL, W1/W2-gated
   python -m benchmark.lever_experiments --lever rag_r3_targeted --n 90 --seed 42 --dataset supergpqa --rag-k 5  # CONDITIONAL, W1/W2-gated
+  python -m benchmark.lever_experiments --lever diversified_panel --n 90 --seed 42 --dataset supergpqa --n-solvers 15 --no-tribunal
+  python -m benchmark.lever_experiments --lever cycled_panel --n 90 --seed 42 --dataset supergpqa --n-solvers 15 --no-tribunal  # confound control, identical items
   python -m benchmark.lever_experiments --lever gate-replay             # cheap replay against frozen data
 """
 
@@ -309,7 +353,7 @@ from pathlib import Path
 import requests
 
 from quorumqa.baseline import solve_single_agent
-from quorumqa.config import JUDGE_MODEL, MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_TEMPERATURES, TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
+from quorumqa.config import JUDGE_MODEL, MECHANICAL_MODEL, N_SOLVERS, ORCHESTRATOR_MODEL, SOLVER_LENSES, SOLVER_PROCEDURES, SOLVER_TEMPERATURES, TOKEN_PLAN_API_KEY, TOKEN_PLAN_BASE_URL
 from quorumqa.engine.judge import JUDGE_SYSTEM, adjudicate
 from quorumqa.engine.skeptic import rebut
 from quorumqa.engine.solver import SOLVER_SYSTEM, _lenses_for, _solve_one, solve_all
@@ -809,7 +853,7 @@ def _permute_choices(choices: list[str], seed: int, question_id: str, seat_index
     return shuffled, perm
 
 
-def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat_index, model=MECHANICAL_MODEL, temperature=0.4):
+def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat_index, model=MECHANICAL_MODEL, temperature=0.4, thinking=False):
     """Identical to solver._solve_one (same system prompt, model default,
     JSON contract, user-prompt shape) EXCEPT this seat is shown an
     independently shuffled choice order (see _permute_choices). The model's
@@ -818,7 +862,13 @@ def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat
     SolverAnswer, so downstream plurality voting/escalation always operate
     on canonical letters exactly like every other lever. Returns
     (answer, usage, permutation_record) -- permutation_record is the
-    logging-only detail (field `seat_permutations` in the output row)."""
+    logging-only detail (field `seat_permutations` in the output row).
+
+    `thinking` (new, default False -- byte-identical to the original
+    behavior for every existing caller, which never passed it) lets
+    diversified_panel run its seats at the flagship tier (thinking=True,
+    role tagged "solver_thinking", same convention as _solve_one_rag's
+    `thinking` parameter) without a second copy of this function."""
     shuffled_choices, perm = _permute_choices(choices, seed, question_id, seat_index)
     choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", shuffled_choices))
     user = (
@@ -826,7 +876,8 @@ def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat
         'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
-    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
+    role = "solver_thinking" if thinking else "solver"
+    result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role=role, thinking=thinking, temperature=temperature, retries=2)
     shuffled_letter = str(result.data.get("letter", "")).strip().upper()[:1]
     if shuffled_letter not in "ABCD":
         shuffled_letter = "A"
@@ -924,6 +975,130 @@ async def solve_all_method_panel(client, question, choices):
         for i in range(3)
     ]
     return list(await asyncio.gather(*tasks))
+
+
+# ---------------------------------------------------------------------------
+# Panel scaling -- docs/experiment-spec-book.md section 2 (S1-S4). The
+# coprime factorial that fixes the N=5 confound (section 2.1/2.2): diversified_
+# panel builds seats from config.SOLVER_PROCEDURES (period 5) x
+# SOLVER_TEMPERATURES (period 3) plus a per-seat permutation, so every seat
+# up to N=15 occupies a UNIQUE (procedure, temperature) cell (gcd(5,3)==1).
+# cycled_panel is the CONFOUND CONTROL: it deliberately reproduces the old
+# period-3/period-3 cycling (SOLVER_LENSES x SOLVER_TEMPERATURES, no
+# permutation) at arbitrary N, so seat i is a byte-identical config to seat
+# i-3 by construction -- exactly the bug diversified_panel fixes. Running
+# both on the SAME items answers section 2's S2 question: does diversity
+# come from seat count, or from genuinely decorrelated seats?
+#
+# Both levers support `--n-solvers` (any N, not just 3), `--solver-tier`
+# (cheap = MECHANICAL_MODEL thinking=False, flagship = ORCHESTRATOR_MODEL
+# thinking=True), and `--no-tribunal` (vote-only mode: run N solver seats,
+# record the plurality, and skip skeptic/verifier/judge entirely -- see
+# run_question_lever's no_tribunal short-circuit -- this is what makes an
+# N=15 harvest affordable). Every seat's full detail (letter, confidence,
+# procedure/lens, temperature, permutation) is logged in order via
+# `seat_answers` so every intermediate odd N can be reconstructed OFFLINE by
+# taking the first N seats (nested-prefix subsampling, see
+# benchmark/analyze_panel_scaling.py) from a single max-N harvest.
+# ---------------------------------------------------------------------------
+
+SOLVER_TIER_MODELS = {"cheap": MECHANICAL_MODEL, "flagship": ORCHESTRATOR_MODEL}
+SOLVER_TIER_THINKING = {"cheap": False, "flagship": True}
+
+PROCEDURE_NAMES = [
+    "solve_forward", "verify_by_candidate", "estimate_first",
+    "dimensional_analysis", "analogy_to_canonical",
+]
+
+
+async def solve_all_diversified_panel(client, question, choices, seed, question_id, n=N_SOLVERS, tier="cheap"):
+    """S1 (section 2, PRIMARY): seat i gets PROCEDURE
+    config.SOLVER_PROCEDURES[i % 5], TEMPERATURE SOLVER_TEMPERATURES[i % 3],
+    and an independently shuffled choice order seeded on
+    (seed, question_id, i) -- reuses _permute_choices/_solve_one_permuted
+    exactly as permuted_panel does (same canonical-letter remap), with the
+    lens argument swapped for a procedure prompt (same trick method_panel
+    already uses: _solve_one_permuted's `lens` param is just arbitrary text
+    appended to SOLVER_SYSTEM) and the new `thinking` param wired to the
+    requested solver tier. Since len(SOLVER_PROCEDURES)==5 and
+    len(SOLVER_TEMPERATURES)==3 are coprime, every seat up to N=15 lands on
+    a distinct (procedure, temperature) cell by construction.
+
+    Returns (solver_pairs, seat_answers): solver_pairs matches every other
+    lever's (SolverAnswer, CallUsage) shape; seat_answers is the ordered
+    per-seat log record (list of {seat_index, letter, confidence,
+    procedure_or_lens, temperature, permutation}) needed to reconstruct any
+    intermediate N offline."""
+    model = SOLVER_TIER_MODELS[tier]
+    thinking = SOLVER_TIER_THINKING[tier]
+    procedures = [SOLVER_PROCEDURES[i % len(SOLVER_PROCEDURES)] for i in range(n)]
+    temperatures = [SOLVER_TEMPERATURES[i % len(SOLVER_TEMPERATURES)] for i in range(n)]
+    tasks = [
+        asyncio.to_thread(
+            _solve_one_permuted, client, question, choices, procedures[i], seed, question_id, i,
+            model, temperatures[i], thinking,
+        )
+        for i in range(n)
+    ]
+    triples = list(await asyncio.gather(*tasks))
+    solver_pairs = [(a, u) for a, u, _ in triples]
+    seat_answers = [
+        {
+            "seat_index": i,
+            "letter": answer.letter,
+            "confidence": answer.confidence,
+            "procedure_or_lens": PROCEDURE_NAMES[i % len(PROCEDURE_NAMES)],
+            "temperature": temperatures[i],
+            "permutation": perm_record,
+        }
+        for i, (answer, _usage, perm_record) in enumerate(triples)
+    ]
+    return solver_pairs, seat_answers
+
+
+async def solve_all_cycled_panel(client, question, choices, n=N_SOLVERS, tier="cheap"):
+    """S2 (section 2, CONFOUND CONTROL): seat i gets LENS
+    config.SOLVER_LENSES[i % 3] and TEMPERATURE SOLVER_TEMPERATURES[i % 3],
+    NO permutation -- the CURRENT shipped-panel cycling behavior (period 3
+    x period 3), generalized to arbitrary N. Seat i is a byte-identical
+    config to seat i-3 by construction; at `tier="cheap"` (the default) the
+    first 3 seats are byte-identical in config to the shipped panel (reuses
+    engine.solver._solve_one directly, same args _lenses_for(3)/
+    SOLVER_MODELS/SOLVER_TEMPERATURES[:3] produce inside solve_all). At
+    `tier="flagship"` every seat instead runs _solve_one_thinking
+    (ORCHESTRATOR_MODEL, thinking=True) -- _solve_one hard-codes
+    thinking=False, so it cannot serve the flagship tier itself.
+
+    Returns (solver_pairs, seat_answers), same shape as
+    solve_all_diversified_panel except every seat's `permutation` is None
+    (this lever never shuffles choices)."""
+    lenses = [SOLVER_LENSES[i % len(SOLVER_LENSES)] for i in range(n)]
+    temperatures = [SOLVER_TEMPERATURES[i % len(SOLVER_TEMPERATURES)] for i in range(n)]
+    if tier == "flagship":
+        model = SOLVER_TIER_MODELS[tier]
+        tasks = [
+            asyncio.to_thread(_solve_one_thinking, client, question, choices, lenses[i], model, temperatures[i])
+            for i in range(n)
+        ]
+    else:
+        model = SOLVER_TIER_MODELS[tier]
+        tasks = [
+            asyncio.to_thread(_solve_one, client, question, choices, lenses[i], model, temperatures[i])
+            for i in range(n)
+        ]
+    pairs = list(await asyncio.gather(*tasks))
+    seat_answers = [
+        {
+            "seat_index": i,
+            "letter": answer.letter,
+            "confidence": answer.confidence,
+            "procedure_or_lens": lenses[i],
+            "temperature": temperatures[i],
+            "permutation": None,
+        }
+        for i, (answer, _usage) in enumerate(pairs)
+    ]
+    return pairs, seat_answers
 
 
 # ---------------------------------------------------------------------------
@@ -1645,11 +1820,13 @@ async def _tribunal(
 async def run_question_lever(
     client, tool_session, item: GPQAItem, lever: str, rag: "RagPresolveConfig | None" = None,
     rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD, seed: int = 42,
+    n_solvers: int = N_SOLVERS, no_tribunal: bool = False, solver_tier: str = "cheap",
 ):
     start = time.monotonic()
     rag_gate_applied = None
     rag_gate_top_score = None
     seat_permutations = None
+    seat_answers = None
 
     if lever in ("thinking", "combined", "thinking_gate", "tribunal_debate"):
         solver_pairs = await solve_all_thinking_seat(client, item.question, item.choices)
@@ -1671,6 +1848,14 @@ async def run_question_lever(
         solver_pairs, seat_permutations = await solve_all_permuted_panel(client, item.question, item.choices, seed, item.question_id)
     elif lever == "method_panel":
         solver_pairs = await solve_all_method_panel(client, item.question, item.choices)
+    elif lever == "diversified_panel":
+        solver_pairs, seat_answers = await solve_all_diversified_panel(
+            client, item.question, item.choices, seed, item.question_id, n=n_solvers, tier=solver_tier,
+        )
+    elif lever == "cycled_panel":
+        solver_pairs, seat_answers = await solve_all_cycled_panel(
+            client, item.question, item.choices, n=n_solvers, tier=solver_tier,
+        )
     elif lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "rag_r3_targeted"):
         # rag_recursive's R1 pre-solve step is IDENTICAL to rag_presolve's --
         # same solve_all_rag_presolve call, same evidence block, same
@@ -1782,6 +1967,11 @@ async def run_question_lever(
         }
     elif lever == "permuted_panel":
         note = {"seat_permutations": seat_permutations}
+    elif lever in ("diversified_panel", "cycled_panel"):
+        note = {
+            "seat_answers": seat_answers, "unanimous": unanimous, "n_solvers": n_solvers,
+            "solver_tier": solver_tier, "no_tribunal": no_tribunal,
+        }
     elif lever == "tribunal_debate":
         # Default shape for the ACCEPTED (non-escalated) case -- no tribunal
         # ever ran, so there is no one-shot/post-debate ruling to log.
@@ -1792,6 +1982,19 @@ async def run_question_lever(
             "concession_rate": None, "ruling_changed": False,
             "one_shot_ruling": None, "post_debate_ruling": None,
         }
+
+    if lever in ("diversified_panel", "cycled_panel") and no_tribunal:
+        # Vote-only mode (docs/experiment-spec-book.md section 2.3): record
+        # the plurality and return immediately, WHETHER OR NOT the panel was
+        # unanimous -- skeptic/verifier/judge (and any gate call) never
+        # fire. This is the one paid arm the whole N-curve is derived from
+        # offline, so it must never silently fall through to the tribunal
+        # below on a split.
+        return QuestionResult(
+            item=item, solver_answers=solver_answers, plurality_letter=plurality_letter,
+            escalated=False, final_letter=plurality_letter, correct=(plurality_letter == item.correct_letter),
+            calls=calls, latency_s=time.monotonic() - start,
+        ), note
 
     if unanimous and not force_escalate:
         return QuestionResult(
@@ -1842,10 +2045,14 @@ async def run_question_lever(
 async def _run_one(
     client, tool_session, item, semaphore, lever, rag: "RagPresolveConfig | None" = None,
     rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD, seed: int = 42,
+    n_solvers: int = N_SOLVERS, no_tribunal: bool = False, solver_tier: str = "cheap",
 ):
     try:
         async with semaphore:
-            result, note = await run_question_lever(client, tool_session, item, lever, rag, rag_gate_threshold, seed)
+            result, note = await run_question_lever(
+                client, tool_session, item, lever, rag, rag_gate_threshold, seed,
+                n_solvers, no_tribunal, solver_tier,
+            )
     except Exception:
         log.exception("%s: DROPPED after unrecoverable error", item.question_id)
         return None
@@ -1896,7 +2103,9 @@ def _build_output_row(
     permuted_panel folds in seat_permutations; tribunal_debate (W4) folds in
     debate_applicable/minority_seats/concessions/concession_rate/
     ruling_changed/one_shot_ruling/post_debate_ruling; rag_r3_targeted (W6)
-    folds in disputed_claim/r3_query_fired/r3_passages/r3_evidence_used_by."""
+    folds in disputed_claim/r3_query_fired/r3_passages/r3_evidence_used_by;
+    diversified_panel/cycled_panel (section 2) fold in seat_answers/
+    unanimous/n_solvers/solver_tier/no_tribunal."""
     row = {"engine": result.model_dump(), "lever": lever, "seed": seed, "dataset": dataset}
     if lever in ("rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "rag_r3_targeted"):
         row["rag"] = "ON"
@@ -1935,13 +2144,32 @@ def _build_output_row(
         row["r3_query_fired"] = note.get("r3_query_fired")
         row["r3_passages"] = note.get("r3_passages")
         row["r3_evidence_used_by"] = note.get("r3_evidence_used_by")
+    if lever in ("diversified_panel", "cycled_panel") and isinstance(note, dict):
+        # seat_answers is the CRITICAL field docs/experiment-spec-book.md
+        # section 2.3 depends on -- every intermediate odd N is derived
+        # offline by nested-prefix subsampling from this ordered list (see
+        # benchmark/analyze_panel_scaling.py), never by re-running the panel.
+        row["seat_answers"] = note.get("seat_answers")
+        row["unanimous"] = note.get("unanimous")
+        row["n_solvers"] = note.get("n_solvers")
+        row["solver_tier"] = note.get("solver_tier")
+        row["no_tribunal"] = note.get("no_tribunal")
     return row
 
 
 async def main_live(
     lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa",
     rag_db: str | None = None, rag_k: int = DEFAULT_RAG_K, rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
+    n_solvers: int = N_SOLVERS, no_tribunal: bool = False, solver_tier: str = "cheap",
 ):
+    if lever in ("diversified_panel", "cycled_panel") and solver_tier not in SOLVER_TIER_MODELS:
+        # Fails loudly BEFORE any dataset load or paid call -- same posture
+        # as the SILENT-DEGENERACY GUARD below.
+        raise ValueError(
+            f"--solver-tier {solver_tier!r} is not one of {sorted(SOLVER_TIER_MODELS)} -- "
+            f"refusing to silently fall back to a default tier for a paid run."
+        )
+
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     log.info("Loaded %d %s questions (seed=%d) for lever=%s", len(items), dataset, seed, lever)
 
@@ -1993,7 +2221,10 @@ async def main_live(
     results = []
     async with verifier_tool_session() as tool_session:
         tasks = [
-            asyncio.ensure_future(_run_one(client, tool_session, item, semaphore, lever, rag_config, rag_gate_threshold, seed))
+            asyncio.ensure_future(_run_one(
+                client, tool_session, item, semaphore, lever, rag_config, rag_gate_threshold, seed,
+                n_solvers, no_tribunal, solver_tier,
+            ))
             for item in items
         ]
         for coro in asyncio.as_completed(tasks):
@@ -2098,7 +2329,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "tribunal_debate", "rag_r3_targeted", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "tribunal_debate", "rag_r3_targeted", "diversified_panel", "cycled_panel", "control", "baseline", "gate-replay"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
@@ -2123,6 +2354,21 @@ if __name__ == "__main__":
                               f"retrieved evidence block; below it, the panel runs on the plain question with no "
                               f"evidence (default {DEFAULT_RAG_SCORE_THRESHOLD}, calibrated -- see "
                               f"benchmark/results/rag_gating_analysis.md). Ignored by every other lever.")
+    parser.add_argument("--n-solvers", type=int, default=N_SOLVERS,
+                         help=f"diversified_panel/cycled_panel only: panel size N (default {N_SOLVERS}). "
+                              f"Seat i's config is derived from i (procedure/lens x temperature, see the "
+                              f"lever docstrings) -- any N is valid, not just odd ones, though the panel-"
+                              f"scaling analysis (benchmark/analyze_panel_scaling.py) only reports odd N.")
+    parser.add_argument("--no-tribunal", action="store_true",
+                         help="diversified_panel/cycled_panel only: vote-only mode -- record the plurality "
+                              "and skip skeptic/verifier/judge (and any gate call) entirely, even on a "
+                              "split. This is what makes a large --n-solvers harvest affordable; every "
+                              "intermediate N is then derived OFFLINE from the logged seat_answers. Ignored "
+                              "by every other lever.")
+    parser.add_argument("--solver-tier", type=str, default="cheap", choices=["cheap", "flagship"],
+                         help="diversified_panel/cycled_panel only: cheap (default) = MECHANICAL_MODEL, "
+                              "thinking=False; flagship = ORCHESTRATOR_MODEL, thinking=True. Ignored by "
+                              "every other lever.")
     args = parser.parse_args()
 
     if args.lever == "gate-replay":
@@ -2136,4 +2382,5 @@ if __name__ == "__main__":
         asyncio.run(main_live(
             args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset,
             args.rag_db, args.rag_k, args.rag_score_threshold,
+            args.n_solvers, args.no_tribunal, args.solver_tier,
         ))
