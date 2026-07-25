@@ -1,0 +1,14 @@
+benchmark,config,seed,delta_pp,is_tie
+GPQA-Diamond,thinking_gate,42,2.3,False
+GPQA-Diamond,thinking_gate,7,0.0,True
+GPQA-Diamond,thinking_gate,123,1.1,False
+SuperGPQA-hard,flagship_panel,42,3.8,False
+SuperGPQA-hard,flagship_panel,7,2.4,False
+SuperGPQA-hard,flagship_panel,123,6.2,False
+SuperGPQA-hard,rag_presolve,42,4.7,False
+SuperGPQA-hard,rag_presolve,7,6.9,False
+SuperGPQA-hard,rag_presolve,123,8.0,False
+SuperGPQA-hard,rag_presolve,271,-5.6,False
+SuperGPQA-hard,rag_thinking_gate,271,0.0,True
+SuperGPQA-hard,rag_thinking_gate,606,4.6,False
+SuperGPQA-hard,rag_thinking_gate,838,4.5,False
