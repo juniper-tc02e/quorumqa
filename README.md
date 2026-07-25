@@ -78,6 +78,15 @@ docs/                     architecture diagram and design notes
 ## Research and findings
 
 **→ [`docs/FINDINGS.md`](docs/FINDINGS.md) is the index to everything measured.**
+**→ [`docs/figures/`](docs/figures/README.md) is the same story in nine figures.**
+
+![Build progress in gap space](docs/figures/f01_build_progress_gap_space.png)
+
+*Every benchmark's distance from a single `qwen3.7-max` call. x=0 is flagship
+parity; open circle = the initial build, filled triangle = current best. The gap
+closed on all four benchmarks where we built twice, and crossed zero on two.
+Arrows appear only where a genuine second build exists — the other five
+benchmarks ran one build and say so.*
 
 The short version: deliberation pays if and only if solver errors decorrelate
 into visible disagreement *and* the escalation mechanism fires on it. The

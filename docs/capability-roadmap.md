@@ -46,6 +46,13 @@ That converts "winnable" into a two-part test. A lever is winnable only if it be
 
 ### 1.4 The twelve axes
 
+Before the verdicts, the coverage they rest on — how much evidence actually exists
+per (benchmark, orchestration) cell. GPQA-Diamond has 24 configs; GSM8K has 2.
+Every thin verdict below is thin because of this, not because something was
+skipped:
+
+![Evidence inventory](figures/f03_evidence_inventory_heatmap.png)
+
 | # | Axis | Structural class | Verdict | Gate before spend |
 |---|---|---|---|---|
 | 3.1 | Science (GPQA / SuperGPQA-hard / chem) | B (+ partial A) | **Winnable** — the only validated accuracy surface | Free union + instability audits |
@@ -387,6 +394,12 @@ Additionally: AIME-2024/25 is unusable on two independent grounds — our pilot 
 **SWE-Bench Pro is blocked twice over, independently.** (1) Architectural: it needs the SWE-agent scaffold plus per-repo Docker evaluation environments with fail-to-pass/pass-to-pass tests, none of which exists here — rated multi-day to multi-week. (2) Capability: frontier is 59.1% on Scale's standardized public split and up to 80.3% in vendor aggregates, against a base model roughly 50 points behind. **Fixing (1) does not touch (2).** Our best validated orchestration lift anywhere is +4.1pp; the only published work on this technique class caps at +8–12pp. Orchestration is off by 4–6x.
 
 **One honest correction to our own story.** The coding result on the record — QuorumQAAgent hardening taking Terminal-Bench **graded coverage** from 36% to 86% on a seed-7 sample — is a *harness* result for a **single non-deliberating agent**, not evidence that deliberation helps on code. It measures how many attempts survived to be graded, not how many were correct. It must never be quoted as an orchestration win, and the seed-7 sample it was tuned on must never be used as an evaluation set (see §3.5).
+
+![Agent hardening: coverage vs solved](figures/f09_agent_hardening.png)
+
+*Exactly why the correction is needed. The coverage bars move 5/14 → 12/14 (36% →
+86%), but the **solved** bar — plotted separately for this reason — moves only 2/14
+→ 4/14. Hardening bought attempts that reach the grader, not attempts that pass.*
 
 **Consequence.** There is no separate coding axis this window. The one place where code-shaped work has a measurable, verifiable arbiter is the agentic loop, and it is funded there — see §3.5. A deliberating code tribunal is explicitly *not* proposed: our measured failure taxonomy is dominated by timeouts, stalls and premature-done, not by bad candidate solutions, and the propose-run-observe loop already has a non-fallible arbiter in the sandbox.
 

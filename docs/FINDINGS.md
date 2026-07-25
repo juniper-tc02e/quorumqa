@@ -44,14 +44,35 @@ gap as the predictor outright; that was too strong, and F05 is what caught it.
 | MATH-500 L5 open-answer | 96.6% | 0% escalation *at both tiers* | inert |
 | LEXam (law) | 86.0% | — | **−14** |
 
+![The law, and where it breaks](figures/f05_unanimous_wrong_vs_lever_delta.png)
+
+*The law and its counterexamples in one frame. SuperGPQA-hard (23% gap, +4.1) is
+the confirming point; LEXam (22% gap, −6.0) and MMLU-Pro (14% gap, −2.0) sit in
+the quadrant marked "large gap, lever still lost." Five points, not seven —
+GPQA-Diamond is omitted because its only published unanimous-wrong figure is a
+pooled quantity that would change this axis. No fit line: five heterogeneous
+points at different n do not earn a regression.*
+
 A corollary we did not expect and had to accept: on **6 of 9 benchmarks a bare
 single flagship call Pareto-dominates every lever we ever built** — more tokens
 for equal or worse accuracy. Levers clear the frontier on exactly two surfaces
 plus the chemistry slice.
 
+![Accuracy vs tokens](figures/f04_accuracy_vs_tokens_frontier.png)
+
+*Six panels on a red "FLAGSHIP DOMINATES" ground, two on green. Pooled-marginal
+data — read the shape, not the gaps.*
+
 ---
 
 ## 2. Validated wins (3-seed bar, vs a `qwen3.7-max` single call)
+
+![Build progress in gap space](figures/f01_build_progress_gap_space.png)
+
+*The wins below, in delta space against a single flagship call. Absolute
+accuracies are not comparable across these benchmarks (SuperGPQA-hard and
+MMLU-Pro-STEM are 4-choice trims), which is why there is no accuracy leaderboard
+anywhere in this repo.*
 
 | Benchmark | Config | Models & roles | Result |
 |---|---|---|---|
@@ -117,6 +138,13 @@ Selected mechanisms:
 ---
 
 ## 5. Methodology
+
+![Every lever against the noise floor](figures/f02_lever_deltas_by_benchmark.png)
+
+*Why most of these results are not claims. The shaded band is the ±2.5pp measured
+noise floor (an n=90 control replicate flipped 14/90 items); the dashed lines are
+±5, the minimum net-discordant count clearing p<0.05. A lollipop inside the band is
+indistinguishable from re-running the same config.*
 
 Standards adopted the hard way, after each was violated once:
 

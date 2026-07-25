@@ -58,11 +58,22 @@ This document is that writeup.
 
 **Deliberation pays if and only if (a) the cheap and flagship tiers'
 errors decorrelate into visible disagreement, and (b) the escalation
-mechanism actually fires on that disagreement.** The predictor is the
-**cheap-to-flagship gap**, operationalized as the **unanimous-wrong rate**
-(how often the cheap panel confidently agrees on a wrong answer) — not
-subject difficulty, not benchmark prestige, and not how high the flagship's
-own baseline sits.
+mechanism actually fires on that disagreement.** What predicts whether those
+conditions can be met is the **cheap-to-flagship gap**, operationalized as the
+**unanimous-wrong rate** (how often the cheap panel confidently agrees on a wrong
+answer) — not subject difficulty, not benchmark prestige, and not how high the
+flagship's own baseline sits.
+
+**That gap is necessary, not sufficient — and this project's own figure caught us
+overstating it.** Plotting the gap against the best paired lever delta puts
+SuperGPQA-hard (23%, +4.1) in "large gap → deliberation pays", but LEXam (22%,
+**−6.0**) and MMLU-Pro (14%, **−2.0**) land in a quadrant the figure labels "large
+gap, lever still lost" — two of five plotted points. A large gap pays only when
+the missing ingredient is *decorrelation*. Where it is missing *knowledge or
+corpus* (§3.5, LEXam's Swiss law against a STEM/US-law index) the gap is real, the
+escalation fires, and the answer is still wrong.
+
+![The law, and where it breaks](figures/f05_unanimous_wrong_vs_lever_delta.png)
 
 The table below is the single strongest piece of evidence for this law,
 because medicine and hard science are *both* "knowledge-and-reasoning
@@ -466,6 +477,12 @@ Twenty-two distinct measured nulls, grouped by mechanism.
   null that holds each item's real right/wrong replicate count fixed and
   randomly reassigns which observed wrong text each wrong replicate lands
   on (NDRAWS=5,000, fixed seed).
+![Per-seed spread](figures/f06_per_seed_spread.png)
+
+*Related, and the reason a mean is not a finding: `chem_thinking_gate` clusters
+inside 0.2pt across three seeds while `rag_presolve` reads +4.7 / +6.9 / +8.0 and
+then **−5.6**. Two mean-positive levers, entirely different confidence.*
+
 - *Measured (verified from `stability_audit_summary.json` and the
   write-up's own tables).* Observed overall lift P(wrong|unstable) −
   P(wrong|stable) = **+24.4pp** (34.2% vs 9.8%). Permutation-null mean:
@@ -582,6 +599,11 @@ Twenty-two distinct measured nulls, grouped by mechanism.
 
 **F1. F2 compute frontier — a bare single flagship call Pareto-dominates every logged lever on 6 of 9 benchmarks**
 
+![Accuracy vs tokens frontier](figures/f04_accuracy_vs_tokens_frontier.png)
+
+*This null, drawn. Six panels render on a red "FLAGSHIP DOMINATES" ground; two on
+green. Pooled-marginal provenance — the shape is the claim, not the gaps.*
+
 - *Hypothesis (implicit — a portfolio-level audit, not a single pre-
   registered test).* Across the whole logged record, do multi-agent
   levers (panels, gates, RAG) ever lie off the accuracy/token Pareto
@@ -614,6 +636,13 @@ Twenty-two distinct measured nulls, grouped by mechanism.
 - *Source.* `benchmark/results/family_floor_analysis.md` §F2.
 
 **F2. The MoO router does not beat flat-best on accuracy (91.0% vs 92.8%, corrected; 90.1% vs 92.8%, original)**
+
+![MoO delta and escalation](figures/f07_moo_delta_escalation_heatmap.png)
+
+*The mechanism, side by side: where escalation collapses, the delta collapses with
+it. Note the hatching — **27 of 28 cells sit below the +5 net-discordant McNemar
+floor**, so almost none of this grid is a real effect. Each cell prints its item
+count for exactly that reason: at n=27, a single item is 3.7pp.*
 
 - *Hypothesis.* A heuristic router that picks a per-domain profile (cheap
   single-call, standard tribunal, flagship panel, RAG stacks) beats always

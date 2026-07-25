@@ -48,7 +48,15 @@ points (78.9% vs 84.4%). Breaking down exactly where:
   Chemistry (37/90 questions) has an 18.9% unanimous-wrong rate. Every
   physics subject (quantum mechanics, general physics, HEP, astrophysics,
   relativistic mechanics -- 35 questions combined) has **zero** unanimous-
-  wrong cases. This is a systematic weakness in `qwen3.6-flash`'s organic-
+  wrong cases.
+
+  ![Subject-level paired deltas](../../docs/figures/f08_subject_paired_deltas.png)
+
+  *This diagnosis, drawn across all 43 logged subject cells. Bars with fewer than
+  5 discordant items are hatched, since at these per-subject sample sizes most
+  individual cells cannot clear the McNemar floor -- the pattern is the finding,
+  not any single bar. It is what motivated `chem_flagship_gate` and
+  `chem_thinking_gate`.* This is a systematic weakness in `qwen3.6-flash`'s organic-
   chemistry reasoning, not noise -- confirmed independently by the noise-
   floor measurement above, where Organic Chemistry was again the most
   volatile subject with no architecture change involved at all.
