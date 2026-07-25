@@ -1,0 +1,631 @@
+{
+  "ndraws": 5000,
+  "null_seed": 20260725,
+  "inventory": [
+    {
+      "file": "adhoc_check.jsonl",
+      "n_lines": 9,
+      "n_obs_emitted": 27,
+      "note": ""
+    },
+    {
+      "file": "aime_open_baseline_seed42.jsonl",
+      "n_lines": 48,
+      "n_obs_emitted": 0,
+      "note": "flat row with no item/choices field (cannot map letter to text)"
+    },
+    {
+      "file": "aime_open_panel_cheap_seed42.jsonl",
+      "n_lines": 28,
+      "n_obs_emitted": 0,
+      "note": "open-answer schema (no letter/choices to re-key on text)"
+    },
+    {
+      "file": "full_run.jsonl",
+      "n_lines": 74,
+      "n_obs_emitted": 222,
+      "note": ""
+    },
+    {
+      "file": "full_run2.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 270,
+      "note": ""
+    },
+    {
+      "file": "gsm8k_pilot_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 100,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_gpqa_seed314.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_mmlu_pro_stem_seed42.jsonl",
+      "n_lines": 60,
+      "n_obs_emitted": 60,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_seed123.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_seed7.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed123.jsonl",
+      "n_lines": 86,
+      "n_obs_emitted": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed7.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed777.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed888.jsonl",
+      "n_lines": 87,
+      "n_obs_emitted": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_seed555.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed471.jsonl",
+      "n_lines": 87,
+      "n_obs_emitted": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed7.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_control_lexam_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_seed7.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_seed7_replicate.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed123.jsonl",
+      "n_lines": 88,
+      "n_obs_emitted": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed271.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed606.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed7.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed838.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_five_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_mmlu_pro_stem_seed42.jsonl",
+      "n_lines": 60,
+      "n_obs_emitted": 60,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed42_replicate.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed7.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed123.jsonl",
+      "n_lines": 81,
+      "n_obs_emitted": 81,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed42.jsonl",
+      "n_lines": 79,
+      "n_obs_emitted": 79,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed7.jsonl",
+      "n_lines": 83,
+      "n_obs_emitted": 83,
+      "note": ""
+    },
+    {
+      "file": "lever_gate_replay.jsonl",
+      "n_lines": 56,
+      "n_obs_emitted": 0,
+      "note": "flat row with no item/choices field (cannot map letter to text)"
+    },
+    {
+      "file": "lever_qwen38_judge_gpqa_seed42.jsonl",
+      "n_lines": 76,
+      "n_obs_emitted": 76,
+      "note": ""
+    },
+    {
+      "file": "lever_qwen38_panel_supergpqa_seed42.jsonl",
+      "n_lines": 63,
+      "n_obs_emitted": 63,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_gpqa_seed42.jsonl",
+      "n_lines": 86,
+      "n_obs_emitted": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed123.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed271.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed606.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed7.jsonl",
+      "n_lines": 87,
+      "n_obs_emitted": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_recursive_lexam_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_recursive_supergpqa_seed42.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed271.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed606.jsonl",
+      "n_lines": 87,
+      "n_obs_emitted": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed838.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_smart_gate_seed123.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_subject_seed7.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed7.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_lexam_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 50,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_mmlu_pro_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 50,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed123.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed7.jsonl",
+      "n_lines": 89,
+      "n_obs_emitted": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed42.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed7.jsonl",
+      "n_lines": 90,
+      "n_obs_emitted": 90,
+      "note": ""
+    },
+    {
+      "file": "lexam_pilot_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 100,
+      "note": ""
+    },
+    {
+      "file": "math500_hard_pilot_seed42.jsonl",
+      "n_lines": 49,
+      "n_obs_emitted": 98,
+      "note": ""
+    },
+    {
+      "file": "math_open_baseline_seed42.jsonl",
+      "n_lines": 59,
+      "n_obs_emitted": 0,
+      "note": "flat row with no item/choices field (cannot map letter to text)"
+    },
+    {
+      "file": "math_open_panel_cheap_seed42.jsonl",
+      "n_lines": 59,
+      "n_obs_emitted": 0,
+      "note": "open-answer schema (no letter/choices to re-key on text)"
+    },
+    {
+      "file": "math_open_panel_seed42.jsonl",
+      "n_lines": 59,
+      "n_obs_emitted": 0,
+      "note": "open-answer schema (no letter/choices to re-key on text)"
+    },
+    {
+      "file": "medqa_pilot_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 100,
+      "note": ""
+    },
+    {
+      "file": "mmlu_pro_pilot_seed42.jsonl",
+      "n_lines": 50,
+      "n_obs_emitted": 100,
+      "note": ""
+    },
+    {
+      "file": "moo_m1_eval.jsonl",
+      "n_lines": 827,
+      "n_obs_emitted": 827,
+      "note": ""
+    },
+    {
+      "file": "qwen38_baseline_seed123.jsonl",
+      "n_lines": 78,
+      "n_obs_emitted": 0,
+      "note": "flat row with no item/choices field (cannot map letter to text)"
+    },
+    {
+      "file": "smoke.jsonl",
+      "n_lines": 2,
+      "n_obs_emitted": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke2.jsonl",
+      "n_lines": 2,
+      "n_obs_emitted": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke3.jsonl",
+      "n_lines": 6,
+      "n_obs_emitted": 12,
+      "note": ""
+    },
+    {
+      "file": "supergpqa_hard_pilot_seed42.jsonl",
+      "n_lines": 86,
+      "n_obs_emitted": 172,
+      "note": ""
+    }
+  ],
+  "n_items_total": 1043,
+  "n_items_gold_mismatch_excluded": 0,
+  "gold_mismatch_items": [],
+  "n_items_multi_replicate": 1039,
+  "n_items_wrong_text_pool_gt3": 0,
+  "plurality_sanity_check": {
+    "n_checked": 6644,
+    "n_mismatches": 0
+  },
+  "per_benchmark_real": {
+    "GPQA-Diamond": {
+      "n_items": 195,
+      "n_stable": 115,
+      "n_unstable": 80,
+      "instability_rate": 0.41025641025641024,
+      "n_wrong_stable": 2,
+      "n_wrong_unstable": 16,
+      "p_wrong_given_stable": 0.017391304347826087,
+      "p_wrong_given_unstable": 0.2,
+      "lift": 0.1826086956521739,
+      "mean_replicates_per_item": 16.52820512820513
+    },
+    "GSM8K": {
+      "n_items": 50,
+      "n_stable": 48,
+      "n_unstable": 2,
+      "instability_rate": 0.04,
+      "n_wrong_stable": 0,
+      "n_wrong_unstable": 0,
+      "p_wrong_given_stable": 0.0,
+      "p_wrong_given_unstable": 0.0,
+      "lift": 0.0,
+      "mean_replicates_per_item": 2
+    },
+    "LEXam": {
+      "n_items": 90,
+      "n_stable": 65,
+      "n_unstable": 25,
+      "instability_rate": 0.2777777777777778,
+      "n_wrong_stable": 6,
+      "n_wrong_unstable": 13,
+      "p_wrong_given_stable": 0.09230769230769231,
+      "p_wrong_given_unstable": 0.52,
+      "lift": 0.4276923076923077,
+      "mean_replicates_per_item": 3.6666666666666665
+    },
+    "MATH-500-MC": {
+      "n_items": 49,
+      "n_stable": 46,
+      "n_unstable": 3,
+      "instability_rate": 0.061224489795918366,
+      "n_wrong_stable": 0,
+      "n_wrong_unstable": 0,
+      "p_wrong_given_stable": 0.0,
+      "p_wrong_given_unstable": 0.0,
+      "lift": 0.0,
+      "mean_replicates_per_item": 2
+    },
+    "MMLU-Pro": {
+      "n_items": 83,
+      "n_stable": 73,
+      "n_unstable": 10,
+      "instability_rate": 0.12048192771084337,
+      "n_wrong_stable": 2,
+      "n_wrong_unstable": 3,
+      "p_wrong_given_stable": 0.0273972602739726,
+      "p_wrong_given_unstable": 0.3,
+      "lift": 0.2726027397260274,
+      "mean_replicates_per_item": 5.771084337349397
+    },
+    "MedQA": {
+      "n_items": 50,
+      "n_stable": 49,
+      "n_unstable": 1,
+      "instability_rate": 0.02,
+      "n_wrong_stable": 2,
+      "n_wrong_unstable": 1,
+      "p_wrong_given_stable": 0.04081632653061224,
+      "p_wrong_given_unstable": 1.0,
+      "lift": 0.9591836734693877,
+      "mean_replicates_per_item": 6.2
+    },
+    "SuperGPQA-hard": {
+      "n_items": 522,
+      "n_stable": 359,
+      "n_unstable": 163,
+      "instability_rate": 0.31226053639846746,
+      "n_wrong_stable": 62,
+      "n_wrong_unstable": 64,
+      "p_wrong_given_stable": 0.17270194986072424,
+      "p_wrong_given_unstable": 0.39263803680981596,
+      "lift": 0.21993608694909172,
+      "mean_replicates_per_item": 4.022988505747127
+    }
+  },
+  "per_benchmark_null": {
+    "GPQA-Diamond": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.17460494453722505,
+      "null_lift_ci95_lo": 0.1576086956521739,
+      "null_lift_ci95_hi": 0.1951086956521739,
+      "observed_lift": 0.1826086956521739,
+      "empirical_p_null_ge_observed": 0.4186,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "GSM8K": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.4997,
+      "null_lift_ci95_lo": 0.0,
+      "null_lift_ci95_hi": 1.0,
+      "observed_lift": 0.0,
+      "empirical_p_null_ge_observed": 1.0,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "LEXam": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.42902920078385814,
+      "null_lift_ci95_lo": 0.3076923076923077,
+      "null_lift_ci95_hi": 0.5476923076923077,
+      "observed_lift": 0.4276923076923077,
+      "empirical_p_null_ge_observed": 0.6412,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "MATH-500-MC": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.4976,
+      "null_lift_ci95_lo": 0.0,
+      "null_lift_ci95_hi": 1.0,
+      "observed_lift": 0.0,
+      "empirical_p_null_ge_observed": 1.0,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "MMLU-Pro": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.2726027397260274,
+      "null_lift_ci95_lo": 0.2726027397260274,
+      "null_lift_ci95_hi": 0.2726027397260274,
+      "observed_lift": 0.2726027397260274,
+      "empirical_p_null_ge_observed": 1.0,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "MedQA": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.4605836734693877,
+      "null_lift_ci95_lo": -0.04081632653061224,
+      "null_lift_ci95_hi": 0.9591836734693877,
+      "observed_lift": 0.9591836734693877,
+      "empirical_p_null_ge_observed": 0.5014,
+      "observed_exceeds_null_ci95_hi": false
+    },
+    "SuperGPQA-hard": {
+      "n_draws_usable": 5000,
+      "null_lift_mean": 0.20749142649598185,
+      "null_lift_ci95_lo": 0.16410301485453108,
+      "null_lift_ci95_hi": 0.24585477415666096,
+      "observed_lift": 0.21993608694909172,
+      "empirical_p_null_ge_observed": 0.3194,
+      "observed_exceeds_null_ci95_hi": false
+    }
+  },
+  "overall_real": {
+    "n_items": 1039,
+    "n_stable": 755,
+    "n_unstable": 284,
+    "instability_rate": 0.273339749759384,
+    "n_wrong_stable": 74,
+    "n_wrong_unstable": 97,
+    "p_wrong_given_stable": 0.09801324503311258,
+    "p_wrong_given_unstable": 0.3415492957746479,
+    "lift": 0.24353605074153528,
+    "mean_replicates_per_item": 6.390760346487006
+  },
+  "overall_null": {
+    "n_draws_usable": 5000,
+    "null_lift_mean": 0.2410439657341555,
+    "null_lift_ci95_lo": 0.2149932569757061,
+    "null_lift_ci95_hi": 0.2685236481093719,
+    "observed_lift": 0.24353605074153528,
+    "empirical_p_null_ge_observed": 0.4774,
+    "observed_exceeds_null_ci95_hi": false
+  }
+}

@@ -1,0 +1,91 @@
+question_id,subject,best_idf_weighted_score,best_shared_keyword_count_raw,n_matches_ge1_raw,top_match_sr,top_match_title,top_match_shared_words
+09a2eebe-6c96-4f10-bc76-689eec854b43,Interdisciplinary,5.333,1,2,451.36,"Ordinance on Parks of National Importance (Parks Ordinance, ParkO)",importance
+53bbecbc-ef12-4b60-9645-04015eeaa4ae,Interdisciplinary,5.333,1,12,101,Federal Constitution of the Swiss Confederation,constitution
+b9785176-6859-42c9-829d-0312609916ae,Private,7.957,2,8,272,"Swiss Civil Procedure Code (Civil Procedure Code, CPC)",civil;procedure
+736a05d4-da8a-4177-8bd9-03d4257ff68f,Interdisciplinary,4.64,1,7,455.163,"FSVO Ordinance on Laboratory Animal Husbandry, the Production of Genetically Modified Animals and Methods of Animal Experimentation (Animal Experimentation Ordinance)",production
+866f89e9-c8fd-4bef-bf85-e92a7b992cf7,Interdisciplinary,5.333,1,16,101,Federal Constitution of the Swiss Confederation,constitution
+38783200-42e6-465a-98b8-410a27eb4f56,Interdisciplinary,5.333,1,7,454,Federal Act on the Swiss National Park in the Canton of Graubünden (National Park Act),canton
+26263099-799d-4319-baac-3acf978c7c0a,Interdisciplinary,9.279,2,13,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,registered;companies
+8afbc6d1-fa2b-4e02-a0f3-af802c5320c3,Private,10.665,2,5,414.205.6,"Ordinance of the Swiss Accreditation Council on the Fees for Accreditation Procedures and Services on behalf of Third Parties (SAC Fees Ordinance, FeeO-SAC)",parties;third
+f1bdfe14-a0bc-496c-b9ea-49ed1d6d03df,Interdisciplinary,4.234,1,7,311.0,Swiss Criminal Code,criminal
+e7273a6a-d416-452a-9b8c-6998c58fced2,Interdisciplinary,5.333,1,20,531,"Federal Act on National Economic Supply (National Economic Supply Act, NESA)",economic
+d60d8887-e23a-4219-be7a-f1f29c281c53,Interdisciplinary,5.333,1,8,451.61,"Ordinance on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation (Nagoya Ordinance, NagO)",their
+102d2e11-f391-44a7-b978-a3f83d882f74,Interdisciplinary,5.333,1,6,142.512,"Ordinance on the Central Visa Information System and the National Visa System (Visa Information System Ordinance, VISO)",system
+8f4ae013-cbd7-4563-9d97-26686b88ea14,Interdisciplinary,5.333,1,9,251.5,"Ordinance on Sanctions imposed for Unlawful Restraints of Competition (Cartel Act Sanctions Ordinance, CASO)",imposed
+0ad0edf4-dc5f-40a3-9ec3-ae70daaa271e,Interdisciplinary,9.279,2,25,784.40,Federal Act on Radio and Television (RTVA),television;radio
+842abce3-39e3-43a5-8730-a4318fd1c3f1,Interdisciplinary,5.333,1,29,101,Federal Constitution of the Swiss Confederation,constitution
+2cdd4813-3450-4626-8aca-773dfea1f607,Interdisciplinary,5.333,1,19,531,"Federal Act on National Economic Supply (National Economic Supply Act, NESA)",economic
+ee9c501e-8d41-49d3-85bc-a4a1e8f6a57c,Interdisciplinary,5.333,1,7,151.3,"Federal Act on the Elimination of Discrimination against People with Disabilities (Disability Discrimination Act, DDA)",people
+2f078222-29e9-47ce-b441-66921b51b3e7,Interdisciplinary,7.487,2,33,651.1,"Federal Act on International Administrative Assistance in Tax Matters (Tax Administrative Assistance Act, TAAA)",administrative;international
+6500b177-e1e0-47f7-b550-8224fba100cf,Interdisciplinary,10.665,2,6,420.233,Ordinance of the Swiss Innovation Agency on the Fees and other Contractual Conditions for Members of the Innovation Council and on the Remuneration of Experts (Innosuisse Remuneration Ordinance),agency;remuneration
+1ac7dcee-1599-464e-949e-8464745c0177,Interdisciplinary,5.333,1,23,451.36,"Ordinance on Parks of National Importance (Parks Ordinance, ParkO)",importance
+b218966a-d22d-412b-b3d1-cffa3755872d,Interdisciplinary,7.893,2,12,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,foreign;switzerland
+a32c143b-f4e0-4c32-9f06-cf4cbf9579b6,Interdisciplinary,5.333,1,5,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,time
+5515aed1-568b-4a32-ac6d-8a41c70f878e,Interdisciplinary,5.333,1,23,101,Federal Constitution of the Swiss Confederation,constitution
+b9948b7c-c704-456f-bd02-c1bdf8cc17ba,Interdisciplinary,5.333,1,9,251.5,"Ordinance on Sanctions imposed for Unlawful Restraints of Competition (Cartel Act Sanctions Ordinance, CASO)",imposed
+7d1ed894-dea7-4d33-88b9-efccb20333a4,Interdisciplinary,8.363,2,24,0.810.3,Council of Europe Convention against Trafficking in Human Organs,convention;human
+99c5edda-c827-4430-8f45-5d0cb7412e4c,Private,5.333,1,5,211.223.13,Federal Act on Compulsory Social Measures and Placements prior to 1981 (CSMPA),compulsory
+7d9a3bb7-c8cf-4a4f-a502-b0c8ea44eef6,Interdisciplinary,10.665,2,5,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;taxes
+e2d75efc-b65e-40d1-9fa7-e47d05b2653d,Private,10.665,2,12,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,equity;office
+ca114601-0baa-4ada-8b10-26d0ece00f7e,Interdisciplinary,5.333,1,5,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,regime
+a58581c7-2ffe-412b-819c-9938459733b1,Interdisciplinary,5.333,1,4,454,Federal Act on the Swiss National Park in the Canton of Graubünden (National Park Act),canton
+e4f77fd4-cd04-4b47-821c-9c969dfc1f80,Interdisciplinary,5.333,1,22,172.327.11,Ordinance of the ETH Board on the Organisation of the Conciliation Commission under the Gender Equality Act for the ETH Domain (ConCom-ETH-O),under
+8449146d-90ee-4ee9-abe4-94e1beaa0ac2,Interdisciplinary,8.468,2,10,444.1,"Federal Act on the International Transfer of Cultural Property (Cultural Property Transfer Act, CPTA)",transfer;property
+e1440aa0-1770-4750-8c8e-69cb5dae0df7,Interdisciplinary,5.333,1,11,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,regime
+045fd390-346e-4d5a-a82c-5c620a53d207,Interdisciplinary,9.279,2,28,196.1,"Federal Act on the Freezing and the Restitution of Illicit Assets held by Foreign Politically Exposed Persons (Foreign Illicit Assets Act, FIAA)",held;foreign
+430dc3d6-009b-4da6-8eba-a01f1c58589c,Interdisciplinary,8.363,2,21,0.810.3,Council of Europe Convention against Trafficking in Human Organs,convention;human
+e7ce2112-cb65-469b-a6ae-fe9b49ebc8f9,Interdisciplinary,7.957,2,17,312.0,"Swiss Criminal Procedure Code (Criminal Procedure Code, CrimPC)",criminal;procedure
+568814d7-2e54-41ab-ac2c-c14f7e17f054,Public,5.333,1,22,220,Federal Act on the Amendment of the Swiss Civil Code (Part Five: The Code of Obligations),obligations
+c72132c6-8bcb-4d4c-9d5b-2acbd0cd42e8,Interdisciplinary,9.567,2,18,172.010.31,Federal Act on the Status and Tasks of the Swiss Federal Institute of Intellectual Property (IPIA),institute;property
+1aa2d158-1f58-4671-ba73-78b7f64d04d3,Interdisciplinary,4.234,1,3,444.1,"Federal Act on the International Transfer of Cultural Property (Cultural Property Transfer Act, CPTA)",transfer
+bffa4b3e-2917-424e-a915-9b277f58f54e,Interdisciplinary,4.234,1,7,210,Swiss Civil Code,civil
+b766bab3-7116-42ee-853e-2eb3f01c0c15,Interdisciplinary,15.305,3,8,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;double;taxation
+79b8e5fe-3c1c-434e-8ab4-3f7c6ea87e32,Interdisciplinary,13.226,3,20,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,registered;companies;switzerland
+4eadfed1-062d-441f-b86f-a3407bc282e7,Interdisciplinary,5.333,1,21,101,Federal Constitution of the Swiss Confederation,constitution
+02d7f932-337e-4f51-b72b-a3054d726c48,Private,5.333,1,4,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,capital
+53e67d91-df72-4136-b78c-4be1b900eaae,Interdisciplinary,9.279,2,19,784.40,Federal Act on Radio and Television (RTVA),television;radio
+70d58c55-71d9-400a-938a-d79bfa9856e0,Private,5.333,1,5,171.14,Standing Orders of the Council of States (SO-CS),states
+658ad4b8-1fb2-4ddf-be33-75064c459692,Interdisciplinary,8.468,2,11,444.1,"Federal Act on the International Transfer of Cultural Property (Cultural Property Transfer Act, CPTA)",transfer;property
+9abc219b-82f3-4c7c-91d7-653ae4960d02,Private,9.279,2,22,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,equity;foreign
+f14962d2-fa9c-436a-b283-daf4b770e9cf,Interdisciplinary,5.333,1,11,251.5,"Ordinance on Sanctions imposed for Unlawful Restraints of Competition (Cartel Act Sanctions Ordinance, CASO)",imposed
+0e6fe784-81bc-454f-9d8c-f3c339fc5205,Interdisciplinary,5.333,1,1,171.14,Standing Orders of the Council of States (SO-CS),states
+5a6dba84-0a81-48a5-ab34-74049fde90df,Interdisciplinary,5.333,1,8,170.512,"Federal Act on the Compilations of Federal Legislation and the Federal Gazette (Publications Act, PublA)",legislation
+087bd6d4-e66b-4e93-b4b0-eabd3000221a,Interdisciplinary,5.333,1,9,101,Federal Constitution of the Swiss Confederation,constitution
+fec50c1a-a039-4132-a084-c36540d87d9b,Interdisciplinary,10.665,2,8,420.233,Ordinance of the Swiss Innovation Agency on the Fees and other Contractual Conditions for Members of the Innovation Council and on the Remuneration of Experts (Innosuisse Remuneration Ordinance),agency;remuneration
+976c31fb-9a6c-4048-b82c-1103ca9359ae,Interdisciplinary,5.333,1,8,220,Federal Act on the Amendment of the Swiss Civil Code (Part Five: The Code of Obligations),obligations
+c26390d0-3935-4006-a24e-6dfaf39cef80,Private,0.0,0,0,,,
+b21b13ee-ceae-4883-949a-ca9b4f6c20e1,Interdisciplinary,10.665,2,10,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;taxes
+85eef1a1-ec5c-4708-b96f-1c231cf70de6,Interdisciplinary,5.333,1,14,451.36,"Ordinance on Parks of National Importance (Parks Ordinance, ParkO)",importance
+9975be1d-0c23-4dba-850f-b6e4319c3b4d,Public,5.333,1,15,192.126,"Ordinance on Conditions for Entry, Stay and Work for Private Household Employees of Individual Beneficiaries of Privileges, Immunities and Facilities (Private Household Employees Ordinance, PHEO)",individual
+ba413a41-1ebb-4c03-94e7-17e0445511d5,Interdisciplinary,8.363,2,20,0.810.3,Council of Europe Convention against Trafficking in Human Organs,convention;human
+4d0236c9-d3f2-4c60-8257-7225cddc1be6,Interdisciplinary,5.333,1,8,443.1,"Federal Act on Film Production and Film Culture (Film Act, FiA)",culture
+b4ead004-85e3-466a-b962-2aae328bcdb4,Interdisciplinary,5.333,1,11,454,Federal Act on the Swiss National Park in the Canton of Graubünden (National Park Act),canton
+de1c1c2a-bd46-4d81-b319-0fb93481797d,Interdisciplinary,15.305,3,8,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;double;taxation
+8b9b4ae4-41fd-42d1-99e5-556b8e900d0d,Interdisciplinary,8.363,2,36,0.810.3,Council of Europe Convention against Trafficking in Human Organs,convention;human
+5c5b901c-f9f1-4c80-965b-1f9e0b39d3f6,Interdisciplinary,15.305,3,9,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;double;taxation
+35e36767-b938-46f1-83db-ea9ad2a3ddc8,Interdisciplinary,5.333,1,10,451.61,"Ordinance on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation (Nagoya Ordinance, NagO)",equitable
+7fe55c7a-82d0-4cca-8b51-455539312689,Interdisciplinary,8.363,2,14,814.82,"Ordinance on the Rotterdam Convention on the Prior Informed Consent Procedure for Certain Chemicals in International Trade (PIC Ordinance, ChemPICO)",convention;procedure
+3745876e-f1aa-45d4-95e7-515fd94bb067,Interdisciplinary,5.333,1,15,173.41,"Federal Act on the Federal Patent Court (Patent Court Act, PatCA)",court
+1f971333-c7a9-4e08-b7d5-ba53f5d2ab96,Interdisciplinary,5.333,1,9,220,Federal Act on the Amendment of the Swiss Civil Code (Part Five: The Code of Obligations),obligations
+c1b40f1a-b273-4ba1-9ec2-3f0e3665096b,Interdisciplinary,5.333,1,13,454,Federal Act on the Swiss National Park in the Canton of Graubünden (National Park Act),canton
+72d45659-9250-4a9f-9818-3dc1132eb878,Interdisciplinary,10.665,2,7,672.3,Federal Act on the Recognition of Private Agreements for the Avoidance of Double Taxation with respect to Taxes on Income and on Capital,income;taxes
+f56522b5-2e36-4188-ad2e-66e5c429cd9a,Interdisciplinary,8.586,2,18,192.12,"Federal Act on the Privileges, Immunities and Facilities and the Financial Subsidies granted by Switzerland as a Host State (Host State Act, HSA)",state;switzerland
+00694d7e-6eb2-4f13-af22-1dc87d8194a5,Interdisciplinary,5.333,1,13,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,regime
+321d143a-8bc8-4403-a4a7-f7507c124281,Interdisciplinary,5.333,1,20,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,regime
+5dc69e0f-1ad8-4f6c-bc29-4c03eef68fbd,Interdisciplinary,5.333,1,2,151.3,"Federal Act on the Elimination of Discrimination against People with Disabilities (Disability Discrimination Act, DDA)",people
+398441e4-df09-4b8d-8d12-7a7bbfc317ef,Interdisciplinary,13.696,3,24,0.810.3,Council of Europe Convention against Trafficking in Human Organs,europe;convention;human
+85f1cc1d-6881-4ce7-8706-1de83450e79a,Interdisciplinary,9.279,2,11,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,registered;companies
+f8ec52b4-b134-48ae-9018-59c104a29796,Interdisciplinary,5.333,1,24,101,Federal Constitution of the Swiss Confederation,constitution
+1701d694-bddc-4f42-9bb1-b376a7317ce9,Interdisciplinary,5.333,1,4,172.327.11,Ordinance of the ETH Board on the Organisation of the Conciliation Commission under the Gender Equality Act for the ETH Domain (ConCom-ETH-O),domain
+fcdfb402-3cd2-4483-922d-4b1a82d5ff55,Interdisciplinary,8.468,2,16,444.1,"Federal Act on the International Transfer of Cultural Property (Cultural Property Transfer Act, CPTA)",transfer;property
+1ed14de1-4b52-423e-98d0-bb9027a17240,Interdisciplinary,5.333,1,6,451.61,"Ordinance on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation (Nagoya Ordinance, NagO)",their
+3c051a4b-8387-4378-9c2c-b97e8113918e,Interdisciplinary,7.893,2,23,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,foreign;switzerland
+ed64e65a-1ddc-4b6e-ba99-59018a14383f,Interdisciplinary,5.333,1,8,371,Federal Act on the Annulment of the Convictions of Persons who assisted Refugees at the time of the Nazi Regime,regime
+9526a1f2-7704-4cb5-9d5f-bac3a623a495,Interdisciplinary,5.333,1,17,172.327.11,Ordinance of the ETH Board on the Organisation of the Conciliation Commission under the Gender Equality Act for the ETH Domain (ConCom-ETH-O),under
+3c169f97-dc08-40a7-b647-79705eca9fe0,Interdisciplinary,5.333,1,12,251.5,"Ordinance on Sanctions imposed for Unlawful Restraints of Competition (Cartel Act Sanctions Ordinance, CASO)",imposed
+7f312059-c871-4aae-9f44-9eb4fc8625a1,Interdisciplinary,12.127,3,32,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,recognition;foreign;switzerland
+2fd8b61d-1c5b-4a09-818c-2780c6d50921,Interdisciplinary,5.333,1,11,454,Federal Act on the Swiss National Park in the Canton of Graubünden (National Park Act),canton
+362a46c3-5a62-4fa8-815e-3212b38d5826,Private,9.279,2,7,958.2,Ordinance on the Recognition of Foreign Trading Venues for the Trading of Equity Securities of Companies with Registered Office in Switzerland,registered;foreign
+e49934e7-16cc-455f-b5e7-efef5a34c270,Interdisciplinary,5.333,1,7,170.512,"Federal Act on the Compilations of Federal Legislation and the Federal Gazette (Publications Act, PublA)",legislation
+7020eae4-7abf-48e7-9074-d064e34d30c3,Interdisciplinary,5.333,1,25,451.36,"Ordinance on Parks of National Importance (Parks Ordinance, ParkO)",importance
+7f1e923a-ba29-47c6-b42f-497cf1ae387d,Interdisciplinary,5.333,1,7,451.61,"Ordinance on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation (Nagoya Ordinance, NagO)",equitable

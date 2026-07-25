@@ -1,0 +1,85 @@
+{
+  "dataset_stats": {
+    "num_examples": 35698,
+    "download_size_bytes": 191523464,
+    "dataset_size_bytes": 2054959849,
+    "language_frequencies": {
+      "de": 17559,
+      "rm": 534,
+      "it": 6201,
+      "en": 207,
+      "fr": 11197
+    },
+    "canton_frequencies": {
+      "ar": 330,
+      "ag": 483,
+      "ow": 513,
+      "ch": 15840,
+      "so": 547,
+      "fr": 1633,
+      "zg": 632,
+      "ne": 1115,
+      "gl": 467,
+      "ur": 367,
+      "tg": 453,
+      "ge": 837,
+      "sh": 469,
+      "vd": 870,
+      "sz": 423,
+      "bl": 863,
+      "vs": 1328,
+      "lu": 584,
+      "sg": 764,
+      "zh": 974,
+      "ti": 627,
+      "gr": 1205,
+      "ai": 416,
+      "ik": 510,
+      "be": 1344,
+      "bs": 899,
+      "ju": 804,
+      "nw": 401
+    },
+    "is_active_frequencies": {
+      "True": 35698
+    }
+  },
+  "metadata_cross_checks": {
+    "n_rows_read": 35698,
+    "n_rows_datasets_server": 35698,
+    "n_english_rows_parquet": 207,
+    "n_english_rows_datasets_server": 207,
+    "n_title_blank": 207,
+    "n_short_blank": 207,
+    "n_abbr_blank": 207,
+    "english_canton_distribution": {
+      "ch": 207
+    }
+  },
+  "n_english_titles_extracted": 207,
+  "n_titles_nonblank_after_extraction": 206,
+  "lexam_n_items": 90,
+  "lexam_subject_distribution": {
+    "Interdisciplinary": 79,
+    "Private": 9,
+    "Public": 2
+  },
+  "overlap_naive_ge1_count": 89,
+  "overlap_naive_ge1_pct": 98.88888888888889,
+  "overlap_naive_ge2_count": 35,
+  "overlap_naive_ge2_pct": 38.888888888888886,
+  "idf_threshold": 4.0,
+  "overlap_idf_weighted_count": 89,
+  "overlap_idf_weighted_pct": 98.88888888888889,
+  "idf_score_distribution": {
+    "max": 15.30500919923616,
+    "p10": 10.665437586530738,
+    "p25": 8.46821300919452,
+    "median": 5.332718793265369,
+    "p75": 5.332718793265369,
+    "min": 0.0
+  },
+  "law0_bar_pct": 30.0,
+  "law0_verdict_naive_ge1": "CLEARS BAR",
+  "law0_verdict_idf_weighted": "CLEARS BAR"
+}
