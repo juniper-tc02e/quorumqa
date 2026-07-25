@@ -34,3 +34,19 @@ sentence-transformers>=3.0
 # input). latex2sympy2-extended works standalone; sympy does the comparison.
 sympy>=1.12
 latex2sympy2-extended>=1.11
+
+# IFEval scorer port (benchmark/ifeval_verify.py, docs/capability-roadmap.md
+# F6/IF-1) -- both are real runtime deps of faithfully grading IFEval's
+# length_constraints:number_sentences / change_case:capital_word_frequency
+# (nltk: sentence/word tokenization, needs the one-time `punkt`/`punkt_tab`
+# nltk_data download -- `python -m nltk.downloader punkt punkt_tab`, then
+# fully offline) and language:response_language /
+# change_case:english_capital / change_case:english_lowercase (langdetect:
+# pure-Python, ships its n-gram profiles in the package, no download
+# needed). NOT added: absl-py, immutabledict -- those are dependencies of
+# the *official* google-research reference package used only transiently,
+# outside this repo, to validate this port (see
+# benchmark/results/ifeval_scorer_validation.md); nothing shipped here
+# imports them.
+nltk>=3.8
+langdetect>=1.0.9
