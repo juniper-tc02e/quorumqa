@@ -718,6 +718,62 @@ disputed-claim extraction → targeted retrieval → evidence to verifier+judge)
 committed pre-run). 30 tests; suite **473**. Their RUNS stay conditional on
 W1/W2 screening positive — only the build gate was lifted.
 
+## JUN KAI'S DIRECTIVES (2026-07-24) — INDEFINITE LOOP, standing decisions
+
+1. **Run in an INDEFINITE loop.** No stop time. "If there is an issue you want to
+   raise, take the best choice" — standing authority to resolve issues
+   autonomously, logging each resolution here.
+2. **Paid ordering: go DEEP ON SCALING FIRST**, then run the cheap
+   high-information probes before committing further seats.
+3. **Build the missing harnesses during the block: YES** (IFEval scorer,
+   SimpleQA loader, Swiss-law corpus check).
+
+ORCHESTRATOR RESOLUTION of an ordering nuance in (2): all FREE work runs NOW
+during the block (it costs nothing, and several free analyses GATE the paid
+scaling runs). At reset: scaling-deep (panel S1+S2) first per the directive,
+then the cheap probes (oracle coverage, AIME liveness, P(wrong|unanimous))
+before any further seat commitment (S5/S6).
+
+Two planning artifacts now govern the work:
+- `docs/capability-roadmap.md` — WHICH axes to chase (6 planners, 48 levers,
+  3 critics, 72 issues). Verdicts: Science winnable; Coding NOT winnable this
+  window (~50pt base gap); Math not winnable on absolute SOTA (saturated);
+  Multimodal architectural, and its obvious design is predicted-negative by our
+  own law; IFEval the strongest structural case (detection coverage 100% by
+  construction) but grader-blocked.
+- `docs/experiment-spec-book.md` — HOW each experiment runs (38 pre-registered
+  specs, 6 families, 85 critique issues applied).
+
+### THREE CORRECTIONS TO OUR OWN STANDARDS (adopted repo-wide)
+1. **The "+3 net discordant" bar is RETIRED** — statistically unreachable.
+   Exact one-sided McNemar: +3 = p 0.125 (best case), +4 = p 0.0625. Minimum
+   clearing p<0.05 with zero losses is **+5**. New rule: net >= +5 at one seed,
+   OR >= +3 at 2-of-3 seeds with pooled McNemar (n=270) clearing p<0.05.
+2. **GPQA must be keyed on choice TEXT, never letter** —
+   `load_gpqa._shuffle_choices` reshuffles per seed, so cross-seed joins on
+   letters are noise. Latent hazard.
+3. **F1(a)'s 2.1% family floor is INFLATED** — a config counts correct if EVER
+   correct across seed repeats, so part of the 7pt union headroom is resampling
+   luck. De-inflation is free and gates the council lever.
+
+### THE COST CORRECTION (measured; overturns prior reasoning)
+Under a TOKEN quota, tier labels do NOT predict cost. Measured per solver call:
+cheap flash seat **2,009 tok** (1,341 logged calls) vs flagship thinking seat
+**3,096 tok** (729 calls) on SuperGPQA-hard — only ~35% cheaper, NOT the 4x the
+USD table implies, so **15 cheap seats ~= 10 flagship seats** in quota terms. On
+AIME it inverts: cheap flash **24,411** vs flagship **5,327** tok/call (4.6x
+MORE), because max_tokens=2048 is not enforced here and flash rambles. All cost
+models now use measured per-role tokens.
+
+### BUG CAUGHT AND GUARDED (2026-07-24)
+`chem_flagship_gate` / `chem_thinking_gate` / `subject` / `smart_gate` branch on
+an exact `subject == "Organic Chemistry"` match, which exists only in GPQA's
+fine-grained labels. SuperGPQA stores `subject=discipline` (8 coarse values in
+our logs), so the chemistry branch can NEVER fire there and the lever
+degenerates byte-identically to `thinking_gate` while logging under a chem name.
+Now fails loudly BEFORE any paid call. Our committed chem results are all
+`--dataset gpqa` (seeds 217/314/471) and are UNAFFECTED — 90.9% stands.
+
 ## NEXT — everything is READY-TO-FIRE at quota reset (2026-07-28 03:32 UTC)
 1. AIME pilot ① (queued, fixed, paired design) — always first.
 2. W1 verified_gate screen (flaw-finder arm) on SuperGPQA-hard, 1 fresh seed
