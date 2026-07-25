@@ -147,6 +147,22 @@ def _to_float(token: str) -> float:
     return float(token.strip().replace("−", "-").lstrip("+"))
 
 
+def _to_float_or_none(token) -> Optional[float]:
+    """Lenient sibling of _to_float for optional ledger cells.
+
+    _to_float is deliberately strict -- its callers pre-screen with _NUMERIC_RE
+    and a raise there means the ledger is malformed. But n_common_items is
+    legitimately blank on some rows (rendered "NR" by n_seed_label), so reading
+    it needs a None rather than an exception.
+    """
+    if token is None:
+        return None
+    text = str(token).strip()
+    if not _NUMERIC_RE.match(text):
+        return None
+    return _to_float(text)
+
+
 def get_git_sha() -> str:
     try:
         out = subprocess.run(
@@ -294,23 +310,48 @@ def flat_reference_accuracy(ledger_df: pd.DataFrame, benchmark: str) -> Optional
     return sum(vals) / len(vals)
 
 
-def fill_category(seeds: int, delta_pp: Optional[float], contaminated: bool, provenance: str) -> str:
+def fill_category(
+    seeds: int,
+    delta_pp: Optional[float],
+    contaminated: bool,
+    provenance: str,
+    n_items: Optional[float] = None,
+) -> str:
     """Convention 2: solid = paired >=3 seeds clearing the +5 net-discordant
-    bar (here, the +-5pp dashed line is used as the visual proxy for that
-    bar, matching MCNEMAR_MIN_NET's own re-use across these figures). Half =
-    2 seeds, or magnitude in [NOISE_FLOOR, MCNEMAR_MIN_NET). Hollow = single
-    seed, OR inside the noise band -- nothing hollow is a claimed win.
-    Contaminated rows and 'computed_matched_approx' (baseline-mismatch risk
-    demonstrated on chem_thinking_gate, see module docstring) are capped
-    below solid regardless of magnitude/seed count."""
+    bar. Half = 2 seeds, or magnitude below the bar. Hollow = single seed, OR
+    inside the noise band -- nothing hollow is a claimed win. Contaminated rows
+    and 'computed_matched_approx' (baseline-mismatch risk demonstrated on
+    chem_thinking_gate, see module docstring) are capped below solid regardless
+    of magnitude/seed count.
+
+    UNITS. MCNEMAR_MIN_NET is +5 *items*, not +5 percentage points. Earlier
+    revisions compared it directly against delta_pp as "a visual proxy", which
+    is only equivalent at n=100 and is TOO PERMISSIVE at every smaller n --
+    on an n=50 benchmark 5pp is 2.5 items, half the bar, where the one-sided
+    exact McNemar p is >=0.25. So when n is known we convert to items and test
+    the real bar; only when n is unavailable do we fall back to the pp proxy,
+    and that fallback can never reach "solid".
+
+    Audited 2026-07-26: across every row of figure_claims_ledger.csv the two
+    rules agree, so this tightening changes no currently rendered marker. It
+    closes a latent trap rather than correcting a published claim -- the trap
+    would have fired the moment a small-n benchmark posted >+5pp at 3 seeds.
+    """
     if delta_pp is None:
         return "hollow"
     magnitude = abs(delta_pp)
     if contaminated:
         return "hollow"
+
+    if n_items and n_items > 0:
+        clears_bar = abs(delta_pp) / 100.0 * n_items >= MCNEMAR_MIN_NET
+    else:
+        # n unknown: the pp proxy cannot be verified, so it may not claim a win.
+        clears_bar = False
+
     if seeds <= 1 or magnitude < NOISE_FLOOR_PP:
         category = "hollow"
-    elif seeds >= 3 and magnitude >= MCNEMAR_MIN_NET:
+    elif seeds >= 3 and clears_bar:
         category = "solid"
     else:
         category = "half"
@@ -353,7 +394,7 @@ def resolve_row(row: pd.Series, flat_ref: Optional[float]) -> Resolved:
             provenance = "unresolved"
 
     is_tie = delta is not None and math.isclose(delta, 0.0, abs_tol=1e-9)
-    fill = fill_category(seeds, delta, contaminated, provenance)
+    fill = fill_category(seeds, delta, contaminated, provenance, _to_float_or_none(row.get("n_common_items")))
     shape = marker_shape(delta, is_tie)
 
     return Resolved(

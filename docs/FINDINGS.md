@@ -142,16 +142,29 @@ Selected mechanisms:
 ![Every lever against the noise floor](figures/f02_lever_deltas_by_benchmark.png)
 
 *Why most of these results are not claims. The shaded band is the ±2.5pp measured
-noise floor (an n=90 control replicate flipped 14/90 items); the dashed lines are
-±5, the minimum net-discordant count clearing p<0.05. A lollipop inside the band is
-indistinguishable from re-running the same config.*
+noise floor (an n=90 control replicate flipped 14/90 items). The dashed lines sit
+at ±5 **percentage points**, drawn as a visual proxy for the +5-**item**
+net-discordant bar — the two coincide only at n=100, and every benchmark here has
+n<100, so the drawn line is **more permissive than the real bar** (on an n=50
+benchmark, 5pp is 2.5 items). Marker fill is computed from the true item count,
+not from this line. A lollipop inside the band is indistinguishable from
+re-running the same config; a lollipop past the dashed line is **not** thereby
+significant.*
 
 Standards adopted the hard way, after each was violated once:
 
 - **Bars are net-discordant counts with an exact McNemar test.** A "+3 items per
   90" bar is *unreachable* — one-sided exact McNemar gives p=0.125 at +3 and
-  p=0.0625 at +4, so **+5 is the minimum that clears p<0.05**. Seven levers had
-  been pre-registered against a bar their own analysis plan rejects.
+  p=0.0625 at +4, so **+5 is the minimum that clears p<0.05 — and only with
+  zero losses** (b=5, c=0). That qualifier is load-bearing and was missing from
+  this summary until 2026-07-26: a net of +5 built from 10 gains and 5 losses
+  gives **p=0.151**, nowhere near significant, and at 10 discordant pairs the
+  net required is **+8**. Net magnitude is therefore a *necessary screen, never
+  sufficient*; the portfolio bar in
+  [capability-roadmap.md](capability-roadmap.md) has always required
+  `net ≥ +5` **and** `McNemar p < 0.05` as separate conjuncts, and that is the
+  binding rule. Seven levers had been pre-registered against a bar their own
+  analysis plan rejects.
 - **Kill dominates bar**, pre-registered, never decided after seeing data.
 - **Paired same-item designs only.** A run with dropped items is re-run, never
   analysed — one pilot was invalidated by 32/60 drops whose survivors then
