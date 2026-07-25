@@ -368,7 +368,7 @@ from benchmark.load_gpqa import load_benchmark_set
 from benchmark.load_lexam import load_lexam_set
 from benchmark.load_medqa import load_medqa_set
 from benchmark.load_mmlu_pro import load_mmlu_pro_full_set, load_mmlu_pro_set, load_mmlu_pro_stem_set
-from benchmark.load_supergpqa import load_supergpqa_set
+from benchmark.load_supergpqa import load_supergpqa_full_set, load_supergpqa_set
 
 # Every lever is a pure function of (client, tool_session, item, lever_name)
 # -- none of them know or care which benchmark an item came from, since they
@@ -386,6 +386,14 @@ DATASET_LOADERS = {
     # numbers above -- see load_mmlu_pro.py's module docstring.
     "mmlu_pro_full": lambda n, seed, skip_huggingface: load_mmlu_pro_full_set(n=n, seed=seed),
     "supergpqa": lambda n, seed, skip_huggingface: load_supergpqa_set(n=n, seed=seed, difficulty="hard"),
+    # F7 continuation (docs/capability-roadmap.md item F7 / section 3.6): the
+    # untrimmed SuperGPQA variant -- keeps every one of a question's native
+    # options (measured max 10) instead of trimming to 4. difficulty stays
+    # "hard" (this loader's own default, matching "supergpqa" above) --
+    # only the choice-count trim is disabled. NOT comparable to
+    # "supergpqa"'s numbers above -- see load_supergpqa.py's module
+    # docstring.
+    "supergpqa_full": lambda n, seed, skip_huggingface: load_supergpqa_full_set(n=n, seed=seed, difficulty="hard"),
     "medqa": lambda n, seed, skip_huggingface: load_medqa_set(n=n, seed=seed),
 }
 

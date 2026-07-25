@@ -958,7 +958,7 @@ additional API cost to reproduce).
 | qwen38_panel 0% escalation, 63/90 survivors | `lever_qwen38_panel_supergpqa_seed42.jsonl` |
 | GPQA family floor 4/197 (2.1%) | `family_floor_analysis_data.json` (`f1_floor`), `f1_family_floor_items.csv` |
 | Stability-audit permutation null (+24.4 vs +24.1, p=0.48) | `stability_audit_summary.json`, `stability_audit_items.csv` |
-| SuperGPQA-hard flagship_panel 3-seed (+3.8/+2.4/+6.2, mean +4.1) | `lever_flagship_panel_supergpqa_seed{42,7,123}.jsonl` + matched `lever_baseline_supergpqa_seed{42,7,123}.jsonl` |
+| SuperGPQA-hard flagship_panel 3-seed (+3.8/+2.4/+6.2, mean +4.1; pooled b=11, c=1, net +10, McNemar p=0.0032) | `lever_flagship_panel_supergpqa_seed{42,7,123}.jsonl` + matched `lever_baseline_supergpqa_seed{7,123}.jsonl`; **seed 42's comparator is the `baseline` arm inside `supergpqa_hard_pilot_seed42.jsonl`** — there is no `lever_baseline_supergpqa_seed42.jsonl`, and this row previously implied one. Recompute with `python -m benchmark.verify_flagship_claim` |
 | chem_thinking_gate 3-seed (90.9/91.0/90.8) | `lever_chem_thinking_gate_gpqa_seed{314,217,471}.jsonl` |
 | rag_presolve 4-seed (+4.7/+6.9/+8.0/−5.6) | `lever_rag_presolve_supergpqa_seed{42,7,123,271}.jsonl` |
 | MoO router (92.8 / 90.1 / 91.0 / 96.4) | `moo_m1_eval.jsonl`, `moo_calibration_table.csv` |

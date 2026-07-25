@@ -113,8 +113,46 @@ def test_noise_band_and_contamination_still_dominate():
     assert fill_category(1, 50.0, False, "printed_mean", 90) == "hollow"
 
 
-def test_units_fix_is_a_no_op_on_current_ledger():
-    """Closed a latent trap; restated no published claim."""
+def test_flagship_row_is_solid_because_it_now_carries_a_real_p_value():
+    """The one intended classification change, and why it is not a regression.
+
+    flagship_panel/SuperGPQA-hard used to render "half" only because its
+    net_discordant_items and mcnemar_p cells were EMPTY -- the claim was
+    validated but its statistic had never been computed. Filling in the real
+    pooled test (net +10, p=0.0032, verified by
+    benchmark/verify_flagship_claim.py) promotes it to "solid". That is the
+    figure becoming more accurate, not looser: the promotion is driven by a
+    measured p<0.05, not by the pp proxy.
+    """
+    row = next(
+        r for r in _rows()
+        if r["config"] == "flagship_panel" and r["benchmark_label"] == "SuperGPQA-hard"
+    )
+    assert row["net_discordant_items"] == "+10"
+    assert row["mcnemar_p"] == "0.0032"
+    assert fill_category(
+        3, 4.1, False, "printed_mean",
+        _to_float_or_none(row["n_common_items"]),
+        _to_float_or_none(row["net_discordant_items"]),
+        _to_float_or_none(row["mcnemar_p"]),
+    ) == "solid"
+    # Without the statistic it would have stayed "half" -- the old behaviour.
+    assert fill_category(3, 4.1, False, "printed_mean", None, None, None) == "half"
+
+
+def test_a_real_p_value_cannot_rescue_a_sub_bar_net():
+    """p<0.05 alone is not enough; net magnitude remains a necessary screen."""
+    assert fill_category(3, 4.1, False, "printed_mean", 241, 3, 0.01) == "half"
+    assert fill_category(3, 4.1, False, "printed_mean", 241, 10, 0.20) == "half"
+
+
+def test_units_fix_is_a_no_op_on_rows_without_a_recorded_statistic():
+    """Closed a latent trap; restated no published claim.
+
+    Scoped to rows whose net/p cells are empty -- i.e. every row as the ledger
+    stood before the flagship statistic was computed. The one row that now
+    carries a real p-value is covered by the test above.
+    """
 
     def old_rule(seeds, delta_pp, contaminated, provenance):
         if delta_pp is None:
@@ -141,6 +179,8 @@ def test_units_fix_is_a_no_op_on_current_ledger():
     )
     compared = 0
     for row in _rows():
+        if _to_float_or_none(row.get("mcnemar_p")) is not None:
+            continue  # covered by the flagship-promotion test instead
         seeds = _seed_count(row)
         pp = _to_float_or_none(row.get("mean_delta_pp"))
         n = _to_float_or_none(row.get("n_common_items"))

@@ -316,6 +316,8 @@ def fill_category(
     contaminated: bool,
     provenance: str,
     n_items: Optional[float] = None,
+    net_items: Optional[float] = None,
+    mcnemar_p: Optional[float] = None,
 ) -> str:
     """Convention 2: solid = paired >=3 seeds clearing the +5 net-discordant
     bar. Half = 2 seeds, or magnitude below the bar. Hollow = single seed, OR
@@ -343,7 +345,17 @@ def fill_category(
     if contaminated:
         return "hollow"
 
-    if n_items and n_items > 0:
+    if mcnemar_p is not None:
+        # Best case: the row carries its ACTUAL paired test. Use it directly
+        # rather than reconstructing an item count from pp x n -- p<0.05 is the
+        # real criterion, and net magnitude is only its necessary screen.
+        clears_bar = mcnemar_p < 0.05 and (
+            net_items is None or abs(net_items) >= MCNEMAR_MIN_NET
+        )
+    elif n_items and n_items > 0:
+        # Reconstruct the item count. This checks the necessary screen only --
+        # it cannot verify p, so a row promoted on this path is claiming that
+        # net magnitude alone is suggestive, not that significance was tested.
         clears_bar = abs(delta_pp) / 100.0 * n_items >= MCNEMAR_MIN_NET
     else:
         # n unknown: the pp proxy cannot be verified, so it may not claim a win.
@@ -394,7 +406,15 @@ def resolve_row(row: pd.Series, flat_ref: Optional[float]) -> Resolved:
             provenance = "unresolved"
 
     is_tie = delta is not None and math.isclose(delta, 0.0, abs_tol=1e-9)
-    fill = fill_category(seeds, delta, contaminated, provenance, _to_float_or_none(row.get("n_common_items")))
+    fill = fill_category(
+        seeds,
+        delta,
+        contaminated,
+        provenance,
+        _to_float_or_none(row.get("n_common_items")),
+        _to_float_or_none(row.get("net_discordant_items")),
+        _to_float_or_none(row.get("mcnemar_p")),
+    )
     shape = marker_shape(delta, is_tie)
 
     return Resolved(

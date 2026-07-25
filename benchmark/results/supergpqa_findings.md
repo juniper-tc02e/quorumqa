@@ -170,6 +170,40 @@ competent solver panel beats the same flagship model running alone,
 consistently, on a broad hard-STEM benchmark: the strongest general-use
 evidence the project has.
 
+### The paired statistic, computed 2026-07-26
+
+This section previously stated the deltas but never the test behind them, and
+the ledger's `net_discordant_items` / `mcnemar_p` cells for this row were
+**empty** — the repo's flagship claim carried the word "validated" without a
+recorded p-value. Recomputed from the committed files, paired on the
+question_id intersection of each arm:
+
+| seed | candidate n | comparator n | shared | b (gains) | c (losses) | net | delta | one-sided p |
+|---|---|---|---|---|---|---|---|---|
+| 42 | 79 | 86 | 78 | 3 | 0 | +3 | +3.8 | 0.1250 |
+| 7 | 83 | 88 | 82 | 3 | 1 | +2 | +2.4 | 0.3125 |
+| 123 | 81 | 86 | 81 | 5 | 0 | **+5** | +6.2 | **0.0312** |
+| **pooled** | | | **241** | **11** | **1** | **+10** | **+4.15** | **0.0032** |
+
+**The bar is cleared by both of its branches**, not just one: seed 123 alone
+reaches net +5 with p=0.0312, *and* two of three seeds reach net ≥ +3 with the
+pooled McNemar at p=0.0032. The published per-seed deltas reproduce exactly.
+
+Two honest qualifications:
+
+- **The candidate arm dropped items on every seed** (79/83/81 rows against
+  comparators of 86/88/86; 241 shared, not the 270 the roadmap's bar names).
+  The paired test is unaffected *in kind* — both arms are scored on the same
+  surviving items — but the item sample is survivor-selected. Unlike the D0
+  bar, this biases the estimate only if dropping correlates with the treatment
+  effect, not merely with difficulty.
+- **Seed 42's comparator is the `baseline` arm inside
+  `supergpqa_hard_pilot_seed42.jsonl`.** There is no
+  `lever_baseline_supergpqa_seed42.jsonl`; the evidence table in
+  `docs/negative-results.md` implied one until this was caught.
+
+Reproduce: `python -m benchmark.verify_flagship_claim`
+
 ## qwen38_panel (strongest solver tier): a mechanistically clean NEGATIVE
 
 Tested whether an even stronger solver tier beats flagship_panel: all
