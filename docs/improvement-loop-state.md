@@ -774,6 +774,51 @@ degenerates byte-identically to `thinking_gate` while logging under a chem name.
 Now fails loudly BEFORE any paid call. Our committed chem results are all
 `--dataset gpqa` (seeds 217/314/471) and are UNAFFECTED — 90.9% stands.
 
+## FREE SPRINT #2 COMPLETE (2026-07-24, 4 workers) — suite 473 → 654
+
+| Deliverable | Outcome |
+|---|---|
+| **Panel-scaling family** (S1-S4) | Built. Coprime 5x3 factorial verified **15/15 unique cells**; `cycled_panel` control verified **3/15** (reproduces the old bug deliberately). `--no-tribunal` vote-only = exactly N calls, zero tribunal. Ordered per-seat answers logged → whole N-curve derived offline from ONE run. McNemar independently reproduced (+3→0.125, +4→0.0625, +5→0.03125). 61 tests. |
+| **IFEval harness** | Built AND validated against the OFFICIAL google-research grader: 50/50, 126/126, and 77.22% vs 77.0-77.2% on its own 540-row fixture. **Found a bug in the official grader** (LetterFrequencyChecker substitutes a RANDOM letter on bad kwargs → the reference is nondeterministic on its own data; we don't replicate it). Anti-gaming split frozen: 8/25 types held out, **verified 0 leaks across all 541 prompts**. 82 tests. |
+| **SimpleQA harness** | Built. 4,326 rows, MIT, cross-checked byte-for-byte vs OpenAI's CSV; `urls` column dropped per firewall. ABSTAIN is a real terminal state, never scored correct (verified). F1 formula verified by hand. **Corrected a roadmap assumption**: the double-encoded-UTF-8 gotcha did NOT reproduce (0/4,326). 38 tests. |
+| **Selector audit** | **CANDIDATE FREE WIN** — see below. |
+| **Stability audit** | **CLEAN KILL** — see below. |
+| **Swiss law check** | **AXIS CLOSED** with a better diagnosis — see below. |
+
+### The candidate free win (needs held-out confirmation before shipping)
+Changing only WHICH already-computed letter is reported — zero new calls —
+`max_single_confidence` scores **net +121 overall (p<0.0001)** and
+`confidence_weighted` **net +49**, both clearing the pre-registered bar on
+GPQA-Diamond (+55/+22) and SuperGPQA-hard (+76/+25). The junk control
+(`longest_reasoning`, net **−314**) loses badly, which is what proves confidence
+carries real signal. **ORACLE headroom: +12.00pp overall (+654 items)**; GPQA
++13.15pp, SuperGPQA-hard +14.71pp — and the winning selector captures only
+16.1%/28.0% of it, so most remains for a smarter selector.
+**NOT SHIPPABLE YET**: this is in-sample selection over the pools it was scored
+on — precisely the fitting risk spec **S7** exists to catch. S7 (held-out, fresh
+pools, unused seeds) is now promoted to the front of the paid queue.
+**Reconciles with W5 rather than contradicting it**: W5 showed verbalized
+confidence too weak to PREDICT wrongness (AUC 0.625); RANKING candidates is a
+strictly easier task, so the same signal can fail one and win the other.
+
+### The clean kill (and why the repair mattered)
+Answer-instability looks like a strong wrongness signal (+24.4pp lift) — but under
+a permutation null holding each item's right/wrong replicate count fixed, the
+observed lift lands almost exactly ON the null mean (overall +24.4 vs +24.1,
+p=0.48; GPQA +18.3 vs +17.5, p=0.42). **Instability does not survive its own
+mechanical floor.** Without the null we'd have banked a pure arithmetic artifact.
+CONSEQUENCE: the CAL-2 instability rider and any instability-gated escalation
+lever are **dead as designed**. P(wrong|unanimous) still requires a genuinely NEW
+observation (perturb-and-re-observe), not a re-reading of existing replicates —
+the roadmap's "re-weighting is the ceiling in a new costume" test, confirmed.
+
+### Law: closed, with a sharper reason than "corpus mismatch"
+`rcds/swiss_legislation` is real (207 English rows, federal only). But genuine
+topical overlap with our logged LEXam English items is only **~11-21%** (a naive
+keyword match inflates it to 98.9%). The real reason: **88% of LEXam's English
+pool is "Interdisciplinary"** — legal history, theory, comparative law — which no
+statute-text corpus can serve. Retrieval was never the missing piece.
+
 ## NEXT — everything is READY-TO-FIRE at quota reset (2026-07-28 03:32 UTC)
 1. AIME pilot ① (queued, fixed, paired design) — always first.
 2. W1 verified_gate screen (flaw-finder arm) on SuperGPQA-hard, 1 fresh seed
