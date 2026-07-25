@@ -81,10 +81,15 @@ docs/                     architecture diagram and design notes
 
 The short version: deliberation pays if and only if solver errors decorrelate
 into visible disagreement *and* the escalation mechanism fires on it. The
-predictor is the cheap-to-flagship gap (the unanimous-wrong rate) — not
-benchmark difficulty, not baseline height, and not the subject label. Medicine
-and hard science are both knowledge-and-reasoning multiple choice, and they sit
-at opposite ends of that table.
+cheap-to-flagship gap (the unanimous-wrong rate) predicts whether that is even
+possible — not benchmark difficulty, not baseline height, and not the subject
+label. Medicine and hard science are both knowledge-and-reasoning multiple
+choice, and they sit at opposite ends of that table.
+
+That gap is **necessary but not sufficient**, and our own figures caught us
+overstating it: LEXam has a 22% unanimous-wrong rate and still loses 6 points,
+because there the missing ingredient is *knowledge*, not decorrelation. See
+[`docs/figures/`](docs/figures/) — the "large gap, lever still lost" quadrant.
 
 Validated at a 3-seed bar against a single `qwen3.7-max` call: **+4.1 mean** on
 SuperGPQA-hard, **+4.4** on chemistry (90.9%), and matches-or-beats on

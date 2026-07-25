@@ -16,13 +16,23 @@ over (see [negative-results.md §4](negative-results.md)).
 
 > **Deliberation pays if and only if (a) solver errors decorrelate into visible
 > disagreement, and (b) the escalation mechanism actually fires on it.**
-> The predictor is the **cheap-to-flagship gap**, measured as the
-> unanimous-wrong rate — **not** benchmark difficulty, not baseline height, and
-> not the subject label.
+> The **cheap-to-flagship gap** (the unanimous-wrong rate) is what predicts
+> whether those conditions *can* be met — **not** benchmark difficulty, not
+> baseline height, and not the subject label.
 
-The evidence that makes this hard to argue with: medicine and hard science are
+The evidence that makes the subject label useless: medicine and hard science are
 both "knowledge-and-reasoning multiple choice," and they sit at opposite ends of
-the table below. The subject told us nothing; the gap told us everything.
+the table below.
+
+**But the gap is NECESSARY, not SUFFICIENT — and our own data says so.** Figure
+[F05](figures/f05_unanimous_wrong_vs_lever_delta.png) plots the gap against the
+best lever delta, and two of five points land in a quadrant labelled *"large
+gap, lever still lost"*: LEXam has a 22% unanimous-wrong rate and still loses
+**−6.0**, and MMLU-Pro has 14% and loses **−2.0**. A large gap only pays when the
+missing ingredient is *decorrelation*. Where it is missing **knowledge or corpus**
+(LEXam's Swiss law against a STEM/US-law index) the gap is real, the escalation
+fires, and the answer is still wrong. Earlier summaries in this repo stated the
+gap as the predictor outright; that was too strong, and F05 is what caught it.
 
 | Surface | Flagship single call | Cheap-tier unanimous-wrong | Best lever outcome |
 |---|---|---|---|
