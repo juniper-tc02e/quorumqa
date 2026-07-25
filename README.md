@@ -75,6 +75,32 @@ deploy/                   Alibaba Cloud OSS client (proof of deployment) + ECS n
 docs/                     architecture diagram and design notes
 ```
 
+## Research and findings
+
+**→ [`docs/FINDINGS.md`](docs/FINDINGS.md) is the index to everything measured.**
+
+The short version: deliberation pays if and only if solver errors decorrelate
+into visible disagreement *and* the escalation mechanism fires on it. The
+predictor is the cheap-to-flagship gap (the unanimous-wrong rate) — not
+benchmark difficulty, not baseline height, and not the subject label. Medicine
+and hard science are both knowledge-and-reasoning multiple choice, and they sit
+at opposite ends of that table.
+
+Validated at a 3-seed bar against a single `qwen3.7-max` call: **+4.1 mean** on
+SuperGPQA-hard, **+4.4** on chemistry (90.9%), and matches-or-beats on
+GPQA-Diamond. Retrieval adds **+3.5 mean** where knowledge is the gap, and
+nothing where it isn't. The shipped submission config is 78.9% — *below* the
+flagship's 84.4%, at ~11% lower cost; that was always a cost claim.
+
+The largest artifact is the negative results:
+**[`docs/negative-results.md`](docs/negative-results.md)** — 22 measured nulls
+each with its mechanism, 6 methodological errors we caught in our own work, and
+4 adjudicated contradictions between our own documents. A
+[verified research pass](docs/frontier-oss-model-research.md) found that no
+frontier lab publishes on multi-agent ensembling, LLM-as-judge, or
+self-preference bias, so these nulls have no published prior — each one is a run
+someone else doesn't have to waste.
+
 ## Deployment
 
 The backend runs on Alibaba Cloud ECS and persists every deliberation
