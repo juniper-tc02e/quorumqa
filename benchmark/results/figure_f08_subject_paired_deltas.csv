@@ -1,0 +1,44 @@
+benchmark,subject,n,baseline_acc,engine_acc,delta_pp,delta_items,hatched
+GPQA-Diamond,Inorganic Chemistry,1,1.0,0.0,-100.0,-1,True
+GPQA-Diamond,Optics and Acoustics,2,1.0,0.5,-50.0,-1,True
+MMLU-Pro,engineering,7,0.8571428571428571,0.42857142857142855,-42.857142857142854,-3,True
+GPQA-Diamond,Electromagnetism and Photonics,5,1.0,0.6,-40.0,-2,True
+MMLU-Pro,law,3,0.6666666666666666,0.3333333333333333,-33.33333333333333,-1,True
+MATH-500-MC,Precalculus,4,1.0,0.75,-25.0,-1,True
+MMLU-Pro,chemistry,4,1.0,0.75,-25.0,-1,True
+MMLU-Pro,other,4,1.0,0.75,-25.0,-1,True
+MATH-500-MC,Algebra,9,1.0,0.7777777777777778,-22.22222222222222,-2,True
+LEXam,Interdisciplinary,42,0.8571428571428571,0.6904761904761905,-16.666666666666664,-7,False
+GPQA-Diamond,Organic Chemistry,86,0.8604651162790697,0.7209302325581395,-13.953488372093027,-12,False
+SuperGPQA-hard,Science,58,0.7586206896551724,0.6379310344827587,-12.06896551724137,-7,False
+SuperGPQA-hard,Engineering,25,0.88,0.76,-12.0,-3,True
+GPQA-Diamond,Chemistry (general),14,1.0,0.9285714285714286,-7.14285714285714,-1,True
+GSM8K,unknown,50,1.0,0.96,-4.0000000000000036,-2,True
+LEXam,Private,7,0.8571428571428571,0.8571428571428571,0.0,0,True
+MMLU-Pro,business,5,1.0,1.0,0.0,0,True
+MMLU-Pro,biology,3,1.0,1.0,0.0,0,True
+MATH-500-MC,Prealgebra,7,1.0,1.0,0.0,0,True
+LEXam,Public,1,1.0,1.0,0.0,0,True
+MATH-500-MC,Number Theory,7,1.0,1.0,0.0,0,True
+MATH-500-MC,Counting & Probability,8,1.0,1.0,0.0,0,True
+MATH-500-MC,Intermediate Algebra,10,1.0,1.0,0.0,0,True
+MATH-500-MC,Geometry,4,1.0,1.0,0.0,0,True
+MMLU-Pro,economics,5,1.0,1.0,0.0,0,True
+MMLU-Pro,health,2,1.0,1.0,0.0,0,True
+MMLU-Pro,history,1,0.0,0.0,0.0,0,True
+MMLU-Pro,computer science,1,1.0,1.0,0.0,0,True
+MMLU-Pro,math,8,1.0,1.0,0.0,0,True
+GPQA-Diamond,Relativistic Mechanics,5,0.6,0.6,0.0,0,True
+GPQA-Diamond,Astrophysics,7,1.0,1.0,0.0,0,True
+GPQA-Diamond,Physics (general),17,1.0,1.0,0.0,0,True
+SuperGPQA-hard,Philosophy,1,1.0,1.0,0.0,0,True
+SuperGPQA-hard,Literature and Arts,1,0.0,0.0,0.0,0,True
+SuperGPQA-hard,Economics,1,1.0,1.0,0.0,0,True
+MMLU-Pro,physics,4,1.0,1.0,0.0,0,True
+MMLU-Pro,psychology,2,1.0,1.0,0.0,0,True
+MedQA,step2&3,26,0.9230769230769231,0.9230769230769231,0.0,0,True
+MMLU-Pro,philosophy,1,1.0,1.0,0.0,0,True
+MedQA,step1,24,0.9583333333333334,1.0,4.1666666666666625,1,True
+GPQA-Diamond,Quantum Mechanics,22,0.9090909090909091,0.9545454545454546,4.545454545454552,1,True
+GPQA-Diamond,Molecular Biology,18,0.6666666666666666,0.7222222222222222,5.555555555555558,1,True
+GPQA-Diamond,High-energy particle physics,6,0.8333333333333334,1.0,16.666666666666664,1,True

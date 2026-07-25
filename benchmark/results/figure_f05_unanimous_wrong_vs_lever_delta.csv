@@ -1,0 +1,6 @@
+benchmark,unanimous_wrong_rate_pct,n_unanimous_sample,best_lever_config,best_lever_delta_pp,best_lever_verdict,best_lever_seeds,evidence_fill
+LEXam,22.0,50,thinking_gate,-6.0,screen,1,half
+MMLU-Pro,14.0,50,thinking_gate,-2.0,screen,1,half
+MMLU-Pro-STEM,1.7,60,flagship_panel,0.0,inert,1,none
+MedQA,4.0,50,shipped_engine,2.0,inert,1,none
+SuperGPQA-hard,23.0,86,flagship_panel,4.1,validated,3,full
