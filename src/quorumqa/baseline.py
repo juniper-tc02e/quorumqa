@@ -2,6 +2,7 @@ import time
 from collections import Counter
 
 from quorumqa.config import BASELINE_MODEL, SOLVER_MODEL
+from quorumqa.letters import choice_block, letter_hint, parse_letter
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import BaselineResult, GPQAItem
 
@@ -12,15 +13,23 @@ BASELINE_SYSTEM = (
 
 
 def _ask_once(client: QwenClient, model: str, item: GPQAItem, role: str, thinking: bool = True):
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", item.choices))
+    # A-J generalized (docs/capability-roadmap.md F7), completing the sweep that
+    # covered the four engine roles and the levers. This site was the BLOCKING
+    # gap: every accuracy claim is a delta against this single-agent baseline, so
+    # on a >4-choice item (mmlu_pro_full, MedXpertQA) the old zip("ABCD", choices)
+    # would have silently truncated the baseline's prompt to the first 4 options
+    # while the engine saw all of them -- the baseline would have been answering
+    # an easier question, and the comparison would have been invalid rather than
+    # merely noisy. quorumqa.letters is byte-identical at 4 choices by
+    # construction, so every published baseline number is unaffected.
+    n = len(item.choices)
     user = (
-        f"Question: {item.question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "reasoning": "..."}\n'
+        f"Question: {item.question}\n\nChoices:\n{choice_block(item.choices)}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n)}", "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences."
     )
     result = client.chat_json(model=model, system=BASELINE_SYSTEM, user=user, role=role, thinking=thinking)
-    letter = str(result.data.get("letter", "")).strip().upper()[:1]
-    return (letter if letter in "ABCD" else "A"), result.usage
+    return parse_letter(result.data.get("letter", ""), n), result.usage
 
 
 def solve_single_agent(client: QwenClient, item: GPQAItem) -> BaselineResult:

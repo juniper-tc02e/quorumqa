@@ -6,8 +6,8 @@ from pydantic import BaseModel, Field
 class GPQAItem(BaseModel):
     question_id: str
     question: str
-    choices: list[str]  # exactly 4, order already shuffled by the loader
-    correct_letter: str  # "A" | "B" | "C" | "D"
+    choices: list[str]  # 2-10 (see quorumqa.letters.letters_for), order already shuffled by the loader
+    correct_letter: str  # "A".."J" -- one of quorumqa.letters.letters_for(len(choices))
     subject: Optional[str] = None
 
 

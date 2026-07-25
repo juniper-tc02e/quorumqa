@@ -1,6 +1,7 @@
 import asyncio
 
 from quorumqa.config import N_SOLVERS, SOLVER_LENSES, SOLVER_MODEL, SOLVER_MODELS, SOLVER_TEMPERATURES
+from quorumqa.letters import choice_block, letter_hint, parse_letter
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import CallUsage, SolverAnswer
 
@@ -13,16 +14,16 @@ SOLVER_SYSTEM = (
 
 
 def _solve_one(client: QwenClient, question: str, choices: list[str], lens: str, model: str = SOLVER_MODEL, temperature: float = 0.4) -> tuple[SolverAnswer, CallUsage]:
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
-    letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
-        letter=letter if letter in "ABCD" else "A",
+        letter=parse_letter(result.data.get("letter", ""), n_choices),
         confidence=float(result.data.get("confidence", 0.5)),
         reasoning=str(result.data.get("reasoning", "")),
         lens=lens,

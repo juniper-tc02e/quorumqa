@@ -358,6 +358,7 @@ from quorumqa.engine.judge import JUDGE_SYSTEM, adjudicate
 from quorumqa.engine.skeptic import rebut
 from quorumqa.engine.solver import SOLVER_SYSTEM, _lenses_for, _solve_one, solve_all
 from quorumqa.engine.verifier import verify
+from quorumqa.letters import choice_block, letter_hint, letters_for, parse_letter
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import CallUsage, GPQAItem, JudgeVerdict, QuestionResult, SkepticRebuttal, SolverAnswer, VerifierFinding
 from quorumqa.tools.mcp_client import VerifierToolSession, verifier_tool_session
@@ -366,7 +367,7 @@ from quorumqa.tools.mcp_server import sympy_check
 from benchmark.load_gpqa import load_benchmark_set
 from benchmark.load_lexam import load_lexam_set
 from benchmark.load_medqa import load_medqa_set
-from benchmark.load_mmlu_pro import load_mmlu_pro_set, load_mmlu_pro_stem_set
+from benchmark.load_mmlu_pro import load_mmlu_pro_full_set, load_mmlu_pro_set, load_mmlu_pro_stem_set
 from benchmark.load_supergpqa import load_supergpqa_set
 
 # Every lever is a pure function of (client, tool_session, item, lever_name)
@@ -379,6 +380,11 @@ DATASET_LOADERS = {
     "lexam": lambda n, seed, skip_huggingface: load_lexam_set(n=n, seed=seed),
     "mmlu_pro": lambda n, seed, skip_huggingface: load_mmlu_pro_set(n=n, seed=seed),
     "mmlu_pro_stem": lambda n, seed, skip_huggingface: load_mmlu_pro_stem_set(n=n, seed=seed),
+    # F7 (docs/capability-roadmap.md item F7 / section 3.6): the untrimmed
+    # variant -- keeps every one of MMLU-Pro's native options (up to 10)
+    # instead of trimming to 4. NOT comparable to "mmlu_pro"/"mmlu_pro_stem"
+    # numbers above -- see load_mmlu_pro.py's module docstring.
+    "mmlu_pro_full": lambda n, seed, skip_huggingface: load_mmlu_pro_full_set(n=n, seed=seed),
     "supergpqa": lambda n, seed, skip_huggingface: load_supergpqa_set(n=n, seed=seed, difficulty="hard"),
     "medqa": lambda n, seed, skip_huggingface: load_medqa_set(n=n, seed=seed),
 }
@@ -398,16 +404,16 @@ def _plurality(answers):
 def _solve_one_thinking(client, question, choices, lens, model=MECHANICAL_MODEL, temperature=0.4):
     """Identical to solver._solve_one except thinking=True. Same model, same
     prompt -- isolates reasoning depth as the only variable."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role="solver_thinking", thinking=True, temperature=temperature, retries=2)
-    letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
-        letter=letter if letter in "ABCD" else "A",
+        letter=parse_letter(result.data.get("letter", ""), n_choices),
         confidence=float(result.data.get("confidence", 0.5)),
         reasoning=str(result.data.get("reasoning", "")),
         lens=lens,
@@ -535,10 +541,10 @@ GATE_SYSTEM = (
 
 
 def second_opinion_gate(client, question, choices, solver_answers, plurality_letter):
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in solver_answers)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Panel's unanimous answer: {plurality_letter}\n\nReasoning given:\n{transcript}\n\n"
         'JSON shape: {"doubt": true|false, "reason": "..."} -- reason under 20 words.'
     )
@@ -580,7 +586,8 @@ def adjudicate_qwen38(
     transport only). Everything else about this lever -- solvers, skeptic,
     verifier, escalation trigger -- is untouched from the shipped engine.
     """
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(
         f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
     )
@@ -590,12 +597,12 @@ def adjudicate_qwen38(
     ) or "(no checkable claims were raised)"
 
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Solver transcript:\n{transcript}\n\n"
         f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
         f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
         f"Verifier findings:\n{findings_block}\n\n"
-        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        f'JSON shape: {{"final_letter": "{letter_hint(n_choices)}", "decisive_reasoning": "...", '
         '"dissent": "unresolved objection, or null if none", '
         '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
     )
@@ -625,10 +632,9 @@ def adjudicate_qwen38(
         raise ValueError(f"No JSON object found in qwen38 judge response text: {text!r}")
     parsed = json.loads(match.group(0))
 
-    letter = str(parsed.get("final_letter", "")).strip().upper()[:1]
     dissent = parsed.get("dissent") or None
     verdict = JudgeVerdict(
-        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        final_letter=parse_letter(parsed.get("final_letter", ""), n_choices, fallback=solver_answers[0].letter),
         decisive_reasoning=str(parsed.get("decisive_reasoning", "")),
         dissent=dissent,
         overturned_plurality=bool(parsed.get("overturned_plurality", False)),
@@ -674,10 +680,11 @@ def _solve_one_qwen38(client, question, choices, lens, temperature=0.4):
     transport, unlike QwenClient.chat_json). Any "thinking" content block in
     the response is simply skipped when extracting the answer JSON, same
     handling as adjudicate_qwen38."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     headers = {
@@ -702,9 +709,8 @@ def _solve_one_qwen38(client, question, choices, lens, temperature=0.4):
         raise ValueError(f"No JSON object found in qwen38 solver response text: {text!r}")
     parsed = json.loads(match.group(0))
 
-    letter = str(parsed.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
-        letter=letter if letter in "ABCD" else "A",
+        letter=parse_letter(parsed.get("letter", ""), n_choices),
         confidence=float(parsed.get("confidence", 0.5)),
         reasoning=str(parsed.get("reasoning", "")),
         lens=lens,
@@ -770,10 +776,10 @@ def flaw_finder_gate_check(client, question, choices, solver_answers, plurality_
     gate (which used a cheap model and opinion-only framing, no reasoning
     depth). Runs once per unanimous plurality; the caller escalates to the
     shipped tribunal iff flaw_found is true."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in solver_answers)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Panel's unanimous answer: {plurality_letter}\n\nReasoning given:\n{transcript}\n\n"
         'JSON shape: {"flaw_found": true|false, "flaw": "the specific flaw found, or empty '
         'string if none", "confidence": 0.0-1.0}'
@@ -812,10 +818,10 @@ def cas_gate_check(client, question, choices, solver_answers, plurality_letter):
     performed here (it must stay deterministic/local, no model call) -- the
     caller runs the new sympy_check MCP tool (tools/mcp_server.py) against
     the returned relation/candidate."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(f"[{a.lens}] {a.reasoning}" for a in solver_answers)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Panel's unanimous answer: {plurality_letter}\n\nReasoning given:\n{transcript}\n\n"
         'JSON shape: {"checkable": true|false, "relation": "sympy-parseable equation, '
         "e.g. 'LHS = RHS', empty string if not checkable\", \"candidate\": \"the chosen "
@@ -869,21 +875,21 @@ def _solve_one_permuted(client, question, choices, lens, seed, question_id, seat
     diversified_panel run its seats at the flagship tier (thinking=True,
     role tagged "solver_thinking", same convention as _solve_one_rag's
     `thinking` parameter) without a second copy of this function."""
+    n_choices = len(choices)
     shuffled_choices, perm = _permute_choices(choices, seed, question_id, seat_index)
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", shuffled_choices))
+    choice_block_str = choice_block(shuffled_choices)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     role = "solver_thinking" if thinking else "solver"
     result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role=role, thinking=thinking, temperature=temperature, retries=2)
-    shuffled_letter = str(result.data.get("letter", "")).strip().upper()[:1]
-    if shuffled_letter not in "ABCD":
-        shuffled_letter = "A"
-    shuffled_index = "ABCD".index(shuffled_letter)
+    letters = letters_for(n_choices)
+    shuffled_letter = parse_letter(result.data.get("letter", ""), n_choices)
+    shuffled_index = letters.index(shuffled_letter)
     canonical_index = perm[shuffled_index]
-    canonical_letter = "ABCD"[canonical_index]
+    canonical_letter = letters[canonical_index]
     answer = SolverAnswer(
         letter=canonical_letter,
         confidence=float(result.data.get("confidence", 0.5)),
@@ -946,16 +952,16 @@ def _solve_one_method(client, question, choices, method_prompt, method_name, mod
     stored in SolverAnswer.lens so downstream logging/analysis can see
     which method each seat used, the same field every other lever already
     uses for its lens/method label."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{method_prompt}", user=user, role="solver", thinking=False, temperature=temperature, retries=2)
-    letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
-        letter=letter if letter in "ABCD" else "A",
+        letter=parse_letter(result.data.get("letter", ""), n_choices),
         confidence=float(result.data.get("confidence", 0.5)),
         reasoning=str(result.data.get("reasoning", "")),
         lens=method_name,
@@ -1264,18 +1270,18 @@ def _solve_one_rag(client, question, choices, lens, evidence_block, model=MECHAN
     role="solver_thinking" tag so downstream analysis can distinguish the
     thinking seat's calls from the plain seats' the same way it already can
     for thinking_gate/chem_thinking_gate."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     evidence_prefix = f"{evidence_block}\n\n" if evidence_block else ""
     user = (
-        f"{evidence_prefix}Question: {question}\n\nChoices:\n{choice_block}\n\n"
-        'JSON shape: {"letter": "A|B|C|D", "confidence": 0.0-1.0, "reasoning": "..."}\n'
+        f"{evidence_prefix}Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
+        f'JSON shape: {{"letter": "{letter_hint(n_choices)}", "confidence": 0.0-1.0, "reasoning": "..."}}\n'
         "Keep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
     )
     role = "solver_thinking" if thinking else "solver"
     result = client.chat_json(model=model, system=f"{SOLVER_SYSTEM}\n\n{lens}", user=user, role=role, thinking=thinking, temperature=temperature, retries=2)
-    letter = str(result.data.get("letter", "")).strip().upper()[:1]
     answer = SolverAnswer(
-        letter=letter if letter in "ABCD" else "A",
+        letter=parse_letter(result.data.get("letter", ""), n_choices),
         confidence=float(result.data.get("confidence", 0.5)),
         reasoning=str(result.data.get("reasoning", "")),
         lens=lens,
@@ -1425,7 +1431,7 @@ def minority_rebuttal_check(
     is expected empty when concede is true (requested in the prompt, not
     enforced -- same defensive-parsing posture as every other JSON contract
     in this file)."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    choice_block_str = choice_block(choices)
     findings_block = "\n".join(
         f"- claim: {f.claim} | tool: {f.tool_used}({f.tool_query}) -> {f.tool_result} | supports claim: {f.supports_claim}"
         for f in verifier_findings
@@ -1439,7 +1445,7 @@ def minority_rebuttal_check(
         "right, give ONE concise counter-argument addressing the majority's strongest point."
     )
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Your original answer: {minority_answer.letter}\nYour original reasoning: {minority_answer.reasoning}\n\n"
         f"Majority answer ({plurality_letter}) -- reasoning:\n{majority_reasoning_block}\n\n"
         f"Verifier findings:\n{findings_block}\n\n"
@@ -1469,7 +1475,8 @@ def adjudicate_post_debate(
     docstring. role="post_debate_judge" only distinguishes this call from
     the one-shot judge call in logging/tests; the JSON contract is
     identical to the shipped judge's."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(
         f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
     )
@@ -1483,22 +1490,21 @@ def adjudicate_post_debate(
     ) or "(no minority seats)"
 
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Solver transcript:\n{transcript}\n\n"
         f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
         f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
         f"Verifier findings:\n{findings_block}\n\n"
         f"Debate round -- each minority seat's response after seeing the majority's reasoning "
         f"and the verifier's findings:\n{debate_block}\n\n"
-        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        f'JSON shape: {{"final_letter": "{letter_hint(n_choices)}", "decisive_reasoning": "...", '
         '"dissent": "unresolved objection, or null if none", '
         '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
     )
     result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="post_debate_judge")
-    letter = str(result.data.get("final_letter", "")).strip().upper()[:1]
     dissent = result.data.get("dissent") or None
     verdict = JudgeVerdict(
-        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        final_letter=parse_letter(result.data.get("final_letter", ""), n_choices, fallback=solver_answers[0].letter),
         decisive_reasoning=str(result.data.get("decisive_reasoning", "")),
         dissent=dissent,
         overturned_plurality=bool(result.data.get("overturned_plurality", False)),
@@ -1675,7 +1681,8 @@ def adjudicate_with_r3_evidence(
     adjudicate_qwen38's docstring -- if the shipped adjudicate() prompt
     ever changes, this copy must change with it. role stays "judge" (this
     IS the lever's only judge call, nothing to disambiguate in logs)."""
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    n_choices = len(choices)
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(
         f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
     )
@@ -1686,21 +1693,20 @@ def adjudicate_with_r3_evidence(
     evidence_section = f"\n\nEVIDENCE (retrieved for the disputed claim):\n{evidence_block}" if evidence_block else ""
 
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Solver transcript:\n{transcript}\n\n"
         f"Skeptic's rebuttal (targeting {skeptic_rebuttal.target_letter}): "
         f"disputed step: {skeptic_rebuttal.disputed_step}\nargument: {skeptic_rebuttal.argument}\n\n"
         f"Verifier findings:\n{findings_block}"
         f"{evidence_section}\n\n"
-        'JSON shape: {"final_letter": "A|B|C|D", "decisive_reasoning": "...", '
+        f'JSON shape: {{"final_letter": "{letter_hint(n_choices)}", "decisive_reasoning": "...", '
         '"dissent": "unresolved objection, or null if none", '
         '"overturned_plurality": true/false, "confidence": "high|medium|low"}'
     )
     result = client.chat_json(model=JUDGE_MODEL, system=JUDGE_SYSTEM, user=user, role="judge")
-    letter = str(result.data.get("final_letter", "")).strip().upper()[:1]
     dissent = result.data.get("dissent") or None
     verdict = JudgeVerdict(
-        final_letter=letter if letter in "ABCD" else solver_answers[0].letter,
+        final_letter=parse_letter(result.data.get("final_letter", ""), n_choices, fallback=solver_answers[0].letter),
         decisive_reasoning=str(result.data.get("decisive_reasoning", "")),
         dissent=dissent,
         overturned_plurality=bool(result.data.get("overturned_plurality", False)),

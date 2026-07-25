@@ -1,0 +1,192 @@
+{
+  "adjudicate_post_debate": {
+    "max_tokens": 1024,
+    "model": "qwen3.7-max",
+    "retries": 1,
+    "role": "post_debate_judge",
+    "seed": null,
+    "system": "You are the Judge adjudicating a contested exam question. Weigh ARGUMENTS, not headcounts: an unrefuted minority position beats a conforming majority. You are given independent solver rationales, a skeptic's rebuttal of the plurality answer, and tool-grounded verifier findings (treat these as ground truth where they directly address a claim). Rule on the single best answer letter, state the specific argument that was decisive, and report any unresolved dissent -- do not manufacture false consensus.",
+    "temperature": 0.4,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nSolver transcript:\n[lensA] answered A (confidence 0.60): because reasons\n\n[lensB] answered B (confidence 0.60): because reasons\n\n[lensC] answered B (confidence 0.60): because reasons\n\nSkeptic's rebuttal (targeting B): disputed step: step X\nargument: argument Y\n\nVerifier findings:\n- claim: 2+2=4 | tool: safe_calculate({'expression': '2+2'}) -> 4 | supports claim: True\n\nDebate round -- each minority seat's response after seeing the majority's reasoning and the verifier's findings:\n- Seat A: CONCEDED -- convinced\n\nJSON shape: {\"final_letter\": \"A|B|C|D\", \"decisive_reasoning\": \"...\", \"dissent\": \"unresolved objection, or null if none\", \"overturned_plurality\": true/false, \"confidence\": \"high|medium|low\"}"
+  },
+  "adjudicate_qwen38": {
+    "model": "qwen3.8-max-preview",
+    "system": "You are the Judge adjudicating a contested exam question. Weigh ARGUMENTS, not headcounts: an unrefuted minority position beats a conforming majority. You are given independent solver rationales, a skeptic's rebuttal of the plurality answer, and tool-grounded verifier findings (treat these as ground truth where they directly address a claim). Rule on the single best answer letter, state the specific argument that was decisive, and report any unresolved dissent -- do not manufacture false consensus.",
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nSolver transcript:\n[lensA] answered A (confidence 0.60): because reasons\n\n[lensB] answered B (confidence 0.60): because reasons\n\n[lensC] answered B (confidence 0.60): because reasons\n\nSkeptic's rebuttal (targeting B): disputed step: step X\nargument: argument Y\n\nVerifier findings:\n- claim: 2+2=4 | tool: safe_calculate({'expression': '2+2'}) -> 4 | supports claim: True\n\nJSON shape: {\"final_letter\": \"A|B|C|D\", \"decisive_reasoning\": \"...\", \"dissent\": \"unresolved objection, or null if none\", \"overturned_plurality\": true/false, \"confidence\": \"high|medium|low\"}"
+  },
+  "adjudicate_with_r3_evidence": {
+    "max_tokens": 1024,
+    "model": "qwen3.7-max",
+    "retries": 1,
+    "role": "judge",
+    "seed": null,
+    "system": "You are the Judge adjudicating a contested exam question. Weigh ARGUMENTS, not headcounts: an unrefuted minority position beats a conforming majority. You are given independent solver rationales, a skeptic's rebuttal of the plurality answer, and tool-grounded verifier findings (treat these as ground truth where they directly address a claim). Rule on the single best answer letter, state the specific argument that was decisive, and report any unresolved dissent -- do not manufacture false consensus.",
+    "temperature": 0.4,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nSolver transcript:\n[lensA] answered A (confidence 0.60): because reasons\n\n[lensB] answered B (confidence 0.60): because reasons\n\n[lensC] answered B (confidence 0.60): because reasons\n\nSkeptic's rebuttal (targeting B): disputed step: step X\nargument: argument Y\n\nVerifier findings:\n- claim: 2+2=4 | tool: safe_calculate({'expression': '2+2'}) -> 4 | supports claim: True\n\nEVIDENCE (retrieved for the disputed claim):\nEvidence text here\n\nJSON shape: {\"final_letter\": \"A|B|C|D\", \"decisive_reasoning\": \"...\", \"dissent\": \"unresolved objection, or null if none\", \"overturned_plurality\": true/false, \"confidence\": \"high|medium|low\"}"
+  },
+  "cas_gate_check": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "verified_gate_cas",
+    "seed": null,
+    "system": "You are the CAS (computer-algebra) extractor for a science-exam panel that just gave a UNANIMOUS answer. Decide whether that answer can be verified by a symbolic/arithmetic equality check -- it is the numeric result of a calculation, satisfies an equation, or matches a formula evaluated with the quantities given in the question. If so, write the check as ONE sympy-parseable equation (\"LHS = RHS\") with the chosen answer's numeric value already substituted in wherever possible (e.g. \"2 * 3.0 + 4 = 10\"); if a variable must remain because the answer IS that variable's value, leave that ONE symbol in the equation and also report its numeric value as `candidate`. NEVER invent a check for a conceptual, qualitative, or multi-step-judgment question -- report checkable=false instead of guessing.",
+    "temperature": 0.2,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nPanel's unanimous answer: B\n\nReasoning given:\n[lensA] because reasons\n\n[lensB] because reasons\n\n[lensC] because reasons\n\nJSON shape: {\"checkable\": true|false, \"relation\": \"sympy-parseable equation, e.g. 'LHS = RHS', empty string if not checkable\", \"candidate\": \"the chosen answer's numeric value as a plain string, empty string if not checkable\"}"
+  },
+  "flaw_finder_gate_check": {
+    "max_tokens": 1024,
+    "model": "qwen3.7-max",
+    "retries": 2,
+    "role": "verified_gate_flaw",
+    "seed": null,
+    "system": "You are an expert reviewer auditing a panel's UNANIMOUS answer to a hard graduate-level science question. This is VERIFICATION, not solving -- do not silently re-derive the answer from scratch and grade it against your own; read the panel's chosen answer and its stated reasoning, and hunt specifically for a concrete, checkable flaw: a wrong fact, a skipped case, a misapplied formula or law, a common misconception the question is designed to trap. If you find one, name it precisely. If the reasoning genuinely holds up under scrutiny, confirm it -- do not manufacture doubt just because the question is hard.",
+    "temperature": 0.3,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nPanel's unanimous answer: B\n\nReasoning given:\n[lensA] because reasons\n\n[lensB] because reasons\n\n[lensC] because reasons\n\nJSON shape: {\"flaw_found\": true|false, \"flaw\": \"the specific flaw found, or empty string if none\", \"confidence\": 0.0-1.0}"
+  },
+  "judge_adjudicate": {
+    "max_tokens": 1024,
+    "model": "qwen3.7-max",
+    "retries": 1,
+    "role": "judge",
+    "seed": null,
+    "system": "You are the Judge adjudicating a contested exam question. Weigh ARGUMENTS, not headcounts: an unrefuted minority position beats a conforming majority. You are given independent solver rationales, a skeptic's rebuttal of the plurality answer, and tool-grounded verifier findings (treat these as ground truth where they directly address a claim). Rule on the single best answer letter, state the specific argument that was decisive, and report any unresolved dissent -- do not manufacture false consensus.",
+    "temperature": 0.4,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nSolver transcript:\n[lensA] answered A (confidence 0.60): because reasons\n\n[lensB] answered B (confidence 0.60): because reasons\n\n[lensC] answered B (confidence 0.60): because reasons\n\nSkeptic's rebuttal (targeting B): disputed step: step X\nargument: argument Y\n\nVerifier findings:\n- claim: 2+2=4 | tool: safe_calculate({'expression': '2+2'}) -> 4 | supports claim: True\n\nJSON shape: {\"final_letter\": \"A|B|C|D\", \"decisive_reasoning\": \"...\", \"dissent\": \"unresolved objection, or null if none\", \"overturned_plurality\": true/false, \"confidence\": \"high|medium|low\"}"
+  },
+  "minority_rebuttal_check": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "minority_rebuttal",
+    "seed": null,
+    "system": "You are the solver who answered A while the panel majority answered B. Review the majority's reasoning and the verifier's findings below with an open mind -- your job now is to judge the argument, not defend your original pick out of stubbornness. If the majority's case (or the verifier's findings) genuinely holds up, concede. If you still believe your original answer is right, give ONE concise counter-argument addressing the majority's strongest point.",
+    "temperature": 0.4,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nYour original answer: A\nYour original reasoning: because reasons\n\nMajority answer (B) -- reasoning:\n[lensB] reasoning\n\n[lensC] reasoning\n\nVerifier findings:\n- claim: 2+2=4 | tool: safe_calculate({'expression': '2+2'}) -> 4 | supports claim: True\n\nJSON shape: {\"concede\": true|false, \"reason\": \"why you concede or hold your position\", \"counter_argument\": \"required if concede is false, at most 4 sentences; empty string if conceding\"}"
+  },
+  "second_opinion_gate": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "gate",
+    "seed": null,
+    "system": "You are a fast sanity-checker reviewing a panel's UNANIMOUS answer to a hard graduate-level science question, before it ships without further review. All three independent solvers agreed, so your default should be to trust them -- only raise doubt if you spot a concrete, specific flaw in the shared reasoning (a wrong fact, a skipped case, a common misconception the question is designed to trap). Do not raise doubt just because the topic is hard.",
+    "temperature": 0.2,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nPanel's unanimous answer: B\n\nReasoning given:\n[lensA] because reasons\n\n[lensB] because reasons\n\n[lensC] because reasons\n\nJSON shape: {\"doubt\": true|false, \"reason\": \"...\"} -- reason under 20 words."
+  },
+  "skeptic_rebut": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "skeptic",
+    "seed": null,
+    "system": "You are the Skeptic. The solver panel below did NOT reach unanimous agreement on this question. Your job is narrowly scoped: attack the PLURALITY answer's weakest inferential step. Name the specific reasoning step you dispute and why -- a generic 'I'm not sure' critique is not acceptable. If you genuinely cannot find a flaw, say so explicitly rather than inventing one.",
+    "temperature": 0.4,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nPlurality answer: B\n\nSolver transcript:\n[lensA] answered A (confidence 0.60): because reasons\n\n[lensB] answered B (confidence 0.60): because reasons\n\n[lensC] answered B (confidence 0.60): because reasons\n\nJSON shape: {\"target_letter\": \"the letter you are disputing\", \"disputed_step\": \"the specific inferential step you dispute\", \"argument\": \"your rebuttal argument\"}"
+  },
+  "solve_one": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "temperature": 0.3,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_method": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nMethod: solve forward analytically, step by step. Derive the answer from first principles or known formulas in a clear logical sequence, then match your result to the closest choice.",
+    "temperature": 0.3,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_permuted": {
+    "_canonical_letter": "A",
+    "_permutation_record": {
+      "canonical_letter": "A",
+      "seat_index": 0,
+      "shuffled_letter": "B",
+      "shuffled_order": [
+        1,
+        0,
+        2,
+        3
+      ]
+    },
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "temperature": 0.4,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 100\nB) 50\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_qwen38": {
+    "model": "qwen3.8-max-preview",
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_rag_no_evidence": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "temperature": 0.3,
+    "thinking": false,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_rag_with_evidence": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver_thinking",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "temperature": 0.9,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Relevant reference passages (may or may not be useful):\n[Water] Water boils at 100C at sea level...\n\nQuestion: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  },
+  "solve_one_thinking": {
+    "max_tokens": 1024,
+    "model": "qwen3.6-flash",
+    "retries": 2,
+    "role": "solver_thinking",
+    "seed": null,
+    "system": "You are one independent solver in a panel of experts answering a hard, graduate-level multiple-choice science question. Answer on your own reasoning -- you cannot see any other solver's answer. Be honest about uncertainty in your confidence score.\n\nAnswer by reasoning from first principles, step by step.",
+    "temperature": 0.9,
+    "thinking": true,
+    "thinking_budget": null,
+    "user": "Question: What is the boiling point of water at sea level, in degrees Celsius?\n\nChoices:\nA) 50\nB) 100\nC) 150\nD) 200\n\nJSON shape: {\"letter\": \"A|B|C|D\", \"confidence\": 0.0-1.0, \"reasoning\": \"...\"}\nKeep reasoning to at most 3 sentences -- your answer letter matters more than showing full working."
+  }
+}

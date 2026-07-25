@@ -1,4 +1,5 @@
 from quorumqa.config import SKEPTIC_MODEL
+from quorumqa.letters import choice_block
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import CallUsage, SkepticRebuttal, SolverAnswer
 
@@ -19,12 +20,12 @@ def rebut(
     plurality_letter: str,
     solver_answers: list[SolverAnswer],
 ) -> tuple[SkepticRebuttal, CallUsage]:
-    choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
+    choice_block_str = choice_block(choices)
     transcript = "\n\n".join(
         f"[{a.lens}] answered {a.letter} (confidence {a.confidence:.2f}): {a.reasoning}" for a in solver_answers
     )
     user = (
-        f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
+        f"Question: {question}\n\nChoices:\n{choice_block_str}\n\n"
         f"Plurality answer: {plurality_letter}\n\nSolver transcript:\n{transcript}\n\n"
         'JSON shape: {"target_letter": "the letter you are disputing", '
         '"disputed_step": "the specific inferential step you dispute", '
