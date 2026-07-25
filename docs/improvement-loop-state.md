@@ -693,7 +693,12 @@ ceiling section (correlated-error floor, verifier gap, self-preference
 bias, tool-checkable cap), and Track B restated as a measurable claim:
 **beat qwen3.8-max-preview solo on shared items/seeds, net ≥ +3/90
 discordant, 3-seed bar, diversity accounting mandatory.** Key status: GPQA
-society (90.9%) is −2.7pt UNDER the 3.8-solo bar (93.6%); SuperGPQA-hard
+society (90.9%) vs the 3.8-solo bar — **sign unknown**, superseding the
+"−2.7pt UNDER" reading written here originally. The bar's 93.6% is 73/78
+with 12 drops; imputing those bounds it to **[81.1%, 94.4%]**, and 90.9%
+lies inside that band (so: 9.8pt ahead to 3.5pt behind). It is also
+cross-seed (123 vs 314/217/471), which D0 does not fix. See
+`docs/negative-results.md` §4 and the D0 pre-registration. SuperGPQA-hard
 bar unmeasured → P1 (3.8-solo paired baselines) is the first new paid spend.
 
 ## FREE SPRINT COMPLETE (2026-07-24, orchestrator + 4 Sonnet workers)

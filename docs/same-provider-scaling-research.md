@@ -175,7 +175,7 @@ Same-provider scaling has a floor it cannot dig below, and the program's credibi
 
 | Benchmark | Floor measurement | Cost | What it bounds |
 |---|---|---|---|
-| GPQA-Diamond | F1 intersection (logs incl. 3.8-solo 93.6% baseline) + P3 on ~10-item pool | free + small | Max W1/W2 recovery; the 2.7pt society-to-3.8 deficit's composition |
+| GPQA-Diamond | F1 intersection (logs incl. the 3.8-solo baseline, survivor-only) + P3 on ~10-item pool | free + small | Max W1/W2 recovery; the composition of the society-to-3.8 deficit — whose *sign* is not yet established (§5) |
 | SuperGPQA-hard | F1 + P3 on ~20/86 pool + P1 (3.8-solo unmeasured) | free + cheapest paid | The real Track-B bar; addressable pool for the +4.1→+6 goal |
 | AIME-60 | W3's logged coverage-vs-selection + P2 + P1 arm | ~zero extra + small | Whether math headroom is coverage or selection; kill: flash < 15% |
 | MATH-500 / MMLU-STEM | F5 map (already measured saturated) | free | Nothing to scale; routing-only, no-harm |
@@ -194,7 +194,7 @@ Everything short of that is Track A (the price claim: match flagship cheaper), w
 
 | Surface | Family-best bar | Best society today | Gap |
 |---|---|---|---|
-| GPQA-Diamond | **93.6%** (3.8-solo, measured) | chem_thinking_gate **90.9%** (3 seeds) | **−2.7pt — currently UNDER the bar.** The hardest surface; ~2.5 discordant items of ground to make up before any claim. |
+| GPQA-Diamond | **[81.1%, 94.4%]** (3.8-solo; 73/78 survivors, 12 drops — point estimate retired, see below) | chem_thinking_gate **90.9%** (3 seeds) | **UNKNOWN SIGN.** Our 90.9% falls *inside* the bar's own uncertainty interval, so we are somewhere between 9.8pt ahead and 3.5pt behind. Also cross-seed (bar at seed 123, society at 314/217/471) — never a paired comparison. D0 repairs the first defect only. |
 | SuperGPQA-hard | **unmeasured** (P1 measures it) | flagship_panel mean ~82.6% (+4.1 over 3.7-max solo, 3 seeds) | Unknown — possibly already cleared if 3.8's edge there is small; possibly entirely inside it. P1 is therefore the first paid spend. |
 | AIME-60 | unmeasured (P1 arm) | unmeasured (queued pilot IS the measurement) | Open — the predicted gap regime. |
 

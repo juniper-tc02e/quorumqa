@@ -839,6 +839,32 @@ not a settled bar** — flagged here because several other committed
 findings (the GPQA deficit split, the Track-B family-floor targets) are
 built on it without that caveat attached at the point of use.
 
+**Quantified 2026-07-26 (free, no new data).** Imputing the 12 missing
+items at both extremes bounds the true value:
+
+| Assumption about the 12 missing | True accuracy |
+|---|---|
+| all 12 wrong | 73/90 = **81.1%** |
+| all 12 right | 85/90 = **94.4%** |
+| missing behave like survivors | ≈ 93.6% (the published figure) |
+
+The band is **13.3pt wide, and our own best society (chem_thinking_gate,
+90.9%) sits inside it.** So the repeated claim that the society is
+*"−2.7pt under the family bar"* silently selected the top of the interval:
+the honest range runs from **9.8pt ahead** to **3.5pt behind**, and the
+*sign of the gap is not established*. Corrected at the point of use in
+`docs/same-provider-scaling-research.md` §5 and §4.6's ledger.
+
+**A second, independent defect in the same comparison — NOT repaired by
+D0.** The bar was measured at **seed 123**; chem_thinking_gate ran at
+seeds **314/217/471**. GPQA reshuffles its item sample per seed, so this
+was never a paired comparison, and cross-seed sampling error stacks on
+top of the survivorship bias. Even a clean 90/90 repair leaves it
+unpaired. Any "society vs family-best" sentence must therefore either
+re-run 3.8-solo at our seeds or carry the cross-seed caveat inline.
+Pre-registered analysis plan (written before the repair data exists):
+`benchmark/results/qwen38_bar_repair_preregistration.md`.
+
 ---
 
 ## 5. What the nulls jointly imply

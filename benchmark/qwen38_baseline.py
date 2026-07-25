@@ -44,7 +44,12 @@ SYSTEM = (
 )
 
 
-def _ask_once(question: str, choices: list[str]) -> tuple[str, dict]:
+DEFAULT_TIMEOUT_S = 300
+
+
+def _ask_once(
+    question: str, choices: list[str], timeout_s: float = DEFAULT_TIMEOUT_S
+) -> tuple[str, dict]:
     choice_block = "\n".join(f"{letter}) {c}" for letter, c in zip("ABCD", choices))
     user = (
         f"Question: {question}\n\nChoices:\n{choice_block}\n\n"
@@ -62,7 +67,10 @@ def _ask_once(question: str, choices: list[str]) -> tuple[str, dict]:
         "system": SYSTEM,
         "messages": [{"role": "user", "content": user}],
     }
-    resp = requests.post(MESSAGES_URL, headers=headers, json=body, timeout=300)
+    # NOTE: `max_tokens` above is NOT enforced by this endpoint -- observed
+    # output_tokens reach 17,395 against a 1024 request. Wall-clock timeout is
+    # therefore the only bound on generation length, which is why it is a knob.
+    resp = requests.post(MESSAGES_URL, headers=headers, json=body, timeout=timeout_s)
     resp.raise_for_status()
     data = resp.json()
 
@@ -79,11 +87,13 @@ def _ask_once(question: str, choices: list[str]) -> tuple[str, dict]:
     return letter, usage
 
 
-async def _run_one(item, semaphore):
+async def _run_one(item, semaphore, timeout_s: float = DEFAULT_TIMEOUT_S):
     async with semaphore:
         start = time.monotonic()
         try:
-            letter, usage = await asyncio.to_thread(_ask_once, item.question, item.choices)
+            letter, usage = await asyncio.to_thread(
+                _ask_once, item.question, item.choices, timeout_s
+            )
         except Exception:
             log.exception("%s: DROPPED after unrecoverable error", item.question_id)
             return None
@@ -105,7 +115,7 @@ async def _run_one(item, semaphore):
         }
 
 
-async def main(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, retry_missing: bool):
+async def main(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, retry_missing: bool, timeout_s: float = DEFAULT_TIMEOUT_S):
     items = load_benchmark_set(n=n, seed=seed, skip_huggingface=skip_huggingface)
     log.info("Loaded %d benchmark questions (seed=%d) for qwen3.8-max-preview baseline", len(items), seed)
 
@@ -114,10 +124,19 @@ async def main(n: int, seed: int, concurrency: int, out_path: Path, skip_hugging
         existing = [json.loads(l) for l in out_path.open(encoding="utf-8")]
         done_ids = {r["question_id"] for r in existing}
         items = [it for it in items if it.question_id not in done_ids]
-        log.info("Retry mode: %d already done, %d missing, retrying only the missing ones with the longer timeout", len(existing), len(items))
+        # Previously this line claimed "with the longer timeout" while the
+        # timeout was a hardcoded 300s constant -- so the earlier retry pass was
+        # a byte-identical repeat of the pass that had just failed, and
+        # predictably lost the same 12 items. State the real value instead.
+        log.info(
+            "Retry mode: %d already done, %d missing, retrying only the missing "
+            "ones at timeout=%.0fs (raise --timeout if these are timeout drops; "
+            "a repeat at the same value is not an escalation)",
+            len(existing), len(items), timeout_s,
+        )
 
     semaphore = asyncio.Semaphore(concurrency)
-    tasks = [asyncio.ensure_future(_run_one(item, semaphore)) for item in items]
+    tasks = [asyncio.ensure_future(_run_one(item, semaphore, timeout_s)) for item in items]
     results = list(existing)
     for coro in asyncio.as_completed(tasks):
         outcome = await coro
