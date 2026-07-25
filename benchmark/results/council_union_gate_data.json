@@ -1,0 +1,1106 @@
+{
+  "constants": {
+    "MIN_CONFIGS_PER_ITEM": 3,
+    "MIN_COVERAGE_FOR_BEST_SINGLE": 30,
+    "MIN_SHARED_ITEMS_FOR_PAIR": 10,
+    "BAR_ITEMS_PER_90": 5.0,
+    "BAR_DISCORDANCE_RATE": 0.1
+  },
+  "inventory": [
+    {
+      "file": "adhoc_check.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 9,
+      "n_gpqa_records": 27,
+      "note": ""
+    },
+    {
+      "file": "aime_open_baseline_seed42.jsonl",
+      "family": "math/aime-open (flat, non-GPQA)",
+      "n_rows": 48,
+      "n_gpqa_records": 0,
+      "note": "not GPQA -- skipped"
+    },
+    {
+      "file": "aime_open_panel_cheap_seed42.jsonl",
+      "family": "math/aime-open (flat, non-GPQA)",
+      "n_rows": 28,
+      "n_gpqa_records": 0,
+      "note": "not GPQA -- skipped"
+    },
+    {
+      "file": "full_run.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 74,
+      "n_gpqa_records": 222,
+      "note": ""
+    },
+    {
+      "file": "full_run2.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 90,
+      "n_gpqa_records": 270,
+      "note": ""
+    },
+    {
+      "file": "gsm8k_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    },
+    {
+      "file": "lever_baseline_gpqa_seed314.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_mmlu_pro_stem_seed42.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 60,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark lever_baseline file) -- skipped"
+    },
+    {
+      "file": "lever_baseline_seed123.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_seed7.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed123.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 86,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark lever_baseline file) -- skipped"
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed7.jsonl",
+      "family": "lever_baseline",
+      "n_rows": 88,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark lever_baseline file) -- skipped"
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed777.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 88,
+      "n_gpqa_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_gpqa_seed888.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 87,
+      "n_gpqa_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_flagship_gate_seed555.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 88,
+      "n_gpqa_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 88,
+      "n_gpqa_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_chem_thinking_gate_gpqa_seed471.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 87,
+      "n_gpqa_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_combined_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 88,
+      "n_gpqa_records": 88,
+      "note": ""
+    },
+    {
+      "file": "lever_control_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_control_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_control_seed7_replicate.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_control_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 88,
+      "n_gpqa_records": 0,
+      "note": "88 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_control_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_control_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 0,
+      "note": "89 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_control_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_control_supergpqa_seed838.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_five_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_mmlu_pro_stem_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 60,
+      "n_gpqa_records": 0,
+      "note": "60 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_flagship_panel_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed42_replicate.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 81,
+      "n_gpqa_records": 0,
+      "note": "81 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 79,
+      "n_gpqa_records": 0,
+      "note": "79 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_flagship_panel_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 83,
+      "n_gpqa_records": 0,
+      "note": "83 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_gate_replay.jsonl",
+      "family": "EXCLUDED",
+      "n_rows": 0,
+      "n_gpqa_records": 0,
+      "note": "gate-replay analysis artifact (was_unanimous_correct/gate_doubt/gate_cost_usd schema) -- not a config x item correctness observation, no item/choices to key on. Excluded, same exclusion the F1/F2/F5 analysis already applied."
+    },
+    {
+      "file": "lever_qwen38_judge_gpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 76,
+      "n_gpqa_records": 76,
+      "note": ""
+    },
+    {
+      "file": "lever_qwen38_panel_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 63,
+      "n_gpqa_records": 0,
+      "note": "63 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_presolve_gpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 86,
+      "n_gpqa_records": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 0,
+      "note": "89 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_presolve_supergpqa_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 87,
+      "n_gpqa_records": 0,
+      "note": "87 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_recursive_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 0,
+      "note": "90 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_recursive_supergpqa_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 0,
+      "note": "89 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed271.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 0,
+      "note": "89 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed606.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 87,
+      "n_gpqa_records": 0,
+      "note": "87 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_rag_thinking_gate_supergpqa_seed838.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 0,
+      "note": "89 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_smart_gate_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_subject_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_all_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_lexam_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "50 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_thinking_gate_mmlu_pro_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "50 row(s) not GPQA or missing engine wrapper -- skipped"
+    },
+    {
+      "file": "lever_thinking_gate_seed123.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_gate_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 89,
+      "n_gpqa_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed42.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_thinking_seed7.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_rows": 90,
+      "n_gpqa_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lexam_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    },
+    {
+      "file": "math500_hard_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 49,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    },
+    {
+      "file": "math_open_baseline_seed42.jsonl",
+      "family": "math/aime-open (flat, non-GPQA)",
+      "n_rows": 59,
+      "n_gpqa_records": 0,
+      "note": "not GPQA -- skipped"
+    },
+    {
+      "file": "math_open_panel_cheap_seed42.jsonl",
+      "family": "math/aime-open (flat, non-GPQA)",
+      "n_rows": 59,
+      "n_gpqa_records": 0,
+      "note": "not GPQA -- skipped"
+    },
+    {
+      "file": "math_open_panel_seed42.jsonl",
+      "family": "math/aime-open (flat, non-GPQA)",
+      "n_rows": 59,
+      "n_gpqa_records": 0,
+      "note": "not GPQA -- skipped"
+    },
+    {
+      "file": "medqa_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    },
+    {
+      "file": "mmlu_pro_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 50,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    },
+    {
+      "file": "moo_m1_eval.jsonl",
+      "family": "moo (flat, profile/bucket; gpqa_hard bucket only)",
+      "n_rows": 827,
+      "n_gpqa_records": 205,
+      "note": "622 row(s) are non-gpqa_hard buckets (supergpqa_hard/medqa/saturated_easy_mmlu) -- skipped"
+    },
+    {
+      "file": "qwen38_baseline_seed123.jsonl",
+      "family": "qwen38_baseline (flat, GPQA, no choices logged)",
+      "n_rows": 78,
+      "n_gpqa_records": 78,
+      "note": "chosen_text unavailable for this config -- excluded from text-keyed plurality/discordance tables"
+    },
+    {
+      "file": "smoke.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 2,
+      "n_gpqa_records": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke2.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 2,
+      "n_gpqa_records": 4,
+      "note": ""
+    },
+    {
+      "file": "smoke3.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 6,
+      "n_gpqa_records": 12,
+      "note": ""
+    },
+    {
+      "file": "supergpqa_hard_pilot_seed42.jsonl",
+      "family": "combo(baseline+engine[+sc5])",
+      "n_rows": 86,
+      "n_gpqa_records": 0,
+      "note": "not GPQA (other-benchmark combo file) -- skipped"
+    }
+  ],
+  "qa": {
+    "letter_correct_checked": 3303,
+    "letter_correct_mismatches": 0,
+    "correct_text_conflicts": {}
+  },
+  "repeat_selection": {
+    "n_distinct_config_qid_groups": 2225,
+    "n_repeat_groups": 831,
+    "n_repeat_groups_where_deinflation_flips_credit": 43
+  },
+  "coverage": {
+    "n_gpqa_qids_total": 197,
+    "coverage_histogram": {
+      "1": 5,
+      "2": 12,
+      "3": 17,
+      "4": 3,
+      "5": 5,
+      "6": 12,
+      "7": 1,
+      "8": 2,
+      "9": 13,
+      "10": 12,
+      "11": 10,
+      "12": 23,
+      "13": 12,
+      "14": 12,
+      "15": 17,
+      "16": 6,
+      "17": 5,
+      "18": 2,
+      "19": 2,
+      "20": 9,
+      "21": 1,
+      "22": 13,
+      "23": 3
+    }
+  },
+  "headline": {
+    "n_d2_items": 180,
+    "n_union_inflated": 176,
+    "n_union_deinflated": 176,
+    "n_floor_inflated": 4,
+    "n_floor_deinflated": 4,
+    "n_ceiling_deinflated": 102,
+    "n_partial_deinflated": 74,
+    "n_plurality_correct": 160,
+    "n_plurality_scored": 180
+  },
+  "contingency_table": {
+    "15": {
+      "15": 9,
+      "6": 2,
+      "13": 2,
+      "5": 1,
+      "7": 1,
+      "12": 1,
+      "1": 1
+    },
+    "9": {
+      "8": 1,
+      "9": 9,
+      "1": 1,
+      "4": 1,
+      "7": 1
+    },
+    "6": {
+      "6": 7,
+      "3": 1,
+      "5": 3,
+      "4": 1
+    },
+    "22": {
+      "21": 2,
+      "12": 1,
+      "22": 5,
+      "13": 1,
+      "15": 1,
+      "18": 2,
+      "20": 1
+    },
+    "11": {
+      "11": 5,
+      "8": 1,
+      "6": 2,
+      "7": 1,
+      "1": 1
+    },
+    "20": {
+      "20": 5,
+      "19": 2,
+      "1": 1,
+      "12": 1
+    },
+    "12": {
+      "12": 15,
+      "0": 1,
+      "10": 2,
+      "11": 2,
+      "9": 1,
+      "5": 1,
+      "7": 1
+    },
+    "10": {
+      "8": 1,
+      "9": 3,
+      "10": 8
+    },
+    "3": {
+      "3": 14,
+      "0": 1,
+      "2": 1,
+      "1": 1
+    },
+    "16": {
+      "14": 1,
+      "15": 2,
+      "16": 2,
+      "5": 1
+    },
+    "19": {
+      "14": 1,
+      "4": 1
+    },
+    "14": {
+      "14": 7,
+      "5": 1,
+      "13": 3,
+      "0": 1
+    },
+    "13": {
+      "10": 1,
+      "13": 5,
+      "8": 1,
+      "12": 4,
+      "0": 1
+    },
+    "4": {
+      "4": 3
+    },
+    "23": {
+      "21": 1,
+      "22": 2
+    },
+    "21": {
+      "16": 1
+    },
+    "17": {
+      "17": 2,
+      "16": 2,
+      "1": 1
+    },
+    "5": {
+      "3": 1,
+      "5": 3,
+      "2": 1
+    },
+    "18": {
+      "18": 1,
+      "17": 1
+    },
+    "8": {
+      "8": 2
+    },
+    "7": {
+      "5": 1
+    }
+  },
+  "config_table": [
+    {
+      "config": "qwen3.8_solo",
+      "n_all_items": 78,
+      "accuracy_all_items": 0.9358974358974359,
+      "n_d2_subset_items": 78,
+      "accuracy_d2_subset": 0.9358974358974359
+    },
+    {
+      "config": "moo:thinking_gate",
+      "n_all_items": 30,
+      "accuracy_all_items": 0.9333333333333333,
+      "n_d2_subset_items": 30,
+      "accuracy_d2_subset": 0.9333333333333333
+    },
+    {
+      "config": "moo:rag_thinking_gate",
+      "n_all_items": 29,
+      "accuracy_all_items": 0.9310344827586207,
+      "n_d2_subset_items": 29,
+      "accuracy_d2_subset": 0.9310344827586207
+    },
+    {
+      "config": "chem_thinking_gate",
+      "n_all_items": 166,
+      "accuracy_all_items": 0.9216867469879518,
+      "n_d2_subset_items": 152,
+      "accuracy_d2_subset": 0.9210526315789473
+    },
+    {
+      "config": "moo:rag_presolve",
+      "n_all_items": 30,
+      "accuracy_all_items": 0.9,
+      "n_d2_subset_items": 30,
+      "accuracy_d2_subset": 0.9
+    },
+    {
+      "config": "moo:flagship_panel",
+      "n_all_items": 28,
+      "accuracy_all_items": 0.8928571428571429,
+      "n_d2_subset_items": 28,
+      "accuracy_d2_subset": 0.8928571428571429
+    },
+    {
+      "config": "chem_flagship_gate",
+      "n_all_items": 162,
+      "accuracy_all_items": 0.8888888888888888,
+      "n_d2_subset_items": 147,
+      "accuracy_d2_subset": 0.891156462585034
+    },
+    {
+      "config": "flagship_panel",
+      "n_all_items": 141,
+      "accuracy_all_items": 0.8794326241134752,
+      "n_d2_subset_items": 141,
+      "accuracy_d2_subset": 0.8794326241134752
+    },
+    {
+      "config": "combined",
+      "n_all_items": 140,
+      "accuracy_all_items": 0.8785714285714286,
+      "n_d2_subset_items": 140,
+      "accuracy_d2_subset": 0.8785714285714286
+    },
+    {
+      "config": "baseline_3.7max",
+      "n_all_items": 180,
+      "accuracy_all_items": 0.8777777777777778,
+      "n_d2_subset_items": 180,
+      "accuracy_d2_subset": 0.8777777777777778
+    },
+    {
+      "config": "thinking_gate",
+      "n_all_items": 163,
+      "accuracy_all_items": 0.8650306748466258,
+      "n_d2_subset_items": 163,
+      "accuracy_d2_subset": 0.8650306748466258
+    },
+    {
+      "config": "moo:single-call",
+      "n_all_items": 29,
+      "accuracy_all_items": 0.8620689655172413,
+      "n_d2_subset_items": 29,
+      "accuracy_d2_subset": 0.8620689655172413
+    },
+    {
+      "config": "thinking",
+      "n_all_items": 141,
+      "accuracy_all_items": 0.8581560283687943,
+      "n_d2_subset_items": 141,
+      "accuracy_d2_subset": 0.8581560283687943
+    },
+    {
+      "config": "thinking_all",
+      "n_all_items": 141,
+      "accuracy_all_items": 0.8439716312056738,
+      "n_d2_subset_items": 141,
+      "accuracy_d2_subset": 0.8439716312056738
+    },
+    {
+      "config": "smart_gate",
+      "n_all_items": 89,
+      "accuracy_all_items": 0.8314606741573034,
+      "n_d2_subset_items": 89,
+      "accuracy_d2_subset": 0.8314606741573034
+    },
+    {
+      "config": "subject",
+      "n_all_items": 89,
+      "accuracy_all_items": 0.8314606741573034,
+      "n_d2_subset_items": 89,
+      "accuracy_d2_subset": 0.8314606741573034
+    },
+    {
+      "config": "moo:stem-max",
+      "n_all_items": 29,
+      "accuracy_all_items": 0.8275862068965517,
+      "n_d2_subset_items": 29,
+      "accuracy_d2_subset": 0.8275862068965517
+    },
+    {
+      "config": "five",
+      "n_all_items": 90,
+      "accuracy_all_items": 0.8111111111111111,
+      "n_d2_subset_items": 90,
+      "accuracy_d2_subset": 0.8111111111111111
+    },
+    {
+      "config": "qwen38_judge",
+      "n_all_items": 76,
+      "accuracy_all_items": 0.8026315789473685,
+      "n_d2_subset_items": 76,
+      "accuracy_d2_subset": 0.8026315789473685
+    },
+    {
+      "config": "moo:standard-tribunal",
+      "n_all_items": 30,
+      "accuracy_all_items": 0.8,
+      "n_d2_subset_items": 30,
+      "accuracy_d2_subset": 0.8
+    },
+    {
+      "config": "shipped_engine",
+      "n_all_items": 94,
+      "accuracy_all_items": 0.7872340425531915,
+      "n_d2_subset_items": 94,
+      "accuracy_d2_subset": 0.7872340425531915
+    },
+    {
+      "config": "control",
+      "n_all_items": 90,
+      "accuracy_all_items": 0.7777777777777778,
+      "n_d2_subset_items": 90,
+      "accuracy_d2_subset": 0.7777777777777778
+    },
+    {
+      "config": "rag_presolve",
+      "n_all_items": 86,
+      "accuracy_all_items": 0.7441860465116279,
+      "n_d2_subset_items": 86,
+      "accuracy_d2_subset": 0.7441860465116279
+    },
+    {
+      "config": "self_consistency_5x",
+      "n_all_items": 94,
+      "accuracy_all_items": 0.5957446808510638,
+      "n_d2_subset_items": 94,
+      "accuracy_d2_subset": 0.5957446808510638
+    }
+  ],
+  "best_single_config": {
+    "config": "qwen3.8_solo",
+    "n_all_items": 78,
+    "accuracy_all_items": 0.9358974358974359,
+    "n_d2_subset_items": 78,
+    "accuracy_d2_subset": 0.9358974358974359
+  },
+  "union_vs_best": {
+    "config": "qwen3.8_solo",
+    "config_accuracy_d2_subset": 0.9358974358974359,
+    "n_paired_items": 78,
+    "union_correct": 77,
+    "config_correct": 73,
+    "gain_union_right_config_wrong": 4,
+    "loss_union_wrong_config_right": 0,
+    "net_discordant": 4
+  },
+  "union_vs_each_eligible_config": [
+    {
+      "config": "qwen3.8_solo",
+      "config_accuracy_d2_subset": 0.9358974358974359,
+      "n_paired_items": 78,
+      "union_correct": 77,
+      "config_correct": 73,
+      "gain_union_right_config_wrong": 4,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 4
+    },
+    {
+      "config": "moo:thinking_gate",
+      "config_accuracy_d2_subset": 0.9333333333333333,
+      "n_paired_items": 30,
+      "union_correct": 30,
+      "config_correct": 28,
+      "gain_union_right_config_wrong": 2,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 2
+    },
+    {
+      "config": "chem_thinking_gate",
+      "config_accuracy_d2_subset": 0.9210526315789473,
+      "n_paired_items": 152,
+      "union_correct": 149,
+      "config_correct": 140,
+      "gain_union_right_config_wrong": 9,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 9
+    },
+    {
+      "config": "moo:rag_presolve",
+      "config_accuracy_d2_subset": 0.9,
+      "n_paired_items": 30,
+      "union_correct": 30,
+      "config_correct": 27,
+      "gain_union_right_config_wrong": 3,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 3
+    },
+    {
+      "config": "chem_flagship_gate",
+      "config_accuracy_d2_subset": 0.891156462585034,
+      "n_paired_items": 147,
+      "union_correct": 144,
+      "config_correct": 131,
+      "gain_union_right_config_wrong": 13,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 13
+    },
+    {
+      "config": "flagship_panel",
+      "config_accuracy_d2_subset": 0.8794326241134752,
+      "n_paired_items": 141,
+      "union_correct": 138,
+      "config_correct": 124,
+      "gain_union_right_config_wrong": 14,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 14
+    },
+    {
+      "config": "combined",
+      "config_accuracy_d2_subset": 0.8785714285714286,
+      "n_paired_items": 140,
+      "union_correct": 137,
+      "config_correct": 123,
+      "gain_union_right_config_wrong": 14,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 14
+    },
+    {
+      "config": "baseline_3.7max",
+      "config_accuracy_d2_subset": 0.8777777777777778,
+      "n_paired_items": 180,
+      "union_correct": 176,
+      "config_correct": 158,
+      "gain_union_right_config_wrong": 18,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 18
+    },
+    {
+      "config": "thinking_gate",
+      "config_accuracy_d2_subset": 0.8650306748466258,
+      "n_paired_items": 163,
+      "union_correct": 160,
+      "config_correct": 141,
+      "gain_union_right_config_wrong": 19,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 19
+    },
+    {
+      "config": "thinking",
+      "config_accuracy_d2_subset": 0.8581560283687943,
+      "n_paired_items": 141,
+      "union_correct": 138,
+      "config_correct": 121,
+      "gain_union_right_config_wrong": 17,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 17
+    },
+    {
+      "config": "thinking_all",
+      "config_accuracy_d2_subset": 0.8439716312056738,
+      "n_paired_items": 141,
+      "union_correct": 138,
+      "config_correct": 119,
+      "gain_union_right_config_wrong": 19,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 19
+    },
+    {
+      "config": "smart_gate",
+      "config_accuracy_d2_subset": 0.8314606741573034,
+      "n_paired_items": 89,
+      "union_correct": 87,
+      "config_correct": 74,
+      "gain_union_right_config_wrong": 13,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 13
+    },
+    {
+      "config": "subject",
+      "config_accuracy_d2_subset": 0.8314606741573034,
+      "n_paired_items": 89,
+      "union_correct": 87,
+      "config_correct": 74,
+      "gain_union_right_config_wrong": 13,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 13
+    },
+    {
+      "config": "five",
+      "config_accuracy_d2_subset": 0.8111111111111111,
+      "n_paired_items": 90,
+      "union_correct": 88,
+      "config_correct": 73,
+      "gain_union_right_config_wrong": 15,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 15
+    },
+    {
+      "config": "qwen38_judge",
+      "config_accuracy_d2_subset": 0.8026315789473685,
+      "n_paired_items": 76,
+      "union_correct": 74,
+      "config_correct": 61,
+      "gain_union_right_config_wrong": 13,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 13
+    },
+    {
+      "config": "moo:standard-tribunal",
+      "config_accuracy_d2_subset": 0.8,
+      "n_paired_items": 30,
+      "union_correct": 30,
+      "config_correct": 24,
+      "gain_union_right_config_wrong": 6,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 6
+    },
+    {
+      "config": "shipped_engine",
+      "config_accuracy_d2_subset": 0.7872340425531915,
+      "n_paired_items": 94,
+      "union_correct": 92,
+      "config_correct": 74,
+      "gain_union_right_config_wrong": 18,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 18
+    },
+    {
+      "config": "control",
+      "config_accuracy_d2_subset": 0.7777777777777778,
+      "n_paired_items": 90,
+      "union_correct": 88,
+      "config_correct": 70,
+      "gain_union_right_config_wrong": 18,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 18
+    },
+    {
+      "config": "rag_presolve",
+      "config_accuracy_d2_subset": 0.7441860465116279,
+      "n_paired_items": 86,
+      "union_correct": 84,
+      "config_correct": 64,
+      "gain_union_right_config_wrong": 20,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 20
+    },
+    {
+      "config": "self_consistency_5x",
+      "config_accuracy_d2_subset": 0.5957446808510638,
+      "n_paired_items": 94,
+      "union_correct": 92,
+      "config_correct": 56,
+      "gain_union_right_config_wrong": 36,
+      "loss_union_wrong_config_right": 0,
+      "net_discordant": 36
+    }
+  ],
+  "selection_bias_control": {
+    "config": "baseline_3.7max",
+    "n_full_pool": 180,
+    "accuracy_full_pool": 0.8777777777777778,
+    "n_d2_subset": 180,
+    "accuracy_d2_subset": 0.8777777777777778,
+    "delta_pp": 0.0
+  },
+  "mean_discordance_qualifying_pairs": 0.1687309300376302,
+  "verdict": {
+    "n_d2_items": 180,
+    "n_partial_deinflated": 74,
+    "partial_rate_per_90": 37.0,
+    "bar_items_per_90": 5.0,
+    "condition_a_pass": true,
+    "mean_discordance_qualifying_pairs": 0.1687309300376302,
+    "bar_discordance_rate": 0.1,
+    "condition_b_pass": true,
+    "fund_council_lever": true
+  }
+}
