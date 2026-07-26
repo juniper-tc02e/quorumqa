@@ -108,12 +108,85 @@ DATASET_TO_BENCHMARK = {
 # that comparison drift without anyone noticing. Source: selector_audit.md
 # section 2's per-benchmark tables (GPQA-Diamond n=2,601, SuperGPQA-hard
 # n=1,842).
+#
+# UNITS -- the defect this structure exists to prevent. These are net item
+# COUNTS over the audit's own large denominators. An S7 run pools ~270 items
+# (3 seeds x --n 90), so comparing an S7 count against one of these counts
+# compares quantities whose denominators differ by 7-10x. That is what the
+# clause below used to do, and it made the gate an unconditional DO NOT SHIP:
+# a selector replicating the GPQA effect EXACTLY (2.1146% of items) yields an
+# expected net of 5.7 over 270 items against a band floor of 27.5, and the
+# floor is unreachable at any achievable size (GPQA-Diamond has only 198
+# questions, so 3 seeds cap at 594 items). Inverted, a selector at ~7x the
+# audited effect landed inside the band and PASSED. The denominators are
+# therefore stored ALONGSIDE the counts and the clause compares RATES.
 ORIGINAL_AUDIT_NET = {
     ("max_single_confidence", "GPQA-Diamond"): 55,
     ("max_single_confidence", "SuperGPQA-hard"): 76,
     ("confidence_weighted", "GPQA-Diamond"): 22,
     ("confidence_weighted", "SuperGPQA-hard"): 25,
 }
+
+# Denominators for the counts above, from selector_audit.md section 2's
+# per-benchmark tables. Kept as a parallel hardcoded map for the same
+# anti-drift reason as the counts themselves.
+ORIGINAL_AUDIT_N = {
+    "GPQA-Diamond": 2601,
+    "SuperGPQA-hard": 1842,
+}
+
+# The S1 audit's raw contingency, needed for the POWER check below.
+ORIGINAL_AUDIT_BC = {
+    ("max_single_confidence", "GPQA-Diamond"): (141, 86),
+    ("max_single_confidence", "SuperGPQA-hard"): (137, 61),
+}
+
+# ---------------------------------------------------------------------------
+# POWER -- read this before choosing a home benchmark.
+#
+# Fixing the units bug above exposed a second, larger problem: at the S1
+# audit's OWN measured effect size, the S7 design (3 seeds x --n 90 = 270
+# pooled items) is underpowered on GPQA-Diamond and adequately powered only on
+# SuperGPQA-hard.
+#
+#   GPQA-Diamond    b=141 c=86 over n=2,601 -> 5.42%/3.31% per item.
+#                   At n=270 the expected contingency is b=15 c=9, one-sided
+#                   exact McNemar p=0.1537. Reaching p<0.05 needs n>=600.
+#                   GPQA-Diamond has only 198 questions, so three seeds cap at
+#                   594 pooled observations -- and pooling more seeds of a
+#                   198-question set re-uses the SAME questions, which inflates
+#                   the discordant count without adding evidence (the identical
+#                   duplicate-pooling trap the figure ledger documents).
+#                   => S7 cannot clear its own p<0.05 clause on GPQA-Diamond.
+#
+#   SuperGPQA-hard  b=137 c=61 over n=1,842 -> 7.44%/3.31% per item.
+#                   At n=270 the expected contingency is b=20 c=9, p=0.0307.
+#                   Reaching p<0.05 needs n>=210. => adequately powered.
+#
+# So the home benchmark for S7 must be SuperGPQA-hard. Verify with
+# minimum_pooled_n_for_audit_effect() rather than trusting this comment.
+# ---------------------------------------------------------------------------
+
+
+def minimum_pooled_n_for_audit_effect(
+    selector: str, benchmark: str, max_n: int = 5000
+) -> "int | None":
+    """Smallest pooled n at which the S1 audit's own effect clears SHIP_ALPHA.
+
+    Holds b and c at the audit-measured per-item rates and walks n upward.
+    Returns None if no n <= max_n suffices. This is what makes the power claim
+    in the block above checkable instead of asserted.
+    """
+    bc = ORIGINAL_AUDIT_BC.get((selector, benchmark))
+    n_audit = ORIGINAL_AUDIT_N.get(benchmark)
+    if bc is None or not n_audit:
+        return None
+    b_rate, c_rate = bc[0] / n_audit, bc[1] / n_audit
+    for n in range(10, max_n + 1, 10):
+        b, c = round(b_rate * n), round(c_rate * n)
+        if b - c > 0 and mcnemar_exact_one_sided(b, c) < SHIP_ALPHA:
+            return n
+    return None
 
 # ---------------------------------------------------------------------------
 # S7 ship bar (docs/experiment-spec-book.md section 3 / the task spec this
@@ -388,17 +461,34 @@ def ship_gate_verdict(selector: str, benchmark: str, per_seed_reports: list[dict
         reasons.append(f"pooled exact McNemar p={pooled_p:.4f} is not < {SHIP_ALPHA}")
 
     original_net = ORIGINAL_AUDIT_NET.get((selector, benchmark))
-    if original_net is None:
+    original_n = ORIGINAL_AUDIT_N.get(benchmark)
+    pooled_n = sum(r.get("n_items") or 0 for r in per_seed_reports)
+    observed_rate = (pooled_net / pooled_n) if pooled_n else None
+    original_rate = (original_net / original_n) if (original_net is not None and original_n) else None
+
+    if original_net is None or original_n is None:
         reasons.append(
-            f"no original-audit reference net for (selector={selector!r}, "
+            f"no original-audit reference for (selector={selector!r}, "
             f"benchmark={benchmark!r}) -- cannot evaluate the within-50% replication clause"
         )
+    elif not pooled_n:
+        # Fail CLOSED. Without denominators the clause can only be evaluated in
+        # the broken count-vs-count form, so refuse to evaluate it at all
+        # rather than silently reproducing the units bug.
+        reasons.append(
+            "per-seed reports carry no n_items, so the within-50% replication clause "
+            "cannot be evaluated as a rate -- refusing to compare a ~270-item net "
+            f"against the S1 audit's net={original_net:+d} over n={original_n}"
+        )
     else:
-        lo, hi = (1 - SHIP_EFFECT_BAND) * original_net, (1 + SHIP_EFFECT_BAND) * original_net
-        if not (lo <= pooled_net <= hi):
+        lo, hi = (1 - SHIP_EFFECT_BAND) * original_rate, (1 + SHIP_EFFECT_BAND) * original_rate
+        if not (lo <= observed_rate <= hi):
             reasons.append(
-                f"pooled net={pooled_net:+d} is outside 50% of the original S1 audit's "
-                f"net={original_net:+d} for {selector} on {benchmark} (band=[{lo:.1f}, {hi:.1f}])"
+                f"observed net rate={observed_rate * 100:+.4f}% ({pooled_net:+d} over "
+                f"n={pooled_n}) is outside 50% of the original S1 audit's rate="
+                f"{original_rate * 100:+.4f}% ({original_net:+d} over n={original_n}) "
+                f"for {selector} on {benchmark} "
+                f"(band=[{lo * 100:+.4f}%, {hi * 100:+.4f}%])"
             )
 
     negative_seeds = [r["seed"] for r in per_seed_reports if (r["b"] - r["c"]) < 0]
@@ -411,7 +501,11 @@ def ship_gate_verdict(selector: str, benchmark: str, per_seed_reports: list[dict
     stats = {
         "pooled_b": pooled_b, "pooled_c": pooled_c, "pooled_net": pooled_net,
         "pooled_discordant": pooled_discordant, "pooled_p": pooled_p,
-        "original_net": original_net,
+        "original_net": original_net, "original_n": original_n,
+        "pooled_n": pooled_n,
+        "observed_rate_pp": (observed_rate * 100) if observed_rate is not None else None,
+        "original_rate_pp": (original_rate * 100) if original_rate is not None else None,
+        "distinct_seeds": len({r["seed"] for r in per_seed_reports}),
     }
     return verdict, reasons, stats
 
@@ -428,6 +522,20 @@ def _resolve_dataset_and_seeds(pools_data: list[tuple[Path, list[dict]]]) -> tup
     on ONE benchmark pooled over seeds, never pooled across benchmarks."""
     datasets = set()
     seeds = []
+    # The caller only checks that THREE pool paths were supplied, not that they
+    # are three DIFFERENT runs. Passing the same file three times used to sum
+    # its b/c three times: one honest seed-411 pool (b=13, c=0) became
+    # b=39/c=0/p=0.0000 and printed SHIP with exit code 0. That is precisely
+    # the single-seed overfitting S7 exists to prevent, so resolve duplicates
+    # here where both the paths and the seeds are visible.
+    resolved_paths = [Path(p).resolve() for p, _ in pools_data]
+    if len(set(resolved_paths)) != len(resolved_paths):
+        raise ValueError(
+            "--ship-gate was given the same pool file more than once "
+            f"(resolved paths: {[str(p) for p in resolved_paths]}). Three DISTINCT "
+            "held-out pools are required; repeating one multiplies its discordant "
+            "pairs and fabricates significance."
+        )
     for path, rows in pools_data:
         if not rows:
             raise ValueError(f"{path}: empty pool")
@@ -444,6 +552,15 @@ def _resolve_dataset_and_seeds(pools_data: list[tuple[Path, list[dict]]]) -> tup
         raise ValueError(
             f"--ship-gate requires every pool to be the SAME dataset (saw {sorted(datasets)}) "
             f"-- pooling across benchmarks is not the pre-registered design"
+        )
+    # Distinct paths are not sufficient: a copy, a symlink, or a re-run written
+    # to a new filename all carry the same logged seed. The seed is what makes
+    # the pools independent, so it is what must be unique.
+    if len(set(seeds)) != len(seeds):
+        raise ValueError(
+            f"--ship-gate requires 3 DISTINCT held-out seeds, saw {seeds}. Pooling "
+            "the same seed more than once inflates the discordant count without "
+            "adding evidence."
         )
     return next(iter(datasets)), seeds
 
@@ -502,7 +619,11 @@ def main(pool_paths: list[str], selector: str, k: "int | None", ship_gate: bool,
         per_seed_reports = []
         for (path, rows, scored), seed in zip(per_pool_scored, seeds):
             rep = selector_report(scored["per_item"], selector)
-            per_seed_reports.append({"seed": seed, "b": rep["b"], "c": rep["c"]})
+            # n_items is REQUIRED by the within-50% replication clause, which
+            # compares rates rather than raw counts.
+            per_seed_reports.append(
+                {"seed": seed, "b": rep["b"], "c": rep["c"], "n_items": scored["n_items"]}
+            )
 
         verdict, reasons, stats = ship_gate_verdict(selector, benchmark, per_seed_reports)
         print()
@@ -512,8 +633,14 @@ def main(pool_paths: list[str], selector: str, k: "int | None", ship_gate: bool,
         print(
             f"pooled: b={stats['pooled_b']} c={stats['pooled_c']} net={stats['pooled_net']:+d} "
             f"discordant={stats['pooled_discordant']} p={stats['pooled_p']:.4f} "
-            f"original_audit_net={stats['original_net']}"
+            f"n={stats['pooled_n']}"
         )
+        if stats.get("observed_rate_pp") is not None and stats.get("original_rate_pp") is not None:
+            print(
+                f"        replication: observed rate={stats['observed_rate_pp']:+.4f}% vs "
+                f"S1 audit rate={stats['original_rate_pp']:+.4f}% "
+                f"(net={stats['original_net']:+d} over n={stats['original_n']})"
+            )
         for r in per_seed_reports:
             print(f"  seed {r['seed']}: b={r['b']} c={r['c']} net={r['b'] - r['c']:+d}")
         print()

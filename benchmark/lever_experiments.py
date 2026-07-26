@@ -402,6 +402,29 @@ log = logging.getLogger(__name__)
 
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
+# Levers whose behaviour depends on `item.subject == "Organic Chemistry"`.
+# SINGLE SOURCE OF TRUTH: both the routing branch in run_question_lever and the
+# silent-degeneracy guard in main read this, so the two cannot drift apart.
+#
+# They HAD drifted: the guard listed chem_flagship_gate / chem_thinking_gate /
+# subject / smart_gate, while the routing branch also covered `combined` and
+# `flagship_panel_combined`. Those two were therefore unguarded -- running
+# either on a dataset whose `subject` is a coarse discipline ("Science",
+# "Engineering") silently produced a byte-identical re-run of its parent lever
+# (`thinking` and `flagship_panel` respectively) at full flagship price, and it
+# would have landed in the record looking like an independent second lever
+# confirming the flagship claim.
+SUBJECT_BRANCHING_LEVERS = ("subject", "combined", "flagship_panel_combined")
+
+# The guard's scope is the union: every lever that reads the fine-grained
+# subject, whether to force escalation or to pick a solver tier.
+CHEMISTRY_BRANCHING_LEVERS = tuple(
+    dict.fromkeys(
+        SUBJECT_BRANCHING_LEVERS
+        + ("chem_flagship_gate", "chem_thinking_gate", "smart_gate")
+    )
+)
+
 
 def _plurality(answers):
     counts = Counter(a.letter for a in answers)
@@ -1934,7 +1957,7 @@ async def run_question_lever(
     gate_fired = False
     gate_reason = None
     if unanimous:
-        if lever in ("subject", "combined", "flagship_panel_combined") and item.subject == "Organic Chemistry":
+        if lever in SUBJECT_BRANCHING_LEVERS and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
         elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "rag_thinking_gate", "tribunal_debate", "rag_r3_targeted"):
@@ -2201,7 +2224,7 @@ async def main_live(
     # corrupt the record. Our committed chem results are all `--dataset gpqa`
     # (seeds 217/314/471) and are unaffected; this guard keeps it that way.
     # Fails loudly BEFORE any paid call.
-    if lever in ("chem_flagship_gate", "chem_thinking_gate", "subject", "smart_gate") and dataset != "gpqa":
+    if lever in CHEMISTRY_BRANCHING_LEVERS and dataset != "gpqa":
         subjects = {getattr(i, "subject", None) for i in items}
         if "Organic Chemistry" not in subjects:
             raise ValueError(

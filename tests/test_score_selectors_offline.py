@@ -200,20 +200,82 @@ def test_discordant_vs_plurality_counts_gains_and_losses_separately():
 # ---------------------------------------------------------------------------
 
 
-def _seed_reports(specs):
+def _seed_reports(specs, n_items=90):
     """specs: [(seed, b, c), ...] -> the per_seed_reports shape
-    ship_gate_verdict expects."""
-    return [{"seed": s, "b": b, "c": c} for s, b, c in specs]
+    ship_gate_verdict expects.
+
+    n_items is REQUIRED by the within-50% replication clause, which compares
+    the observed net RATE against the S1 audit's rate. It used to compare raw
+    counts, which meant a ~270-item run was measured against a 2,601-item
+    audit -- see the UNITS block in score_selectors.py. Reports without
+    n_items now fail closed.
+    """
+    return [{"seed": s, "b": b, "c": c, "n_items": n_items} for s, b, c in specs]
 
 
 def test_ship_gate_ships_when_every_clause_passes():
-    reports = _seed_reports([(1, 15, 2), (2, 15, 2), (3, 15, 2)])  # pooled net=39, disc=51
-    verdict, reasons, stats = ship_gate_verdict("max_single_confidence", "GPQA-Diamond", reports)
-    assert verdict == "SHIP"
+    # SuperGPQA-hard is the correctly-powered home benchmark (see the POWER
+    # block in score_selectors.py). Its S1 rate is 76/1842 = 4.126%/item; this
+    # contingency is 4.44% over 270, comfortably inside the +-50% band.
+    reports = _seed_reports([(1, 7, 3), (2, 7, 3), (3, 7, 3)])  # pooled net=12, disc=30
+    verdict, reasons, stats = ship_gate_verdict("max_single_confidence", "SuperGPQA-hard", reports)
+    assert verdict == "SHIP", reasons
     assert reasons == []
-    assert stats["pooled_net"] == 39
-    assert stats["pooled_discordant"] == 51
+    assert stats["pooled_net"] == 12
+    assert stats["pooled_discordant"] == 30
     assert stats["pooled_p"] < 0.05
+    assert stats["pooled_n"] == 270
+
+
+def test_a_faithful_replication_of_the_s1_effect_ships():
+    """The regression the units bug would have caused.
+
+    Before the fix this exact contingency -- a faithful replication of the S1
+    SuperGPQA effect -- returned DO NOT SHIP with the band as its ONLY failing
+    clause, i.e. the gate rejected the very result it exists to confirm.
+    """
+    reports = _seed_reports([(411, 7, 3), (523, 7, 3), (631, 7, 3)])
+    verdict, reasons, _ = ship_gate_verdict("max_single_confidence", "SuperGPQA-hard", reports)
+    assert verdict == "SHIP", reasons
+
+
+def test_a_wildly_inflated_effect_is_rejected_by_the_band():
+    """The other direction the count-based band could not catch: ~7x the
+    audited effect used to land INSIDE [38, 114] and pass."""
+    reports = _seed_reports([(1, 14, 1), (2, 14, 1), (3, 14, 1)])  # 14.4% net rate
+    verdict, reasons, _ = ship_gate_verdict("max_single_confidence", "GPQA-Diamond", reports)
+    assert verdict == "DO NOT SHIP"
+    assert any("outside 50%" in r for r in reasons)
+
+
+def test_missing_n_items_fails_closed():
+    """Without denominators the clause can only be evaluated in its broken
+    count-vs-count form, so it must refuse rather than silently regress."""
+    reports = [{"seed": s, "b": 7, "c": 3} for s in (1, 2, 3)]
+    verdict, reasons, _ = ship_gate_verdict("max_single_confidence", "SuperGPQA-hard", reports)
+    assert verdict == "DO NOT SHIP"
+    assert any("no n_items" in r for r in reasons)
+
+
+def test_s7_is_underpowered_on_gpqa_and_powered_on_supergpqa():
+    """Pins the power finding that the units fix exposed.
+
+    At the S1 audit's own effect size, 3x90=270 pooled items cannot reach
+    p<0.05 on GPQA-Diamond -- it needs 600, and the benchmark only has 198
+    questions. SuperGPQA-hard needs 210 and is therefore the valid home
+    benchmark for S7.
+    """
+    from benchmark.score_selectors import minimum_pooled_n_for_audit_effect
+
+    gpqa = minimum_pooled_n_for_audit_effect("max_single_confidence", "GPQA-Diamond")
+    sgp = minimum_pooled_n_for_audit_effect("max_single_confidence", "SuperGPQA-hard")
+    assert gpqa == 600
+    assert sgp == 210
+    design_n = 3 * 90
+    assert design_n < gpqa, "GPQA would be adequately powered -- power note is stale"
+    assert design_n >= sgp
+    # And 3 seeds of GPQA-Diamond cannot reach 600 even at full size.
+    assert 198 * 3 < gpqa
 
 
 def test_ship_gate_fails_on_net_too_low():
@@ -254,14 +316,14 @@ def test_ship_gate_fails_on_effect_size_outside_band_isolated():
 
 
 def test_ship_gate_fails_on_negative_individual_seed_isolated():
-    # Pooled net=48 (within the [27.5, 82.5] band), discordant=76, p tiny --
-    # passes every pooled clause, fails ONLY because seed 3's own net is
-    # negative.
-    reports = _seed_reports([(1, 30, 2), (2, 30, 2), (3, 2, 10)])
-    verdict, reasons, stats = ship_gate_verdict("max_single_confidence", "GPQA-Diamond", reports)
+    # Pooled net=+12 over n=270 -> a 4.44% rate, inside SuperGPQA-hard's
+    # [2.06%, 6.19%] band; discordant=22; p<0.05 -- every pooled clause passes
+    # and it fails ONLY because seed 3's own net is negative.
+    reports = _seed_reports([(1, 8, 1), (2, 8, 1), (3, 1, 3)])
+    verdict, reasons, stats = ship_gate_verdict("max_single_confidence", "SuperGPQA-hard", reports)
     assert verdict == "DO NOT SHIP"
-    assert stats["pooled_net"] == 48
-    assert len(reasons) == 1
+    assert stats["pooled_net"] == 12
+    assert len(reasons) == 1, reasons
     assert "negative" in reasons[0]
     assert "3" in reasons[0]
 
@@ -328,9 +390,24 @@ def _samples_gain():
     return [("A", 0.1, "r"), ("A", 0.1, "r"), ("B", 0.99, "r")]  # plurality wrong, maxc right
 
 
-def _seed_pool_rows(seed: int, n_gain: int, n_loss: int, dataset: str = "gpqa") -> list[dict]:
+def _samples_concordant():
+    # plurality and max-confidence both pick A -> neither a gain nor a loss
+    return [("A", 0.9, "r"), ("A", 0.8, "r"), ("B", 0.1, "r")]
+
+
+def _seed_pool_rows(
+    seed: int, n_gain: int, n_loss: int, dataset: str = "gpqa", n_same: int = 0
+) -> list[dict]:
+    """n_same adds CONCORDANT filler so the pool has a realistic denominator.
+
+    Without filler every row is discordant, giving a ~76% net rate -- roughly
+    36x the S1 audit's measured effect. That passed the old count-based band
+    only because the band compared raw counts across mismatched denominators;
+    against the corrected rate band it is correctly rejected as absurd.
+    """
     rows = [_row(f"g{seed}_{i}", "B", _samples_gain(), dataset=dataset, seed=seed) for i in range(n_gain)]
     rows += [_row(f"l{seed}_{i}", "A", _samples_gain(), dataset=dataset, seed=seed) for i in range(n_loss)]
+    rows += [_row(f"s{seed}_{i}", "A", _samples_concordant(), dataset=dataset, seed=seed) for i in range(n_same)]
     return rows
 
 
@@ -341,11 +418,17 @@ def _write_pool(path, rows):
 
 
 def test_main_ship_gate_end_to_end_ships(tmp_path, capsys):
+    # SuperGPQA-hard, the correctly-powered home benchmark, with a realistic
+    # 90-item pool per seed: 7 gains + 3 losses + 80 concordant = a 4.44% net
+    # rate against the S1 audit's 4.126%.
     seeds = [900011, 900012, 900013]
     paths = []
     for seed in seeds:
-        p = tmp_path / f"pool_gpqa_cheap_k3_seed{seed}.jsonl"
-        _write_pool(p, _seed_pool_rows(seed, n_gain=15, n_loss=2))
+        p = tmp_path / f"pool_supergpqa_cheap_k3_seed{seed}.jsonl"
+        _write_pool(
+            p,
+            _seed_pool_rows(seed, n_gain=7, n_loss=3, dataset="supergpqa", n_same=80),
+        )
         paths.append(str(p))
 
     out_path = tmp_path / "report.json"

@@ -474,20 +474,39 @@ def check_change_case_capital_word_frequency(response: str, kwargs: dict) -> dic
     }
 
 
+# The official checker is:
+#     try:
+#         return value.isupper() and langdetect.detect(value) == "en"
+#     except LangDetectException:
+#         return True
+# Python's `and` SHORT-CIRCUITS, so when isupper() is False langdetect is never
+# called, no exception can be raised, and the official result is False. Calling
+# _detect_language first and failing open on None therefore inverts the
+# behaviour for every letter-free response ('42', '!!!', '$1,000,000'): official
+# False, ours True -- a fail-OPEN grader false positive that scores a violating
+# response as compliant. It bit both checkers on 8/8 letter-free probes, and
+# these two instruction types cover 64/541 = 11.8% of IFEval.
+# The fail-open branch is real, but ONLY once the case test has already passed.
+
+
 def check_change_case_english_capital(response: str, kwargs: dict) -> dict:
+    if not response.isupper():
+        # Short-circuit exactly as the official `and` does: no langdetect call,
+        # so no exception, so no fail-open.
+        return {"followed": False, "detail": "isupper=False (langdetect not consulted, per official short-circuit)"}
     detected = _detect_language(response)
     if detected is None:
         return {"followed": True, "detail": "langdetect could not classify (fail-open, per official grader)"}
-    ok = response.isupper() and detected == "en"
-    return {"followed": ok, "detail": f"isupper={response.isupper()}, detected_lang={detected}"}
+    return {"followed": detected == "en", "detail": f"isupper=True, detected_lang={detected}"}
 
 
 def check_change_case_english_lowercase(response: str, kwargs: dict) -> dict:
+    if not response.islower():
+        return {"followed": False, "detail": "islower=False (langdetect not consulted, per official short-circuit)"}
     detected = _detect_language(response)
     if detected is None:
         return {"followed": True, "detail": "langdetect could not classify (fail-open, per official grader)"}
-    ok = response.islower() and detected == "en"
-    return {"followed": ok, "detail": f"islower={response.islower()}, detected_lang={detected}"}
+    return {"followed": detected == "en", "detail": f"islower=True, detected_lang={detected}"}
 
 
 def check_punctuation_no_comma(response: str, kwargs: dict) -> dict:

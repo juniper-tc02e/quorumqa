@@ -62,7 +62,10 @@ def _finalize(client: QwenClient, executed: list[dict], evidence_block: str = ""
                 tool_used=c["tool"],
                 tool_query=str(c["arguments"]),
                 tool_result=str(c["tool_result"]),
-                supports_claim=bool(f.get("supports_claim", False)),
+                # Same hole as the claims loop above: findings_raw elements are
+                # unvalidated model JSON. A non-dict element must read as
+                # "unsupported", not crash the question.
+                supports_claim=bool(f.get("supports_claim", False)) if isinstance(f, dict) else False,
             )
         )
     return findings, result.usage
@@ -90,6 +93,19 @@ async def verify(
 
     executed = []
     for c in claims[:2]:
+        # `claims` comes straight from model JSON and _extract_claims only
+        # validates the CONTAINER is a list, never its elements. A model that
+        # returns {"claims": [2, 3]} used to raise AttributeError here, which
+        # propagates out through _tribunal and makes the caller drop the WHOLE
+        # question. Observed in the wild:
+        # benchmark/results/lever_flagship_panel_supergpqa_seed123.log:743
+        # ("'int' object has no attribute 'get'") cost one item from a seed
+        # behind the flagship claim. Because verify() is only reachable after a
+        # split, every such drop removes a CONTESTED item -- the only kind the
+        # tribunal can change -- so the loss is correlated with escalation
+        # rather than random. Skip the malformed claim instead.
+        if not isinstance(c, dict):
+            continue
         tool = c.get("tool")
         arguments = c.get("arguments", {}) or {}
         if tool not in ("lookup_constant", "safe_calculate") or not isinstance(arguments, dict):
