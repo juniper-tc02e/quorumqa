@@ -538,16 +538,50 @@ def compute_f5_subject_breakdown(records: list[Rec]):
     """Secondary, lower-confidence proxy: per-subject accuracy delta between
     shipped_engine and baseline_3.7max within the combo files that carry a
     `subject` field indirectly via question item -- reconstructed here from
-    the underlying JSONL rather than Rec (Rec doesn't carry subject)."""
+    the underlying JSONL rather than Rec (Rec doesn't carry subject).
+
+    DE-DUPLICATED BY question_id (fixed 2026-07-26). Six separate files map to
+    GPQA-Diamond, and several re-run the same questions, so appending every row
+    counted a question once per file it appeared in: 183 observations over only
+    94 unique question_ids, 76 ids appearing more than once, one as often as 5
+    times. That inflated F08 -- which is typed as a PAIRED same-item frame and
+    labelled "(paired, same items)" -- with exactly the duplicate-pooled record
+    the figure ledger names as confirmed Trap #2 and says should never be
+    cited. The Organic Chemistry bar read n=86 against 39 real unique
+    questions, and disagreed 2.3x with the prose introducing it.
+
+    Rule: where a benchmark has a FROZEN published run, plot only that run --
+    no pooling at all, so the figure's n is the run's n and matches the prose
+    that introduces it (lever_findings.md cites "Organic Chemistry (37/90
+    questions)"; full_run2.jsonl is exactly 90 paired rows, 37 of them organic
+    chemistry). Elsewhere, de-duplicate on (benchmark, question_id), first
+    observation winning.
+    """
     subj_map: dict[tuple[str, str], dict[str, list[bool]]] = defaultdict(lambda: defaultdict(list))
+    seen: set[tuple[str, str]] = set()
+
+    # GPQA-Diamond's six combo files include ad-hoc and smoke runs that have no
+    # business in a published figure. The frozen n=90 run is the citable one.
+    FROZEN_RUN_BY_BENCHMARK = {"GPQA-Diamond": "full_run2.jsonl"}
+
     for fname, bench in COMBO_BENCHMARK_BY_FNAME.items():
+        frozen = FROZEN_RUN_BY_BENCHMARK.get(bench)
+        if frozen is not None and fname != frozen:
+            continue
         path = RESULTS_DIR / fname
         if not path.exists():
             continue
         for row in iter_jsonl(path):
             if "baseline" not in row or "engine" not in row:
                 continue
-            subj = row["baseline"]["item"].get("subject") or "unknown"
+            item = row["baseline"]["item"]
+            qid = str(item.get("question_id") or "")
+            if qid:
+                key = (bench, qid)
+                if key in seen:
+                    continue
+                seen.add(key)
+            subj = item.get("subject") or "unknown"
             subj_map[(bench, subj)]["baseline_3.7max"].append(bool(row["baseline"]["correct"]))
             subj_map[(bench, subj)]["shipped_engine"].append(bool(row["engine"]["correct"]))
 

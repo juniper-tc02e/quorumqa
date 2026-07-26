@@ -74,21 +74,53 @@ accuracies are not comparable across these benchmarks (SuperGPQA-hard and
 MMLU-Pro-STEM are 4-choice trims), which is why there is no accuracy leaderboard
 anywhere in this repo.*
 
+**Read the comparator column first.** An audit on 2026-07-26 found two rows in
+this table measured against a *cheap-panel* control while the heading promised a
+flagship one. The table is now split by comparator, and each row states the test
+behind it rather than only its delta.
+
+**(a) Against a single `qwen3.7-max` call — the flagship comparator**
+
 | Benchmark | Config | Models & roles | Result |
 |---|---|---|---|
-| **SuperGPQA-hard** | `flagship_panel` | 3 solvers = `qwen3.7-max` (thinking); Skeptic/Verifier = `qwen3.6-flash`; Judge = `qwen3.7-max` | **+4.1 mean** (+3.8 / +2.4 / +6.2) |
-| **Chemistry** | `chem_thinking_gate` | organic-chem → 3× `qwen3.7-max`; else 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | **90.9% mean**, +4.4 matched |
-| **GPQA-Diamond** | `thinking_gate` | 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | 86.7 / tie / +1.1 — matches-or-beats, marginal |
-| **Retrieval** | `rag_presolve` | cheap panel + top-k STEM passages pre-solve | +4.7 / +6.9 / +8.0 / **−5.6** (mean **+3.5**, "validated-with-variance") |
-| **Retrieval, gated** | `rag_thinking_gate` | as above + reasoning gate | +0.0 / +4.6 / +4.5 — **never negative** |
-| **Coding agent** | `QuorumQAAgent` hardening | single `qwen3.7-max` agent, Harbor sandbox | graded coverage **36% → 86%** |
+| **SuperGPQA-hard** | `flagship_panel` | 3 solvers = `qwen3.7-max` (thinking); Skeptic/Verifier = `qwen3.6-flash`; Judge = `qwen3.7-max` | **+4.1 mean** (+3.8 / +2.4 / +6.2); pooled b=11 c=1 **net +10, p=0.0032**, n=241. **Clears the bar** — at **~3.0× measured tokens**, no compute-matched control |
+| **Chemistry** | `chem_thinking_gate` | organic-chem → 3× `qwen3.7-max`; else 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | **90.9% mean** (3 seeds). The **+4.4 is ONE matched seed** (314), n=87, b=6 c=2, **p=0.145 — does NOT clear the bar**; seeds 217/471 have no matched comparator |
+| **GPQA-Diamond** | `thinking_gate` | 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | 86.7 / tie / +1.1 — matches-or-beats, marginal, inside noise |
 
-Honest framing: the wins on SuperGPQA-hard and chemistry are
-**orchestration-beats-flagship** — those configs *use* flagship solvers, so the
-claim is "deliberation on top of the best model beats one call of it," at
-higher cost. `thinking_gate` on GPQA is the closest to a genuine
-cheap-beats-flagship result, with the flagship appearing only as the escalation
-judge.
+**(b) Against the cheap-panel control (3× `qwen3.6-flash`, no retrieval)** —
+*not* a flagship comparison:
+
+| Benchmark | Config | Result vs cheap-panel control | Against a flagship call |
+|---|---|---|---|
+| **Retrieval** | `rag_presolve` | +4.7 / +6.9 / +8.0 / **−5.6** (mean **+3.5**) | **−7.0 / −2.4 / −4.7 — loses on every seed where the comparison exists** |
+| **Retrieval, gated** | `rag_thinking_gate` | +0.0 / +4.6 / +4.5 — never negative vs control | **unmeasurable** — seeds 271/606/838 have no flagship baseline file |
+
+**(c) Not an accuracy comparison at all**
+
+| Benchmark | Config | Result |
+|---|---|---|
+| **Coding agent** | `QuorumQAAgent` hardening | single `qwen3.7-max` agent, Harbor sandbox — graded coverage **36% → 86%** |
+
+Honest framing: **exactly one row above clears the bar** — `flagship_panel` on
+SuperGPQA-hard. It is **orchestration-beats-flagship**, not
+cheap-beats-flagship: the config *uses* flagship solvers, so the claim is
+"deliberation on top of the best model beats one call of it," at **~3.0× the
+measured tokens** (10,685 vs 3,589 tok/q, summed over every call at seed 7).
+
+**The compute-matched control this repo mandates has not been run.**
+[capability-roadmap.md](capability-roadmap.md) states that "every whole-pipeline
+swap (panels, councils, replicated ensembles) must carry a compute-matched
+control — the same base config sampled the same number of times, aggregated by
+majority," because without it a gain is indistinguishable from plain
+self-consistency. `flagship_panel` is precisely such a swap and no 3×-flagship
+majority arm exists in `benchmark/results/`. Until it does, the honest ceiling
+on this claim is "beats a 1× flagship call at 3× the tokens" — Self-MoA
+(ICML 2025) predicts a substantial part of the +10 may reproduce with no
+tribunal at all. Running that control is queued, not done.
+
+`thinking_gate` on GPQA remains the closest to a genuine cheap-beats-flagship
+result, with the flagship appearing only as the escalation judge — but it is
+marginal and inside the noise band.
 
 **The frozen submission number is 78.9%** — *below* the flagship's 84.4%, at
 ~11% lower cost. That was always a cost claim, never an accuracy claim.

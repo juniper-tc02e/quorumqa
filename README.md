@@ -100,11 +100,24 @@ overstating it: LEXam has a 22% unanimous-wrong rate and still loses 6 points,
 because there the missing ingredient is *knowledge*, not decorrelation. See
 [`docs/figures/`](docs/figures/) — the "large gap, lever still lost" quadrant.
 
-Validated at a 3-seed bar against a single `qwen3.7-max` call: **+4.1 mean** on
-SuperGPQA-hard, **+4.4** on chemistry (90.9%), and matches-or-beats on
-GPQA-Diamond. Retrieval adds **+3.5 mean** where knowledge is the gap, and
-nothing where it isn't. The shipped submission config is 78.9% — *below* the
-flagship's 84.4%, at ~11% lower cost; that was always a cost claim.
+One result clears the 3-seed bar against a single `qwen3.7-max` call:
+**+4.1 mean** on SuperGPQA-hard (pooled b=11, c=1, net +10, exact McNemar
+p=0.0032, n=241 shared items) — at **~3.0× the measured tokens**, and with no
+compute-matched control run, so it is "deliberation on top of the flagship
+beats one call of it", not a free win. The other headline numbers are weaker
+than this README used to imply, and the corrections are stated at the point of
+use in [`docs/FINDINGS.md`](docs/FINDINGS.md):
+
+- **Chemistry +4.4** is *one* matched seed (314), n=87, b=6 c=2, p=0.145 — it
+  does **not** clear the bar. The 90.9% is a 3-seed candidate-arm mean with no
+  matched comparator at seeds 217/471.
+- **Retrieval +3.5** is measured against the **cheap-panel control**, not
+  against a flagship call. Against a flagship call `rag_presolve` *loses* on
+  every seed where the comparison is possible (−7.0 / −2.4 / −4.7).
+- **GPQA-Diamond** matches-or-beats, marginal and inside noise.
+
+The shipped submission config is 78.9% — *below* the flagship's 84.4%, at ~11%
+lower cost; that was always a cost claim.
 
 The largest artifact is the negative results:
 **[`docs/negative-results.md`](docs/negative-results.md)** — 22 measured nulls

@@ -218,6 +218,54 @@ def test_the_guard_list_is_derived_not_duplicated():
     assert len(CHEMISTRY_BRANCHING_LEVERS) == len(set(CHEMISTRY_BRANCHING_LEVERS))
 
 
+# --------------------------------------------------------------------------
+# C8 -- F08 plotted duplicate-pooled data as a PAIRED same-item frame
+# --------------------------------------------------------------------------
+
+
+def test_f08_gpqa_panel_has_no_duplicate_questions():
+    """The frame is typed [PAIRED-SMALL-N] and labelled "(paired, same items)",
+    so every GPQA observation must be a distinct question.
+
+    It used to concatenate six combo files with no de-duplication: 183
+    observations over 94 unique question_ids, 76 counted more than once. The
+    Organic Chemistry bar read n=86 against 37 real questions.
+    """
+    from benchmark.analyze_family_floor import compute_f5_subject_breakdown
+
+    rows = compute_f5_subject_breakdown([])
+    gpqa = [r for r in rows if r["benchmark"] == "GPQA-Diamond"]
+    total = sum(r["n"] for r in gpqa)
+    # The frozen published run is n=90.
+    assert total == 90, f"GPQA panel should be the frozen n=90 run, got {total}"
+
+    oc = [r for r in gpqa if r["subject"] == "Organic Chemistry"]
+    assert len(oc) == 1
+    # Matches lever_findings.md's "Organic Chemistry (37/90 questions)".
+    assert oc[0]["n"] == 37
+    assert oc[0]["delta_items"] == -3
+
+
+def test_f08_gpqa_matches_the_frozen_run_exactly():
+    """Guards the provenance rule itself: the GPQA panel must be drawn from
+    full_run2.jsonl alone, not pooled with ad-hoc/smoke runs."""
+    import json as _json
+    from pathlib import Path
+
+    from benchmark.analyze_family_floor import RESULTS_DIR, compute_f5_subject_breakdown
+
+    frozen = Path(RESULTS_DIR) / "full_run2.jsonl"
+    with frozen.open(encoding="utf-8") as fh:
+        rows = [_json.loads(x) for x in fh if x.strip()]
+    paired = [r for r in rows if "baseline" in r and "engine" in r]
+    qids = {r["baseline"]["item"]["question_id"] for r in paired}
+    assert len(paired) == len(qids), "the frozen run itself must not repeat a question"
+
+    computed = compute_f5_subject_breakdown([])
+    total = sum(r["n"] for r in computed if r["benchmark"] == "GPQA-Diamond")
+    assert total == len(paired)
+
+
 def test_finalize_tolerates_non_dict_findings():
     from quorumqa.engine.verifier import _finalize
 

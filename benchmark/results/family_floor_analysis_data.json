@@ -4110,7 +4110,7 @@
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Astrophysics",
-      "n": 7,
+      "n": 4,
       "baseline_acc": 1.0,
       "engine_acc": 1.0,
       "delta_pp": 0.0,
@@ -4119,28 +4119,28 @@
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Chemistry (general)",
-      "n": 14,
+      "n": 8,
       "baseline_acc": 1.0,
-      "engine_acc": 0.9285714285714286,
-      "delta_pp": -7.14285714285714,
+      "engine_acc": 0.875,
+      "delta_pp": -12.5,
       "delta_items": -1
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Electromagnetism and Photonics",
-      "n": 5,
+      "n": 3,
       "baseline_acc": 1.0,
-      "engine_acc": 0.6,
-      "delta_pp": -40.0,
+      "engine_acc": 0.3333333333333333,
+      "delta_pp": -66.66666666666667,
       "delta_items": -2
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "High-energy particle physics",
-      "n": 6,
-      "baseline_acc": 0.8333333333333334,
+      "n": 4,
+      "baseline_acc": 0.75,
       "engine_acc": 1.0,
-      "delta_pp": 16.666666666666664,
+      "delta_pp": 25.0,
       "delta_items": 1
     },
     {
@@ -4155,34 +4155,34 @@
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Molecular Biology",
-      "n": 18,
-      "baseline_acc": 0.6666666666666666,
-      "engine_acc": 0.7222222222222222,
-      "delta_pp": 5.555555555555558,
-      "delta_items": 1
+      "n": 8,
+      "baseline_acc": 0.75,
+      "engine_acc": 0.75,
+      "delta_pp": 0.0,
+      "delta_items": 0
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Optics and Acoustics",
-      "n": 2,
+      "n": 1,
       "baseline_acc": 1.0,
-      "engine_acc": 0.5,
-      "delta_pp": -50.0,
-      "delta_items": -1
+      "engine_acc": 1.0,
+      "delta_pp": 0.0,
+      "delta_items": 0
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Organic Chemistry",
-      "n": 86,
-      "baseline_acc": 0.8604651162790697,
-      "engine_acc": 0.7209302325581395,
-      "delta_pp": -13.953488372093027,
-      "delta_items": -12
+      "n": 37,
+      "baseline_acc": 0.7567567567567568,
+      "engine_acc": 0.6756756756756757,
+      "delta_pp": -8.108108108108114,
+      "delta_items": -3
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Physics (general)",
-      "n": 17,
+      "n": 10,
       "baseline_acc": 1.0,
       "engine_acc": 1.0,
       "delta_pp": 0.0,
@@ -4191,18 +4191,18 @@
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Quantum Mechanics",
-      "n": 22,
+      "n": 11,
       "baseline_acc": 0.9090909090909091,
-      "engine_acc": 0.9545454545454546,
-      "delta_pp": 4.545454545454552,
+      "engine_acc": 1.0,
+      "delta_pp": 9.090909090909093,
       "delta_items": 1
     },
     {
       "benchmark": "GPQA-Diamond",
       "subject": "Relativistic Mechanics",
-      "n": 5,
-      "baseline_acc": 0.6,
-      "engine_acc": 0.6,
+      "n": 3,
+      "baseline_acc": 0.6666666666666666,
+      "engine_acc": 0.6666666666666666,
       "delta_pp": 0.0,
       "delta_items": 0
     },

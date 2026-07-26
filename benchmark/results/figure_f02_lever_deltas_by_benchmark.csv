@@ -10,7 +10,7 @@ GPQA-Diamond,combined,v2,negative,flagship_baseline,1.5999999999999943,computed_
 GPQA-Diamond,qwen38_judge,v2,negative,v1_shipped_engine_frozen_run,-4.1000000000000085,computed_vs_flat_reference,1,76,True,False,hollow,loss
 GPQA-Diamond,smart_gate,v2,negative,flagship_baseline,-1.3000000000000114,computed_vs_flat_reference,1,89,False,False,hollow,loss
 SuperGPQA-hard,shipped_engine,v1,negative,flagship_baseline,-11.6,printed_mean,1,86,False,False,hollow,loss
-SuperGPQA-hard,flagship_panel,v2,validated,flagship_baseline_matched_seed,4.1,printed_mean,3,,False,False,half,win
+SuperGPQA-hard,flagship_panel,v2,validated,flagship_baseline_matched_seed,4.1,printed_mean,3,241,False,False,solid,win
 SuperGPQA-hard,rag_presolve,v2,screen,cheap_panel_control_no_rag_matched_seed,3.5,printed_mean,4,,False,False,half,win
 SuperGPQA-hard,rag_thinking_gate,v2,validated,control_no_rag_matched_seed,3.0,printed_mean,3,,False,False,half,win
 SuperGPQA-hard,qwen38_panel,v2,negative,flagship_panel_and_baseline_common_items,9.466666666666669,computed_vs_flat_reference,1,58,True,False,hollow,win

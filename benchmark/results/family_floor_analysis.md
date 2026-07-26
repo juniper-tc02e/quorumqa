@@ -263,12 +263,25 @@ locking any routing rule that assumes "hard bucket → route to any deliberation
 **Secondary, lower-confidence proxy — per-subject `shipped_engine` vs `baseline_3.7max` within
 the combo pilot files** (paired on the same item, same row; full table in stdout / the JSON):
 most subject bins are too small (n=1–8) to trust, but two bins clear real N and show a
-consistent, large negative: **GPQA-Diamond Organic Chemistry (n=86): 86%→72%, −14.0pp (−12
-items)** and **SuperGPQA-hard Science (n=58): 76%→64%, −12.1pp (−7 items)**. LEXam
+consistent negative: **GPQA-Diamond Organic Chemistry (n=37): −8.1pp (−3 items)** and
+**SuperGPQA-hard Science (n=58): 76%→64%, −12.1pp (−7 items)**. LEXam
 Interdisciplinary (n=42): 86%→69%, −16.7pp (−7 items) is also large-N. All three point the same
 direction as F2's headline finding: `shipped_engine` is a net accuracy cost relative to a bare
 flagship call on the specific high-volume subject bins it's actually tested on, not a targeted
 win.
+
+> **Corrected 2026-07-26 — this bin was previously overstated.** It read
+> "n=86: 86%→72%, −14.0pp (−12 items)". That n came from concatenating all six
+> GPQA combo files without de-duplicating `question_id`: 183 observations over
+> 94 unique questions, 76 of them counted more than once. The GPQA panel is now
+> restricted to the frozen published run (`full_run2.jsonl`, n=90), which is
+> also the run the prose elsewhere cites as "Organic Chemistry (37/90
+> questions)". The **direction survives and the diagnosis stands** — organic
+> chemistry is still the only substantial GPQA bin with a consistent negative,
+> and the bins that now score worse are all n=1–8 noise — but the magnitude was
+> inflated roughly 4x in items and 1.7x in percentage points. The chemistry
+> levers it motivated (`chem_flagship_gate`, `chem_thinking_gate`) were
+> therefore aimed at a real hole, a smaller one than the figure showed.
 
 ---
 
