@@ -1,7 +1,7 @@
 import time
 from collections import Counter
 
-from quorumqa.config import BASELINE_MODEL, SOLVER_MODEL
+from quorumqa.config import BASELINE_MODEL, N_SOLVERS, SOLVER_MODEL
 from quorumqa.letters import choice_block, letter_hint, parse_letter
 from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import BaselineResult, GPQAItem
@@ -41,6 +41,38 @@ def solve_single_agent(client: QwenClient, item: GPQAItem) -> BaselineResult:
         answer_letter=letter,
         correct=(letter == item.correct_letter),
         calls=[usage],
+        latency_s=time.monotonic() - start,
+    )
+
+
+def solve_compute_matched_control(client: QwenClient, item: GPQAItem) -> BaselineResult:
+    """The compute-matched control `capability-roadmap.md` mandates for every
+    whole-pipeline swap and that `flagship_panel` never received: N_SOLVERS
+    (3) independent flagship-tier (BASELINE_MODEL) calls, majority vote, no
+    tribunal. Same tier and same call count as flagship_panel's three solver
+    seats -- the only difference is the vote is text-majority over
+    independent samples rather than plurality-then-escalate-on-split. Without
+    this arm, flagship_panel's +4.1/+10 headline cannot be told apart from
+    plain self-consistency (Self-MoA, ICML 2025), which is exactly the gap
+    docs/FINDINGS.md flags as open.
+
+    thinking=True to match solve_single_agent's default (flagship_panel's
+    solver seats also run thinking=True) -- this is a fair-tier match, not
+    the cheap-tier match solve_self_consistency5 targets below.
+    """
+    start = time.monotonic()
+    letters = []
+    calls = []
+    for _ in range(N_SOLVERS):
+        letter, usage = _ask_once(client, BASELINE_MODEL, item, role="baseline", thinking=True)
+        letters.append(letter)
+        calls.append(usage)
+    final_letter = Counter(letters).most_common(1)[0][0]
+    return BaselineResult(
+        item=item,
+        answer_letter=final_letter,
+        correct=(final_letter == item.correct_letter),
+        calls=calls,
         latency_s=time.monotonic() - start,
     )
 

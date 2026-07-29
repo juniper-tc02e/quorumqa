@@ -1957,7 +1957,24 @@ async def run_question_lever(
     gate_fired = False
     gate_reason = None
     if unanimous:
-        if lever in SUBJECT_BRANCHING_LEVERS and item.subject == "Organic Chemistry":
+        if lever == "universal_gate":
+            # The gate-recall lever (benchmark/analyze_judge_anchoring.py,
+            # benchmark/results/unanimous_gate_headroom.md): the shipped
+            # orchestrator returns early on unanimity, so the 61.6%-of-wrong-
+            # rows-are-unanimous set is unreachable "by construction". Free,
+            # offline analysis of every existing doubt/score-gate firing found
+            # that when a unanimous panel DOES reach the tribunal, it recovers
+            # 40/84 = 47.6% of wrong ones and breaks only 1/130 = 0.8% of right
+            # ones -- break-even is w=1.6% against a measured w=18.0% wrong-
+            # rate among unanimous panels, 11x above. This lever tests that
+            # unconditionally: escalate EVERY unanimous panel, no doubt-check,
+            # no subject filter -- the maximal-recall arm the analysis
+            # predicts should convert BELOW the pooled 47.6% (existing gates
+            # fire on DETECTABLE doubt; this fires on all of it, including
+            # confidently-wrong panels the analysis flags as untested).
+            force_escalate = True
+            gate_note = "universal-unconditional"
+        elif lever in SUBJECT_BRANCHING_LEVERS and item.subject == "Organic Chemistry":
             force_escalate = True
             gate_note = "subject-forced"
         elif lever in ("gate", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "rag_thinking_gate", "tribunal_debate", "rag_r3_targeted"):
@@ -2366,7 +2383,7 @@ async def main_gate_replay(frozen_path: Path, out_path: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "tribunal_debate", "rag_r3_targeted", "diversified_panel", "cycled_panel", "control", "baseline", "gate-replay"])
+    parser.add_argument("--lever", required=True, choices=["gate", "thinking", "subject", "five", "combined", "thinking_all", "thinking_gate", "smart_gate", "chem_flagship_gate", "chem_thinking_gate", "flagship_panel", "flagship_panel_combined", "qwen38_judge", "qwen38_panel", "rag_presolve", "rag_recursive", "rag_thinking_gate", "rag_gated_presolve", "verified_gate_flaw", "verified_gate_cas", "permuted_panel", "method_panel", "tribunal_debate", "rag_r3_targeted", "diversified_panel", "cycled_panel", "control", "baseline", "gate-replay", "universal_gate"])
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)

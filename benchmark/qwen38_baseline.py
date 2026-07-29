@@ -171,6 +171,7 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=str, default=None)
     parser.add_argument("--skip-huggingface", action="store_true")
     parser.add_argument("--retry-missing", action="store_true", help="Only re-run question_ids not already present in --out, appending to it")
+    parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT_S, help="Per-request HTTP timeout in seconds (default: %(default)s)")
     args = parser.parse_args()
     out_path = Path(args.out) if args.out else RESULTS_DIR / f"qwen38_baseline_seed{args.seed}.jsonl"
-    asyncio.run(main(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.retry_missing))
+    asyncio.run(main(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.retry_missing, args.timeout))
