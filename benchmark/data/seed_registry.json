@@ -1,0 +1,96 @@
+{
+  "_comment": "Pre-flight P1 (docs/experiment-spec-book.md section 6.0). Committed 2026-07-29 so 26-of-31 colliding spec ids and their seed assignments cannot silently merge result files. Resolves Q2 (seed 909 collision) with the doc's own recommended default (a).",
+  "_source": "docs/experiment-spec-book.md sections 6.0 and 6, section 8 Q2 -- cross-checked against benchmark/score_selectors.py's enforced BURNED_SEEDS and the dynamic original_audit_seeds() filename scan.",
+  "_discrepancy_found_2026-07-29": "spec-book section 6.0's prose lists seed 3 as burned ('Burned, never reusable: 3, 7, 42, ...'). No committed result file anywhere uses seed=3, and original_audit_seeds()'s dynamic scan does not find it either -- score_selectors.BURNED_SEEDS (the actual enforced list) correctly omits it. This registry follows the CODE, not the doc's prose, since the doc appears to have a transcription error. Flagging for a spec-book correction; not fixed here to avoid conflating a live-run registry commit with an unrelated doc edit.",
+  "burned_never_reusable": [7, 42, 123, 217, 271, 314, 471, 555, 606, 777, 838, 888],
+  "blocks": {
+    "instability_merged": {
+      "spec_ids": ["META-2", "SCI-1"],
+      "dataset": "SuperGPQA-hard",
+      "seeds": {"screen": 909, "extension": [1313, 2027]},
+      "note": "Kept 909 as first mover in the collision (Q2 default a) -- the merge with SCI-1's restate_probe is deliberate and shares one control triple."
+    },
+    "blinding": {
+      "spec_ids": ["SCI-2"],
+      "dataset": "SuperGPQA-hard",
+      "seeds": {"screen": 1213, "extension": [1427, 1619]}
+    },
+    "replay": {
+      "spec_ids": ["SCI-3"],
+      "dataset": "frozen logs",
+      "seeds": {"pairing_rng": "analysis:5501"},
+      "note": "No sampling seed -- analysis-only pairing."
+    },
+    "transfer": {
+      "spec_ids": ["SCI-5"],
+      "dataset": "GPQA",
+      "seeds": {"screen": 7103, "extension": [8117, 9127]}
+    },
+    "analysis_only": {
+      "spec_ids": ["META-1"],
+      "dataset": null,
+      "seeds": {"namespaced": "analysis:5309"},
+      "note": "Never a sampling seed."
+    },
+    "long_doc": {
+      "spec_ids": ["META-3"],
+      "dataset": "synthetic",
+      "seeds": {"strata": [3109, 3221, 3331]}
+    },
+    "ifeval": {
+      "spec_ids": ["META-5"],
+      "dataset": "IFEval",
+      "seeds": {"strata": [1234, 3037, 5150]}
+    },
+    "simpleqa": {
+      "spec_ids": ["META-6"],
+      "dataset": "SimpleQA",
+      "seeds": {"strata": [7331, 8081, 9091]}
+    },
+    "coding": {
+      "spec_ids": ["CODE-1", "CODE-2", "CODE-3", "CODE-4", "CODE-5"],
+      "dataset": "Terminal-Bench 2.1",
+      "seeds": {
+        "task_sample": null,
+        "note": "No task-sample seed -- explicit task lists. Per-trial model seeds derived into 10000-99999.",
+        "reserved_for_subsampling": 11
+      }
+    },
+    "selection_pools": {
+      "spec_ids": ["SEL-7"],
+      "dataset": "GPQA-Diamond / SuperGPQA-hard (S7 ship-gate)",
+      "seeds": [411, 523, 631],
+      "note": "Renumbered from a 909 collision claim per Q2 default (a). Matches benchmark/score_selectors.py's own S7 CLI example and the 411/523/631 pools already referenced in this repo's run queue."
+    },
+    "math_aime": {
+      "spec_ids": ["MATH-1", "MATH-6"],
+      "dataset": "AIME",
+      "seeds": {
+        "liveness_screen": 101,
+        "note": "101/202/303 stay with the SEL pools per Q2; MATH-6's SuperGPQA sc_mc screen and MATH-4 (dropped) renumber away from 909. MATH-1's own liveness screen uses 101 directly (docs/experiment-spec-book.md section 6.2 item 1) -- if MATH-6 genuinely needs the same 90 items as META-2, run ONE shared control arm and label it shared in both write-ups rather than double-counting, per Q2's closing note."
+      }
+    },
+    "panel_scaling": {
+      "spec_ids": ["PS-1", "PS-2"],
+      "dataset": "SuperGPQA-hard",
+      "seeds": {"merged_n15_harvest": 19}
+    }
+  },
+  "this_sessions_additions_not_in_the_original_spec_book": {
+    "compute_matched_control": {
+      "dataset": "SuperGPQA-hard",
+      "seeds": [42, 7, 123],
+      "note": "MUST match flagship_panel's own seeds exactly -- this is a paired control, not a fresh screen. See benchmark/run_compute_matched_control.py."
+    },
+    "chemistry_matched_baselines": {
+      "dataset": "GPQA-Diamond",
+      "seeds": [217, 471],
+      "note": "Completes chem_thinking_gate's 3-seed comparison (314 already matched). 217/314/471 are in burned_never_reusable for S7 SELECTOR-SHIPPING purposes only (score_selectors.assert_seeds_not_burned is scoped to --ship-gate); reusing them here to pair with an EXISTING engine run at the same seed is the intended use, not a violation."
+    },
+    "universal_gate": {
+      "dataset": "GPQA-Diamond",
+      "seeds": "not yet assigned -- pick a fresh, unburned seed before firing",
+      "note": "GPQA first per benchmark/results/unanimous_gate_headroom.md (4.2 escalations/net item vs SuperGPQA's 24.0)."
+    }
+  }
+}
