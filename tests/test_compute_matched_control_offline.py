@@ -7,6 +7,7 @@ fixture files. No API calls, no tokens.
 
 from __future__ import annotations
 
+import asyncio
 import json
 
 import pytest
@@ -156,6 +157,111 @@ def test_verify_pools_across_seeds_by_summing_bc(fixture_results_dir):
     assert r["pooled"]["c"] == 3
     assert r["pooled"]["net"] == 0
     assert r["pooled"]["shared"] == 6
+
+
+# --------------------------------------------------------------------------
+# main()'s --retry-missing path -- added after seed 123's first live attempt
+# dropped 75/90 items to QwenClient's fixed 300s per-call timeout (3
+# sequential thinking=True flagship calls per item is far more timeout-prone
+# than a single-call baseline). Mirrors qwen38_baseline.py's own resume path.
+# --------------------------------------------------------------------------
+
+
+@pytest.fixture
+def fake_loader(monkeypatch):
+    """Three fixed items (q1/q2/q3), all correct_letter='A'."""
+    import benchmark.run_compute_matched_control as rcmc
+
+    items = [
+        GPQAItem(question_id=f"q{i}", question="Q?", choices=["c1", "c2", "c3", "c4"], correct_letter="A")
+        for i in (1, 2, 3)
+    ]
+    monkeypatch.setitem(rcmc.DATASET_LOADERS, "fake_ds", lambda n, seed, skip: items)
+    return items
+
+
+def test_retry_missing_skips_already_done_and_appends(tmp_path, monkeypatch, fake_loader):
+    import benchmark.run_compute_matched_control as rcmc
+
+    out = tmp_path / "control.jsonl"
+    # Pre-seed q1 as already done (wrong answer, on purpose, to prove it is
+    # NOT re-run -- a fresh client would answer differently).
+    out.write_text(json.dumps({
+        "baseline": {"item": {"question_id": "q1", "correct_letter": "A"},
+                      "answer_letter": "B", "correct": False, "calls": [], "latency_s": 0},
+        "seed": 1,
+    }) + "\n", encoding="utf-8")
+
+    calls_by_qid = {"q1": [], "q2": [], "q3": []}
+
+    def fake_solve(client, item):
+        from quorumqa.baseline import BaselineResult
+        calls_by_qid[item.question_id].append(1)
+        letter = "A"  # every FRESH call answers correctly
+        return BaselineResult(item=item, answer_letter=letter, correct=(letter == item.correct_letter),
+                               calls=[], latency_s=0.0)
+
+    monkeypatch.setattr(rcmc, "solve_compute_matched_control", fake_solve)
+    asyncio.run(rcmc.main(1, 3, 2, out, True, "fake_ds", retry_missing=True))
+
+    rows = [json.loads(l) for l in out.read_text(encoding="utf-8").splitlines() if l.strip()]
+    assert len(rows) == 3
+    by_qid = {r["baseline"]["item"]["question_id"]: r for r in rows}
+    # q1 untouched -- still the pre-seeded wrong answer, never re-solved.
+    assert by_qid["q1"]["baseline"]["answer_letter"] == "B"
+    assert calls_by_qid["q1"] == []
+    # q2/q3 freshly solved and correct.
+    assert by_qid["q2"]["baseline"]["correct"] is True
+    assert by_qid["q3"]["baseline"]["correct"] is True
+    assert calls_by_qid["q2"] == [1]
+    assert calls_by_qid["q3"] == [1]
+
+
+def test_retry_missing_with_no_existing_file_runs_everything(tmp_path, monkeypatch, fake_loader):
+    import benchmark.run_compute_matched_control as rcmc
+
+    out = tmp_path / "control.jsonl"  # does not exist yet
+    solved = []
+
+    def fake_solve(client, item):
+        from quorumqa.baseline import BaselineResult
+        solved.append(item.question_id)
+        return BaselineResult(item=item, answer_letter="A", correct=True, calls=[], latency_s=0.0)
+
+    monkeypatch.setattr(rcmc, "solve_compute_matched_control", fake_solve)
+    asyncio.run(rcmc.main(1, 3, 2, out, True, "fake_ds", retry_missing=True))
+
+    assert sorted(solved) == ["q1", "q2", "q3"]
+    rows = [json.loads(l) for l in out.read_text(encoding="utf-8").splitlines() if l.strip()]
+    assert len(rows) == 3
+
+
+def test_without_retry_missing_always_reruns_everything(tmp_path, monkeypatch, fake_loader):
+    """Default behaviour (no --retry-missing) must stay exactly as before:
+    a fresh full run overwrites the file, regardless of what was there."""
+    import benchmark.run_compute_matched_control as rcmc
+
+    out = tmp_path / "control.jsonl"
+    out.write_text(json.dumps({
+        "baseline": {"item": {"question_id": "q1"}, "answer_letter": "B",
+                      "correct": False, "calls": [], "latency_s": 0},
+        "seed": 1,
+    }) + "\n", encoding="utf-8")
+
+    solved = []
+
+    def fake_solve(client, item):
+        from quorumqa.baseline import BaselineResult
+        solved.append(item.question_id)
+        return BaselineResult(item=item, answer_letter="A", correct=True, calls=[], latency_s=0.0)
+
+    monkeypatch.setattr(rcmc, "solve_compute_matched_control", fake_solve)
+    asyncio.run(rcmc.main(1, 3, 2, out, True, "fake_ds", retry_missing=False))
+
+    assert sorted(solved) == ["q1", "q2", "q3"]  # q1 re-run despite pre-existing row
+    rows = [json.loads(l) for l in out.read_text(encoding="utf-8").splitlines() if l.strip()]
+    assert len(rows) == 3
+    assert all(r["baseline"]["correct"] for r in rows)  # old wrong row is gone
 
 
 def test_verify_raises_on_zero_overlap_instead_of_silent_null(fixture_results_dir):

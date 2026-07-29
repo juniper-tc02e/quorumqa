@@ -63,9 +63,20 @@ async def _run_one(client: QwenClient, item, semaphore: asyncio.Semaphore):
     return result
 
 
-async def main(seed: int, n: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str) -> None:
+async def main(seed: int, n: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str, retry_missing: bool = False) -> None:
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
     log.info("Loaded %d %s items (seed=%d) for the compute-matched control", len(items), dataset, seed)
+
+    existing: list[dict] = []
+    if retry_missing and out_path.exists():
+        with out_path.open(encoding="utf-8") as fh:
+            existing = [json.loads(line) for line in fh if line.strip()]
+        done_ids = {r["baseline"]["item"]["question_id"] for r in existing}
+        items = [it for it in items if it.question_id not in done_ids]
+        log.info(
+            "Retry mode: %d already done, %d missing, retrying only the missing ones",
+            len(existing), len(items),
+        )
 
     client = QwenClient()
     semaphore = asyncio.Semaphore(concurrency)
@@ -80,19 +91,22 @@ async def main(seed: int, n: int, concurrency: int, out_path: Path, skip_hugging
     if dropped:
         log.warning("%d/%d questions dropped", dropped, len(items))
 
+    fresh_rows = [{"baseline": r.model_dump(), "seed": seed} for r in results]
+    all_rows = existing + fresh_rows
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
-        for r in results:
-            f.write(json.dumps({"baseline": r.model_dump(), "seed": seed}) + "\n")
+        for row in all_rows:
+            f.write(json.dumps(row) + "\n")
 
-    correct = sum(1 for r in results if r.correct)
-    total_in = sum(c.input_tokens or 0 for r in results for c in r.calls)
-    total_out = sum(c.output_tokens or 0 for r in results for c in r.calls)
+    correct = sum(1 for row in all_rows if row["baseline"]["correct"])
+    total_in = sum(c.get("input_tokens") or 0 for row in all_rows for c in row["baseline"]["calls"])
+    total_out = sum(c.get("output_tokens") or 0 for row in all_rows for c in row["baseline"]["calls"])
     log.info(
         "SUMMARY n=%d accuracy=%.1f%% total_input_tokens=%d total_output_tokens=%d",
-        len(results), 100 * correct / len(results) if results else 0, total_in, total_out,
+        len(all_rows), 100 * correct / len(all_rows) if all_rows else 0, total_in, total_out,
     )
-    log.info("Wrote %d results to %s", len(results), out_path)
+    log.info("Wrote %d results to %s (%d retried this pass)", len(all_rows), out_path, len(fresh_rows))
 
 
 if __name__ == "__main__":
@@ -104,9 +118,15 @@ if __name__ == "__main__":
     parser.add_argument("--dataset", type=str, default="supergpqa", choices=list(DATASET_LOADERS.keys()))
     parser.add_argument("--out", type=str, default=None)
     parser.add_argument("--skip-huggingface", action="store_true")
+    parser.add_argument("--retry-missing", action="store_true",
+                         help="Only re-run question_ids not already present in --out, appending to it. "
+                              "Added after seed 123's first attempt dropped 75/90 items to the shared "
+                              "QwenClient's fixed 300s per-call timeout (3 sequential thinking=True "
+                              "flagship calls per item makes this arm far more timeout-prone than a "
+                              "single-call baseline) -- mirrors qwen38_baseline.py's own resume path.")
     args = parser.parse_args()
     out_path = (
         Path(args.out) if args.out
         else RESULTS_DIR / f"compute_matched_control_{args.dataset}_seed{args.seed}.jsonl"
     )
-    asyncio.run(main(args.seed, args.n, args.concurrency, out_path, args.skip_huggingface, args.dataset))
+    asyncio.run(main(args.seed, args.n, args.concurrency, out_path, args.skip_huggingface, args.dataset, args.retry_missing))
