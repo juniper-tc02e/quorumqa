@@ -84,7 +84,7 @@ behind it rather than only its delta.
 | Benchmark | Config | Models & roles | Result |
 |---|---|---|---|
 | **SuperGPQA-hard** | `flagship_panel` | 3 solvers = `qwen3.7-max` (thinking); Skeptic/Verifier = `qwen3.6-flash`; Judge = `qwen3.7-max` | **+4.1 mean** (+3.8 / +2.4 / +6.2); pooled b=11 c=1 **net +10, p=0.0032**, n=241. **Clears the bar** — at **~3.0× measured tokens**, no compute-matched control |
-| **Chemistry** | `chem_thinking_gate` | organic-chem → 3× `qwen3.7-max`; else 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | **90.9% mean** (3 seeds). The **+4.4 is ONE matched seed** (314), n=87, b=6 c=2, **p=0.145 — does NOT clear the bar**; seeds 217/471 have no matched comparator |
+| **Chemistry** | `chem_thinking_gate` | organic-chem → 3× `qwen3.7-max`; else 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | **90.9% mean** (3 seeds). **Updated 2026-07-29** — the two missing matched baselines landed: pooled b=16 c=4 **net +12, p=0.0059 — clears the bar**. Per-seed: 217 net +9 (p=0.0020, big win), 314 net +4 (p=0.145, noise), **471 net −1 (slightly negative)** — a real pooled effect built from one strong seed, one null, one mild loss, not three confirmations of the same number |
 | **GPQA-Diamond** | `thinking_gate` | 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | 86.7 / tie / +1.1 — matches-or-beats, marginal, inside noise |
 
 **(b) Against the cheap-panel control (3× `qwen3.6-flash`, no retrieval)** —

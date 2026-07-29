@@ -2,7 +2,7 @@ benchmark_label,config,build_stage,comparator,n_common_items,seeds,per_seed_delt
 GPQA-Diamond,baseline_3.7max,reference,,90,42,,,84.4,,,,FALSE,,,,,benchmark/results/summary.md,QuorumQA Benchmark Results
 GPQA-Diamond,shipped_engine,v1,flagship_baseline,90,42,,,78.9,,,negative,FALSE,,,37.8,,benchmark/results/summary.md,QuorumQA Benchmark Results
 GPQA-Diamond,thinking_gate,v2,flagship_baseline_matched_seed,90,42;7;123,+2.3;tie;+1.1,,86.7;86.5;86.7,,,validated,FALSE,,,,,benchmark/results/lever_findings.md,"Third-seed validation, and a targeting hypothesis that inverted"
-GPQA-Diamond,chem_thinking_gate,v2,matched_flagship_baseline,88,314;217;471,,+4.4,90.9,,,validated,FALSE,,,34.1;37.1;42.5,,benchmark/results/lever_findings.md,chem_thinking_gate: the stack of both validated winners (VALIDATED: three fresh seeds)
+GPQA-Diamond,chem_thinking_gate,v2,matched_flagship_baseline,259,314;217;471,+10.3;+4.6;-1.2,+4.63,90.9,+12,0.0059,validated,FALSE,,,34.1;37.1;42.5,,benchmark/results/lever_findings.md,chem_thinking_gate: the stack of both validated winners (VALIDATED: three fresh seeds)
 GPQA-Diamond,chem_flagship_gate,v2,matched_flagship_baseline,,555;777;888,,,88.6,,,validated,FALSE,,,39.8;46.6;43.7,,benchmark/results/lever_findings.md,Third seed (888): validation bar met
 GPQA-Diamond,five,v2,flagship_baseline,90,42,,,81.1,,,negative,FALSE,,,43.3,,benchmark/results/lever_findings.md,"Levers tested / Full results, both seeds"
 GPQA-Diamond,thinking_all,v2,flagship_baseline,,42;7,,,85.6;83.3,,,negative,FALSE,,,18.9;21.1,,benchmark/results/lever_findings.md,"Full results, both seeds"

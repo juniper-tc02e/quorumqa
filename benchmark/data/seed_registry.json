@@ -89,8 +89,8 @@
     },
     "universal_gate": {
       "dataset": "GPQA-Diamond",
-      "seeds": "not yet assigned -- pick a fresh, unburned seed before firing",
-      "note": "GPQA first per benchmark/results/unanimous_gate_headroom.md (4.2 escalations/net item vs SuperGPQA's 24.0)."
+      "seeds": [1001],
+      "note": "GPQA first per benchmark/results/unanimous_gate_headroom.md (4.2 escalations/net item vs SuperGPQA's 24.0). Assigned 2026-07-29, confirmed unburned and unused."
     }
   }
 }

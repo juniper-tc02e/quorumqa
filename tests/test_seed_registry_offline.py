@@ -82,3 +82,12 @@ def test_chemistry_baseline_seeds_are_the_matching_pair():
     registry = _load()
     chem = registry["this_sessions_additions_not_in_the_original_spec_book"]["chemistry_matched_baselines"]
     assert set(chem["seeds"]) == {217, 471}
+
+
+def test_universal_gate_seed_is_assigned_and_unburned():
+    registry = _load()
+    from benchmark.score_selectors import BURNED_SEEDS
+
+    seeds = registry["this_sessions_additions_not_in_the_original_spec_book"]["universal_gate"]["seeds"]
+    assert isinstance(seeds, list) and seeds, "universal_gate seed must be assigned before firing"
+    assert not (set(seeds) & set(BURNED_SEEDS))

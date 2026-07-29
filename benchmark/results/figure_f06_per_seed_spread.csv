@@ -2,6 +2,9 @@ benchmark,config,seed,delta_pp,is_tie
 GPQA-Diamond,thinking_gate,42,2.3,False
 GPQA-Diamond,thinking_gate,7,0.0,True
 GPQA-Diamond,thinking_gate,123,1.1,False
+GPQA-Diamond,chem_thinking_gate,314,10.3,False
+GPQA-Diamond,chem_thinking_gate,217,4.6,False
+GPQA-Diamond,chem_thinking_gate,471,-1.2,False
 SuperGPQA-hard,flagship_panel,42,3.8,False
 SuperGPQA-hard,flagship_panel,7,2.4,False
 SuperGPQA-hard,flagship_panel,123,6.2,False

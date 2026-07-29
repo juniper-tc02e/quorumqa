@@ -1,7 +1,7 @@
 benchmark,config,build_stage,verdict,comparator,delta_pp,provenance,seeds,n,contaminated,is_tie,fill,shape
 GPQA-Diamond,shipped_engine,v1,negative,flagship_baseline,-5.5,computed_vs_flat_reference,1,90,False,False,hollow,loss
 GPQA-Diamond,thinking_gate,v2,validated,flagship_baseline_matched_seed,1.1333333333333333,printed_per_seed_centroid,3,90,False,False,hollow,win
-GPQA-Diamond,chem_thinking_gate,v2,validated,matched_flagship_baseline,4.4,printed_mean,3,88,False,False,half,win
+GPQA-Diamond,chem_thinking_gate,v2,validated,matched_flagship_baseline,4.63,printed_mean,3,259,False,False,solid,win
 GPQA-Diamond,chem_flagship_gate,v2,validated,matched_flagship_baseline,4.199999999999989,computed_matched_approx,3,,False,False,half,win
 GPQA-Diamond,five,v2,negative,flagship_baseline,-3.3000000000000114,computed_vs_flat_reference,1,90,False,False,hollow,loss
 GPQA-Diamond,thinking_all,v2,negative,flagship_baseline,0.04999999999998295,computed_vs_flat_reference,2,,False,False,hollow,win

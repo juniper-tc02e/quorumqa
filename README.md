@@ -108,9 +108,12 @@ beats one call of it", not a free win. The other headline numbers are weaker
 than this README used to imply, and the corrections are stated at the point of
 use in [`docs/FINDINGS.md`](docs/FINDINGS.md):
 
-- **Chemistry +4.4** is *one* matched seed (314), n=87, b=6 c=2, p=0.145 — it
-  does **not** clear the bar. The 90.9% is a 3-seed candidate-arm mean with no
-  matched comparator at seeds 217/471.
+- **Chemistry**: the missing matched baselines (seeds 217, 471) landed
+  2026-07-29, completing a real 3-seed paired result — pooled net **+12,
+  p=0.0059, clears the bar**. Not three uniform wins, though: seed 217 alone
+  is +9 (p=0.002), seed 314 is +4 (noise), and **seed 471 is −1**. The 90.9%
+  candidate-arm mean is unchanged; only the delta against a matched baseline
+  was previously incomplete.
 - **Retrieval +3.5** is measured against the **cheap-panel control**, not
   against a flagship call. Against a flagship call `rag_presolve` *loses* on
   every seed where the comparison is possible (−7.0 / −2.4 / −4.7).

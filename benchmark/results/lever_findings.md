@@ -427,6 +427,36 @@ thinking seat resolving some would-be splits before they escalate.
 | 471 | 90.8% | 90.3% (band 82.4-91.2) | 42.5% | 3 (all chem) |
 | **mean** | **90.9%** | ~90.5% | ~38% | |
 
+### The paired 3-seed statistic, completed 2026-07-29
+
+The table above is the candidate arm's OWN accuracy stability (a tight
+0.2-point spread) -- it is not a paired delta. Until today only seed 314 had a
+matched same-seed flagship baseline; a 2026-07-26 audit corrected the
+published "+4.4, validated 3-seed" headline to what the data actually showed:
+one matched seed, n=87, b=6 c=2, p=0.145 -- **not** clearing the repo's bar.
+Seeds 217 and 471's matched baselines were queued (Tier G, week-1 run queue)
+specifically to settle this.
+
+Both landed today, 88/90 rows each. Paired on the question_id intersection at
+every seed:
+
+| seed | candidate n | baseline n | shared | b | c | net | delta | one-sided p |
+|---|---|---|---|---|---|---|---|---|
+| 217 | 89 | 88 | 87 | 9 | 0 | **+9** | +10.3 | **0.0020** |
+| 314 | 88 | 89 | 87 | 6 | 2 | +4 | +4.6 | 0.1445 |
+| 471 | 87 | 88 | 85 | 1 | 2 | −1 | −1.2 | 0.8750 |
+| **pooled** | | | **259** | **16** | **4** | **+12** | **+4.63** | **0.00591** |
+
+**The claim now clears the bar by both branches** -- seed 217 alone reaches
+net +5 at p<0.05, and 2 of 3 seeds reach net ≥ +3 with the pooled McNemar at
+p=0.0059. But the per-seed spread is real and must be shown alongside the
+pooled number, not smoothed into it: seed 217 is a large win, seed 314 is
+noise, and **seed 471 is slightly negative**. This is the honest shape of the
+result -- a genuinely positive pooled effect built from one strong seed, one
+null seed, and one mild loss -- not three independent confirmations of +4.4.
+
+Reproduce: `python -m benchmark.verify_chemistry_claim`
+
 The tightest replication of any configuration tested in this project
 (compare chem_flagship_gate's 89.8/88.6/87.4 and thinking_gate's
 86.7/86.5/83.3). Against the flagship baseline's measured range across

@@ -2,7 +2,7 @@ benchmark,role,config,delta_pp,provenance,seeds,n,contaminated,fill,shape
 LEXam,v1,shipped_engine,-14.0,printed_mean,1,50,False,hollow,loss
 LEXam,current_best,thinking_gate,-6.0,computed_vs_flat_reference,1,50,False,hollow,loss
 GPQA-Diamond,v1,shipped_engine,-5.5,computed_vs_flat_reference,1,90,False,hollow,loss
-GPQA-Diamond,current_best,chem_thinking_gate,4.4,printed_mean,3,88,False,half,win
+GPQA-Diamond,current_best,chem_thinking_gate,4.63,printed_mean,3,259,False,solid,win
 SuperGPQA-hard,v1,shipped_engine,-11.6,printed_mean,1,86,False,hollow,loss
 SuperGPQA-hard,current_best,flagship_panel,4.1,printed_mean,3,241,False,solid,win
 MMLU-Pro,v1,shipped_engine,-12.0,printed_mean,1,50,False,hollow,loss

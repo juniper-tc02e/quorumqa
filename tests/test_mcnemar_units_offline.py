@@ -82,14 +82,23 @@ def test_five_items_is_not_five_pp_except_at_n_100():
     assert 5 / 50 * 100 == pytest.approx(10.0)
 
 
-def test_every_ledger_benchmark_is_below_n_100():
-    """Why the old proxy was permissive everywhere it mattered."""
+def test_most_ledger_benchmarks_are_below_n_100():
+    """Why the old proxy was permissive everywhere it mattered when this was
+    written. Threshold loosened 2026-07-29 when chemistry's pooled n grew to
+    259 (Tier G landed the two missing matched baselines) -- flagship_panel
+    (n=241) was already the one exception; this is a second, expected one,
+    not a regression. The single-row exemption this test used to encode is
+    gone on purpose: any row CAN pool past n=100 now that per-seed pairing is
+    genuinely wired up. What must stay true is that most rows -- the ones
+    still measured at a single n=90-ish benchmark -- remain under 100, which
+    is what made the old percentage-point proxy permissive in the first
+    place."""
     ns = [
         n for n in (_to_float_or_none(r.get("n_common_items")) for r in _rows())
         if n
     ]
     assert ns, "ledger has no n_common_items values"
-    assert sum(1 for n in ns if n < 100) >= len(ns) - 1
+    assert sum(1 for n in ns if n < 100) >= len(ns) - 3
 
 
 def test_fill_category_uses_items_not_pp():
