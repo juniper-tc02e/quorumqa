@@ -5,11 +5,19 @@ engine. Decided 2026-07-19; two-tier model locked in by Jun Kai.)*
 
 ## Thesis
 
-Every mainstream chatbot (ChatGPT, Claude, Z.ai) returns **one voice's
-answer** with no visible basis for trust. MagiAchiral is the chatbot for
-answers you need to trust: **ask like a chatbot, adjudicated like a
-tribunal.** The chat UI is the familiar shell; the visible deliberation is
-the product.
+Most mainstream chatbots (ChatGPT, Claude, Z.ai) present **one synthesized
+answer**, with the reasoning that produced it largely invisible to the reader.
+MagiAchiral is the chatbot for answers you need to trust: **ask like a chatbot,
+adjudicated like a tribunal.** The chat UI is the familiar shell; the visible
+deliberation is the product.
+
+*Scoped 2026-07-30: this previously read "Every mainstream chatbot… with no
+visible basis for trust." Several assistants do expose reasoning traces or
+citations, and multi-model council products exist (see
+`docs/prior-art-and-positioning.md`). The differentiator is not that we
+deliberate and nobody else does — it is **what we surface**: the panel's actual
+split, which claims were tool-checked, the adjudicator's ruling, and any dissent
+that survived it.*
 
 Design rule that governs everything: **the disagreement is the feature.**
 Other chatbots hide uncertainty; we sell it.
@@ -74,10 +82,17 @@ Highest-leverage UI investment in the product.
 1. **STEM verification / homework & exam prep** — literally what we
    benchmarked (GPQA). Launch wedge.
 2. **Second opinion on high-stakes personal questions** — medical/legal/
-   financial *information* (hard disclaimers, never advice). The dissent
-   surface is uniquely honest here.
-3. **Fact-checked research answers** — claims forced through Verifier
-   tools; answers ship with receipts.
+   financial *information* (hard disclaimers, never advice). Dissent is a
+   first-class part of the interface here, not a footnote.
+3. **Verifier-checked answers on eligible claims — ROADMAP for general
+   fact-checking.** What ships today is narrower than "fact-checked research"
+   implies: the Verifier's MCP surface is exactly five tools —
+   `lookup_constant`, `safe_calculate`, `sympy_check`, `substitute_check`, and
+   `search_corpus` (`src/quorumqa/tools/mcp_server.py`). That is constants, a
+   calculator, symbolic-equivalence and substitution checks, and retrieval over
+   a local corpus. It is **not** open-domain fact verification, and it only
+   fires on claims the extractor judges checkable. General fact-checked
+   research is a roadmap capability, not a shipped one.
 4. **Decision support** — Plan A vs Plan B adversarially argued.
    Anti-sycophancy as a consumer feature.
 5. **API / Verdict-Cards-as-a-service** — open-core path; the chat product

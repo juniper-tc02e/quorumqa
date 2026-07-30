@@ -125,11 +125,16 @@ lower cost; that was always a cost claim.
 The largest artifact is the negative results:
 **[`docs/negative-results.md`](docs/negative-results.md)** — 22 measured nulls
 each with its mechanism, 6 methodological errors we caught in our own work, and
-4 adjudicated contradictions between our own documents. A
-[verified research pass](docs/frontier-oss-model-research.md) found that no
-frontier lab publishes on multi-agent ensembling, LLM-as-judge, or
-self-preference bias, so these nulls have no published prior — each one is a run
-someone else doesn't have to waste.
+4 adjudicated contradictions between our own documents.
+
+Prior work establishes multi-agent debate, aggregation, routing, judging, and
+tool-assisted verification — this project builds on it rather than predating it.
+What the null ledger contributes is a **source-traced, Qwen-specific record of
+how one disagreement-triggered cascade behaves across multiple benchmarks**,
+including where it fails, wastes escalation, or cannot observe unanimous errors:
+one stack, one harness, one cost model, every claim traced to a committed
+artifact. See [`docs/prior-art-and-positioning.md`](docs/prior-art-and-positioning.md)
+for the component-level prior-art map and the claim boundaries.
 
 ## Deployment
 

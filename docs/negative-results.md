@@ -9,7 +9,39 @@ than asserted from memory.*
 
 ---
 
-## 1. Why negative results, and why these are novel
+## 1. Why these negative results matter
+
+> **Scope correction, 2026-07-30.** This section previously argued that these
+> nulls "have no published prior to compete with," citing a research pass over
+> frontier open-weight model reports. **That inference does not hold**, and the
+> correction is recorded here rather than quietly deleted. The review's actual
+> finding was narrow and correctly stated at its source: no *surviving claim in
+> that report corpus* addressed orchestration. The corpus was frontier-lab
+> technical reports about **building single models** — it was never a review of
+> the multi-agent systems literature. Absence of orchestration claims from that
+> source set is a limitation of the review corpus, not evidence about the
+> field.
+>
+> The claim is in fact **self-refuting from this repository's own files**: the
+> repo cites Self-MoA (Li et al., "Rethinking Mixture-of-Agents", arXiv
+> 2502.00674, 2025-02-02) in eleven places — including as the source of the
+> *prediction* that this project's homogeneity trap would occur — and cites Sea
+> AI Lab (arXiv 2503.20783) as an external refutation of its own reflection-
+> token null. A project that cites external orchestration literature to
+> corroborate its findings cannot also claim that literature does not exist.
+> `docs/frontier-oss-model-research.md` even rated its own orchestration
+> synthesis *"inferential and rated low"*; downstream documents quoted it as
+> established fact. See `docs/prior-art-and-positioning.md` for the full
+> component-level prior-art map.
+>
+> **The corrected thesis:** these results are valuable because they are measured
+> under one reproducible orchestration stack and traced to committed artifacts.
+> They show how homogeneity, escalation coverage, saturation, corpus mismatch,
+> judge access, and cost interact in QuorumQA's specific setting. They should
+> **not** be read as the field's first negative results.
+
+The original argument is preserved below for audit. Read it as the reasoning
+that was corrected, not as current positioning.
 
 A verified, cited research pass over the frontier open-weight literature
 (`docs/frontier-oss-model-research.md`, 104 agents, ~15 primary sources,
@@ -30,25 +62,33 @@ when does retrieval help a panel that is already confident and wrong. The
 harness's own synthesis states this plainly: *"the leap to multi-agent/
 ensemble design is unvalidated by the surviving evidence set"* (finding 14).
 
-This means the null results in this project have no published prior to
-compete with, agree with, or be refuted by. Two consequences follow, and
-both are the actual point of this document:
+~~This means the null results in this project have no published prior to
+compete with, agree with, or be refuted by.~~ **[RETRACTED 2026-07-30 — see the
+scope correction above. The reviewed corpus contained no orchestration claims;
+the broader literature does. Corrected reading: no *frontier-lab technical
+report in that corpus* provides a prior for these nulls.]** Two consequences
+follow, and both are the actual point of this document:
 
-1. **There is nothing to fall back on.** Every claim below stands or falls
-   on this project's own 3-seed empirical record, not on external
-   validation. That is why the tone throughout is source-traced rather than
-   argued — there is no literature to argue with.
+1. **There is little frontier-lab validation to fall back on.** Every claim
+   below stands or falls on this project's own 3-seed empirical record. That is
+   why the tone throughout is source-traced rather than argued. *(Corrected:
+   the original read "there is no literature to argue with" — there is, and
+   this repo cites some of it. What is genuinely absent is a same-stack,
+   same-harness, cost-accounted comparison to argue against.)*
 2. **The nulls are the most exportable thing this project has produced.**
    A positive result on a resource-limited hackathon build is, at best, a
    3-seed replication of an effect a bigger lab could reproduce with more
    compute. A negative result that pins down *why* three structurally
    different levers (a stronger judge, a bigger panel, a smarter selector)
    all failed in the *same mechanistic way* is not compute-limited — it is a
-   fact about the shape of multi-agent deliberation, and it is currently
-   unpublished anywhere else. `docs/capability-roadmap.md` names this item
-   directly as **F10, "Null-harvest writeup (S5)"**: *"The scarcest artifact
-   we own: no frontier lab publishes on multi-agent ensembling, so there are
-   no published nulls to compete with."*
+   fact about the shape of multi-agent deliberation ~~and it is currently
+   unpublished anywhere else~~ **[RETRACTED: no exhaustive search supports
+   "unpublished anywhere else". The defensible version is that this particular
+   set of mechanisms, measured on one stack with one cost model and traced to
+   committed artifacts, is not something we found published in that form.]**
+   `docs/capability-roadmap.md` names this item directly as **F10,
+   "Null-harvest writeup (S5)"** — whose own rationale carried the same
+   over-generalization and is corrected in that file.
 
 This document is that writeup.
 

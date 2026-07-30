@@ -133,12 +133,23 @@ marginal and inside the noise band.
 its **mechanism**, plus 6 methodological negatives (errors we caught in our own
 work) and 4 adjudicated contradictions between our own documents.
 
-Why this is the scarcest thing in the repo: a
-[verified research pass](frontier-oss-model-research.md) established that **no
-frontier lab publishes on multi-agent ensembling, mixture-of-agents,
-LLM-as-judge, or self-preference bias.** Labs publish on *building* single
-models, not *orchestrating* panels of them. These nulls have no published prior
-to compete with, and each is a run someone else does not have to waste.
+Why this is the most valuable thing in the repo — stated carefully, because an
+earlier version of this paragraph overreached. A
+[verified research pass](frontier-oss-model-research.md) found that no
+frontier-lab technical report **in its corpus** covered multi-agent ensembling,
+mixture-of-agents, LLM-as-judge, or self-preference bias; that corpus was about
+*building* single models. **That is a fact about the corpus, not about the
+field** — published prior work on all of those topics exists, and this repo
+cites some of it (Self-MoA, arXiv 2502.00674, appears here and in eleven other
+places). The earlier claim that "these nulls have no published prior" is
+retracted; see [`prior-art-and-positioning.md`](prior-art-and-positioning.md).
+
+What makes the ledger valuable is not priority but **consolidation and
+traceability**: 22 nulls measured on one reproducible orchestration stack,
+under one benchmark harness and one token-based cost model, each diagnosed to a
+*mechanism* rather than reported as a bare number, with positive and negative
+outcomes recorded together and every claim traced to a committed artifact. Each
+is still a run someone else does not have to waste.
 
 Selected mechanisms:
 - **The homogeneity trap.** Making solvers stronger or more numerous *kills* the

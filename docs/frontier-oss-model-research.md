@@ -159,34 +159,43 @@ MAJOR GAP: No surviving claim addresses the entire multi-agent section of the br
 ## Open questions
 
 - Does Kimi K3 exist as a released model? No citable primary source appears among the verified claims — release status, MoE specs/param counts, license, and benchmarks all need confirmation before any adoption decision (the only reference is unverifiable local tooling).
-- When does combining models actually help vs hurt for an orchestration panel — specifically Self-MoA (repeated samples of one strong model) vs mixed-MoA (diverse models), how large is self-preference bias when a model judges its own or same-family outputs, and does debate/deliberation beat simple majority voting? This core orchestration question is entirely unaddressed by the verified evidence.
+- When does combining models actually help vs hurt for an orchestration panel — specifically Self-MoA (repeated samples of one strong model) vs mixed-MoA (diverse models), how large is self-preference bias when a model judges its own or same-family outputs, and does debate/deliberation beat simple majority voting? This core orchestration question is **unaddressed by the verified evidence set used in this report** — a frontier-lab technical-report corpus. It is *not* unaddressed in the wider literature: Self-MoA (arXiv 2502.00674) studies the quality-vs-diversity trade-off head-on, and this document cites it elsewhere. See `docs/prior-art-and-positioning.md`.
 - Do the RL-for-reasoning gains (GRPO/DAPO/GSPO/VAPO/Lite-PPO) and the self-consistency boost transfer beyond Qwen/DeepSeek bases and math benchmarks to the heterogeneous, multi-vendor panels an orchestration layer would actually run?
 - What are DeepSeek-V3's concrete MLA / MoE-routing / MTP / FP8 specifications (uncovered here), and are V3.2 / V3.2-Speciale's frontier-competitor benchmarks and IMO/IOI results independently reproducible rather than lab-reported?
 
 ## Source list
 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
--  — 
+> **INCOMPLETE — repaired 2026-07-30.** This section was committed as 22 empty
+> `- — ` rows: the generator emitted the list structure without populating it.
+> The entries below were **recovered from citations inline in this document's
+> own body** (per-finding "Source:" and "Contra:" lines) and are traceable to
+> the findings they support. **No entry here was reconstructed from memory or
+> inferred** — the original 22-row count could not be reproduced, so this list
+> is shorter than the structure implied and should be treated as a partial
+> record. The per-finding inline citations, not this list, are authoritative.
+
+Recovered from inline citations in this document:
+
+- DeepSeek-R1, Guo et al., Jan 2025, arXiv 2501.12948 — https://arxiv.org/abs/2501.12948
+  *(cited by findings at lines 49, 118, 147)*
+- DAPO: An Open-Source LLM RL System at Scale, Mar 2025, arXiv 2503.14476 — https://arxiv.org/abs/2503.14476
+- Group Sequence Policy Optimization, Qwen team (Zheng et al.), Jul 2025, arXiv 2507.18071 — https://arxiv.org/abs/2507.18071
+- VAPO: Efficient and Reliable RL for Advanced Reasoning Tasks, ByteDance Seed, Apr 2025, arXiv 2504.05118 — https://arxiv.org/abs/2504.05118
+- Part I: Tricks or Traps? A Deep Dive into RL for LLM Reasoning, Alibaba/ROLL-Qwen, Aug 2025, arXiv 2508.08221 — https://arxiv.org/abs/2508.08221
+- RL with Verifiable Rewards: GRPO's Effective Loss, Dynamics, and Success Amplification, Y. Mroueh (IBM Research), Mar 2025, arXiv 2503.06639 — https://arxiv.org/abs/2503.06639
+- Understanding R1-Zero-Like Training / OAT-Zero, Sea AI Lab, Mar 2025, arXiv 2503.20783 — https://arxiv.org/abs/2503.20783
+  *(cited as the CONTRA source for the reflective-token / "aha moment" finding)*
+- Rethinking Mixture-of-Agents: Is Mixing Different Large Language Models
+  Beneficial? (Self-MoA), Li, Lin, Xia & Jin, 2025-02-02, arXiv 2502.00674 —
+  https://arxiv.org/abs/2502.00674
+  *(verified against the arXiv abstract page 2026-07-30. Note: this is an
+  ORCHESTRATION paper, cited by this document — which is why this report cannot
+  be read as establishing that orchestration literature does not exist.)*
+
+Referenced in the body but without a recoverable arXiv/DOI in this document
+(treat as untraced here; confirm before citing elsewhere): Nature
+s41586-025-09422-z, arXiv 2507.20534, arXiv 2512.02556, and the Kimi K2 /
+DeepSeek-V3.2 primary reports.
 
 
 ---
@@ -226,21 +235,47 @@ QuorumQA result it touches.*
   distribution-feature upgrade was NEGATIVE. Two independent roads to the same
   place — do not build a confidence/escalation gate on reflection-word counts.
 
-### 3. The biggest strategic takeaway: our orchestration work is on
-### genuinely uncharted ground
+### 3. The biggest strategic takeaway: this corpus does not validate our
+### orchestration thesis either way
+
+> **SCOPE CORRECTION, 2026-07-30 — read before reusing this section.**
+> This review's corpus was **frontier/open-weight model technical reports**,
+> concentrated on architecture and training. It was **not** a review of the
+> multi-agent systems literature, and it cannot support conclusions about that
+> literature. The heading of this section previously read "our orchestration
+> work is on genuinely uncharted ground"; that is retracted.
+>
+> "No surviving claim" means *no claim within this corpus*. Substantial
+> published prior work exists on multi-agent debate, councils and peer-review
+> aggregation, Mixture-of-Agents and same-model aggregation, agreement-based
+> adaptive computation, weak-to-strong routing, LLM-as-judge, and tool-assisted
+> verification. **This very document cites some of it** — Self-MoA (Li et al.,
+> arXiv 2502.00674) and Sea AI Lab (arXiv 2503.20783) — which is why the
+> "no published prior" reading was self-refuting. Note also that the harness
+> itself rated this section's orchestration synthesis *"inferential and rated
+> low"* (§ Caveats, finding 14); downstream documents nonetheless quoted it as
+> established fact. See `docs/prior-art-and-positioning.md`.
+
 - The harness's flagged **MAJOR GAP**: *no* verified frontier-lab publication
-  covers multi-agent ensembling, mixture-of-agents (Self-MoA vs mixed-MoA),
-  LLM-as-judge, self-preference bias, or debate/deliberation. The labs
-  publish on *building single models*, not on *orchestrating panels of them*.
+  **in this review's corpus** covers multi-agent ensembling, mixture-of-agents
+  (Self-MoA vs mixed-MoA), LLM-as-judge, self-preference bias, or
+  debate/deliberation. The labs in this corpus publish on *building single
+  models*, not on *orchestrating panels of them*.
   Consequences for us, both real:
-  - **Caution:** we cannot lean on external validation for the panel/tribunal/
-    routing thesis — our own 3-seed empirical record IS the evidence base.
-    Keep the honest-negative discipline; there is no published prior to fall
-    back on.
+  - **Caution:** we cannot lean on *frontier-lab technical reports* for
+    external validation of the panel/tribunal/routing thesis — our own 3-seed
+    empirical record is our evidence base. Keep the honest-negative discipline.
+    *(Corrected: the original said "there is no published prior to fall back
+    on." There is; it is academic and open-source rather than frontier-lab, and
+    it is mapped in `docs/prior-art-and-positioning.md`.)*
   - **Opportunity:** the same-provider-scaling questions we've been measuring
     (Self-MoA-like `flagship_panel`, the homogeneity trap, the P4 self-
-    preference audit, P(wrong|unanimous)) are largely *unpublished territory*.
-    Our results are a genuine contribution, not a re-derivation.
+    preference audit, P(wrong|unanimous)) are measured here on one stack with
+    one cost model and full artifact traceability. *(Corrected: the original
+    called these "largely unpublished territory" and "a genuine contribution,
+    not a re-derivation." Self-MoA already studies the quality-vs-diversity
+    trade-off directly; our contribution is the Qwen-specific measurement and
+    the escalation-coverage analysis, not the question itself.)*
 
 ### 4. Track-B (cross-vendor) candidate assessment, if ever revived
 Cross-vendor is parked, but the research names the strongest OSS deliberation

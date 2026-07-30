@@ -6,6 +6,31 @@ committed after every iteration so the loop survives session loss.
 
 ---
 
+## RESEARCH-POSITIONING CORRECTION, 2026-07-30 (applies to entries below)
+
+**This is a historical log and its entries are preserved verbatim. Read this
+note first; do not quote the novelty verdicts below as current positioning.**
+
+Earlier entries in this log record verdicts such as *"Discovery shape verified
+genuinely novel vs DRAG/ACL-2025; no contamination standard exists — our
+firewall is a contribution."* Those verdicts compared the design primarily
+against DRAG and a narrow source set. A targeted review on 2026-07-30 found
+substantial prior work on selective/confidence-gated debate initiation
+(SELENE, EACL 2026), cost-aware adversarial adjudication with token budgets
+(D3, EACL 2026), tool-backed verification (CRITIC, ICLR 2024; Chain-of-
+Verification), and retrieval-grounded multi-agent debate with progressive RAG
+and role-switching (Chowdhury et al., arXiv 2603.28488, ~March 2026 — prior to
+our 2026-07-19 ship).
+
+**Corrected position:** the design must be described as a **specific synthesis
+and testable hypothesis**, not as globally novel. The contamination-firewall
+claim is scoped to "not found in the corpus we searched," not "none exists."
+
+Canonical source of truth: `docs/prior-art-and-positioning.md`. Where that
+document and this log disagree, that document wins.
+
+---
+
 ## LOOP RESTARTED — 2026-07-22 evening, NO stop time (supersedes the wrap-up below)
 
 Jun Kai restarted the loop with no scheduled stop. Objective: beat

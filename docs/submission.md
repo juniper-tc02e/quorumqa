@@ -18,9 +18,12 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
 (GPQA-Diamond) with a society of Qwen agents in escalating tiers:
 
 1. **Three Solver agents** (`qwen3.6-flash`, cheapest tier) answer every
-   question independently and in parallel — none sees another's answer, and
-   each reasons through a different assigned lens so they are genuinely
-   diverse, not three clones.
+   question independently and in parallel — none sees another's answer. All
+   three are the **same model**, differentiated by an assigned reasoning lens
+   and a per-seat temperature (0.3 / 0.6 / 0.9). That is prompt- and
+   sampling-level diversity, not independent error sources: our own measured
+   result is that **61.6% of wrong panel rows are unanimous**, which is exactly
+   what correlated errors look like.
 2. **If they agree**, that's the answer. No further cost. This is the common
    case, and it's what makes the economics work.
 3. **If they split**, the society escalates:
@@ -31,11 +34,15 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
      **MCP server** (constant lookup + sandboxed calculator) — every number
      is forced through a tool call, never asserted from memory;
    - a **Judge** (`qwen3.7-max`, flagship — the only place we pay flagship
-     price) reads the full transcript and rules by weighing arguments, never
-     by counting votes. Consensus-collapse research shows plurality voting
-     discards correct minority answers; our Judge can and does overturn
-     2-vs-1 splits, and every ruling records unresolved dissent verbatim on
-     a rendered Verdict Card.
+     price) reads the full transcript and is **instructed** to rule by weighing
+     arguments rather than headcounts: *"an unrefuted minority position beats a
+     conforming majority"* (`JUDGE_SYSTEM`, `src/quorumqa/engine/judge.py`).
+     Stated precisely, because it matters: the transcript shows each seat's
+     letter, so this is a **prompt-level constraint, not an information-level
+     one** — the Judge is told not to count votes, not prevented from doing so.
+     What we can show empirically is that it **does** overturn 2-vs-1 splits,
+     and every ruling records unresolved dissent verbatim on a rendered Verdict
+     Card.
 
 ### How agents divide work, disagree, and resolve conflict (the track brief)
 
@@ -105,6 +112,18 @@ calibration data becoming what reviewers and regulators come to trust.
 real and independently reproducible. A pilot customer, a validated price
 point, and vertical-specific lens libraries are not — that's next-quarter
 work, not a claim made here.
+
+**Relation to prior work.** QuorumQA builds on established research in
+self-consistency, multi-agent debate, Mixture-of-Agents, model routing,
+LLM-as-judge, and tool-assisted verification — none of which it invented.
+Selective, confidence-gated debate initiation and cost-aware adversarial
+adjudication both have published prior art, so "argue only when it's worth
+arguing" is not our idea either. Our hackathon contribution is the
+**Qwen-specific escalation design and its measured cost/accuracy behavior** —
+including the cases where it loses. The component-level prior-art map, with
+every citation verified against its primary source, is at
+[`docs/prior-art-and-positioning.md`](prior-art-and-positioning.md). "Agent
+Society" is this track's label, not a novelty claim.
 
 ## Submission checklist
 

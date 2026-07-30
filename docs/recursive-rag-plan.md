@@ -216,17 +216,52 @@ self-improving corpus. QuorumQA's Discovery shape — retrieval gated by
 domain-competence routing (R1), queries derived from the Skeptic's named
 disputed step and the Verifier's checkable claims (R2), a judge-ordered
 bounded reopening on the pivotal claim (R3), and a provenance-tracked,
-family-firewalled case-law/knowledge-card corpus (R4) — **appears
-genuinely novel across both research passes.** Worth writing up properly
-once G1-G2 produce measured results.
+family-firewalled case-law/knowledge-card corpus (R4) — was **not found in
+either research pass.**
 
-### Contamination standard: none exists — §4 is ahead of the field
-Verified: the decontamination literature targets *pretraining* corpora;
-no adopted community standard exists for excluding benchmark-derived
-documents from *retrieval indexes* (closest: one recent leakage-free-
-benchmark-generation paper, arXiv 2605.08838 — a proposal, not a norm).
-The §4 firewall is therefore a contribution, not a copy; state that
-plainly if this work is ever published.
+> **NOVELTY VERDICT CORRECTED, 2026-07-30.** This paragraph previously read
+> "appears genuinely novel across both research passes." That is retracted:
+> both passes compared this design primarily against DRAG, and neither was a
+> review of the debate-plus-retrieval literature. A targeted review on
+> 2026-07-30 (`docs/prior-art-and-positioning.md`) found several components and
+> close compositions with clear prior art:
+>
+> - **Courtroom-Style Multi-Agent Debate with Progressive RAG and Role-Switching
+>   for Controversial Claim Verification** (Chowdhury et al., arXiv
+>   [2603.28488](https://arxiv.org/abs/2603.28488), ~March 2026 — i.e. **prior**
+>   to our 2026-07-19 ship) combines adversarial roles, a judge, *progressive*
+>   retrieval, evidence negotiation and multi-judge aggregation. This is the
+>   closest analogue to the whole R2/R3 shape and it was missed.
+> - **CRITIC** (arXiv 2305.11738, ICLR 2024) establishes tool-grounded critique
+>   driving revision.
+> - **Chain-of-Verification** (arXiv 2309.11495) establishes claim extraction →
+>   independent checking → synthesis as separated stages.
+> - **SELENE** (EACL 2026) establishes selective, confidence-gated debate
+>   initiation, which is the R1 gating idea.
+>
+> **Corrected reading:** treat this design as an **engineering synthesis and a
+> testable hypothesis**, not a first-of-kind claim. The defensible statement is
+> that we did not find this exact sequence composed this way — which is a
+> statement about our search, not about the field. Still worth writing up once
+> G1–G2 produce measured results; write it up as a measured integration.
+
+### Contamination standard: we found none in the corpus we searched
+Verified within the searched corpus: the decontamination literature we reviewed
+targets *pretraining* corpora, and we found no adopted community standard for
+excluding benchmark-derived documents from *retrieval indexes* (closest: one
+leakage-free-benchmark-generation paper, arXiv 2605.08838 — a proposal, not a
+norm).
+
+> **SCOPED 2026-07-30.** The heading previously read "none exists — §4 is ahead
+> of the field," and the body concluded the firewall "is therefore a
+> contribution, not a copy." Both overstate what a non-exhaustive search can
+> establish. **Corrected:** we did not find such a standard in the corpus we
+> searched, as of 2026-07-30. That is a statement about our search scope, not a
+> proof of absence — retrieval-index contamination is an active area and we did
+> not review the RAG-evaluation or benchmark-integrity literatures
+> systematically. The §4 firewall remains a genuine and useful engineering
+> discipline; describe it as *our* discipline, with the search scope and date
+> attached, rather than as a field-level first.
 
 ### DRAG's numbers, for calibration of expectations
 Llama-3.1-8B-Instruct, Wikipedia corpus: multi-hop wins (+6 EM
