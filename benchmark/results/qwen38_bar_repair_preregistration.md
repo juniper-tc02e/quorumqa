@@ -86,3 +86,47 @@ If the 12 items cannot be completed after 3 paced attempts, record the interval
 and **retire the point estimate entirely** — the bar becomes "between X% and Y%"
 in every document that cites it, and no "N pt from the bar" sentence may be
 written at all.
+
+## Result, 2026-07-30 — the kill clause fired
+
+Three paced attempts were run (`--retry-missing`, `--timeout 900`, concurrency
+1): 78 → 79 → 80 survivors, recovering only **2 of the original 12** missing
+items. Each attempt hit **504 Gateway Timeout from Aliyun's own infrastructure**
+on the same residual items — not a client-side timeout, so raising `--timeout`
+past the default could never have fixed it. `rec5rjeLsEq5Fg7Oj`, one of the
+still-dropped items, is independently named in `lever_findings.md` as a
+chronic-drop offender ("the slowest-reasoning questions hitting the API
+read-timeout ceiling") across multiple prior runs — this is a structural
+property of these specific items' generation length, not transient load.
+
+**Per the kill clause: the point estimate is retired.** 10 of 90 items remain
+unreachable via this API path.
+
+| | value |
+|---|---|
+| survivors | 80/90 |
+| survivor-only accuracy (upper-biased) | 93.8% |
+| all-10-missing-wrong | **83.3%** |
+| all-10-missing-right | **94.4%** |
+
+**The honest bar is the interval [83.3%, 94.4%], not a point.** Our own society
+(`chem_thinking_gate`, 90.9%) sits **inside** this band. The sign of the
+society-vs-family-bar gap remains undetermined — from +7.6pt ahead to −3.5pt
+behind, depending on the 10 unreachable items — and no further attempt at this
+API path is planned; reaching these 10 items would need a different approach
+(e.g. a stricter `max_tokens` forcing shorter generation, changing the model's
+behavior) rather than more retries at the same settings.
+
+No document may state "the society is Npt under/over the family bar" without
+either citing this interval or re-deriving it with a materially different
+method.
+
+**Note on the imputation model (`analyze_dropout_bias.py`), not the point
+estimate.** That script's secondary "slowest-survivors" imputation flipped
+direction with the 2 newly-recovered items: pre-repair it read "society ahead"
+(slow-survivor rate 66.7% < flip threshold 73.4%); post-repair it reads
+"bar ahead, barely" (70.0% > 68.1%). This is a narrow, genuine shift from more
+data, not an error — and it changes nothing about the retired point estimate
+above, which stays the full [83.3%, 94.4%] interval regardless of which
+imputation model is preferred. Flagged so the reversal isn't mistaken for a
+bug if someone diffs the script's output.

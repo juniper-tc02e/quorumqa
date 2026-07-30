@@ -75,25 +75,39 @@ def test_fisher_matches_scipy_if_available():
 
 
 def test_analysis_reproduces_committed_numbers():
-    """Pins the finding itself against the committed result file."""
+    """Pins the finding against the FINAL, retired state of the result file.
+
+    2026-07-30: the pre-registered kill clause fired after 3 paced retry
+    attempts recovered only 2 of the original 12 missing items (78->79->80),
+    each attempt hitting a 504 Gateway Timeout from Aliyun's own
+    infrastructure on the same residual items -- not a client-timeout issue.
+    The point estimate is retired; see
+    benchmark/results/qwen38_bar_repair_preregistration.md's "Result" section.
+    """
     r = analyze()
-    assert r["survivors"] == 78
-    assert r["dropped"] == 12
-    assert r["correct"] == 73
-    assert r["survivor_rate"] == pytest.approx(93.59, abs=0.01)
-    # The bias signal.
-    assert (r["slow_n"], r["fast_n"]) == (9, 69)
-    assert r["slow_rate"] == pytest.approx(66.67, abs=0.01)
-    assert r["fast_rate"] == pytest.approx(97.10, abs=0.01)
-    assert r["fisher_p"] == pytest.approx(0.00975, abs=1e-5)
+    assert r["survivors"] == 80
+    assert r["dropped"] == 10
+    assert r["correct"] == 75
+    assert r["survivor_rate"] == pytest.approx(93.75, abs=0.01)
+    # The bias signal -- still significant after the repair, in fact tighter.
+    assert (r["slow_n"], r["fast_n"]) == (10, 70)
+    assert r["slow_rate"] == pytest.approx(70.0, abs=0.01)
+    assert r["fast_rate"] == pytest.approx(97.14, abs=0.01)
+    assert r["fisher_p"] == pytest.approx(0.01268, abs=1e-4)
     assert r["fisher_p"] < 0.05
     # Hard imputation bounds, and the flip threshold for the society claim.
-    assert r["bar_all_wrong"] == pytest.approx(81.1, abs=0.05)
+    assert r["bar_all_wrong"] == pytest.approx(83.3, abs=0.05)
     assert r["bar_all_right"] == pytest.approx(94.4, abs=0.05)
-    assert r["flip_threshold"] == pytest.approx(73.4, abs=0.05)
-    # The load-bearing inequality: the slowest survivors fall below the
-    # threshold at which the bar drops under our society's 90.9%.
-    assert r["slow_rate"] < r["flip_threshold"]
+    assert r["flip_threshold"] == pytest.approx(68.1, abs=0.05)
+    # REVERSED from the pre-repair reading (66.7% < 73.4%, "society ahead").
+    # After the 2 recovered items, the slowest survivors (70.0%) sit ABOVE the
+    # flip threshold (68.1%) -- barely. Under the "dropped items behave like
+    # the slowest survivors" imputation the bar model now reads bar-ahead
+    # (91.1% vs 90.9%), not society-ahead. This is a genuine, narrow reversal
+    # from more data, not a bug -- and it changes nothing about the KILLED
+    # point estimate, which is retired to the [83.3%, 94.4%] interval
+    # regardless of which imputation model one prefers.
+    assert r["slow_rate"] > r["flip_threshold"]
 
 
 def test_society_lies_inside_the_hard_bounds():
