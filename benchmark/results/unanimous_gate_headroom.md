@@ -143,10 +143,50 @@ reasoning slips — is consistent with the LEXam corpus-gap result, but it is
 ## 7. What follows
 
 - **Killed, free:** the AggLM none-of-the-above licence (§2). No run needed.
-- **Pre-register before firing:** a universal-escalation arm on unanimous panels,
-  GPQA first (4.2 escalations per item gained), SuperGPQA explicitly **not**
-  first (24.0). Paired, same items and seeds, against the current gate. The
-  falsifiable prediction is conversion **below** 47.6% because of limit 2 — if it
-  lands near 47.6%, the selection-bias worry was overblown and that is itself
-  worth recording.
+- **Pre-registered and fired:** a universal-escalation arm on unanimous panels,
+  GPQA first. See §8 for the result.
 - **Cost, not accuracy, is the gate.** Any spend must be argued on Track-B terms.
+
+## 8. Live result, 2026-07-30 — `universal_gate`, GPQA-Diamond, seed 1001
+
+The pre-registered arm from §7 was built (`--lever universal_gate`, no doubt
+check, unconditional escalation on unanimity) and fired on a fresh, unburned
+seed. **It clears the repo's single-seed bar cleanly:**
+
+| | shipped (no universal escalation) | `universal_gate` |
+|---|---|---|
+| accuracy | 71/90 = 78.9% | **80/90 = 88.9%** |
+
+Paired within the same run — both configurations share identical solver panels;
+they differ only in whether a unanimous panel is allowed to escalate:
+**net +9, one-sided exact McNemar p = 0.00195.** This is the single strongest
+p-value of any result in the repo.
+
+Mechanism, measured directly on this run's 48 unanimous panels:
+
+| | count | outcome |
+|---|---|---|
+| unanimous-wrong | 12 | **9 recovered = 75.0%** |
+| unanimous-right | 36 | **0 broken = 0.0%** |
+
+**The pre-registered falsifiable prediction did NOT hold.** §7 predicted
+conversion *below* 47.6% (the pooled, selection-biased estimate), reasoning that
+a wider gate would newly surface *confidently*-wrong items existing doubt-gates
+miss, which should convert worse. Instead this seed converted at 75.0% —
+*above* the pooled estimate, and at the high end of this session's earlier
+GPQA-only range (55.1–75.0%). Recorded honestly per limit 2's own instruction:
+if it lands near or above 47.6%, the selection-bias worry was overblown. It was.
+
+**Read carefully — this does not retroactively validate limit 2's mechanism as
+false in general**, only on this one seed: n=12 unanimous-wrong items is small,
+and a single seed cannot distinguish "the selection-bias worry was wrong" from
+"this seed happened to land well." The repo's own bar treats a single seed at
+p<0.05 as sufficient to claim the win — it is not sufficient to retire the
+caveat itself. The other branch of the bar (net≥+3 at 2 of 3 seeds, pooled
+McNemar p<0.05) would need two more fresh seeds to invoke and was not run.
+
+**GPQA only, as designed** — §5's cost table (4.2 escalations/net item on GPQA
+vs 24.0 on SuperGPQA-hard) is why GPQA fired first. This result says nothing
+about SuperGPQA-hard.
+
+Reproduce: `python -m benchmark.verify_universal_gate`
