@@ -264,6 +264,69 @@ def test_without_retry_missing_always_reruns_everything(tmp_path, monkeypatch, f
     assert all(r["baseline"]["correct"] for r in rows)  # old wrong row is gone
 
 
+# --------------------------------------------------------------------------
+# The live result (2026-07-30): the claim fails its compute-matched control
+# --------------------------------------------------------------------------
+
+
+def test_live_decomposition_shows_a_compute_effect_not_a_deliberation_effect():
+    """Pins the session's most consequential result against the real files.
+
+    flagship_panel beats a 1x flagship call by +10 (p=0.0032). But the
+    compute-matched control shows that gain is carried by SELF-CONSISTENCY,
+    not by the tribunal:
+      - 3x flagship majority vs 1x flagship : net +9, p=0.0245  (clears)
+      - flagship_panel vs 3x majority       : net +2, p=0.344   (does NOT clear)
+
+    Both legs are measured directly. Paired tests on different shared-item
+    sets do not subtract cleanly, so neither number may be derived by
+    arithmetic from the other two.
+    """
+    from benchmark.verify_compute_matched_control import verify
+
+    r = verify()
+    assert r["missing_seeds"] == [], "all three control seeds must be present"
+
+    tribunal = r["pooled"]
+    assert tribunal["net"] == 2
+    assert tribunal["p_one_sided"] == pytest.approx(0.34375, abs=1e-4)
+    assert tribunal["p_one_sided"] >= 0.05, "the tribunal leg must NOT be significant"
+
+    sc = r["self_consistency_vs_baseline"]
+    assert sc is not None
+    assert sc["net"] == 9
+    assert sc["p_one_sided"] == pytest.approx(0.02452, abs=1e-4)
+    assert sc["p_one_sided"] < 0.05, "the self-consistency leg IS significant"
+
+    # The load-bearing asymmetry: sampling explains more than deliberating.
+    assert sc["net"] > tribunal["net"]
+
+
+def test_the_interpretation_is_not_inverted():
+    """Regression guard for a real bug in this script.
+
+    The first version's READ branch printed "deliberation adds +8 beyond plain
+    self-consistency" -- computed as CLAIM_NET minus the control net. That is
+    backwards: the residual after self-consistency is what DELIBERATION adds
+    (+2), and the +8-ish figure is what SELF-CONSISTENCY adds. The bug
+    flattered the project, which is exactly why it needed catching.
+    """
+    from benchmark.verify_compute_matched_control import verify
+
+    r = verify()
+    sc_net = r["self_consistency_vs_baseline"]["net"]
+    tribunal_net = r["pooled"]["net"]
+    # Self-consistency must be credited with the large leg, deliberation the small.
+    assert sc_net >= 5 and tribunal_net <= 4
+
+    # Proof the legs were MEASURED independently rather than derived from the
+    # original +10 by subtraction: they sum to 11, not 10. Each leg has its own
+    # shared-item set (251 vs 237), so a clean split would itself be the tell
+    # that someone had started arithmetic'ing one from the others.
+    assert sc_net + tribunal_net == 11
+    assert r["self_consistency_vs_baseline"]["shared"] != r["pooled"]["shared"]
+
+
 def test_verify_raises_on_zero_overlap_instead_of_silent_null(fixture_results_dir):
     """The exact wrapper-key trap this session hit twice already: an empty
     intersection must raise, not read as 'no effect'."""

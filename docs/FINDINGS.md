@@ -83,7 +83,7 @@ behind it rather than only its delta.
 
 | Benchmark | Config | Models & roles | Result |
 |---|---|---|---|
-| **SuperGPQA-hard** | `flagship_panel` | 3 solvers = `qwen3.7-max` (thinking); Skeptic/Verifier = `qwen3.6-flash`; Judge = `qwen3.7-max` | **+4.1 mean** (+3.8 / +2.4 / +6.2); pooled b=11 c=1 **net +10, p=0.0032**, n=241. **Clears the bar** — at **~3.0× measured tokens**, no compute-matched control |
+| **SuperGPQA-hard** | `flagship_panel` | 3 solvers = `qwen3.7-max` (thinking); Skeptic/Verifier = `qwen3.6-flash`; Judge = `qwen3.7-max` | **+4.1 mean** (+3.8 / +2.4 / +6.2); pooled b=11 c=1 **net +10, p=0.0032**, n=241, at ~3.0× tokens. **⚠ Clears the bar against a 1× call, but FAILS its compute-matched control (2026-07-30):** 3× flagship majority alone gets **+9 (p=0.025)**; the tribunal's own contribution is **+2 (p=0.34, n.s.)**. This is a **compute effect, not a deliberation effect** — see §2.1 below |
 | **Chemistry** | `chem_thinking_gate` | organic-chem → 3× `qwen3.7-max`; else 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | **90.9% mean** (3 seeds). **Updated 2026-07-29** — the two missing matched baselines landed: pooled b=16 c=4 **net +12, p=0.0059 — clears the bar**. Per-seed: 217 net +9 (p=0.0020, big win), 314 net +4 (p=0.145, noise), **471 net −1 (slightly negative)** — a real pooled effect built from one strong seed, one null, one mild loss, not three confirmations of the same number |
 | **GPQA-Diamond** | `thinking_gate` | 3× `qwen3.6-flash` (seat 3 thinking) + doubt-gate; Judge = `qwen3.7-max` | 86.7 / tie / +1.1 — matches-or-beats, marginal, inside noise |
 
@@ -107,16 +107,40 @@ cheap-beats-flagship: the config *uses* flagship solvers, so the claim is
 "deliberation on top of the best model beats one call of it," at **~3.0× the
 measured tokens** (10,685 vs 3,589 tok/q, summed over every call at seed 7).
 
-**The compute-matched control this repo mandates has not been run.**
-[capability-roadmap.md](capability-roadmap.md) states that "every whole-pipeline
-swap (panels, councils, replicated ensembles) must carry a compute-matched
-control — the same base config sampled the same number of times, aggregated by
-majority," because without it a gain is indistinguishable from plain
-self-consistency. `flagship_panel` is precisely such a swap and no 3×-flagship
-majority arm exists in `benchmark/results/`. Until it does, the honest ceiling
-on this claim is "beats a 1× flagship call at 3× the tokens" — Self-MoA
-(ICML 2025) predicts a substantial part of the +10 may reproduce with no
-tribunal at all. Running that control is queued, not done.
+### The compute-matched control was run on 2026-07-30. The claim does not survive it.
+
+[capability-roadmap.md](capability-roadmap.md) mandates that "every
+whole-pipeline swap (panels, councils, replicated ensembles) must carry a
+compute-matched control — the same base config sampled the same number of times,
+aggregated by majority," because without it a gain is indistinguishable from
+plain self-consistency. That control had never been run for `flagship_panel`. It
+has now been: 3× `qwen3.7-max` single calls per item, text-majority, no tribunal,
+on the same items and seeds (85/84/84 rows).
+
+**Each leg measured directly — paired tests on different shared-item sets do not
+subtract cleanly, so nothing here is inferred by arithmetic:**
+
+| Comparison | net | p | n | verdict |
+|---|---|---|---|---|
+| 3× flagship majority **vs 1× flagship** | **+9** | **0.0245** | 251 | **clears p<0.05** |
+| `flagship_panel` **vs 3× majority** (the tribunal's own contribution) | **+2** | **0.344** | 237 | **does not clear** |
+
+**The self-consistency leg carries the claim; the tribunal leg does not.**
+Sampling the flagship three times and taking a majority reproduces the bulk of
+the +10 on its own. The skeptic/verifier/judge apparatus adds a residual of +2
+that is statistically indistinguishable from zero. Self-MoA (ICML 2025) predicted
+exactly this, and the roadmap predicted it too — which is why it required the
+control.
+
+**Corrected claim.** `flagship_panel`'s advantage over a single flagship call is
+a **compute effect, not a deliberation effect**. It is honestly stated as: *three
+samples of the flagship beat one sample of the flagship (+9, p=0.025); routing
+those samples through a tribunal instead of a majority vote adds nothing
+measurable (+2, p=0.34) at roughly the same cost.* The +4.1 / pooled +10 figures
+against a 1× call remain arithmetically correct and are **not** withdrawn — but
+they may no longer be presented as evidence that deliberation works.
+
+Reproduce: `python -m benchmark.verify_compute_matched_control`
 
 `thinking_gate` on GPQA remains the closest to a genuine cheap-beats-flagship
 result, with the flagship appearing only as the escalation judge — but it is

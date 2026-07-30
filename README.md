@@ -102,11 +102,25 @@ because there the missing ingredient is *knowledge*, not decorrelation. See
 
 One result clears the 3-seed bar against a single `qwen3.7-max` call:
 **+4.1 mean** on SuperGPQA-hard (pooled b=11, c=1, net +10, exact McNemar
-p=0.0032, n=241 shared items) — at **~3.0× the measured tokens**, and with no
-compute-matched control run, so it is "deliberation on top of the flagship
-beats one call of it", not a free win. The other headline numbers are weaker
-than this README used to imply, and the corrections are stated at the point of
-use in [`docs/FINDINGS.md`](docs/FINDINGS.md):
+p=0.0032, n=241 shared items) — at **~3.0× the measured tokens**.
+
+**⚠ Then we ran the compute-matched control, and it did not survive.** On
+2026-07-30 we ran the arm our own roadmap had always required: 3× `qwen3.7-max`
+single calls, majority vote, no tribunal, same items and seeds. Measuring each
+leg directly:
+
+- 3× flagship majority **vs 1× flagship**: net **+9**, p=**0.025** — clears.
+- `flagship_panel` **vs 3× majority**: net **+2**, p=**0.34** — does not clear.
+
+So the gain is a **compute effect, not a deliberation effect**: three samples of
+the flagship beat one sample of it, and routing those samples through a
+skeptic/verifier/judge tribunal instead of a plain majority adds nothing
+measurable. Self-MoA (ICML 2025) predicted this; it is why the control was
+mandated. We are reporting it because we ran it, not despite having run it.
+
+The other headline numbers are also weaker than this README used to imply, and
+the corrections are stated at the point of use in
+[`docs/FINDINGS.md`](docs/FINDINGS.md):
 
 - **Chemistry**: the missing matched baselines (seeds 217, 471) landed
   2026-07-29, completing a real 3-seed paired result — pooled net **+12,
