@@ -36,7 +36,13 @@ cases tuned) at seeds a "winner" verdict would otherwise be scored against
 again. That is exactly the fitting failure S7 exists to catch, which is why
 --ship-gate below refuses to run on a burned or previously-audited seed
 (see BURNED_SEEDS / original_audit_seeds / assert_seeds_not_burned) rather
-than merely documenting the rule in a runbook.
+than merely documenting the rule in a runbook. The same guard also refuses a
+seed already CONSUMED by an earlier completed --ship-gate call (see
+CONSUMED_MARKER_PREFIX / _mark_seed_consumed) -- otherwise the first
+--ship-gate call's own held-out pools would stay forever fresh in the burn
+scan (pool_ files are deliberately excluded from it) and could be re-scored
+under a different selector after seeing the first verdict, which is peeking
+by another name.
 
 Usage (plain scoring, no ship verdict -- any number of pool files):
     .venv/Scripts/python.exe -m benchmark.score_selectors --pools \
@@ -75,6 +81,19 @@ RESULTS_DIR = Path(__file__).resolve().parent / "results"
 # used in the S1 audit" scan (a pool doesn't burn itself the moment it's
 # written; only already-existing, non-pool result files count as prior use).
 POOL_FILENAME_PREFIX = "pool_"
+
+# Written by main() after a --ship-gate call reaches a real verdict (see
+# _mark_seed_consumed). Deliberately NOT prefixed with POOL_FILENAME_PREFIX,
+# so original_audit_seeds()'s existing glob-and-regex scan picks these up
+# exactly like any other result file, with no change to assert_seeds_not_burned
+# needed. Without this, a pool file consumed by a completed ship-gate verdict
+# is excluded from the burn scan FOREVER (it only ever matches the pool_
+# exclusion), so the same 3 held-out seeds could be fed into a second
+# --ship-gate call -- a different selector, or the same one re-run -- and
+# silently re-score data that is no longer naive. That is exactly the fitting
+# failure S7 exists to catch, just moved from "seed used in selection" to
+# "seed used in a prior confirmation attempt".
+CONSUMED_MARKER_PREFIX = "s7_shipgate_consumed_"
 
 SELECTOR_NAMES = ("plurality", "confidence_weighted", "max_single_confidence", "longest_reasoning")
 # Only these two cleared the S1 zero-token audit's pre-registered bar
@@ -565,7 +584,35 @@ def _resolve_dataset_and_seeds(pools_data: list[tuple[Path, list[dict]]]) -> tup
     return next(iter(datasets)), seeds
 
 
-def main(pool_paths: list[str], selector: str, k: "int | None", ship_gate: bool, out_path: "str | None") -> int:
+def _mark_seed_consumed(
+    results_dir: "str | Path", seed: int, selector: str, benchmark: str, verdict: str, source_pool: "str | Path"
+) -> Path:
+    """Records that `seed` has now been scored by a completed --ship-gate
+    call, regardless of whether the verdict was SHIP or DO NOT SHIP -- a
+    DO-NOT-SHIP result is still a genuine look at that held-out data, and
+    trying a different selector against the same pools afterward would be
+    exactly the peeking S7 exists to prevent. Idempotent to call more than
+    once for the same seed (appends another line); the burn only requires the
+    file to exist and match the seed(\\d+) filename pattern."""
+    marker_path = Path(results_dir) / f"{CONSUMED_MARKER_PREFIX}seed{seed}.jsonl"
+    marker_path.parent.mkdir(parents=True, exist_ok=True)
+    record = {
+        "seed": seed, "selector": selector, "benchmark": benchmark,
+        "verdict": verdict, "source_pool": str(source_pool),
+    }
+    with open(marker_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(record) + "\n")
+    return marker_path
+
+
+def main(
+    pool_paths: list[str],
+    selector: str,
+    k: "int | None",
+    ship_gate: bool,
+    out_path: "str | None",
+    results_dir: "str | Path" = RESULTS_DIR,
+) -> int:
     pools_data = [(Path(p), load_pool(p)) for p in pool_paths]
 
     print("=" * 100)
@@ -608,7 +655,7 @@ def main(pool_paths: list[str], selector: str, k: "int | None", ship_gate: bool,
                 f"{len(pool_paths)}"
             )
         dataset, seeds = _resolve_dataset_and_seeds(pools_data)
-        assert_seeds_not_burned(seeds)
+        assert_seeds_not_burned(seeds, results_dir=results_dir)
         benchmark = DATASET_TO_BENCHMARK.get(dataset)
         if benchmark is None:
             raise ValueError(
@@ -653,6 +700,11 @@ def main(pool_paths: list[str], selector: str, k: "int | None", ship_gate: bool,
             "selector": selector, "benchmark": benchmark, "seeds": seeds,
         }
 
+        # Burn these seeds for any FUTURE --ship-gate call, win or lose --
+        # see CONSUMED_MARKER_PREFIX's docstring.
+        for (path, _rows, _scored), seed in zip(per_pool_scored, seeds):
+            _mark_seed_consumed(results_dir, seed, selector, benchmark, verdict, path)
+
     if out_path:
         payload = {"pools": [str(p) for p, _ in pools_data], "ship_gate": verdict_payload}
         out = Path(out_path)
@@ -672,5 +724,13 @@ if __name__ == "__main__":
     parser.add_argument("--k", type=int, default=None, help="cap the prefix length scored (default: each pool's own full size)")
     parser.add_argument("--ship-gate", action="store_true", help="require exactly 3 pool files (one benchmark), apply the burned-seed guard, and print the S7 SHIP/DO NOT SHIP verdict")
     parser.add_argument("--out", type=str, default=None, help="optional path to write the full report as JSON")
+    parser.add_argument(
+        "--results-dir", type=str, default=None,
+        help="override the directory scanned for burned seeds and written to for the "
+        "consumed-seed marker (default: benchmark/results/); mainly for tests",
+    )
     args = parser.parse_args()
-    raise SystemExit(main(args.pools, args.selector, args.k, args.ship_gate, args.out))
+    raise SystemExit(main(
+        args.pools, args.selector, args.k, args.ship_gate, args.out,
+        results_dir=args.results_dir or RESULTS_DIR,
+    ))

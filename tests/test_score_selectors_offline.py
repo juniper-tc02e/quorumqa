@@ -33,6 +33,7 @@ import pytest
 from benchmark.score_selectors import (
     BURNED_SEEDS,
     ORIGINAL_AUDIT_NET,
+    _mark_seed_consumed,
     assert_seeds_not_burned,
     discordant_vs_plurality,
     main,
@@ -432,7 +433,7 @@ def test_main_ship_gate_end_to_end_ships(tmp_path, capsys):
         paths.append(str(p))
 
     out_path = tmp_path / "report.json"
-    rc = main(paths, "max_single_confidence", None, True, str(out_path))
+    rc = main(paths, "max_single_confidence", None, True, str(out_path), results_dir=tmp_path)
 
     assert rc == 0
     captured = capsys.readouterr()
@@ -451,7 +452,7 @@ def test_main_ship_gate_end_to_end_do_not_ship(tmp_path, capsys):
         _write_pool(p, _seed_pool_rows(seed, n_gain=1, n_loss=1))  # far too few discordant items
         paths.append(str(p))
 
-    rc = main(paths, "max_single_confidence", None, True, None)
+    rc = main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
 
     assert rc == 1
     captured = capsys.readouterr()
@@ -503,3 +504,73 @@ def test_main_plain_scoring_mode_does_not_require_three_pools_or_check_seeds(tmp
     assert rc == 0
     captured = capsys.readouterr()
     assert "POOL INVENTORY" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# (g) held-out seed consumption guard -- a completed --ship-gate verdict must
+# burn its own seeds, or the same 3 held-out pools could be re-scored under a
+# different selector (or re-run as-is) after seeing the first verdict.
+# ---------------------------------------------------------------------------
+
+
+def test_mark_seed_consumed_writes_a_marker_the_burn_scan_picks_up(tmp_path):
+    _mark_seed_consumed(tmp_path, 900099, "max_single_confidence", "SuperGPQA-hard", "SHIP", "some_pool.jsonl")
+
+    assert original_audit_seeds(tmp_path) == frozenset({900099})
+    with pytest.raises(ValueError, match=r"burned"):
+        assert_seeds_not_burned([900099], results_dir=tmp_path)
+
+
+def test_main_ship_gate_burns_its_seeds_after_shipping(tmp_path):
+    seeds = [900061, 900062, 900063]
+    paths = []
+    for seed in seeds:
+        p = tmp_path / f"pool_supergpqa_cheap_k3_seed{seed}.jsonl"
+        _write_pool(p, _seed_pool_rows(seed, n_gain=7, n_loss=3, dataset="supergpqa", n_same=80))
+        paths.append(str(p))
+
+    rc = main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
+    assert rc == 0  # first call: a genuine SHIP on fresh seeds
+
+    # Reusing the SAME 3 pools for a DIFFERENT selector must now be refused --
+    # this is exactly the peeking S7 is designed to prevent, just discovered
+    # one call later than seed selection.
+    with pytest.raises(ValueError, match=r"burned"):
+        main(paths, "confidence_weighted", None, True, None, results_dir=tmp_path)
+
+    # Re-running the SAME selector against the SAME pools is refused too.
+    with pytest.raises(ValueError, match=r"burned"):
+        main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
+
+
+def test_main_ship_gate_burns_its_seeds_even_on_do_not_ship(tmp_path):
+    # A DO-NOT-SHIP verdict is still a genuine look at the held-out data --
+    # trying again on the same pools afterward must be refused too.
+    seeds = [900071, 900072, 900073]
+    paths = []
+    for seed in seeds:
+        p = tmp_path / f"pool_gpqa_cheap_k3_seed{seed}.jsonl"
+        _write_pool(p, _seed_pool_rows(seed, n_gain=1, n_loss=1))  # far too few discordant items
+        paths.append(str(p))
+
+    rc = main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
+    assert rc == 1  # first call: a genuine DO NOT SHIP
+
+    with pytest.raises(ValueError, match=r"burned"):
+        main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
+
+
+def test_main_ship_gate_does_not_burn_seeds_on_a_failed_precondition(tmp_path):
+    # A run that never reaches a verdict (here: wrong pool count) must not
+    # consume anything -- only a completed --ship-gate scoring pass does.
+    seeds = [900081, 900082]
+    paths = []
+    for seed in seeds:
+        p = tmp_path / f"pool_gpqa_cheap_k3_seed{seed}.jsonl"
+        _write_pool(p, _seed_pool_rows(seed, 15, 2))
+        paths.append(str(p))
+
+    with pytest.raises(ValueError, match="EXACTLY 3"):
+        main(paths, "max_single_confidence", None, True, None, results_dir=tmp_path)
+
+    assert original_audit_seeds(tmp_path) & set(seeds) == set()
