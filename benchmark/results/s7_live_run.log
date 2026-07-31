@@ -1,0 +1,252 @@
+=== S7 live run started ===
+Fri Jul 31 23:29:04 MPST 2026
+--- pool: seed 411 ---
+[07/31/26 23:29:08] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/main/README.                
+                             md "HTTP/1.1 307 Temporary                        
+                             Redirect"                                         
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/api/resolve                
+                             -cache/datasets/m-a-p/SuperGPQA/44                
+                             30d4458112c7d4497fdcf94d7cc223313d                
+                             6acf/README.md "HTTP/1.1 200 OK"                  
+[07/31/26 23:29:09] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/Super                
+                             GPQA.py "HTTP/1.1 404 Not Found"                  
+[07/31/26 23:29:10] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://s3.amazonaws.com/datasets.                
+                             huggingface.co/datasets/datasets/m                
+                             -a-p/SuperGPQA/m-a-p/SuperGPQA.py                 
+                             "HTTP/1.1 404 Not Found"                          
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/revision/4430d44                
+                             58112c7d4497fdcf94d7cc223313d6acf                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/.hugg                
+                             ingface.yaml "HTTP/1.1 404 Not                    
+                             Found"                                            
+[07/31/26 23:29:11] INFO     HTTP Request: GET                  _client.py:1025
+                             https://datasets-server.huggingfac                
+                             e.co/info?dataset=m-a-p/SuperGPQA                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf/data                
+                             ?recursive=true&expand=false                      
+                             "HTTP/1.1 404 Not Found"                          
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf?recu                
+                             rsive=false&expand=false "HTTP/1.1                
+                             200 OK"                                           
+[07/31/26 23:29:12] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/datas                
+                             et_infos.json "HTTP/1.1 404 Not                   
+                             Found"                                            
+                    INFO     Loaded 90 SuperGPQA items    load_supergpqa.py:198
+                             (difficulty=hard, seed=411,                       
+                             max_choices=4)                                    
+                    INFO     Loaded 90 supergpqa items          run_pool.py:222
+                             (seed=411) -- generating a K=8                    
+                             pool at solver_tier=cheap                         
+[07/31/26 23:57:10] INFO     Wrote 90/90 item pools (k=8        run_pool.py:236
+                             samples each) to C:\Users\Ong Jun                 
+                             Kai\Documents\Qwen                                
+                             Hackathon\benchmark\results\pool_s                
+                             upergpqa_cheap_k8_seed411.jsonl                   
+--- pool: seed 523 ---
+[07/31/26 23:57:14] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/main/README.                
+                             md "HTTP/1.1 307 Temporary                        
+                             Redirect"                                         
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/api/resolve                
+                             -cache/datasets/m-a-p/SuperGPQA/44                
+                             30d4458112c7d4497fdcf94d7cc223313d                
+                             6acf/README.md "HTTP/1.1 200 OK"                  
+[07/31/26 23:57:15] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/Super                
+                             GPQA.py "HTTP/1.1 404 Not Found"                  
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://s3.amazonaws.com/datasets.                
+                             huggingface.co/datasets/datasets/m                
+                             -a-p/SuperGPQA/m-a-p/SuperGPQA.py                 
+                             "HTTP/1.1 404 Not Found"                          
+[07/31/26 23:57:16] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/revision/4430d44                
+                             58112c7d4497fdcf94d7cc223313d6acf                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/.hugg                
+                             ingface.yaml "HTTP/1.1 404 Not                    
+                             Found"                                            
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://datasets-server.huggingfac                
+                             e.co/info?dataset=m-a-p/SuperGPQA                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf/data                
+                             ?recursive=true&expand=false                      
+                             "HTTP/1.1 404 Not Found"                          
+[07/31/26 23:57:17] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf?recu                
+                             rsive=false&expand=false "HTTP/1.1                
+                             200 OK"                                           
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/datas                
+                             et_infos.json "HTTP/1.1 404 Not                   
+                             Found"                                            
+                    INFO     Loaded 90 SuperGPQA items    load_supergpqa.py:198
+                             (difficulty=hard, seed=523,                       
+                             max_choices=4)                                    
+                    INFO     Loaded 90 supergpqa items          run_pool.py:222
+                             (seed=523) -- generating a K=8                    
+                             pool at solver_tier=cheap                         
+[08/01/26 00:21:40] WARNING  49e1506404be4e1682c9911643d5a8e0:  run_pool.py:135
+                             sample 2 attempt 1/4 failed                       
+                             (ValueError), retrying in 5s                      
+[08/01/26 00:23:04] INFO     Wrote 90/90 item pools (k=8        run_pool.py:236
+                             samples each) to C:\Users\Ong Jun                 
+                             Kai\Documents\Qwen                                
+                             Hackathon\benchmark\results\pool_s                
+                             upergpqa_cheap_k8_seed523.jsonl                   
+--- pool: seed 631 ---
+[08/01/26 00:23:09] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/main/README.                
+                             md "HTTP/1.1 307 Temporary                        
+                             Redirect"                                         
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/api/resolve                
+                             -cache/datasets/m-a-p/SuperGPQA/44                
+                             30d4458112c7d4497fdcf94d7cc223313d                
+                             6acf/README.md "HTTP/1.1 200 OK"                  
+[08/01/26 00:23:10] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/Super                
+                             GPQA.py "HTTP/1.1 404 Not Found"                  
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://s3.amazonaws.com/datasets.                
+                             huggingface.co/datasets/datasets/m                
+                             -a-p/SuperGPQA/m-a-p/SuperGPQA.py                 
+                             "HTTP/1.1 404 Not Found"                          
+[08/01/26 00:23:11] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/revision/4430d44                
+                             58112c7d4497fdcf94d7cc223313d6acf                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/.hugg                
+                             ingface.yaml "HTTP/1.1 404 Not                    
+                             Found"                                            
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://datasets-server.huggingfac                
+                             e.co/info?dataset=m-a-p/SuperGPQA                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf/data                
+                             ?recursive=true&expand=false                      
+                             "HTTP/1.1 404 Not Found"                          
+[08/01/26 00:23:12] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf?recu                
+                             rsive=false&expand=false "HTTP/1.1                
+                             200 OK"                                           
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/datas                
+                             et_infos.json "HTTP/1.1 404 Not                   
+                             Found"                                            
+                    INFO     Loaded 90 SuperGPQA items    load_supergpqa.py:198
+                             (difficulty=hard, seed=631,                       
+                             max_choices=4)                                    
+                    INFO     Loaded 90 supergpqa items          run_pool.py:222
+                             (seed=631) -- generating a K=8                    
+                             pool at solver_tier=cheap                         
+[08/01/26 00:51:22] WARNING  e916c49eebc644e5a3301e4105a1d56c:  run_pool.py:135
+                             sample 1 attempt 1/4 failed                       
+                             (ValueError), retrying in 5s                      
+[08/01/26 00:51:45] INFO     Wrote 90/90 item pools (k=8        run_pool.py:236
+                             samples each) to C:\Users\Ong Jun                 
+                             Kai\Documents\Qwen                                
+                             Hackathon\benchmark\results\pool_s                
+                             upergpqa_cheap_k8_seed631.jsonl                   
+--- S7 ship-gate: max_single_confidence ---
+====================================================================================================
+POOL INVENTORY
+====================================================================================================
+  benchmark\results\pool_supergpqa_cheap_k8_seed411.jsonl: 90 items
+  benchmark\results\pool_supergpqa_cheap_k8_seed523.jsonl: 90 items
+  benchmark\results\pool_supergpqa_cheap_k8_seed631.jsonl: 90 items
+
+[pool_supergpqa_cheap_k8_seed411.jsonl]  n=90  k=8  plurality_acc=57.78%  oracle_coverage=76.67%
+    confidence_weighted      acc= 57.78%  b=  2 c=  2 net=  +0 n_disc=  4 p=0.6875
+    max_single_confidence    acc= 56.67%  b=  6 c=  7 net=  -1 n_disc= 13 p=0.7095
+    longest_reasoning        acc= 43.33%  b=  4 c= 17 net= -13 n_disc= 21 p=0.9993
+    oracle vs plurality: +18.89pp (+17 items)
+    oracle vs confidence_weighted: +18.89pp (+17 items)
+    oracle vs max_single_confidence: +20.00pp (+18 items)
+    pool-size curve (plurality accuracy@k): k=1:53.3%, k=2:53.3%, k=3:52.2%, k=4:52.2%, k=5:58.9%, k=6:57.8%, k=7:56.7%, k=8:57.8%
+
+[pool_supergpqa_cheap_k8_seed523.jsonl]  n=90  k=8  plurality_acc=61.11%  oracle_coverage=80.00%
+    confidence_weighted      acc= 61.11%  b=  1 c=  1 net=  +0 n_disc=  2 p=0.7500
+    max_single_confidence    acc= 62.22%  b=  5 c=  4 net=  +1 n_disc=  9 p=0.5000
+    longest_reasoning        acc= 50.00%  b=  5 c= 15 net= -10 n_disc= 20 p=0.9941
+    oracle vs plurality: +18.89pp (+17 items)
+    oracle vs confidence_weighted: +18.89pp (+17 items)
+    oracle vs max_single_confidence: +17.78pp (+16 items)
+    pool-size curve (plurality accuracy@k): k=1:62.2%, k=2:62.2%, k=3:61.1%, k=4:61.1%, k=5:61.1%, k=6:62.2%, k=7:61.1%, k=8:61.1%
+
+[pool_supergpqa_cheap_k8_seed631.jsonl]  n=90  k=8  plurality_acc=65.56%  oracle_coverage=85.56%
+    confidence_weighted      acc= 68.89%  b=  4 c=  1 net=  +3 n_disc=  5 p=0.1875
+    max_single_confidence    acc= 61.11%  b=  8 c= 12 net=  -4 n_disc= 20 p=0.8684
+    longest_reasoning        acc= 47.78%  b=  5 c= 21 net= -16 n_disc= 26 p=0.9997
+    oracle vs plurality: +20.00pp (+18 items)
+    oracle vs confidence_weighted: +16.67pp (+15 items)
+    oracle vs max_single_confidence: +24.44pp (+22 items)
+    pool-size curve (plurality accuracy@k): k=1:66.7%, k=2:66.7%, k=3:62.2%, k=4:67.8%, k=5:67.8%, k=6:67.8%, k=7:65.6%, k=8:65.6%
+
+====================================================================================================
+S7 SHIP-GATE VERDICT -- selector=max_single_confidence benchmark=SuperGPQA-hard seeds=[411, 523, 631]
+====================================================================================================
+pooled: b=19 c=23 net=-4 discordant=42 p=0.7796 n=270
+        replication: observed rate=-1.4815% vs S1 audit rate=+4.1260% (net=+76 over n=1842)
+  seed 411: b=6 c=7 net=-1
+  seed 523: b=5 c=4 net=+1
+  seed 631: b=8 c=12 net=-4
+
+>>> DO NOT SHIP -- pooled net=-4 < required +5; pooled exact McNemar p=0.7796 is not < 0.05; observed net rate=-1.4815% (-4 over n=270) is outside 50% of the original S1 audit's rate=+4.1260% (+76 over n=1842) for max_single_confidence on SuperGPQA-hard (band=[+2.0630%, +6.1889%]); negative net on seed(s) [411, 631] -- every individual seed must be non-negative
+
+Wrote benchmark/results/s7_ship_gate_max_single_confidence.json
+=== S7 live run finished ===
+Sat Aug  1 00:51:47 MPST 2026

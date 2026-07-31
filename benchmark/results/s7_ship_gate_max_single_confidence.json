@@ -1,0 +1,34 @@
+{
+  "pools": [
+    "benchmark\\results\\pool_supergpqa_cheap_k8_seed411.jsonl",
+    "benchmark\\results\\pool_supergpqa_cheap_k8_seed523.jsonl",
+    "benchmark\\results\\pool_supergpqa_cheap_k8_seed631.jsonl"
+  ],
+  "ship_gate": {
+    "verdict": "DO NOT SHIP",
+    "reasons": [
+      "pooled net=-4 < required +5",
+      "pooled exact McNemar p=0.7796 is not < 0.05",
+      "observed net rate=-1.4815% (-4 over n=270) is outside 50% of the original S1 audit's rate=+4.1260% (+76 over n=1842) for max_single_confidence on SuperGPQA-hard (band=[+2.0630%, +6.1889%])",
+      "negative net on seed(s) [411, 631] -- every individual seed must be non-negative"
+    ],
+    "pooled_b": 19,
+    "pooled_c": 23,
+    "pooled_net": -4,
+    "pooled_discordant": 42,
+    "pooled_p": 0.7796004663287022,
+    "original_net": 76,
+    "original_n": 1842,
+    "pooled_n": 270,
+    "observed_rate_pp": -1.4814814814814816,
+    "original_rate_pp": 4.125950054288817,
+    "distinct_seeds": 3,
+    "selector": "max_single_confidence",
+    "benchmark": "SuperGPQA-hard",
+    "seeds": [
+      411,
+      523,
+      631
+    ]
+  }
+}

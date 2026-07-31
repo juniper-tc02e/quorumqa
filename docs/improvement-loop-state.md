@@ -816,6 +816,15 @@ Now fails loudly BEFORE any paid call. Our committed chem results are all
 | **Swiss law check** | **AXIS CLOSED** with a better diagnosis — see below. |
 
 ### The candidate free win (needs held-out confirmation before shipping)
+**SUPERSEDED 2026-08-01: S7's held-out confirmation came back DO NOT SHIP for
+BOTH shippable selectors — `max_single_confidence`'s in-sample net +76
+reversed sign to net −4 out-of-sample (2 of 3 seeds negative), and
+`confidence_weighted` also failed (net +3 < required +5). Not a data
+artifact — independently verified. See
+`benchmark/results/s7_live_ship_gate_result.md` for the full result; this
+entry is preserved verbatim below as the historical in-sample framing that
+motivated the S7 run.**
+
 Changing only WHICH already-computed letter is reported — zero new calls —
 `max_single_confidence` scores **net +121 overall (p<0.0001)** and
 `confidence_weighted` **net +49**, both clearing the pre-registered bar on
