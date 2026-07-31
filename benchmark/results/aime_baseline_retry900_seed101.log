@@ -1,0 +1,53 @@
+=== AIME baseline retry with 900s timeout started ===
+Sat Aug  1 06:24:12 MPST 2026
+2026-08-01 06:24:14,776 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 06:24:14,785 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Maxwell-Jia/AIME_2024/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/README.md "HTTP/1.1 200 OK"
+2026-08-01 06:24:15,025 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:15,747 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Maxwell-Jia/AIME_2024/Maxwell-Jia/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:16,013 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/revision/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792 "HTTP/1.1 200 OK"
+2026-08-01 06:24:16,254 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:16,543 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Maxwell-Jia/AIME_2024 "HTTP/1.1 200 OK"
+2026-08-01 06:24:16,787 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:17,034 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 06:24:17,344 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:17,774 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 06:24:17,784 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/yentinglin/aime_2025/6f71d77b0b89b9dabe07ab466c51df33f514df7f/README.md "HTTP/1.1 200 OK"
+2026-08-01 06:24:18,036 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:18,272 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/yentinglin/aime_2025/yentinglin/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:18,525 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/revision/6f71d77b0b89b9dabe07ab466c51df33f514df7f "HTTP/1.1 200 OK"
+2026-08-01 06:24:18,774 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:19,014 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=yentinglin/aime_2025 "HTTP/1.1 200 OK"
+2026-08-01 06:24:19,269 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-08-01 06:24:19,503 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 06:24:19,743 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 06:24:19,784 INFO Loaded 60 AIME items (years=(2024, 2025), seed=101) -- integer open answers
+2026-08-01 06:24:19,785 INFO 53/60 baseline items already present -- retrying 7 missing (timeout=900s, max_attempts=2)
+2026-08-01 06:29:19,993 WARNING aime2025-13: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 06:34:25,224 ERROR aime2025-13: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 06:39:25,450 WARNING aime2024-2024-II-15: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 06:44:30,684 ERROR aime2024-2024-II-15: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 06:49:30,900 WARNING aime2024-2024-I-11: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 06:54:36,161 ERROR aime2024-2024-I-11: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 06:59:36,410 WARNING aime2024-2024-I-12: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 07:04:41,643 ERROR aime2024-2024-I-12: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 07:09:41,861 WARNING aime2025-27: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 07:14:47,078 ERROR aime2025-27: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 07:19:47,289 WARNING aime2025-14: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 07:24:52,493 ERROR aime2025-14: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 07:29:52,702 WARNING aime2025-12: attempt 1/2 failed (HTTPError), retrying in 5s
+2026-08-01 07:34:58,056 ERROR aime2025-12: STILL FAILING after 2 attempts (HTTPError: 504 Server Error: Gateway Timeout for url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/apps/anthropic/v1/message)
+2026-08-01 07:34:58,056 INFO Recovered 0/7. Still failing: ['aime2025-13', 'aime2024-2024-II-15', 'aime2024-2024-I-11', 'aime2024-2024-I-12', 'aime2025-27', 'aime2025-14', 'aime2025-12']
+--- verify ---
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 171, in <module>
+    main()
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 144, in main
+    r = verify()
+        ^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 75, in verify
+    raise AssertionError(
+AssertionError: INADMISSIBLE: expected 60/60 rows in every arm, got baseline=53 cheap=60 -- per the pre-registered bar this run's numbers must be discarded, not analysed. Re-run, do not patch.
+=== AIME baseline retry with 900s timeout finished ===
+Sat Aug  1 07:34:58 MPST 2026

@@ -15,6 +15,7 @@ analysis is correct, not that any particular result occurred.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -24,6 +25,7 @@ from benchmark.verify_aime_liveness_screen import (
     CONTAMINATION_MIN_YEAR_GAP,
     KILL_CHEAP_ACC,
     KILL_FLAGSHIP_ACC,
+    RESULTS,
     verify,
 )
 
@@ -210,3 +212,43 @@ def test_contamination_flag_not_raised_when_years_are_close(tmp_path):
     r = verify(results_dir=tmp_path)
     assert r["year_gap_cheap_correct"] == 2
     assert r["contamination_flag"] is False
+
+
+# ---------------------------------------------------------------------------
+# Pin against the real committed seed-101 run (raw pools gitignored -- only
+# present on the machine that ran it). See
+# benchmark/results/math1_aime_liveness_screen_seed101.md: retired
+# INADMISSIBLE, 7/60 flagship-baseline items chronically fail with a
+# server-side 504 confirmed at both 300s and 900s client timeouts.
+# ---------------------------------------------------------------------------
+
+_REAL_BASELINE = RESULTS / "aime_open_baseline_seed101.jsonl"
+_REAL_CHEAP = RESULTS / "aime_open_sc_cheap_seed101.jsonl"
+
+_CHRONIC_MISSING_IDS = {
+    "aime2025-13", "aime2024-2024-II-15", "aime2024-2024-I-11",
+    "aime2024-2024-I-12", "aime2025-27", "aime2025-14", "aime2025-12",
+}
+
+
+@pytest.mark.skipif(
+    not (_REAL_BASELINE.exists() and _REAL_CHEAP.exists()),
+    reason="AIME seed-101 raw result files are gitignored and only present on the machine that ran MATH-1 live.",
+)
+def test_real_seed101_run_is_inadmissible_as_documented():
+    with pytest.raises(AssertionError, match="INADMISSIBLE"):
+        verify()
+
+
+@pytest.mark.skipif(
+    not _REAL_BASELINE.exists(),
+    reason="AIME seed-101 baseline file is gitignored and only present on the machine that ran MATH-1 live.",
+)
+def test_real_baseline_file_has_exactly_the_documented_53_rows_and_gaps():
+    rows = [json.loads(line) for line in Path(_REAL_BASELINE).read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert len(rows) == 53
+    present_ids = {r["question_id"] for r in rows}
+    from benchmark.load_aime import load_aime_set
+    all_ids = {i.question_id for i in load_aime_set(n=60, seed=101)}
+    missing = all_ids - present_ids
+    assert missing == _CHRONIC_MISSING_IDS
