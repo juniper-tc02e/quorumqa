@@ -1,0 +1,196 @@
+=== MATH-1 AIME liveness screen started ===
+Sat Aug  1 01:45:56 MPST 2026
+2026-08-01 01:46:00,827 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 01:46:00,837 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Maxwell-Jia/AIME_2024/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/README.md "HTTP/1.1 200 OK"
+2026-08-01 01:46:01,094 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:01,847 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Maxwell-Jia/AIME_2024/Maxwell-Jia/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:02,121 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/revision/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792 "HTTP/1.1 200 OK"
+2026-08-01 01:46:02,358 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:02,635 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Maxwell-Jia/AIME_2024 "HTTP/1.1 200 OK"
+2026-08-01 01:46:02,881 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:03,123 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 01:46:03,420 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:03,828 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 01:46:03,836 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/yentinglin/aime_2025/6f71d77b0b89b9dabe07ab466c51df33f514df7f/README.md "HTTP/1.1 200 OK"
+2026-08-01 01:46:04,100 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:04,353 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/yentinglin/aime_2025/yentinglin/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:04,604 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/revision/6f71d77b0b89b9dabe07ab466c51df33f514df7f "HTTP/1.1 200 OK"
+2026-08-01 01:46:04,838 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:05,088 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=yentinglin/aime_2025 "HTTP/1.1 200 OK"
+2026-08-01 01:46:05,350 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-08-01 01:46:05,591 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 01:46:05,831 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 01:46:05,873 INFO Loaded 60 AIME items (years=(2024, 2025), seed=101) -- integer open answers
+2026-08-01 01:46:05,873 INFO Loaded 60 aime open-answer items (level=5, seed=101) -- mode=sc solver_tier=cheap (qwen3.6-flash, thinking=False), judge always flagship
+2026-08-01 01:46:05,873 INFO sc params: n=1 margin_threshold=1 early_stop=True
+2026-08-01 01:48:00,870 INFO aime2025-25 [baseline]: 113(correct)
+2026-08-01 01:48:23,815 INFO aime2024-2024-II-1 [baseline]: 73(correct)
+2026-08-01 01:51:06,250 WARNING aime2025-13: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 01:51:06,265 WARNING aime2025-29: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 01:52:27,562 INFO aime2025-11 [baseline]: 510(correct)
+2026-08-01 01:52:48,409 INFO aime2024-2024-I-13 [baseline]: 110(correct)
+2026-08-01 01:53:10,852 INFO aime2024-2024-II-4 [baseline]: 33(correct)
+2026-08-01 01:53:16,687 INFO aime2025-21 [baseline]: 237(correct)
+2026-08-01 01:53:24,008 WARNING aime2024-2024-II-15: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 01:53:48,821 INFO aime2025-5 [baseline]: 504(correct)
+2026-08-01 01:54:03,975 INFO aime2024-2024-II-3 [baseline]: 45(correct)
+2026-08-01 01:54:43,671 INFO aime2025-17 [baseline]: 82(correct)
+2026-08-01 01:56:07,036 INFO aime2024-2024-II-12 [baseline]: 23(correct)
+2026-08-01 01:56:46,426 INFO aime2025-28 [baseline]: 104(correct)
+2026-08-01 01:57:57,391 INFO aime2024-2024-I-14 [baseline]: 104(correct)
+2026-08-01 01:58:25,661 INFO aime2024-2024-I-2 [baseline]: 25(correct)
+2026-08-01 01:59:43,856 WARNING aime2024-2024-II-9: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:01:07,259 WARNING aime2025-10: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:03:25,885 WARNING aime2025-19: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:03:32,204 INFO aime2025-6 [baseline]: 821(correct)
+2026-08-01 02:03:47,092 INFO aime2025-23 [baseline]: 149(correct)
+2026-08-01 02:04:01,712 INFO aime2024-2024-II-6 [baseline]: 55(correct)
+2026-08-01 02:04:10,442 INFO aime2025-18 [baseline]: 106(correct)
+2026-08-01 02:04:16,847 INFO aime2024-2024-I-4 [baseline]: 116(correct)
+2026-08-01 02:04:44,383 INFO aime2025-15 [baseline]: 468(correct)
+2026-08-01 02:05:13,186 INFO aime2025-3 [baseline]: 117(correct)
+2026-08-01 02:08:15,397 INFO aime2024-2024-I-10 [baseline]: 113(correct)
+2026-08-01 02:08:47,281 WARNING aime2024-2024-II-8: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:08:48,006 INFO aime2025-16 [baseline]: 49(correct)
+2026-08-01 02:09:10,648 WARNING aime2024-2024-I-11: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:09:27,291 INFO aime2025-0 [baseline]: 70(correct)
+2026-08-01 02:10:09,835 INFO aime2024-2024-II-11 [baseline]: 601(correct)
+2026-08-01 02:11:21,567 INFO aime2024-2024-II-2 [baseline]: 236(correct)
+2026-08-01 02:12:33,323 INFO aime2025-26 [baseline]: 19(correct)
+2026-08-01 02:13:48,210 WARNING aime2024-2024-II-14: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:14:07,446 INFO aime2025-9 [baseline]: 81(correct)
+2026-08-01 02:14:42,880 INFO aime2024-2024-I-7 [baseline]: 540(correct)
+2026-08-01 02:17:33,526 WARNING aime2025-22: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:18:48,392 WARNING aime2024-2024-I-12: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:19:11,608 INFO aime2024-2024-I-15 [baseline]: 721(correct)
+2026-08-01 02:19:43,086 WARNING aime2025-27: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:20:37,408 INFO aime2024-2024-I-8 [baseline]: 197(correct)
+2026-08-01 02:20:48,673 INFO aime2024-2024-I-5 [baseline]: 104(correct)
+2026-08-01 02:21:46,997 INFO aime2025-20 [baseline]: 293(correct)
+2026-08-01 02:22:27,824 INFO aime2024-2024-II-5 [baseline]: 80(correct)
+2026-08-01 02:24:19,104 INFO aime2024-2024-II-10 [baseline]: 468(correct)
+2026-08-01 02:24:46,013 INFO aime2025-1 [baseline]: 588(correct)
+2026-08-01 02:25:16,910 INFO aime2024-2024-I-6 [baseline]: 294(correct)
+2026-08-01 02:25:48,859 WARNING aime2025-14: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:26:21,720 INFO aime2025-2 [baseline]: 16(correct)
+2026-08-01 02:26:29,638 INFO aime2024-2024-II-7 [baseline]: 699(correct)
+2026-08-01 02:27:21,519 INFO aime2024-2024-I-3 [baseline]: 809(correct)
+2026-08-01 02:28:14,296 INFO aime2024-2024-II-13 [baseline]: 321(correct)
+2026-08-01 02:29:44,550 INFO aime2025-8 [baseline]: 62(correct)
+2026-08-01 02:31:21,920 WARNING aime2025-12: baseline attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 02:31:44,325 INFO aime2024-2024-I-1 [baseline]: 204(correct)
+2026-08-01 02:31:54,727 INFO aime2025-4 [baseline]: 279(correct)
+2026-08-01 02:32:32,125 INFO aime2025-7 [baseline]: 77(correct)
+2026-08-01 02:32:48,596 INFO aime2025-25 [sc]: 32(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:33:05,037 INFO aime2025-13 [sc]: 63(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:33:08,919 INFO aime2024-2024-I-9 [baseline]: 480(correct)
+2026-08-01 02:33:24,703 INFO aime2025-29 [sc]: 188(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:33:25,620 INFO aime2024-2024-II-1 [sc]: 73(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:33:42,998 INFO aime2024-2024-II-15 [sc]: 15(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:33:46,319 INFO aime2025-11 [sc]: 3045(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:34:01,199 INFO aime2024-2024-I-13 [sc]: 32(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:34:02,777 INFO aime2025-21 [sc]: 237(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:34:11,129 INFO aime2024-2024-II-4 [sc]: 33(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:34:20,692 INFO aime2024-2024-II-3 [sc]: 45(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:34:26,614 INFO aime2025-24 [baseline]: 907(correct)
+2026-08-01 02:34:29,805 INFO aime2025-5 [sc]: 504(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:34:31,319 INFO aime2025-17 [sc]: 114(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:34:43,072 INFO aime2024-2024-II-12 [sc]: 5(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:34:51,219 INFO aime2024-2024-II-9 [sc]: 2(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:34:59,153 INFO aime2025-10 [sc]: 0(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:35:01,876 INFO aime2025-28 [sc]: 98(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:35:05,007 INFO aime2024-2024-I-2 [sc]: 25(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:35:08,492 INFO aime2024-2024-I-14 [sc]: 104(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:35:18,906 INFO aime2025-23 [sc]: 149(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:35:32,167 INFO aime2024-2024-II-6 [sc]: 55(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:35:38,930 INFO aime2025-19 [sc]: 408(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:35:41,941 INFO aime2025-6 [sc]: 79(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:35:42,612 INFO aime2025-18 [sc]: 106(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:35:50,126 INFO aime2024-2024-I-4 [sc]: 116(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:00,408 INFO aime2025-15 [sc]: 468(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:07,678 INFO aime2024-2024-I-11 [sc]: 3(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:36:12,462 INFO aime2025-3 [sc]: 117(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:20,492 INFO aime2025-16 [sc]: 49(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:22,165 INFO aime2024-2024-II-8 [sc]: 7(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:36:35,374 INFO aime2024-2024-II-11 [sc]: 601(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:39,337 INFO aime2024-2024-II-14 [sc]: 25(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:36:41,418 INFO aime2024-2024-I-10 [sc]: 173793(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:36:43,587 INFO aime2025-0 [sc]: 70(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:36:59,456 INFO aime2025-26 [sc]: 19(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:37:03,011 INFO aime2024-2024-II-2 [sc]: 236(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:37:18,435 INFO aime2024-2024-I-12 [sc]: 16(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:37:19,528 INFO aime2025-22 [sc]: 800(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:37:24,170 WARNING aime2025-9: sc attempt 1/4 failed (ValueError), retrying in 5s
+2026-08-01 02:37:33,764 INFO aime2024-2024-I-7 [sc]: 540(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:37:43,001 INFO aime2024-2024-I-15 [sc]: 721(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:37:53,595 INFO aime2025-27 [sc]: 296(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:38:11,883 INFO aime2024-2024-I-5 [sc]: 104(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:38:22,109 INFO aime2024-2024-I-8 [sc]: 35(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:38:28,497 INFO aime2025-20 [sc]: 293(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:38:41,165 INFO aime2025-14 [sc]: 398(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:38:41,341 INFO aime2024-2024-II-5 [sc]: 80(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:38:49,273 INFO aime2024-2024-I-6 [sc]: 294(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:02,312 INFO aime2024-2024-II-10 [sc]: 468(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:03,857 INFO aime2025-1 [sc]: 1020(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:39:07,689 INFO aime2025-8 [sc]: 16(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:39:14,269 INFO aime2025-2 [sc]: 16(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:24,032 INFO aime2025-12 [sc]: 115.75(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:39:28,855 INFO aime2024-2024-I-3 [sc]: 809(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:35,361 INFO aime2024-2024-II-13 [sc]: 321(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:45,600 INFO aime2024-2024-II-7 [sc]: 19(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:39:45,667 INFO aime2024-2024-I-9 [sc]: 480(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:39:51,293 INFO aime2025-4 [sc]: 441(wrong, escalated=False, samples_used=1/1)
+2026-08-01 02:39:55,069 INFO aime2024-2024-I-1 [sc]: 204(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:40:03,430 INFO aime2025-24 [sc]: 907(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:40:14,343 INFO aime2025-7 [sc]: 77(correct, escalated=False, samples_used=1/1)
+2026-08-01 02:44:55,257 WARNING aime2025-13: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:45:03,626 WARNING aime2025-29: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:45:14,539 WARNING aime2024-2024-II-15: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:48:16,968 INFO aime2024-2024-II-9 [baseline]: 902(correct)
+2026-08-01 02:49:27,833 INFO aime2025-10 [baseline]: 259(correct)
+2026-08-01 02:50:14,740 WARNING aime2025-19: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:52:05,863 INFO aime2024-2024-II-8 [baseline]: 127(correct)
+2026-08-01 02:53:01,383 INFO aime2024-2024-II-14 [baseline]: 211(correct)
+2026-08-01 02:54:28,048 WARNING aime2024-2024-I-11: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:55:37,005 INFO aime2025-22 [baseline]: 610(correct)
+2026-08-01 02:58:01,579 WARNING aime2024-2024-I-12: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 02:59:28,245 WARNING aime2025-27: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 03:00:02,527 INFO aime2025-9 [sc]: 63(wrong, escalated=False, samples_used=1/1)
+2026-08-01 03:00:37,204 WARNING aime2025-14: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 03:03:01,808 WARNING aime2025-12: baseline attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 03:05:02,717 WARNING aime2025-13: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:05:37,461 WARNING aime2025-29: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:08:02,033 WARNING aime2024-2024-II-15: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:10:02,910 WARNING aime2025-19: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:10:37,657 WARNING aime2024-2024-I-11: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:13:02,249 WARNING aime2024-2024-I-12: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:15:03,099 WARNING aime2025-27: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:15:37,954 WARNING aime2025-14: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:18:02,490 WARNING aime2025-12: baseline attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:19:08,922 INFO aime2025-29 [baseline]: 240(correct)
+2026-08-01 03:20:03,298 ERROR aime2025-13: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:23:02,713 ERROR aime2024-2024-II-15: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:24:09,136 ERROR aime2025-19: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:25:03,517 ERROR aime2024-2024-I-11: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:28:02,925 ERROR aime2024-2024-I-12: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:29:09,396 ERROR aime2025-27: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:30:03,721 ERROR aime2025-14: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:33:03,147 ERROR aime2025-12: baseline DROPPED after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 03:33:03,147 WARNING 8/60 baseline items dropped due to unrecoverable errors
+2026-08-01 03:33:03,150 INFO Wrote 52 baseline results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\aime_open_baseline_seed101.jsonl
+2026-08-01 03:33:03,150 INFO Wrote 60 panel results to C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\results\aime_open_sc_cheap_seed101.jsonl
+2026-08-01 03:33:03,151 INFO RESULTS (n=52 common items, seed=101, level=5): baseline=100.0% (52/52) panel=61.5% (32/52) delta=-38.5 pp escalation_rate=0.0% (0/52)
+--- verify ---
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 171, in <module>
+    main()
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 144, in main
+    r = verify()
+        ^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 75, in verify
+    raise AssertionError(
+AssertionError: INADMISSIBLE: expected 60/60 rows in every arm, got baseline=52 cheap=60 -- per the pre-registered bar this run's numbers must be discarded, not analysed. Re-run, do not patch.
+=== MATH-1 AIME liveness screen finished ===
+Sat Aug  1 03:33:03 MPST 2026

@@ -83,9 +83,13 @@ class QwenClient:
     never the model API's native tool-use protocol either).
     """
 
-    def __init__(self, api_key: str | None = None, base_url: str | None = None):
+    def __init__(self, api_key: str | None = None, base_url: str | None = None, timeout: float = 300):
         self._api_key = api_key or TOKEN_PLAN_API_KEY
         self._messages_url = (base_url or TOKEN_PLAN_BASE_URL).rstrip("/") + "/v1/messages"
+        # Default unchanged (300) -- see the 300-not-120 rationale below.
+        # Additive only: every existing caller that doesn't pass timeout
+        # gets byte-identical behavior, same posture as seed/thinking_budget.
+        self._timeout = timeout
 
     def chat(
         self,
@@ -157,7 +161,7 @@ class QwenClient:
         # in that run were the exact subject the lever targets (Organic
         # Chemistry), which would silently bias any accuracy figure computed
         # from the survivors toward the easier, faster-answered questions.
-        resp = requests.post(self._messages_url, headers=headers, json=body, timeout=300)
+        resp = requests.post(self._messages_url, headers=headers, json=body, timeout=self._timeout)
         resp.raise_for_status()
         data = resp.json()
 

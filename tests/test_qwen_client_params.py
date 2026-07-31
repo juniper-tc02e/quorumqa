@@ -228,3 +228,46 @@ def test_chat_json_param_sweep(monkeypatch, thinking, thinking_budget, seed, exp
         assert "seed" not in body
     else:
         assert body["seed"] == seed
+
+
+# ---------------------------------------------------------------------------
+# (f) timeout -- additive constructor param, default-preserving (same
+# posture as seed/thinking_budget above: a caller that never passes it gets
+# byte-identical behavior to before the param existed).
+# ---------------------------------------------------------------------------
+
+
+def test_default_timeout_is_300_unchanged(monkeypatch):
+    captured = {}
+    monkeypatch.setattr(qwen_client_module.requests, "post", _fake_post_capturing(captured))
+
+    _client().chat("qwen3.7-max", _MESSAGES, role="solver")
+
+    assert captured["timeout"] == 300
+
+
+def test_custom_timeout_is_forwarded_to_the_http_call(monkeypatch):
+    captured = {}
+    monkeypatch.setattr(qwen_client_module.requests, "post", _fake_post_capturing(captured))
+
+    QwenClient(api_key="fake-key", base_url="https://fake.example/apps/anthropic", timeout=900).chat(
+        "qwen3.7-max", _MESSAGES, role="solver"
+    )
+
+    assert captured["timeout"] == 900
+
+
+def test_custom_timeout_does_not_change_the_request_body(monkeypatch):
+    captured = {}
+    monkeypatch.setattr(qwen_client_module.requests, "post", _fake_post_capturing(captured))
+
+    QwenClient(api_key="fake-key", base_url="https://fake.example/apps/anthropic", timeout=900).chat(
+        "qwen3.7-max", _MESSAGES, role="solver", temperature=0.4, max_tokens=1024, thinking=True
+    )
+
+    assert captured["json"] == {
+        "model": "qwen3.7-max",
+        "max_tokens": 1024,
+        "temperature": 0.4,
+        "messages": _MESSAGES,
+    }

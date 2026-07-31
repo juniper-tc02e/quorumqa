@@ -1,0 +1,71 @@
+=== AIME baseline retry-missing started ===
+Sat Aug  1 03:34:52 MPST 2026
+2026-08-01 03:34:54,619 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 03:34:54,627 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Maxwell-Jia/AIME_2024/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/README.md "HTTP/1.1 200 OK"
+2026-08-01 03:34:54,864 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:55,651 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Maxwell-Jia/AIME_2024/Maxwell-Jia/AIME_2024.py "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:55,893 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/revision/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792 "HTTP/1.1 200 OK"
+2026-08-01 03:34:56,143 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:56,424 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Maxwell-Jia/AIME_2024 "HTTP/1.1 200 OK"
+2026-08-01 03:34:56,667 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/data?recursive=true&expand=false "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:56,911 INFO HTTP Request: GET https://huggingface.co/api/datasets/Maxwell-Jia/AIME_2024/tree/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 03:34:57,221 INFO HTTP Request: HEAD https://huggingface.co/datasets/Maxwell-Jia/AIME_2024/resolve/8d88b2876a82a080e2f172cc9b25d0d9d2cb4792/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:57,621 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-08-01 03:34:57,632 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/yentinglin/aime_2025/6f71d77b0b89b9dabe07ab466c51df33f514df7f/README.md "HTTP/1.1 200 OK"
+2026-08-01 03:34:57,868 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:58,121 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/yentinglin/aime_2025/yentinglin/aime_2025.py "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:58,367 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/revision/6f71d77b0b89b9dabe07ab466c51df33f514df7f "HTTP/1.1 200 OK"
+2026-08-01 03:34:58,602 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:58,849 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=yentinglin/aime_2025 "HTTP/1.1 200 OK"
+2026-08-01 03:34:59,096 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-08-01 03:34:59,329 INFO HTTP Request: GET https://huggingface.co/api/datasets/yentinglin/aime_2025/tree/6f71d77b0b89b9dabe07ab466c51df33f514df7f?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-08-01 03:34:59,573 INFO HTTP Request: HEAD https://huggingface.co/datasets/yentinglin/aime_2025/resolve/6f71d77b0b89b9dabe07ab466c51df33f514df7f/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-08-01 03:34:59,584 INFO Loaded 60 AIME items (years=(2024, 2025), seed=101) -- integer open answers
+2026-08-01 03:34:59,584 INFO 52/60 baseline items already present -- retrying 8 missing
+2026-08-01 03:39:59,830 WARNING aime2025-13: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 03:45:05,029 WARNING aime2025-13: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 03:50:15,239 WARNING aime2025-13: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 03:55:35,461 ERROR aime2025-13: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 04:00:35,696 WARNING aime2024-2024-II-15: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 04:05:40,921 WARNING aime2024-2024-II-15: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 04:10:51,137 WARNING aime2024-2024-II-15: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 04:16:11,361 ERROR aime2024-2024-II-15: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 04:21:11,569 WARNING aime2025-19: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 04:26:16,792 WARNING aime2025-19: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 04:31:27,030 WARNING aime2025-19: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 04:36:41,708 INFO aime2025-19: recovered (correct)
+2026-08-01 04:41:41,923 WARNING aime2024-2024-I-11: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 04:46:47,143 WARNING aime2024-2024-I-11: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 04:51:57,395 WARNING aime2024-2024-I-11: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 04:57:17,638 ERROR aime2024-2024-I-11: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 05:02:17,836 WARNING aime2024-2024-I-12: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 05:07:23,032 WARNING aime2024-2024-I-12: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 05:12:33,277 WARNING aime2024-2024-I-12: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 05:17:53,551 ERROR aime2024-2024-I-12: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 05:22:53,757 WARNING aime2025-27: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 05:27:58,968 WARNING aime2025-27: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 05:33:09,185 WARNING aime2025-27: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 05:38:29,405 ERROR aime2025-27: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 05:43:29,628 WARNING aime2025-14: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 05:48:34,849 WARNING aime2025-14: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 05:53:45,070 WARNING aime2025-14: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 05:59:05,302 ERROR aime2025-14: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 06:04:05,633 WARNING aime2025-12: attempt 1/4 failed (ReadTimeout), retrying in 5s
+2026-08-01 06:09:10,873 WARNING aime2025-12: attempt 2/4 failed (ReadTimeout), retrying in 10s
+2026-08-01 06:14:21,092 WARNING aime2025-12: attempt 3/4 failed (ReadTimeout), retrying in 20s
+2026-08-01 06:19:41,333 ERROR aime2025-12: STILL FAILING after 4 attempts (ReadTimeout: HTTPSConnectionPool(host='token-plan.ap-southeast-1.maas.aliyuncs.com', port=443): Read timed out. (read timeout=300))
+2026-08-01 06:19:41,333 INFO Recovered 1/8. Still failing: ['aime2025-13', 'aime2024-2024-II-15', 'aime2024-2024-I-11', 'aime2024-2024-I-12', 'aime2025-27', 'aime2025-14', 'aime2025-12']
+--- verify ---
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 171, in <module>
+    main()
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 144, in main
+    r = verify()
+        ^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\verify_aime_liveness_screen.py", line 75, in verify
+    raise AssertionError(
+AssertionError: INADMISSIBLE: expected 60/60 rows in every arm, got baseline=53 cheap=60 -- per the pre-registered bar this run's numbers must be discarded, not analysed. Re-run, do not patch.
+=== AIME baseline retry-missing finished ===
+Sat Aug  1 06:19:42 MPST 2026
