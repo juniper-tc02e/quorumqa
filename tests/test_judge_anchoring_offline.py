@@ -15,6 +15,19 @@ pooled number here. Each new value below was verified to shift by EXACTLY that
 run's own contribution (e.g. unanimous_wrong_escalations 84->96 is +12, not an
 unrelated drift) before being pinned -- see the commit that added this comment
 for the arithmetic.
+
+Pins updated again 2026-07-31 after the Tier D odd-N harvest
+(`lever_diversified_panel_supergpqa_seed19.jsonl`,
+`lever_cycled_panel_supergpqa_seed19.jsonl`, both `--no-tribunal`) was
+committed. Neither run can ever escalate, so they shift ONLY the raw
+unanimous-panel counts, not any escalation-derived figure: 8+22=30 new
+unanimous panels (verified directly against each file's own `unanimous` field
+before pinning), of which 10 were wrong -- unanimous_total 3708->3738,
+unanimous_total_wrong 671->681, unanimous_unescalated_wrong 576->586. Every
+escalation-side number (escalations, off_slate, unanimous_wrong_escalations,
+unanimous_wrong_recovered, unanimous_right_escalations,
+unanimous_right_broken, by_dataset) is unchanged, exactly as expected for a
+no-tribunal run.
 """
 
 from __future__ import annotations
@@ -78,11 +91,11 @@ def test_break_even_is_far_below_the_measured_wrong_rate(r):
 
 
 def test_gate_recall_and_headroom(r):
-    assert r["unanimous_total"] == 3708
-    assert r["unanimous_total_wrong"] == 671
-    assert r["unanimous_unescalated_wrong"] == 576
+    assert r["unanimous_total"] == 3738
+    assert r["unanimous_total_wrong"] == 681
+    assert r["unanimous_unescalated_wrong"] == 586
     recall = r["unanimous_wrong_escalations"] / r["unanimous_total_wrong"]
-    assert recall == pytest.approx(0.143, abs=0.002)
+    assert recall == pytest.approx(0.141, abs=0.002)
 
 
 def test_w_is_not_the_61_6_percent_figure(r):
