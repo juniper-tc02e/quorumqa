@@ -859,7 +859,13 @@ pool is "Interdisciplinary"** — legal history, theory, comparative law — whi
 statute-text corpus can serve. Retrieval was never the missing piece.
 
 ## NEXT — everything is READY-TO-FIRE at quota reset (2026-07-28 03:32 UTC)
-1. AIME pilot ① (queued, fixed, paired design) — always first.
+1. **AIME pilot ① — FIRED 2026-08-01, retired INADMISSIBLE, not ALIVE/KILL.**
+   7/60 flagship-baseline items chronically fail with a confirmed
+   server-side 504 (Aliyun infra), unreachable by any re-seed since n=60 is
+   the full population. No accuracy/gap figure from this run is usable per
+   MATH-1's own no-partial-analysis rule. Full writeup:
+   `benchmark/results/math1_aime_liveness_screen_seed101.md`. Original
+   entry preserved below for its design rationale.
 2. W1 verified_gate screen (flaw-finder arm) on SuperGPQA-hard, 1 fresh seed
    — logs the pre-gate control W2 needs. Note F1's arbitration: GPQA gap is
    selection-side, so W1's screen runs on SuperGPQA (bigger coverage pool,
