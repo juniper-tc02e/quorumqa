@@ -115,25 +115,43 @@ def _parse_sympy_expr(s: str):
     """Best-effort parse of `s` into a sympy expression. Returns None on any
     failure -- never raises. Tries latex2sympy2_extended first when `s`
     looks LaTeX-flavored, then falls back to sympy.sympify on a light
-    ASCII-ified form (\\pi -> pi, \\cdot/\\times -> *, {}->(), ^->**)."""
+    ASCII-ified form (\\pi -> pi, \\cdot/\\times -> *, {}->(), ^->**).
+
+    NON-Expr RESULTS ARE REJECTED, and this is load-bearing rather than
+    defensive. `sympy.sympify` resolves a number of bare names to objects that
+    are NOT algebraic expressions: 'beta'/'gamma'/'zeta' become FunctionClass,
+    'Q' becomes AssumptionKeys, 'N' a function, 'S' the SingletonRegistry, 'O'
+    the big-O type. Those are exactly the single-letter/Greek names that
+    physics and chemistry questions use for heat, entropy, particle counts,
+    decay constants and oxygen -- i.e. they are common in this benchmark, not
+    exotic. Returning one of them made `_relation_to_difference` evaluate
+    `lhs - rhs` on a function object and raise TypeError, which broke
+    `sympy_check`'s documented "never raises -- fails safe to unparseable"
+    contract and would have crashed `verified_gate_cas` on a live run.
+    Genuine constants (pi, E, I) ARE `Expr` and still parse.
+    """
     s = (s or "").strip()
     if not s:
         return None
 
     def attempt():
+        parsed = None
         if latex2sympy is not None and _looks_like_latex(s):
             try:
-                return latex2sympy(s)
+                parsed = latex2sympy(s)
             except Exception:
-                pass
-        ascii_s = (
-            s.replace("\\pi", "pi").replace("\\cdot", "*").replace("\\times", "*")
-            .replace("{", "(").replace("}", ")").replace("^", "**")
-        )
-        try:
-            return sympy.sympify(ascii_s, rational=True)
-        except Exception:
-            return None
+                parsed = None
+        if parsed is None:
+            ascii_s = (
+                s.replace("\\pi", "pi").replace("\\cdot", "*").replace("\\times", "*")
+                .replace("{", "(").replace("}", ")").replace("^", "**")
+            )
+            try:
+                parsed = sympy.sympify(ascii_s, rational=True)
+            except Exception:
+                return None
+        # Only algebraic expressions may escape this function.
+        return parsed if isinstance(parsed, sympy.Expr) else None
 
     return _run_with_timeout(attempt, 3.0)
 
@@ -164,7 +182,15 @@ def _relation_to_difference(relation: str):
         rhs = _parse_sympy_expr(rhs_s)
         if lhs is None or rhs is None:
             return None
-        return lhs - rhs
+        # Belt-and-braces: _parse_sympy_expr now guarantees both sides are Expr,
+        # so this subtraction should be total. It stays guarded because the
+        # caller's documented contract is "never raises", and a TypeError here
+        # is precisely how that contract was broken before (see
+        # _parse_sympy_expr's note on beta/gamma/Q/N/S/O).
+        try:
+            return lhs - rhs
+        except Exception:
+            return None
     return _parse_sympy_expr(relation)
 
 

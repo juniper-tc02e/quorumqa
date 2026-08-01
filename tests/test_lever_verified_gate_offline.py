@@ -125,6 +125,49 @@ def test_sympy_check_unparseable_with_too_many_free_symbols():
     assert result["status"] == "unparseable"
 
 
+# --- Regression: sympy names that are NOT algebraic expressions -------------
+# Found 2026-08-01 by the KI-0R replay (benchmark/replay_cas_gate_on_wrong_pool.py)
+# on real logged SuperGPQA transcripts, on the FIRST run of this code path
+# against live data. sympy.sympify resolves several bare names to non-Expr
+# objects -- 'beta'/'gamma'/'zeta' -> FunctionClass, 'Q' -> AssumptionKeys,
+# 'N' -> function, 'S' -> SingletonRegistry, 'O' -> type. _relation_to_difference
+# then evaluated `lhs - rhs` on a function object and raised
+#   TypeError: unsupported operand type(s) for -: 'function' and 'Integer'
+# which broke sympy_check's documented "never raises -- fails safe to
+# unparseable" contract and would have CRASHED verified_gate_cas on a live run.
+# These are not exotic names: they are heat, entropy, particle count, decay
+# constants and oxygen -- routine in GPQA/SuperGPQA physics and chemistry.
+
+
+@pytest.mark.parametrize("name", ["beta", "gamma", "zeta", "Q", "N", "S", "O"])
+def test_sympy_check_survives_names_that_sympify_to_non_expressions(name):
+    """Must fail safe to unparseable, never raise."""
+    result = mcp_server.sympy_check(f"{name} = 5", "5")
+    assert result["status"] == "unparseable"
+    assert "detail" in result
+
+
+@pytest.mark.parametrize("name", ["beta", "gamma", "zeta", "Q", "N", "S", "O"])
+def test_parse_sympy_expr_rejects_non_expressions(name):
+    """Root-cause guard: nothing that is not a sympy Expr may escape the parser."""
+    assert mcp_server._parse_sympy_expr(name) is None
+
+
+def test_sympy_check_non_expression_on_either_side_is_unparseable():
+    assert mcp_server.sympy_check("2 + 3 = gamma", "5")["status"] == "unparseable"
+    assert mcp_server.sympy_check("gamma = 2 + 3", "5")["status"] == "unparseable"
+
+
+def test_genuine_constants_still_parse_after_the_fix():
+    """The fix must not over-reject: pi, E and I ARE sympy Expr and are real
+    constants these questions legitimately use."""
+    assert mcp_server._parse_sympy_expr("pi") is not None
+    assert mcp_server._parse_sympy_expr("E") is not None
+    assert mcp_server._parse_sympy_expr("I") is not None
+    assert mcp_server.sympy_check("pi = pi", "0")["status"] == "pass"
+    assert mcp_server._parse_sympy_expr("x") is not None  # ordinary symbols too
+
+
 def test_sympy_check_accepts_latex_relation():
     result = mcp_server.sympy_check(r"\frac{1}{2} + \frac{1}{2} = 1", "1")
     assert result["status"] == "pass"
