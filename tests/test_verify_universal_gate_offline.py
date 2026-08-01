@@ -141,3 +141,123 @@ def test_verify_runs_with_seeds_missing_from_disk(r):
 
     assert len(r["per_seed"]) >= 1
     assert set(r["per_seed"]).issubset(set(SEEDS))
+
+
+# ---------------------------------------------------------------------------
+# The completed 3-seed result and its compute-matched attribution.
+# See benchmark/results/universal_gate_3seed_result.md.
+# Raw .jsonl are gitignored, so these skip on a machine that has not run them.
+# ---------------------------------------------------------------------------
+
+import json as _json
+from pathlib import Path as _Path
+
+_RES = _Path("benchmark/results")
+_UG = [_RES / f"lever_universal_gate_gpqa_seed{s}.jsonl" for s in (1001, 2311, 3407)]
+_CM = _RES / "KI1BC_compute_matched_n9_gpqa_seed2311.jsonl"
+
+_all_seeds = pytest.mark.skipif(
+    not all(p.exists() for p in _UG),
+    reason="universal_gate raw runs are gitignored; present only where the queue ran",
+)
+
+
+@_all_seeds
+def test_three_seed_pooled_result(r):
+    p = r["pooled"]
+    assert sorted(r["per_seed"]) == [1001, 2311, 3407]
+    assert p["b"] == 25
+    assert p["c"] == 0, "a single loss would change the claim materially"
+    assert p["net"] == 25
+    assert p["p_one_sided"] == pytest.approx(2 ** -25, rel=1e-6)
+
+
+@_all_seeds
+def test_every_seed_clears_the_single_seed_bar_independently(r):
+    """Stronger than the 2-of-3 branch that was the pre-registered target."""
+    for seed, s in r["per_seed"].items():
+        assert s["net"] >= 5, f"seed {seed} net={s['net']}"
+        assert s["p_one_sided"] < 0.05, f"seed {seed} p={s['p_one_sided']}"
+    assert set(r["bar"]["single_seed_clears"]) == {1001, 2311, 3407}
+    assert r["bar"]["two_of_three_branch_clears"] is True
+
+
+@_all_seeds
+def test_per_seed_nets_are_not_transposed(r):
+    """Guards a real error made while writing the result up: seeds 2311 and
+    3407 were swapped in the first draft of the table."""
+    assert r["per_seed"][1001]["net"] == 9
+    assert r["per_seed"][2311]["net"] == 11
+    assert r["per_seed"][3407]["net"] == 5
+    assert r["per_seed"][2311]["gated_accuracy"] == pytest.approx(80 / 89, abs=1e-3)
+
+
+@_all_seeds
+def test_zero_breakage_across_all_seeds(r):
+    total_right = sum(s["unanimous_right"] for s in r["per_seed"].values())
+    total_broken = sum(s["broken"] for s in r["per_seed"].values())
+    total_wrong = sum(s["unanimous_wrong"] for s in r["per_seed"].values())
+    total_recovered = sum(s["recovered"] for s in r["per_seed"].values())
+    assert total_broken == 0
+    assert (total_right, total_wrong, total_recovered) == (118, 38, 25)
+
+
+@_all_seeds
+def test_kill_clause_did_not_fire(r):
+    assert r["kill"]["fresh_seeds_present"] == [2311, 3407]
+    assert r["kill"]["killed"] is False
+
+
+@pytest.mark.skipif(
+    not (_CM.exists() and _UG[1].exists()),
+    reason="compute-matched control raw run is gitignored",
+)
+def test_compute_matched_control_does_not_explain_the_gain():
+    """The attribution guard that retracted the LAST headline. If N=9 cheap
+    votes matched universal_gate at equal tokens, the mechanism claim would be
+    retracted. It does not -- it loses to the shipped 3-seat panel."""
+    from benchmark.analyze_panel_scaling import mcnemar_exact_one_sided
+
+    def load(p):
+        return [_json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
+
+    ug = {r["engine"]["item"]["question_id"]: r["engine"] for r in load(_UG[1])}
+    cm = {r["engine"]["item"]["question_id"]: r["engine"] for r in load(_CM)}
+    shared = sorted(set(ug) & set(cm))
+    assert len(shared) == 89
+
+    def ok(e):
+        return e["final_letter"] == e["item"]["correct_letter"]
+
+    b = sum(1 for q in shared if ok(ug[q]) and not ok(cm[q]))
+    c = sum(1 for q in shared if ok(cm[q]) and not ok(ug[q]))
+    assert (b, c) == (24, 2)
+    assert b - c == 22
+    assert mcnemar_exact_one_sided(b, c) < 0.001
+
+
+@pytest.mark.skipif(not _CM.exists(), reason="compute-matched control raw run is gitignored")
+def test_scaling_cheap_votes_within_the_control_arm_is_flat():
+    """Answers the obvious objection to the control (its seats are weaker, so
+    maybe votes DO scale). Within the arm, N=3 -> N=9 nets exactly zero, which
+    also replicates panel_scaling_n15_seed19.md's flat-N finding on GPQA."""
+    from collections import Counter
+
+    from benchmark.analyze_panel_scaling import mcnemar_exact_one_sided
+
+    rows = [_json.loads(l) for l in open(_CM, encoding="utf-8") if l.strip()]
+    assert all(len(r["seat_answers"]) == 9 for r in rows)
+
+    def at(n):
+        return {
+            r["engine"]["item"]["question_id"]:
+                Counter(s["letter"] for s in r["seat_answers"][:n]).most_common(1)[0][0]
+                == r["engine"]["item"]["correct_letter"]
+            for r in rows
+        }
+
+    n3, n9 = at(3), at(9)
+    b = sum(1 for q in n9 if n9[q] and not n3[q])
+    c = sum(1 for q in n9 if n3[q] and not n9[q])
+    assert b - c == 0, "more cheap votes suddenly help -- the attribution argument needs revisiting"
+    assert mcnemar_exact_one_sided(b, c) > 0.05

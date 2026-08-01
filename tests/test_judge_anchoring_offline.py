@@ -69,30 +69,32 @@ def test_records_are_actually_found(r):
 
 def test_judge_is_not_anchored_to_the_solver_slate(r):
     """Kills the AggLM none-of-the-above licence lever."""
-    assert r["escalations"] == 2356
-    assert r["off_slate"] == 245
-    assert r["off_slate_correct"] == 203
+    assert r["escalations"] == 2535
+    assert r["off_slate"] == 272
+    assert r["off_slate_correct"] == 225
     # Off-slate picks are right far more often than not: no licence needed.
     assert r["off_slate_correct"] / r["off_slate"] > 0.80
     # And on the all-solvers-wrong subset the Judge still recovers ~45%.
-    assert r["gold_unoffered"] == 448
-    assert r["gold_unoffered_recovered"] == 203
+    assert r["gold_unoffered"] == 483
+    assert r["gold_unoffered_recovered"] == 225
 
 
 def test_unanimous_wrong_recovery_and_breakage(r):
-    """The core asymmetry: recovered vs broken. Both moved in universal_gate's
-    favor after its live run was committed (49/96 recovery, still ~1% broken)."""
-    assert r["unanimous_wrong_escalations"] == 96
-    assert r["unanimous_wrong_recovered"] == 49
-    assert r["unanimous_right_escalations"] == 166
+    """The core asymmetry: recovered vs broken. After universal_gate's full
+    3-seed run (seeds 1001/2311/3407), 65/122 recovery against ONE broken item
+    in 249 escalated unanimous-right panels -- a 133x ratio, stronger than the
+    85x measured before those seeds landed."""
+    assert r["unanimous_wrong_escalations"] == 122
+    assert r["unanimous_wrong_recovered"] == 65
+    assert r["unanimous_right_escalations"] == 249
     assert r["unanimous_right_broken"] == 1
 
     recovery = r["unanimous_wrong_recovered"] / r["unanimous_wrong_escalations"]
     breakage = r["unanimous_right_broken"] / r["unanimous_right_escalations"]
-    assert recovery == pytest.approx(0.510, abs=0.001)
-    assert breakage == pytest.approx(0.0060, abs=0.001)
+    assert recovery == pytest.approx(0.533, abs=0.001)
+    assert breakage == pytest.approx(0.0040, abs=0.001)
     # The load-bearing claim of the write-up.
-    assert recovery / breakage > 50
+    assert recovery / breakage > 100
 
 
 def test_break_even_is_far_below_the_measured_wrong_rate(r):
@@ -101,17 +103,17 @@ def test_break_even_is_far_below_the_measured_wrong_rate(r):
     break_even = breakage / (recovery + breakage)
     w = r["unanimous_total_wrong"] / r["unanimous_total"]
 
-    assert break_even == pytest.approx(0.0117, abs=0.002)
-    assert w == pytest.approx(0.188, abs=0.002)
+    assert break_even == pytest.approx(0.0075, abs=0.002)
+    assert w == pytest.approx(0.189, abs=0.002)
     assert w > break_even * 10, "the >10x-above-break-even claim"
 
 
 def test_gate_recall_and_headroom(r):
-    assert r["unanimous_total"] == 4000
-    assert r["unanimous_total_wrong"] == 753
-    assert r["unanimous_unescalated_wrong"] == 658
+    assert r["unanimous_total"] == 4130
+    assert r["unanimous_total_wrong"] == 782
+    assert r["unanimous_unescalated_wrong"] == 661
     recall = r["unanimous_wrong_escalations"] / r["unanimous_total_wrong"]
-    assert recall == pytest.approx(0.127, abs=0.002)
+    assert recall == pytest.approx(0.156, abs=0.002)
 
 
 def test_w_is_not_the_61_6_percent_figure(r):
@@ -138,18 +140,18 @@ def test_supergpqa_converts_far_worse_than_gpqa(r):
     # The spread that makes the pooled figure misleading on its own.
     assert gpqa_rate / sg_rate > 4
 
-    # dataset="gpqa" (explicit --dataset flag, e.g. universal_gate seed 1001)
-    # is a THIRD bucket distinct from gpqa(default) -- and now the strongest:
-    # universal_gate's own 12 wrong / 9 recovered = 75.0% landed here.
+    # dataset="gpqa" (explicit --dataset flag) is a THIRD bucket distinct from
+    # gpqa(default), and it is where all three universal_gate seeds land:
+    # 50 wrong / 34 recovered = 68.0% pooled across 1001/2311/3407.
     gpqa_explicit = ds["gpqa"]
-    assert gpqa_explicit["wrong"] == 24 and gpqa_explicit["recovered"] == 18
-    assert gpqa_explicit["recovered"] / gpqa_explicit["wrong"] == pytest.approx(0.75, abs=0.001)
+    assert gpqa_explicit["wrong"] == 50 and gpqa_explicit["recovered"] == 34
+    assert gpqa_explicit["recovered"] / gpqa_explicit["wrong"] == pytest.approx(0.68, abs=0.01)
 
     # Breakage is ~0 on every surface, which is why accuracy is positive
     # nearly everywhere and COST is the real constraint.
     total_right = sum(c.get("right", 0) for c in ds.values())
     total_broken = sum(c.get("broken", 0) for c in ds.values())
-    assert total_right == 166
+    assert total_right == 249
     assert total_broken == 1
 
 
