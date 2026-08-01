@@ -34,7 +34,19 @@ from benchmark.analyze_panel_scaling import mcnemar_exact_one_sided
 RESULTS = Path(__file__).resolve().parent / "results"
 LEVER_FILE = "lever_universal_gate_gpqa_seed{seed}.jsonl"
 
-SEEDS = (1001,)
+# Seed 1001 was the original single-seed run (+9, p=0.00195). Seeds 2311 and
+# 3407 are the pre-registered transfer replication
+# (docs/spec-sci1-and-knowledge-injection.md section 3.2), fired 2026-08-01 to
+# invoke the repo bar's OTHER branch: net >= +3 at 2 of 3 seeds with pooled
+# exact one-sided McNemar p < 0.05. Seeds absent from disk are skipped, so this
+# script stays runnable mid-queue.
+SEEDS = (1001, 2311, 3407)
+
+# Pre-registered kill (same source, section 3.2): if BOTH fresh seeds land
+# net <= +2, the seed-1001 result is seed luck and universal_gate is RETRACTED
+# as a claim, not softened.
+KILL_MAX_NET_BOTH_FRESH = 2
+FRESH_SEEDS = (2311, 3407)
 
 # This session's earlier OFFLINE, pooled-marginal estimate
 # (benchmark/results/unanimous_gate_headroom.md), reproduced from
@@ -114,7 +126,46 @@ def verify_seed(seed: int) -> dict:
 
 
 def verify() -> dict:
-    return {"per_seed": {s: verify_seed(s) for s in SEEDS if (RESULTS / LEVER_FILE.format(seed=s)).exists()}}
+    per_seed = {s: verify_seed(s) for s in SEEDS if (RESULTS / LEVER_FILE.format(seed=s)).exists()}
+
+    # Pooled McNemar: SUM the per-seed contingency tables. This repo's
+    # established convention (see verify_chemistry_claim.py, ship_gate_verdict)
+    # -- adding independent per-seed 2x2 tables, never re-joining items across
+    # seeds on question_id, since different seeds draw different item samples.
+    pooled_b = sum(s["b"] for s in per_seed.values())
+    pooled_c = sum(s["c"] for s in per_seed.values())
+    pooled_n = sum(s["n"] for s in per_seed.values())
+    pooled_p = mcnemar_exact_one_sided(pooled_b, pooled_c)
+
+    seeds_at_3_plus = [s["seed"] for s in per_seed.values() if s["net"] >= 3]
+    single_seed_clears = [
+        s["seed"] for s in per_seed.values() if s["net"] >= 5 and s["p_one_sided"] < 0.05
+    ]
+    two_of_three = len(seeds_at_3_plus) >= 2 and pooled_p < 0.05
+
+    fresh_present = [s for s in per_seed.values() if s["seed"] in FRESH_SEEDS]
+    killed = (
+        len(fresh_present) == len(FRESH_SEEDS)
+        and all(s["net"] <= KILL_MAX_NET_BOTH_FRESH for s in fresh_present)
+    )
+
+    return {
+        "per_seed": per_seed,
+        "pooled": {
+            "n": pooled_n, "b": pooled_b, "c": pooled_c, "net": pooled_b - pooled_c,
+            "p_one_sided": pooled_p,
+        },
+        "bar": {
+            "single_seed_clears": single_seed_clears,
+            "seeds_at_net_3_plus": seeds_at_3_plus,
+            "two_of_three_branch_clears": two_of_three,
+            "clears": bool(single_seed_clears) or two_of_three,
+        },
+        "kill": {
+            "fresh_seeds_present": [s["seed"] for s in fresh_present],
+            "killed": killed,
+        },
+    }
 
 
 def main() -> None:
@@ -159,13 +210,48 @@ def main() -> None:
         print(f"    against the repo bar (net>=+5 at one seed, p<0.05): "
               f"{'CLEARS' if clears else 'does not clear'}")
         print()
+    p, bar, kill = r["pooled"], r["bar"], r["kill"]
+    n_seeds = len(r["per_seed"])
+    print("=" * 78)
+    print(f"POOLED ACROSS {n_seeds} SEED(S): {sorted(r['per_seed'])}")
+    print("=" * 78)
+    print(f"  b={p['b']} c={p['c']} net={p['net']:+d} n={p['n']}  "
+          f"pooled one-sided exact McNemar p={p['p_one_sided']:.6f}")
+    print()
+    print("  AGAINST THE REPO BAR (either branch suffices):")
+    print(f"    branch 1 -- net>=+5 AND p<0.05 at a single seed: "
+          f"{bar['single_seed_clears'] or 'none'}")
+    print(f"    branch 2 -- net>=+3 at 2 of 3 seeds AND pooled p<0.05: "
+          f"seeds at net>=+3 = {bar['seeds_at_net_3_plus'] or 'none'}, "
+          f"pooled p={p['p_one_sided']:.6f} -> "
+          f"{'CLEARS' if bar['two_of_three_branch_clears'] else 'does not clear'}")
+    print(f"    >>> {'BAR CLEARED' if bar['clears'] else 'BAR NOT CLEARED'}")
+    print()
+    if n_seeds < len(SEEDS):
+        missing = [s for s in SEEDS if s not in r["per_seed"]]
+        print(f"  INCOMPLETE: seed(s) {missing} not on disk yet. The pooled figure above")
+        print("  is a partial read and must not be quoted as the 3-seed result.")
+        print()
+    print("  PRE-REGISTERED KILL (docs/spec-sci1-and-knowledge-injection.md section 3.2):")
+    print(f"    if BOTH fresh seeds {list(FRESH_SEEDS)} land net <= +{KILL_MAX_NET_BOTH_FRESH},")
+    print("    the seed-1001 result is seed luck and universal_gate is RETRACTED.")
+    if kill["killed"]:
+        print("    >>> KILL FIRED. Retract the claim, do not soften it.")
+    elif len(kill["fresh_seeds_present"]) < len(FRESH_SEEDS):
+        print("    >>> not yet evaluable (both fresh seeds must be on disk).")
+    else:
+        print("    >>> kill did NOT fire.")
+    print()
     print("  CAVEATS:")
-    print("  - Single seed. The repo bar's OTHER branch (net>=+3 at 2 of 3 seeds,")
-    print("    pooled McNemar p<0.05) needs 2 more fresh seeds to invoke; this run")
-    print("    alone clears the single-seed branch, which is sufficient on its own.")
     print("  - GPQA only. benchmark/results/unanimous_gate_headroom.md's cost table")
     print("    (4.2 escalations/net item on GPQA vs 24.0 on SuperGPQA-hard) is why")
-    print("    GPQA was fired first; this result does not extend to SuperGPQA.")
+    print("    GPQA was fired first; this result does not extend to SuperGPQA. The")
+    print("    same command there projects +3.2 net at n=180 -- below the bar.")
+    print("  - Mechanism is NOT established by this script. The compute-matched")
+    print("    control (diversified_panel --n-solvers 9 --no-tribunal at seed 2311)")
+    print("    is what separates 'the tribunal helps' from 'more tokens help'. If it")
+    print("    matches or beats universal_gate, the mechanism claim is retracted on")
+    print("    the spot, exactly as flagship_panel's was.")
     print()
     print("  reproduce: python -m benchmark.verify_universal_gate")
 
