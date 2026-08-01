@@ -7,6 +7,7 @@ discipline as verify_aime_liveness_screen.py's own offline test suite).
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -18,6 +19,11 @@ from benchmark.analyze_unanimous_stability import (
     is_correct,
     is_unanimous,
 )
+
+RESULTS = Path("benchmark/results")
+_REAL_SEEDS = (909, 1313, 2027)
+_REAL_CONTROL = [RESULTS / f"META2_control_supergpqa_seed{s}.jsonl" for s in _REAL_SEEDS]
+_REAL_PERMUTED = [RESULTS / f"META2_permuted_panel_supergpqa_seed{s}.jsonl" for s in _REAL_SEEDS]
 
 
 def _row(qid: str, escalated: bool, correct: bool) -> dict:
@@ -261,3 +267,40 @@ def test_pools_multiple_files_per_arm(tmp_path):
     r = analyze([str(c1), str(c2)], [str(p1), str(p2)])
     assert r["n_unanimous_control"] == 10
     assert r["n_flipped_ab"] == 2
+
+
+# ---------------------------------------------------------------------------
+# Pin against the real committed 3-seed run (raw pools gitignored -- only
+# present on the machine that ran it). See
+# benchmark/results/meta2_permutation_instability_findings.md: KILL, pooled
+# contrast +7.1pp / p=0.4552, both disjuncts of the kill clause fire
+# independently.
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.skipif(
+    not all(p.exists() for p in _REAL_CONTROL + _REAL_PERMUTED),
+    reason="META-2 raw result files are gitignored and only present on the machine that ran it live.",
+)
+def test_real_pooled_3seed_result_matches_the_committed_findings():
+    r = analyze([str(p) for p in _REAL_CONTROL], [str(p) for p in _REAL_PERMUTED])
+
+    assert r["n_unanimous_control"] == 139
+    assert r["n_flipped_ab"] == 59
+    assert r["flip_rate_ab"] == pytest.approx(0.4244604316546763, abs=1e-9)
+    assert "CLEARS" in r["coverage_verdict"]
+
+    assert r["n_unanimous_wrong"] == 40
+    assert r["n_unanimous_right"] == 99
+    assert r["n_flipped_wrong"] == 19
+    assert r["n_flipped_right"] == 40
+    assert r["contrast_pp"] == pytest.approx(7.095959595959594, abs=1e-9)
+    assert r["fisher_p"] == pytest.approx(0.4552, abs=1e-3)
+
+    assert r["contrast_clears_bar"] is False
+    assert r["contrast_killed"] is True  # both disjuncts fire: gap<10pt AND p>0.2
+    assert r["contrast_pp"] < 10.0
+    assert r["fisher_p"] > 0.2
+
+    assert r["accuracy_net"] == 7
+    assert r["accuracy_bar_clears"] is False

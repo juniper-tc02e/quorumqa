@@ -866,12 +866,21 @@ statute-text corpus can serve. Retrieval was never the missing piece.
    MATH-1's own no-partial-analysis rule. Full writeup:
    `benchmark/results/math1_aime_liveness_screen_seed101.md`. Original
    entry preserved below for its design rationale.
-2. W1 verified_gate screen (flaw-finder arm) on SuperGPQA-hard, 1 fresh seed
-   — logs the pre-gate control W2 needs. Note F1's arbitration: GPQA gap is
-   selection-side, so W1's screen runs on SuperGPQA (bigger coverage pool,
-   16.1% floor) where coverage levers still have targets.
-3. W2 arm-0 permuted_panel at the same seeds (rides W1's control; produces
-   the instability features W5's conditional predictor needs).
+2. ~~W1 verified_gate screen~~ — superseded by the spec-book's own later,
+   more precise numbering: this item's actual content is **META-2**
+   (`docs/experiment-spec-book.md`), which folds the permuted_panel
+   instability probe together with its required `control` reference arm.
+   **FIRED 2026-08-01, KILLED, pooled 3 seeds (909/1313/2027).** Contrast
+   +7.1pp / p=0.4552, both disjuncts of the kill clause fire independently
+   (gap<10pt, p>0.2). Coverage was never the issue (42.4% flip rate, 4x the
+   authorization floor) — the flip signal simply doesn't predict wrongness.
+   Per the spec's own stated consequence, **this also finishes META-1**:
+   neither logged features nor instability (resample OR permutation) can
+   see inside the unanimous-wrong pool. Full writeup:
+   `benchmark/results/meta2_permutation_instability_findings.md`.
+3. ~~W2 arm-0 permuted_panel~~ — see item 2 above; this and item 2 were
+   always the same underlying question under the loop's earlier, coarser
+   naming and are now resolved together.
 4. P1 qwen3.8-solo paired baselines (SuperGPQA n=86 + AIME n=60) — sets the
    Track-B family bar. Riders: P7 if headroom.
 Total ≈ 4-5M tokens ≈ 10% of measured quota.

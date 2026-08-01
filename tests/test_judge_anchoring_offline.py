@@ -28,6 +28,22 @@ escalation-side number (escalations, off_slate, unanimous_wrong_escalations,
 unanimous_wrong_recovered, unanimous_right_escalations,
 unanimous_right_broken, by_dataset) is unchanged, exactly as expected for a
 no-tribunal run.
+
+Pins updated again 2026-08-01 after META-2's 6 result files (control +
+permuted_panel at seeds 909/1313/2027) were committed. Unlike Tier D, these
+DO use the real tribunal (control/permuted_panel have no gate logic that
+force-escalates a unanimous vote, but genuine 2-1 splits still escalate
+normally), so this shift touches BOTH sides: +262 new unanimous rows
+(verified directly: 43+44+46+38+53+38=262 across the six files) ->
+unanimous_total 3738->4000, unanimous_total_wrong 681->753,
+unanimous_unescalated_wrong 586->658; AND +268 new escalations (2088->2356,
+all from genuine splits, not unanimity-gated) -> off_slate 216->245,
+off_slate_correct 180->203, gold_unoffered 398->448,
+gold_unoffered_recovered 180->203. unanimous_wrong_escalations (96),
+unanimous_wrong_recovered (49), unanimous_right_escalations (166),
+unanimous_right_broken (1), and by_dataset are ALL unchanged -- every one of
+META-2's escalations came from a split, never from a unanimous panel hitting
+a gate, so none of them land in the unanimous_*_escalations buckets.
 """
 
 from __future__ import annotations
@@ -53,14 +69,14 @@ def test_records_are_actually_found(r):
 
 def test_judge_is_not_anchored_to_the_solver_slate(r):
     """Kills the AggLM none-of-the-above licence lever."""
-    assert r["escalations"] == 2088
-    assert r["off_slate"] == 216
-    assert r["off_slate_correct"] == 180
+    assert r["escalations"] == 2356
+    assert r["off_slate"] == 245
+    assert r["off_slate_correct"] == 203
     # Off-slate picks are right far more often than not: no licence needed.
     assert r["off_slate_correct"] / r["off_slate"] > 0.80
     # And on the all-solvers-wrong subset the Judge still recovers ~45%.
-    assert r["gold_unoffered"] == 398
-    assert r["gold_unoffered_recovered"] == 180
+    assert r["gold_unoffered"] == 448
+    assert r["gold_unoffered_recovered"] == 203
 
 
 def test_unanimous_wrong_recovery_and_breakage(r):
@@ -86,16 +102,16 @@ def test_break_even_is_far_below_the_measured_wrong_rate(r):
     w = r["unanimous_total_wrong"] / r["unanimous_total"]
 
     assert break_even == pytest.approx(0.0117, abs=0.002)
-    assert w == pytest.approx(0.181, abs=0.002)
+    assert w == pytest.approx(0.188, abs=0.002)
     assert w > break_even * 10, "the >10x-above-break-even claim"
 
 
 def test_gate_recall_and_headroom(r):
-    assert r["unanimous_total"] == 3738
-    assert r["unanimous_total_wrong"] == 681
-    assert r["unanimous_unescalated_wrong"] == 586
+    assert r["unanimous_total"] == 4000
+    assert r["unanimous_total_wrong"] == 753
+    assert r["unanimous_unescalated_wrong"] == 658
     recall = r["unanimous_wrong_escalations"] / r["unanimous_total_wrong"]
-    assert recall == pytest.approx(0.141, abs=0.002)
+    assert recall == pytest.approx(0.127, abs=0.002)
 
 
 def test_w_is_not_the_61_6_percent_figure(r):
