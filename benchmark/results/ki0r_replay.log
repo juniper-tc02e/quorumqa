@@ -1,0 +1,56 @@
+=== KI-0R CAS-gate replay started ===
+Sat Aug  1 18:28:19 MPST 2026
+[08/01/26 18:28:22] INFO     gpqa: 34      replay_cas_gate_on_wrong_pool.py:265
+                             unanimous-wro                                     
+                             ng, 85                                            
+                             unanimous-rig                                     
+                             ht available,                                     
+                             sampling 34                                       
+                    INFO     supergpqa:    replay_cas_gate_on_wrong_pool.py:265
+                             151                                               
+                             unanimous-wro                                     
+                             ng, 254                                           
+                             unanimous-rig                                     
+                             ht available,                                     
+                             sampling 151                                      
+                    INFO     replaying     replay_cas_gate_on_wrong_pool.py:275
+                             gpqa/wrong:                                       
+                             34 items                                          
+[08/01/26 18:28:34] INFO     replaying     replay_cas_gate_on_wrong_pool.py:275
+                             gpqa/right:                                       
+                             34 items                                          
+[08/01/26 18:28:46] INFO     replaying     replay_cas_gate_on_wrong_pool.py:275
+                             supergpqa/wro                                     
+                             ng: 151 items                                     
+[08/01/26 18:29:39] INFO     replaying     replay_cas_gate_on_wrong_pool.py:275
+                             supergpqa/rig                                     
+                             ht: 151 items                                     
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\replay_cas_gate_on_wrong_pool.py", line 367, in <module>
+    asyncio.run(main(
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\replay_cas_gate_on_wrong_pool.py", line 276, in main
+    out = await asyncio.gather(*[
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\benchmark\replay_cas_gate_on_wrong_pool.py", line 199, in _replay_one
+    check = sympy_check(relation, candidate)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\tools\mcp_server.py", line 208, in sympy_check
+    expr = _relation_to_difference(relation)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ong Jun Kai\Documents\Qwen Hackathon\src\quorumqa\tools\mcp_server.py", line 167, in _relation_to_difference
+    return lhs - rhs
+           ~~~~^~~~~
+TypeError: unsupported operand type(s) for -: 'function' and 'Integer'
+=== KI-0R finished ===
+Sat Aug  1 18:30:18 MPST 2026

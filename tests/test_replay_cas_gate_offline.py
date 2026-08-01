@@ -260,3 +260,60 @@ def test_gate_threshold_matches_the_pre_registered_value():
     kill clause after the fact."""
     assert GATE_THRESHOLD == pytest.approx(0.311, abs=0.001)
     assert 5 / (33.8 * 0.476) == pytest.approx(GATE_THRESHOLD, abs=0.002)
+
+
+# ---------------------------------------------------------------------------
+# Pin the real committed KI-0R result (raw pools gitignored; the report JSON
+# is committed, so these read that). See
+# benchmark/results/ki0r_cas_gate_findings.md -- KILL: the gate fires at
+# statistically identical rates on right and wrong items.
+# ---------------------------------------------------------------------------
+
+import json as _json
+from pathlib import Path as _Path
+
+_KI0R_JSON = _Path("benchmark/results/KI0R_cas_gate_replay.json")
+
+
+@pytest.mark.skipif(not _KI0R_JSON.exists(), reason="KI-0R has not been run on this machine")
+def test_real_ki0r_result_fails_the_pre_registered_gate():
+    raw = _json.loads(_KI0R_JSON.read_text(encoding="utf-8"))
+    for ds in ("gpqa", "supergpqa"):
+        s = raw[f"{ds}/wrong"]["summary"]
+        assert s["product"] < GATE_THRESHOLD, f"{ds} unexpectedly cleared the gate"
+
+
+@pytest.mark.skipif(not _KI0R_JSON.exists(), reason="KI-0R has not been run on this machine")
+def test_real_ki0r_supergpqa_shows_exactly_zero_discrimination():
+    """The load-bearing finding: 24/151 fires on wrong AND 24/151 on right,
+    Fisher p=1.0. If a future change makes these differ, the kill's basis
+    changed and the write-up must be revisited."""
+    from benchmark.analyze_dropout_bias import fisher_exact_two_sided
+
+    raw = _json.loads(_KI0R_JSON.read_text(encoding="utf-8"))
+    w = raw["supergpqa/wrong"]["summary"]
+    r = raw["supergpqa/right"]["summary"]
+    assert w["n_completed"] == r["n_completed"] == 151
+    assert w["n_gate_fires"] == 24
+    assert r["n_gate_fires"] == 24
+    p = fisher_exact_two_sided(24, 151 - 24, 24, 151 - 24)
+    assert p == pytest.approx(1.0, abs=1e-9)
+
+
+@pytest.mark.skipif(not _KI0R_JSON.exists(), reason="KI-0R has not been run on this machine")
+def test_real_ki0r_pools_are_disjoint_so_the_equality_is_not_double_counting():
+    raw = _json.loads(_KI0R_JSON.read_text(encoding="utf-8"))
+    w = {r["question_id"] for r in raw["supergpqa/wrong"]["rows"] if r["gate_would_fire"]}
+    r_ = {r["question_id"] for r in raw["supergpqa/right"]["rows"] if r["gate_would_fire"]}
+    assert len(w) == len(r_) == 24
+    assert not (w & r_), "wrong/right fired sets overlap -- the equality would be an artifact"
+
+
+@pytest.mark.skipif(not _KI0R_JSON.exists(), reason="KI-0R has not been run on this machine")
+def test_real_ki0r_gpqa_gate_is_anti_correlated():
+    """On GPQA it fires MORE on correct answers than wrong ones -- the opposite
+    of its purpose."""
+    raw = _json.loads(_KI0R_JSON.read_text(encoding="utf-8"))
+    assert raw["gpqa/wrong"]["summary"]["n_gate_fires"] == 1
+    assert raw["gpqa/right"]["summary"]["n_gate_fires"] == 5
+    assert raw["gpqa/right"]["summary"]["product"] > raw["gpqa/wrong"]["summary"]["product"]

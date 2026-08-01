@@ -1,0 +1,3770 @@
+{
+  "gpqa/wrong": {
+    "summary": {
+      "n_attempted": 34,
+      "n_completed": 34,
+      "n_dropped": 0,
+      "n_checkable": 7,
+      "n_parseable": 6,
+      "n_unparseable": 1,
+      "n_gate_fires": 1,
+      "p_check": 0.17647058823529413,
+      "y_detect": 0.16666666666666666,
+      "product": 0.029411764705882353,
+      "tokens": 40015
+    },
+    "rows": [
+      {
+        "question_id": "rec0Arme2jcXQZnAW",
+        "checkable": true,
+        "relation": "9 + 1 = 10",
+        "candidate": "10",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '9 + 1 = 10' candidate='10'",
+        "gate_would_fire": false,
+        "tokens": 1713
+      },
+      {
+        "question_id": "rec0yTRmO1o1xCA6H",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 923
+      },
+      {
+        "question_id": "recAYkd96NNuNl1Ei",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 604
+      },
+      {
+        "question_id": "recBhnXrUyTJ6WHIR",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 780
+      },
+      {
+        "question_id": "recDDxpS9s8cwkqfq",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1285
+      },
+      {
+        "question_id": "recDj2Y2BbtV02Wv5",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 590
+      },
+      {
+        "question_id": "recEmTBhx2hgw6tPQ",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1018
+      },
+      {
+        "question_id": "recFaL6j8UMhutXrc",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1111
+      },
+      {
+        "question_id": "recGee5m84dg5FZkc",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1961
+      },
+      {
+        "question_id": "recKm6LNWykGapmCr",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1196
+      },
+      {
+        "question_id": "recLB0EkQ54bYVhnd",
+        "checkable": true,
+        "relation": "1.005 - 1.0 = 0.005",
+        "candidate": "10",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.005 - 1.0 = 0.005' candidate='10'",
+        "gate_would_fire": false,
+        "tokens": 1960
+      },
+      {
+        "question_id": "recMicVBcqy1xM1jq",
+        "checkable": true,
+        "relation": "(1/4) == (1/4)",
+        "candidate": "D",
+        "status": "unparseable",
+        "detail": "could not parse relation '(1/4) == (1/4)'",
+        "gate_would_fire": false,
+        "tokens": 832
+      },
+      {
+        "question_id": "recOkA2zsy4GSMD9R",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1263
+      },
+      {
+        "question_id": "recRZjaElf8ft7xTq",
+        "checkable": true,
+        "relation": "1.5**2 = 2.25",
+        "candidate": "2.25",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.5**2 = 2.25' candidate='2.25'",
+        "gate_would_fire": false,
+        "tokens": 818
+      },
+      {
+        "question_id": "recUBgVlkKzcRPDdK",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 705
+      },
+      {
+        "question_id": "recUOePh79cp4T2Bg",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1280
+      },
+      {
+        "question_id": "recWxGU8Q4YReJ1tb",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1312
+      },
+      {
+        "question_id": "recZbxrocrxh9YENH",
+        "checkable": true,
+        "relation": "12 * 1000 + 11 * 100 - (22 * 400 + 9 * 200 + 2 * 300) = 11200",
+        "candidate": "11200",
+        "status": "fail",
+        "detail": "relation does not hold: '12 * 1000 + 11 * 100 - (22 * 400 + 9 * 200 + 2 * 300) = 11200' candidate='11200' -> -9300",
+        "gate_would_fire": true,
+        "tokens": 1245
+      },
+      {
+        "question_id": "recb2M22zaD3tL6Qc",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 965
+      },
+      {
+        "question_id": "recb4cGsC6BJUCU3V",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1428
+      },
+      {
+        "question_id": "recf6ayQmL1SxKbvW",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 845
+      },
+      {
+        "question_id": "rechKl68Uc6H7vU0N",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 972
+      },
+      {
+        "question_id": "recihePFulRgNKsIn",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 644
+      },
+      {
+        "question_id": "recjJ54TXc04enRkZ",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 844
+      },
+      {
+        "question_id": "reck4G4xxv3YnpbtQ",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1119
+      },
+      {
+        "question_id": "reckl6PkaEMWM50yZ",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1531
+      },
+      {
+        "question_id": "recl1UtgTVKishAq4",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1433
+      },
+      {
+        "question_id": "recnawZPumSCLMVgp",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 2387
+      },
+      {
+        "question_id": "recooG6bivTUJpDBz",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1599
+      },
+      {
+        "question_id": "recrNbtgTNoabJJi6",
+        "checkable": true,
+        "relation": "2 = 2",
+        "candidate": "2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '2 = 2' candidate='2'",
+        "gate_would_fire": false,
+        "tokens": 742
+      },
+      {
+        "question_id": "recs3PLPUEMiqg4P8",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1126
+      },
+      {
+        "question_id": "rectlyG9pCAAuWhoB",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 948
+      },
+      {
+        "question_id": "recvZlMbpPz0yLDle",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1409
+      },
+      {
+        "question_id": "reczjcMtrB1YGS2fO",
+        "checkable": true,
+        "relation": "1.22 * 0.5 = 0.61",
+        "candidate": "1.220 \\lambda / a",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.22 * 0.5 = 0.61' candidate='1.220 \\\\lambda / a'",
+        "gate_would_fire": false,
+        "tokens": 1427
+      }
+    ]
+  },
+  "gpqa/right": {
+    "summary": {
+      "n_attempted": 34,
+      "n_completed": 34,
+      "n_dropped": 0,
+      "n_checkable": 11,
+      "n_parseable": 10,
+      "n_unparseable": 1,
+      "n_gate_fires": 5,
+      "p_check": 0.29411764705882354,
+      "y_detect": 0.5,
+      "product": 0.14705882352941177,
+      "tokens": 29771
+    },
+    "rows": [
+      {
+        "question_id": "recoiTJPGUmzAkief",
+        "checkable": true,
+        "relation": "E - 1/(4*pi*epsilon_0) * q/L**2 = 0",
+        "candidate": "D",
+        "status": "unparseable",
+        "detail": "relation 'E - 1/(4*pi*epsilon_0) * q/L**2 = 0' has 3 free symbols, expected at most 1",
+        "gate_would_fire": false,
+        "tokens": 939
+      },
+      {
+        "question_id": "recJJcOHhFeSaRpl4",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 903
+      },
+      {
+        "question_id": "recI1ls9OXdxatHQn",
+        "checkable": true,
+        "relation": "a**2 * ln(2) + 0.5 = 1",
+        "candidate": "0.85",
+        "status": "fail",
+        "detail": "relation does not hold: 'a**2 * ln(2) + 0.5 = 1' candidate='0.85' -> -1/2 + 289*log(2)/400",
+        "gate_would_fire": true,
+        "tokens": 780
+      },
+      {
+        "question_id": "recO3hvCWRGiG0odN",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 876
+      },
+      {
+        "question_id": "rec5eA17Qr1ucNLUf",
+        "checkable": true,
+        "relation": "(9/2)**(1/3) = 1.650963624447329",
+        "candidate": "1.65",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(9/2)**(1/3) = 1.650963624447329' candidate='1.65'",
+        "gate_would_fire": false,
+        "tokens": 1073
+      },
+      {
+        "question_id": "rec8y3ZrBOcLgNEkE",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 735
+      },
+      {
+        "question_id": "recPIzpnuYpB4yvmp",
+        "checkable": true,
+        "relation": "1/3 * 1/2 = 1/6",
+        "candidate": "1/6",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1/3 * 1/2 = 1/6' candidate='1/6'",
+        "gate_would_fire": false,
+        "tokens": 785
+      },
+      {
+        "question_id": "recPL4ZPpVYxgMu57",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 578
+      },
+      {
+        "question_id": "recr3VHM4zYf6dMFY",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 850
+      },
+      {
+        "question_id": "rec4L69T0Y1AS4AFS",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1045
+      },
+      {
+        "question_id": "recYOzCsevNz61Lyn",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 945
+      },
+      {
+        "question_id": "recypVp2NmPlBKVTp",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 781
+      },
+      {
+        "question_id": "recVE8cUNHpHZIAvL",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 906
+      },
+      {
+        "question_id": "recpki12iG9RUGrz9",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1030
+      },
+      {
+        "question_id": "recD8oX1KevFbl7bL",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 896
+      },
+      {
+        "question_id": "rec527dNeEtWJrYNl",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1133
+      },
+      {
+        "question_id": "recPSTGXK3P39yNYT",
+        "checkable": true,
+        "relation": "0 = 0",
+        "candidate": "0",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0 = 0' candidate='0'",
+        "gate_would_fire": false,
+        "tokens": 944
+      },
+      {
+        "question_id": "recfTlTMjZBuOducT",
+        "checkable": true,
+        "relation": "10 * sqrt(3 + 2 * cos(pi/6)) / sqrt(3 * (1 - cos(pi/6))**2) = 9.54",
+        "candidate": "9.54",
+        "status": "fail",
+        "detail": "relation does not hold: '10 * sqrt(3 + 2 * cos(pi/6)) / sqrt(3 * (1 - cos(pi/6))**2) = 9.54' candidate='9.54' -> -477/50 + 10*sqrt(3)*sqrt(sqrt(3) + 3)/(3*(1 - sqrt(3)/2))",
+        "gate_would_fire": true,
+        "tokens": 636
+      },
+      {
+        "question_id": "recQiWOxhkXRz9NVE",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 871
+      },
+      {
+        "question_id": "rec1zl5LvaatzGhFt",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 847
+      },
+      {
+        "question_id": "recL9MFV5zmdlle5T",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1208
+      },
+      {
+        "question_id": "recxsX66ktJ1Lwt4f",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 928
+      },
+      {
+        "question_id": "recYCMJWH7IpcdqwE",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1018
+      },
+      {
+        "question_id": "rec32C1ZEapBnCC0E",
+        "checkable": true,
+        "relation": "(2 * (10 + 5)**3) / (1 * (15 + 10)**3) = 0.432",
+        "candidate": "0.4",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(2 * (10 + 5)**3) / (1 * (15 + 10)**3) = 0.432' candidate='0.4'",
+        "gate_would_fire": false,
+        "tokens": 803
+      },
+      {
+        "question_id": "recyPffUDqC2k7ZZO",
+        "checkable": true,
+        "relation": "sqrt(1/2 * hbar**2 - 0**2) = hbar/sqrt(2)",
+        "candidate": "hbar/sqrt(2)",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(1/2 * hbar**2 - 0**2) = hbar/sqrt(2)' candidate='hbar/sqrt(2)' -> -hbar/2 + sqrt(hbar**2)/2",
+        "gate_would_fire": true,
+        "tokens": 1008
+      },
+      {
+        "question_id": "reccOKzFNmyqeJ6ry",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 759
+      },
+      {
+        "question_id": "recLSzwBUS3olCjhl",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 800
+      },
+      {
+        "question_id": "rec06pnAkLOr2t2mp",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 713
+      },
+      {
+        "question_id": "recKv4hFyNpViUXnL",
+        "checkable": true,
+        "relation": "exp(1240/(1448e-10 * 1.380649e-23) * (1/5500 - 1/6000)) = 4.5",
+        "candidate": "4.5",
+        "status": "fail",
+        "detail": "relation does not hold: 'exp(1240/(1448e-10 * 1.380649e-23) * (1/5500 - 1/6000)) = 4.5' candidate='4.5' -> -9/2 + exp(77500000000000000000000000000000000000/8246616477)",
+        "gate_would_fire": true,
+        "tokens": 863
+      },
+      {
+        "question_id": "receo3UUzRvWCqyfA",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 949
+      },
+      {
+        "question_id": "recSBcGLPatKb3Ygu",
+        "checkable": true,
+        "relation": "1 - 0.68**1.5 = 0.439",
+        "candidate": "0.44",
+        "status": "fail",
+        "detail": "relation does not hold: '1 - 0.68**1.5 = 0.439' candidate='0.44' -> 561/1000 - 17*sqrt(17)/125",
+        "gate_would_fire": true,
+        "tokens": 716
+      },
+      {
+        "question_id": "recXsYa3i2UhGF5fe",
+        "checkable": true,
+        "relation": "1 = 1",
+        "candidate": "1",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1 = 1' candidate='1'",
+        "gate_would_fire": false,
+        "tokens": 609
+      },
+      {
+        "question_id": "recINSFEYLCyyd08m",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 919
+      },
+      {
+        "question_id": "rec2ZTsqazBZ3LTWZ",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 925
+      }
+    ]
+  },
+  "supergpqa/wrong": {
+    "summary": {
+      "n_attempted": 151,
+      "n_completed": 151,
+      "n_dropped": 0,
+      "n_checkable": 63,
+      "n_parseable": 55,
+      "n_unparseable": 8,
+      "n_gate_fires": 24,
+      "p_check": 0.36423841059602646,
+      "y_detect": 0.43636363636363634,
+      "product": 0.15894039735099338,
+      "tokens": 164954
+    },
+    "rows": [
+      {
+        "question_id": "0116019c4d2949ffbb23d38c1d02155f",
+        "checkable": true,
+        "relation": "1.2 * cosh(300 * 1.5 / 120) = 24.7",
+        "candidate": "24.7",
+        "status": "fail",
+        "detail": "relation does not hold: '1.2 * cosh(300 * 1.5 / 120) = 24.7' candidate='24.7' -> -247/10 + 6*cosh(15/4)/5",
+        "gate_would_fire": true,
+        "tokens": 1068
+      },
+      {
+        "question_id": "01ac3e46a5f04c48b3ad3d21e7a8eacd",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 2566
+      },
+      {
+        "question_id": "0202feea0e3b48af93748396fc2a2d24",
+        "checkable": true,
+        "relation": "2 * 10**(-4) = 2 * 10**(-4)",
+        "candidate": "2e-4",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '2 * 10**(-4) = 2 * 10**(-4)' candidate='2e-4'",
+        "gate_would_fire": false,
+        "tokens": 850
+      },
+      {
+        "question_id": "05ff75c957d445298164337f6fb16dce",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 996
+      },
+      {
+        "question_id": "095ff35b087e416f9a2797a86611b4c2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1308
+      },
+      {
+        "question_id": "0c5b12065dff42d386db06e43ed8b632",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1766
+      },
+      {
+        "question_id": "0cec965e083d473b91baf8419e499266",
+        "checkable": true,
+        "relation": "(200/sqrt(2))**2 / 100 = 200",
+        "candidate": "200",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(200/sqrt(2))**2 / 100 = 200' candidate='200'",
+        "gate_would_fire": false,
+        "tokens": 1292
+      },
+      {
+        "question_id": "10189f626a71458193ceb74c22288670",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 836
+      },
+      {
+        "question_id": "10306739cc6f4b94afa3336c48376be7",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 771
+      },
+      {
+        "question_id": "10f542902dfa44d795fba244e7f1a69c",
+        "checkable": true,
+        "relation": "sqrt(30 * 1.5) = 6.708203932499369",
+        "candidate": "6.5 x 10^6",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'sqrt(30 * 1.5) = 6.708203932499369' candidate='6.5 x 10^6'",
+        "gate_would_fire": false,
+        "tokens": 841
+      },
+      {
+        "question_id": "12a6d09d1179401498c2cae7d2d886a8",
+        "checkable": true,
+        "relation": "5 - 3 = 2",
+        "candidate": "2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '5 - 3 = 2' candidate='2'",
+        "gate_would_fire": false,
+        "tokens": 1474
+      },
+      {
+        "question_id": "14110586ac6f4e02ae2b41caf9767644",
+        "checkable": true,
+        "relation": "pi * (2.50)**2 * 10.0 * 8.20 * 0.12 / 58.9 * 6.022e23 = 1.98e24",
+        "candidate": "1.98e24",
+        "status": "fail",
+        "detail": "relation does not hold: 'pi * (2.50)**2 * 10.0 * 8.20 * 0.12 / 58.9 * 6.022e23 = 1.98e24' candidate='1.98e24' -> -1980000000000000000000000 + 370353000000000000000000000*pi/589",
+        "gate_would_fire": true,
+        "tokens": 1089
+      },
+      {
+        "question_id": "15be8f8e252644028475951da8318593",
+        "checkable": true,
+        "relation": "-395.7 + 197.8 / 2 = -296.8",
+        "candidate": "296.8",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '-395.7 + 197.8 / 2 = -296.8' candidate='296.8'",
+        "gate_would_fire": false,
+        "tokens": 1256
+      },
+      {
+        "question_id": "1e6267aed56a4fba91a50215560a698b",
+        "checkable": true,
+        "relation": "1.059 = 1.059",
+        "candidate": "1.059",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.059 = 1.059' candidate='1.059'",
+        "gate_would_fire": false,
+        "tokens": 936
+      },
+      {
+        "question_id": "1eb91932207046aaa56ce24234ff69af",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 851
+      },
+      {
+        "question_id": "206733326acb4a0b822ea0041dad0452",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1037
+      },
+      {
+        "question_id": "210b3664e51b43bbab0d4b1bfa4668d0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 768
+      },
+      {
+        "question_id": "21c8296790dc44c3b47308fe139b1378",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1502
+      },
+      {
+        "question_id": "21d1d27ba995479dbeed0629b0fb6bc6",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 829
+      },
+      {
+        "question_id": "23ad44902ff945798a7ff404a3bb98d3",
+        "checkable": true,
+        "relation": "10 * ((7.8 - 1.2) / (7.8 - 1.0)) * (8.5e-4 / 13.2) = 6.45e-4",
+        "candidate": "6.45e-4",
+        "status": "fail",
+        "detail": "relation does not hold: '10 * ((7.8 - 1.2) / (7.8 - 1.0)) * (8.5e-4 / 13.2) = 6.45e-4' candidate='6.45e-4' -> -1/50000",
+        "gate_would_fire": true,
+        "tokens": 2157
+      },
+      {
+        "question_id": "25d2d85093d3401b9883e0142407d0ee",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1066
+      },
+      {
+        "question_id": "2789bb6861f94992954c4df00ec8e656",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 793
+      },
+      {
+        "question_id": "278b1bc0ff8040b5beb619203318ea17",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 839
+      },
+      {
+        "question_id": "27b0cc6c758649ecb4fb058ecdad4757",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 969
+      },
+      {
+        "question_id": "2811febd3e9a4348a352c0c2b33ee464",
+        "checkable": true,
+        "relation": "10**11 = 10**11",
+        "candidate": "10**11",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '10**11 = 10**11' candidate='10**11'",
+        "gate_would_fire": false,
+        "tokens": 1272
+      },
+      {
+        "question_id": "2ad84dab86404c8d9d570a983fbed133",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1702
+      },
+      {
+        "question_id": "2c80ad52c2324c3ab0b78cbad3437367",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 901
+      },
+      {
+        "question_id": "2cf2296143904690a6c6f376236839d2",
+        "checkable": true,
+        "relation": "Mod(y_25, 197) == 0",
+        "candidate": "197",
+        "status": "unparseable",
+        "detail": "could not parse relation 'Mod(y_25, 197) == 0'",
+        "gate_would_fire": false,
+        "tokens": 1163
+      },
+      {
+        "question_id": "2da248d76137456ea8533cbb76a4f481",
+        "checkable": true,
+        "relation": "1.2e-16 = 1.2e-16",
+        "candidate": "1.2e-16",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.2e-16 = 1.2e-16' candidate='1.2e-16'",
+        "gate_would_fire": false,
+        "tokens": 871
+      },
+      {
+        "question_id": "2e1738795281443cbc6067913cc2162b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1172
+      },
+      {
+        "question_id": "2e1d297065d247068eaa68f6585f9764",
+        "checkable": true,
+        "relation": "2.262e-6 = 22.62e-7",
+        "candidate": "22.62e-7",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '2.262e-6 = 22.62e-7' candidate='22.62e-7'",
+        "gate_would_fire": false,
+        "tokens": 762
+      },
+      {
+        "question_id": "30ca59713f1b4dc8a6f9e2be9261e168",
+        "checkable": true,
+        "relation": "6.626e-34 / sqrt(2 * 1.675e-27 * 1.38e-23) * 1e10 = 3.64",
+        "candidate": "A",
+        "status": "fail",
+        "detail": "relation does not hold: '6.626e-34 / sqrt(2 * 1.675e-27 * 1.38e-23) * 1e10 = 3.64' candidate='A' -> -91/25 + 3313*sqrt(46230)/23115",
+        "gate_would_fire": true,
+        "tokens": 1347
+      },
+      {
+        "question_id": "3379eb264f7a44fcbb8967c1257d8ef1",
+        "checkable": true,
+        "relation": "log((1 + 0.25 - x_A) / ((1 + 0.25) * (1 - x_A))) = 2.2 * 0.25 * 0.07 * 50",
+        "candidate": "0.590",
+        "status": "fail",
+        "detail": "relation does not hold: 'log((1 + 0.25 - x_A) / ((1 + 0.25) * (1 - x_A))) = 2.2 * 0.25 * 0.07 * 50' candidate='0.590' -> -77/40 + log(264/205)",
+        "gate_would_fire": true,
+        "tokens": 1255
+      },
+      {
+        "question_id": "345786092a354c1e90c6b2004b9d5719",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 731
+      },
+      {
+        "question_id": "396c4ac5d5784036865383281513d239",
+        "checkable": true,
+        "relation": "sqrt(2 * 16 * 8.854e-14 * 0.245 / 1.602e-19 * (1/3.79e14 + 1/2.08e16)) = 6.09e-6",
+        "candidate": "6.09e-6",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(2 * 16 * 8.854e-14 * 0.245 / 1.602e-19 * (1/3.79e14 + 1/2.08e16)) = 6.09e-6' candidate='6.09e-6' -> -609/100000000 + 7*sqrt(411137926487990)/1315509000000",
+        "gate_would_fire": true,
+        "tokens": 1067
+      },
+      {
+        "question_id": "3bb9bdcf2aae48e5a62161a1578a5df5",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1031
+      },
+      {
+        "question_id": "3c4c69c60cc840138881e84e7dfc53c2",
+        "checkable": true,
+        "relation": "0.30 / (0.15 * 0.15) * 0.30 * 0.30 = 1.20",
+        "candidate": "1.20",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.30 / (0.15 * 0.15) * 0.30 * 0.30 = 1.20' candidate='1.20'",
+        "gate_would_fire": false,
+        "tokens": 1070
+      },
+      {
+        "question_id": "3f8989b3db06466787aa75da59bd29f5",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 783
+      },
+      {
+        "question_id": "423099d02b5642939e9550ce9eca1f31",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1138
+      },
+      {
+        "question_id": "4284e998fada4c82963c98155b243a6d",
+        "checkable": true,
+        "relation": "0.056 == 0.056",
+        "candidate": "0.056",
+        "status": "unparseable",
+        "detail": "could not parse relation '0.056 == 0.056'",
+        "gate_would_fire": false,
+        "tokens": 890
+      },
+      {
+        "question_id": "42fc314addcb4e3580e011b12cde0406",
+        "checkable": true,
+        "relation": "(2 * sin(16*pi/180) * cos(32*pi/180)) / sin(29*pi/180) = sqrt(2) - 2 * sin(17*pi/180)",
+        "candidate": "17",
+        "status": "fail",
+        "detail": "relation does not hold: '(2 * sin(16*pi/180) * cos(32*pi/180)) / sin(29*pi/180) = sqrt(2) - 2 * sin(17*pi/180)' candidate='17' -> -sqrt(2) + 2*sin(17*pi/180) + 2*sin(4*pi/45)*cos(8*pi/45)/sin(29*pi/180)",
+        "gate_would_fire": true,
+        "tokens": 972
+      },
+      {
+        "question_id": "438f43de355a46e982a21abda8d4f152",
+        "checkable": true,
+        "relation": "(16/5) / (12/5) = 4/3",
+        "candidate": "4/3",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(16/5) / (12/5) = 4/3' candidate='4/3'",
+        "gate_would_fire": false,
+        "tokens": 1245
+      },
+      {
+        "question_id": "48de38a79dd148da89ca4bf92c8bddd1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1127
+      },
+      {
+        "question_id": "4ae91bc0704c4d16891bceda9518416c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1174
+      },
+      {
+        "question_id": "4b460c2d40974304b34a313768f1a9af",
+        "checkable": true,
+        "relation": "(3 * 8e-18 * 6e4) / (4 * pi * 9.8 * (13.6e3 - 1.29))**(1/3) = 2.7e-8",
+        "candidate": "2.7e-8",
+        "status": "fail",
+        "detail": "relation does not hold: '(3 * 8e-18 * 6e4) / (4 * pi * 9.8 * (13.6e3 - 1.29))**(1/3) = 2.7e-8' candidate='2.7e-8' -> -27/1000000000 + 9*12944743956487**(1/3)/(11898871250000000000*pi**(1/3))",
+        "gate_would_fire": true,
+        "tokens": 1148
+      },
+      {
+        "question_id": "4c53840b44904a97b04bf942e34ce522",
+        "checkable": true,
+        "relation": "80.0 - 50.0 = 30.0",
+        "candidate": "30.0",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '80.0 - 50.0 = 30.0' candidate='30.0'",
+        "gate_would_fire": false,
+        "tokens": 1197
+      },
+      {
+        "question_id": "4da6b094f021432e9f07bcff16c36b4e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1350
+      },
+      {
+        "question_id": "4da750a1226341988c648c97d601821e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1169
+      },
+      {
+        "question_id": "4ec7fd279abe4399b72a91acb406fa9e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1378
+      },
+      {
+        "question_id": "54feae1e9cf54ae985fc5b07a79d864d",
+        "checkable": true,
+        "relation": "sqrt(2 * pi / (2e-8 * 4e-8)) = 0.849e8",
+        "candidate": "0.849e8",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(2 * pi / (2e-8 * 4e-8)) = 0.849e8' candidate='0.849e8' -> -84900000 + 50000000*sqrt(pi)",
+        "gate_would_fire": true,
+        "tokens": 1945
+      },
+      {
+        "question_id": "5559142f9bfb407b835f455534274613",
+        "checkable": true,
+        "relation": "12 / (4/3) = 9",
+        "candidate": "16",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '12 / (4/3) = 9' candidate='16'",
+        "gate_would_fire": false,
+        "tokens": 1329
+      },
+      {
+        "question_id": "59964f9268c240609796de021ca97aff",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1117
+      },
+      {
+        "question_id": "5b45b2db369345e58b6dfa4ec2bebe1e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1769
+      },
+      {
+        "question_id": "5d0d7b5d79d448c7b2ffdee0247a0296",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 842
+      },
+      {
+        "question_id": "5df707865b404a0697d8fd1791bb9b0b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 615
+      },
+      {
+        "question_id": "5e19e0c88d074381afd719501a7080a1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 739
+      },
+      {
+        "question_id": "5e20b93a9d8e4171836aa1e0e5320730",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 983
+      },
+      {
+        "question_id": "5f0bde5deeae40a88762eea520849455",
+        "checkable": true,
+        "relation": "sqrt(64.64) = 8.04",
+        "candidate": "8.04",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(64.64) = 8.04' candidate='8.04' -> -201/25 + 4*sqrt(101)/5",
+        "gate_would_fire": true,
+        "tokens": 925
+      },
+      {
+        "question_id": "624ccf3cf3e144ccbe8f18ec921d686a",
+        "checkable": true,
+        "relation": "T1 = 40.0 and T2 = 50.0",
+        "candidate": "C",
+        "status": "unparseable",
+        "detail": "could not parse relation 'T1 = 40.0 and T2 = 50.0'",
+        "gate_would_fire": false,
+        "tokens": 1601
+      },
+      {
+        "question_id": "6409dc9dba8d4f28a06fd6807e3c7cf9",
+        "checkable": true,
+        "relation": "388.81 = 388.81",
+        "candidate": "388.81",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '388.81 = 388.81' candidate='388.81'",
+        "gate_would_fire": false,
+        "tokens": 893
+      },
+      {
+        "question_id": "667bfe0ed4b9420cab5fdfd122909d26",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 836
+      },
+      {
+        "question_id": "68be2b3c64f340e1ab95a722390c67b6",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 810
+      },
+      {
+        "question_id": "6be198f958ef4516852dc9c0b0f93766",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1149
+      },
+      {
+        "question_id": "753b9bb15f1c4875b1ebd8a4f0e8ad61",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1152
+      },
+      {
+        "question_id": "7596b20b80904d37a2cdb3571dd140b1",
+        "checkable": true,
+        "relation": "921 = 921",
+        "candidate": "921",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '921 = 921' candidate='921'",
+        "gate_would_fire": false,
+        "tokens": 1950
+      },
+      {
+        "question_id": "784bc160afa34cc184a98687b152411a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1274
+      },
+      {
+        "question_id": "787c2342e0ef4aaa85f1bd2fcedd9fe0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 773
+      },
+      {
+        "question_id": "791dcce8a03d4e438922d47882148a8c",
+        "checkable": true,
+        "relation": "1.96 / 1.97 = 0.99492",
+        "candidate": "0.99492",
+        "status": "fail",
+        "detail": "relation does not hold: '1.96 / 1.97 = 0.99492' candidate='0.99492' -> 19/4925000",
+        "gate_would_fire": true,
+        "tokens": 1304
+      },
+      {
+        "question_id": "7cba4178aa2b47d8abd5c11113bcd92f",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 722
+      },
+      {
+        "question_id": "7f0a718222564dc3922873f9b8b8b407",
+        "checkable": true,
+        "relation": "-0.06 - 0.0591 * log(0.1**2)/2 = 0",
+        "candidate": "0.1",
+        "status": "fail",
+        "detail": "relation does not hold: '-0.06 - 0.0591 * log(0.1**2)/2 = 0' candidate='0.1' -> -3/50 + 591*log(100)/20000",
+        "gate_would_fire": true,
+        "tokens": 973
+      },
+      {
+        "question_id": "7f8c9e5f1e554ad396060dbe085be0bc",
+        "checkable": true,
+        "relation": "sqrt(5)/25 = sqrt(5)/25",
+        "candidate": "0.08944271909999159",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'sqrt(5)/25 = sqrt(5)/25' candidate='0.08944271909999159'",
+        "gate_would_fire": false,
+        "tokens": 1022
+      },
+      {
+        "question_id": "80ecabf1688e4be3bb3f9c0181947167",
+        "checkable": true,
+        "relation": "5 - 1 = 4",
+        "candidate": "4",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '5 - 1 = 4' candidate='4'",
+        "gate_would_fire": false,
+        "tokens": 1557
+      },
+      {
+        "question_id": "81bb88e7883d4fc7aae41299e7522a01",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 988
+      },
+      {
+        "question_id": "8212116814624ac3ab3c645bb720a0de",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1128
+      },
+      {
+        "question_id": "8220134735164021974f2c9cb3fe485e",
+        "checkable": true,
+        "relation": "20 * 30 = 600",
+        "candidate": "600",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '20 * 30 = 600' candidate='600'",
+        "gate_would_fire": false,
+        "tokens": 1538
+      },
+      {
+        "question_id": "836465ad84b24ff996128fb87fd864a1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 990
+      },
+      {
+        "question_id": "8663d52325714e76ad7e012721316c23",
+        "checkable": true,
+        "relation": "66.8 = 66.8",
+        "candidate": "66.8",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '66.8 = 66.8' candidate='66.8'",
+        "gate_would_fire": false,
+        "tokens": 985
+      },
+      {
+        "question_id": "86ad4780d9e843f7b8a98e208abf3a52",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 983
+      },
+      {
+        "question_id": "89c81fa5104e4d2580f05c3dc32fa11d",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 861
+      },
+      {
+        "question_id": "8aca8b27a1674720bcb8271a46213d95",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 2123
+      },
+      {
+        "question_id": "8c293442d9444277866f493968187325",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 2830
+      },
+      {
+        "question_id": "8c466141d2b744ee9303d466b28b2e52",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 852
+      },
+      {
+        "question_id": "8cb1a3d68036488689cc6279ff47fd5a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 848
+      },
+      {
+        "question_id": "8de4e96a88f546c78038f13b06b2a747",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 945
+      },
+      {
+        "question_id": "8e40cd53b45a4b15ac686b1de9f0c732",
+        "checkable": true,
+        "relation": "1 / 0.5 = 2",
+        "candidate": "2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1 / 0.5 = 2' candidate='2'",
+        "gate_would_fire": false,
+        "tokens": 823
+      },
+      {
+        "question_id": "8ed91874efe844458592ce5db5ba6aec",
+        "checkable": true,
+        "relation": "4 * (1.26e-2 / 2)**3 = 1.0e-6",
+        "candidate": "1.26e-2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '4 * (1.26e-2 / 2)**3 = 1.0e-6' candidate='1.26e-2'",
+        "gate_would_fire": false,
+        "tokens": 1160
+      },
+      {
+        "question_id": "925edd1a51234c619cdd2f02bd90e0a3",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 739
+      },
+      {
+        "question_id": "9370a1e88cd44bfb97e73d1dbd0be108",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 762
+      },
+      {
+        "question_id": "9475ca3efa54496b837464898ac0ce37",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1563
+      },
+      {
+        "question_id": "99a57a8ecb994d2398eeb11d5a4f4287",
+        "checkable": true,
+        "relation": "200 * 9.8 * (0.2 + 3.09 * sqrt(0.04**2 + (3*pi/180)**2)) = 791.0",
+        "candidate": "810",
+        "status": "fail",
+        "detail": "relation does not hold: '200 * 9.8 * (0.2 + 3.09 * sqrt(0.04**2 + (3*pi/180)**2)) = 791.0' candidate='810' -> -399 + 30282*sqrt(1/625 + pi**2/3600)/5",
+        "gate_would_fire": true,
+        "tokens": 1125
+      },
+      {
+        "question_id": "9a7c64761a20499fbc470baae9f95b25",
+        "checkable": true,
+        "relation": "400 * (0.25 / 5)**2 = 1",
+        "candidate": "0.25",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '400 * (0.25 / 5)**2 = 1' candidate='0.25'",
+        "gate_would_fire": false,
+        "tokens": 953
+      },
+      {
+        "question_id": "9b2ab36a103b4b7087634081c8124ec8",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1174
+      },
+      {
+        "question_id": "9bd7f60ef909497db6860cc08ea6e4f7",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1466
+      },
+      {
+        "question_id": "9fcea6b17825455e84ca2a14591131db",
+        "checkable": true,
+        "relation": "0.36 = 0.36 and 0.99 = 0.99",
+        "candidate": "A",
+        "status": "unparseable",
+        "detail": "could not parse relation '0.36 = 0.36 and 0.99 = 0.99'",
+        "gate_would_fire": false,
+        "tokens": 921
+      },
+      {
+        "question_id": "a05ccae7bcc14d9791e97e9f628ca88e",
+        "checkable": true,
+        "relation": "1 * 0.082 * 300 * (1/1 - 1/20) * 101.3 = 2367",
+        "candidate": "2367",
+        "status": "fail",
+        "detail": "relation does not hold: '1 * 0.082 * 300 * (1/1 - 1/20) * 101.3 = 2367' candidate='2367' -> 381/1000",
+        "gate_would_fire": true,
+        "tokens": 801
+      },
+      {
+        "question_id": "a184300ae28b4748a6422218fe1fcaaf",
+        "checkable": true,
+        "relation": "3.64 = 3.64",
+        "candidate": "3.64",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '3.64 = 3.64' candidate='3.64'",
+        "gate_would_fire": false,
+        "tokens": 952
+      },
+      {
+        "question_id": "a38723e1b2ea48b9b8d6a723fc64d90d",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1429
+      },
+      {
+        "question_id": "a4c88f95e21f4fb4bcb82fb49377a5d5",
+        "checkable": true,
+        "relation": "0.4 * 5.6e-6 * 4 * pi * (0.04)**2 * (3000**4 - 300**4) = 3.7e7",
+        "candidate": "3.7e7",
+        "status": "fail",
+        "detail": "relation does not hold: '0.4 * 5.6e-6 * 4 * pi * (0.04)**2 * (3000**4 - 300**4) = 3.7e7' candidate='3.7e7' -> -37000000 + 725687424*pi/625",
+        "gate_would_fire": true,
+        "tokens": 1002
+      },
+      {
+        "question_id": "a9ef86d999d6451da0be649f98619cf8",
+        "checkable": true,
+        "relation": "14 + log10(1.8e-5 * 0.30 / 0.30) = 9.255",
+        "candidate": "9.20",
+        "status": "fail",
+        "detail": "relation does not hold: '14 + log10(1.8e-5 * 0.30 / 0.30) = 9.255' candidate='9.20' -> log10(9/500000) + 949/200",
+        "gate_would_fire": true,
+        "tokens": 766
+      },
+      {
+        "question_id": "a9f34192579d4f448b378d733eb8d3bf",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 999
+      },
+      {
+        "question_id": "ad04a3dd9c6e47d2b696274ed0b959d3",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 914
+      },
+      {
+        "question_id": "b278c269529d444e97014e86de71b135",
+        "checkable": true,
+        "relation": "(48 - 8*sqrt(3))/(3*sqrt(2)) = (48 - 8*sqrt(3))/(3*sqrt(2))",
+        "candidate": "(48 - 8*sqrt(3))/(3*sqrt(2))",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(48 - 8*sqrt(3))/(3*sqrt(2)) = (48 - 8*sqrt(3))/(3*sqrt(2))' candidate='(48 - 8*sqrt(3))/(3*sqrt(2))'",
+        "gate_would_fire": false,
+        "tokens": 906
+      },
+      {
+        "question_id": "b2e311f4dbbb4a03b4364679034a97fb",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1192
+      },
+      {
+        "question_id": "b586d22adc1340dcb0af3966063009ee",
+        "checkable": true,
+        "relation": "1.98e30 = 1.98e30",
+        "candidate": "1.98e30",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.98e30 = 1.98e30' candidate='1.98e30'",
+        "gate_would_fire": false,
+        "tokens": 856
+      },
+      {
+        "question_id": "b8de1171b4a44ba4bf85615dca222549",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1042
+      },
+      {
+        "question_id": "bcfc156935154d9aa7e4335b373b9428",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 790
+      },
+      {
+        "question_id": "bdf9115420a84d398fb6bd367c3f0010",
+        "checkable": true,
+        "relation": "0.5 * (10 * sin(pi/6) - 0.01 * 100 * cos(pi/6) - 0.2 * (10 * cos(pi/6) + 0.01 * 100 * sin(pi/6))) * 1**2 = 1.172",
+        "candidate": "1.172",
+        "status": "fail",
+        "detail": "relation does not hold: '0.5 * (10 * sin(pi/6) - 0.01 * 100 * cos(pi/6) - 0.2 * (10 * cos(pi/6) + 0.01 * 100 * sin(pi/6))) * 1**2 = 1.172' candidate='1.172' -> 639/500 - 3*sqrt(3)/4",
+        "gate_would_fire": true,
+        "tokens": 1071
+      },
+      {
+        "question_id": "be091c3945a54db99326f44605f5aadf",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1123
+      },
+      {
+        "question_id": "be529e4267c8488f8df3970620cef40e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 887
+      },
+      {
+        "question_id": "becff80caaec4e6e9191e84c8b6caf71",
+        "checkable": true,
+        "relation": "0.05 * 40 * 100 = 200",
+        "candidate": "200",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.05 * 40 * 100 = 200' candidate='200'",
+        "gate_would_fire": false,
+        "tokens": 677
+      },
+      {
+        "question_id": "bf79c60db17b4207957d40a5ada06a76",
+        "checkable": true,
+        "relation": "4.468e9 * ln((0.3/238 + 0.12/206) / (0.3/238)) / ln(2) = 2.03e9",
+        "candidate": "2.03",
+        "status": "fail",
+        "detail": "relation does not hold: '4.468e9 * ln((0.3/238 + 0.12/206) / (0.3/238)) / ln(2) = 2.03e9' candidate='2.03' -> -2030000000 + 4468000000*log(753/515)/log(2)",
+        "gate_would_fire": true,
+        "tokens": 1297
+      },
+      {
+        "question_id": "c0117dda97024cfe8dd15c99a89735b2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 992
+      },
+      {
+        "question_id": "c134c966d6d04da0b1d6b1a268a70744",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1548
+      },
+      {
+        "question_id": "c247b75bef6843a6bddb467b4f6530c7",
+        "checkable": true,
+        "relation": "4 * exp((-(-46060) / 8.314) * (1/400 - 1/300)) = 0.04",
+        "candidate": "0.04",
+        "status": "fail",
+        "detail": "relation does not hold: '4 * exp((-(-46060) / 8.314) * (1/400 - 1/300)) = 0.04' candidate='0.04' -> -1/25 + 4*exp(-57575/12471)",
+        "gate_would_fire": true,
+        "tokens": 1502
+      },
+      {
+        "question_id": "c3d30d41af104ec7841aea328cf0398a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1749
+      },
+      {
+        "question_id": "c5d4d7db014b497ca7029a9bec7f4bb2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 970
+      },
+      {
+        "question_id": "c69b37c168c0442d8535be75e705658e",
+        "checkable": true,
+        "relation": "4.1 * (1 + 0.004 * (95 - 20)) = 3.9 * (1 + 0.005 * (95 - 20))",
+        "candidate": "95",
+        "status": "fail",
+        "detail": "relation does not hold: '4.1 * (1 + 0.004 * (95 - 20)) = 3.9 * (1 + 0.005 * (95 - 20))' candidate='95' -> -13/400",
+        "gate_would_fire": true,
+        "tokens": 895
+      },
+      {
+        "question_id": "c8be6f10c6b04b879a5fe393fb1b38f8",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 745
+      },
+      {
+        "question_id": "ca2b68f8198e4c41befc4a3ceee1a9bc",
+        "checkable": true,
+        "relation": "2**7 / 3**6 = 0.32",
+        "candidate": "0.32",
+        "status": "fail",
+        "detail": "relation does not hold: '2**7 / 3**6 = 0.32' candidate='0.32' -> -2632/18225",
+        "gate_would_fire": true,
+        "tokens": 790
+      },
+      {
+        "question_id": "cd59e82f9198404fad3b5e494c032544",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1085
+      },
+      {
+        "question_id": "cf53bf592b244cb1ad02b684eda29e3b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 710
+      },
+      {
+        "question_id": "d0004a6586604fb097d29b2a9e2fafba",
+        "checkable": true,
+        "relation": "Mod(f(40), 179) == 0",
+        "candidate": "179",
+        "status": "unparseable",
+        "detail": "could not parse relation 'Mod(f(40), 179) == 0'",
+        "gate_would_fire": false,
+        "tokens": 868
+      },
+      {
+        "question_id": "d0fc74cd11664ab2a3dbee8d055afb5d",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 718
+      },
+      {
+        "question_id": "d0fe7c1a74314662ac5ed5f2538e7b13",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 681
+      },
+      {
+        "question_id": "d2112d932a714bbf875080626c135d31",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 813
+      },
+      {
+        "question_id": "d9f3da47d50840a79c51096169d25583",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 907
+      },
+      {
+        "question_id": "dae4002886484ca9b3f2e329a73e69f9",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 934
+      },
+      {
+        "question_id": "dff99ba339964cb9b6ab381b618355b5",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 890
+      },
+      {
+        "question_id": "e26b923888d1415f9c76de764ba146b0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 620
+      },
+      {
+        "question_id": "e274da8c33684a8eaf93ff535f26966c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1184
+      },
+      {
+        "question_id": "e39471c3142648a5b5916e6aa6c4ca5d",
+        "checkable": true,
+        "relation": "8.314 * 273 * ln(50/1) - 655 * (1/1 - 1/50) = 8355",
+        "candidate": "8.355",
+        "status": "fail",
+        "detail": "relation does not hold: '8.314 * 273 * ln(50/1) - 655 * (1/1 - 1/50) = 8355' candidate='8.355' -> -89969/10 + 1134861*log(50)/500",
+        "gate_would_fire": true,
+        "tokens": 916
+      },
+      {
+        "question_id": "e4e11a5fc2714133b1c7af4a68f24b7c",
+        "checkable": true,
+        "relation": "(5e-12 * 10) / ((100 * 3.9e6 / 34) * 1.602e-19) = 28",
+        "candidate": "28",
+        "status": "fail",
+        "detail": "relation does not hold: '(5e-12 * 10) / ((100 * 3.9e6 / 34) * 1.602e-19) = 28' candidate='28' -> -24692/31239",
+        "gate_would_fire": true,
+        "tokens": 1290
+      },
+      {
+        "question_id": "e639f6eaf9a542f4a26c1358c0ef3f2c",
+        "checkable": true,
+        "relation": "1500 + 5 * 100 = 10 * 100 + 0.5 * 0.2 * 100**2",
+        "candidate": "0.2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1500 + 5 * 100 = 10 * 100 + 0.5 * 0.2 * 100**2' candidate='0.2'",
+        "gate_would_fire": false,
+        "tokens": 1419
+      },
+      {
+        "question_id": "e78c81f946704e8ab0fb15182b6f8f68",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 982
+      },
+      {
+        "question_id": "e7ed8b4f392140368530a851521d82e0",
+        "checkable": true,
+        "relation": "40/sqrt(3) = 40/sqrt(3)",
+        "candidate": "40/sqrt(3)",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '40/sqrt(3) = 40/sqrt(3)' candidate='40/sqrt(3)'",
+        "gate_would_fire": false,
+        "tokens": 1016
+      },
+      {
+        "question_id": "ebea0f7c051d4247be3d6bee67e0da89",
+        "checkable": true,
+        "relation": "6.02e-7 = 6.02e-7",
+        "candidate": "6.02e-7",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '6.02e-7 = 6.02e-7' candidate='6.02e-7'",
+        "gate_would_fire": false,
+        "tokens": 905
+      },
+      {
+        "question_id": "ec301d7b596f4f45afef08dc4448910c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1232
+      },
+      {
+        "question_id": "ecbdd9947fd94b588f3873caed11ffeb",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 764
+      },
+      {
+        "question_id": "f1478d6b08f24d28a0c070d58c79bbad",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1062
+      },
+      {
+        "question_id": "f167d93fcf404e1990b65bbc25464616",
+        "checkable": true,
+        "relation": "5.67e-8 * 2 * (353.15**4 - 293.15**4) = 991.49",
+        "candidate": "991.49",
+        "status": "fail",
+        "detail": "relation does not hold: '5.67e-8 * 2 * (353.15**4 - 293.15**4) = 991.49' candidate='991.49' -> -32582134185253/500000000000",
+        "gate_would_fire": true,
+        "tokens": 999
+      },
+      {
+        "question_id": "f303c96caa884a1d83af52b6df8f2ae9",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 847
+      },
+      {
+        "question_id": "f3657e5a406947ddb8ad447219321aef",
+        "checkable": true,
+        "relation": "5/8 = 5/P",
+        "candidate": "8",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '5/8 = 5/P' candidate='8'",
+        "gate_would_fire": false,
+        "tokens": 847
+      },
+      {
+        "question_id": "f3dbbb1c935242e287d05399a283167a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1080
+      },
+      {
+        "question_id": "f619ae035456453e8f8f34604395cc3f",
+        "checkable": true,
+        "relation": "2 : 2*sqrt(2) : 1 == 2 : 2*sqrt(2) : 1",
+        "candidate": "D",
+        "status": "unparseable",
+        "detail": "could not parse relation '2 : 2*sqrt(2) : 1 == 2 : 2*sqrt(2) : 1'",
+        "gate_would_fire": false,
+        "tokens": 735
+      },
+      {
+        "question_id": "f63cf000cb004ff989417e027221c056",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 848
+      },
+      {
+        "question_id": "f82319d73b044735be5dfe1187da76f8",
+        "checkable": true,
+        "relation": "2.5 + 1/(1-1.38) < 0",
+        "candidate": "1.38",
+        "status": "unparseable",
+        "detail": "could not parse relation '2.5 + 1/(1-1.38) < 0'",
+        "gate_would_fire": false,
+        "tokens": 1637
+      },
+      {
+        "question_id": "f9d8f390f4c348838f3d42e5c15fbb24",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1471
+      },
+      {
+        "question_id": "fa49b578c45543d8847bac91a1e14045",
+        "checkable": true,
+        "relation": "0.429 = 0.429",
+        "candidate": "0.429",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.429 = 0.429' candidate='0.429'",
+        "gate_would_fire": false,
+        "tokens": 964
+      },
+      {
+        "question_id": "fab27a77c7a04024bdf2a0e07f36df23",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 930
+      },
+      {
+        "question_id": "fed1780eaf1f42a09ea63e89e1d18a41",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 970
+      },
+      {
+        "question_id": "ff771d6c3b254cd28af057b06d0992a2",
+        "checkable": true,
+        "relation": "(-1)**2 + (-1)**2 + 1**2 == 3",
+        "candidate": "A",
+        "status": "unparseable",
+        "detail": "could not parse relation '(-1)**2 + (-1)**2 + 1**2 == 3'",
+        "gate_would_fire": false,
+        "tokens": 923
+      }
+    ]
+  },
+  "supergpqa/right": {
+    "summary": {
+      "n_attempted": 151,
+      "n_completed": 151,
+      "n_dropped": 0,
+      "n_checkable": 69,
+      "n_parseable": 56,
+      "n_unparseable": 13,
+      "n_gate_fires": 24,
+      "p_check": 0.3708609271523179,
+      "y_detect": 0.42857142857142855,
+      "product": 0.15894039735099338,
+      "tokens": 157001
+    },
+    "rows": [
+      {
+        "question_id": "c5836da9034249b4b27508d97f2fef48",
+        "checkable": true,
+        "relation": "(1+I)*(1-I)/(1+1+3*I*(1-1)) - 1 == 0",
+        "candidate": "D",
+        "status": "unparseable",
+        "detail": "could not parse relation '(1+I)*(1-I)/(1+1+3*I*(1-1)) - 1 == 0'",
+        "gate_would_fire": false,
+        "tokens": 803
+      },
+      {
+        "question_id": "8c908849bd1640a1a991bf8de055826c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 917
+      },
+      {
+        "question_id": "b6bb5716a3e04e67b34e8675a3eddde3",
+        "checkable": true,
+        "relation": "2**8 * 3**5 * 11**3 == 82798848",
+        "candidate": "D",
+        "status": "unparseable",
+        "detail": "could not parse relation '2**8 * 3**5 * 11**3 == 82798848'",
+        "gate_would_fire": false,
+        "tokens": 1036
+      },
+      {
+        "question_id": "cef6e3a767534afab6be3925eee3908f",
+        "checkable": true,
+        "relation": "1.0545718e-34**2 / (1.660539e-27 * 0.12e-9**2) / 1.602176634e-19 = 3.6e-4",
+        "candidate": "3.6e-4",
+        "status": "fail",
+        "detail": "relation does not hold: '1.0545718e-34**2 / (1.660539e-27 * 0.12e-9**2) / 1.602176634e-19 = 3.6e-4' candidate='3.6e-4' -> 761095753740129347/299303638385144175000",
+        "gate_would_fire": true,
+        "tokens": 773
+      },
+      {
+        "question_id": "f0bb3853e211468d8b09a21b001c3909",
+        "checkable": true,
+        "relation": "(8.314 * 293 * 4.41e-13) / (6.3e-7 * (1 - 0.749e-3 * 998)) / 1000 = 6.75",
+        "candidate": "6.75",
+        "status": "fail",
+        "detail": "relation does not hold: '(8.314 * 293 * 4.41e-13) / (6.3e-7 * (1 - 0.749e-3 * 998)) / 1000 = 6.75' candidate='6.75' -> -8521798973993/1262490000000",
+        "gate_would_fire": true,
+        "tokens": 982
+      },
+      {
+        "question_id": "6afbc30d68f940abbb7fe92128c3cf86",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1638
+      },
+      {
+        "question_id": "937e75090a8a4e4f8dd14f6330f14ed4",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 779
+      },
+      {
+        "question_id": "8ec3055b24ae4df1a4ec131f82389818",
+        "checkable": true,
+        "relation": "500 = (0.5 * 25 / 0.01) * Vf + 7 * (1 - Vf)",
+        "candidate": "0.397",
+        "status": "fail",
+        "detail": "relation does not hold: '500 = (0.5 * 25 / 0.01) * Vf + 7 * (1 - Vf)' candidate='0.397' -> -471/1000",
+        "gate_would_fire": true,
+        "tokens": 937
+      },
+      {
+        "question_id": "c9aaec36dd7d48d0b90c34c9955bdf1b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 822
+      },
+      {
+        "question_id": "5311909efaca4ab580654676d1850946",
+        "checkable": true,
+        "relation": "(2 / (200 * 1e9 * 1.602176634e-19 / (299792458 * 2))) * 180 / pi = 0.344",
+        "candidate": "0.344",
+        "status": "fail",
+        "detail": "relation does not hold: '(2 / (200 * 1e9 * 1.602176634e-19 / (299792458 * 2))) * 180 / pi = 0.344' candidate='0.344' -> -43/125 + 599584916000000000000000000/(89009813*pi)",
+        "gate_would_fire": true,
+        "tokens": 807
+      },
+      {
+        "question_id": "ba5929c89bf34872beb2bda81c3f7ac0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1662
+      },
+      {
+        "question_id": "78ac1b5d74634d1a861784ea1ba4341a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1343
+      },
+      {
+        "question_id": "aa686324e7a84266a1ae052de62eee20",
+        "checkable": true,
+        "relation": "abs(-1) = 1",
+        "candidate": "1",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'abs(-1) = 1' candidate='1'",
+        "gate_would_fire": false,
+        "tokens": 1110
+      },
+      {
+        "question_id": "8340b646cf8a4d3d81b2c22e2d573143",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 819
+      },
+      {
+        "question_id": "abf7231db16a4ccfa58e0973e98e91c1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 898
+      },
+      {
+        "question_id": "0a6a29e816074835b6ac6886e3575da6",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 2109
+      },
+      {
+        "question_id": "db63f2730520468e86d5071599d6cffd",
+        "checkable": true,
+        "relation": "2 * pi * (25**2 * 0.529e-10 / 11) / 25 = 1 / (1.097e7 * 11**2 * (1 - 1/(25+1)**2))",
+        "candidate": "25",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '2 * pi * (25**2 * 0.529e-10 / 11) / 25 = 1 / (1.097e7 * 11**2 * (1 - 1/(25+1)**2))' candidate='25'",
+        "gate_would_fire": false,
+        "tokens": 970
+      },
+      {
+        "question_id": "664f513b52d340afbc7d6ecce20671f3",
+        "checkable": true,
+        "relation": "-405*R = -405*R",
+        "candidate": "-405",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '-405*R = -405*R' candidate='-405'",
+        "gate_would_fire": false,
+        "tokens": 1104
+      },
+      {
+        "question_id": "84fba45a65da41fb8ea056a8cd072fff",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1559
+      },
+      {
+        "question_id": "60568684a6c7436cb002aaaae1224044",
+        "checkable": true,
+        "relation": "1.0e5 + 4 * 0.49 / (2.0e-3) = 1.01e5",
+        "candidate": "1.01e5",
+        "status": "fail",
+        "detail": "relation does not hold: '1.0e5 + 4 * 0.49 / (2.0e-3) = 1.01e5' candidate='1.01e5' -> -20",
+        "gate_would_fire": true,
+        "tokens": 846
+      },
+      {
+        "question_id": "47f09ff7d66a4742ba76601ea67539d8",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1210
+      },
+      {
+        "question_id": "e8e40ae579384b51b006d7d50d8d039d",
+        "checkable": true,
+        "relation": "mn - m + n - 2 = mn - m + n - 2",
+        "candidate": "B",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'mn - m + n - 2 = mn - m + n - 2' candidate='B'",
+        "gate_would_fire": false,
+        "tokens": 818
+      },
+      {
+        "question_id": "b06afc3997974662986e009c41226c9c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 795
+      },
+      {
+        "question_id": "89c0dd54ad6d4419a29148159a71a478",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1339
+      },
+      {
+        "question_id": "6514ced034134b80bfee523ab31dd6be",
+        "checkable": true,
+        "relation": "95.4 == 95.4 and 92.9 == 92.9",
+        "candidate": "B",
+        "status": "unparseable",
+        "detail": "could not parse relation '95.4 == 95.4 and 92.9 == 92.9'",
+        "gate_would_fire": false,
+        "tokens": 860
+      },
+      {
+        "question_id": "c83eb03cf4be49dcb0b470fb5da66009",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1214
+      },
+      {
+        "question_id": "f9a33d8f93a746ec8c6431a2b6bce193",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1020
+      },
+      {
+        "question_id": "e706ab8388c24f29b19b738be024aabf",
+        "checkable": true,
+        "relation": "3 / (2 * n * epsilon_r) = 3 / (2 * n * epsilon_r)",
+        "candidate": "3 / (2 * n * epsilon_r)",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '3 / (2 * n * epsilon_r) = 3 / (2 * n * epsilon_r)' candidate='3 / (2 * n * epsilon_r)'",
+        "gate_would_fire": false,
+        "tokens": 1070
+      },
+      {
+        "question_id": "c02bdc589b28470f9e8c9ebaf715cfd0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 665
+      },
+      {
+        "question_id": "a1fe1674694645b8914102f518ba1dbd",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1072
+      },
+      {
+        "question_id": "b389bd8fda16458da390b0aeefa9328c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 915
+      },
+      {
+        "question_id": "b2db67f7fbf94e2d90c3220b1167db0c",
+        "checkable": true,
+        "relation": "(2/pi) * (pi/2) * (1 - sqrt(17)/17) = 0.757",
+        "candidate": "0.757",
+        "status": "fail",
+        "detail": "relation does not hold: '(2/pi) * (pi/2) * (1 - sqrt(17)/17) = 0.757' candidate='0.757' -> 243/1000 - sqrt(17)/17",
+        "gate_would_fire": true,
+        "tokens": 937
+      },
+      {
+        "question_id": "ddb18eed65624eb8857f493d3575fef0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1824
+      },
+      {
+        "question_id": "9131843fc01049059b93839bc1a1beaa",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1164
+      },
+      {
+        "question_id": "1f3d33e572a44b1681f2a328042e2218",
+        "checkable": true,
+        "relation": "5*R/4 = 5*R/4",
+        "candidate": "C",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '5*R/4 = 5*R/4' candidate='C'",
+        "gate_would_fire": false,
+        "tokens": 1494
+      },
+      {
+        "question_id": "a0fcdf416bfd4419ba9f714813ece402",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1469
+      },
+      {
+        "question_id": "f36a5f7ac1104f8f976b65b4bb352cc6",
+        "checkable": true,
+        "relation": "pi * k**2 * R**7 / (7 * epsilon_0) = pi * k**2 * R**7 / (7 * epsilon_0)",
+        "candidate": "",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'pi * k**2 * R**7 / (7 * epsilon_0) = pi * k**2 * R**7 / (7 * epsilon_0)' candidate=''",
+        "gate_would_fire": false,
+        "tokens": 715
+      },
+      {
+        "question_id": "facd6dd1e2074073adcfcac48eab3afb",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 852
+      },
+      {
+        "question_id": "7becb6c49d3d402686a0eafc9041a91f",
+        "checkable": true,
+        "relation": "2.18 * sqrt(2) * 10**6 = 2.18 * sqrt(2) * 10**6",
+        "candidate": "2.18*sqrt(2)*10**6",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '2.18 * sqrt(2) * 10**6 = 2.18 * sqrt(2) * 10**6' candidate='2.18*sqrt(2)*10**6'",
+        "gate_would_fire": false,
+        "tokens": 1168
+      },
+      {
+        "question_id": "468c654c940f438dafebc19b7ab77b1a",
+        "checkable": true,
+        "relation": "0.2/(1.0*3.14159265358979*0.14**2) + 2*73/(1.0*980*0.14) = 4.31",
+        "candidate": "4.31",
+        "status": "fail",
+        "detail": "relation does not hold: '0.2/(1.0*3.14159265358979*0.14**2) + 2*73/(1.0*980*0.14) = 4.31' candidate='4.31' -> 23706509788790993/10775662801812979700",
+        "gate_would_fire": true,
+        "tokens": 700
+      },
+      {
+        "question_id": "515b67c43f064c15bb0154d546f88277",
+        "checkable": true,
+        "relation": "(2007 - 1) // 6 + 1 = 335",
+        "candidate": "335",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(2007 - 1) // 6 + 1 = 335' candidate='335'",
+        "gate_would_fire": false,
+        "tokens": 1473
+      },
+      {
+        "question_id": "e9850e7c1b5744b19cdf700c4bbac0ab",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 907
+      },
+      {
+        "question_id": "1622f49268b84531a9fe06692ab09371",
+        "checkable": true,
+        "relation": "0.34 - (0.05916/2)*log(2.1e13)/log(10) = -0.054",
+        "candidate": "-0.053",
+        "status": "fail",
+        "detail": "relation does not hold: '0.34 - (0.05916/2)*log(2.1e13)/log(10) = -0.054' candidate='-0.053' -> -1479*log(21000000000000)/(50000*log(10)) + 197/500",
+        "gate_would_fire": true,
+        "tokens": 855
+      },
+      {
+        "question_id": "42432d79d0af4c2fa1612e6ca53f2882",
+        "checkable": true,
+        "relation": "M1/M2 = 3",
+        "candidate": "3",
+        "status": "unparseable",
+        "detail": "relation 'M1/M2 = 3' has 2 free symbols, expected at most 1",
+        "gate_would_fire": false,
+        "tokens": 851
+      },
+      {
+        "question_id": "09addd707349419198fb032baa9e3597",
+        "checkable": true,
+        "relation": "(534 * 485000) / (100 * 7.87 * 8760) = 37.4",
+        "candidate": "37.4",
+        "status": "fail",
+        "detail": "relation does not hold: '(534 * 485000) / (100 * 7.87 * 8760) = 37.4' candidate='37.4' -> 47913/287255",
+        "gate_would_fire": true,
+        "tokens": 797
+      },
+      {
+        "question_id": "2901fd9282834a269854bd1c929c2d27",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1513
+      },
+      {
+        "question_id": "b6ef5fa25f6c43bb8c1ac7440eeb1067",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 725
+      },
+      {
+        "question_id": "ab9084f0f5294f298fde1cc8f3639fcd",
+        "checkable": true,
+        "relation": "pi/4 + log(3)/4 >= pi/9 & pi/4 + log(3)/4 <= 2*pi/3",
+        "candidate": "1.1806",
+        "status": "unparseable",
+        "detail": "could not parse relation 'pi/4 + log(3)/4 >= pi/9 & pi/4 + log(3)/4 <= 2*pi/3'",
+        "gate_would_fire": false,
+        "tokens": 849
+      },
+      {
+        "question_id": "6b1823e9cf1a408394028492a2543d2f",
+        "checkable": true,
+        "relation": "750000.0**2 * 2 * 3.085677581e22 / 6.67430e-11 / 1.98847e30 = 2.6e14",
+        "candidate": "2.6e14",
+        "status": "fail",
+        "detail": "relation does not hold: '750000.0**2 * 2 * 3.085677581e22 / 6.67430e-11 / 1.98847e30 = 2.6e14' candidate='2.6e14' -> 20759495165000000000000/13271645321",
+        "gate_would_fire": true,
+        "tokens": 713
+      },
+      {
+        "question_id": "7788cdba3e464b49b9516f45fa00381a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1571
+      },
+      {
+        "question_id": "b7b66af0bf0940ffbb69c04dd5f1b995",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 666
+      },
+      {
+        "question_id": "4817837b472e4795aa76b5e9b2dc1cc2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1077
+      },
+      {
+        "question_id": "4bbb616f70fa470ead5f650821ff158f",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 858
+      },
+      {
+        "question_id": "88dfa83c304a42fb93f5ac30ca086d55",
+        "checkable": true,
+        "relation": "0.94950",
+        "candidate": "0.94950",
+        "status": "fail",
+        "detail": "relation does not hold: '0.94950' candidate='0.94950' -> 1899/2000",
+        "gate_would_fire": true,
+        "tokens": 1404
+      },
+      {
+        "question_id": "bba0149a0e4e4fb2b289442bc74883ee",
+        "checkable": true,
+        "relation": "sqrt((-2/3)**2 + (2/3)**2 + (1/3)**2) = 1.0",
+        "candidate": "-2/3*e_x + 2/3*e_y + 1/3*e_z",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'sqrt((-2/3)**2 + (2/3)**2 + (1/3)**2) = 1.0' candidate='-2/3*e_x + 2/3*e_y + 1/3*e_z'",
+        "gate_would_fire": false,
+        "tokens": 1035
+      },
+      {
+        "question_id": "9d8ad39cb8ab4c00811470629f812d2c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1840
+      },
+      {
+        "question_id": "929cbd9e50d94b17ba5024919e4c2ae5",
+        "checkable": true,
+        "relation": "(39 - 21)**2 / (8 * (5.10 - 1.80)) = 12.272727272727273",
+        "candidate": "12",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(39 - 21)**2 / (8 * (5.10 - 1.80)) = 12.272727272727273' candidate='12'",
+        "gate_would_fire": false,
+        "tokens": 802
+      },
+      {
+        "question_id": "90527d3655bc43029751e21cdb4a4f8b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1015
+      },
+      {
+        "question_id": "f8b2bc6a248c4235812f3dfbc187fed7",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 843
+      },
+      {
+        "question_id": "37871236ef614d9ead11af4912abc0fd",
+        "checkable": true,
+        "relation": "3.29e11 * (4/3 * 3.141592653589793 * (1.217e6)**3) * 0.025 = 6.20e28",
+        "candidate": "6.5e28",
+        "status": "fail",
+        "detail": "relation does not hold: '3.29e11 * (4/3 * 3.141592653589793 * (1.217e6)**3) * 0.025 = 6.20e28' candidate='6.5e28' -> 301994916549424243015876100/3",
+        "gate_would_fire": true,
+        "tokens": 895
+      },
+      {
+        "question_id": "8f9ae9b94a0a4e66ab56225f7a356fd1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1211
+      },
+      {
+        "question_id": "776b1918d67244708c5caf2f6d71390e",
+        "checkable": true,
+        "relation": "3700 / (1 - 1/14**1.4 * (2**1.4 - 1)/(2 - 1)) / 46500 = 0.134",
+        "candidate": "0.134",
+        "status": "fail",
+        "detail": "relation does not hold: '3700 / (1 - 1/14**1.4 * (2**1.4 - 1)/(2 - 1)) / 46500 = 0.134' candidate='0.134' -> -67/500 + 37/(465*(-14**(3/5)*(-1 + 2*2**(2/5))/196 + 1))",
+        "gate_would_fire": true,
+        "tokens": 792
+      },
+      {
+        "question_id": "ab99e4e6e4f548f9bf22a0c4afba770a",
+        "checkable": true,
+        "relation": "sqrt(78/11) = 1.8708286933869707",
+        "candidate": "1.8708",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(78/11) = 1.8708286933869707' candidate='1.8708' -> -18708286933869707/10000000000000000 + sqrt(858)/11",
+        "gate_would_fire": true,
+        "tokens": 783
+      },
+      {
+        "question_id": "fc86b86189fa4145bfc49c741a7d8387",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 855
+      },
+      {
+        "question_id": "4a0b44d076df4b458538e29e594ab4a8",
+        "checkable": true,
+        "relation": "4 * 5 + 2 = 22",
+        "candidate": "20",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '4 * 5 + 2 = 22' candidate='20'",
+        "gate_would_fire": false,
+        "tokens": 1478
+      },
+      {
+        "question_id": "a63462f4ff9e44289d3c9e4a91314250",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 677
+      },
+      {
+        "question_id": "628b15eb4d254e64b066dc67ca5899c7",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 850
+      },
+      {
+        "question_id": "c6dd6b345fbf490eb71cce53229a6af2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1033
+      },
+      {
+        "question_id": "1ec0b6b8d6b74d6f81c900d22aa3f9b3",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1501
+      },
+      {
+        "question_id": "65e18d5ebc6d481f92372a02f7346d7e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 878
+      },
+      {
+        "question_id": "b48e738748e24c309530026051f00c50",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1066
+      },
+      {
+        "question_id": "e459d523e32a40e483fa37877ae37dd7",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 682
+      },
+      {
+        "question_id": "4eca043b6430444cbdd049afdfa2f053",
+        "checkable": true,
+        "relation": "0.6461 = 0.6461",
+        "candidate": "64.61",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.6461 = 0.6461' candidate='64.61'",
+        "gate_would_fire": false,
+        "tokens": 911
+      },
+      {
+        "question_id": "75137178e29747f9975dc7624cca3109",
+        "checkable": true,
+        "relation": "4 = 4",
+        "candidate": "4",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '4 = 4' candidate='4'",
+        "gate_would_fire": false,
+        "tokens": 1185
+      },
+      {
+        "question_id": "02606f10da9b4a91a734948a2f8f8cab",
+        "checkable": true,
+        "relation": "8 / (cos(t)**4 * sin(t)) == 8 / (cos(t)**4 * sin(t))",
+        "candidate": "C",
+        "status": "unparseable",
+        "detail": "could not parse relation '8 / (cos(t)**4 * sin(t)) == 8 / (cos(t)**4 * sin(t))'",
+        "gate_would_fire": false,
+        "tokens": 730
+      },
+      {
+        "question_id": "950df3915a04434eab77d8f4f0322b84",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1078
+      },
+      {
+        "question_id": "3fe28bc716c245ed80ddac64604a5d82",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1372
+      },
+      {
+        "question_id": "9de35ddd9f964480ae7ef1999f00e775",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 762
+      },
+      {
+        "question_id": "4490060d4abe45a984c1f8965bf10633",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 686
+      },
+      {
+        "question_id": "03ccb89aa12341928fc94ffc1721820d",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 789
+      },
+      {
+        "question_id": "8e6adf9e81774ae98a454a1736907ba1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 660
+      },
+      {
+        "question_id": "8922f6cb597c486f89dba3f52a95a33f",
+        "checkable": true,
+        "relation": "19.5 = 19.5",
+        "candidate": "19.5",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '19.5 = 19.5' candidate='19.5'",
+        "gate_would_fire": false,
+        "tokens": 705
+      },
+      {
+        "question_id": "5b52a5d2e16147c48ba126e8d7b14f27",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1954
+      },
+      {
+        "question_id": "09f8f51f6b3b41d6b53b58f8232dfc20",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1374
+      },
+      {
+        "question_id": "42218a1a88e144cda0a439614e5ed37a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1542
+      },
+      {
+        "question_id": "89ea2c1b2c644c1bbe9ec05cde7a7c34",
+        "checkable": true,
+        "relation": "13 * (6/13) = 6",
+        "candidate": "6",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '13 * (6/13) = 6' candidate='6'",
+        "gate_would_fire": false,
+        "tokens": 636
+      },
+      {
+        "question_id": "f7452fa83fca480db969c6762ef902df",
+        "checkable": true,
+        "relation": "(69 + 67 + 5 + 6) / 1000 * 100 = 14.7",
+        "candidate": "14.7",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(69 + 67 + 5 + 6) / 1000 * 100 = 14.7' candidate='14.7'",
+        "gate_would_fire": false,
+        "tokens": 952
+      },
+      {
+        "question_id": "b276a7c672c44245bd8ff7b2f3bfc6ed",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 698
+      },
+      {
+        "question_id": "9307245386e440adab7bfa7be2eeb492",
+        "checkable": true,
+        "relation": "88/8649 = 88/8649",
+        "candidate": "0.010175233680555556",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '88/8649 = 88/8649' candidate='0.010175233680555556'",
+        "gate_would_fire": false,
+        "tokens": 2520
+      },
+      {
+        "question_id": "acb56c94e8f94646aed6f85ef997937a",
+        "checkable": true,
+        "relation": "R*a**3/(3*b) = R*a**3/(3*b)",
+        "candidate": "Ra^3/3b",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'R*a**3/(3*b) = R*a**3/(3*b)' candidate='Ra^3/3b'",
+        "gate_would_fire": false,
+        "tokens": 790
+      },
+      {
+        "question_id": "9706c4ed64d346bdb4326a3951d46dbf",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1211
+      },
+      {
+        "question_id": "f4c026d1f3e945a5a3829d02351a7560",
+        "checkable": true,
+        "relation": "10 * (9.6 + 17.8) = 274",
+        "candidate": "274",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '10 * (9.6 + 17.8) = 274' candidate='274'",
+        "gate_would_fire": false,
+        "tokens": 1428
+      },
+      {
+        "question_id": "16cef3414b88465496646fb53ecb3357",
+        "checkable": true,
+        "relation": "4.5 * 2.65e4 = 1.193e5",
+        "candidate": "B",
+        "status": "fail",
+        "detail": "relation does not hold: '4.5 * 2.65e4 = 1.193e5' candidate='B' -> -50",
+        "gate_would_fire": true,
+        "tokens": 1389
+      },
+      {
+        "question_id": "e15b91b897dd46419d8f7f2ac2034745",
+        "checkable": true,
+        "relation": "0.9 * 100 * cos(30 * pi / 180) = 77.97",
+        "candidate": "77.97V;38.99A;38.99A",
+        "status": "fail",
+        "detail": "relation does not hold: '0.9 * 100 * cos(30 * pi / 180) = 77.97' candidate='77.97V;38.99A;38.99A' -> -7797/100 + 45*sqrt(3)",
+        "gate_would_fire": true,
+        "tokens": 925
+      },
+      {
+        "question_id": "a14c016f261f4b46a1f62c1a4096bd86",
+        "checkable": true,
+        "relation": "3 * (12288**(1/1) + 12288**(1/2) + 12288**(1/3) + 12288**(1/4) + 12288**(1/5)) == 3 * (12288 + 110.7826... + 23.094... + 10.0 + 5.278...) != integer",
+        "candidate": "5",
+        "status": "unparseable",
+        "detail": "could not parse relation '3 * (12288**(1/1) + 12288**(1/2) + 12288**(1/3) + 12288**(1/4) + 12288**(1/5)) == 3 * (12288 + 110.7826... + 23.094... + 10.0 + 5.278...) != integer'",
+        "gate_would_fire": false,
+        "tokens": 1614
+      },
+      {
+        "question_id": "d637308b16d4406f8d467e25c2b9ed4b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 764
+      },
+      {
+        "question_id": "d7755a021c1e490489c333e917b923c1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 788
+      },
+      {
+        "question_id": "7d0d30aa83704e04bd9330d2c8e90f78",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 844
+      },
+      {
+        "question_id": "e015103613d84a6489a1867aa85f4f65",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 935
+      },
+      {
+        "question_id": "880aebd099464404b8d229ef4cb3d9ea",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 638
+      },
+      {
+        "question_id": "b3d0389dfc294bc2a3a305710907635c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1457
+      },
+      {
+        "question_id": "048b9dc1730044e48e9ef8f0a0a59db7",
+        "checkable": true,
+        "relation": "N = 65",
+        "candidate": "65",
+        "status": "unparseable",
+        "detail": "could not parse relation 'N = 65'",
+        "gate_would_fire": false,
+        "tokens": 823
+      },
+      {
+        "question_id": "0fa712ebccaa4d23849cc1f4904445f4",
+        "checkable": true,
+        "relation": "150 * (302 / 290 - 298 / 310) = 12.04",
+        "candidate": "12",
+        "status": "fail",
+        "detail": "relation does not hold: '150 * (302 / 290 - 298 / 310) = 12.04' candidate='12' -> -599/22475",
+        "gate_would_fire": true,
+        "tokens": 1032
+      },
+      {
+        "question_id": "4068f6cb89214b0a86c16c2497caeb6e",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1085
+      },
+      {
+        "question_id": "ebe13c146960463e8ea8c439076c0f1f",
+        "checkable": true,
+        "relation": "0.5 * 10**(3/10) / (4 * pi * (500000)**2) = 0.318e-12",
+        "candidate": "0.318e-12",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.5 * 10**(3/10) / (4 * pi * (500000)**2) = 0.318e-12' candidate='0.318e-12'",
+        "gate_would_fire": false,
+        "tokens": 907
+      },
+      {
+        "question_id": "917d14354e104597ab763b7c98ec5098",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 909
+      },
+      {
+        "question_id": "9b63c53c2d6142a3be06e4010bc54f3f",
+        "checkable": true,
+        "relation": "10**(-22) == 1e-22",
+        "candidate": "1e-22",
+        "status": "unparseable",
+        "detail": "could not parse relation '10**(-22) == 1e-22'",
+        "gate_would_fire": false,
+        "tokens": 1184
+      },
+      {
+        "question_id": "28b8e9105db04b8b9d3a7e2f6aedff5c",
+        "checkable": true,
+        "relation": "n = 1/5",
+        "candidate": "0.2",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'n = 1/5' candidate='0.2'",
+        "gate_would_fire": false,
+        "tokens": 1697
+      },
+      {
+        "question_id": "c13acd3d7e4d4afab782af7180af48b8",
+        "checkable": true,
+        "relation": "(3 + I)/2 == (3 + I)/2",
+        "candidate": "(3 + I)/2",
+        "status": "unparseable",
+        "detail": "could not parse relation '(3 + I)/2 == (3 + I)/2'",
+        "gate_would_fire": false,
+        "tokens": 759
+      },
+      {
+        "question_id": "06ae69ef1c91427cbe9c4828fca5f44b",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1087
+      },
+      {
+        "question_id": "f99d0c2438e347088abece7d58f4e3cc",
+        "checkable": true,
+        "relation": "pi * cos(pi/3) + beta = 0",
+        "candidate": "-1.5707963267948966",
+        "status": "unparseable",
+        "detail": "could not parse relation 'pi * cos(pi/3) + beta = 0'",
+        "gate_would_fire": false,
+        "tokens": 902
+      },
+      {
+        "question_id": "19216cc8085c4e9089ba5d9e765fc373",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 717
+      },
+      {
+        "question_id": "7e6059f1fc704d61a8894d2822a9adf1",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1200
+      },
+      {
+        "question_id": "d008e4e5fa3740599a6cdbb6afef7e06",
+        "checkable": true,
+        "relation": "1.36 - (0.0591/2)*log((1.2**2)/3.6) = 1.372",
+        "candidate": "-1.372",
+        "status": "fail",
+        "detail": "relation does not hold: '1.36 - (0.0591/2)*log((1.2**2)/3.6) = 1.372' candidate='-1.372' -> -3/250 - 591*log(2/5)/20000",
+        "gate_would_fire": true,
+        "tokens": 743
+      },
+      {
+        "question_id": "6c089bcc77df411186116b02d5a29397",
+        "checkable": true,
+        "relation": "18/(5*R) = 18/(5*R)",
+        "candidate": "18/(5*R)",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '18/(5*R) = 18/(5*R)' candidate='18/(5*R)'",
+        "gate_would_fire": false,
+        "tokens": 1188
+      },
+      {
+        "question_id": "25139c83331f4efead0a39063294e6d1",
+        "checkable": true,
+        "relation": "6.6e-13 = 6.6e-13",
+        "candidate": "6.6e-13",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '6.6e-13 = 6.6e-13' candidate='6.6e-13'",
+        "gate_would_fire": false,
+        "tokens": 666
+      },
+      {
+        "question_id": "f258bb1065be48218e7d3a3f5baa4821",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1266
+      },
+      {
+        "question_id": "7d6ad8c52f0f4cc1a24f51744eb9190c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1043
+      },
+      {
+        "question_id": "b3743d924802472a989b477f6b0345af",
+        "checkable": true,
+        "relation": "1.6 * 0.395 * 0.5 / 2 = 0.1582",
+        "candidate": "0.1582",
+        "status": "fail",
+        "detail": "relation does not hold: '1.6 * 0.395 * 0.5 / 2 = 0.1582' candidate='0.1582' -> -1/5000",
+        "gate_would_fire": true,
+        "tokens": 1119
+      },
+      {
+        "question_id": "c0aff61a5b0243628fe8d3684305f4cb",
+        "checkable": true,
+        "relation": "Derivative(x**2 * exp(-x), x, 2) = (2 - 4*x + x**2)*exp(-x)",
+        "candidate": "B",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'Derivative(x**2 * exp(-x), x, 2) = (2 - 4*x + x**2)*exp(-x)' candidate='B'",
+        "gate_would_fire": false,
+        "tokens": 779
+      },
+      {
+        "question_id": "8648572e55d842439a80359026e8e776",
+        "checkable": true,
+        "relation": "10.0 / 70.906 * (242.58 + 1257.5 - 354.8) = 163",
+        "candidate": "163",
+        "status": "fail",
+        "detail": "relation does not hold: '10.0 / 70.906 * (242.58 + 1257.5 - 354.8) = 163' candidate='163' -> -52439/35453",
+        "gate_would_fire": true,
+        "tokens": 1116
+      },
+      {
+        "question_id": "52b6e83adfb346178c4b9df68b857c73",
+        "checkable": true,
+        "relation": "abs(3 * cos(pi/6) / (9.8 + 3 * sin(pi/6))) = 0.23",
+        "candidate": "0.23",
+        "status": "fail",
+        "detail": "relation does not hold: 'abs(3 * cos(pi/6) / (9.8 + 3 * sin(pi/6))) = 0.23' candidate='0.23' -> -23/100 + 15*sqrt(3)/113",
+        "gate_would_fire": true,
+        "tokens": 787
+      },
+      {
+        "question_id": "d5aeeab54d66402884025a6038acd942",
+        "checkable": true,
+        "relation": "(7**2005 - 1) / 6 % 1000 = 801",
+        "candidate": "801",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '(7**2005 - 1) / 6 % 1000 = 801' candidate='801'",
+        "gate_would_fire": false,
+        "tokens": 1747
+      },
+      {
+        "question_id": "0d55abc62c6541119ac010bd0bd11cb4",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1051
+      },
+      {
+        "question_id": "42c21a0221b74afebe151a545114e59f",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 858
+      },
+      {
+        "question_id": "ad9b69d4627741a1a953880f089b14f0",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 965
+      },
+      {
+        "question_id": "72c816932eb34ae5bc7dd5d9fa3385d2",
+        "checkable": true,
+        "relation": "3.59 = 3.59",
+        "candidate": "3.59",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '3.59 = 3.59' candidate='3.59'",
+        "gate_would_fire": false,
+        "tokens": 783
+      },
+      {
+        "question_id": "b232c347b66641feb655e8089ad3236c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 844
+      },
+      {
+        "question_id": "c9a90d77920e426592a8016b8282d0b4",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1004
+      },
+      {
+        "question_id": "776b536a60e241f2b75b94accc6dff2c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 916
+      },
+      {
+        "question_id": "dbb0051f0dc54c399a92967f5f8d3adf",
+        "checkable": true,
+        "relation": "Integral(1/(1+cos(x)**2), (x, 0, 2*pi)) = sqrt(2)*pi",
+        "candidate": "sqrt(2)*pi",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): 'Integral(1/(1+cos(x)**2), (x, 0, 2*pi)) = sqrt(2)*pi' candidate='sqrt(2)*pi'",
+        "gate_would_fire": false,
+        "tokens": 992
+      },
+      {
+        "question_id": "c4989fc378654551b8ef93ad99fcf5bb",
+        "checkable": true,
+        "relation": "sqrt(0.16) * 2 * (1 - sqrt(0.16)) * 100 = 20",
+        "candidate": "20",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(0.16) * 2 * (1 - sqrt(0.16)) * 100 = 20' candidate='20' -> 28",
+        "gate_would_fire": true,
+        "tokens": 1127
+      },
+      {
+        "question_id": "6f48814bd0a14a67bb76a67dfff57723",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1642
+      },
+      {
+        "question_id": "176df1aecda443a39f416e15834b6dd6",
+        "checkable": true,
+        "relation": "59.99 = 59.99",
+        "candidate": "D",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '59.99 = 59.99' candidate='D'",
+        "gate_would_fire": false,
+        "tokens": 892
+      },
+      {
+        "question_id": "1a2b570b90b940d9a7e60ec37a91c438",
+        "checkable": true,
+        "relation": "3 * (5e15 + 1e15) = 1.8e16",
+        "candidate": "1.8e16",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '3 * (5e15 + 1e15) = 1.8e16' candidate='1.8e16'",
+        "gate_would_fire": false,
+        "tokens": 977
+      },
+      {
+        "question_id": "933f999d89984b4ea9c59bffad3405ef",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 930
+      },
+      {
+        "question_id": "cb1f3d75e5a9402a9bb7755b6f6a029c",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 868
+      },
+      {
+        "question_id": "775ac535425e4d018f158dd6febdc74a",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1192
+      },
+      {
+        "question_id": "8015afe9ebfa45388f4c8ec8d990e431",
+        "checkable": true,
+        "relation": "1.8e23 * 3.6e5 = 6.48e28",
+        "candidate": "6.5e28",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '1.8e23 * 3.6e5 = 6.48e28' candidate='6.5e28'",
+        "gate_would_fire": false,
+        "tokens": 668
+      },
+      {
+        "question_id": "88525de50e7d4b47830c6eb98c9f17d2",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 884
+      },
+      {
+        "question_id": "1879143c55594a16af99b8f28262d5cd",
+        "checkable": true,
+        "relation": "0.45 / 2.4 * 100 = 18.75",
+        "candidate": "18.7%",
+        "status": "pass",
+        "detail": "relation holds (evaluated to ~0): '0.45 / 2.4 * 100 = 18.75' candidate='18.7%'",
+        "gate_would_fire": false,
+        "tokens": 921
+      },
+      {
+        "question_id": "6b347be4d8ba43e2b425fd504ad16f4c",
+        "checkable": true,
+        "relation": "sqrt(10 * 20 * sqrt(2) / 2) = 10",
+        "candidate": "10",
+        "status": "fail",
+        "detail": "relation does not hold: 'sqrt(10 * 20 * sqrt(2) / 2) = 10' candidate='10' -> -10 + 10*2**(1/4)",
+        "gate_would_fire": true,
+        "tokens": 817
+      },
+      {
+        "question_id": "3b37ffa7eb2b455283a129a4ada95546",
+        "checkable": true,
+        "relation": "0.12 + 0.22 + 0.66 == 1.0",
+        "candidate": "A",
+        "status": "unparseable",
+        "detail": "could not parse relation '0.12 + 0.22 + 0.66 == 1.0'",
+        "gate_would_fire": false,
+        "tokens": 1231
+      },
+      {
+        "question_id": "eb78f399e33e4fde99373c2944da84ba",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1189
+      },
+      {
+        "question_id": "2a0199802fa34912899bc4db2e48e324",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 885
+      },
+      {
+        "question_id": "85be4287145e40b1a4d47a105aafc40d",
+        "checkable": true,
+        "relation": "1900.0 == 1900.0",
+        "candidate": "B",
+        "status": "unparseable",
+        "detail": "could not parse relation '1900.0 == 1900.0'",
+        "gate_would_fire": false,
+        "tokens": 1043
+      },
+      {
+        "question_id": "7a9df24be1fa4c2ebb1d80d46daf7203",
+        "checkable": true,
+        "relation": "1.5 * 0.00033e-3 * 20 * 60 / (900 * 50e-4) = 1.32e-5",
+        "candidate": "1.3e-5",
+        "status": "fail",
+        "detail": "relation does not hold: '1.5 * 0.00033e-3 * 20 * 60 / (900 * 50e-4) = 1.32e-5' candidate='1.3e-5' -> 297/2500000",
+        "gate_would_fire": true,
+        "tokens": 1091
+      },
+      {
+        "question_id": "37cb2e257bb449cf951354ed79d9faed",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 814
+      },
+      {
+        "question_id": "3418164dfa79431db4b71b7e984f74d8",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 708
+      },
+      {
+        "question_id": "09064f2131ad4c6fb1f28bc7cf992775",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 1204
+      },
+      {
+        "question_id": "cd30976ef17748819f04e65423ef8b9f",
+        "checkable": false,
+        "relation": "",
+        "candidate": "",
+        "status": "not_checkable",
+        "detail": "",
+        "gate_would_fire": false,
+        "tokens": 702
+      }
+    ]
+  }
+}

@@ -62,6 +62,7 @@ from quorumqa.qwen_client import QwenClient
 from quorumqa.schemas import SolverAnswer
 from quorumqa.tools.mcp_server import sympy_check
 
+from benchmark.analyze_dropout_bias import fisher_exact_two_sided
 from benchmark.classify_pool_checkability import (
     RESULTS_DIR,
     _dataset_for,
@@ -343,6 +344,27 @@ def _render(results, datasets, sample_seed: int) -> str:
             L.append(f"- False-positive rate on unanimous-**right**: "
                      f"**{rs['product']*100:.1f}%** ({rs['n_gate_fires']}/{rs['n_completed']}) -- "
                      f"these are items the gate would escalate that were already correct.")
+
+        # DISCRIMINATION -- the number that actually decides the lever, and the
+        # one a sensitivity/specificity pair does not answer on its own. A gate
+        # can have any firing rate and still be useless if it fires at the SAME
+        # rate on right and wrong items.
+        if s["n_completed"] and rs["n_completed"]:
+            a, b_ = s["n_gate_fires"], s["n_completed"] - s["n_gate_fires"]
+            c_, d_ = rs["n_gate_fires"], rs["n_completed"] - rs["n_gate_fires"]
+            p = fisher_exact_two_sided(a, b_, c_, d_)
+            L.append("")
+            L.append(f"**Discrimination.** fired&wrong={a}, fired&right={c_} -- "
+                     f"Fisher exact two-sided **p = {p:.4f}**.")
+            if s["product"] is not None and rs["product"] is not None:
+                if rs["product"] > s["product"]:
+                    ratio = rs["product"] / s["product"] if s["product"] else float("inf")
+                    L.append(f"- The gate fires **{ratio:.1f}x more often on CORRECT answers** "
+                             f"than on wrong ones. It is anti-correlated with the thing it is "
+                             f"supposed to detect.")
+                elif abs(rs["product"] - s["product"]) < 1e-9:
+                    L.append("- The firing rates on right and wrong items are **exactly equal**: "
+                             "the gate is a coin flip with respect to correctness.")
         L.append("")
 
     L.append("## Cost")
@@ -363,8 +385,24 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=str, default="benchmark/results/KI0R_cas_gate_replay.md")
     parser.add_argument("--concurrency", type=int, default=3)
     parser.add_argument("--limit", type=int, default=None, help="cap items per pool (smoke tests only)")
+    parser.add_argument("--from-json", type=str, default=None,
+                        help="re-render the report from a previous run's raw .json, making ZERO "
+                             "API calls -- so the report can be regenerated after an analysis "
+                             "change without re-spending the run's tokens")
     args = parser.parse_args()
-    asyncio.run(main(
-        [d.strip() for d in args.datasets.split(",") if d.strip()],
-        args.match_right_sample_seed, Path(args.out), args.concurrency, args.limit,
-    ))
+    datasets = [d.strip() for d in args.datasets.split(",") if d.strip()]
+
+    if args.from_json:
+        raw = json.loads(Path(args.from_json).read_text(encoding="utf-8"))
+        results = {}
+        for key, payload in raw.items():
+            ds, bucket = key.split("/", 1)
+            results[(ds, bucket)] = (payload["rows"], payload["summary"]["n_attempted"])
+        report = _render(results, datasets, args.match_right_sample_seed)
+        Path(args.out).write_text(report, encoding="utf-8")
+        print(report)
+        print(f"\nRe-rendered {args.out} from {args.from_json} -- no API calls made.")
+    else:
+        asyncio.run(main(
+            datasets, args.match_right_sample_seed, Path(args.out), args.concurrency, args.limit,
+        ))
