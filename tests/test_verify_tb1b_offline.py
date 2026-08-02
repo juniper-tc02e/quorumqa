@@ -227,6 +227,60 @@ def test_cost_kill_does_not_fire_when_the_arm_actually_wins(tmp_path, monkeypatc
     assert r["cost"]["cost_killed"] is False
 
 
+# ---------------------------------------------------------------------------
+# Recovery is only a gain where the flagship actually missed
+# ---------------------------------------------------------------------------
+
+
+def test_recoveries_split_by_whether_the_flagship_already_had_the_item(tmp_path, monkeypatch):
+    """A raw "recovered N unanimous-wrong items" count reads as N items of gain
+    and is not. On the real seed-7 data 7 of 8 recoveries were items the
+    flagship already had, so the headline overstates the gain against the actual
+    comparator by 8x. Constructed here so the split is verified independently of
+    that run."""
+    ug, bl = [], []
+    for i in range(90):
+        qid = f"q{i}"
+        if i < 10:
+            # unanimous-WRONG, tribunal recovers it
+            ug.append(_ug_row(qid, "A", ["B", "B", "B"], "A"))
+            # flagship already had 7 of those 10; missed 3
+            bl.append(_bl_row(qid, "A", "A" if i < 7 else "B"))
+        else:
+            ug.append(_ug_row(qid, "A", ["A", "A", "A"], "A"))
+            bl.append(_bl_row(qid, "A", "A"))
+    _setup(tmp_path, monkeypatch, 7, ug, bl)
+
+    s = verify()["per_seed"][7]
+    assert s["recovered"] == 10
+    assert s["recovered_flagship_also_had"] == 7
+    assert s["recovered_flagship_missed"] == 3
+    assert (s["recovered_flagship_also_had"]
+            + s["recovered_flagship_missed"]) == s["recovered"], "the split must partition"
+
+
+def test_a_recovery_the_flagship_missed_is_the_one_that_moves_the_primary(tmp_path, monkeypatch):
+    """The split is not cosmetic: only the 'flagship missed' leg can contribute
+    to the PRIMARY net. Here every recovery is redundant, so the secondary is
+    strongly positive while the primary is exactly zero."""
+    ug, bl = [], []
+    for i in range(90):
+        qid = f"q{i}"
+        if i < 12:
+            ug.append(_ug_row(qid, "A", ["B", "B", "B"], "A"))
+            bl.append(_bl_row(qid, "A", "A"))       # flagship had all of them
+        else:
+            ug.append(_ug_row(qid, "A", ["A", "A", "A"], "A"))
+            bl.append(_bl_row(qid, "A", "A"))
+    _setup(tmp_path, monkeypatch, 7, ug, bl)
+
+    s = verify()["per_seed"][7]
+    assert s["recovered"] == 12
+    assert s["recovered_flagship_missed"] == 0
+    assert s["vs_shipped_rule"]["net"] == 12, "big win against the shipped rule"
+    assert s["vs_flagship"]["net"] == 0, "and exactly nothing against the flagship"
+
+
 def test_no_files_is_reported_not_crashed(tmp_path, monkeypatch):
     monkeypatch.setattr(tb1b, "RESULTS", tmp_path)
     r = verify()

@@ -133,6 +133,40 @@ buys back exactly the ground the cheap panel gives up, and stops there.
 flagship call. This is a *scaffolded flagship call*, not cheap seats replacing
 a flagship, and the result should never be worded that way.
 
+### 4b. TB-1B — the same lever on the benchmark where orchestration wins
+
+**Measured 2026-08-03, seed 7, n=87 paired.** SuperGPQA-hard is the one surface
+where anything has cleared the bar against a flagship call (`flagship_panel`,
++7, p=0.0327). If the reason were *headroom*, `universal_gate` — the same
+escalate-everything architecture, built from cheap seats — should win there too.
+
+**It loses.** Net **−2**, p = **0.89**, at **5.1×** the flagship's tokens
+(15,255 vs 2,969). Both pre-registered kill clauses fired: the screen kill, so
+the ~2.7M-token extension to seeds 42/123 was **not funded**; and the cost kill,
+so it is reported as **dominated**.
+
+| benchmark | `universal_gate` vs shipped rule | vs one flagship call |
+|---|---:|---:|
+| GPQA-Diamond | **+25** (p = 3×10⁻⁸) | +1 (p = 0.50) |
+| SuperGPQA-hard | **+6** (p = 0.055) | **−2** (p = 0.89) |
+
+Two benchmarks, one pattern: **the gain is always against the cheap panel and
+never survives against the flagship.**
+
+The mechanism is visible one level down. Of 87 items, 46 were unanimous and 18
+unanimous-*wrong*; the lever recovered 8 and broke 2. But of those 8 recoveries,
+**7 were items the flagship already had** and only **1** was one it missed. The
+lever recovers almost exactly the items the flagship also finds easy, so a
+headline "recovered 8" overstates the gain against the real comparator by 8×.
+
+**This retires the headroom reading of the SuperGPQA win.** Same benchmark, same
+headroom, same escalate-everything gate — opposite outcomes, and the only
+difference is the seat tier. `flagship_panel` samples `qwen3.7-max` three times;
+`universal_gate` samples `qwen3.6-flash`. The compute-matched control's
+conclusion arrives a second time by a different route: **sampling the strong
+model is what works; deliberation among weak ones is not.** See
+[`tb1b_supergpqa_result.md`](../benchmark/results/tb1b_supergpqa_result.md).
+
 ## 5. Corrections we made to our own record
 
 Publishing these because a record that only grows is not a record.

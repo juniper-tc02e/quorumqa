@@ -39,6 +39,17 @@ def _engines(row: dict):
             yield val
 
 
+def corpus_size() -> int:
+    """How many result files collect() will read.
+
+    Exposed because every pooled figure here is computed over a glob of
+    `results/*.jsonl`, so it grows whenever any new experiment is committed.
+    A test that pins the pooled counts is really pinning "the corpus as of date
+    D", and without this it has no way to say which corpus it meant.
+    """
+    return len(glob.glob(str(RESULTS / "*.jsonl")))
+
+
 def collect() -> dict:
     esc = 0
     # Every unanimous panel seen, escalated or not -- the denominator for

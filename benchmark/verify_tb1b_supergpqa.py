@@ -150,6 +150,19 @@ def verify() -> dict:
             "unanimous_wrong": sum(1 for q in shared if a[q]["unanimous_wrong"]),
             "recovered": sum(1 for q in shared if a[q]["recovered"]),
             "broken": sum(1 for q in shared if a[q]["broken"]),
+            # WHY THIS SPLIT EXISTS. A raw "recovered N unanimous-wrong items"
+            # count reads as N items of gain, and it is not: a recovery only
+            # helps against the flagship if the flagship MISSED that item.
+            # Measured on seed 7, 7 of 8 recoveries were items the flagship
+            # already had -- so the headline recovery figure overstates the gain
+            # against the real comparator by 8x. Splitting it here means the
+            # number cannot be quoted without its denominator.
+            "recovered_flagship_also_had": sum(
+                1 for q in shared if a[q]["recovered"] and b[q]
+            ),
+            "recovered_flagship_missed": sum(
+                1 for q in shared if a[q]["recovered"] and not b[q]
+            ),
         }
 
     def _pool(key: str) -> dict:
@@ -207,6 +220,11 @@ def main() -> None:
               f"p={c['p_one_sided']:.5f}   (a DIFFERENT claim -- see module docstring)")
         print(f"    unanimous={s['unanimous']} of which wrong={s['unanimous_wrong']}; "
               f"recovered={s['recovered']} broken={s['broken']}; {s['tokens_per_item']:.0f} tok/item")
+        if s["recovered"]:
+            print(f"    of {s['recovered']} recovered: "
+                  f"{s['recovered_flagship_also_had']} the flagship ALREADY had "
+                  f"(buys nothing vs it), "
+                  f"{s['recovered_flagship_missed']} it missed (real gain)")
         print()
 
     pf, ps = r["pooled_vs_flagship"], r["pooled_vs_shipped_rule"]

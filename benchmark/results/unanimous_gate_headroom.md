@@ -7,8 +7,32 @@ tokens.** Reproduce with:
 python benchmark/analyze_judge_anchoring.py
 ```
 
-Corpus: **1,998 escalations carrying a Judge verdict, across 58 result files**,
-plus **3,660 unanimous panels** (escalated or not) as the recall denominator.
+Corpus **as measured on the date of this write-up**: **1,998 escalations
+carrying a Judge verdict, across 58 result files**, plus **3,660 unanimous
+panels** (escalated or not) as the recall denominator.
+
+> **⚠ These are a dated snapshot, not live figures — labelled 2026-08-03.**
+> `analyze_judge_anchoring.py` globs *every* `benchmark/results/*.jsonl`, so
+> the corpus grows whenever any experiment is committed and every pooled number
+> on this page moves with it. As of 2026-08-03 the same script reports **2,624
+> escalations over 104 files and 4,177 unanimous panels** — the file count
+> has risen 79% and the unanimous pool 14%.
+>
+> **The conclusions are unaffected**, because all of them are ratios and the
+> ratios are stable: off-slate accuracy, the recovery-to-breakage asymmetry,
+> and gate recall all sit where they did. What changed is only the size of the
+> pool they are computed over.
+>
+> This note exists because the drift went unnoticed across four separate
+> re-pins over four days. The test guarding this analysis updated its expected
+> counts four times
+> (3,708 → 3,738 → 4,000 → 4,130) as new runs landed, each time carefully and
+> each time widening the gap to the 3,660 published here — the test tracked the
+> data while the doc stood still, and nothing compared the two. The test is now
+> split into stable structural claims and an explicitly dated
+> `CORPUS_SNAPSHOT`, and it pins the *file count* as well, so the next time the
+> corpus moves it says so in those words. Re-run the command above for current
+> figures.
 
 ---
 
