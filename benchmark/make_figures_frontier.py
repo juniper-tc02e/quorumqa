@@ -26,8 +26,11 @@ purely from sampling.
        after N=3. Includes the random-guess coverage reference that retires
        the "40-point opportunity" reading of the gap.
   F12  The kill list -- every mechanism this project tested for detecting a
-       wrong-but-confident panel, with its measured effect and p-value. Ten
-       entries, ten nulls.
+       wrong-but-confident panel, with its measured effect and p-value. Every
+       entry is a null; the count is len(F12_KILLS) and is deliberately NOT
+       written out here. It said "Ten entries, ten nulls" while the list held
+       eleven, which is the same defect as the F10 caption above. A docstring
+       cannot derive a count, so it states none.
   F13  universal_gate's 3-seed result and its two controls, showing why the
        +25 and the +1 are both true: they are measured against comparators
        nine points apart.
@@ -447,9 +450,22 @@ def build_f12() -> None:
 
     ax.set_yticks([])
     # Widened so the longest annotation (the p=1.0000 CAS row) is not clipped.
+    # The xlim runs past 1.0 only to leave room for the right-hand annotations
+    # (the longest is the p=1.0000 CAS row). Ticks stop at 1.0, because a
+    # p-value axis labelled 1.2 / 1.4 / 1.6 tells the reader p can exceed 1 --
+    # a false statement about the statistic, in a figure whose whole subject is
+    # statistics.
     ax.set_xlim(0, 1.72)
+    ax.set_xticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    # Stop the axis line where the statistic stops too, so the annotation
+    # margin does not read as unlabelled axis, and centre the label under the
+    # data rather than under the blank margin.
+    ax.spines["bottom"].set_bounds(0.0, 1.0)
     ax.set_ylim(-0.95, len(df) - 0.3)
     ax.set_xlabel("p-value of the measured effect  (all far above 0.05 — none is a detector)")
+    # AFTER set_xlabel -- set_xlabel resets the label position, so calling this
+    # first silently does nothing (it did, on the first attempt).
+    ax.xaxis.set_label_coords(1.0 / 1.72 / 2, -0.085)
     ax.grid(axis="x", alpha=0.22, zorder=0)
     ax.spines[["top", "right", "left"]].set_visible(False)
 
