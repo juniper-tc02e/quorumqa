@@ -250,6 +250,48 @@ def load_frontier() -> PooledFrame:
     if not FRONTIER_CSV.exists():
         raise FileNotFoundError(f"Frontier CSV not found: {FRONTIER_CSV}")
     df = pd.read_csv(FRONTIER_CSV)
+
+    # RETIRED POINT ESTIMATES ARE DROPPED HERE, at the loader, so no figure
+    # downstream can plot one by omission. This is not defensive tidying: on
+    # 2026-08-02 `qwen3.8_solo`'s retracted 93.6% was found in
+    # f04_accuracy_vs_tokens_frontier.svg as the HIGHEST GPQA point with
+    # on_pareto_frontier=True -- i.e. a number this repo had withdrawn on
+    # 2026-07-30 was setting the published frontier's ceiling. A frontier is a
+    # claim about what is achievable; a withdrawn estimate cannot support one.
+    # Dropping the row is the honest rendering: the alternative is drawing it
+    # as its [83.3%, 94.4%] interval, which a scatter of point estimates has
+    # no vocabulary for.
+    retired_rows = df["config"].isin(RETIRED_POINT_ESTIMATES)
+    dropped = sorted(df.loc[retired_rows, "config"].unique())
+    df = df.loc[~retired_rows].reset_index(drop=True)
+
+    retired_note = ""
+    if dropped:
+        # The CSV's on_pareto_frontier column was computed WITH the retired
+        # rows present, so removing them leaves it wrong in both directions: a
+        # point dominated only by the retracted estimate should now be ON the
+        # frontier. Recompute rather than trust it -- dropping a row and
+        # keeping its stale consequences would be a worse error than leaving
+        # the row in, because it would look corrected.
+        stale = df["on_pareto_frontier"].copy()
+        recomputed = []
+        for _, row in df.iterrows():
+            same_bench = df[df["benchmark"] == row["benchmark"]]
+            dominated = (
+                (same_bench["accuracy"] >= row["accuracy"])
+                & (same_bench["mean_tokens_per_q"] <= row["mean_tokens_per_q"])
+                & (same_bench["config"] != row["config"])
+            ).any()
+            recomputed.append(not dominated)
+        df["on_pareto_frontier"] = recomputed
+        n_flipped = int((stale != df["on_pareto_frontier"]).sum())
+        retired_note = (
+            " RETIRED AND EXCLUDED from this frame: "
+            + "; ".join(f"{c} ({RETIRED_POINT_ESTIMATES[c]})" for c in dropped)
+            + f". The CSV's on_pareto_frontier column was computed with those rows "
+            f"present and has been RECOMPUTED here; {n_flipped} row(s) changed."
+        )
+
     return PooledFrame(
         data=df,
         tier="B",
@@ -263,6 +305,7 @@ def load_frontier() -> PooledFrame:
             "figure_claims_ledger.md Sec.'Three confirmed CSV traps'. Never "
             "plot a single cell from this frame as a validated claim "
             "without cross-checking figure_claims_ledger.csv first."
+            + retired_note
         ),
     )
 

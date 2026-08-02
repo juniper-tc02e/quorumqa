@@ -359,3 +359,85 @@ def test_the_qwen38_footnote_states_the_retirement_not_just_the_bias():
     assert "RETIRED" in note
     assert "[83.3%, 94.4%]" in note
     assert "Pareto" in note, "the footnote must warn against frontier use specifically"
+
+
+# ---------------------------------------------------------------------------
+# load_frontier must EXCLUDE retired point estimates and RECOMPUTE the Pareto
+# column. Added 2026-08-02 after f04 was found publishing qwen3.8_solo's
+# retracted 93.6% as the highest GPQA point, on the frontier.
+# ---------------------------------------------------------------------------
+
+
+def test_load_frontier_drops_retired_configs():
+    from benchmark.figure_data import RETIRED_POINT_ESTIMATES, load_frontier
+
+    configs = set(load_frontier().data["config"])
+    for retired in RETIRED_POINT_ESTIMATES:
+        assert retired not in configs, f"{retired} is retired but still in the frontier frame"
+
+
+def test_load_frontier_caveat_names_the_exclusion():
+    """A silently-filtered frame is worse than an unfiltered one: a reader
+    cannot tell a config was removed. The caveat must say so."""
+    from benchmark.figure_data import load_frontier
+
+    caveat = load_frontier().caveat
+    assert "RETIRED AND EXCLUDED" in caveat
+    assert "qwen3.8_solo" in caveat
+    assert "RECOMPUTED" in caveat
+
+
+def test_load_frontier_recomputes_pareto_rather_than_trusting_the_csv():
+    """The CSV's on_pareto_frontier was computed WITH the retired row present.
+    Dropping the row while keeping its stale consequences would look corrected
+    while still being wrong -- and it was wrong in a load-bearing way: the
+    retracted point had knocked five real GPQA configs off the frontier."""
+    import pandas as pd
+
+    from benchmark.figure_data import FRONTIER_CSV, RETIRED_POINT_ESTIMATES, load_frontier
+
+    raw = pd.read_csv(FRONTIER_CSV)
+    raw = raw[~raw["config"].isin(RETIRED_POINT_ESTIMATES)].reset_index(drop=True)
+    live = load_frontier().data.reset_index(drop=True)
+    assert len(raw) == len(live)
+    # The flags must actually differ -- otherwise nothing was recomputed.
+    assert (raw["on_pareto_frontier"].values != live["on_pareto_frontier"].values).any()
+
+    gpqa = live[(live["benchmark"] == "GPQA-Diamond") & (live["on_pareto_frontier"])]
+    assert len(gpqa) > 1, "the retracted point had suppressed every other GPQA frontier config"
+
+
+def test_recomputed_frontier_points_are_genuinely_undominated():
+    """Definitional check on the recomputation itself."""
+    from benchmark.figure_data import load_frontier
+
+    d = load_frontier().data
+    for _, row in d[d["on_pareto_frontier"]].iterrows():
+        same = d[(d["benchmark"] == row["benchmark"]) & (d["config"] != row["config"])]
+        dominated = (
+            (same["accuracy"] >= row["accuracy"])
+            & (same["mean_tokens_per_q"] <= row["mean_tokens_per_q"])
+        ).any()
+        assert not dominated, f"{row['benchmark']}/{row['config']} is flagged frontier but dominated"
+
+
+def test_flagship_domination_is_derived_and_counts_moo_single_call():
+    """`moo:single-call` IS a single flagship call (the MoO router's own
+    single-call route), so a benchmark whose frontier is only that is still
+    flagship-dominated. The old hardcoded set could not express this, and
+    after the Pareto recomputation MMLU-Pro's frontier point is exactly that."""
+    from benchmark.figure_data import load_frontier
+    from benchmark.make_figures_analysis import (
+        F04_SINGLE_CALL_CONFIGS,
+        f04_flagship_dominates,
+    )
+
+    assert "moo:single-call" in F04_SINGLE_CALL_CONFIGS
+    d = load_frontier().data
+    mmlu = d[d["benchmark"] == "MMLU-Pro"]
+    assert set(mmlu[mmlu["on_pareto_frontier"]]["config"]) == {"moo:single-call"}
+    assert f04_flagship_dominates(mmlu) is True
+
+    # And the two surfaces where a real lever clears must NOT be dominated.
+    for bench in ("GPQA-Diamond", "SuperGPQA-hard"):
+        assert f04_flagship_dominates(d[d["benchmark"] == bench]) is False

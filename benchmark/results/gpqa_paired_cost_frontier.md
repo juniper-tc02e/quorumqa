@@ -71,9 +71,21 @@ frontier's ceiling.
   interval, and warns against frontier use specifically.
 - Three tests enforce it, including one asserting the footnote names Pareto use.
 
-**The SVG itself is not regenerated here** — that requires re-running the
-figure pipeline and is tracked separately. Until it is, `f04` should not be
-shown.
+**Update, later the same day — the SVG is regenerated and F04 is now correct.**
+Fixing it properly surfaced a second, larger consequence. `load_frontier()`
+now drops retired estimates *and recomputes the Pareto column*, because the
+CSV's flags were computed while the retracted row was present. Recomputing
+flipped **5 rows**: the retracted 93.6% had been dominating
+`chem_flagship_gate`, `moo:flagship_panel`, `chem_thinking_gate`,
+`moo:rag_thinking_gate` and `moo:thinking_gate` **off** the published GPQA
+frontier. A withdrawn number was not merely decorating the figure — it was
+suppressing five real results from it.
+
+The panel's "flagship dominates" label is now derived too, not hardcoded. That
+change revealed a further subtlety: on MMLU-Pro the frontier point is
+`moo:single-call`, not `baseline_3.7max` — still a single flagship call (the
+MoO router's own single-call route), so the benchmark is still correctly
+flagship-dominated, but the old hardcoded set had no vocabulary for saying so.
 
 ## 4. What this means for the project
 

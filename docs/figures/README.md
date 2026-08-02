@@ -13,12 +13,17 @@ python benchmark/make_figures_frontier.py     # F10, F11, F12, F13
 python -m benchmark.figure_data --check       # verify the ledger against its sources
 ```
 
-> **F04 is superseded and should not be shown.** It plots `qwen3.8_solo` at
-> 93.6% as the highest GPQA point with `on_pareto_frontier=True`. That estimate
-> was retired to the interval [83.3%, 94.4%] — it is a survivor-only rate over
-> 73/78 items, the rest lost to structural server-side 504s. `F10` is the
-> corrected, paired replacement. `benchmark/figure_data.RETIRED_POINT_ESTIMATES`
-> now excludes retired estimates from any frontier by construction.
+> **F04 was republished 2026-08-02 and is now correct.** It previously plotted
+> `qwen3.8_solo` at 93.6% as the highest GPQA point with
+> `on_pareto_frontier=True` — an estimate retired to the interval
+> [83.3%, 94.4%] (survivor-only over 73/78 items, the rest lost to structural
+> server-side 504s). `load_frontier()` now drops retired estimates **and
+> recomputes the Pareto column**, because the CSV's flags had been computed
+> while the retracted row was present. That mattered: the retracted point was
+> knocking **five legitimate GPQA configs off the frontier**, which now appear.
+> The "flagship dominates" panel label is likewise derived from the data rather
+> than hardcoded. `F10` remains the *paired* frontier; F04 is the
+> pooled-marginal view and the two answer different questions.
 
 ---
 

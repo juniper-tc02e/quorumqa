@@ -327,6 +327,37 @@ def save_figure(fig, stem: str, plotted_df: pd.DataFrame) -> None:
 # this classification) because its only committed result file is a
 # survivorship-invalidated pilot -- it still counts toward the published
 # "9" denominator, per the source doc's own accounting.
+# Configs that ARE a single flagship call, however they were logged.
+# `moo:single-call` is the MoO router's own single-call route
+# (docs/mixture-of-orchestrations-plan.md: "easy/saturated queries, or caller
+# wants cheap") -- the flagship answering alone, recorded through a different
+# harness at n=30. It must count as "the flagship", or a benchmark whose
+# frontier is entirely single calls would be mislabelled as one where a
+# deliberation lever won.
+F04_SINGLE_CALL_CONFIGS = {"baseline_3.7max", "baseline_3.7max_open", "moo:single-call"}
+
+
+def f04_flagship_dominates(bench_frame) -> bool:
+    """A benchmark is flagship-dominated iff EVERY point on its (recomputed)
+    Pareto frontier is a single flagship call.
+
+    Derived rather than hardcoded. The previous hardcoded set went stale the
+    moment `load_frontier` began excluding retired point estimates and
+    recomputing the frontier: dropping `qwen3.8_solo`'s retracted 93.6% put
+    five GPQA configs back on the frontier, and revealed that on MMLU-Pro the
+    frontier point is `moo:single-call` rather than `baseline_3.7max` -- still
+    a single flagship call, so still 'dominated', but the hardcoded set had no
+    way to say so.
+    """
+    frontier = bench_frame[bench_frame["on_pareto_frontier"]]
+    if frontier.empty:
+        return False
+    return bool(frontier["config"].isin(F04_SINGLE_CALL_CONFIGS).all())
+
+
+#: Retained ONLY for the published "6 of 9" denominator sentence, which is
+#: quoted verbatim from docs/negative-results.md Sec.3.6. Never used to decide
+#: a panel's colour -- f04_flagship_dominates() does that from the data.
 F04_DOMINATED = {"MMLU-Pro", "MedQA", "LEXam", "GSM8K", "MATH-500-MC", "MATH-500-open"}
 F04_NOT_DOMINATED = {"GPQA-Diamond", "SuperGPQA-hard"}
 F04_PANEL_ORDER = [
@@ -365,7 +396,7 @@ def build_f04():
 
     for ax, bench in zip(axes, F04_PANEL_ORDER):
         g = df[df["benchmark"] == bench].sort_values("mean_tokens_per_q")
-        dominated = bench in F04_DOMINATED
+        dominated = f04_flagship_dominates(g)
         panel_bg = "#fff2ef" if dominated else "#eefaf0"
         ax.set_facecolor(panel_bg)
 
@@ -521,7 +552,9 @@ def build_f04():
         "benchmark", "config", "n", "accuracy_pct", "mean_tokens_per_q", "seeds", "n_seeds",
         "on_pareto_frontier", "is_baseline", "is_contaminated", "footnote",
     ]].copy()
-    out["dominated_benchmark"] = out["benchmark"].isin(F04_DOMINATED)
+    out["dominated_benchmark"] = out["benchmark"].map(
+        lambda b: f04_flagship_dominates(df[df["benchmark"] == b])
+    )
     return fig, out
 
 
