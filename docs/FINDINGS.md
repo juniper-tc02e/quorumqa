@@ -154,9 +154,20 @@ marginal and inside the noise band.
 ~11% lower cost **in dollars** ($0.0213 vs $0.0240/question, pre-Token-Plan
 pricing). That was always a cost claim, never an accuracy claim — and it is a
 claim in **one particular currency**. In tokens, the unit the Token Plan
-actually bills, the same engine costs **8,690 vs 2,792 per item — 3.1× more**.
+actually bills, that same frozen run costs **9,013 vs 3,415 per item — 2.64×
+more**. Even the cheap path is not cheap: an unanimous panel that never
+escalates still burns 4,638 tok/item, **1.36×** a single flagship call.
 Both numbers are correct; a bare "11% lower cost" tells the reader the opposite
 of what the billing unit now says, so the unit is stated wherever the figure is.
+
+*A second, also-correct pair for this quantity is **8,690 vs 2,792 (3.1×)**,
+measured on the TB-1 paired set (seeds 1001/2311/3407, n=265) rather than on
+the frozen n=90 seed-42 run. Same measurement, different item sets. Quote
+whichever run the surrounding claim is about — this paragraph is about the
+frozen submission run, so it uses that run's figures. The mismatch appeared in
+three places before it was caught (this doc, `README.md` and
+`site_data/cases.json`), always as the TB-1 pair standing next to the n=90
+dollar figures, which is the tell.*
 
 ---
 

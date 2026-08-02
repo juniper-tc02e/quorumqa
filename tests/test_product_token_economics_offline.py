@@ -219,3 +219,59 @@ def test_the_generator_computes_tokens_rather_than_hardcoding_them():
     )
     assert "def tokens_of(" in src
     assert "tok_engine = round(" in src
+
+
+def test_dollar_anchored_claims_quote_the_dollar_run_token_pair():
+    """The rule, applied mechanically: quote the run the claim is about.
+
+    Both token pairs measure the same quantity -- shipped engine vs one
+    flagship call -- on different item sets. 9,013/3,415 (2.64x) is the frozen
+    n=90 seed-42 submission run; 8,690/2,792 (3.1x) is the TB-1 paired n=265
+    set. Neither is wrong; using the wrong one for the surrounding claim is.
+
+    This error has now appeared in THREE places, all in the most-read text:
+    site_data/cases.json's stats block, README.md's opening paragraph, and
+    architecture.md's cost-cascade note. Each time it was the TB-1 pair
+    standing next to the n=90 DOLLAR figures ($0.0213 vs $0.0240, "11% lower
+    cost"), which is the tell -- those dollars are the n=90 run's, so the
+    tokens beside them must be too.
+
+    So: within 400 characters of a dollar-anchored claim, the token pair must
+    be the n=90 one.
+    """
+    for rel in ["README.md", "docs/architecture.md", "docs/FINDINGS.md"]:
+        text = (PROJECT_ROOT / rel).read_text(encoding="utf-8")
+        for anchor in ("$0.0213", "11% lower cost", "11% cheaper"):
+            idx = text.find(anchor)
+            while idx != -1:
+                window = text[idx: idx + 400]
+                # A paragraph that explicitly names the OTHER item set is
+                # reconciling the two pairs, not confusing them -- the same
+                # use/mention escape hatch the sibling test uses.
+                labelled = any(k in window for k in ("n=265", "TB-1", "1001/2311/3407"))
+                if "8,690" in window and "9,013" not in window and not labelled:
+                    raise AssertionError(
+                        f"{rel}: {anchor!r} is a figure from the n=90 seed-42 run, "
+                        f"but the token pair beside it is 8,690/2,792 (the TB-1 "
+                        f"paired n=265 set). Use 9,013/3,415 (2.64x) here, or name "
+                        f"the other set explicitly."
+                    )
+                idx = text.find(anchor, idx + 1)
+
+
+def test_both_pairs_stay_reconciled_wherever_the_tb1_pair_appears():
+    """8,690/2,792 may still be used -- it is correct for TB-1's item set. But
+    wherever it appears in reader-facing text it must say which set, or the
+    next person to notice the two pairs will 'fix' one of them."""
+    for rel in ["README.md", "docs/architecture.md"]:
+        text = (PROJECT_ROOT / rel).read_text(encoding="utf-8")
+        idx = text.find("8,690")
+        while idx != -1:
+            window = text[max(0, idx - 350): idx + 350]
+            assert ("n=265" in window or "TB-1" in window
+                    or "1001/2311/3407" in window), (
+                f"{rel}: 8,690 appears without naming the item set it was "
+                f"measured on. Two correct pairs exist for this quantity; an "
+                f"unlabelled one invites a wrong reconciliation."
+            )
+            idx = text.find("8,690", idx + 1)

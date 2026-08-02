@@ -15,9 +15,12 @@ for those same cheap models run as a plain self-consistency@5 ensemble, and
 84.4% for that flagship answering every question alone. So it closes ~78% of
 the gap to the flagship at **11% lower cost in dollars** ($0.0213 vs
 $0.0240/question, pre-Token-Plan pricing). **In tokens — the unit that now
-bills — the same engine costs 8,690 vs 2,792 per item, 3.1× more**, and on
+bills — this run's engine costs 9,013 vs 3,415 per item, 2.64× more**, and on
 identical items across 3 fresh seeds the full stack is net +1, p=0.50 against
 one `qwen3.7-max` call (`docs/FINDINGS-2026-08.md`).
+Even the cheap path is not cheap: an unanimous panel that never escalates still
+burns 4,638 tok/item, **1.36×** a single flagship call
+(`benchmark/results/submission_token_economics.json`).
 The saving comes from *routing* the expensive model to the questions that
 need it, not from avoiding it: the Judge and the baseline are the same
 `qwen3.7-max`. Every other role (3 solvers, Skeptic, Verifier) runs on
@@ -112,8 +115,12 @@ complete account, and the one to read first.**
 > One number in this README needs its unit stated: the *"11% lower cost"* below
 > is measured in **dollars** under the pre-Token-Plan pricing. Under the Token
 > Plan the billing unit is tokens, and in tokens the same engine costs
-> **8,690 vs 2,792 per item — 3.1× more**. Both are correct; they are different
-> currencies, and the token one is the one that now binds.
+> **9,013 vs 3,415 per item — 2.64× more** on that same n=90 seed-42 run.
+> Both are correct; they are different currencies, and the token one is the one
+> that now binds. (A second, also-correct pair — **8,690 vs 2,792, 3.1×** — is
+> the SAME quantity measured on the TB-1 paired set, seeds 1001/2311/3407,
+> n=265. Quote whichever run the surrounding claim is about; they are not
+> competing estimates.)
 
 ![Build progress in gap space](docs/figures/f01_build_progress_gap_space.png)
 

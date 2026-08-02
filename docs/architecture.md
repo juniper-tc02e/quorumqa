@@ -6,8 +6,11 @@ escalated to **only when the Solvers disagree**. Unanimous questions never
 pay for the expensive roles at all -- that asymmetric escalation is the
 entire **dollar**-cost story, not a benchmark trick layered on afterward.
 **In tokens -- the unit that now bills -- the cascade is strictly more
-expensive than one flagship call (8,690 vs 2,792/item), and against that
-call on identical items the full stack is net +1, p=0.50.** See
+expensive than one flagship call (8,690 vs 2,792/item on the TB-1 paired set,
+seeds 1001/2311/3407, n=265; 9,013 vs 3,415 on the frozen n=90 seed-42
+submission run), and against that call on identical items the full stack is
+net +1, p=0.50.** Two item sets, same quantity, both correct -- quote whichever
+run the surrounding claim is about. See
 [`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
 
 ```mermaid
@@ -43,7 +46,9 @@ flowchart TD
 
 > **Superseded 2026-08 as a superiority claim.** In dollars under pre-Token-Plan
 > pricing this routing was ~11% cheaper than calling the flagship on every
-> question. **In tokens it is 3.1× more expensive** (8,690 vs 2,792/item), and
+> question. **In tokens it is 2.64× more expensive** (9,013 vs 3,415/item on the
+> n=90 seed-42 run the dollar figure comes from; 3.1×, 8,690 vs 2,792, on the
+> TB-1 paired n=265 set), and
 > on GPQA-Diamond the shipped config scores ~9 points *below* a single
 > `qwen3.7-max` call. The full stack is net +1, p=0.50 against one flagship
 > call on identical items. See [`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
