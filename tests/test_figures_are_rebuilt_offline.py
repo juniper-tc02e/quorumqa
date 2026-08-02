@@ -148,3 +148,37 @@ def test_no_figure_csv_carries_a_superseded_figure(name):
         ("77.2", "the 3-seed SuperGPQA flagship accuracy is 79.2%"),
     ]:
         assert bad not in blob, f"{name} still carries {bad!r} -- {why}"
+
+
+def test_the_figure_count_in_prose_matches_the_files_on_disk():
+    """Both README.md and docs/figures/README.md say "thirteen figures". That
+    is a fourth count-in-prose in this area, after F12's title, the "all ten
+    nulls" phrasing, and the module docstring -- each of which went stale when
+    the underlying set changed. Adding a figure would break the wording
+    silently, so it gets the same treatment."""
+    words = {13: "thirteen", 14: "fourteen", 15: "fifteen", 12: "twelve"}
+    n = len(list((PROJECT_ROOT / "docs" / "figures").glob("f*.png")))
+    assert n in words, f"extend the word map for {n} figures"
+
+    for rel in ["README.md", "docs/figures/README.md"]:
+        low = (PROJECT_ROOT / rel).read_text(encoding="utf-8").lower()
+        if "figures" not in low:
+            continue
+        for k, w in words.items():
+            if k == n:
+                continue
+            assert f"{w} figures" not in low, (
+                f"{rel} says '{w} figures' but docs/figures holds {n} "
+                f"({words[n]}). Update the prose."
+            )
+
+
+def test_every_figure_has_both_a_png_and_an_svg():
+    """The SVGs are what a reader zooms into; a PNG-only figure is a figure
+    nobody can inspect at the resolution the numbers need."""
+    figs = PROJECT_ROOT / "docs" / "figures"
+    pngs = {p.stem for p in figs.glob("f*.png")}
+    svgs = {p.stem for p in figs.glob("f*.svg")}
+    assert pngs == svgs, (
+        f"PNG-only: {sorted(pngs - svgs)}; SVG-only: {sorted(svgs - pngs)}"
+    )
