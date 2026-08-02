@@ -275,3 +275,39 @@ def test_both_pairs_stay_reconciled_wherever_the_tb1_pair_appears():
                 f"unlabelled one invites a wrong reconciliation."
             )
             idx = text.find("8,690", idx + 1)
+
+
+def test_the_site_wall_is_internally_consistent_with_its_stats_block():
+    """cases.json carries a 90-entry `wall` that build_cases.py does not
+    generate -- it was added by hand outside the generator, which is why both
+    of 2026-08-03's corrections were surgical text edits rather than a
+    regeneration (regenerating would have destroyed it).
+
+    Hand-maintained data next to generated data is exactly what drifts, and
+    nothing was checking it. Every one of these cross-checks passes today; the
+    point is that they will keep being checked.
+    """
+    d = json.loads(
+        (PROJECT_ROOT / "site_data" / "cases.json").read_text(encoding="utf-8"))
+    wall, stats = d["wall"], d["stats"]
+
+    assert len(wall) == stats["n"], "the wall should hold one entry per question"
+
+    escalated = [w for w in wall if w["kind"] != "unanimous"]
+    assert round(100 * len(escalated) / len(wall), 1) == stats["escalation_rate"]
+
+    correct = [w for w in wall if w["correct"]]
+    assert round(100 * len(correct) / len(wall), 1) == stats["accuracy"]["engine"]
+
+    overruled = [w for w in wall if w["kind"] == "overruled"]
+    assert len(overruled) == stats["overturns"], (
+        "wall 'overruled' entries must equal the published overturn count"
+    )
+
+    detailed = [w for w in wall if w.get("hasDetail")]
+    assert len(detailed) == len(d["cases"]), (
+        "every wall entry flagged hasDetail needs a case transcript behind it, "
+        "or the site links to nothing"
+    )
+
+    assert {w["kind"] for w in wall} <= {"unanimous", "overruled", "confirmed"}
