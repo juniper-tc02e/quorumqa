@@ -311,3 +311,65 @@ def test_cost_claims_in_dollars_state_their_unit():
         f"{offenders} claim '11% lower cost' without naming the unit within "
         f"300 chars. In tokens the same engine costs 3.1x MORE."
     )
+
+
+# ---------------------------------------------------------------------------
+# A document must not contradict ITSELF
+# ---------------------------------------------------------------------------
+
+#: Quantities that have exactly one current value, and the values a document
+#: must not mix. Each pair is (label, current, superseded) where BOTH are real
+#: numbers this repo published for the same thing on different item sets.
+SINGLE_VALUED = [
+    ("GPQA flagship_1x accuracy", "90.6%", "89.4%"),
+    ("GPQA universal_gate tok/item", "12,991", "13,175"),
+    ("GPQA flagship_1x tok/item", "2,627", "2,792"),
+]
+
+
+@pytest.mark.parametrize("label,current,superseded", SINGLE_VALUED)
+def test_no_document_states_two_values_for_one_quantity(label, current, superseded):
+    """The gap every other check in this file structurally misses.
+
+    The drift tests compare documents to EACH OTHER and to the analyzer. A
+    document that contradicts ITSELF passes all of them, and on 2026-08-03
+    FINDINGS-2026-08 did exactly that twice: it said "the flagship is already at
+    89.4%" three lines under a table reading 90.6%, and section 6 repeated the
+    old figure. Both were found by reading the file top to bottom, which is not
+    a repeatable process.
+
+    A document may still MENTION the superseded value -- explaining that a
+    figure was replaced requires naming it -- so an occurrence is only an
+    offence when the doc gives no indication it is talking about the older item
+    set.
+    """
+    offenders = []
+    for rel in CLAIM_DOCS:
+        text = _read(rel)
+        if not text or current not in text:
+            continue  # doc does not discuss this quantity at all
+        idx = text.find(superseded)
+        while idx != -1:
+            window = text[max(0, idx - 400): idx + 250].lower()
+            explained = any(k in window for k in (
+                "replace", "superseded", "earlier", "2-arm", "before arm c",
+                "n=265", "recomputed", "previously", "retired", "corrected",
+            ))
+            if not explained:
+                offenders.append((rel, text[max(0, idx - 60): idx + 40].replace("\n", " ")))
+            idx = text.find(superseded, idx + 1)
+    assert not offenders, (
+        f"a document states BOTH {current!r} and {superseded!r} for "
+        f"{label} with nothing marking the second as superseded:\n"
+        + "\n".join(f"  {r}: ...{c}..." for r, c in offenders)
+    )
+
+
+def test_the_self_contradiction_check_is_not_vacuous():
+    """If every CLAIM_DOC stopped mentioning the current values, the test above
+    would pass by skipping everything."""
+    for label, current, _ in SINGLE_VALUED:
+        assert any(current in (_read(rel) or "") for rel in CLAIM_DOCS), (
+            f"no claim doc mentions {current!r} ({label}), so its "
+            f"self-contradiction check inspects nothing"
+        )

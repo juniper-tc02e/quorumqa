@@ -241,7 +241,9 @@ Publishing these because a record that only grows is not a record.
   wrong: +9 of its +10 is self-consistency, +2 the tribunal (p = 0.344).
 - **Cost direction depends on the unit.** The original README reports the
   shipped engine at *11% lower cost* in **dollars**. Under the Token Plan the
-  billing unit is tokens, and in tokens the same engine costs **8,690 vs 2,792
+  billing unit is tokens, and in tokens the same engine costs — measured on the
+  earlier 2-arm TB-1 set (n=265), which is why the flagship reads 2,792 here and
+  2,627 in §1's 3-arm table — **8,690 vs 2,792
   per item — 3.1× more**. Both measurements are correct; they are different
   currencies, and the token one is the one that now binds.
 - **A latent crash in shipped code**, found by replaying a never-fired lever:
