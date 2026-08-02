@@ -91,12 +91,14 @@ gives up, and stops at parity with the obvious alternative.
 
 ## 5. Honest limits
 
-1. **GPQA-Diamond only.** SuperGPQA-hard is the surface where the flagship is
-   weakest (measured 79.5 / 79.3 / 76.5%) and where `flagship_panel` already
-   beats it by pooled net +10, p=0.0032 — though that advantage was itself
-   attributed to self-consistency sampling, not deliberation. A paired cost
-   frontier there is **not yet built** and is the one place this conclusion
-   might not hold.
+1. **GPQA-Diamond only — and SuperGPQA-hard is where it does NOT hold.**
+   Updated 2026-08-02: the SuperGPQA paired frontier has since been built
+   (`python -m benchmark.analyze_cost_frontier --dataset supergpqa`). There the
+   flagship sits at 79.2% and `flagship_panel` **beats it, pooled net +7,
+   p=0.0327, 3 seeds** — a genuine win this GPQA-only conclusion would have
+   missed. The difference is headroom: 89.4% leaves nothing to win, 79.2%
+   does. The mechanism is still sampling rather than deliberation
+   (`flagship_panel` vs its compute-matched SC@3 control: net +1, p=0.50).
 2. **`qwen3.7-max` as the reference.** Against `qwen3.8-max-preview` the
    comparison is unrunnable without survivorship bias (§3).
 3. **Tokens are not dollars.** Cheap-tier and flagship tokens differ in price;
@@ -106,3 +108,53 @@ gives up, and stops at parity with the obvious alternative.
    an inspectable transcript are real properties of the tribunal that a single
    opaque call does not have. They are simply not accuracy-per-token, and this
    document is about accuracy-per-token.
+
+
+---
+
+## Addendum, 2026-08-02 — two seed-42 SuperGPQA baselines, and why it does not matter
+
+Recording a redundant spend and the robustness check it forced.
+
+A standalone flagship-1× baseline was run at SuperGPQA seed 42 to complete the
+3-seed frontier. **A seed-42 flagship baseline already existed**, embedded as
+the `baseline` wrapper inside `supergpqa_hard_pilot_seed42.jsonl` — the run is
+a full pilot carrying both an `engine` and a `baseline` record per row, so it
+is easy to miss when scanning filenames. ~0.27M tokens were spent
+unnecessarily. Noted rather than quietly absorbed.
+
+The consequence is more interesting than the waste: **two valid seed-42
+flagship baselines now exist and they disagree.**
+
+| source | accuracy | on the 85 shared items |
+|---|---:|---:|
+| pilot-embedded (`supergpqa_hard_pilot_seed42.jsonl`) | 79.1% | 80.0% |
+| new standalone (`lever_baseline_supergpqa_seed42.jsonl`) | 81.8% | 82.4% |
+
+They agree per-item on **92.9%** of shared questions — ordinary decoder noise
+between two independent samples of the same configuration, not a discrepancy
+in kind. But a 2.4pp difference in the comparator is enough to move a frontier,
+so which one an analysis picks has to be a stated choice rather than an
+accident of filename matching.
+
+**The choice made, and why:** the frontier uses the **standalone** file for all
+three seeds, so its `flagship_1x` arm has uniform provenance (seeds 7, 42 and
+123 all read `lever_baseline_supergpqa_seed*.jsonl`). Mixing a pilot-embedded
+baseline into one seed of three would make the reference arm inconsistent with
+itself.
+
+**The verdict is robust to the choice**, which is the point of checking:
+
+| seed-42 baseline used | pooled b | c | net | p | verdict |
+|---|---:|---:|---:|---:|---|
+| new standalone (**published**) | 9 | 2 | **+7** | **0.0327** | beats |
+| pilot-embedded | 11 | 1 | +10 | 0.0032 | beats |
+
+`flagship_panel` beats a single flagship call either way. **The published
+figure is the more conservative of the two** — a smaller effect at a weaker
+p-value — which is the correct default when a defensible alternative would
+flatter the result.
+
+`benchmark/verify_flagship_claim.py` continues to use the **pilot** file for
+its own seed-42 comparator, unchanged. A test now pins that the two are never
+conflated or swapped.

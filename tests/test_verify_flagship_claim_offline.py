@@ -89,9 +89,57 @@ def test_candidate_arm_dropped_items_on_every_seed(r):
 
 
 def test_seed42_comparator_is_the_pilot_file():
-    """There is no lever_baseline_supergpqa_seed42.jsonl; the evidence table
-    implied one until 2026-07-26."""
+    """This claim's seed-42 comparator is the PILOT file, and must stay so.
+
+    Original guard (2026-07-26) asserted that `lever_baseline_supergpqa_seed42.jsonl`
+    did not exist, because the evidence table had implied one when the real
+    comparator was the pilot. On 2026-08-02 that file was created for real --
+    a standalone flagship-1x baseline run for the SuperGPQA cost frontier --
+    so the non-existence half of the guard is retired.
+
+    What replaces it matters more, because TWO valid seed-42 flagship
+    baselines now exist and they differ by 2.4pp (pilot-embedded 79.1%, new
+    standalone 81.8%; 92.9% per-item agreement -- ordinary decoder noise
+    between two samples of the same configuration). Whichever a downstream
+    analysis picks shifts its numbers, so the binding requirement is that
+    THIS claim keeps using the pilot, unchanged, and does not silently
+    acquire the newer file.
+
+    Checked for robustness rather than assumed: the SuperGPQA frontier's
+    verdict holds under either choice -- flagship_panel beats flagship-1x at
+    pooled net +7, p=0.0327 with the new baseline (the published, more
+    conservative figure) and net +10, p=0.0032 with the pilot's.
+    """
     assert ARMS[42][1] == "supergpqa_hard_pilot_seed42.jsonl"
     from benchmark.verify_flagship_claim import RESULTS
-    assert not (RESULTS / "lever_baseline_supergpqa_seed42.jsonl").exists()
     assert (RESULTS / "supergpqa_hard_pilot_seed42.jsonl").exists()
+
+
+def test_the_two_seed42_flagship_baselines_are_not_conflated():
+    """Both files carry a seed-42 flagship-1x baseline. They must never be
+    pooled or swapped: the frontier uses the standalone file for all three
+    seeds (uniform provenance), this claim uses the pilot."""
+    import json
+
+    from benchmark.analyze_cost_frontier import ARMS as FRONTIER_ARMS
+    from benchmark.verify_flagship_claim import RESULTS
+
+    # The frontier's seed-42 flagship arm is the standalone file, not the pilot.
+    template, seeds = FRONTIER_ARMS["supergpqa"]["flagship_1x"]
+    assert template == "lever_baseline_supergpqa_seed{s}.jsonl"
+    assert 42 in seeds
+
+    standalone = RESULTS / "lever_baseline_supergpqa_seed42.jsonl"
+    if not standalone.exists():
+        pytest.skip("standalone seed-42 baseline is gitignored and absent here")
+
+    def _acc(path, wrapper):
+        rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+        recs = [r[wrapper] for r in rows if wrapper in r]
+        return sum(bool(x["correct"]) for x in recs) / len(recs)
+
+    pilot_acc = _acc(RESULTS / "supergpqa_hard_pilot_seed42.jsonl", "baseline")
+    new_acc = _acc(standalone, "baseline")
+    # They disagree, which is exactly why they must not be interchanged.
+    assert abs(new_acc - pilot_acc) > 0.01
+    assert 0.75 < pilot_acc < 0.85 and 0.75 < new_acc < 0.90
