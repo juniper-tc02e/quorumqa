@@ -56,9 +56,16 @@ others are over n=236. Its paired statistic still uses only items it shares
 with the reference.)*
 
 The difference between the two tables is **headroom**. On GPQA the flagship is
-already at 89.4% and there is almost nothing left to win. On SuperGPQA-hard it
-sits at 79.2%, and orchestration converts that gap into a real, significant
+already at **90.6%** and there is almost nothing left to win. On SuperGPQA-hard
+it sits at 79.2%, and orchestration converts that gap into a real, significant
 gain (3 seeds, +7, p=0.0327).
+
+⚠ *But see §4c before treating headroom as a build rule: on SuperGPQA-hard the
+**same** escalate-everything lever, built from cheap seats, LOSES (TB-1B, net
+−2). Same benchmark, same headroom, opposite outcome — the difference is the
+seat tier, not the headroom. And separately, the unanimous-wrong rate **bounds**
+the achievable gain but does not predict it (r = −0.216, p = 0.73 across 5
+benchmarks; see the README's corrected paragraph).*
 
 **But the mechanism is not deliberation.** `flagship_panel` against its own
 compute-matched self-consistency control is **net +1, p = 0.50**. Three
@@ -248,7 +255,15 @@ Publishing these because a record that only grows is not a record.
 1. **Route by headroom, not by hope — as a filter, not a forecast.**
    Orchestration is worth its tokens when the base model has room to improve,
    and is dominated when it does not. Measured on two benchmarks: the flagship
-   at 89.4% (GPQA, net +1) versus 79.2% (SuperGPQA-hard, net +7).
+   at 90.6% (GPQA, net +0) versus 79.2% (SuperGPQA-hard, net +7).
+
+   **⚠ Weakened again 2026-08-03 by TB-1 arm C — this is now the weakest of the
+   four claims in this list, not the strongest.** On GPQA the stack does not
+   merely tie one flagship call; against the *same token budget spent on plain
+   sampling* it is **net −6, p=0.981** (§4c). And on SuperGPQA-hard, the surface
+   this rule points *toward*, the same escalate-everything lever built from
+   cheap seats **loses** (TB-1B, net −2). Headroom rules benchmarks out; it has
+   never been shown to rule one in.
 
    **⚠ Weakened 2026-08-03, and the weakening matters for anyone planning on
    it.** A *related* headroom measure was tested across 5 benchmarks and has
