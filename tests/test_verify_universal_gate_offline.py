@@ -261,3 +261,36 @@ def test_scaling_cheap_votes_within_the_control_arm_is_flat():
     c = sum(1 for q in n9 if n3[q] and not n9[q])
     assert b - c == 0, "more cheap votes suddenly help -- the attribution argument needs revisiting"
     assert mcnemar_exact_one_sided(b, c) > 0.05
+
+
+@_all_seeds
+def test_seed_overlap_is_real_and_the_result_survives_it():
+    """GPQA-Diamond has only ~198 questions, so three 90-item draws overlap.
+    Pooling per-seed 2x2 tables treats 269 rows as independent when they cover
+    170 unique items. The conservative unique-item statistic must still clear
+    overwhelmingly, or the headline needs re-framing rather than a footnote."""
+    from benchmark.analyze_panel_scaling import mcnemar_exact_one_sided
+
+    gains, losses, all_ids = {}, {}, set()
+    for s in (1001, 2311, 3407):
+        for line in open(_RES / f"lever_universal_gate_gpqa_seed{s}.jsonl", encoding="utf-8"):
+            if not line.strip():
+                continue
+            e = _json.loads(line)["engine"]
+            qid, gold = e["item"]["question_id"], e["item"]["correct_letter"]
+            all_ids.add(qid)
+            unanimous = len({a["letter"] for a in e["solver_answers"]}) == 1
+            shipped = e["plurality_letter"] if unanimous else e["final_letter"]
+            if e["final_letter"] == gold and shipped != gold:
+                gains.setdefault(qid, []).append(s)
+            elif shipped == gold and e["final_letter"] != gold:
+                losses.setdefault(qid, []).append(s)
+
+    # The overlap is real and must not be silently forgotten.
+    assert len(all_ids) == 170
+    assert sum(len(v) for v in gains.values()) == 25
+    assert len(gains) == 21, "unique gained items"
+    assert len(losses) == 0
+
+    p_unique = mcnemar_exact_one_sided(len(gains), len(losses))
+    assert p_unique < 1e-6, "conservative unique-item statistic must still be overwhelming"

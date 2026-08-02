@@ -109,6 +109,41 @@ to N=15). Two benchmarks, two seat configurations, same shape.
 **Mechanism verdict: the tribunal is doing the work, and it is not compute.**
 Unlike `flagship_panel`, this claim survives the control that killed the last one.
 
+## 3.2 Robustness: the seeds overlap, and the result survives it
+
+GPQA-Diamond holds only ~198 questions, so three 90-item draws **cannot** be
+disjoint. Measured overlap:
+
+| pair | shared items |
+|---|---:|
+| 1001 ∩ 2311 | 34 (38%) |
+| 1001 ∩ 3407 | 46 (51%) |
+| 2311 ∩ 3407 | 31 (34%) |
+| in all three | 12 |
+
+The 269 pooled rows therefore cover **170 unique items**, with **99 repeated
+observations**. Summing per-seed 2×2 tables — this repo's pooling convention —
+implicitly treats those 269 as independent, and they are not. Stated plainly
+because it inflates the pooled figure and a reader would be right to object.
+
+**How much does it matter? Almost none.** Counting each item **once**, however
+many seeds recovered it:
+
+| | b | c | net | p |
+|---|---:|---:|---:|---:|
+| as reported (per-seed pooled) | 25 | 0 | +25 | 2.98 × 10⁻⁸ |
+| **conservative, unique items only** | **21** | **0** | **+21** | **4.77 × 10⁻⁷** |
+
+Only **4 items** were recovered at more than one seed. The conservative
+statistic is still overwhelming, and — because `c = 0` on both counts — no
+weighting scheme can produce a loss where none exists. **The conclusion is
+unchanged; the honest number to quote for a cross-seed-independence-sensitive
+reader is net +21, p = 4.8 × 10⁻⁷.**
+
+This is a property of GPQA-Diamond's size, not of the design: any 3-seed,
+n=90 GPQA study in this repo has the same structure, including every prior
+result quoted with a pooled p-value.
+
 ## 4. What the claim reads
 
 > On GPQA-Diamond, three cheap `qwen3.6-flash` seats that escalate **every**
