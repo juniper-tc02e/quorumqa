@@ -1,15 +1,24 @@
 # QuorumQA — figures
 
-Nine figures covering every orchestration we ran, on every benchmark, and how
-each benchmark moved from the initial build to the current one.
+Thirteen figures covering every orchestration we ran, on every benchmark, how
+each benchmark moved from the initial build to the current one, and — in the
+F10–F13 set — whether any of it was worth its tokens.
 
 Regenerate with (no API calls, no network — all inputs are committed):
 
 ```bash
 python benchmark/make_figures_progress.py     # F01, F02, F03, F06
 python benchmark/make_figures_analysis.py     # F04, F05, F07, F08, F09
+python benchmark/make_figures_frontier.py     # F10, F11, F12, F13
 python -m benchmark.figure_data --check       # verify the ledger against its sources
 ```
+
+> **F04 is superseded and should not be shown.** It plots `qwen3.8_solo` at
+> 93.6% as the highest GPQA point with `on_pareto_frontier=True`. That estimate
+> was retired to the interval [83.3%, 94.4%] — it is a survivor-only rate over
+> 73/78 items, the rest lost to structural server-side 504s. `F10` is the
+> corrected, paired replacement. `benchmark/figure_data.RETIRED_POINT_ESTIMATES`
+> now excludes retired estimates from any frontier by construction.
 
 ---
 
@@ -165,3 +174,53 @@ the findings docs and **self-verifying**: `verify_ledger()` greps every non-empt
 numeric cell for its literal formatted value in the doc it cites — 99 numbers
 currently verified. A transcription typo fails the check rather than reaching a
 figure.
+
+
+---
+
+## F10–F13 — the 2026-08 findings set
+
+Added 2026-08-02. All four are **Tier A [PAIRED]**: computed on the per-seed
+`question_id` intersection of the arms compared, never pooled across seeds.
+That restriction is the whole point — Tier B pools each config over whatever
+seeds it happened to run on, and with the flagship's measured 83.0/86.5/94.3%
+spread on GPQA a cross-seed frontier can invert from sampling alone.
+
+Full narrative: [`docs/FINDINGS-2026-08.md`](../FINDINGS-2026-08.md).
+
+### F10 — Orchestration pays where the base model is weak
+
+![F10](f10_paired_cost_frontier.png)
+
+The headline, and it cuts both ways. On GPQA-Diamond the flagship is already at
+89.4% and **nothing beats it** — `universal_gate` is net +1 at p=0.50 for 4.7×
+the tokens. On SuperGPQA-hard the flagship sits at 77.2% and `flagship_panel`
+**does** beat it, +7 at p=0.0195. Solid = beats the reference at p<0.05;
+hollow = no significant gain; hollow red = loses. Nothing hollow is a win.
+
+### F11 — Scaling cheap workers buys coverage, not answers
+
+![F11](f11_cheap_worker_scaling.png)
+
+Plurality accuracy is flat after N=3 in all three arms; paired N=3→N=9 on GPQA
+is net **exactly 0** (p=0.62). The dotted line is the coverage you get from
+*random* 4-choice guessing — it overtakes the measured curve, which is why the
+coverage/accuracy gap is **not** the 40-point opportunity we once called it.
+
+### F12 — Ten mechanisms, ten nulls
+
+![F12](f12_kill_list.png)
+
+Every technique tested for detecting a confident-but-wrong panel, ranked by the
+p-value it died on. The bars are **not mutually comparable** — they come from
+exact McNemar, Fisher exact and permutation nulls depending on design — and are
+ranked only to show that none approaches 0.05.
+
+### F13 — Why +25 and +1 are both true
+
+![F13](f13_two_comparators.png)
+
+`universal_gate` beats the cheap panel by +25 (p=3.0e-8) and beats a single
+flagship call by +1 (p=0.50), because those two comparators are 8.6 points
+apart. Note the caveat in the footer: judge calls/item = 1.00, so this is a
+*scaffolded flagship call*, not cheap seats replacing a flagship.

@@ -1,0 +1,221 @@
+# What we actually found — QuorumQA, August 2026
+
+A complete, honest account of what a multi-agent deliberation engine on Qwen
+models does and does not buy. Most of it is negative. The negative results are
+the contribution.
+
+Every number below is **paired** — computed on the per-seed `question_id`
+intersection of the arms being compared, never pooled across different item
+samples — and traces to a committed result file and a pinned test. Where a
+claim was retracted, the retraction is stated, not quietly dropped.
+
+---
+
+## The one-paragraph version
+
+We built a society of cheap Qwen solvers that escalates disagreement to a
+tool-using tribunal with a flagship judge. It works: escalating **every**
+answer instead of only the split ones is worth **+25 items, zero losses,
+p = 3 × 10⁻⁸** on GPQA-Diamond. But when we finally measured it against the
+obvious alternative — *just call the flagship once* — the whole apparatus came
+out **net +1, p = 0.50, at 4.5× the tokens**. On GPQA-Diamond, QuorumQA is
+dominated by a single flagship call. On SuperGPQA-hard, where the base model
+is 12 points weaker, orchestration **does** win (+7, p = 0.0195) — but a
+compute-matched control shows the gain is **self-consistency sampling, not
+deliberation**. Along the way, ten separate mechanisms for detecting a
+confident-but-wrong panel were tested. All ten are null.
+
+---
+
+## 1. Orchestration pays where the base model is weak — and nowhere else
+
+![F10](figures/f10_paired_cost_frontier.png)
+
+| GPQA-Diamond (n=265 paired) | accuracy | tokens/item | accuracy per 1k tokens |
+|---|---:|---:|---:|
+| **`qwen3.7-max` ×1** | 89.4% | **2,792** | **0.320** |
+| `universal_gate` | 89.8% | 13,175 | 0.068 — net +1, p=0.50 |
+| shipped engine | 80.8% | 8,690 | 0.093 — dominated |
+
+| SuperGPQA-hard (n=158 paired) | accuracy | tokens/item | accuracy per 1k tokens |
+|---|---:|---:|---:|
+| `qwen3.7-max` ×1 | 77.2% | 3,029 | 0.255 |
+| `flagship_sc3` | 81.0% | 8,694 | 0.093 — net +6, p=0.055 |
+| **`flagship_panel`** | **81.6%** | 9,987 | 0.082 — net **+7, p=0.0195** ✅ |
+| cheap panel ×3 | 69.0% | 9,836 | 0.070 — net −13 |
+
+The difference between the two tables is **headroom**. On GPQA the flagship is
+already at 89.4% and there is almost nothing left to win. On SuperGPQA-hard it
+sits at 77.2%, and orchestration converts that gap into a real, significant
+gain.
+
+**But the mechanism is not deliberation.** `flagship_panel` against its own
+compute-matched self-consistency control is **net +1, p = 0.50**. Three
+flagship samples beat one flagship call; adding a skeptic, a verifier and a
+judge on top of those three samples adds nothing measurable. This
+independently reproduces an earlier compute-matched finding on fresh seeds.
+
+## 2. Scaling cheap workers buys coverage, not answers
+
+![F11](figures/f11_cheap_worker_scaling.png)
+
+| N cheap seats | SuperGPQA diversified | SuperGPQA cycled | GPQA diversified |
+|---:|---:|---:|---:|
+| 1 | 42.5% | 41.4% | 57.8% |
+| 3 | 47.1% | 47.1% | 65.6% |
+| 9 | 50.6% | 49.4% | 65.6% |
+| 15 | 47.1% | 48.3% | — |
+
+**Almost all the gain is 1→3.** After that it wanders inside noise: N=15 lands
+*below* N=9 in one arm. The pre-registered +5-item bar was never cleared on any
+arm (best observed +3). The scaling question proper — **N=3→N=9 on GPQA — is
+b=5, c=5, net exactly 0, p = 0.62.**
+
+Coverage climbs steadily (42%→91%), so the right answer keeps *appearing* more
+often while plurality voting captures almost none of it. **We previously called
+that a 40-point opportunity. That framing is retired:** fifteen uniformly random
+4-choice guesses reach **98.7%** coverage, above the measured 90.8%. Most of
+the climb is guessing entropy, not harvestable signal — which is why five
+successive selectors have died against it.
+
+## 3. Ten mechanisms for catching a confident-but-wrong panel. Ten nulls.
+
+![F12](figures/f12_kill_list.png)
+
+The engine's core weakness is that ~18% of its *unanimous* answers are wrong,
+and unanimity is where it stops looking. Everything we tried to detect those:
+
+| mechanism | measured | p |
+|---|---|---:|
+| Verbalized confidence (selector) | net +76 in-sample → **−4 held out**, sign-reversed on 2/3 seeds | 0.78 |
+| Confidence-weighted selector | net +3, under bar | 0.2744 |
+| Permutation instability | contrast +7.1pp (needed ≥25) | 0.4552 |
+| Resample instability | lift lands **on** the permutation null mean | 0.48 |
+| Self-authored CAS verification | fires **24/151 wrong AND 24/151 right** | **1.0000** |
+| Reasoning length (junk control) | net −314 | 0.9999 |
+| Stronger judge | 9/9 overturns correct, **zero net gain** | 0.50 |
+| Cheap panel scaling N=3→15 | best +3 vs a +5 bar | 0.252 |
+| Deliberation vs self-consistency | tribunal leg +2 of +10 | 0.344 |
+| Whole stack vs one flagship call | net +1 at 4.5× tokens | 0.5000 |
+
+The self-authored CAS result is the sharpest. We asked the model to write a
+`sympy`-checkable equation for its own answer and ran a real offline
+computation on it. The check fires on **exactly** as many right answers as
+wrong ones — Fisher p = 1.0000, across 48 disjoint items. The arithmetic is
+genuinely new information; **the premise is a re-read**, because the model
+chooses which equation to write and writes one consistent with the answer it
+already committed to. Verifying a self-authored premise verifies nothing.
+
+**The pattern across all ten: every mechanism that re-reads what the model
+already generated has failed.** Any future proposal whose readout is cross-seat
+agreement, or any property of an existing transcript, has to argue past all ten.
+
+## 4. Why +25 and +1 are both true
+
+![F13](figures/f13_two_comparators.png)
+
+`universal_gate` — escalate *every* answer, not just the split ones — is a
+genuine, well-controlled win over the shipped engine: **+25 items, zero losses,
+p = 3.0 × 10⁻⁸**, three seeds, each clearing the bar independently, and it
+survives a compute-matched control against nine cheap seats (+22, p = 0.00001).
+
+It is *also* only **+1, p = 0.50** against a single flagship call.
+
+Both are true because the comparators are **8.6 points apart**. The scaffolding
+buys back exactly the ground the cheap panel gives up, and stops there.
+
+**What it is not:** `universal_gate` issues one `qwen3.7-max` judge call on
+**every** item (measured: judge calls/item = 1.00). Nothing returns without a
+flagship call. This is a *scaffolded flagship call*, not cheap seats replacing
+a flagship, and the result should never be worded that way.
+
+## 5. Corrections we made to our own record
+
+Publishing these because a record that only grows is not a record.
+
+- **A retracted number was setting the ceiling of a published figure.**
+  `f04_accuracy_vs_tokens_frontier.svg` plotted `qwen3.8_solo` at 93.6% as the
+  highest GPQA point, marked on the Pareto frontier. That estimate had been
+  retired to the interval **[83.3%, 94.4%]** — it was a survivor-only rate over
+  73/78 items, with the missing items lost to structural server-side 504s. Now
+  excluded at the data layer, with tests asserting a retired estimate can
+  neither sit on a frontier nor dominate a live point.
+- **The oracle-coverage "opportunity" was mostly entropy** (§2).
+- **`flagship_panel`'s mechanism was retracted** — arithmetic intact, story
+  wrong: +9 of its +10 is self-consistency, +2 the tribunal (p = 0.344).
+- **Cost direction depends on the unit.** The original README reports the
+  shipped engine at *11% lower cost* in **dollars**. Under the Token Plan the
+  billing unit is tokens, and in tokens the same engine costs **8,690 vs 2,792
+  per item — 3.1× more**. Both measurements are correct; they are different
+  currencies, and the token one is the one that now binds.
+- **A latent crash in shipped code**, found by replaying a never-fired lever:
+  `sympy.sympify` turns `beta`, `gamma`, `zeta`, `Q`, `N`, `S`, `O` into
+  non-expression objects, so `sympy_check` raised `TypeError` instead of
+  failing safe. Those are heat, entropy, particle count, decay constants and
+  oxygen — routine variables in exactly the physics questions the gate targets.
+
+## 6. What survives
+
+1. **Route by headroom, not by hope.** Orchestration is worth its tokens when
+   the base model has room to improve, and is dominated when it does not. That
+   is a deployable decision rule, and it is measured on two benchmarks.
+2. **Escalate on unanimity, not just disagreement.** The shipped early-return
+   on unanimity makes ~18% of its own errors structurally unreachable.
+   Escalating everything recovers 25/38 of them while breaking 0/118.
+3. **Sampling beats deliberation, repeatedly.** Where multi-agent setups win
+   here, a compute-matched self-consistency control explains the win.
+4. **The negative-results corpus itself.** Ten controlled nulls, each
+   pre-registered with a kill clause fixed before the data existed.
+
+## 7. How this was kept honest
+
+- **Pre-registration.** Bars and kill clauses fixed *before* each run. It
+  caught a survivorship trap on AIME that would otherwise have published a
+  100%-vs-62% artifact.
+- **Adversarial review before spending.** Four independent review passes; every
+  one found a defect. One declined ~78% of a proposed 20M-token budget. One
+  found the headline claim was false *as a description of the arm being run*.
+- **Compute-matched controls fired up front**, after one headline had already
+  lost its mechanism to a control fired afterwards.
+- **Verify every number against its source before writing it up.** This caught
+  a transposed seed pair and an overstated recovery rate in our own drafts.
+- **Never re-pin a drifting test without proving the drift is attributable.**
+
+## 8. Honest limits
+
+1. **Two benchmarks.** GPQA-Diamond and SuperGPQA-hard. The headroom rule is
+   inferred from two points.
+2. **`qwen3.7-max` is the reference.** Against `qwen3.8-max-preview` the
+   comparison is currently unrunnable without survivorship bias.
+3. **GPQA's three seeds overlap** — 269 rows over 170 unique items — so its
+   pooled figures are quoted conservatively (+21, p = 4.8 × 10⁻⁷ counting each
+   item once). SuperGPQA's seeds are near-disjoint (2 shared of 88).
+4. **SuperGPQA's frontier is two seeds**, not three. A third is in flight.
+5. **Failure to show superiority is not proof of equivalence.** TB-1's 95%
+   interval spans [−6.6, +8.6] items.
+6. **No cross-lab comparison is made or supportable.** No shared item sample,
+   no shared grading protocol. Any sentence of the form "QuorumQA beats
+   \<another lab's model\>" is not expressible with these instruments.
+
+---
+
+## Reproduce
+
+Every figure and number regenerates from committed files with no API calls:
+
+```bash
+python -m benchmark.analyze_cost_frontier --dataset gpqa
+python -m benchmark.analyze_cost_frontier --dataset supergpqa
+python -m benchmark.verify_universal_gate
+python -m benchmark.verify_tb1_flagship
+python benchmark/make_figures_frontier.py
+python -m pytest -q
+```
+
+Primary write-ups: [`universal_gate_3seed_result.md`](../benchmark/results/universal_gate_3seed_result.md),
+[`tb1_flagship_comparison_result.md`](../benchmark/results/tb1_flagship_comparison_result.md),
+[`gpqa_paired_cost_frontier.md`](../benchmark/results/gpqa_paired_cost_frontier.md),
+[`meta2_permutation_instability_findings.md`](../benchmark/results/meta2_permutation_instability_findings.md),
+[`ki0r_cas_gate_findings.md`](../benchmark/results/ki0r_cas_gate_findings.md),
+[`s7_live_ship_gate_result.md`](../benchmark/results/s7_live_ship_gate_result.md),
+[`panel_scaling_n15_seed19.md`](../benchmark/results/panel_scaling_n15_seed19.md).

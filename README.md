@@ -77,8 +77,26 @@ docs/                     architecture diagram and design notes
 
 ## Research and findings
 
+**→ [`docs/FINDINGS-2026-08.md`](docs/FINDINGS-2026-08.md) — the current,
+complete account, and the one to read first.**
 **→ [`docs/FINDINGS.md`](docs/FINDINGS.md) is the index to everything measured.**
-**→ [`docs/figures/`](docs/figures/README.md) is the same story in nine figures.**
+**→ [`docs/figures/`](docs/figures/README.md) is the same story in thirteen figures.**
+
+> **August 2026 update — read this before the numbers above.** We finally
+> measured the whole engine against the obvious alternative of *calling the
+> flagship once*, on identical items. On GPQA-Diamond it is **net +1,
+> p = 0.50, at 4.5× the tokens** — a single flagship call dominates the
+> architecture there. On SuperGPQA-hard, where the base model is 12 points
+> weaker, orchestration **does** win (+7, p = 0.0195) — but a compute-matched
+> control attributes that gain to **self-consistency sampling, not
+> deliberation**. Ten separate mechanisms for detecting a confident-but-wrong
+> panel were tested; all ten are null.
+>
+> One number in this README needs its unit stated: the *"11% lower cost"* below
+> is measured in **dollars** under the pre-Token-Plan pricing. Under the Token
+> Plan the billing unit is tokens, and in tokens the same engine costs
+> **8,690 vs 2,792 per item — 3.1× more**. Both are correct; they are different
+> currencies, and the token one is the one that now binds.
 
 ![Build progress in gap space](docs/figures/f01_build_progress_gap_space.png)
 

@@ -1,0 +1,4 @@
+config,accuracy_pct
+cheap panel (shipped rule: escalate splits only),80.8
+universal_gate (escalate every item),89.81132075471699
+qwen3.7-max ×1 call,89.43396226415095

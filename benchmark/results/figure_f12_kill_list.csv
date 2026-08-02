@@ -1,0 +1,11 @@
+mechanism,test,measured,p_value,source
+Panel scaling N=3→15 (cheap),"Tier D harvest, seed 19",best +3 vs a +5 bar,0.252,panel_scaling_n15_seed19.md
+Confidence-weighted selector,S7 held-out ship gate,"net +3, under bar, disc 11<12",0.2744,s7_live_ship_gate_result.md
+Deliberation (vs self-consistency),compute-matched control,tribunal leg +2 of +10,0.344,verify_compute_matched_control.py
+Permutation instability,"META-2, 3 seeds, n=139 unanimous",contrast +7.1pp (needed ≥25),0.4552,meta2_permutation_instability_findings.md
+Resample instability,permutation-null control,lift lands ON the null mean,0.48,improvement-loop-state.md (FREE SPRINT #2)
+Stronger judge,9/9 overturns correct,zero net accuracy gain,0.5,negative-results.md
+Whole stack vs one flagship call,"TB-1, 3 seeds, n=265",net +1 at 4.5× the tokens,0.5,tb1_flagship_comparison_result.md
+Verbalized confidence (selector),S7 held-out ship gate,net +76 in-sample → −4 held out,0.78,s7_live_ship_gate_result.md
+Reasoning length (junk control),S1 selector audit,net −314 pooled,0.9999,selector_audit.md
+Self-authored CAS verification,"KI-0R replay, n=151+151",fires 24/151 wrong AND 24/151 right,1.0,ki0r_cas_gate_findings.md
