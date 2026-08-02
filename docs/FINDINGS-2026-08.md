@@ -160,9 +160,26 @@ Publishing these because a record that only grows is not a record.
 
 ## 6. What survives
 
-1. **Route by headroom, not by hope.** Orchestration is worth its tokens when
-   the base model has room to improve, and is dominated when it does not. That
-   is a deployable decision rule, and it is measured on two benchmarks.
+1. **Route by headroom, not by hope — as a filter, not a forecast.**
+   Orchestration is worth its tokens when the base model has room to improve,
+   and is dominated when it does not. Measured on two benchmarks: the flagship
+   at 89.4% (GPQA, net +1) versus 79.2% (SuperGPQA-hard, net +7).
+
+   **⚠ Weakened 2026-08-03, and the weakening matters for anyone planning on
+   it.** A *related* headroom measure was tested across 5 benchmarks and has
+   **no predictive power**: the unanimous-wrong rate gives Pearson r = −0.216
+   (p = 0.73) and Spearman ρ = +0.100 (p = 0.87) against best-lever delta — the
+   two do not agree on the sign, and LEXam (22.0% → −6.0 pp) and SuperGPQA-hard
+   (23.0% → +4.1 pp) sit one point apart with opposite outcomes (D5 in
+   `negative-results.md`).
+
+   These are **not the same variable** — flagship accuracy is not the
+   unanimous-wrong rate, and the 5-benchmark test does not directly refute the
+   2-point one. But it is the closest thing to a test of this rule that exists,
+   and it came back null. So: treat headroom as a *necessary* condition that
+   rules benchmarks OUT, never as a rule that predicts a win where headroom
+   exists. It cannot rank candidates, and it should not be used to choose what
+   to build next.
 2. **Escalate on unanimity, not just disagreement.** The shipped early-return
    on unanimity makes ~18% of its own errors structurally unreachable.
    Escalating everything recovers 25/38 of them while breaking 0/118.
