@@ -115,15 +115,34 @@ base model has headroom; *deliberation on top of that compute* has not been
 shown to add anything (against a compute-matched control the tribunal is net
 +1, p=0.50). Decorrelated disagreement plus a firing escalation gate is
 necessary for the cascade to act at all, but it is not sufficient for a win. The
-cheap-to-flagship gap (the unanimous-wrong rate) predicts whether that is even
-possible — not benchmark difficulty, not baseline height, and not the subject
-label. Medicine and hard science are both knowledge-and-reasoning multiple
-choice, and they sit at opposite ends of that table.
+cheap-to-flagship gap (the unanimous-wrong rate) **bounds** whether a win is
+arithmetically possible — a lever cannot move more accuracy than there is
+unanimous-wrong to recover.
 
-That gap is **necessary but not sufficient**, and our own figures caught us
-overstating it: LEXam has a 22% unanimous-wrong rate and still loses 6 points,
-because there the missing ingredient is *knowledge*, not decorrelation. See
-[`docs/figures/`](docs/figures/) — the "large gap, lever still lost" quadrant.
+**⚠ Corrected 2026-08-03: this paragraph used to say the gap "predicts" the
+outcome. It does not, and we tested it rather than leaving the word standing.**
+Across the 5 benchmarks with both numbers measured, Pearson **r = −0.216
+(p = 0.73)** and Spearman **ρ = +0.100 (p = 0.87)** — the two correlations do
+not even agree on the *sign*. The decisive pair:
+
+| benchmark | unanimous-wrong | best lever | evidence |
+|---|---:|---:|---|
+| LEXam | 22.0% | **−6.0 pp** | 1 seed, screen |
+| SuperGPQA-hard | 23.0% | **+4.1 pp** | 3 seeds, validated |
+
+One point of headroom apart, opposite directions. Levers convert between
+**−27% and +50%** of the available headroom, a range that spans zero. So the
+rate is a **ceiling, not a forecast**: it tells you whether a win is possible,
+never whether one will happen or which way it will go. Only 1 of those 5 points
+is validated at 3 seeds, which is a further reason not to fit a rule to them.
+Reproduce with `python -m benchmark.analyze_headroom_rule`.
+
+Where LEXam loses despite its large gap, the missing ingredient is *knowledge*,
+not decorrelation. See [`docs/figures/`](docs/figures/) — the "large gap, lever
+still lost" quadrant. Note also that benchmark difficulty, baseline height and
+the subject label are all *equally* unpredictive here; medicine and hard science
+are both knowledge-and-reasoning multiple choice and sit at opposite ends of the
+table.
 
 One result clears the 3-seed bar against a single `qwen3.7-max` call:
 `flagship_panel` on SuperGPQA-hard, **82.2% vs 79.2%, pooled net +7,

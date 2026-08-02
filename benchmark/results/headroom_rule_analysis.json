@@ -1,0 +1,39 @@
+{
+  "n_benchmarks": 5,
+  "degenerate_input": false,
+  "n_validated_3seed": 1,
+  "pearson": {
+    "r": -0.216,
+    "p": 0.727
+  },
+  "spearman": {
+    "rho": 0.1,
+    "p": 0.8729
+  },
+  "correlation_signs_agree": false,
+  "bound_holds_on_all": true,
+  "headroom_converted_pct": {
+    "min": -27.3,
+    "max": 50.0
+  },
+  "near_identical_headroom": [
+    {
+      "benchmark": "LEXam",
+      "rate_pct": 22.0,
+      "delta_pp": -6.0,
+      "verdict": "screen",
+      "seeds": 1
+    },
+    {
+      "benchmark": "SuperGPQA-hard",
+      "rate_pct": 23.0,
+      "delta_pp": 4.1,
+      "verdict": "validated",
+      "seeds": 3
+    }
+  ],
+  "verdict": {
+    "bound": "SUPPORTED",
+    "prediction": "NOT SUPPORTED"
+  }
+}
