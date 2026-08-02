@@ -281,7 +281,7 @@ Two clusters proposed this idea at ~10.5M and ~6M — a 16.5M double-spend on on
 | Surface | Baseline | Best society | Family bar |
 |---|---|---|---|
 | SuperGPQA-hard | ~79.5% single flagship | flagship_panel 83.3 / 81.7 / 82.7 (**+4.1** mean, 3 seeds, never negative) | — |
-| GPQA-Diamond | 84.4% single flagship | chem_thinking_gate 90.9% mean | qwen3.8-solo 93.6% — **contaminated**, n = 78 with 12 drops; repaired by D0 |
+| GPQA-Diamond | 84.4% single flagship | chem_thinking_gate 90.9% mean | qwen3.8-solo **RETIRED to [83.3%, 94.4%]** 2026-07-30 — D0's repair recovered only 2 of 12; residual drops are structural server-side 504s |
 | Organic chem slice | matched flagship | chem_thinking_gate **+4.4** vs matched flagship, **+7.9** on chem | — |
 
 **Funded levers (this window).**
@@ -534,7 +534,7 @@ Additionally: AIME-2024/25 is unusable on two independent grounds — our pilot 
 
 **Pre-registered bar:** CAL-1 — 6 of 6 coverage comparisons non-negative with ≥4 clearly positive (bootstrap CI excluding the flagship curve), reported alongside accuracy@80% coverage. CAL-2 — item-level lift ≥2x **against the permutation null**, not against the raw 6.2x.
 
-**Kill (dominates):** CAL-1 — verbalized confidence alone matches or beats the panel curve → the multi-agent confidence signal adds nothing; drop the capability claim entirely *and* record that the same finding invalidates the trust story the escalation architecture rests on. CAL-2 — item-level lift <2x against the null → **record permanently that instability features do not separate either**, close calibration-as-a-gate for good, and keep calibration only as a cost-router input (its one validated role: MoO matches flagship accuracy within noise at 28-50% lower cost on easy-skewed traffic).
+**Kill (dominates):** CAL-1 — verbalized confidence alone matches or beats the panel curve → the multi-agent confidence signal adds nothing; drop the capability claim entirely *and* record that the same finding invalidates the trust story the escalation architecture rests on. CAL-2 — item-level lift <2x against the null → **record permanently that instability features do not separate either**, close calibration-as-a-gate for good, and keep calibration only as a cost-router input (its one validated role: MoO matches flagship accuracy within noise at 28-50% lower cost **in dollars** (pre-Token-Plan pricing; re-derive in tokens before relying on it) on easy-skewed traffic).
 
 ---
 

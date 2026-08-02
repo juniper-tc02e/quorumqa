@@ -90,7 +90,7 @@ complete account, and the one to read first.**
 > measured the whole engine against the obvious alternative of *calling the
 > flagship once*, on identical items. On GPQA-Diamond it is **net +1,
 > p = 0.50, at 4.7× the tokens** — a single flagship call dominates the
-> architecture there. On SuperGPQA-hard, where the base model is 12 points
+> architecture there. On SuperGPQA-hard, where the base model is 10 points
 > weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched
 > control attributes that gain to **self-consistency sampling, not
 > deliberation**. Ten separate mechanisms for detecting a confident-but-wrong
@@ -110,8 +110,11 @@ closed on all four benchmarks where we built twice, and crossed zero on two.
 Arrows appear only where a genuine second build exists — the other five
 benchmarks ran one build and say so.*
 
-The short version: deliberation pays if and only if solver errors decorrelate
-into visible disagreement *and* the escalation mechanism fires on it. The
+The short version, **narrowed 2026-08**: *extra sampled compute* pays where the
+base model has headroom; *deliberation on top of that compute* has not been
+shown to add anything (against a compute-matched control the tribunal is net
++1, p=0.50). Decorrelated disagreement plus a firing escalation gate is
+necessary for the cascade to act at all, but it is not sufficient for a win. The
 cheap-to-flagship gap (the unanimous-wrong rate) predicts whether that is even
 possible — not benchmark difficulty, not baseline height, and not the subject
 label. Medicine and hard science are both knowledge-and-reasoning multiple

@@ -4,7 +4,11 @@ QuorumQA is a Qwen Cloud Agent Society: three cheap Solvers vote on every
 question in parallel; a Skeptic, a tool-using Verifier, and a Judge are
 escalated to **only when the Solvers disagree**. Unanimous questions never
 pay for the expensive roles at all -- that asymmetric escalation is the
-entire efficiency-gain story, not a benchmark trick layered on afterward.
+entire **dollar**-cost story, not a benchmark trick layered on afterward.
+**In tokens -- the unit that now bills -- the cascade is strictly more
+expensive than one flagship call (8,690 vs 2,792/item), and against that
+call on identical items the full stack is net +1, p=0.50.** See
+[`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
 
 ```mermaid
 flowchart TD

@@ -115,7 +115,7 @@ before the router may select it in product mode.
 | Profile | Status | Evidence |
 |---|---|---|
 | `stem-max` (chem_thinking_gate) | **VALIDATED** | 90.9% mean, 3 seeds, +4.4 matched |
-| `flagship_panel` (hard-STEM tier-swap) | **VALIDATED** | +4.1 mean vs flagship-solo, 3 seeds, SuperGPQA-hard |
+| `flagship_panel` (hard-STEM tier-swap) | **VALIDATED (arithmetic) / MECHANISM RETRACTED** | +4.1 mean vs flagship-solo, but its compute-matched SC@3 control shows the gain is sampling, not deliberation (tribunal leg +2, p=0.344), 3 seeds, SuperGPQA-hard |
 | `rag_presolve` (cheap + pre-solve retrieval) | **VALIDATED** | +6.5 mean vs cheap, 3 seeds, floor cut every seed; GPQA tripwire clean |
 | `qwen38_panel` (max-tier homogeneous panel) | **NEGATIVE** | 0% escalation = expensive self-consistency; trails flagship_panel |
 | `rag_recursive` (R2 tribunal retrieval) | **NEGATIVE (no-gain)** | −1.2 vs R1; structurally can't reach the unanimous-wrong floor |

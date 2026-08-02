@@ -38,7 +38,7 @@ gap as the predictor outright; that was too strong, and F05 is what caught it.
 |---|---|---|---|
 | SuperGPQA-hard | ~79.5% | 23% | **+4.1 mean** (3 seeds) |
 | Organic-chemistry slice | ~86.5% matched | large | **+4.4** (+7.9 on chem itself) |
-| GPQA-Diamond | 84.4% | ~11% | **+1.1 mean** (marginal, inside noise) |
+| GPQA-Diamond | 84.4% | ~11% | **+1.1 mean** (marginal, inside noise); full stack vs 1× flagship is **null: +1, p=0.50** (TB-1) |
 | MedQA | 94% | **4%** | ties (+2 = one item of 50) |
 | MMLU-Pro STEM (4-way) | 96.7% | **1.7%** | **+0.0**, escalation 3.3% |
 | MATH-500 L5 open-answer | 96.6% | 0% escalation *at both tiers* | inert |
@@ -55,8 +55,9 @@ points at different n do not earn a regression.*
 
 A corollary we did not expect and had to accept: on **6 of 9 benchmarks a bare
 single flagship call Pareto-dominates every lever we ever built** — more tokens
-for equal or worse accuracy. Levers clear the frontier on exactly two surfaces
-plus the chemistry slice.
+for equal or worse accuracy. Levers clear the frontier on one surface (SuperGPQA-hard)
+plus the chemistry slice — **TB-1 (2026-08-02) moved GPQA-Diamond into the
+dominated set**: the full stack is net +1, p=0.50 against one flagship call.
 
 ![Accuracy vs tokens](figures/f04_accuracy_vs_tokens_frontier.png)
 

@@ -122,7 +122,7 @@ opposite ends of it:
 
 | Surface | Flagship baseline | Unanimous-wrong rate | Lever outcome | Source |
 |---|---|---|---|---|
-| SuperGPQA-hard | ~79.3–79.5% (3 seeds) | 23% (20/86, seed 42) | `flagship_panel` **+4.1 mean** (3 seeds, never negative) | `benchmark/results/supergpqa_findings.md` |
+| SuperGPQA-hard | ~79.3–79.5% (3 seeds) | 23% (20/86, seed 42) | `flagship_panel` **+4.1 mean** (3 seeds, never negative) — but it **fails its compute-matched SC@3 control** (tribunal leg net +2, p=0.344; the panel vs the control is net +1, p=0.50). The gain is sampling, not deliberation | `benchmark/results/supergpqa_findings.md` |
 | GPQA Organic Chemistry slice | matched flagship (83.3–86.5%) | 18.9% (37 questions, seed 42) — 0% on every physics subject in the same set | `chem_thinking_gate` **+4.4** vs matched flagship (3-seed mean 90.9%, spread 0.2pt) | `benchmark/results/lever_findings.md` |
 | GPQA-Diamond (full) | 84.4–86.5% (3 seeds) | ~11% | `thinking_gate` **+1.1 to +2.3** (3-seed replicated, one seed a tie) | `benchmark/results/lever_findings.md` |
 | MedQA | 94.0% | **4%** (2/50) | tie, **+2 = one item of 50** | `benchmark/results/medqa_findings.md` |
@@ -275,7 +275,7 @@ Twenty-two distinct measured nulls, grouped by mechanism.
 **B1. qwen38_panel (SuperGPQA-hard) — 0% escalation, 30% timeout drops**
 
 - *Hypothesis.* Swapping all three solver seats to the family's strongest
-  single model (`qwen3.8-max-preview`, 93.6% solo on GPQA) beats
+  single model (`qwen3.8-max-preview`, 93.8% survivor-only (upper-biased); honest interval **[83.3%, 94.4%]**, point estimate RETIRED 2026-07-30 by D0's own kill clause — solo on GPQA) beats
   `flagship_panel` (`qwen3.7-max`, validated +4.1 mean).
 - *Config.* 3× `qwen3.8-max-preview` solver seats, SuperGPQA-hard, seed 42,
   concurrency 2.
@@ -397,7 +397,7 @@ Twenty-two distinct measured nulls, grouped by mechanism.
 
 **C1. qwen38_judge — 9/9 overturns correct, zero net gain**
 
-- *Hypothesis.* Swapping the Judge role to `qwen3.8-max-preview` (93.6%
+- *Hypothesis.* Swapping the Judge role to `qwen3.8-max-preview` (93.8% survivor-only (upper-biased); honest interval **[83.3%, 94.4%]**, point estimate RETIRED 2026-07-30 by D0's own kill clause; formerly quoted as 93.6%
   solo vs `qwen3.7-max`'s 85.6%) lifts the engine, since the Judge rules on
   every escalation.
 - *Config.* GPQA-Diamond, seed 42 (the frozen submission run's own
