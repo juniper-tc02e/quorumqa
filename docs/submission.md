@@ -8,7 +8,9 @@ An agent society that argues only when it's worth arguing: three cheap Qwen
 solvers vote independently, and a Skeptic, a tool-using Verifier and a flagship
 Judge are summoned only on the 37.8% of questions where they disagree — closing
 most of the gap to a flagship model on "Google-proof" PhD-level science
-questions while costing 11% less than running that flagship on everything.
+questions while costing 11% less **in dollars** than running that flagship on
+everything. (In tokens — the unit that now bills — it costs **2.64× more**:
+9,013 vs 3,415 per item. Both are true; they are different currencies.)
 
 ## Text description (paste into "About the project")
 
@@ -64,7 +66,8 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
 
   **Headline: +20.0 accuracy points over the identical cheap models run as a
   plain ensemble, closing ~78% of the gap to the thinking flagship while
-  costing 11% less than it.** The Judge is that same `qwen3.7-max`, so the
+  costing 11% less **in dollars** than it — and **2.64× more in tokens**, the
+  unit that now bills.** The Judge is that same `qwen3.7-max`, so the
   result comes from *routing* the expensive model to the 37.8% of questions
   that need it, not from doing without it. The flagship still wins outright on
   accuracy by 5.5 points, and we say so on the site.
@@ -144,5 +147,40 @@ The shot list, the word-for-word narration and the claims-to-avoid list live in
 [`docs/demo-script.md`](demo-script.md). It uses two distinct cases on purpose:
 `recIj8lR4tuDgrHou` shows majority voting failing and adjudication fixing it
 (the flagship also got that one right, so it is not a win over the flagship),
-and `recBhnXrUyTJ6WHIR` is one of the five where the cheap society beat the
-flagship outright.
+and `recBhnXrUyTJ6WHIR` is one of the five where the engine answered correctly
+and a single flagship call did not.
+
+> **⚠ Corrected 2026-08-03. This previously read "one of the five where the
+> cheap society beat the flagship outright." That is false for this case, and
+> it is the case in the demo video.**
+>
+> Checked against the run: `recBhnXrUyTJ6WHIR` **escalated**. Its solvers split
+> D/D/B, and its logged call roles are
+> `solver, solver, solver, skeptic, verifier, judge` — so it consumed a
+> `qwen3.7-max` judge call, *the same model as the baseline it beat*. The cheap
+> panel did not beat a flagship here; the engine **routed to** one, and that
+> flagship-with-a-tribunal-in-front-of-it answered correctly where the same
+> flagship answered alone did not.
+>
+> That is still a real and interesting result — identical model, different
+> scaffolding, different answer — but it is a claim about **scaffolding**, not
+> about cheap seats replacing an expensive model. Of the five such cases, **2
+> escalated and 3 were answered by the cheap panel alone**
+> (`site_data/cases.json` → `stats.flagship_miss_engine_hit`). The three
+> genuine cheap-panel-only cases, verified against the run:
+>
+> | question_id | subject | escalated |
+> |---|---|---|
+> | `rec4r4KWNLrT7g2kR` | Organic Chemistry | no |
+> | `recpki12iG9RUGrz9` | High-energy particle physics | no |
+> | `recEmTBhx2hgw6tPQ` | Organic Chemistry | no |
+>
+> Any of those three supports "three cheap models answered correctly where one
+> flagship call did not" without qualification. `recBhnXrUyTJ6WHIR` and
+> `rec5rjeLsEq5Fg7Oj` are the two that escalated.
+>
+> **Keeping `recBhnXrUyTJ6WHIR` in the video is also defensible** — its 2-1
+> split into an escalation is a better *demonstration of the mechanism* than a
+> unanimous cheap win, which shows nothing happening. It just has to be
+> narrated as what it is: the panel disagreed, the tribunal ran, and the ruling
+> beat a bare flagship call on the same question.
