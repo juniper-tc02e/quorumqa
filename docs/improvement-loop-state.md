@@ -929,6 +929,44 @@ an existing transcript, is presumed dead and must argue past all eight.
 fresh. `universal_gate` does exactly that and nothing else — no trigger to
 tune, no feature to fit.
 
+> ### ⚠ SUPERSEDED 2026-08-03 — read before acting on the paragraph above
+>
+> This section is the one that "should govern what happens next", so leaving
+> it standing would steer real work. It is left in place (this log is
+> chronological; earlier entries are not rewritten) and corrected here.
+>
+> **"Eight independent nulls" is now eleven.** TB-1 (whole stack vs one
+> flagship call, +1, p=0.50), the compute-matched deliberation leg (+2 of +10,
+> p=0.344), and TB-1B (cheap seats + escalate-all vs flagship, −2, p=0.8906)
+> have landed since. The shape is unchanged and stronger.
+>
+> **"What works instead: escalating to a different tier" did not survive.**
+> That claim was measured against the *shipped cheap panel*, which is the
+> wrong denominator. Against the tier being escalated to:
+>
+> | | vs shipped rule | vs one flagship call |
+> |---|---:|---:|
+> | GPQA-Diamond | +25 (p=3×10⁻⁸) | **+1 (p=0.50)** |
+> | SuperGPQA-hard | +6 (p=0.055) | **−2 (p=0.89)** |
+>
+> Escalating to a stronger tier does not beat *calling that tier directly*. On
+> SuperGPQA-hard it is worse, at 5.1× the tokens. TB-1B also decomposes why:
+> of 8 unanimous-wrong items recovered, **7 were items the flagship already
+> had**. The scaffolding recovers ground the flagship never lost.
+>
+> **"Mechanism: the tribunal, not the budget" is reversed.** That read came
+> from one control — 9 cheap vote-only seats. Against the control that
+> matters, self-consistency on the *same* tier, the tribunal leg is +2 at
+> p=0.344 and the whole stack is +1 at p=0.50. The measured mechanism is
+> **budget on a strong model, not the tribunal.**
+>
+> **Operative rule for whatever comes next.** Every candidate must be scored
+> against *a single call to the strongest model it uses internally*, not
+> against the cheap panel. A lever that beats the cheap panel and ties the
+> flagship has bought nothing and cost 5×. That comparator is now
+> pre-registered in `docs/spec-tb1b-supergpqa.md` §5 as PRIMARY, with the
+> cheap-panel comparison demoted to SECONDARY, precisely so this cannot recur.
+
 ## A correction to a framing this log itself carried
 
 The oracle-coverage/plurality gap was repeatedly described here and elsewhere
