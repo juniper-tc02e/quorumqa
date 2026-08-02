@@ -49,6 +49,14 @@ CLAIM_DOCS = [
     "docs/capability-roadmap.md",
     "docs/mixture-of-orchestrations-plan.md",
     "docs/same-provider-scaling-research.md",
+    # Added 2026-08-03. The FIRST version of this list omitted these two, and
+    # both were carrying the stale 2-seed SuperGPQA figures ("77.2% ... +7 at
+    # p=0.0195") at the moment the list was written -- so the very test built
+    # to catch that drift walked straight past two live instances of it.
+    # figures/README.md is as reader-facing as any doc here, and the figure
+    # module's docstring is what a maintainer reads before touching the plot.
+    "docs/figures/README.md",
+    "benchmark/make_figures_frontier.py",
 ]
 
 #: (forbidden string, what replaced it, why it is wrong now)
@@ -62,6 +70,49 @@ SUPERSEDED = [
      "same 2-seed/3-seed drift, parenthesised form"),
     ("[81.1%, 94.4%]", "[83.3%, 94.4%]",
      "D0's three paced retries recovered 2 of 12 items, moving the floor to 83.3%"),
+    ("flagship sits at 77.2%", "flagship sits at 79.2%",
+     "77.2% was the 2-seed SuperGPQA flagship accuracy; the 3-seed paired "
+     "figure the F10 plot actually renders is 79.2%"),
+]
+
+#: Docs deliberately OUTSIDE the drift check, each with its reason.
+#:
+#: The governing distinction is **frozen vs current**. A pre-registration's
+#: numbers are bars and budget estimates fixed BEFORE the data existed;
+#: retroactively editing them to match the result destroys the only property
+#: that makes a pre-registration worth having. The same logic already excludes
+#: benchmark/results/ write-ups, which are dated records of what one run
+#: measured. Only documents that speak in the present tense about what is
+#: currently true get checked for agreement with each other.
+FROZEN_OR_NON_CLAIM_DOCS = {
+    # --- frozen pre-registrations: numbers fixed before the data existed ---
+    "docs/experiment-spec-book.md",
+    "docs/spec-trackb-flagship-comparison.md",
+    "docs/spec-sci1-and-knowledge-injection.md",
+    "docs/spec-tb1b-supergpqa.md",
+    # --- forward-looking plans: proposed work, not measured claims ---
+    "docs/agentic-rebuild-scoping.md",
+    "docs/reasoning-supercharge-plan.md",
+    "docs/recursive-rag-plan.md",
+    "docs/orchestration-contract.md",
+    # --- working notes and external research: not our measurements ---
+    "docs/improvement-loop-state.md",
+    "docs/rag-corpus-notes.md",
+    "docs/frontier-oss-model-research.md",
+    # --- positioning and sources ---
+    "docs/prior-art-and-positioning.md",      # no measured claims of our own
+    "docs/demo-script.md",                    # checked separately, below
+    "docs/figures/figure_claims_ledger.md",   # the ledger's own source of truth
+}
+
+#: Figures whose only correct source is the analyzer, checked live below rather
+#: than trusted as transcribed. (value, dataset, point, field, scale)
+DERIVED_HEADLINES = [
+    (89.4, "gpqa", "flagship_1x", "accuracy", 100),
+    (79.2, "supergpqa", "flagship_1x", "accuracy", 100),
+    (82.2, "supergpqa", "flagship_panel", "accuracy", 100),
+    (0.0327, "supergpqa", "flagship_panel", "p_one_sided", 1),
+    (0.50, "gpqa", "universal_gate", "p_one_sided", 1),
 ]
 
 
@@ -80,6 +131,48 @@ def test_superseded_figures_do_not_reappear(forbidden, replacement, why):
     assert not offenders, (
         f"{offenders} still contain the superseded value {forbidden!r}. "
         f"Use {replacement!r} instead. Reason: {why}"
+    )
+
+
+@pytest.mark.parametrize("published,dataset,point,field,scale", DERIVED_HEADLINES)
+def test_published_headlines_match_what_the_analyzer_computes(
+        published, dataset, point, field, scale):
+    """The forbidden-string checks catch a value that was replaced. They cannot
+    catch a value that was WRONG FROM THE START, because nothing tells them what
+    right looks like. This one asks the analyzer.
+
+    It is the check that would have caught the F10 caption drift at its source
+    instead of two documents downstream: the plot recomputes from data on every
+    render, so any prose disagreeing with the analyzer is prose that has gone
+    stale.
+    """
+    pytest.importorskip("pandas")
+    from benchmark.analyze_cost_frontier import analyze
+
+    pt = analyze(dataset)["points"].get(point)
+    assert pt is not None, f"{point} absent from the {dataset} frontier"
+    got = pt[field] * scale
+    assert got == pytest.approx(published, abs=0.05), (
+        f"docs publish {published} for {dataset}/{point}/{field} but the "
+        f"analyzer computes {got:.4f}. The analyzer is the source."
+    )
+
+
+def test_every_reader_facing_claim_doc_is_actually_in_the_list():
+    """A drift check is only as wide as its file list, and the first version of
+    this one omitted docs/figures/README.md and make_figures_frontier.py --
+    both of which were carrying the stale figures at that exact moment. This
+    fails when a new top-level doc appears that nobody added here, so the
+    omission is loud instead of silent."""
+    known = set(CLAIM_DOCS) | FROZEN_OR_NON_CLAIM_DOCS
+    found = {
+        str(p.relative_to(PROJECT_ROOT)).replace("\\", "/")
+        for p in (PROJECT_ROOT / "docs").glob("*.md")
+    }
+    missing = sorted(found - known)
+    assert not missing, (
+        f"{missing} are reader-facing docs not covered by the drift check. Add "
+        f"them to CLAIM_DOCS, or to the exclusion set with a reason."
     )
 
 

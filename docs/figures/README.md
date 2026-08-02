@@ -199,9 +199,17 @@ Full narrative: [`docs/FINDINGS-2026-08.md`](../FINDINGS-2026-08.md).
 
 The headline, and it cuts both ways. On GPQA-Diamond the flagship is already at
 89.4% and **nothing beats it** — `universal_gate` is net +1 at p=0.50 for 4.7×
-the tokens. On SuperGPQA-hard the flagship sits at 77.2% and `flagship_panel`
-**does** beat it, +7 at p=0.0195. Solid = beats the reference at p<0.05;
-hollow = no significant gain; hollow red = loses. Nothing hollow is a win.
+the tokens. On SuperGPQA-hard the flagship sits at 79.2% and `flagship_panel`
+**does** beat it, +7 at p=0.0327 (seeds 7/42/123). Solid = beats the reference
+at p<0.05; hollow = no significant gain; hollow red = loses. Nothing hollow is
+a win.
+
+*Corrected 2026-08-03. This paragraph read "77.2% … p=0.0195" — the 2-seed
+figures, transcribed from the figure's caption back when that caption was
+hardcoded. The caption was made data-derived when the third seed landed, so
+`f10_paired_cost_frontier.png` has been right since; this prose was not, and no
+check was reading across the two. One now does
+(`tests/test_headline_consistency_offline.py`).*
 
 ### F11 — Scaling cheap workers buys coverage, not answers
 

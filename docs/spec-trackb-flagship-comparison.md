@@ -527,6 +527,26 @@ against the N=4 draft: **"four independent … samples" becomes "five"**, and
 "identical items" becomes **"question_id-paired items"** per §3. Nothing else
 in this paragraph may be altered.
 
+> **⚠ This template was never used, and must not be copy-pasted. Added
+> 2026-08-03.**
+>
+> The result was a **NULL** — net +1, p = 0.50 — so the "if the result is
+> positive" branch above never fired. The paragraph is retained as the frozen
+> pre-registration it is, deliberately unedited: rewriting a pre-registration
+> to match its outcome destroys the only property that makes one worth having.
+>
+> But two of its numbers are pre-run estimates and would be **wrong if lifted
+> into a current claim**. The **4.5×** here is 13,541 / 3,022, computed from
+> seed 1001 alone for the N=5 budget decision in §"Why N=5". The published
+> figure is **4.7×** (13,175 / 2,792), measured on the 3-seed paired n=265 item
+> set. Likewise 4,116 / 3,066 tok/item are seed-1001 estimates. Both are
+> correct *for the budget calculation they were written for* and neither is the
+> figure to quote about the result.
+>
+> This doc is excluded from `tests/test_headline_consistency_offline.py` on
+> exactly that ground — frozen, not current. The exclusion is what makes this
+> note necessary.
+
 **Prohibited wordings, pre-registered:** "cheap seats beat a stronger model",
 "orchestration of cheap Qwen seats beats a single call of a stronger Qwen",
 "multi-agent beats single-agent", or any phrasing implying arm A replaces the

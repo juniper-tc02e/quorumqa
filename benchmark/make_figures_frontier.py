@@ -11,9 +11,16 @@ purely from sampling.
   F10  The paired cost frontier, GPQA-Diamond vs SuperGPQA-hard side by side.
        The headline: a single flagship call is 4.7x more token-efficient than
        the best QuorumQA config on GPQA and is never beaten there -- but on
-       SuperGPQA-hard, where the flagship has 12 points more headroom,
-       flagship_panel DOES beat it (+7, p=0.0195). Orchestration pays where
-       the base model is weak and not where it is strong.
+       SuperGPQA-hard, where the flagship has 10 points more headroom,
+       flagship_panel DOES beat it (+7, p=0.0327, seeds 7/42/123).
+       Orchestration pays where the base model is weak and not where it is
+       strong.
+
+       (This docstring said p=0.0195 until 2026-08-03 -- the 2-seed figure.
+       The rendered caption below is derived from the data and was already
+       correct; the prose describing it was not. Same class of drift as the
+       one docs/figures/README.md carried, and the reason
+       tests/test_headline_consistency_offline.py now reads across docs.)
   F11  Cheap-worker scaling: plurality accuracy vs oracle coverage as N goes
        1->15, three arms. Coverage climbs steadily; plurality does not move
        after N=3. Includes the random-guess coverage reference that retires
