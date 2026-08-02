@@ -373,3 +373,38 @@ def test_the_self_contradiction_check_is_not_vacuous():
             f"no claim doc mentions {current!r} ({label}), so its "
             f"self-contradiction check inspects nothing"
         )
+
+
+def test_the_null_catalogue_count_matches_its_entries():
+    """negative-results.md is described repo-wide as the largest artifact, and
+    its own intro states how many nulls it holds. That count has now been wrong
+    twice -- once when D5 was added and once when F3/F4 were -- because the
+    catalogue and the sentence describing it live 700 lines apart.
+
+    Counted from the A1..F4 headings, never incremented by hand.
+    """
+    text = _read("docs/negative-results.md")
+    assert text, "the catalogue is missing"
+    import re
+    n = len(re.findall(r"^\*\*([A-F]\d+)\.", text, re.M))
+    assert n >= 20, f"only {n} catalogue entries parsed -- the heading format changed"
+
+    words = {22: "twenty-two", 23: "twenty-three", 24: "twenty-four",
+             25: "twenty-five", 26: "twenty-six", 27: "twenty-seven"}
+    assert n in words, f"extend the word map for {n} entries"
+
+    low = text.lower()
+    assert f"{words[n]} distinct measured nulls" in low, (
+        f"the catalogue holds {n} entries but its intro does not say "
+        f"'{words[n]} distinct measured nulls'"
+    )
+    for k, w in words.items():
+        if k != n:
+            assert f"{w} distinct measured nulls" not in low, (
+                f"catalogue intro says '{w}' but there are {n} entries"
+            )
+
+    readme = _read("README.md") or ""
+    assert f"{n} measured nulls" in readme, (
+        f"README should cite {n} measured nulls to match the catalogue"
+    )
