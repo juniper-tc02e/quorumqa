@@ -316,10 +316,40 @@ def main() -> None:
 
     if not r["arm_c_run"]:
         print("  *** arm C NOT RUN -- every A-vs-B number above is COMPUTE-UNMATCHED.")
-        print("  *** universal_gate spends ~4.5x a single flagship call. Publishing an")
+        print("  *** universal_gate spends ~4.7x a single flagship call. Publishing an")
         print("  *** A-vs-B result without arm C is the exact failure that required")
         print("  *** retracting flagship_panel's mechanism. Say 'compute-unmatched' at")
         print("  *** every point of use until arm C lands.")
+        print()
+    else:
+        # Kill clause 1 (attribution). Evaluated here rather than left to be
+        # computed by hand at write-up time, which is where a pre-registered
+        # rule quietly becomes a judgement call.
+        c = r["pooled"]["C"]
+        degenerate = [s for s, e in r["per_seed"].items()
+                      if (e.get("sc_diagnostics") or {}).get("degenerate")]
+        print("-" * 78)
+        print("KILL CLAUSE 1 -- attribution (spec section 6.1)")
+        print("-" * 78)
+        if degenerate:
+            print(f"  arm C is DEGENERATE at seed(s) {degenerate} -- kill clause 4.")
+            print("  A-vs-C is VOID there, NOT favourable to arm A.")
+        if len(c["seeds"]) < len(SEEDS):
+            print(f"  PARTIAL: arm C has fired {len(c['seeds'])} of {len(SEEDS)} seeds "
+                  f"{c['seeds']}. The primary is the pooled 3-seed test; anything")
+            print("  below that is SECONDARY and EXPLORATORY and must be labelled so.")
+        if c["net"] <= 0:
+            print(f"  pooled A-vs-C net={c['net']:+d} <= 0  ->  ATTRIBUTION KILL FIRES.")
+            print("  Report in the spec's words: a COMPUTE EFFECT, NOT AN ORCHESTRATION")
+            print("  EFFECT. The tokens buy more accuracy spent on plain sampling.")
+        elif c["primary_clears"]:
+            print(f"  pooled A-vs-C net={c['net']:+d}, p={c['p_one_sided']:.4f} -> clears.")
+            print("  Arm A earns a mechanism claim: the gain is orchestration, not budget.")
+        else:
+            print(f"  pooled A-vs-C net={c['net']:+d}, p={c['p_one_sided']:.4f} -- positive")
+            print("  but not significant. Report as ATTRIBUTION UNRESOLVED, never as a")
+            print("  win (spec section 6.1: the asymmetry that granted mechanism survival")
+            print("  on net >= +1 with no significance requirement was removed).")
         print()
     print("  reproduce: python -m benchmark.verify_tb1_flagship")
 

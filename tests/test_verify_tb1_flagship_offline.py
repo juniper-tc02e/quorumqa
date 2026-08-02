@@ -575,3 +575,106 @@ def test_the_output_warns_when_arm_c_changed_the_analysis_set(tmp_path, monkeypa
     out = capsys.readouterr().out
     assert "arm C is present" in out
     assert "SMALLER" in out and "not a contradiction" in out
+
+
+# ---------------------------------------------------------------------------
+# Kill clause 1 must be reported, not left to be computed at write-up time
+# ---------------------------------------------------------------------------
+
+
+def _three_arm_seed(tmp_path, seed, *, c_wins, n=90):
+    """Arm A and B tie; arm C beats A on `c_wins` items."""
+    qs = [f"q{i}" for i in range(n)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=seed),
+           [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=seed),
+           [_engine_row(q, "A", "A") for q in qs])
+    # Arm C's seats are diverse (so clause 4 stays quiet) and its majority is
+    # wrong on exactly the items arm A should lose.
+    rows = []
+    for i, q in enumerate(qs):
+        rows.append(_sc_row(q, "A", ["B", "B", "B", "A", "C"] if i >= n - c_wins
+                            else ["A", "A", "B", "A", "C"]))
+    _write(tmp_path / ARM_FILES["C"].format(seed=seed), rows)
+
+
+def test_attribution_kill_fires_and_uses_the_specs_wording(tmp_path, monkeypatch, capsys):
+    """net <= 0 must print 'COMPUTE EFFECT, NOT AN ORCHESTRATION EFFECT' --
+    the exact phrase section 6.1 pre-registers, so the verdict cannot be
+    softened in prose later."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    # Arm C never loses to A, so A-vs-C net is 0.
+    qs = [f"q{i}" for i in range(90)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["A", "A", "B", "A", "C"]) for q in qs])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "ATTRIBUTION KILL FIRES" in out
+    assert "COMPUTE EFFECT, NOT AN ORCHESTRATION" in out
+
+
+def test_positive_but_unsignificant_is_attribution_unresolved(tmp_path, monkeypatch, capsys):
+    """The asymmetry section 6.1 explicitly removed: arm A used to earn a
+    mechanism claim on net >= +1 with no significance requirement. A small
+    positive must now read as UNRESOLVED, never as a win."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    # Arm C loses 2 items to A -> net +2, p well above 0.05.
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["B", "B", "B", "A", "C"] if i < 2 else ["A", "A", "B", "A", "C"])
+            for i, q in enumerate(qs)])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "ATTRIBUTION UNRESOLVED" in out.upper()
+    assert "ATTRIBUTION KILL FIRES" not in out
+    assert "never as a" in out, "must say it is not a win"
+
+
+def test_a_partial_arm_c_is_labelled_secondary_and_exploratory(tmp_path, monkeypatch, capsys):
+    """The primary is the pooled 3-seed test. One seed of arm C cannot carry
+    the verdict, and the output must say so rather than presenting a 1-seed
+    pooled figure as if it were the primary."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    for seed in (1001, 2311):
+        _write(tmp_path / ARM_FILES["A"].format(seed=seed), [_engine_row(q, "A", "A") for q in qs])
+        _write(tmp_path / ARM_FILES["B"].format(seed=seed), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["A", "A", "B", "A", "C"]) for q in qs])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "PARTIAL" in out and "1 of 3 seeds" in out
+    assert "SECONDARY and EXPLORATORY" in out
+
+
+def test_a_degenerate_arm_c_voids_rather_than_favours(tmp_path, monkeypatch, capsys):
+    """Clause 4 beats clause 1: identical samples make A-vs-C VOID, and the
+    output must not let a void read as a result in arm A's favour."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["A"] * 5) for q in qs])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "DEGENERATE" in out
+    assert "VOID" in out and "NOT favourable to arm A" in out
+
+
+def test_the_stale_token_multiple_is_gone_from_the_warning():
+    """The compute-unmatched warning said universal_gate spends ~4.5x a single
+    flagship call. The published paired figure is 4.7x; 4.5x is the seed-1001
+    budget estimate. Same drift as the F10 caption and the F12 data."""
+    import pathlib
+    src = pathlib.Path(tb1.__file__).read_text(encoding="utf-8")
+    assert "4.5x" not in src and "4.5×" not in src
+    assert "4.7x" in src or "4.7×" in src

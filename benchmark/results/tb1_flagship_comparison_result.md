@@ -75,7 +75,11 @@ It buys back the ~9 points the cheap panel gives up, and stops there. That is
 why the +25 and the +1 are both true and not in tension: they are measured
 against comparators 9 points apart.
 
-## 5. Arm C is NOT being fired, and why
+## 5. Arm C was cancelled here — and that decision was REVERSED (see §5.1)
+
+*The section below is the original cancellation, kept verbatim as the record of
+what was decided and why. It was overturned on 2026-08-03 and arm C was fired;
+§5.1 states the reasons and the cost. Read both.*
 
 The spec funds arm C (flagship self-consistency @ N=5, 4.08M) as the attribution
 guard that decides whether a win is orchestration or budget.
