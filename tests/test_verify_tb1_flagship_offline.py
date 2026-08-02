@@ -18,6 +18,9 @@ import pytest
 
 import benchmark.verify_tb1_flagship as tb1
 from benchmark.verify_tb1_flagship import (
+    ARM_FILES,
+    RESULTS,
+    SEEDS,
     INTENDED_N,
     MIN_ANALYSIS_SET,
     PRIMARY_ALPHA,
@@ -338,3 +341,41 @@ def test_arm_c_remains_unrun_by_design():
     attribute a WIN, and there is no win. If C files ever appear, the result
     doc's section 5 needs revisiting rather than silently absorbing them."""
     assert verify()["arm_c_run"] is False
+
+
+# ---------------------------------------------------------------------------
+# The fixtures above must match what the RUNNER actually writes
+# ---------------------------------------------------------------------------
+
+
+def test_sc_diagnostics_reads_the_key_the_runner_actually_writes():
+    """`_sc_row` above is a hand-built fixture. Every test in this file that
+    exercises arm C therefore proves the analysis works on the shape I ASSUMED
+    the runner emits, not the shape it does emit.
+
+    That distinction is not academic here. `_sc_diagnostics` reads
+    `row["seat_answers"] or engine["seat_answers"]`, and the engine record
+    stores its seats under `solver_answers`. If the top-level `seat_answers`
+    key were ever dropped, the diagnostic would find zero seats, compute zero
+    pairs, and report perfect agreement over nothing -- kill clause 4 would
+    evaluate on an empty set and pass silently. The spec calls out exactly this
+    class of failure: a run that "would have finished with no number".
+
+    So this reads the real committed arm C file when one exists and asserts the
+    diagnostic actually sees seats. It skips where the file does not, because
+    arm C results are gitignored like every other raw run.
+    """
+    present = [s for s in SEEDS if (RESULTS / ARM_FILES["C"].format(seed=s)).exists()]
+    if not present:
+        pytest.skip("no arm C file yet (raw results are gitignored)")
+
+    for seed in present:
+        d = _sc_diagnostics(seed)
+        assert d is not None, f"seed {seed}: arm C file exists but read as empty"
+        assert d["pairs"] > 0, (
+            f"seed {seed}: the diversity diagnostic found ZERO seat pairs. The "
+            f"runner's row shape no longer matches what _sc_diagnostics reads, "
+            f"so kill clause 4 is evaluating on an empty set and will pass "
+            f"whatever the control actually did."
+        )
+        assert 0.0 <= d["mean_pairwise_agreement"] <= 1.0
