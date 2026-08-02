@@ -112,6 +112,13 @@ complete account, and the one to read first.**
 > plain sampling.** `qwen3.7-max` self-consistency @ N=5 costs 13,833 tok/item
 > against the stack's 12,991 — a 6% difference — and scores **92.9% against the
 > stack's 90.6%**. Paired, three seeds, n=255: the stack is **net −6, p=0.981**.
+>
+> *(The flagship reads **90.6%** here and **84.4%** at the top of this page. Both
+> are measured: 84.4% is the frozen n=90 seed-42 submission run; 90.6% is the
+> TB-1 paired set, seeds 1001/2311/3407, n=255 shared items. Different runs on
+> different item samples of the same benchmark — GPQA-Diamond has ~198
+> questions and no run covers all of them. Neither figure is a correction to
+> the other.)*
 > Every seed points the same way. So the result is not the weak "the tribunal
 > fails to beat one call"; it is **spend its budget on sampling instead and you
 > do better** (`benchmark/results/tb1_flagship_comparison_result.md` §5.2). On SuperGPQA-hard, where the base model is 10 points
