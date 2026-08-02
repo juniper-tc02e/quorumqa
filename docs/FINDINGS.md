@@ -151,7 +151,12 @@ result, with the flagship appearing only as the escalation judge — but it is
 marginal and inside the noise band.
 
 **The frozen submission number is 78.9%** — *below* the flagship's 84.4%, at
-~11% lower cost. That was always a cost claim, never an accuracy claim.
+~11% lower cost **in dollars** ($0.0213 vs $0.0240/question, pre-Token-Plan
+pricing). That was always a cost claim, never an accuracy claim — and it is a
+claim in **one particular currency**. In tokens, the unit the Token Plan
+actually bills, the same engine costs **8,690 vs 2,792 per item — 3.1× more**.
+Both numbers are correct; a bare "11% lower cost" tells the reader the opposite
+of what the billing unit now says, so the unit is stated wherever the figure is.
 
 ---
 
