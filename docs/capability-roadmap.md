@@ -55,7 +55,7 @@ skipped:
 
 | # | Axis | Structural class | Verdict | Gate before spend |
 |---|---|---|---|---|
-| 3.1 | Science (GPQA / SuperGPQA-hard / chem) | B (+ partial A) | **Winnable** — the only validated accuracy surface | Free union + instability audits |
+| 3.1 | Science (GPQA / SuperGPQA-hard / chem) | B (+ partial A) | **Narrowed 2026-08-03.** On GPQA-Diamond, paired against one `qwen3.7-max` call over 265 shared items, the stack is **net +1 (p=0.50) at 4.7× the tokens** — no accuracy win is validated there. **SuperGPQA-hard is the only surface carrying a paired win** (`flagship_panel` +7, p=0.0327), and its own compute-matched control attributes that to sampling, not deliberation. Earlier readings here rested on a cross-seed *unpaired* 84.4%-vs-90.9% gap. | Free union + instability audits |
 | 3.2 | General knowledge (MMLU-Pro, BBH) | — | **Not winnable** (MMLU-Pro saturated); BBH unmeasured | R6 probe |
 | 3.3 | Math | A (equivalence checking) | **Not winnable on absolute SOTA** — measurement-blocked; every reachable surface saturated | M0 probe |
 | 3.4 | Coding (SWE-bench class) | A in principle | **Not winnable** — ~50pt base gap, no scaffold | Dropped this window |

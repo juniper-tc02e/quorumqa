@@ -9,7 +9,7 @@ Record https://magiachiral.com (fixed replay, no live API calls). Streamlit dash
 | Case | What it proves | Panel | Judge | Flagship |
 |---|---|---|---|---|
 | **recIj8lR4tuDgrHou** (Quantum Mechanics) | Majority voting fails and adjudication fixes it. Does **not** beat the flagship — the flagship also got this one right, so it only demonstrates the mechanism. | D, C, D → plurality D | C (correct) | C (also correct) |
-| **recBhnXrUyTJ6WHIR** (Quantum Mechanics) | The cheap society beats the expensive model outright. | Leaned D | D (correct) | B (**wrong**) |
+| **recBhnXrUyTJ6WHIR** (Quantum Mechanics) | The engine is right where a single flagship call is wrong — but it escalated to a `qwen3.7-max` judge to get there. | Leaned D | D (correct) | B (**wrong**) |
 
 ## What changed in this revision
 
@@ -68,7 +68,7 @@ Rewritten for spoken cadence — contractions, natural connective tissue, varied
 > And we publish the number that stings too: fifty-eight point eight percent of escalations just re-confirm the panel.
 
 **[Shot 9 — Verdict Wall, filter to 'Beat the flagship', open the case]** *(running: 304 words)*
-> Ninety questions, one honeycomb — every hexagon a real result: agreed, split, or overruled. Filter for 'Beat the flagship': five cases. Here's one: the flagship said B, the society said D. D's correct.
+> Ninety questions, one honeycomb — every hexagon a real result: agreed, split, or overruled. Filter for the cases a single flagship call got wrong: five. Three the cheap panel answered alone; two, including this one, escalated to a flagship judge. Here the flagship said B, the society said D. D's correct.
 
 **[Shot 10 — Build Log: "We overrule ourselves, too"]** *(running: 347 words)*
 > The judge overturns its panel and keeps the record; we hold the build to that standard — a credential bug we caught by testing the real login, a design we called ugly in public, and an architecture we tried, then chose not to ship.

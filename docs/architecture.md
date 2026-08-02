@@ -35,7 +35,15 @@ flowchart TD
     OSS --> Dash[Streamlit dashboard<br/>on Alibaba Cloud ECS]
 ```
 
-## Cost cascade (why this beats a single-agent baseline)
+## Cost cascade (how the escalation is routed)
+
+> **Superseded 2026-08 as a superiority claim.** In dollars under pre-Token-Plan
+> pricing this routing was ~11% cheaper than calling the flagship on every
+> question. **In tokens it is 3.1× more expensive** (8,690 vs 2,792/item), and
+> on GPQA-Diamond the shipped config scores ~9 points *below* a single
+> `qwen3.7-max` call. The full stack is net +1, p=0.50 against one flagship
+> call on identical items. See [`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
+> What follows describes the routing mechanism, which is unchanged.
 
 | Role | Model | Thinking | Runs on |
 |---|---|---|---|

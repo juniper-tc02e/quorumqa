@@ -396,7 +396,7 @@ F12_KILLS = [
     ("Deliberation (vs self-consistency)", "compute-matched control",
      "tribunal leg +2 of +10", 0.344, "verify_compute_matched_control.py"),
     ("Whole stack vs one flagship call", "TB-1, 3 seeds, n=265",
-     "net +1 at 4.5× the tokens", 0.5000, "tb1_flagship_comparison_result.md"),
+     "net +1 at 4.7× the tokens", 0.5000, "tb1_flagship_comparison_result.md"),
 ]
 
 

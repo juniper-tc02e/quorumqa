@@ -13,7 +13,11 @@ dropped questions):** three cheap solvers, plus a flagship Judge called only
 on the 37.8% of questions where they split, reach **78.9%** — against 58.9%
 for those same cheap models run as a plain self-consistency@5 ensemble, and
 84.4% for that flagship answering every question alone. So it closes ~78% of
-the gap to the flagship at **11% lower cost** ($0.0213 vs $0.0240/question).
+the gap to the flagship at **11% lower cost in dollars** ($0.0213 vs
+$0.0240/question, pre-Token-Plan pricing). **In tokens — the unit that now
+bills — the same engine costs 8,690 vs 2,792 per item, 3.1× more**, and on
+identical items across 3 fresh seeds the full stack is net +1, p=0.50 against
+one `qwen3.7-max` call (`docs/FINDINGS-2026-08.md`).
 The saving comes from *routing* the expensive model to the questions that
 need it, not from avoiding it: the Judge and the baseline are the same
 `qwen3.7-max`. Every other role (3 solvers, Skeptic, Verifier) runs on
@@ -85,9 +89,9 @@ complete account, and the one to read first.**
 > **August 2026 update — read this before the numbers above.** We finally
 > measured the whole engine against the obvious alternative of *calling the
 > flagship once*, on identical items. On GPQA-Diamond it is **net +1,
-> p = 0.50, at 4.5× the tokens** — a single flagship call dominates the
+> p = 0.50, at 4.7× the tokens** — a single flagship call dominates the
 > architecture there. On SuperGPQA-hard, where the base model is 12 points
-> weaker, orchestration **does** win (+7, p = 0.0195) — but a compute-matched
+> weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched
 > control attributes that gain to **self-consistency sampling, not
 > deliberation**. Ten separate mechanisms for detecting a confident-but-wrong
 > panel were tested; all ten are null.
@@ -119,8 +123,15 @@ because there the missing ingredient is *knowledge*, not decorrelation. See
 [`docs/figures/`](docs/figures/) — the "large gap, lever still lost" quadrant.
 
 One result clears the 3-seed bar against a single `qwen3.7-max` call:
-**+4.1 mean** on SuperGPQA-hard (pooled b=11, c=1, net +10, exact McNemar
-p=0.0032, n=241 shared items) — at **~3.0× the measured tokens**.
+`flagship_panel` on SuperGPQA-hard, **82.2% vs 79.2%, pooled net +7,
+p=0.0327, n=236 paired items** (seeds 7/42/123) — at **~3.4× the measured
+tokens** (9,969 vs 2,969/item).
+
+*Two valid seed-42 flagship baselines exist and differ by 2.4pp, so this test
+has two defensible figures: net +7 / p=0.0327 with the standalone baseline
+(quoted above, the **more conservative**) and net +10 / p=0.0032 with the
+pilot-embedded one. The verdict holds either way; see the addendum in
+[`gpqa_paired_cost_frontier.md`](benchmark/results/gpqa_paired_cost_frontier.md).*
 
 **⚠ Then we ran the compute-matched control, and it did not survive.** On
 2026-07-30 we ran the arm our own roadmap had always required: 3× `qwen3.7-max`
@@ -152,7 +163,8 @@ the corrections are stated at the point of use in
 - **GPQA-Diamond** matches-or-beats, marginal and inside noise.
 
 The shipped submission config is 78.9% — *below* the flagship's 84.4%, at ~11%
-lower cost; that was always a cost claim.
+lower cost **in dollars**; that was always a cost claim, and in tokens it is
+3.1× *more* expensive.
 
 The largest artifact is the negative results:
 **[`docs/negative-results.md`](docs/negative-results.md)** — 22 measured nulls

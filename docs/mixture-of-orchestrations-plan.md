@@ -15,10 +15,19 @@ question:
 
 - **Routing by domain beats any flat configuration.**
   `chem_thinking_gate` — flagship panel for Organic Chemistry, thinking
-  seat everywhere else — is validated at 90.9% mean (three fresh seeds,
-  0.2pt spread), ~+5 points over the flagship-on-everything baseline and
-  above BOTH of its flat parents. Routing is not an optimization; it is
-  where the accuracy came from.
+  seat everywhere else — measures 90.9% mean (three fresh seeds, 0.2pt
+  spread) and clears the bar against its *matched* baselines (pooled net
+  +12, p=0.0059).
+
+  > **Narrowed 2026-08-03.** The "~+5 points over the
+  > flagship-on-everything baseline" was a **cross-seed, unpaired**
+  > comparison (90.9% at seeds 217/314/471 against 84.4% at seed 42), and
+  > the flagship's own measured seed spread on GPQA is 83.0/86.5/94.3% —
+  > wider than the claimed effect. Paired on identical items across three
+  > fresh seeds, the full stack is **net +1, p=0.50** against one
+  > `qwen3.7-max` call (`docs/FINDINGS-2026-08.md`). On this evidence
+  > routing is a **cost lever, not an accuracy one**, and the sentence
+  > "it is where the accuracy came from" is withdrawn.
 - **The same subject can need a different MODEL, not more effort.**
   `smart_gate` (more thinking time on chemistry, same model) made
   chemistry WORSE (72.2% vs 77.8% baseline); a different model fixed it

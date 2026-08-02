@@ -73,7 +73,9 @@ QuorumQA answers graduate-level, deliberately search-proof science questions
   never pay for the expensive roles at all; unanimous questions cost
   ~$0.004 vs the baseline's ~$0.024); the Judge overturned the solver
   plurality 14 times and was right in 11 (78.6%) — adjudication by argument
-  demonstrably beats majority vote; false-escalation rate 58.8% (reported
+  (n=14, seed 42) can correct a majority on individual items, though against a
+  compute-matched self-consistency control the deliberation component itself is
+  +2 at p=0.344, so argument-weighing is not claimed as the proven mechanism; false-escalation rate 58.8% (reported
   honestly: the cost of the escalations that merely re-confirmed the
   panel).
 

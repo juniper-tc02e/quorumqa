@@ -31,7 +31,7 @@ least a three-seat panel.
 | Tier | What runs | Latency | Framing |
 |---|---|---|---|
 | **Quorum** *(default)* | 3 solver seats vote independently → Skeptic/Verifier/Judge escalate **only on split** | ~10s unanimous / ~45–90s escalated | The everyday tier |
-| **Tribunal** | Full pipeline forced: panel + Skeptic + Verifier + Judge, always, regardless of unanimity | ~60–90s | The "I need to be sure" button |
+| **Tribunal** | Full pipeline forced: panel + Skeptic + Verifier + Judge, always, regardless of unanimity | ~60–90s | The "show me the work" button — forces the complete audit trail (panel split, Skeptic's attack, every tool call, ruling, surviving dissent). **Not measured to be more accurate** than a single flagship call on our benchmark (net +1, p=0.50, 3 seeds); it buys visibility, not a better answer |
 
 - Unanimous Quorum answers cost ~$0.004; escalated ~$0.05 (measured, n=90
   GPQA benchmark). Tribunal always pays the full pipeline.

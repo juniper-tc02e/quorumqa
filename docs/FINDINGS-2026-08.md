@@ -18,7 +18,7 @@ tool-using tribunal with a flagship judge. It works: escalating **every**
 answer instead of only the split ones is worth **+25 items, zero losses,
 p = 3 × 10⁻⁸** on GPQA-Diamond. But when we finally measured it against the
 obvious alternative — *just call the flagship once* — the whole apparatus came
-out **net +1, p = 0.50, at 4.5× the tokens**. On GPQA-Diamond, QuorumQA is
+out **net +1, p = 0.50, at 4.7× the tokens**. On GPQA-Diamond, QuorumQA is
 dominated by a single flagship call. On SuperGPQA-hard, where the base model
 is 10 points weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a
 compute-matched control shows the gain is **self-consistency sampling, not
@@ -100,7 +100,7 @@ and unanimity is where it stops looking. Everything we tried to detect those:
 | Stronger judge | 9/9 overturns correct, **zero net gain** | 0.50 |
 | Cheap panel scaling N=3→15 | best +3 vs a +5 bar | 0.252 |
 | Deliberation vs self-consistency | tribunal leg +2 of +10 | 0.344 |
-| Whole stack vs one flagship call | net +1 at 4.5× tokens | 0.5000 |
+| Whole stack vs one flagship call | net +1 at 4.7× tokens | 0.5000 |
 
 The self-authored CAS result is the sharpest. We asked the model to write a
 `sympy`-checkable equation for its own answer and ran a real offline

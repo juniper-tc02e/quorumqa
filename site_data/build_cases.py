@@ -99,9 +99,21 @@ def main():
     good_overturns = [c for c in overturns if c["correct"]]
     unanimous = [c for c in cases if not c["escalated"]]
 
-    # The cases that most sharply justify the architecture: the expensive
-    # flagship got it wrong where the cheap society got it right.
+    # Cases where the engine was right and a single flagship call was wrong.
+    #
+    # NOT "the cheap society beat the expensive model": measured 2026-08-03,
+    # 2 of these 5 ESCALATED and therefore consumed a `qwen3.7-max` judge call
+    # -- the same model as the baseline they beat -- so for those two the
+    # engine did not out-perform the flagship, it *routed to* it. Only 3 were
+    # answered by the cheap panel alone. The breakdown is emitted below so the
+    # distinction is available to any consumer rather than lost in one count.
+    #
+    # The aggregate claim is weaker still: on identical items across 3 fresh
+    # seeds the full stack is net +1, p=0.50 against one flagship call
+    # (docs/FINDINGS-2026-08.md).
     beats_flagship = [c for c in cases if c["correct"] and not c["baseline"]["correct"]]
+    bf_panel_only = [c for c in beats_flagship if not c["escalated"]]
+    bf_escalated = [c for c in beats_flagship if c["escalated"]]
 
     stats = {
         "n": n,
@@ -130,6 +142,15 @@ def main():
         "overturns_correct": len(good_overturns),
         "overturn_precision": round(100 * len(good_overturns) / max(len(overturns), 1), 1),
         "beats_flagship": len(beats_flagship),
+        # See the comment at the definition: this count is NOT "cheap beat
+        # expensive" -- the escalated ones used a flagship judge.
+        "flagship_miss_engine_hit": {
+            "total": len(beats_flagship),
+            "panel_only": len(bf_panel_only),
+            "judge_escalated": len(bf_escalated),
+        },
+        "cost_unit": "USD, pre-Token-Plan pricing (superseded 2026-08; see docs/FINDINGS-2026-08.md)",
+        "tokens_per_question": {"engine": 8690, "baseline": 2792},
         "median_latency_s": round(
             sorted(c["latency_s"] for c in cases)[n // 2], 2
         ),
