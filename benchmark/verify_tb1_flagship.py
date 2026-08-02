@@ -265,6 +265,17 @@ def main() -> None:
         print("  Arm A files not found -- nothing to compare.")
         return
 
+    if r["arm_c_run"]:
+        print("  NOTE: arm C is present, so the analysis set S is A n B n C and")
+        print("  is SMALLER than the A n B set used before arm C existed. The")
+        print("  A-vs-B numbers below will therefore differ from any previously")
+        print("  published TB-1 figure. That is the spec's requirement (section 5:")
+        print("  both comparisons on the same S, so arm A's accuracy is one")
+        print("  number in both tables) -- not a contradiction, and not a")
+        print("  correction. Quote the A-vs-B figure together with the S it was")
+        print("  computed on.")
+        print()
+
     for seed, s in r["per_seed"].items():
         print(f"  seed {seed}: arms present {s['arms_present']}, |S|={s['analysis_set_size']}")
         if not s["gate_ok"]:

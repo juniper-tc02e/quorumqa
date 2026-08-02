@@ -473,3 +473,62 @@ def test_majority_differs_is_reported_but_never_gates(tmp_path, monkeypatch):
     assert d["majority_differs_from_first_seat"] == 0.0
     assert d["split_item_rate"] == 1.0
     assert d["degenerate"] is False
+
+
+def test_adding_arm_c_shrinks_s_and_moves_the_a_vs_b_figure(tmp_path, monkeypatch):
+    """Arm C changes the published A-vs-B number, and that is correct.
+
+    S is the intersection of every arm present, so once arm C lands S becomes
+    A n B n C -- smaller than the A n B that TB-1's +1 / p=0.50 was computed on.
+    The spec requires this (section 5: both comparisons on the same S, so arm
+    A's accuracy is ONE number in both tables).
+
+    The hazard is presentational, not statistical: a reader who sees a different
+    A-vs-B after arm C lands will read it as a correction or a contradiction.
+    This pins the mechanism, and main() prints the caveat whenever arm C exists.
+    """
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    # A and B cover everything; arm A wins 6 items outright.
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001),
+           [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001),
+           [_engine_row(q, "A", "B" if i < 6 else "A") for i, q in enumerate(qs)])
+
+    before = verify()["per_seed"][1001]
+    assert before["analysis_set_size"] == 90
+    assert before["comparisons"]["B"]["net"] == 6
+
+    # Arm C drops 5 items: q0/q1/q2 (three of the six arm A had won) plus two
+    # items neither arm disputes. Chosen deliberately -- an earlier version
+    # dropped qs[:5], i.e. FIVE of the six wins, and the assertion below then
+    # failed against a fixture that did not match its own comment.
+    dropped = {"q0", "q1", "q2", "q80", "q81"}
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["A"] * 5) for q in qs if q not in dropped])
+
+    after = verify()["per_seed"][1001]
+    assert after["analysis_set_size"] == 85, "S must shrink to A n B n C"
+    assert after["comparisons"]["B"]["net"] == 3, (
+        "the A-vs-B figure legitimately moves when arm C lands; it is not a "
+        "correction to the earlier number, it is a different analysis set"
+    )
+    assert "C" in after["comparisons"], "A-vs-C must now be computed too"
+
+
+def test_the_output_warns_when_arm_c_changed_the_analysis_set(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    for arm, rows in (("A", [_engine_row(q, "A", "A") for q in qs]),
+                      ("B", [_engine_row(q, "A", "A") for q in qs])):
+        _write(tmp_path / ARM_FILES[arm].format(seed=1001), rows)
+
+    tb1.main()
+    assert "arm C is present" not in capsys.readouterr().out, "no warning without arm C"
+
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(q, "A", ["A", "A", "B", "A", "C"]) for q in qs])
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "arm C is present" in out
+    assert "SMALLER" in out and "not a contradiction" in out
