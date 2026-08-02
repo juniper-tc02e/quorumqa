@@ -720,6 +720,13 @@
       "n_lines": 89,
       "n_records": 0,
       "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "TB1B_universal_gate_supergpqa_seed7.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 89,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
     }
   ],
   "f1_floor": {

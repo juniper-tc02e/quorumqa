@@ -9,9 +9,9 @@ Harbor invocation, or model call was made to produce this report.
 ## 1. What was found
 
 Search roots (Harbor `--jobs-dir` locations, deduplicated):
-- `%LOCALAPPDATA%\Temp\harbor_jobs` (exists)
-- `%LOCALAPPDATA%\Temp\harbor_jobs_pilot` (exists)
-- `%LOCALAPPDATA%\Temp\harbor_jobs_quorumqa` (exists)
+- `C:\Users\ONGJUN~1\AppData\Local\Temp\harbor_jobs` (exists)
+- `C:\Users\ONGJUN~1\AppData\Local\Temp\harbor_jobs_pilot` (exists)
+- `C:\Users\ONGJUN~1\AppData\Local\Temp\harbor_jobs_quorumqa` (exists)
 
 In-repo search for stray agent/Harbor artifacts (`benchmark/results/`, anywhere else under the repo): **0 found** -- none. Harbor writes to its own --jobs-dir, never into this repo.
 

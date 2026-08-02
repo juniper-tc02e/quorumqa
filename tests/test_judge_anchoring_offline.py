@@ -88,8 +88,8 @@ from benchmark.analyze_judge_anchoring import collect, corpus_size
 #: 2026-08-03 entry above for the arithmetic) and then update this block.
 CORPUS_SNAPSHOT = {
     "as_of": "2026-08-03",
-    "n_result_files": 104,
-    "last_added": "TB1B_universal_gate_supergpqa_seed7.jsonl",
+    "n_result_files": 105,
+    "last_added": "TB1_flagship_sc5_gpqa_seed1001.jsonl",
     "escalations": 2624,
     "off_slate": 286,
     "off_slate_correct": 235,
@@ -99,9 +99,9 @@ CORPUS_SNAPSHOT = {
     "unanimous_wrong_recovered": 73,
     "unanimous_right_escalations": 278,
     "unanimous_right_broken": 3,
-    "unanimous_total": 4177,
-    "unanimous_total_wrong": 800,
-    "unanimous_unescalated_wrong": 661,
+    "unanimous_total": 4256,
+    "unanimous_total_wrong": 803,
+    "unanimous_unescalated_wrong": 664,
 }
 
 

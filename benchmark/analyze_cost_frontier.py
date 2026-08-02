@@ -41,6 +41,21 @@ ARMS = {
     "gpqa": {
         "flagship_1x": ("TB1_flagship1x_gpqa_seed{s}.jsonl", (1001, 2311, 3407)),
         "universal_gate": ("lever_universal_gate_gpqa_seed{s}.jsonl", (1001, 2311, 3407)),
+        # TB-1 arm C (flagship SC@5) is DELIBERATELY NOT REGISTERED HERE until
+        # all three of its seeds exist.
+        #
+        # Registering it early looks harmless -- the loader uses only configs
+        # with a committed file -- but it is not. Every point on this frontier
+        # is computed on the per-seed intersection of ALL registered arms, so a
+        # partially-present arm silently shrinks that intersection and moves
+        # figures that are already published. Tried it on 2026-08-03 with one
+        # of three seeds present and flagship_1x shifted 89.4% -> 90.1%,
+        # 2,792 -> 2,745 tok/item, taking F10's caption and the claims ledger
+        # with it. Nine tests failed, which is the only reason it was caught.
+        #
+        # Add the line below once seeds 1001/2311/3407 have all landed, then
+        # rebuild F10/F13 and re-run the ledger check in the same commit:
+        #   "flagship_sc5": ("TB1_flagship_sc5_gpqa_seed{s}.jsonl", (1001, 2311, 3407)),
     },
     "supergpqa": {
         "flagship_1x": ("lever_baseline_supergpqa_seed{s}.jsonl", (7, 42, 123)),

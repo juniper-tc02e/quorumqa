@@ -1,0 +1,1396 @@
+=== TB-1B screen: universal_gate on SuperGPQA-hard, seed 7 ===
+Mon Aug  3 00:42:02 MPST 2026
+[08/03/26 00:42:06] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/main/README.                
+                             md "HTTP/1.1 307 Temporary                        
+                             Redirect"                                         
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/api/resolve                
+                             -cache/datasets/m-a-p/SuperGPQA/44                
+                             30d4458112c7d4497fdcf94d7cc223313d                
+                             6acf/README.md "HTTP/1.1 200 OK"                  
+[08/03/26 00:42:07] INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/Super                
+                             GPQA.py "HTTP/1.1 404 Not Found"                  
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://s3.amazonaws.com/datasets.                
+                             huggingface.co/datasets/datasets/m                
+                             -a-p/SuperGPQA/m-a-p/SuperGPQA.py                 
+                             "HTTP/1.1 404 Not Found"                          
+[08/03/26 00:42:08] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/revision/4430d44                
+                             58112c7d4497fdcf94d7cc223313d6acf                 
+                             "HTTP/1.1 200 OK"                                 
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/.hugg                
+                             ingface.yaml "HTTP/1.1 404 Not                    
+                             Found"                                            
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://datasets-server.huggingfac                
+                             e.co/info?dataset=m-a-p/SuperGPQA                 
+                             "HTTP/1.1 200 OK"                                 
+[08/03/26 00:42:09] INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf/data                
+                             ?recursive=true&expand=false                      
+                             "HTTP/1.1 404 Not Found"                          
+                    INFO     HTTP Request: GET                  _client.py:1025
+                             https://huggingface.co/api/dataset                
+                             s/m-a-p/SuperGPQA/tree/4430d445811                
+                             2c7d4497fdcf94d7cc223313d6acf?recu                
+                             rsive=false&expand=false "HTTP/1.1                
+                             200 OK"                                           
+                    INFO     HTTP Request: HEAD                 _client.py:1025
+                             https://huggingface.co/datasets/m-                
+                             a-p/SuperGPQA/resolve/4430d4458112                
+                             c7d4497fdcf94d7cc223313d6acf/datas                
+                             et_infos.json "HTTP/1.1 404 Not                   
+                             Found"                                            
+                    INFO     Loaded 90 SuperGPQA items    load_supergpqa.py:198
+                             (difficulty=hard, seed=7,                         
+                             max_choices=4)                                    
+                    INFO     Loaded 90 supergpqa      lever_experiments.py:2228
+                             questions (seed=7) for                            
+                             lever=universal_gate                              
+[08/03/26 00:42:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             ListToolsRequest                                  
+[08/03/26 00:42:35] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:42:36] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:42:54] INFO     8a331a10506a4ff6b543fc5b lever_experiments.py:2113
+                             2ac2502f                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:43:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:43:34] INFO     b278c269529d444e97014e86 lever_experiments.py:2113
+                             de71b135                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:43:37] INFO     811c704287184f8fa520358d lever_experiments.py:2113
+                             c0ea2493                                          
+                             [universal_gate]:                                 
+                             final=B(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:44:36] INFO     b389bd8fda16458da390b0ae lever_experiments.py:2113
+                             efa9328c                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:44:53] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:45:17] INFO     749c18edf45840fca90d356b lever_experiments.py:2113
+                             bed0fe5b                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:45:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:45:39] INFO     a14c016f261f4b46a1f62c1a lever_experiments.py:2113
+                             4096bd86                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:46:04] INFO     a63462f4ff9e44289d3c9e4a lever_experiments.py:2113
+                             91314250                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:46:39] INFO     843e623807884c63a38376e9 lever_experiments.py:2113
+                             bd6d6f14                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:46:43] INFO     b68e89ad898246c4bc116ff4 lever_experiments.py:2113
+                             d353e4b9                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:47:03] INFO     4068f6cb89214b0a86c16c24 lever_experiments.py:2113
+                             97caeb6e                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:47:19] INFO     cb1f3d75e5a9402a9bb7755b lever_experiments.py:2113
+                             6f6a029c                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:47:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:47:33] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:47:55] INFO     c9aaec36dd7d48d0b90c34c9 lever_experiments.py:2113
+                             955bdf1b                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:48:06] INFO     2ee8b1af76f04527a574124d lever_experiments.py:2113
+                             f6476a8d                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:48:20] INFO     ff414ca699a74f7484650a35 lever_experiments.py:2113
+                             95512055                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:48:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:48:38] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:48:44] INFO     2cf2296143904690a6c6f376 lever_experiments.py:2113
+                             236839d2                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:48:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:49:03] INFO     5d4e9507100c48c89db59015 lever_experiments.py:2113
+                             820c6059                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:49:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:49:25] INFO     7c20fd3e214f4e438614b091 lever_experiments.py:2113
+                             fccce433                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:49:36] INFO     2499f7cec22b4bda8f96d061 lever_experiments.py:2113
+                             a1fae7af                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:49:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:49:59] INFO     711025f0562b41118c0c383a lever_experiments.py:2113
+                             fdc77215                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:50:01] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:50:13] INFO     32d56386e78f4e16bfe38d9e lever_experiments.py:2113
+                             a73fd02a                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:50:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:50:33] INFO     d0fe7c1a74314662ac5ed5f2 lever_experiments.py:2113
+                             538e7b13                                          
+                             [universal_gate]:                                 
+                             final=C(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:50:48] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:51:08] INFO     077aea7da31e4b94886be971 lever_experiments.py:2113
+                             3580db0d                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:51:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:51:36] INFO     8fb8ca1cd7114cd8b8dcad39 lever_experiments.py:2113
+                             53f68a44                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:51:58] INFO     24b548b324684a8490d46d47 lever_experiments.py:2113
+                             6bde792c                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:51:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:52:05] INFO     413f8d70916547989ed51d11 lever_experiments.py:2113
+                             16a4551a                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:52:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:52:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:53:15] INFO     5f0bde5deeae40a88762eea5 lever_experiments.py:2113
+                             20849455                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:53:53] INFO     facd6dd1e2074073adcfcac4 lever_experiments.py:2113
+                             8eab3afb                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:54:13] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:54:30] INFO     920d5a4aae764dc8962d36ff lever_experiments.py:2113
+                             4d95710a                                          
+                             [universal_gate]:                                 
+                             final=D(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:54:48] INFO     10f542902dfa44d795fba244 lever_experiments.py:2113
+                             e7f1a69c                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:54:54] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:55:06] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:55:35] INFO     fc9a01ab2a2344cabfe9c2bd lever_experiments.py:2113
+                             94be487f                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:55:39] INFO     d9f3da47d50840a79c510961 lever_experiments.py:2113
+                             69d25583                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:55:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:56:01] INFO     de43b1c48f7b410695b2a4da lever_experiments.py:2113
+                             f5fe3f31                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:56:17] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:56:42] INFO     8f9ae9b94a0a4e66ab56225f lever_experiments.py:2113
+                             7a356fd1                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:57:00] INFO     05edf34d21464999ad82c54b lever_experiments.py:2113
+                             ad66a005                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:57:03] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:57:19] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:57:57] INFO     f8e740921e964dfc9922e08b lever_experiments.py:2113
+                             7f5e815b                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:58:10] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:58:28] INFO     ccbff2992c7f49c48a8fe254 lever_experiments.py:2113
+                             e1fff783                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:58:35] INFO     5cbfbf1108434eca91c070d1 lever_experiments.py:2113
+                             ed1c0bc6                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:58:52] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:58:54] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 00:59:42] INFO     5fe6a509598c4dd5aec2c8f7 lever_experiments.py:2113
+                             abc0d259                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 00:59:50] INFO     ea9364829af04d188546f8d3 lever_experiments.py:2113
+                             69483d46                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 00:59:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:00:06] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:00:21] INFO     fa49b578c45543d8847bac91 lever_experiments.py:2113
+                             a1e14045                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:00:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:00:47] INFO     c8be6f10c6b04b879a5fe393 lever_experiments.py:2113
+                             fb1b38f8                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:01:08] INFO     b81111afa517415f8f5b91a1 lever_experiments.py:2113
+                             7ac991ce                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:01:11] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:01:20] INFO     0a3895b8a5cc4239a2a6e96c lever_experiments.py:2113
+                             1289011d                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:01:29] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:01:44] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:02:16] INFO     bfba15ab92174bf5b537cadc lever_experiments.py:2113
+                             675dafdb                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:02:26] INFO     1d1666032573496f84efe333 lever_experiments.py:2113
+                             d572f1e2                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:02:42] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:03:07] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:03:10] INFO     2789bb6861f94992954c4df0 lever_experiments.py:2113
+                             0ec8e656                                          
+                             [universal_gate]:                                 
+                             final=C(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:03:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:04:28] INFO     93218c202d734e8cacaa4dff lever_experiments.py:2113
+                             4cd9a761                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:04:46] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:05:02] INFO     e301bd85789b4c4fa02b60e3 lever_experiments.py:2113
+                             dba62e5c                                          
+                             [universal_gate]:                                 
+                             final=B(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+                    INFO     fe7c522a688a4b3c952b4ae9 lever_experiments.py:2113
+                             5a5d1ae8                                          
+                             [universal_gate]:                                 
+                             final=B(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:05:23] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:05:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:05:55] INFO     4cd0be5521844b3781d88e8a lever_experiments.py:2113
+                             29433b39                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:06:14] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:06:14] INFO     2e1d297065d247068eaa68f6 lever_experiments.py:2113
+                             585f9764                                          
+                             [universal_gate]:                                 
+                             final=C(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:06:26] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:06:34] INFO     e020184788314d25a2ea1828 lever_experiments.py:2113
+                             d568538a                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:06:46] INFO     12a6d09d1179401498c2cae7 lever_experiments.py:2113
+                             d2d886a8                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:07:04] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:07:05] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:07:38] INFO     492ac21c1ff94ba49de684cf lever_experiments.py:2113
+                             b6527930                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:07:52] INFO     18aa367ae47744199ba63308 lever_experiments.py:2113
+                             b5c581bf                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:07:58] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:08:06] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:08:41] INFO     01ac3e46a5f04c48b3ad3d21 lever_experiments.py:2113
+                             e7a8eacd                                          
+                             [universal_gate]:                                 
+                             final=D(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:09:01] INFO     05ac97570c2a40ab94f83a5c lever_experiments.py:2113
+                             f3aa09df                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:09:04] INFO     54bfc8311916428a8f2a43c1 lever_experiments.py:2113
+                             7ca17c7a                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:09:22] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:09:25] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:09:43] INFO     a9ab2cd572f04f88b629deb5 lever_experiments.py:2113
+                             9e486adf                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:10:11] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:10:39] INFO     515b67c43f064c15bb0154d5 lever_experiments.py:2113
+                             46f88277                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:10:57] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:11:16] INFO     e8e40ae579384b51b006d7d5 lever_experiments.py:2113
+                             0d8d039d                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:11:26] INFO     d7f9b5a785a94530a9e73765 lever_experiments.py:2113
+                             6ec0dcaa                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:11:34] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:11:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:12:25] INFO     9da468facb58464982465242 lever_experiments.py:2113
+                             468c9a13                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:12:43] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:13:41] INFO     8aca8b27a1674720bcb8271a lever_experiments.py:2113
+                             46213d95                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:13:59] INFO     933f999d89984b4ea9c59bff lever_experiments.py:2113
+                             ad3405ef                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:14:00] ERROR    abf7231db16a4ccfa58e0973 lever_experiments.py:2111
+                             e98e91c1: DROPPED after                           
+                             unrecoverable error                               
+                             +- Traceback (most rec-+                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connectionpool.py: |                          
+                             | 534 in _make_request |                          
+                             |                      |                          
+                             |    531               |                          
+                             |    532         # Rec |                          
+                             |    533         try:  |                          
+                             | >  534             r |                          
+                             |    535         excep |                          
+                             |    536             s |                          
+                             |    537             r |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connection.py:571  |                          
+                             | in getresponse       |                          
+                             |                      |                          
+                             |    568         _shut |                          
+                             |    569               |                          
+                             |    570         # Get |                          
+                             | >  571         httpl |                          
+                             |    572               |                          
+                             |    573         try:  |                          
+                             |    574             a |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\http\client. |                          
+                             | py:1430 in           |                          
+                             | getresponse          |                          
+                             |                      |                          
+                             |   1427               |                          
+                             |   1428         try:  |                          
+                             |   1429             t |                          
+                             | > 1430               |                          
+                             |   1431             e |                          
+                             |   1432               |                          
+                             |   1433               |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\http\client. |                          
+                             | py:331 in begin      |                          
+                             |                      |                          
+                             |    328               |                          
+                             |    329         # rea |                          
+                             |    330         while |                          
+                             | >  331             v |                          
+                             |    332             i |                          
+                             |    333               |                          
+                             |    334             # |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\http\client. |                          
+                             | py:292 in            |                          
+                             | _read_status         |                          
+                             |                      |                          
+                             |    289         self. |                          
+                             |    290               |                          
+                             |    291     def _read |                          
+                             | >  292         line  |                          
+                             |    293         if le |                          
+                             |    294             r |                          
+                             |    295         if se |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\socket.py:72 |                          
+                             | 0 in readinto        |                          
+                             |                      |                          
+                             |   717             ra |                          
+                             |   718         while  |                          
+                             |   719             tr |                          
+                             | > 720                |                          
+                             |   721             ex |                          
+                             |   722                |                          
+                             |   723                |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\ssl.py:1251  |                          
+                             | in recv_into         |                          
+                             |                      |                          
+                             |   1248               |                          
+                             |   1249               |                          
+                             |   1250               |                          
+                             | > 1251             r |                          
+                             |   1252         else: |                          
+                             |   1253             r |                          
+                             |   1254               |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\ssl.py:1103  |                          
+                             | in read              |                          
+                             |                      |                          
+                             |   1100             r |                          
+                             |   1101         try:  |                          
+                             |   1102             i |                          
+                             | > 1103               |                          
+                             |   1104             e |                          
+                             |   1105               |                          
+                             |   1106         excep |                          
+                             +----------------------+                          
+                             TimeoutError: The read                            
+                             operation timed out                               
+                                                                               
+                             The above exception was                           
+                             the direct cause of the                           
+                             following exception:                              
+                                                                               
+                             +- Traceback (most rec-+                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\adapters.py:696   |                          
+                             | in send              |                          
+                             |                      |                          
+                             |   693             re |                          
+                             |   694                |                          
+                             |   695         try:   |                          
+                             | > 696             re |                          
+                             |   697                |                          
+                             |   698                |                          
+                             |   699                |                          
+                             |       accept Iterabl |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connectionpool.py: |                          
+                             | 842 in urlopen       |                          
+                             |                      |                          
+                             |    839             e |                          
+                             |    840               |                          
+                             |    841               |                          
+                             | >  842             r |                          
+                             |    843               |                          
+                             |    844             ) |                          
+                             |    845             r |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\util\retry.py:498  |                          
+                             | in increment         |                          
+                             |                      |                          
+                             |   495         elif e |                          
+                             |   496             #  |                          
+                             |   497             if |                          
+                             | > 498                |                          
+                             |   499             el |                          
+                             |   500                |                          
+                             |   501                |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\util\util.py:39 in |                          
+                             | reraise              |                          
+                             |                      |                          
+                             |   36     try:        |                          
+                             |   37         if valu |                          
+                             |   38             rai |                          
+                             | > 39         raise v |                          
+                             |   40     finally:    |                          
+                             |   41         value = |                          
+                             |   42         tb = No |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connectionpool.py: |                          
+                             | 788 in urlopen       |                          
+                             |                      |                          
+                             |    785             r |                          
+                             |    786               |                          
+                             |    787             # |                          
+                             | >  788             r |                          
+                             |    789               |                          
+                             |    790               |                          
+                             |    791               |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connectionpool.py: |                          
+                             | 536 in _make_request |                          
+                             |                      |                          
+                             |    533         try:  |                          
+                             |    534             r |                          
+                             |    535         excep |                          
+                             | >  536             s |                          
+                             |    537             r |                          
+                             |    538               |                          
+                             |    539         # Set |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\urllib |                          
+                             | 3\connectionpool.py: |                          
+                             | 367 in               |                          
+                             | _raise_timeout       |                          
+                             |                      |                          
+                             |    364         """Is |                          
+                             |    365               |                          
+                             |    366         if is |                          
+                             | >  367             r |                          
+                             |    368               |                          
+                             |    369             ) |                          
+                             |    370               |                          
+                             +----------------------+                          
+                             ReadTimeoutError:                                 
+                             HTTPSConnectionPool(host                          
+                             ='token-plan.ap-southeas                          
+                             t-1.maas.aliyuncs.com',                           
+                             port=443): Read timed                             
+                             out. (read timeout=300)                           
+                                                                               
+                             During handling of the                            
+                             above exception, another                          
+                             exception occurred:                               
+                                                                               
+                             +- Traceback (most rec-+                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\benchmark\ |                          
+                             | lever_experiments.py |                          
+                             | :2106 in _run_one    |                          
+                             |                      |                          
+                             |   2103 ):            |                          
+                             |   2104     try:      |                          
+                             |   2105         async |                          
+                             | > 2106             r |                          
+                             |   2107               |                          
+                             |   2108               |                          
+                             |   2109             ) |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\benchmark\ |                          
+                             | lever_experiments.py |                          
+                             | :2092 in             |                          
+                             | run_question_lever   |                          
+                             |                      |                          
+                             |   2089         # ver |                          
+                             |   2090         # non |                          
+                             |   2091         # tri |                          
+                             | > 2092         resul |                          
+                             |   2093             c |                          
+                             |   2094             r |                          
+                             |   2095         )     |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\benchmark\ |                          
+                             | lever_experiments.py |                          
+                             | :1842 in _tribunal   |                          
+                             |                      |                          
+                             |   1839         clien |                          
+                             |        evidence_bloc |                          
+                             |   1840     )         |                          
+                             |   1841     calls.ext |                          
+                             | > 1842     verdict,  |                          
+                             |   1843         adjud |                          
+                             |        skeptic_rebut |                          
+                             |   1844     )         |                          
+                             |   1845     calls.app |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\asyncio\thre |                          
+                             | ads.py:25 in         |                          
+                             | to_thread            |                          
+                             |                      |                          
+                             |   22     loop = even |                          
+                             |   23     ctx = conte |                          
+                             |   24     func_call = |                          
+                             | > 25     return awai |                          
+                             |   26                 |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\AppData\Local\Pr |                          
+                             | ograms\Python\Python |                          
+                             | 312\Lib\concurrent\f |                          
+                             | utures\thread.py:59  |                          
+                             | in run               |                          
+                             |                      |                          
+                             |    56             re |                          
+                             |    57                |                          
+                             |    58         try:   |                          
+                             | >  59             re |                          
+                             |    60         except |                          
+                             |    61             se |                          
+                             |    62             #  |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\src\quorum |                          
+                             | qa\engine\judge.py:4 |                          
+                             | 8 in adjudicate      |                          
+                             |                      |                          
+                             |   45         '"disse |                          
+                             |   46         '"overt |                          
+                             |   47     )           |                          
+                             | > 48     result = cl |                          
+                             |      role="judge")   |                          
+                             |   49     dissent: Op |                          
+                             |   50     verdict = J |                          
+                             |   51         final_l |                          
+                             |      fallback=solver |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\src\quorum |                          
+                             | qa\qwen_client.py:20 |                          
+                             | 7 in chat_json       |                          
+                             |                      |                          
+                             |   204         spent_ |                          
+                             |   205         spent_ |                          
+                             |   206         for at |                          
+                             | > 207             co |                          
+                             |   208                |                          
+                             |       max_tokens=max |                          
+                             |   209                |                          
+                             |   210             )  |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\src\quorum |                          
+                             | qa\qwen_client.py:16 |                          
+                             | 4 in chat            |                          
+                             |                      |                          
+                             |   161         # in t |                          
+                             |   162         # Chem |                          
+                             |   163         # from |                          
+                             | > 164         resp = |                          
+                             |       timeout=self._ |                          
+                             |   165         resp.r |                          
+                             |   166         data = |                          
+                             |   167                |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\api.py:134 in     |                          
+                             | post                 |                          
+                             |                      |                          
+                             |   131     :rtype: re |                          
+                             |   132     """        |                          
+                             |   133                |                          
+                             | > 134     return req |                          
+                             |   135                |                          
+                             |   136                |                          
+                             |   137 def put(       |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\api.py:71 in      |                          
+                             | request              |                          
+                             |                      |                          
+                             |    68     # avoid le |                          
+                             |    69     # cases, a |                          
+                             |    70     with sessi |                          
+                             | >  71         return |                          
+                             |    72                |                          
+                             |    73                |                          
+                             |    74 def get(       |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\sessions.py:651   |                          
+                             | in request           |                          
+                             |                      |                          
+                             |   648             "a |                          
+                             |   649         }      |                          
+                             |   650         send_k |                          
+                             | > 651         resp = |                          
+                             |   652                |                          
+                             |   653         return |                          
+                             |   654                |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\sessions.py:784   |                          
+                             | in send              |                          
+                             |                      |                          
+                             |   781         start  |                          
+                             |   782                |                          
+                             |   783         # Send |                          
+                             | > 784         r = ad |                          
+                             |   785                |                          
+                             |   786         # Tota |                          
+                             |   787         elapse |                          
+                             |                      |                          
+                             | C:\Users\Ong Jun     |                          
+                             | Kai\Documents\Qwen   |                          
+                             | Hackathon\.venv\Lib\ |                          
+                             | site-packages\reques |                          
+                             | ts\adapters.py:742   |                          
+                             | in send              |                          
+                             |                      |                          
+                             |   739                |                          
+                             |   740                |                          
+                             |   741             el |                          
+                             | > 742                |                          
+                             |   743             el |                          
+                             |   744                |                          
+                             |   745             el |                          
+                             +----------------------+                          
+                             ReadTimeout:                                      
+                             HTTPSConnectionPool(host                          
+                             ='token-plan.ap-southeas                          
+                             t-1.maas.aliyuncs.com',                           
+                             port=443): Read timed                             
+                             out. (read timeout=300)                           
+[08/03/26 01:14:08] INFO     9ae52f5b63d9459a833c6e10 lever_experiments.py:2113
+                             c0539a4d                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:14:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:14:21] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:14:23] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:15:11] INFO     6b347be4d8ba43e2b425fd50 lever_experiments.py:2113
+                             4ad16f4c                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:15:16] INFO     5272de2f504946d1beff3dbb lever_experiments.py:2113
+                             51bea3f3                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:15:30] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:15:40] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:16:27] INFO     c4f6b8482b184c0b98b6d72d lever_experiments.py:2113
+                             00204932                                          
+                             [universal_gate]:                                 
+                             final=D(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:16:36] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:16:59] INFO     776b536a60e241f2b75b94ac lever_experiments.py:2113
+                             cc6dff2c                                          
+                             [universal_gate]:                                 
+                             final=B(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:17:15] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:17:17] INFO     4f85b84235914d259dbdd893 lever_experiments.py:2113
+                             1be5d3a9                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:17:47] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:17:59] INFO     f1c5fbceb2124a8bb11963f7 lever_experiments.py:2113
+                             6c8771b3                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+                    INFO     080a910849bd4aae8dbdeb3d lever_experiments.py:2113
+                             7a6e835b                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:18:05] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:18:59] INFO     b06afc3997974662986e009c lever_experiments.py:2113
+                             41226c9c                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:19:12] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:20:01] INFO     3f48e266da744ae6b9e99e76 lever_experiments.py:2113
+                             2b67954f                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:20:12] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:20:20] INFO     7a71c086988a45f6823dbb87 lever_experiments.py:2113
+                             48e89f66                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:20:35] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:20:57] INFO     a9f34192579d4f448b378d73 lever_experiments.py:2113
+                             3eb8d3bf                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:20:59] INFO     e286dac07362459cb41b0c9a lever_experiments.py:2113
+                             dca02747                                          
+                             [universal_gate]:                                 
+                             final=A(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:21:02] INFO     a462a6fe458b4b6e8b609cf0 lever_experiments.py:2113
+                             ef896b52                                          
+                             [universal_gate]:                                 
+                             final=A(wrong,                                    
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:21:13] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:21:17] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:21:24] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:21:39] INFO     2811febd3e9a4348a352c0c2 lever_experiments.py:2113
+                             b33ee464                                          
+                             [universal_gate]:                                 
+                             final=B(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:21:50] INFO     0e4c4ac2694d4b88b43bf6bb lever_experiments.py:2113
+                             d6f4c356                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:22:02] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:22:10] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:22:46] INFO     9b67dac06fc448afa19a3372 lever_experiments.py:2113
+                             8a469cec                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:23:13] INFO     15e29ed7c9d1459484348074 lever_experiments.py:2113
+                             abe10661                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:23:28] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:24:39] INFO     1b003811eaf443e492e6717f lever_experiments.py:2113
+                             a934b15b                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+[08/03/26 01:24:50] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:24:57] INFO     8c293442d9444277866f4939 lever_experiments.py:2113
+                             68187325                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:25:13] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:25:19] INFO     ec301d7b596f4f45afef08dc lever_experiments.py:2113
+                             4448910c                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:25:30] INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+                    INFO     Processing request of type           server.py:733
+                             CallToolRequest                                   
+[08/03/26 01:25:56] INFO     2761d3d5298f4a4a8b52db20 lever_experiments.py:2113
+                             fc0343cb                                          
+                             [universal_gate]:                                 
+                             final=D(correct,                                  
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:26:03] INFO     f9d8f390f4c348838f3d42e5 lever_experiments.py:2113
+                             c15fbb24                                          
+                             [universal_gate]:                                 
+                             final=D(wrong,                                    
+                             escalated=True,                                   
+                             universal-unconditional)                          
+                             cost=$0.00000                                     
+[08/03/26 01:27:13] INFO     620f491d9a9542fca57a62d2 lever_experiments.py:2113
+                             799d97a6                                          
+                             [universal_gate]:                                 
+                             final=C(correct,                                  
+                             escalated=True)                                   
+                             cost=$0.00000                                     
+                    WARNING  1/90 questions dropped   lever_experiments.py:2291
+                             due to unrecoverable                              
+                             errors                                            
+[08/03/26 01:27:14] INFO     Wrote 89 results to      lever_experiments.py:2297
+                             benchmark\results\TB1B_u                          
+                             niversal_gate_supergpqa_                          
+                             seed7.jsonl                                       
+=== screen finished ===
+Mon Aug  3 01:27:14 MPST 2026

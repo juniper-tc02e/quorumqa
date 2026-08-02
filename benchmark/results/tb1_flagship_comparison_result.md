@@ -94,6 +94,41 @@ to interpret a *null* — the compute asymmetry only ever threatened a positive.
 Arm B′ (the prompt-richness control) is cancelled for the same reason: it
 existed to bound a confound in a positive result.
 
+### 5.1 ⚠ The cancellation was REVERSED on 2026-08-03. Arm C was fired.
+
+Recording this as an overturned decision rather than quietly absorbing the
+data — a test (`test_arm_c_remains_unrun_by_design`) existed specifically to
+force this paragraph to be written, and it is the only reason the reversal was
+noticed rather than silently landing.
+
+**What the cancellation got right:** arm C cannot rescue an accuracy claim, and
+attribution-of-a-win is indeed void when there is no win.
+
+**What it missed:** arm C answers a *second* question the cancellation never
+considered. A-vs-B establishes that the stack **ties one flagship call**.
+A-vs-C establishes whether the stack is **dominated at the same token budget** —
+whether the 13,175 tok/item it spends would buy more accuracy spent on plain
+sampling instead. That is a materially stronger and more useful claim, and it is
+the one a reader deciding whether to build this architecture actually needs.
+
+**Its second supporting reason is now falsified.** The cancellation argued that
+"same-family sampling has failed to scale twice in this repo… so a flagship SC@5
+arm is unlikely to beat either A or B." Measured at seed 1001: flagship SC@5
+scores **79/85 against the stack's 78/85**, with mean per-sample accuracy
+**92.3%**. It did beat arm A. The prediction was reasonable and wrong, which is
+the ordinary reason to run an experiment rather than reason about it.
+
+**Cost, stated plainly:** ~4.0M tokens, the same 13.6% of the week-1 cap the
+cancellation called waste. That judgement was defensible on the information
+available then; it is being overridden with the reason above, not ignored.
+
+**Its third reason still stands** and is worth keeping: A-vs-B needed no
+compute-matching to interpret a *null*, because the compute asymmetry only ever
+threatened a positive. Arm C is not a correction to A-vs-B. It is a different
+question.
+
+Results in §5.2 below once all three seeds land.
+
 ## 6. What survives, honestly
 
 Nothing here rescues an accuracy claim on GPQA-Diamond. What remains true:
