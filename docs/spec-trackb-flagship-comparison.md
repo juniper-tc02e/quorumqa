@@ -197,7 +197,7 @@ analysed on the intersection S defined in §5.
 | **A** `universal_gate` | scaffolded flagship, already run | **RUN — no new spend.** 90/89/90 rows |
 | **B** flagship 1× solo | `--lever baseline` | **FIRE — falsification test** |
 | **B′** flagship 1×, rich prompt | prompt-richness control, 1 seed | **FIRE after build** — diagnostic only, no bar |
-| **C** flagship SC @ N=5 | compute-matched, diversity-matched | **HELD** until §4.1 pre-flight passes |
+| **C** flagship SC @ N=5 | compute-matched, diversity-matched | **PRE-FLIGHT PASSED 2026-08-03, FIRING.** 5/5 returned, mean pairwise agreement 0.920 (<1.0 required), temps cycling 0.3/0.6/0.9 matching arm A, tier confirmed `qwen3.7-max` thinking=True from `src/quorumqa/config.py` rather than from this spec's description of it. 14,740 tok/item — slightly OVER-matching `universal_gate`'s 13,175, the conservative direction. |
 
 ### 2.1 Arm B — flagship 1× solo (the falsification comparator)
 
@@ -435,6 +435,28 @@ the exact failure that required retracting `flagship_panel`'s mechanism.
 4. **Degeneracy kill (arm C).** If arm C's mean pairwise seat agreement is
    ≈ 1.0, the samples are degenerate, the control is defeated by construction,
    and the A-vs-C comparison is void rather than favourable.
+
+   > **Quantified 2026-08-03, before arm C's result existed.** "≈ 1.0" is not a
+   > threshold, and `verify_tb1_flagship.py` only *printed* agreement without
+   > evaluating it — so this clause was unenforceable and would have been
+   > settled after seeing the number. That matters more here than elsewhere
+   > because the incentive is one-directional: **voiding A-vs-C is the outcome
+   > that protects arm A's mechanism claim.**
+   >
+   > Fixed while seed 1001 was still running, with only the §4.1 pre-flight
+   > (5 items, agreement 0.920) and a running item *count* observed — no
+   > accuracy read. Two conditions, either sufficient:
+   >
+   > | condition | value | why |
+   > |---|---|---|
+   > | mean pairwise agreement ≥ **0.98** | `DEGENERACY_MAX_AGREEMENT` | ~18 of 900 pairs disagree; SC can move only a handful of items |
+   > | items where the 5 seats split at all < **5%** | `DEGENERACY_MIN_SPLIT_ITEM_RATE` | under ~4 of 90; voting over samples that never disagree *is* a single call |
+   >
+   > A third figure — how often the majority differs from the first seat — is
+   > reported and **deliberately not a kill**, because that is the effect under
+   > test and gating on it would condition the control's admissibility on its
+   > own result. Both thresholds carry bounds-checking tests so loosening them
+   > later is a visible edit, not a quiet nudge.
 
 ## 7. Cost — tokens *and* dollars
 
