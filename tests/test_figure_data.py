@@ -322,3 +322,40 @@ def test_usd_guard_pattern_matches_cost_and_dollar_variants():
         assert _COST_PATTERN.search(name), f"expected {name!r} to match the USD guard pattern"
     for name in ["total_tokens", "accuracy", "n_common_items"]:
         assert not _COST_PATTERN.search(name), f"did not expect {name!r} to match the USD guard pattern"
+
+
+# ---------------------------------------------------------------------------
+# Retired point estimates must never be plotted as frontier points.
+# Added 2026-08-02: f04_accuracy_vs_tokens_frontier.svg was found publishing
+# qwen3.8_solo at 93.6% as the HIGHEST GPQA point with
+# on_pareto_frontier=True -- a number D0's own kill clause retired to the
+# interval [83.3%, 94.4%] on 2026-07-30.
+# ---------------------------------------------------------------------------
+
+
+def test_retired_point_estimates_are_declared():
+    from benchmark.figure_data import RETIRED_POINT_ESTIMATES
+
+    assert "qwen3.8_solo" in RETIRED_POINT_ESTIMATES
+    assert "83.3" in RETIRED_POINT_ESTIMATES["qwen3.8_solo"]
+
+
+def test_every_retired_config_also_carries_a_contamination_footnote():
+    """A retirement is strictly stronger than contamination; anything retired
+    must at minimum still be footnoted wherever it appears."""
+    from benchmark.figure_data import CONTAMINATION_FOOTNOTES, RETIRED_POINT_ESTIMATES
+
+    for config in RETIRED_POINT_ESTIMATES:
+        assert config in CONTAMINATION_FOOTNOTES, f"{config} retired but not footnoted"
+
+
+def test_the_qwen38_footnote_states_the_retirement_not_just_the_bias():
+    """The pre-2026-07-30 footnote called it an 'upper-biased point estimate,
+    not a settled bar'. That predates the kill clause firing and understates
+    it: the estimate is withdrawn, not merely biased."""
+    from benchmark.figure_data import CONTAMINATION_FOOTNOTES
+
+    note = CONTAMINATION_FOOTNOTES["qwen3.8_solo"]
+    assert "RETIRED" in note
+    assert "[83.3%, 94.4%]" in note
+    assert "Pareto" in note, "the footnote must warn against frontier use specifically"

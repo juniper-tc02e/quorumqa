@@ -77,11 +77,15 @@ CONTAMINATION_FOOTNOTES: dict[str, str] = {
         "pattern, not a clean paired comparison at n=90."
     ),
     "qwen3.8_solo": (
-        "73/78 with 12 timeout/429 drops -- the same survivorship "
-        "contamination used to disqualify qwen38_panel's pooled 87.3%, but "
-        "the correction was never applied to this row "
-        "(docs/capability-roadmap.md item D0). Upper-biased point estimate, "
-        "not a settled bar."
+        "POINT ESTIMATE RETIRED 2026-07-30 by D0's own pre-registered kill "
+        "clause. Three paced retries recovered only 2 of 12 missing items "
+        "(78->80/90); the residual failures are server-side 504s, not client "
+        "timeouts, so they are structural. The honest figure is the "
+        "imputation INTERVAL [83.3%, 94.4%], not 93.6% -- which was the "
+        "survivor-only rate. Any figure plotting 93.6% as a point, and "
+        "especially as a Pareto-frontier point, is showing a number this "
+        "repo has retracted. See "
+        "benchmark/results/qwen38_bar_repair_preregistration.md."
     ),
     "qwen38_panel": (
         "30% timeout drop rate (27/90), concentrated in the hardest "
@@ -99,6 +103,26 @@ CONTAMINATION_FOOTNOTES: dict[str, str] = {
 #: was invalidated..."). No AIME row may appear in the ledger until a
 #: clean re-run lands with its own result file.
 EXCLUDED_BENCHMARKS = frozenset({"AIME"})
+
+#: Configs whose POINT ESTIMATE has been formally retired by a pre-registered
+#: kill clause. These are not merely "contaminated" (which a footnote can
+#: carry) -- the repo has withdrawn the number itself, so plotting it as a
+#: point, and above all as a Pareto-frontier point, republishes a retraction.
+#:
+#: `qwen3.8_solo`: retired 2026-07-30. The 93.6% was the survivor-only rate
+#: over 73/78; after three paced retries recovered 2 of 12 missing items the
+#: honest figure is the imputation interval [83.3%, 94.4%]. It appeared in
+#: `docs/figures/f04_accuracy_vs_tokens_frontier.svg` as the HIGHEST GPQA
+#: point and was marked on_pareto_frontier=True -- i.e. the retracted number
+#: was doing load-bearing work in a published figure. Found 2026-08-02 while
+#: building the TB-1 paired frontier.
+#:
+#: A frontier is a claim about what is achievable. A retired estimate cannot
+#: support one, so these configs must be excluded from any frontier
+#: computation or drawn as an interval, never as a point.
+RETIRED_POINT_ESTIMATES: dict[str, str] = {
+    "qwen3.8_solo": "retired 2026-07-30 by D0's kill clause; honest figure is the interval [83.3%, 94.4%]",
+}
 
 _COST_PATTERN = re.compile(r"usd|cost|dollar", re.IGNORECASE)
 
