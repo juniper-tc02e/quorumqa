@@ -304,6 +304,34 @@ Publishing these because a record that only grows is not a record.
   a transposed seed pair and an overstated recovery rate in our own drafts.
 - **Never re-pin a drifting test without proving the drift is attributable.**
 
+### 7.1 The discipline is now mechanically enforced, because practising it was not enough
+
+Every item above is a *habit*, and on 2026-08-03 a five-way audit found the
+habits had failed in eight places at once — a p-value published at two values, a
+token multiple at two, a retracted estimate still setting a Pareto ceiling, a
+figure rendering a number corrected days earlier. Each had been produced by
+someone being careful. So the checks are now code, and each one exists because
+it caught something real:
+
+| check | what it catches | found on its first run |
+|---|---|---|
+| cross-document drift | two docs disagreeing on one figure | two live instances **in its own file list's blind spot** |
+| analyzer agreement | a figure that was wrong from the start | the F10 caption, at its source |
+| self-contradiction | one doc stating two values | 3 (the drift checks are structurally blind to this) |
+| figure staleness | source fixed, artifact not rebuilt | F12 showing 4.5× days after the fix |
+| count-in-prose | "ten nulls" over eleven bars | 4 documents at once |
+| citation resolution | a cited file that does not exist | 0 real, 15 use/mention false positives |
+| corpus snapshot | pooled counts silently drifting | a **doc 517 items behind its own test** |
+| dollar-anchoring | the wrong run's tokens beside a dollar figure | 2 more the eye had missed |
+
+Three of those were defects **I introduced while fixing a different one** —
+including writing the TB-1 token pair into the site's stats hours after
+committing a note warning against exactly that. Writing the warning does not
+stop you walking into it; the check does.
+
+**The honest summary of this section: the discipline did not hold on its own.
+What holds is the part that fails a test run.**
+
 ## 8. Honest limits
 
 1. **Two benchmarks.** GPQA-Diamond and SuperGPQA-hard. The headroom rule is
