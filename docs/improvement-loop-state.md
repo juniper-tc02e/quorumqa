@@ -966,6 +966,28 @@ tune, no feature to fit.
 > flagship has bought nothing and cost 5×. That comparator is now
 > pre-registered in `docs/spec-tb1b-supergpqa.md` §5 as PRIMARY, with the
 > cheap-panel comparison demoted to SECONDARY, precisely so this cannot recur.
+>
+> ### ⚠ The rule above is still too weak. Sharpened 2026-08-03 by TB-1 arm C.
+>
+> "Beat a single call" is the *floor*, not the bar. `universal_gate` clears
+> that floor on GPQA — net +0, p=0.605, which is a tie, not a loss. Then arm C
+> asked the question that actually decides whether to build the thing:
+>
+> **Does it beat the same token budget spent on plain sampling of that same
+> model?** It does not. At 12,991 vs 13,833 tok/item — a 6% difference —
+> `qwen3.7-max` SC@5 scores **92.9%** against the stack's **90.6%**. Paired,
+> three seeds, n=255: the stack is **net −6, p=0.981**, negative at every seed.
+>
+> So the operative comparator is not "one call". It is **N calls, where N is
+> whatever the candidate's own token budget buys**, and the candidate has to
+> beat *that*. Anything weaker lets a lever look successful for spending more.
+>
+> This is now the third independent route to the same conclusion — the
+> SuperGPQA compute-matched control, TB-1B, and now arm C — and it is the
+> single most useful thing this project has established. **Before building any
+> further orchestration, price it in tokens and ask what plain sampling would
+> buy for the same spend.** On both benchmarks measured, the answer has been
+> "more".
 
 ## A correction to a framing this log itself carried
 
