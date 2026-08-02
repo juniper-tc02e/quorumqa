@@ -8,6 +8,18 @@ tool-using Verifier (via a real MCP server), and a Judge escalate and
 resolve the disagreement -- and the Judge's ruling, including any unresolved
 dissent, is recorded verbatim, never papered over into false consensus.
 
+> ### What we actually found — the one-line version
+>
+> **It works, and it is not worth its tokens.** The engine does what it was
+> designed to do: escalating every answer instead of only the split ones is
+> worth **+25 items, zero losses, p = 3×10⁻⁸** against the shipped rule. But
+> against the comparator that decides whether to build it — *the same token
+> budget spent on plain sampling of the same model* — it is **net −6,
+> p = 0.981**, negative at every seed. Twelve mechanisms for catching a
+> confident-but-wrong panel were pre-registered and tested. **All twelve are
+> null.** The negative results, and the discipline that produced them, are the
+> contribution. → [`docs/FINDINGS-2026-08.md`](docs/FINDINGS-2026-08.md)
+
 **Measured on the full 90-question GPQA-Diamond set (complete run, no
 dropped questions):** three cheap solvers, plus a flagship Judge called only
 on the 37.8% of questions where they split, reach **78.9%** — against 58.9%
@@ -16,8 +28,8 @@ for those same cheap models run as a plain self-consistency@5 ensemble, and
 the gap to the flagship at **11% lower cost in dollars** ($0.0213 vs
 $0.0240/question, pre-Token-Plan pricing). **In tokens — the unit that now
 bills — this run's engine costs 9,013 vs 3,415 per item, 2.64× more**, and on
-identical items across 3 fresh seeds the full stack is net +1, p=0.50 against
-one `qwen3.7-max` call (`docs/FINDINGS-2026-08.md`).
+identical items across 3 fresh seeds the full stack is **net +0, p = 0.605**
+against one `qwen3.7-max` call (`docs/FINDINGS-2026-08.md`).
 Even the cheap path is not cheap: an unanimous panel that never escalates still
 burns 4,638 tok/item, **1.36×** a single flagship call
 (`benchmark/results/submission_token_economics.json`).

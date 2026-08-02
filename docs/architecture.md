@@ -9,7 +9,8 @@ entire **dollar**-cost story, not a benchmark trick layered on afterward.
 expensive than one flagship call (8,690 vs 2,792/item on the TB-1 paired set,
 seeds 1001/2311/3407, n=265; 9,013 vs 3,415 on the frozen n=90 seed-42
 submission run), and against that call on identical items the full stack is
-net +1, p=0.50.** Two item sets, same quantity, both correct -- quote whichever
+net +0, p=0.605 -- and net **-6** against the same budget spent on plain
+sampling.** Two item sets, same quantity, both correct -- quote whichever
 run the surrounding claim is about. See
 [`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
 
@@ -50,7 +51,7 @@ flowchart TD
 > n=90 seed-42 run the dollar figure comes from; 3.1×, 8,690 vs 2,792, on the
 > TB-1 paired n=265 set), and
 > on GPQA-Diamond the shipped config scores ~9 points *below* a single
-> `qwen3.7-max` call. The full stack is net +1, p=0.50 against one flagship
+> `qwen3.7-max` call. The full stack is net +0, p=0.605 against one flagship
 > call on identical items. See [`FINDINGS-2026-08.md`](FINDINGS-2026-08.md).
 > What follows describes the routing mechanism, which is unchanged.
 
