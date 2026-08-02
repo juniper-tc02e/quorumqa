@@ -888,3 +888,106 @@ Total ≈ 4-5M tokens ≈ 10% of measured quota.
    (when does deliberation help: validated hard-STEM wins; inert on saturated
    math; the AIME result). Additive-only, within grant.
 3. Calibration memory (§5.1) + R2 per-question router for the MoO oracle gap.
+
+---
+
+# SESSION LOG — 2026-07-31 → 2026-08-02 (autonomous loop)
+
+Written as the loop's memory. Every claim below is committed with a pin test
+and an independently-verified number; nothing here is a projection.
+
+## The one-line state of the project
+
+**`universal_gate` on GPQA-Diamond is the repo's strongest result** — 3 seeds,
+pooled net **+25**, zero losses, p = 2.98 × 10⁻⁸, and it **survives a
+compute-matched control fired up front**. Everything else this session was a
+kill, and the kills are the more important half.
+
+## What was fired and what it returned
+
+| item | result |
+|---|---|
+| Tier D odd-N harvest (PS-1+PS-2, seed 19) | **Null.** Coverage climbs 71→91% N=3→15; plurality accuracy flat 47–51%. S1 bar (+5) not cleared, best +3. S2 settled: permutation scheme is irrelevant at every N. |
+| S7 ship gate (seeds 411/523/631) | **DO NOT SHIP, both selectors.** `max_single_confidence` went net **+76 in-sample → −4 held out**, sign-reversed on 2/3 seeds. Confidence-based selection does not generalize. |
+| MATH-1 AIME liveness screen (seed 101) | **INADMISSIBLE.** 7/60 flagship items unreachable behind confirmed server-side 504s. n=60 IS the full AIME population, so no re-seed can dodge them — the spec's own "re-run" escape hatch is unreachable for this failure class. |
+| META-2 (seeds 909/1313/2027) | **KILLED.** Permutation breaks 42.4% of "unanimous" panels but predicts nothing: contrast +7.1pp, Fisher **p = 0.4552**, n=139 pooled. By its own kill clause this also finishes META-1 and the calibration thesis. |
+| SCI-1 (design review, never fired) | **DO NOT RUN**, killed three ways: its own pre-registration (both disjuncts of META-2's clause fired), an unreachable bar (a *perfect* oracle yields 0.54 net/seed against +5), and an invalid test (McNemar is paired; trigger−placebo is not). |
+| KI-0R CAS-gate replay | **KILLED self-authored verification.** The gate fires on 24/151 wrong **and** 24/151 right — Fisher **p = 1.0000**, exact. On GPQA it fires **5× more on correct** answers. 0.39M spent, **5.06M killed**. |
+| `universal_gate` 3-seed + compute control | **THE RESULT.** See below. |
+
+## The synthesis that should govern what happens next
+
+**Every mechanism that re-reads what the model already generated has failed.**
+Verbalized confidence, reasoning length, resample instability, permutation
+instability, logged features, logprob ranking, stronger judges, and now
+self-authored tool verification. **Eight independent nulls with one shape.**
+
+Any future proposal whose readout is cross-seat agreement, or any property of
+an existing transcript, is presumed dead and must argue past all eight.
+
+**What works instead:** escalating to a *different tier* that sees the item
+fresh. `universal_gate` does exactly that and nothing else — no trigger to
+tune, no feature to fit.
+
+## A correction to a framing this log itself carried
+
+The oracle-coverage/plurality gap was repeatedly described here and elsewhere
+as "the single biggest opportunity" (90.8% coverage vs ~50% plurality at
+N=15). **That is wrong and is retired.** 15 uniformly random 4-choice guesses
+reach **98.7%** coverage; the measured 90.8% is *below* that. Most of the "gap"
+is guessing entropy, not harvestable signal — which is why five selectors have
+now died against it. Do not cite it to size an opportunity.
+
+## `universal_gate`, in full
+
+| seed | shipped panel | universal_gate | net | p |
+|---|---:|---:|---:|---:|
+| 1001 | 78.9% | 88.9% | +9 | 0.00195 |
+| 2311 | 77.5% | 89.9% | +11 | 0.00049 |
+| 3407 | 83.3% | 88.9% | +5 | 0.03125 |
+| **pooled** | | | **+25, c=0** | **2.98e-8** |
+
+Every seed clears the single-seed bar independently. Recovers 25/38
+unanimous-wrong; breaks **0/118** unanimous-right.
+
+**Compute-matched control, run up front at seed 2311** (the discipline
+`flagship_panel` lacked): 9 cheap vote-only seats score **65.2%** vs
+`universal_gate`'s 89.9% (paired net **+22**, p=0.00001) — and *within* that
+arm, N=3→N=9 nets **exactly 0** (p=0.62). More cheap votes buy nothing
+regardless of seat strength, which also replicates the flat-N finding on a
+second benchmark. **Mechanism: the tribunal, not the budget.**
+
+## Known limits on that result, stated so they are not lost
+
+1. **GPQA-Diamond only.** SuperGPQA-hard converts unanimous-wrong at 9.5% vs
+   GPQA's 55–75%, costing 24.0 escalations per net item; the same command
+   projects **+3.2 at n=180 — below bar** there.
+2. **It is a cost trade:** 13,541 tok/item vs the shipped panel's 9,145 (~1.5×),
+   escalating ~59% of items that would otherwise return immediately.
+3. **Never yet compared to a flagship single call at these seeds** — that is
+   the open Track-B question, pre-registered in
+   `docs/spec-trackb-flagship-comparison.md`.
+
+## Infrastructure fixed along the way
+
+- **`sympy_check` crash.** `sympify` turns `beta`/`gamma`/`zeta`/`Q`/`N`/`S`/`O`
+  into non-expression objects; `lhs - rhs` raised TypeError, breaking its own
+  "never raises" contract. A live `verified_gate_cas` run **would have crashed**
+  on the first physics item using β, γ, Q, N or S. Root-caused, 16 regression
+  tests.
+- **S7 harness self-protection gap.** Pools consumed by a completed ship-gate
+  verdict never burned themselves, so the same held-out triple could be
+  re-scored under a different selector. Fixed before the harness was trusted.
+- **`QwenClient(timeout=...)`** added, default-preserving, so a longer wall-clock
+  budget is testable without duplicating client logic.
+
+## Standing method notes for the next iteration
+
+- Pre-register the analysis **before** firing, every time. It caught a
+  survivorship trap on MATH-1 and stopped a 100%-vs-62% artifact being published.
+- Adversarially review a spec **before** paying for it. Four reviews this
+  session; every one found a defect that would have wasted tokens or produced a
+  wrong claim, and one declined ~78% of a proposed 20M budget.
+- Verify every number against its source before writing it up. This caught a
+  transposed seed pair and an overstated recovery rate in my own draft.
+- Never re-pin a drifting test without proving the drift is attributable.
