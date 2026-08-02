@@ -144,16 +144,52 @@ This is a property of GPQA-Diamond's size, not of the design: any 3-seed,
 n=90 GPQA study in this repo has the same structure, including every prior
 result quoted with a pooled p-value.
 
+## 3.3 What this result is NOT — a framing guard added 2026-08-02
+
+An adversarial review of the follow-up spec caught a misreading this document
+invited, and it is important enough to state before the claim itself.
+
+**`universal_gate` issues one `qwen3.7-max` judge call on EVERY item.** Measured
+directly: judge calls/item = **1.00** at all three seeds (90/90, 89/89, 90/90
+escalated; role counts `judge: 90 / 89 / 90`). Because the lever escalates all
+unanimous panels and splits escalate anyway, **nothing returns without a
+flagship call.**
+
+So this result must **not** be described as *"cheap seats beating a stronger
+model."* It is not. `universal_gate` is **a flagship call, scaffolded** — three
+cheap drafts, an adversarial rebuttal, and tool-grounded checks feeding a
+flagship judge. The correct reading of the +25:
+
+> Routing **every** item through the flagship judge beats routing **only split**
+> items through it, on the same panel, by +25 discordant with zero losses.
+
+That is a real and useful finding — it is the gate-recall result the
+`unanimous_gate_headroom.md` analysis predicted — but it is a claim about
+**when to escalate**, not about cheap models outperforming expensive ones.
+
+**The comparison against a flagship answering alone has never been run** at
+these seeds. It is pre-registered as TB-1
+(`docs/spec-trackb-flagship-comparison.md`), where its own statistical review
+puts the probability of confirming superiority at only ~5% and of falsifying it
+at ~25–38%. Until that lands, no sentence of the form "QuorumQA beats the
+flagship" is supported by anything in this repo.
+
 ## 4. What the claim reads
 
-> On GPQA-Diamond, three cheap `qwen3.6-flash` seats that escalate **every**
-> unanimous answer to a tool-using tribunal with a `qwen3.7-max` judge score
-> 88.9 / 89.9 / 88.9% against 78.9 / 77.5 / 83.3% for the byte-identical panel
-> without escalation — pooled net **+25 discordant items, 0 losses**, exact
-> one-sided McNemar **p = 3.0 × 10⁻⁸**, 3 seeds, paired in-run — recovering
-> **65.8%** of unanimous-wrong answers while breaking **0%** of unanimous-right
-> ones, and beating a **compute-matched 9-seat cheap panel** that spends the
-> same tokens on more votes instead of a tribunal by a further **+22 (p=0.00001)**.
+> On GPQA-Diamond, escalating **every** panel answer to a tool-using tribunal
+> with a `qwen3.7-max` judge — rather than only the split ones, as the shipped
+> engine does — scores 88.9 / 89.9 / 88.9% against 78.9 / 77.5 / 83.3% for the
+> byte-identical panel with the shipped escalation rule. Pooled net **+25
+> discordant items, 0 losses**, exact one-sided McNemar **p = 3.0 × 10⁻⁸**,
+> 3 seeds, paired in-run (**+21, p = 4.8 × 10⁻⁷** counting each item once). It
+> recovers **65.8%** of unanimous-wrong answers while breaking **0%** of
+> unanimous-right ones, and beats a **compute-matched 9-seat cheap panel** that
+> spends the same tokens on more votes instead of a tribunal by a further
+> **+22 (p = 0.00001)**.
+>
+> **This is a claim about *when to escalate*, not about cheap models beating
+> expensive ones** — every item in both arms of the headline comparison
+> receives a flagship call in the treatment arm (§3.3).
 
 Paired, controlled, within-family, 3 seeds, and the control is in the run rather
 than appended to it.
