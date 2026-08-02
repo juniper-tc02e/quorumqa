@@ -93,8 +93,8 @@ complete account, and the one to read first.**
 > architecture there. On SuperGPQA-hard, where the base model is 10 points
 > weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched
 > control attributes that gain to **self-consistency sampling, not
-> deliberation**. Ten separate mechanisms for detecting a confident-but-wrong
-> panel were tested; all ten are null.
+> deliberation**. Eleven separate mechanisms for detecting a confident-but-wrong
+> panel were tested; all eleven are null.
 >
 > One number in this README needs its unit stated: the *"11% lower cost"* below
 > is measured in **dollars** under the pre-Token-Plan pricing. Under the Token

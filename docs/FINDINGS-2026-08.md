@@ -22,8 +22,8 @@ out **net +1, p = 0.50, at 4.7× the tokens**. On GPQA-Diamond, QuorumQA is
 dominated by a single flagship call. On SuperGPQA-hard, where the base model
 is 10 points weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a
 compute-matched control shows the gain is **self-consistency sampling, not
-deliberation**. Along the way, ten separate mechanisms for detecting a
-confident-but-wrong panel were tested. All ten are null.
+deliberation**. Along the way, eleven separate mechanisms for detecting a
+confident-but-wrong panel were tested. All eleven are null.
 
 ---
 
@@ -82,7 +82,7 @@ that a 40-point opportunity. That framing is retired:** fifteen uniformly random
 the climb is guessing entropy, not harvestable signal — which is why five
 successive selectors have died against it.
 
-## 3. Ten mechanisms for catching a confident-but-wrong panel. Ten nulls.
+## 3. Eleven mechanisms for catching a confident-but-wrong panel. Eleven nulls.
 
 ![F12](figures/f12_kill_list.png)
 
@@ -101,6 +101,7 @@ and unanimity is where it stops looking. Everything we tried to detect those:
 | Cheap panel scaling N=3→15 | best +3 vs a +5 bar | 0.252 |
 | Deliberation vs self-consistency | tribunal leg +2 of +10 | 0.344 |
 | Whole stack vs one flagship call | net +1 at 4.7× tokens | 0.5000 |
+| Cheap seats + escalate-all vs flagship | net −2 at 5.1× tokens (TB-1B, §4b) | 0.8906 |
 
 The self-authored CAS result is the sharpest. We asked the model to write a
 `sympy`-checkable equation for its own answer and ran a real offline
@@ -110,9 +111,10 @@ genuinely new information; **the premise is a re-read**, because the model
 chooses which equation to write and writes one consistent with the answer it
 already committed to. Verifying a self-authored premise verifies nothing.
 
-**The pattern across all ten: every mechanism that re-reads what the model
+**The pattern across all eleven: every mechanism that re-reads what the model
 already generated has failed.** Any future proposal whose readout is cross-seat
-agreement, or any property of an existing transcript, has to argue past all ten.
+agreement, or any property of an existing transcript, has to argue past all
+eleven.
 
 ## 4. Why +25 and +1 are both true
 
@@ -219,7 +221,7 @@ Publishing these because a record that only grows is not a record.
    Escalating everything recovers 25/38 of them while breaking 0/118.
 3. **Sampling beats deliberation, repeatedly.** Where multi-agent setups win
    here, a compute-matched self-consistency control explains the win.
-4. **The negative-results corpus itself.** Ten controlled nulls, each
+4. **The negative-results corpus itself.** Eleven controlled nulls, each
    pre-registered with a kill clause fixed before the data existed.
 
 ## 7. How this was kept honest

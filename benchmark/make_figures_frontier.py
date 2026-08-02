@@ -404,7 +404,27 @@ F12_KILLS = [
      "tribunal leg +2 of +10", 0.344, "verify_compute_matched_control.py"),
     ("Whole stack vs one flagship call", "TB-1, 3 seeds, n=265",
      "net +1 at 4.7× the tokens", 0.5000, "tb1_flagship_comparison_result.md"),
+    # Added 2026-08-03. The only row measured on the benchmark where
+    # orchestration DOES beat a flagship call -- which is what makes it
+    # informative rather than one more null: same benchmark, same headroom,
+    # same escalate-everything gate as flagship_panel's +7, but cheap seats
+    # instead of flagship seats, and the sign flips.
+    ("Cheap seats + escalate-all vs flagship", "TB-1B, seed 7, n=87",
+     "net −2 at 5.1× the tokens", 0.8906, "tb1b_supergpqa_result.md"),
 ]
+
+
+def _spell(n: int) -> str:
+    """Small integers as words, for prose in figure titles.
+
+    Falls back to digits past twenty rather than growing a lookup table that
+    nobody maintains -- a title reading "23 mechanisms" is fine; one reading
+    "Ten" over 23 bars is not.
+    """
+    words = ("Zero One Two Three Four Five Six Seven Eight Nine Ten Eleven "
+             "Twelve Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen "
+             "Nineteen Twenty").split()
+    return words[n] if 0 <= n < len(words) else str(n)
 
 
 def build_f12() -> None:
@@ -435,7 +455,13 @@ def build_f12() -> None:
 
     draw_title(
         fig, "[PAIRED]",
-        "Ten mechanisms tested for finding a confident-but-wrong panel. Ten nulls.",
+        # DERIVED, not typed. This title read "Ten mechanisms ... Ten nulls."
+        # while the chart underneath it drew eleven bars, the moment TB-1B was
+        # added -- the same failure as the F10 caption, in the same module,
+        # three weeks later. A count in a title must come from the data it
+        # counts.
+        f"{_spell(len(df))} mechanisms tested for finding a confident-but-wrong "
+        f"panel. {_spell(len(df))} nulls.",
         "Every technique that re-reads what the model already generated has failed. Any new proposal whose "
         "readout is cross-seat agreement or a transcript property must argue past all of these.",
     )

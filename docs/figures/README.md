@@ -220,7 +220,7 @@ is net **exactly 0** (p=0.62). The dotted line is the coverage you get from
 *random* 4-choice guessing — it overtakes the measured curve, which is why the
 coverage/accuracy gap is **not** the 40-point opportunity we once called it.
 
-### F12 — Ten mechanisms, ten nulls
+### F12 — Eleven mechanisms, eleven nulls
 
 ![F12](f12_kill_list.png)
 

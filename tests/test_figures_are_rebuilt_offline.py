@@ -94,6 +94,39 @@ def test_committed_figure_csvs_agree_with_the_source_constants():
         )
 
 
+def test_the_kill_count_in_prose_matches_the_number_of_kills():
+    """F12's title read "Ten mechanisms ... Ten nulls." over ELEVEN bars the
+    moment TB-1B was added, and three documents said "all ten" alongside it.
+
+    The title is now derived from len(F12_KILLS). Prose cannot be, so it is
+    checked here instead: every doc that states the count must state the real
+    one. This is the third instance of the same defect in this module's output
+    (the F10 caption, the F12 title, and now the surrounding prose), which is
+    why it gets a test rather than another careful edit.
+    """
+    import benchmark.make_figures_frontier as m
+
+    n = len(m.F12_KILLS)
+    words = {10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen"}
+    assert n in words, f"extend the word map for {n} kills"
+    correct, wrong = words[n], [w for k, w in words.items() if k != n]
+
+    for rel in ["README.md", "docs/FINDINGS-2026-08.md", "docs/figures/README.md"]:
+        p = PROJECT_ROOT / rel
+        if not p.exists():
+            continue
+        low = p.read_text(encoding="utf-8").lower()
+        if "mechanisms" not in low:
+            continue
+        for w in wrong:
+            for phrase in (f"all {w}", f"{w} separate mechanisms",
+                           f"{w} mechanisms", f"{w} controlled nulls"):
+                assert phrase not in low, (
+                    f"{rel} says {phrase!r} but F12_KILLS has {n} entries "
+                    f"({correct}). Update the prose."
+                )
+
+
 @pytest.mark.parametrize("name", [
     "f10_paired_cost_frontier",
     "f11_cheap_worker_scaling",
