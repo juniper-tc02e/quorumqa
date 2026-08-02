@@ -20,7 +20,19 @@
   "overturns": 14,
   "overturns_correct": 11,
   "overturn_precision": 78.6,
+  "overturn_mechanism_note": "Descriptive of this run (n=14, seed 42) only. Deliberation has NOT been shown to outperform a compute-matched self-consistency control: the tribunal's own leg is +2 at p=0.344, and the full stack is net +1 at p=0.50 against one qwen3.7-max call on identical items. See docs/FINDINGS-2026-08.md.",
   "beats_flagship": 5,
+  "flagship_miss_engine_hit": {
+   "total": 5,
+   "panel_only": 3,
+   "judge_escalated": 2,
+   "note": "NOT 'cheap beat expensive'. 2 of these 5 escalated and consumed a qwen3.7-max judge call -- the same model as the baseline they beat -- so those two routed TO the flagship rather than out-performing it. Only 3 were answered by the cheap panel alone."
+  },
+  "cost_unit": "USD, pre-Token-Plan pricing (superseded 2026-08). In tokens, the unit that now bills, the engine costs 8,690 vs the baseline's 2,792 per item -- 3.1x MORE.",
+  "tokens_per_question": {
+   "engine": 8690,
+   "baseline": 2792
+  },
   "median_latency_s": 10.77,
   "subjects": {
    "Organic Chemistry": 37,
@@ -2388,6 +2400,638 @@
     "correct": false,
     "cost_usd": 0.002173
    }
+  }
+ ],
+ "wall": [
+  {
+   "id": "recypVp2NmPlBKVTp",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": true
+  },
+  {
+   "id": "recINSFEYLCyyd08m",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recnawZPumSCLMVgp",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "rec527dNeEtWJrYNl",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": true
+  },
+  {
+   "id": "rechKl68Uc6H7vU0N",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "rec4r4KWNLrT7g2kR",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "rec0yTRmO1o1xCA6H",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Electromagnetism and Photonics",
+   "hasDetail": true
+  },
+  {
+   "id": "recVvpD8miVjmmyfe",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": false
+  },
+  {
+   "id": "recE2ihVfqEK4R9d0",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recnTTKdBzfuoZ7w7",
+   "kind": "overruled",
+   "correct": false,
+   "subject": "Molecular Biology",
+   "hasDetail": true
+  },
+  {
+   "id": "rec5rjeLsEq5Fg7Oj",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recb80OwMgNnceA9t",
+   "kind": "confirmed",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "reczjcMtrB1YGS2fO",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Optics and Acoustics",
+   "hasDetail": true
+  },
+  {
+   "id": "recpki12iG9RUGrz9",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "High-energy particle physics",
+   "hasDetail": true
+  },
+  {
+   "id": "recDj2Y2BbtV02Wv5",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "rec260hNUCEj109Dj",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recLAgwx9vbgB5EHk",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recIj8lR4tuDgrHou",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": true
+  },
+  {
+   "id": "recWPMm91mGDLXONm",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recHVUd2DkoKfedJZ",
+   "kind": "overruled",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recVEXvhYxAhELVqB",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recnGEpF1srQpaqWq",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recPSTGXK3P39yNYT",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recIlghoOw5VbY4Zh",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recOvqPKUtyy9ISA1",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recL9MFV5zmdlle5T",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recwW1A85nfyQpReG",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Astrophysics",
+   "hasDetail": true
+  },
+  {
+   "id": "rec4L69T0Y1AS4AFS",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": false
+  },
+  {
+   "id": "recNuT2oSnO86bxOx",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recGee5m84dg5FZkc",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recEmTBhx2hgw6tPQ",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recJZ3QEfRKjYw9a7",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recwlwlcPvXVNPmvl",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": true
+  },
+  {
+   "id": "recdya6FuYraBU5Rh",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": true
+  },
+  {
+   "id": "recooG6bivTUJpDBz",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recaXdGn3FAIkxLGM",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "reccOKzFNmyqeJ6ry",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "rec06pnAkLOr2t2mp",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "rectXfsCM1dj4Kv2c",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "rec7C06XOB2h298ue",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recs3PLPUEMiqg4P8",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recO3hvCWRGiG0odN",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "reckEnrOPFT9Ru7tW",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "reck4G4xxv3YnpbtQ",
+   "kind": "overruled",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recoiTJPGUmzAkief",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Electromagnetism and Photonics",
+   "hasDetail": false
+  },
+  {
+   "id": "reccVFW11Elovnf8T",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": false
+  },
+  {
+   "id": "recI1ls9OXdxatHQn",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recIOlKBsOeEcgkA1",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Molecular Biology",
+   "hasDetail": false
+  },
+  {
+   "id": "recRZjaElf8ft7xTq",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": true
+  },
+  {
+   "id": "recmkvk6EFAmqyMxR",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Relativistic Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "rechtUKxC6G67H7Pr",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "rec8y3ZrBOcLgNEkE",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "reczUoM8JsxU6pYxr",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Astrophysics",
+   "hasDetail": false
+  },
+  {
+   "id": "rec5eA17Qr1ucNLUf",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recPIzpnuYpB4yvmp",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recINGR1z01Fh1Z3A",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recPL4ZPpVYxgMu57",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "High-energy particle physics",
+   "hasDetail": true
+  },
+  {
+   "id": "reczkBiPPNrNN49Hp",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recJJcOHhFeSaRpl4",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "receo3UUzRvWCqyfA",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recuYEkVjdVUwA3c0",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "High-energy particle physics",
+   "hasDetail": true
+  },
+  {
+   "id": "recv7GsQg3f0fvB1f",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recLSzwBUS3olCjhl",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recUOePh79cp4T2Bg",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recf6ayQmL1SxKbvW",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Molecular Biology",
+   "hasDetail": true
+  },
+  {
+   "id": "recn3NhOhqAPLda16",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recihePFulRgNKsIn",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recrNbtgTNoabJJi6",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "rec8nshandHARTkrg",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recFaL6j8UMhutXrc",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recr3VHM4zYf6dMFY",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recjJ54TXc04enRkZ",
+   "kind": "confirmed",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recclFbsjbaiVVnnV",
+   "kind": "confirmed",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recXsuOHRBLcyenF2",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": true
+  },
+  {
+   "id": "recfTlTMjZBuOducT",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recOkA2zsy4GSMD9R",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Inorganic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "reckl6PkaEMWM50yZ",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Organic Chemistry",
+   "hasDetail": false
+  },
+  {
+   "id": "recBhnXrUyTJ6WHIR",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": true
+  },
+  {
+   "id": "recQiWOxhkXRz9NVE",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Chemistry (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recGFNRVl1qBZGwyU",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Organic Chemistry",
+   "hasDetail": true
+  },
+  {
+   "id": "recXvQ6gWAmyakrpD",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Astrophysics",
+   "hasDetail": false
+  },
+  {
+   "id": "reczzzihL7btBH7RO",
+   "kind": "confirmed",
+   "correct": false,
+   "subject": "Relativistic Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "rechgQucGlrnt8KRV",
+   "kind": "confirmed",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "receYQxnUBvxPcvbQ",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Astrophysics",
+   "hasDetail": false
+  },
+  {
+   "id": "rec6sE2CRtD4drtHg",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "High-energy particle physics",
+   "hasDetail": false
+  },
+  {
+   "id": "recSBcGLPatKb3Ygu",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Physics (general)",
+   "hasDetail": false
+  },
+  {
+   "id": "recmI7EiLv72PxmYK",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Relativistic Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recatj4YXzbOaq3Ar",
+   "kind": "unanimous",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": false
+  },
+  {
+   "id": "recMicVBcqy1xM1jq",
+   "kind": "unanimous",
+   "correct": false,
+   "subject": "Electromagnetism and Photonics",
+   "hasDetail": false
+  },
+  {
+   "id": "rec0wZvZgiz320KRs",
+   "kind": "overruled",
+   "correct": true,
+   "subject": "Quantum Mechanics",
+   "hasDetail": true
   }
  ]
 }
