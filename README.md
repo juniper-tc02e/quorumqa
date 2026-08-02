@@ -125,19 +125,23 @@ complete account, and the one to read first.**
 > against the stack's 12,991 — a 6% difference — and scores **92.9% against the
 > stack's 90.6%**. Paired, three seeds, n=255: the stack is **net −6, p=0.981**.
 >
+> Every seed points the same way. So the result is not the weak "the tribunal
+> fails to beat one call"; it is **spend its budget on sampling instead and you
+> do better** (`benchmark/results/tb1_flagship_comparison_result.md` §5.2).
+>
 > *(The flagship reads **90.6%** here and **84.4%** at the top of this page. Both
 > are measured: 84.4% is the frozen n=90 seed-42 submission run; 90.6% is the
 > TB-1 paired set, seeds 1001/2311/3407, n=255 shared items. Different runs on
 > different item samples of the same benchmark — GPQA-Diamond has ~198
 > questions and no run covers all of them. Neither figure is a correction to
 > the other.)*
-> Every seed points the same way. So the result is not the weak "the tribunal
-> fails to beat one call"; it is **spend its budget on sampling instead and you
-> do better** (`benchmark/results/tb1_flagship_comparison_result.md` §5.2). On SuperGPQA-hard, where the base model is 10 points
-> weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched
-> control attributes that gain to **self-consistency sampling, not
-> deliberation**. Twelve separate mechanisms for detecting a confident-but-wrong
-> panel were tested; all twelve are null.
+>
+> On SuperGPQA-hard, where the base model is 10 points weaker, orchestration
+> **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched control
+> attributes that gain to **self-consistency sampling, not deliberation**, and
+> the same escalate-everything lever built from *cheap* seats **loses** there
+> (net −2, p = 0.89). Twelve separate mechanisms for detecting a
+> confident-but-wrong panel were tested; all twelve are null.
 >
 > One number in this README needs its unit stated: the *"11% lower cost"* below
 > is measured in **dollars** under the pre-Token-Plan pricing. Under the Token
@@ -236,7 +240,7 @@ lower cost **in dollars**; that was always a cost claim, and in tokens it is
 3.1× *more* expensive.
 
 The largest artifact is the negative results:
-**[`docs/negative-results.md`](docs/negative-results.md)** — 23 measured nulls
+**[`docs/negative-results.md`](docs/negative-results.md)** — 25 measured nulls
 each with its mechanism, 6 methodological errors we caught in our own work, and
 4 adjudicated contradictions between our own documents.
 

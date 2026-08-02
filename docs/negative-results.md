@@ -157,7 +157,7 @@ ceiling case.
 
 ## 3. The catalogue
 
-Twenty-three distinct measured nulls, grouped by mechanism.
+Twenty-five distinct measured nulls, grouped by mechanism.
 
 ### 3.1 Saturation nulls — the benchmark ran out of headroom before the lever could be tested
 
@@ -777,6 +777,66 @@ count for exactly that reason: at n=27, a single item is 3.7pp.*
   on any traffic mix** — stated as such, without inflating it further.
 - *Source.* `benchmark/results/moo_m1_findings.md`,
   `benchmark/results/moo_m1_corrected_findings.md`.
+
+**F3. Cheap seats + escalate-everything loses to one flagship call on the benchmark where orchestration wins (net −2, p=0.89)**
+
+- *Hypothesis.* SuperGPQA-hard is the only surface where anything has beaten a
+  flagship call (`flagship_panel`, +7, p=0.0327). If **headroom** is the reason,
+  then `universal_gate` — the same escalate-everything architecture built from
+  cheap seats — should win there too.
+- *Config.* TB-1B, pre-registered in `docs/spec-tb1b-supergpqa.md` before firing.
+  Seed 7, n=87 paired, |S| ≥ 81 gate cleared.
+- *Measured.* **Net −2, p = 0.8906** against a single `qwen3.7-max` call, at
+  **5.1×** its tokens (15,255 vs 2,969). Against the *shipped* escalate-on-split
+  rule the same arm is **+6, p = 0.055** — the two claims kept separate by
+  design, because conflating them is how GPQA's +25 came to read as a flagship
+  win.
+- *Mechanism.* Of 87 items, 46 unanimous and 18 unanimous-**wrong**; the lever
+  recovered 8 and broke 2. But **7 of those 8 recoveries were items the flagship
+  already had**, and only 1 was one it missed. A headline "recovered 8"
+  overstates the gain against the real comparator by 8×. The lever recovers,
+  almost entirely, ground the flagship never lost.
+- *What it retires.* The headroom reading of the SuperGPQA win. Same benchmark,
+  same headroom, same escalate-everything gate — opposite outcome, and the only
+  difference is the **seat tier**. `flagship_panel` samples `qwen3.7-max` three
+  times; `universal_gate` samples `qwen3.6-flash`.
+- *Not spent.* The pre-registered screen kill fired, so the ~2.7M-token
+  extension to seeds 42/123 was never funded. Total: ~1.35M for a definitive
+  negative.
+- *Source.* `benchmark/results/tb1b_supergpqa_result.md`; reproduce with
+  `python -m benchmark.verify_tb1b_supergpqa`.
+
+**F4. The whole stack loses to its own token budget spent on plain sampling (net −6, p=0.981) — the strongest negative in this catalogue**
+
+- *Hypothesis.* TB-1 established that `universal_gate` merely **ties** one
+  flagship call (net +0, p=0.605). The harder question, and the one that decides
+  whether to build the architecture at all: does it beat **the same number of
+  tokens spent on plain self-consistency of the same model**?
+- *Config.* TB-1 arm C, pre-registered in
+  `docs/spec-trackb-flagship-comparison.md` §2.2 as "non-negotiable", then
+  formally cancelled, then reinstated (§5.1 of the result doc records the
+  reversal and its cost). `qwen3.7-max` SC@5 via the existing `cycled_panel`
+  path, temperatures cycling 0.3/0.6/0.9 to match arm A's own diversity. Seeds
+  1001/2311/3407, n=255 paired, |S|=85 every seed.
+- *Measured.* **Net −6, p = 0.9807.** Per seed **−1 / −2 / −3** — no seed
+  carries it. At essentially equal budget (12,991 vs 13,833 tok/item, a 6%
+  difference) SC@5 scores **92.9%** against the stack's **90.6%**.
+- *Mechanism.* Not "the tribunal fails to add value over sampling" — the
+  stronger statement: **spend the tribunal's budget on sampling instead and you
+  do measurably better.** The scaffolding is a net drag on its own compute.
+- *Admissibility, stated because the incentive ran the other way.* Kill clause 4
+  voids A-vs-C if the control's samples are degenerate — the outcome that would
+  have *protected* the architecture's mechanism claim. The clause had no number
+  in the spec; one was fixed (agreement ≥0.98 or <5% of items splitting) while
+  the first seed was still running and **before any accuracy was read**.
+  Measured: 0.963/0.927/0.931 agreement, 8.1%/12.8%/12.9% split. **Not
+  degenerate at any seed.** Had the threshold been set at 0.95, all three would
+  have been voided.
+- *Context.* Sampling itself is directionally worth its budget (SC@5 vs one
+  call: +6, p = 0.090) — reported so that "the stack loses to the control" is
+  not left ambiguous between *sampling is good* and *the stack is bad*.
+- *Source.* `benchmark/results/tb1_flagship_comparison_result.md` §5.2;
+  reproduce with `python -m benchmark.verify_tb1_flagship`.
 
 ---
 
