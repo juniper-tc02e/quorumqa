@@ -22,6 +22,16 @@ def cost_of(calls):
     return round(sum(c.get("cost_usd", 0.0) for c in calls), 6)
 
 
+def tokens_of(calls):
+    """Total input+output tokens.
+
+    Tokens, not dollars, because the Token Plan bills tokens and the two point
+    in OPPOSITE directions here: the engine is ~11% cheaper in dollars and
+    ~2.6x more expensive in tokens.
+    """
+    return sum(c.get("input_tokens", 0) + c.get("output_tokens", 0) for c in calls)
+
+
 def role_costs(calls):
     by_role = {}
     for c in calls:
@@ -99,6 +109,17 @@ def main():
     good_overturns = [c for c in overturns if c["correct"]]
     unanimous = [c for c in cases if not c["escalated"]]
 
+    # Per-path token cost, computed from THIS run's own call logs. `records`
+    # rather than `cases` because shape_case drops the raw call list.
+    eng_toks = [tokens_of(r["engine"]["calls"]) for r in records]
+    base_toks = [tokens_of(r["baseline"]["calls"]) for r in records]
+    un_toks = [t for r, t in zip(records, eng_toks) if not r["engine"].get("escalated")]
+    esc_toks = [t for r, t in zip(records, eng_toks) if r["engine"].get("escalated")]
+    tok_engine = round(sum(eng_toks) / len(eng_toks))
+    tok_base = round(sum(base_toks) / len(base_toks))
+    tok_unanimous = round(sum(un_toks) / len(un_toks)) if un_toks else 0
+    tok_escalated = round(sum(esc_toks) / len(esc_toks)) if esc_toks else 0
+
     # Cases where the engine was right and a single flagship call was wrong.
     #
     # NOT "the cheap society beat the expensive model": measured 2026-08-03,
@@ -149,8 +170,36 @@ def main():
             "panel_only": len(bf_panel_only),
             "judge_escalated": len(bf_escalated),
         },
-        "cost_unit": "USD, pre-Token-Plan pricing (superseded 2026-08; see docs/FINDINGS-2026-08.md)",
-        "tokens_per_question": {"engine": 8690, "baseline": 2792},
+        "cost_unit": (
+            f"USD, pre-Token-Plan pricing (superseded 2026-08; see "
+            f"docs/FINDINGS-2026-08.md). In tokens, the unit that now bills, "
+            f"this run's engine costs {tok_engine:,} vs the baseline's "
+            f"{tok_base:,} per item -- {tok_engine / tok_base:.2f}x MORE."
+        ),
+        # COMPUTED from this run, never hardcoded. Until 2026-08-03 this field
+        # held a literal 8,690 / 2,792 -- correct numbers, wrong run. That pair
+        # is the TB-1 paired item set (seeds 1001/2311/3407, n=265); everything
+        # else in this stats block describes the frozen n=90 seed-42 run, whose
+        # own figures are 9,013 / 3,415. A stats block about one run must quote
+        # that run's cost, and computing it makes the mismatch impossible.
+        "tokens_per_question": {
+            "engine": tok_engine,
+            "baseline": tok_base,
+            "unanimous_path": tok_unanimous,
+            "escalated_path": tok_escalated,
+            "multiple_vs_baseline": round(tok_engine / tok_base, 2),
+            "measured_on": (
+                "THIS run: the frozen n=90 seed-42 submission run, the same run "
+                "every other number in this stats block describes. Source: "
+                "benchmark/results/submission_token_economics.json."
+            ),
+            "do_not_confuse_with": (
+                "8,690 / 2,792 (3.1x), quoted in README.md, docs/architecture.md "
+                "and docs/FINDINGS-2026-08.md. That pair is the TB-1 paired item "
+                "set -- seeds 1001/2311/3407, n=265 shared items -- a DIFFERENT "
+                "run, not a competing estimate of the same quantity."
+            ),
+        },
         "median_latency_s": round(
             sorted(c["latency_s"] for c in cases)[n // 2], 2
         ),

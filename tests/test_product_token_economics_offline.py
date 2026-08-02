@@ -159,3 +159,63 @@ def test_no_unverifiable_margin_claim_survives():
         "the superseded margin claim must be marked unverifiable at the point "
         "of use, not silently left standing"
     )
+
+
+# ---------------------------------------------------------------------------
+# The live site data must quote THIS run's cost, not another run's
+# ---------------------------------------------------------------------------
+
+
+def test_site_stats_quote_the_run_they_describe():
+    """site_data/cases.json's stats block describes the frozen n=90 seed-42
+    run -- accuracy 78.9/84.4/58.9, 90 items, generated_from full_run2.jsonl.
+
+    Until 2026-08-03 its tokens_per_question read 8,690 / 2,792. Those are real,
+    published, correct numbers -- for a DIFFERENT run (the TB-1 paired set,
+    seeds 1001/2311/3407, n=265). I put them there myself while fixing a
+    separate defect in the same block, which is precisely the confusion the
+    do_not_confuse_with note in submission_token_economics.json was written to
+    prevent, committed hours earlier.
+
+    A stats block about one run must quote that run's own cost.
+    """
+    cases = json.loads(
+        (PROJECT_ROOT / "site_data" / "cases.json").read_text(encoding="utf-8"))
+    econ = json.loads(SUMMARY.read_text(encoding="utf-8"))
+
+    stats = cases["stats"]
+    assert stats["n"] == econ["n_items"], "same run, same item count"
+
+    tpq = stats["tokens_per_question"]
+    assert tpq["engine"] == econ["tokens_per_item"]["blended"]
+    assert tpq["baseline"] == econ["tokens_per_item"]["baseline_flagship_1x"]
+    assert tpq["unanimous_path"] == econ["tokens_per_item"]["unanimous"]
+    assert tpq["escalated_path"] == econ["tokens_per_item"]["escalated"]
+    assert tpq["multiple_vs_baseline"] == econ["multiples_vs_flagship_1x"]["blended"]
+
+
+def test_site_stats_do_not_silently_carry_the_other_token_pair():
+    """The specific regression: the TB-1 pair appearing as this run's cost."""
+    tpq = json.loads(
+        (PROJECT_ROOT / "site_data" / "cases.json").read_text(encoding="utf-8")
+    )["stats"]["tokens_per_question"]
+    assert (tpq["engine"], tpq["baseline"]) != TB1_PAIRED_TOKENS, (
+        "cases.json describes the n=90 seed-42 run; 8,690/2,792 is the n=265 "
+        "TB-1 paired set. Both correct, different runs."
+    )
+    # It must still NAME the other pair, so the next reader is warned rather
+    # than left to rediscover the distinction.
+    assert "8,690" in tpq["do_not_confuse_with"]
+
+
+def test_the_generator_computes_tokens_rather_than_hardcoding_them():
+    """The durable fix. The field was a literal, so it could not track the run
+    it was emitted alongside; now it is derived from that run's own call logs
+    and the mismatch is unrepresentable."""
+    src = (PROJECT_ROOT / "site_data" / "build_cases.py").read_text(encoding="utf-8")
+    assert '"engine": 8690' not in src and "8690" not in src, (
+        "build_cases.py hardcodes a token count again -- compute it from the "
+        "records instead"
+    )
+    assert "def tokens_of(" in src
+    assert "tok_engine = round(" in src

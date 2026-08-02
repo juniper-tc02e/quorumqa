@@ -28,10 +28,15 @@
    "judge_escalated": 2,
    "note": "NOT 'cheap beat expensive'. 2 of these 5 escalated and consumed a qwen3.7-max judge call -- the same model as the baseline they beat -- so those two routed TO the flagship rather than out-performing it. Only 3 were answered by the cheap panel alone."
   },
-  "cost_unit": "USD, pre-Token-Plan pricing (superseded 2026-08). In tokens, the unit that now bills, the engine costs 8,690 vs the baseline's 2,792 per item -- 3.1x MORE.",
+  "cost_unit": "USD, pre-Token-Plan pricing (superseded 2026-08). In tokens, the unit that now bills, this run's engine costs 9,013 vs the baseline's 3,415 per item -- 2.64x MORE.",
   "tokens_per_question": {
-   "engine": 8690,
-   "baseline": 2792
+   "engine": 9013,
+   "baseline": 3415,
+   "unanimous_path": 4638,
+   "escalated_path": 16218,
+   "multiple_vs_baseline": 2.64,
+   "measured_on": "THIS run: the frozen n=90 seed-42 submission run (full_run.jsonl + full_run2.jsonl), the same run every other number in this stats block describes. Source: benchmark/results/submission_token_economics.json.",
+   "do_not_confuse_with": "8,690 / 2,792 (3.1x), quoted in README.md, docs/architecture.md and docs/FINDINGS-2026-08.md. That pair is measured on the TB-1 paired item set -- seeds 1001/2311/3407, n=265 shared items -- a DIFFERENT run, not a competing estimate of the same quantity. This field carried that pair until 2026-08-03, which was wrong here: a stats block describing one run must quote that run's own cost."
   },
   "median_latency_s": 10.77,
   "subjects": {
