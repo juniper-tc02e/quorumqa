@@ -173,7 +173,23 @@ python benchmark/build_rag_index_preembedded.py \
 `build_progress` checkpoint, same resumability contract as the
 from-scratch builder.)
 
-<!-- BUILD_RESULT_PLACEHOLDER -->
+**Build result, read back from the index on 2026-08-03** (the build itself ran
+2026-07-22; this doc carried an unfilled placeholder until the figures were
+queried directly out of the committed DB):
+
+| table | rows |
+|---|---:|
+| `passages` | **150,148** |
+| `embeddings` | **150,148** |
+| `passages_fts` | 150,148 |
+
+Every passage has an embedding — the counts match exactly, so the build did not
+stop partway through the embedding pass, which is the failure mode the
+`build_progress` checkpoint exists to make resumable. `--max-passages 150000`
+was requested and 150,148 landed; the small overshoot is the last source
+document being taken whole rather than truncated mid-article.
+
+Index size on disk: **1,010,511,872 bytes (1.01 GB)**.
 
 The index DB itself (`benchmark/data/rag_index_preembedded.sqlite3`) is
 gitignored, same as the from-scratch build's `rag_index.sqlite3` --
@@ -189,7 +205,31 @@ Runs 5 hardcoded STEM queries through the real `quorumqa.tools.mcp_server.
 search_corpus` function (same code path the Verifier's tool rack calls),
 prints top-3 titles+scores per query, and reports latency.
 
-<!-- QUERY_RESULT_PLACEHOLDER -->
+**Measured 2026-08-03** against the committed 1.01 GB pre-embedded index.
+All 5 queries returned `ok=True dense=True`.
+
+| query | top hit | score | 2nd | 3rd |
+|---|---|---:|---|---|
+| activation energy Arrhenius equation | Activation energy | 0.0328 | Arrhenius equation | Activation energy |
+| CRISPR Cas9 mechanism | CRISPR | 0.0315 | Anti-CRISPR | Cas9 |
+| eigenvalue decomposition | Common spatial pattern | 0.0320 | Numerical analysis | Gaussian network model |
+| second law of thermodynamics entropy | Thermodynamics | 0.0328 | Objections to evolution | Temperature |
+| neural network backpropagation gradient descent | Connectionism | 0.0323 | Recursive neural network | Artificial intelligence |
+
+Latency over 5 queries: **min 988 ms, max 34,295 ms, mean 7,775 ms.** The max is
+the first query and is cold-start cost — model load plus page cache — not
+steady-state; the remaining four run 988–1,487 ms.
+
+**Read the retrieval quality honestly, because it bears on D1/E2.** Two of five
+queries return a *topically adjacent* article rather than the named concept:
+"eigenvalue decomposition" tops out at *Common spatial pattern*, and "second law
+of thermodynamics entropy" puts *Objections to evolution* above *Temperature*.
+Scores are also flat — every hit sits in 0.0299–0.0328, a 0.003 spread — so the
+ranking carries little discriminating signal between a good hit and a mediocre
+one. That is consistent with, and is a plausible mechanism for, the two
+retrieval nulls already in the record: **D1** (score-gating cannot separate
+regressions from wins, 0.0288 vs 0.0290 — the same flat band) and **D4**
+(`rag_presolve` manufacturing unanimous-wrong consensus at seed 271).
 
 ## Using this index
 
