@@ -35,6 +35,32 @@ least a three-seat panel.
 
 - Unanimous Quorum answers cost ~$0.004; escalated ~$0.05 (measured, n=90
   GPQA benchmark). Tribunal always pays the full pipeline.
+
+  **⚠ Those are dollars under pre-Token-Plan pricing, and the billing unit
+  changed.** Re-derived in tokens from the same frozen n=90 seed-42 run
+  (`benchmark/results/full_run.jsonl` + `full_run2.jsonl`, mean input+output
+  per item):
+
+  | path | share of questions | tok/item | vs one flagship call |
+  |---|---:|---:|---:|
+  | Quorum, unanimous | 62.2% | **4,638** | 1.36× |
+  | Quorum, escalated | 37.8% | **16,218** | 4.75× |
+  | Quorum, blended | 100% | **9,013** | 2.64× |
+  | *one `qwen3.7-max` call* | — | *3,415* | 1.00× |
+
+  So the cheap path is **not** cheap relative to the obvious alternative — a
+  unanimous three-seat panel still burns 1.36× what a single flagship call
+  burns, and the blended figure is 2.64×. The dollar saving came entirely from
+  the flash/max price ratio, which the Token Plan removes.
+
+  *Reconciling with the 8,690 / 2,792 pair quoted in `README.md`,
+  `docs/architecture.md` and `docs/FINDINGS-2026-08.md`: that pair is measured
+  on the **3-seed paired TB-1 item set** (seeds 1001/2311/3407, n=265 shared
+  items) and gives 3.1×. The table above is the **frozen n=90 seed-42
+  submission run**, the same run the dollar figures on this page come from, and
+  gives 2.64×. Both are correct; they are different item sets, and the one to
+  quote is whichever run the surrounding claim is about. They are not two
+  estimates of one quantity.*
 - Follow-up messages within a case (see Conversation model) do NOT re-run
   the panel, so multi-turn chat stays fast and cheap despite there being no
   casual tier.
@@ -123,6 +149,30 @@ Highest-leverage UI investment in the product.
   Pro use stays well under subscription price. The per-answer cost chip
   doubles as a trust signal no competitor shows.
 
+  **⚠ Re-derived 2026-08-03 — the margin claim is not currently verifiable, and
+  the honest version is stated in tokens.** "Well under subscription price"
+  was computed from `PRICING_USD_PER_MTOK`, which prices `qwen3.6-flash` input
+  at 0.60 and `qwen3.7-max` input at 2.50 USD/Mtok. The whole saving lives in
+  that ~4× spread. The Token Plan bills a **token quota**, not a
+  model-differentiated dollar rate, and its rate is not in this repo — so no
+  margin figure can be defended here, and none is asserted.
+
+  What *is* measured, from the frozen n=90 run:
+
+  | Pro usage | blended tok/mo | vs the same user on 1× flagship |
+  |---|---:|---:|
+  | 30 cases/mo (Free ceiling) | 270k | 102k |
+  | 200 cases/mo (typical Pro) | 1.80M | 683k |
+  | 1,000 cases/mo (heavy Pro) | 9.01M | 3.42M |
+
+  A heavy Pro user costs **2.64× the token budget** of the same user served by
+  one flagship call per question — and TB-1 measured that the extra tokens buy
+  net +1 accuracy at p=0.50. **The product case for the tribunal is therefore
+  visibility, not accuracy and not cost**, which is what the tier table on this
+  page now says. Before any pricing decision, this needs the actual Token Plan
+  rate and a real margin re-derivation; it is listed as an open question below
+  rather than left as a settled claim.
+
 ## Phasing
 
 - **Phase 0 (days):** magiachiral.com landing — live *replayed* demos from
@@ -141,6 +191,14 @@ Highest-leverage UI investment in the product.
 - Disclaimer depth for medical/legal use cases.
 - Phase 0 ships after the hackathon submission (sequencing: submission
   first).
+- **Pricing is unresolved and currently blocks nothing but should block
+  launch.** The $15–20/mo Pro figure was set against a dollar cost that the
+  Token Plan superseded. Needs: (a) the actual Token Plan rate or quota, (b) a
+  margin re-derivation in tokens against the table in "Unit economics" above,
+  and (c) a decision on what the tribunal is priced *for*, given TB-1 measured
+  its accuracy contribution at net +1, p=0.50 — the defensible pitch is the
+  audit trail, not a better answer. Until (a) exists no margin claim should
+  appear on the site or in this doc.
 
 See BRAND.md (same directory) for fonts, color system, naming surfaces,
 and the deployable feature spec.

@@ -673,6 +673,20 @@ green. Pooled-marginal provenance — the shape is the claim, not the gaps.*
   that row discounted, **no lever built purely from flagship+flash seats
   clears the Pareto frontier on any of the 9 benchmarks** in this
   analysis.
+- *Correction, 2026-07-30.* The first of those two exceptions has since been
+  **retracted**, which strengthens the conclusion rather than weakening it.
+  `qwen3.8_solo`'s 93.6% was a *survivor-only* figure over 78 of 90 items.
+  Three paced retries recovered 2 of the 12 drops (78 → 79 → 80) and then
+  stalled on repeated 504s from Aliyun's own infrastructure — a structural
+  property of those items' generation length, not transient load, so no
+  client-side timeout could have fixed it. Per D0's own pre-registered kill
+  clause the point estimate is retired; the honest figure is the interval
+  **[83.3%, 94.4%]**, and `chem_thinking_gate`'s 90.9% sits *inside* it, so
+  the sign of that gap is undetermined. It is therefore no longer a config
+  that demonstrably clears the frontier, and it was suppressing five
+  legitimate configs while it stood as the ceiling. `RETIRED_POINT_ESTIMATES`
+  in `benchmark/figure_data.py` excludes it at source and the Pareto flags are
+  recomputed rather than read from the stale CSV.
 - *Source.* `benchmark/results/family_floor_analysis.md` §F2.
 
 **F2. The MoO router does not beat flat-best on accuracy (91.0% vs 92.8%, corrected; 90.1% vs 92.8%, original)**

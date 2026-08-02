@@ -1,0 +1,39 @@
+{
+  "_what": "Aggregate token cost per routing path for the frozen submission run. Derived artifact: aggregates only, no question text, no transcripts, no answer keys -- safe to commit where the source .jsonl is gitignored.",
+  "_why": "docs/product/PRODUCT.md publishes these figures. Their source (benchmark/results/full_run*.jsonl) is gitignored, so without this file the test that pins the doc to the data would skip on every machine but the one that ran it -- a guard that does not guard.",
+  "_source": [
+    "benchmark/results/full_run.jsonl",
+    "benchmark/results/full_run2.jsonl"
+  ],
+  "_source_note": "full_run2 continues full_run; rows are deduplicated by question_id with later rows winning.",
+  "_generated": "2026-08-03",
+  "_regenerate": "python -m benchmark.derive_token_economics",
+  "benchmark": "GPQA-Diamond",
+  "seed": 42,
+  "n_items": 90,
+  "escalation_rate_pct": 37.8,
+  "tokens_per_item": {
+    "unanimous": 4638,
+    "escalated": 16218,
+    "blended": 9013,
+    "baseline_flagship_1x": 3415
+  },
+  "counts": {
+    "unanimous": 56,
+    "escalated": 34
+  },
+  "multiples_vs_flagship_1x": {
+    "unanimous": 1.36,
+    "escalated": 4.75,
+    "blended": 2.64
+  },
+  "_do_not_confuse_with": {
+    "pair": [
+      8690,
+      2792
+    ],
+    "multiple": 3.11,
+    "measured_on": "TB-1 paired item set, seeds 1001/2311/3407, n=265 shared items",
+    "note": "Quoted in README.md, docs/architecture.md and docs/FINDINGS-2026-08.md. A DIFFERENT item set, not a competing estimate of the same quantity. Do not reconcile them by editing either one."
+  }
+}
