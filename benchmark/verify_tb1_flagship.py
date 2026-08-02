@@ -58,6 +58,38 @@ ARM_FILES = {
 PRIMARY_ALPHA = 0.05
 SECONDARY_ALPHA = 0.05 / 3  # Bonferroni over the three seeds
 
+# --- Kill clause 4 (degeneracy), given a number ------------------------------
+#
+# The spec states clause 4 as "if arm C's mean pairwise seat agreement is
+# approximately 1.0, the samples are degenerate and the A-vs-C comparison is
+# VOID rather than favourable." That is not a threshold. An unquantified kill
+# clause is decided after the data is seen, which is the one thing a
+# pre-registration exists to prevent -- and the temptation runs in a specific
+# direction here, since voiding A-vs-C would conveniently protect arm A's
+# mechanism claim.
+#
+# Fixed 2026-08-03, BEFORE reading any seed-1001 accuracy. At that moment the
+# only arm C numbers seen were the section 4.1 pre-flight (5 items, mean
+# pairwise agreement 0.920) and a running item COUNT from the log.
+#
+# Two conditions, either sufficient, because "degenerate" has two distinct
+# failure shapes:
+#
+#   AGREEMENT >= 0.98. At 0.98 over 90 items x 10 pairs, ~18 of 900 pairs
+#   disagree. Self-consistency can then move only a handful of items and the
+#   control cannot meaningfully differ from a single call.
+#
+#   DISAGREEING ITEMS < 5%. The direct statement of the same thing and the more
+#   interpretable one: on fewer than ~4 of 90 items do the five seats split at
+#   all. Voting over samples that never disagree IS a single call.
+#
+# A third figure is reported but deliberately NOT a kill: how often the majority
+# differs from the first seat. That measures whether voting changed the answer,
+# which is the effect under test -- gating on it would be conditioning the
+# control's admissibility on its own result.
+DEGENERACY_MAX_AGREEMENT = 0.98
+DEGENERACY_MIN_SPLIT_ITEM_RATE = 0.05
+
 
 def _load(name: str) -> list[dict]:
     path = RESULTS / name
@@ -118,6 +150,8 @@ def _sc_diagnostics(seed: int) -> dict | None:
         return None
     per_sample_correct = per_sample_total = 0
     agree_pairs = total_pairs = 0
+    split_items = items = 0
+    majority_differs = 0
     for row in rows:
         engine = row.get("engine") or {}
         gold = (engine.get("item") or {}).get("correct_letter")
@@ -129,9 +163,30 @@ def _sc_diagnostics(seed: int) -> dict | None:
             for j in range(i + 1, len(letters)):
                 total_pairs += 1
                 agree_pairs += letters[i] == letters[j]
+        if letters:
+            items += 1
+            if len(set(letters)) > 1:
+                split_items += 1
+            # Did voting actually change the answer relative to taking one
+            # sample? Reported, never a kill -- see the note on the constants.
+            majority = max(set(letters), key=letters.count)
+            majority_differs += majority != letters[0]
+
+    agreement = (agree_pairs / total_pairs) if total_pairs else None
+    split_rate = (split_items / items) if items else None
+    degenerate = bool(
+        agreement is not None and split_rate is not None
+        and (agreement >= DEGENERACY_MAX_AGREEMENT
+             or split_rate < DEGENERACY_MIN_SPLIT_ITEM_RATE)
+    )
     return {
         "mean_per_sample_accuracy": (per_sample_correct / per_sample_total) if per_sample_total else None,
-        "mean_pairwise_agreement": (agree_pairs / total_pairs) if total_pairs else None,
+        "mean_pairwise_agreement": agreement,
+        "pairs": total_pairs,
+        "items": items,
+        "split_item_rate": split_rate,
+        "majority_differs_from_first_seat": (majority_differs / items) if items else None,
+        "degenerate": degenerate,
     }
 
 
@@ -226,7 +281,17 @@ def main() -> None:
         if s["sc_diagnostics"]:
             d = s["sc_diagnostics"]
             print(f"    arm C diversity: mean per-sample acc={d['mean_per_sample_accuracy']:.3f}, "
-                  f"mean pairwise agreement={d['mean_pairwise_agreement']:.3f}")
+                  f"mean pairwise agreement={d['mean_pairwise_agreement']:.3f} "
+                  f"({d['pairs']} pairs)")
+            print(f"      items where the 5 seats split at all: "
+                  f"{d['split_item_rate']:.1%} of {d['items']}"
+                  f"   | voting changed the answer on "
+                  f"{d['majority_differs_from_first_seat']:.1%} (reported, not a kill)")
+            if d["degenerate"]:
+                print(f"      ** KILL CLAUSE 4 FIRED -- arm C is DEGENERATE "
+                      f"(agreement >= {DEGENERACY_MAX_AGREEMENT} or split rate "
+                      f"< {DEGENERACY_MIN_SPLIT_ITEM_RATE:.0%}). A-vs-C is VOID, "
+                      f"not favourable to arm A. **")
         print()
 
     print("-" * 78)

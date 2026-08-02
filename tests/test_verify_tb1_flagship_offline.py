@@ -379,3 +379,97 @@ def test_sc_diagnostics_reads_the_key_the_runner_actually_writes():
             f"whatever the control actually did."
         )
         assert 0.0 <= d["mean_pairwise_agreement"] <= 1.0
+
+
+# ---------------------------------------------------------------------------
+# Kill clause 4, now that it has a number
+# ---------------------------------------------------------------------------
+
+
+def test_identical_samples_fire_the_degeneracy_kill(tmp_path, monkeypatch):
+    """Five seats that never disagree: SC@5 is literally a single call, so the
+    control is defeated by construction and A-vs-C is VOID."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(f"q{i}", "A", ["A"] * 5) for i in range(90)])
+    d = _sc_diagnostics(1001)
+    assert d["mean_pairwise_agreement"] == 1.0
+    assert d["split_item_rate"] == 0.0
+    assert d["degenerate"] is True
+
+
+def test_a_genuinely_diverse_control_does_not_fire_it(tmp_path, monkeypatch):
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    rows = []
+    for i in range(90):
+        # 30% of items split -- well clear of the 5% floor.
+        rows.append(_sc_row(f"q{i}", "A",
+                            ["A", "A", "B", "A", "C"] if i % 10 < 3 else ["A"] * 5))
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001), rows)
+    d = _sc_diagnostics(1001)
+    assert d["split_item_rate"] == pytest.approx(0.30, abs=0.01)
+    assert d["degenerate"] is False
+
+
+def test_the_split_rate_condition_fires_on_its_own(tmp_path, monkeypatch):
+    """The two conditions catch different shapes, so each must fire alone.
+
+    Isolating the split-rate leg needs care: few enough split items to breach
+    the 5% floor, but disagreement violent enough on those items to keep mean
+    pairwise agreement BELOW 0.98, so the other condition is not what fired.
+    4 of 90 items spread across all four letters gives split_rate 4.4% and
+    agreement 0.960.
+
+    (The first version of this fixture used 5 of 90 = 5.56%, which is above the
+    floor, while its docstring claimed 6%. The fixture was wrong, not the
+    threshold -- the same way the TB-1B cost fixture was.)
+    """
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    rows = [_sc_row(f"q{i}", "A",
+                    ["A", "B", "C", "D", "A"] if i < 4 else ["A"] * 5)
+            for i in range(90)]
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001), rows)
+    d = _sc_diagnostics(1001)
+    assert d["split_item_rate"] == pytest.approx(4 / 90)
+    assert d["split_item_rate"] < tb1.DEGENERACY_MIN_SPLIT_ITEM_RATE
+    assert d["mean_pairwise_agreement"] < tb1.DEGENERACY_MAX_AGREEMENT, (
+        "agreement must stay under its own threshold, or this test would not "
+        "prove the split-rate condition is what fired"
+    )
+    assert d["degenerate"] is True
+
+
+def test_the_threshold_cannot_be_loosened_to_void_an_inconvenient_control():
+    """Guard on the guard, and on myself.
+
+    Voiding A-vs-C is the outcome that PROTECTS arm A's mechanism claim, so the
+    incentive on this threshold runs one way. These bounds make loosening it a
+    visible, deliberate edit rather than a quiet nudge.
+
+    0.98 was fixed before any seed-1001 accuracy was read; the section 4.1
+    pre-flight had measured 0.920 over 5 items. A threshold at or below ~0.95
+    would void a control that still moves items, which is not degeneracy -- it
+    is a strong model being self-consistent, exactly what a flagship at 89%
+    should look like.
+    """
+    assert tb1.DEGENERACY_MAX_AGREEMENT >= 0.97, (
+        "a threshold this low voids controls that are merely self-consistent"
+    )
+    assert tb1.DEGENERACY_MIN_SPLIT_ITEM_RATE <= 0.10, (
+        "requiring more than 10% of items to split would void a legitimate "
+        "control on a benchmark the flagship already answers well"
+    )
+
+
+def test_majority_differs_is_reported_but_never_gates(tmp_path, monkeypatch):
+    """Whether voting changed the answer IS the effect under test. Gating
+    admissibility on it would condition the control on its own result."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    # Seats split on every item, but the majority always equals seat 0, so
+    # voting never changes anything -- and that must NOT be a kill.
+    _write(tmp_path / ARM_FILES["C"].format(seed=1001),
+           [_sc_row(f"q{i}", "A", ["A", "A", "A", "B", "C"]) for i in range(90)])
+    d = _sc_diagnostics(1001)
+    assert d["majority_differs_from_first_seat"] == 0.0
+    assert d["split_item_rate"] == 1.0
+    assert d["degenerate"] is False
