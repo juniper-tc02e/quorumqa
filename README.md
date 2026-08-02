@@ -104,13 +104,21 @@ complete account, and the one to read first.**
 
 > **August 2026 update — read this before the numbers above.** We finally
 > measured the whole engine against the obvious alternative of *calling the
-> flagship once*, on identical items. On GPQA-Diamond it is **net +1,
-> p = 0.50, at 4.7× the tokens** — a single flagship call dominates the
-> architecture there. On SuperGPQA-hard, where the base model is 10 points
+> flagship once*, on identical items. On GPQA-Diamond it is **net +0,
+> p = 0.605, at ~4.9× the tokens** — a single flagship call dominates the
+> architecture there.
+>
+> **And then against the harder comparator: the same token budget spent on
+> plain sampling.** `qwen3.7-max` self-consistency @ N=5 costs 13,833 tok/item
+> against the stack's 12,991 — a 6% difference — and scores **92.9% against the
+> stack's 90.6%**. Paired, three seeds, n=255: the stack is **net −6, p=0.981**.
+> Every seed points the same way. So the result is not the weak "the tribunal
+> fails to beat one call"; it is **spend its budget on sampling instead and you
+> do better** (`benchmark/results/tb1_flagship_comparison_result.md` §5.2). On SuperGPQA-hard, where the base model is 10 points
 > weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched
 > control attributes that gain to **self-consistency sampling, not
-> deliberation**. Eleven separate mechanisms for detecting a confident-but-wrong
-> panel were tested; all eleven are null.
+> deliberation**. Twelve separate mechanisms for detecting a confident-but-wrong
+> panel were tested; all twelve are null.
 >
 > One number in this README needs its unit stated: the *"11% lower cost"* below
 > is measured in **dollars** under the pre-Token-Plan pricing. Under the Token

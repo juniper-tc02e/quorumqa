@@ -53,9 +53,10 @@ ARMS = {
         # 2,792 -> 2,745 tok/item, taking F10's caption and the claims ledger
         # with it. Nine tests failed, which is the only reason it was caught.
         #
-        # Add the line below once seeds 1001/2311/3407 have all landed, then
-        # rebuild F10/F13 and re-run the ledger check in the same commit:
-        #   "flagship_sc5": ("TB1_flagship_sc5_gpqa_seed{s}.jsonl", (1001, 2311, 3407)),
+        # All three seeds landed 2026-08-03, so it is registered now. Every
+        # frontier point below moves as a result -- the intersection is now
+        # A n B n C -- which is correct and is why this waited.
+        "flagship_sc5": ("TB1_flagship_sc5_gpqa_seed{s}.jsonl", (1001, 2311, 3407)),
     },
     "supergpqa": {
         "flagship_1x": ("lever_baseline_supergpqa_seed{s}.jsonl", (7, 42, 123)),

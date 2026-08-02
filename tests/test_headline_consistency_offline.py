@@ -107,12 +107,25 @@ FROZEN_OR_NON_CLAIM_DOCS = {
 
 #: Figures whose only correct source is the analyzer, checked live below rather
 #: than trusted as transcribed. (value, dataset, point, field, scale)
+#:
+#: UPDATED 2026-08-03 when TB-1 arm C landed. GPQA's numbers moved because the
+#: analysis set is the intersection of every registered arm, and arm C added a
+#: third: S went from A n B to A n B n C, 265 items to 255. flagship_1x reads
+#: 90.6% on the smaller set where it read 89.4% on the larger, and
+#: universal_gate's p moved 0.50 -> 0.605 as its net went +1 -> +0.
+#:
+#: Nothing was re-measured and nothing was corrected. A paired statistic is
+#: defined on its item set; changing the set changes the number, and the spec
+#: requires all arms share one set so arm A's accuracy is a single number
+#: across both comparisons. SuperGPQA is untouched because arm C is GPQA-only.
 DERIVED_HEADLINES = [
-    (89.4, "gpqa", "flagship_1x", "accuracy", 100),
+    (90.6, "gpqa", "flagship_1x", "accuracy", 100),
     (79.2, "supergpqa", "flagship_1x", "accuracy", 100),
     (82.2, "supergpqa", "flagship_panel", "accuracy", 100),
     (0.0327, "supergpqa", "flagship_panel", "p_one_sided", 1),
-    (0.50, "gpqa", "universal_gate", "p_one_sided", 1),
+    (0.605, "gpqa", "universal_gate", "p_one_sided", 1),
+    # Arm C itself: the compute-matched control beats the lever it controls for.
+    (92.9, "gpqa", "flagship_sc5", "accuracy", 100),
 ]
 
 

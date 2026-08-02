@@ -131,7 +131,89 @@ compute-matching to interpret a *null*, because the compute asymmetry only ever
 threatened a positive. Arm C is not a correction to A-vs-B. It is a different
 question.
 
-Results in §5.2 below once all three seeds land.
+### 5.2 Arm C result — the attribution kill fires
+
+**Measured 2026-08-03. Seeds 1001/2311/3407, |S| = 85 at every seed, n = 255
+paired.** All three seeds clear the ≥81 gate. Reproduce with
+`python -m benchmark.verify_tb1_flagship`.
+
+| comparison | b | c | net | p (one-sided) | verdict |
+|---|---:|---:|---:|---:|---|
+| **A vs C** — stack vs the same budget sampled | 3 | 9 | **−6** | 0.981 | **KILL FIRES** |
+| A vs B — stack vs one flagship call | 7 | 7 | **+0** | 0.605 | ties |
+| C vs B — sampling vs one call *(context, not pre-registered)* | 10 | 4 | +6 | 0.090 | directional |
+
+Per seed, A-vs-C is **−1 / −2 / −3**. Every seed points the same way; none of
+them is carrying the result.
+
+**Verdict, in the wording §6.1 fixed before the data existed: a COMPUTE EFFECT,
+NOT AN ORCHESTRATION EFFECT.**
+
+#### The frontier, on identical items
+
+| configuration | accuracy | tok/item | accuracy per 1k tokens |
+|---|---:|---:|---:|
+| `qwen3.7-max` ×1 | 90.6% | **2,627** | **34.5** |
+| `universal_gate` | 90.6% | 12,991 | 6.97 |
+| **`qwen3.7-max` SC@5** | **92.9%** | 13,833 | 6.72 |
+
+At **essentially the same token budget** — 12,991 against 13,833, a 6%
+difference — plain self-consistency scores **2.3 points higher** than the full
+scaffolded stack. The tribunal does not merely fail to add value over sampling;
+spending its budget on sampling instead is measurably better.
+
+#### Kill clause 4 did not fire, and that matters
+
+The control is **admissible at every seed**:
+
+| seed | mean pairwise agreement | items where the 5 seats split | degenerate? |
+|---|---:|---:|---|
+| 1001 | 0.963 | 8.1% | no |
+| 2311 | 0.927 | 12.8% | no |
+| 3407 | 0.931 | 12.9% | no |
+
+Thresholds were **≥0.98 agreement** or **<5% split**, both fixed on 2026-08-03
+while seed 1001 was still running and before any accuracy was read — see the
+note at `verify_tb1_flagship.py`'s constants. Had the agreement threshold been
+set at 0.95 instead, all three seeds would have been voided, and voiding A-vs-C
+is precisely the outcome that would have protected arm A's mechanism claim.
+
+Diversity parity was verified from the run rather than from config: all 430
+seat records at seed 1001 fire at temperatures 0.3/0.6/0.9/0.3/0.6, matching
+arm A's own cycle. Review point 7 of the spec rejected a 0.4-uniform arm C as an
+under-diversified straw control; this is not that.
+
+#### Why C-vs-B is reported alongside
+
+A-vs-C alone is ambiguous: "the stack loses to SC@5" is consistent both with
+*sampling is good* and with *the stack is bad*. C-vs-B separates them —
+**+6, p = 0.090** — so sampling is directionally worth its budget while the
+scaffold on top of that budget is not. It is labelled *not a pre-registered
+test* because it is not one.
+
+#### What moved, and what did not
+
+Adding arm C shrank S from **265 to 255** items, because the analysis set is the
+intersection of every arm present (§5). A-vs-B therefore reads **net +0,
+p = 0.605** here where it read net +1, p = 0.50 before. **Nothing was
+re-measured and nothing is corrected** — a paired statistic is defined on its
+item set, and the spec requires all arms share one set so arm A's accuracy is a
+single number in both comparisons. Both figures describe the same null.
+
+#### Drops
+
+Every seed lost 5 items (|S| = 85 of 90), well inside the 9-drop kill. Drops are
+504-correlated and therefore **not MCAR**; with net −6 against a bar the result
+misses by a wide margin, 5 items could not reverse it, but the bias is stated
+rather than assumed harmless. The 300 s client timeout that caused them is
+filed as separate work — `lever_experiments.py` does not expose the `timeout`
+parameter `QwenClient` already has.
+
+#### Cost
+
+~4.0M tokens across three seeds, at 14,740 tok/item measured (the spec budgeted
+~15,000). Slightly **over**-matching `universal_gate`'s own spend, which is the
+conservative direction.
 
 ## 6. What survives, honestly
 

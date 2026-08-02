@@ -168,14 +168,48 @@ def build_f10() -> None:
         # placed label is near it in BOTH axes, in which case it flips below.
         ordered = sorted(pts.items(), key=lambda kv: kv[1]["tokens_per_item"])
         x_span = max(e["tokens_per_item"] for e in pts.values()) or 1.0
-        y_span = (max(e["accuracy"] for e in pts.values())
-                  - min(e["accuracy"] for e in pts.values())) * 100 or 1.0
         placed: list[tuple[float, float, bool]] = []  # (x, y, was_above)
 
+        # The vertical clearance a label needs is set by how tall the LABEL is
+        # in axis units, not by how spread the DATA is.
+        #
+        # This used the data span, and arm C exposed why that is wrong: on GPQA
+        # the three points span only 2.3pp, so the threshold came out at 0.88pp
+        # while a three-line label occupies ~2.5pp of a 20-point axis. The rule
+        # declared universal_gate and flagship_sc5 "not near" and printed one
+        # straight through the other's marker.
+        #
+        # ~13% of the drawn y-range is a three-line label plus its offset.
+        #
+        # The final ylim is set further down (lo-11, hi+8), AFTER placement, so
+        # ax.get_ylim() here would return matplotlib's autoscale default and
+        # silently give the wrong clearance. Computed the same way instead, and
+        # asserted identical below so the two cannot drift apart.
+        _lo = min(e["accuracy"] for e in pts.values()) * 100
+        _hi = max(e["accuracy"] for e in pts.values()) * 100
+        y_range = (_hi + 8) - (_lo - 11)
+        y_clear = 0.13 * y_range
+
+        # Every point's MARKER, so a label can avoid printing through one.
+        #
+        # The rule only compared labels to other labels, which is why
+        # universal_gate's label still ran through flagship_sc5's marker: the
+        # two labels were correctly on opposite sides, but the upper one
+        # occupied exactly the accuracy where the other point is drawn. A label
+        # colliding with a marker is the more visible defect of the two.
+        markers = [(e["tokens_per_item"], e["accuracy"] * 100) for e in pts.values()]
+
         def _side(x: float, y: float) -> bool:
+            """True to place the label above; False to flip it below."""
             for px, py, pabove in placed:
-                near = abs(px - x) < 0.30 * x_span and abs(py - y) < 0.22 * max(y_span, 4.0)
+                near = abs(px - x) < 0.30 * x_span and abs(py - y) < y_clear
                 if near and pabove:
+                    return False
+            # Would a label placed ABOVE this point land on another marker?
+            for mx, my in markers:
+                if (mx, my) == (x, y):
+                    continue
+                if abs(mx - x) < 0.22 * x_span and 0 < (my - y) < y_clear:
                     return False
             return True
 
@@ -241,6 +275,9 @@ def build_f10() -> None:
         ax.set_xlim(0, max(e["tokens_per_item"] for e in pts.values()) * 1.35)
         lo = min(e["accuracy"] for e in pts.values()) * 100
         hi = max(e["accuracy"] for e in pts.values()) * 100
+        # Must match the range the label-collision clearance was computed
+        # against, or labels are placed for an axis that is never drawn.
+        assert (lo, hi) == (_lo, _hi), "ylim drifted from the collision calc"
         ax.set_ylim(lo - 11, hi + 8)
         ax.grid(alpha=0.22, zorder=0)
 
@@ -414,6 +451,11 @@ F12_KILLS = [
     # instead of flagship seats, and the sign flips.
     ("Cheap seats + escalate-all vs flagship", "TB-1B, seed 7, n=87",
      "net −2 at 5.1× the tokens", 0.8906, "tb1b_supergpqa_result.md"),
+    # Added 2026-08-03. The strongest row in the list: not "the scaffold fails
+    # to beat one call" but "the scaffold LOSES to its own budget spent on
+    # plain sampling", on identical items at all three seeds.
+    ("Scaffolding vs the same budget sampled", "TB-1 arm C, 3 seeds, n=255",
+     "net −6; 90.6% vs SC@5's 92.9%", 0.9807, "tb1_flagship_comparison_result.md"),
 ]
 
 
@@ -509,7 +551,7 @@ def build_f13() -> None:
         ("universal_gate\n(escalate every item)", ug["accuracy"] * 100, WIN_GREEN,
          "+25 vs cheap panel\np = 3.0e-8"),
         ("qwen3.7-max\n×1 call", fl["accuracy"] * 100, FLAGSHIP_GOLD,
-         f"universal_gate is only\nnet {ug['net']:+d} vs this, p={ug['p_one_sided']:.2f}"),
+         f"gate is net {ug['net']:+d}\nvs this, p={ug['p_one_sided']:.2f}"),
     ]
     # TB-1 arm C, appended only when it is registered AND has data. Kept
     # conditional rather than hardcoded so this figure gains its fourth bar the
@@ -521,7 +563,7 @@ def build_f13() -> None:
         bars.append((
             "qwen3.7-max\nSC@5\n(compute-matched)",
             sc5["accuracy"] * 100, LOSS_RED,
-            f"universal_gate is net\n{-sc5['net']:+d} vs this, p={sc5['p_one_sided']:.2f}"
+            f"gate is net {-sc5['net']:+d}\nvs this, p={sc5['p_one_sided']:.2f}"
             if sc5.get("net") is not None else "",
         ))
 
@@ -534,17 +576,22 @@ def build_f13() -> None:
         if note:
             ax.text(i, val - 4.6, note, ha="center", fontsize=8.4, color="#ffffff", fontweight="bold")
 
-    # The two comparators, ~9 points apart -- the whole explanation. Drawn as a
-    # vertical span to the RIGHT of the bars: an earlier diagonal arrow cut
-    # straight through the middle bar's own label.
+    # The comparator SPREAD -- the whole explanation. Drawn as a vertical span
+    # to the RIGHT of the bars: an earlier diagonal arrow cut straight through
+    # the middle bar's own label.
+    #
+    # Spans lowest bar to highest, whichever they are. This said "the two
+    # comparators" while four bars were drawn, because arm C added a third.
     gap_x = len(bars) - 0.48
-    lo_y, hi_y = 80.8, fl["accuracy"] * 100
+    ys = [b[1] for b in bars]
+    lo_y, hi_y = min(ys), max(ys)
+    n_comparators = len(bars) - 1  # every bar except universal_gate itself
     ax.annotate("", xy=(gap_x, lo_y), xytext=(gap_x, hi_y),
                 arrowprops=dict(arrowstyle="<->", color="#444444", lw=1.6))
     for yv in (lo_y, hi_y):
         ax.plot([len(bars) - 0.72, gap_x], [yv, yv], color="#8a8a8a", lw=0.9, ls=":", zorder=1)
     ax.text(gap_x + 0.06, (lo_y + hi_y) / 2,
-            f"the two comparators\nare {hi_y - lo_y:.1f} points apart",
+            f"{_spell(n_comparators).lower()} comparators,\n{hi_y - lo_y:.1f} points apart",
             ha="left", va="center", fontsize=8.8, color="#333333", style="italic")
 
     ax.set_xticks(list(xs))
@@ -555,11 +602,18 @@ def build_f13() -> None:
     ax.grid(axis="y", alpha=0.22, zorder=0)
     ax.spines[["top", "right"]].set_visible(False)
 
+    # Title DERIVED. It read "Why +25 and +1 are both true" after arm C had
+    # moved the flagship comparison to net +0 -- naming a number the chart no
+    # longer showed. Fourth stale count in this module; the pattern is settled.
+    n_cmp = _spell(len(bars) - 1).lower()
+    sc5_txt = (f", and net {-sc5['net']:+d} against that same budget sampled"
+               if sc5 and sc5.get("net") is not None else "")
     draw_title(
         fig, "[PAIRED]",
-        "Why +25 and +1 are both true",
-        "universal_gate's large win is measured against the cheap panel; its null is measured against a single "
-        "flagship call. The scaffolding buys back exactly the ground the cheap panel gives up, and stops there.",
+        f"One lever, {n_cmp} comparators, {n_cmp} different verdicts",
+        f"universal_gate is +25 against the cheap panel, net {ug['net']:+d} against a single flagship call"
+        f"{sc5_txt} — same lever, same items, same seeds. The comparator decides the verdict, which is why "
+        f"the comparator has to be named every time.",
     )
     draw_footer(
         fig,
@@ -568,7 +622,8 @@ def build_f13() -> None:
         "universal_gate issues one qwen3.7-max judge call on EVERY item (judge calls/item = 1.00), so this is a "
         "SCAFFOLDED flagship call, not cheap seats replacing a flagship. Its +25 vs the cheap panel is +21 "
         "counting each item once (three 90-item seeds over a ~198-question benchmark cover 170 unique items). "
-        "Cost: 13,175 vs 2,792 tok/item.",
+        f"Cost on THIS item set: {ug['tokens_per_item']:,.0f} vs {fl['tokens_per_item']:,.0f} tok/item"
+        + (f"; the compute-matched control spends {sc5['tokens_per_item']:,.0f}." if sc5 else "."),
     )
     fig.subplots_adjust(left=0.085, right=0.975, top=0.850, bottom=0.195)
     save_figure(fig, "f13_two_comparators", pd.DataFrame(

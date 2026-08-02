@@ -18,12 +18,13 @@ tool-using tribunal with a flagship judge. It works: escalating **every**
 answer instead of only the split ones is worth **+25 items, zero losses,
 p = 3 × 10⁻⁸** on GPQA-Diamond. But when we finally measured it against the
 obvious alternative — *just call the flagship once* — the whole apparatus came
-out **net +1, p = 0.50, at 4.7× the tokens**. On GPQA-Diamond, QuorumQA is
+out **net +1, p = 0.50, at 4.7× the tokens** (net **+0**, p = 0.605 once arm C
+joined the intersection — §4c). On GPQA-Diamond, QuorumQA is
 dominated by a single flagship call. On SuperGPQA-hard, where the base model
 is 10 points weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a
 compute-matched control shows the gain is **self-consistency sampling, not
-deliberation**. Along the way, eleven separate mechanisms for detecting a
-confident-but-wrong panel were tested. All eleven are null.
+deliberation**. Along the way, twelve separate mechanisms for detecting a
+confident-but-wrong panel were tested. All twelve are null.
 
 ---
 
@@ -31,11 +32,17 @@ confident-but-wrong panel were tested. All eleven are null.
 
 ![F10](figures/f10_paired_cost_frontier.png)
 
-| GPQA-Diamond (n=265 paired) | accuracy | tokens/item | accuracy per 1k tokens |
+| GPQA-Diamond (n=255 paired, 3 arms) | accuracy | tokens/item | accuracy per 1k tokens |
 |---|---:|---:|---:|
-| **`qwen3.7-max` ×1** | 89.4% | **2,792** | **0.320** |
-| `universal_gate` | 89.8% | 13,175 | 0.068 — net +1, p=0.50 |
-| shipped engine | 80.8% | 8,690 | 0.093 — dominated |
+| **`qwen3.7-max` ×1** | 90.6% | **2,627** | **34.5** |
+| `universal_gate` | 90.6% | 12,991 | 6.97 — net +0, p=0.605 |
+| **`qwen3.7-max` SC@5** (compute-matched) | **92.9%** | 13,833 | 6.72 — the stack is net −6 vs this |
+| shipped engine | 80.8% | 8,690 | — dominated |
+
+*Recomputed 2026-08-03 on the 3-arm intersection. These figures replace an
+earlier 2-arm table (89.4% / 2,792 / net +1 / n=265): adding arm C shrank S from
+265 to 255, and a paired statistic is defined on its item set. Nothing was
+re-measured. See `tb1_flagship_comparison_result.md` §5.2.*
 
 | SuperGPQA-hard (3 seeds, n=236 paired) | accuracy | tokens/item | accuracy per 1k tokens |
 |---|---:|---:|---:|
@@ -82,7 +89,7 @@ that a 40-point opportunity. That framing is retired:** fifteen uniformly random
 the climb is guessing entropy, not harvestable signal — which is why five
 successive selectors have died against it.
 
-## 3. Eleven mechanisms for catching a confident-but-wrong panel. Eleven nulls.
+## 3. Twelve mechanisms for catching a confident-but-wrong panel. Twelve nulls.
 
 ![F12](figures/f12_kill_list.png)
 
@@ -102,6 +109,7 @@ and unanimity is where it stops looking. Everything we tried to detect those:
 | Deliberation vs self-consistency | tribunal leg +2 of +10 | 0.344 |
 | Whole stack vs one flagship call | net +1 at 4.7× tokens | 0.5000 |
 | Cheap seats + escalate-all vs flagship | net −2 at 5.1× tokens (TB-1B, §4b) | 0.8906 |
+| **Scaffolding vs the same budget sampled** | **net −6**; 90.6% vs SC@5’s 92.9% (TB-1 arm C, §4c) | **0.9807** |
 
 The self-authored CAS result is the sharpest. We asked the model to write a
 `sympy`-checkable equation for its own answer and ran a real offline
@@ -111,12 +119,12 @@ genuinely new information; **the premise is a re-read**, because the model
 chooses which equation to write and writes one consistent with the answer it
 already committed to. Verifying a self-authored premise verifies nothing.
 
-**The pattern across all eleven: every mechanism that re-reads what the model
+**The pattern across all twelve: every mechanism that re-reads what the model
 already generated has failed.** Any future proposal whose readout is cross-seat
 agreement, or any property of an existing transcript, has to argue past all
-eleven.
+twelve.
 
-## 4. Why +25 and +1 are both true
+## 4. One lever, three comparators, three different verdicts
 
 ![F13](figures/f13_two_comparators.png)
 
@@ -125,10 +133,18 @@ genuine, well-controlled win over the shipped engine: **+25 items, zero losses,
 p = 3.0 × 10⁻⁸**, three seeds, each clearing the bar independently, and it
 survives a compute-matched control against nine cheap seats (+22, p = 0.00001).
 
-It is *also* only **+1, p = 0.50** against a single flagship call.
+It is *also* only **net +0, p = 0.605** against a single flagship call, and
+**net −6, p = 0.981** against the same token budget spent on plain sampling
+(§4c).
 
-Both are true because the comparators are **8.6 points apart**. The scaffolding
-buys back exactly the ground the cheap panel gives up, and stops there.
+All three are true because the comparators are **12.1 points apart**. The
+scaffolding buys back exactly the ground the cheap panel gives up, stops there,
+and is then overtaken by simply sampling the strong model more.
+
+**Which is why the comparator has to be named every time.** A result quoted as
+"+25" and a result quoted as "−6" are the same lever on the same items at the
+same seeds. Nothing about the engine changed between them; only what it was
+measured against.
 
 **What it is not:** `universal_gate` issues one `qwen3.7-max` judge call on
 **every** item (measured: judge calls/item = 1.00). Nothing returns without a
@@ -168,6 +184,39 @@ difference is the seat tier. `flagship_panel` samples `qwen3.7-max` three times;
 conclusion arrives a second time by a different route: **sampling the strong
 model is what works; deliberation among weak ones is not.** See
 [`tb1b_supergpqa_result.md`](../benchmark/results/tb1b_supergpqa_result.md).
+
+### 4c. TB-1 arm C — the stack loses to its own budget spent on sampling
+
+**Measured 2026-08-03. Seeds 1001/2311/3407, n=255 paired, |S|=85 every seed.**
+This is the arm the TB-1 spec called "non-negotiable" and that a later note
+**cancelled**; the cancellation was reversed and the reasons are recorded in
+[`tb1_flagship_comparison_result.md`](../benchmark/results/tb1_flagship_comparison_result.md) §5.1.
+
+| comparison | b | c | net | p | verdict |
+|---|---:|---:|---:|---:|---|
+| **A vs C** — stack vs the same budget sampled | 3 | 9 | **−6** | 0.981 | **ATTRIBUTION KILL FIRES** |
+| A vs B — stack vs one flagship call | 7 | 7 | +0 | 0.605 | ties |
+| C vs B — sampling vs one call *(context)* | 10 | 4 | +6 | 0.090 | directional |
+
+Per seed A-vs-C reads **−1 / −2 / −3**. No seed carries the result.
+
+**At essentially equal budget — 12,991 vs 13,833 tok/item, a 6% difference —
+plain self-consistency scores 92.9% against the full scaffolded stack's 90.6%.**
+So the finding is not the weak form "the tribunal fails to beat one call". It is
+the strong form: **spend the tribunal's own budget on sampling instead and you
+do measurably better.** The spec's pre-registered wording for this outcome, set
+before the data existed, is *a compute effect, not an orchestration effect*.
+
+The control is **admissible** — mean pairwise seat agreement 0.963/0.927/0.931
+and split rates 8.1%/12.8%/12.9%, against a degeneracy threshold of ≥0.98 or
+<5%. That threshold was fixed while the first seed was still running and before
+any accuracy was read. **Had it been set at 0.95, all three seeds would have
+been voided** — and voiding A-vs-C is exactly the outcome that would have
+protected the architecture's mechanism claim.
+
+This closes TB-1. Combined with §4b (TB-1B on SuperGPQA-hard), the two
+benchmarks agree: **the scaffolding's gain is always measured against a weaker
+comparator, and never survives against the strong model given the same budget.**
 
 ## 5. Corrections we made to our own record
 
@@ -221,7 +270,7 @@ Publishing these because a record that only grows is not a record.
    Escalating everything recovers 25/38 of them while breaking 0/118.
 3. **Sampling beats deliberation, repeatedly.** Where multi-agent setups win
    here, a compute-matched self-consistency control explains the win.
-4. **The negative-results corpus itself.** Eleven controlled nulls, each
+4. **The negative-results corpus itself.** Twelve controlled nulls, each
    pre-registered with a kill clause fixed before the data existed.
 
 ## 7. How this was kept honest
