@@ -174,9 +174,9 @@ hardening was tuned against.
 
 Every figure writes the exact frame it plotted to
 `benchmark/results/figure_fNN_<name>.csv`. The claims ledger
-(`benchmark/results/figure_claims_ledger.csv`, 36 rows) is hand-transcribed from
+(`benchmark/results/figure_claims_ledger.csv`, 43 rows) is hand-transcribed from
 the findings docs and **self-verifying**: `verify_ledger()` greps every non-empty
-numeric cell for its literal formatted value in the doc it cites — 99 numbers
+numeric cell for its literal formatted value in the doc it cites — **118 numbers**
 currently verified. A transcription typo fails the check rather than reaching a
 figure.
 
@@ -198,8 +198,9 @@ Full narrative: [`docs/FINDINGS-2026-08.md`](../FINDINGS-2026-08.md).
 ![F10](f10_paired_cost_frontier.png)
 
 The headline, and it cuts both ways. On GPQA-Diamond the flagship is already at
-89.4% and **nothing beats it** — `universal_gate` is net +1 at p=0.50 for 4.7×
-the tokens. On SuperGPQA-hard the flagship sits at 79.2% and `flagship_panel`
+**90.6%** and **nothing beats it** — `universal_gate` is net **+0** at p=0.605 for
+~4.9× the tokens, and the compute-matched SC@5 control **beats the stack** by 6
+items at the same budget. On SuperGPQA-hard the flagship sits at 79.2% and `flagship_panel`
 **does** beat it, +7 at p=0.0327 (seeds 7/42/123). Solid = beats the reference
 at p<0.05; hollow = no significant gain; hollow red = loses. Nothing hollow is
 a win.
@@ -233,7 +234,8 @@ ranked only to show that none approaches 0.05.
 
 ![F13](f13_two_comparators.png)
 
-`universal_gate` beats the cheap panel by +25 (p=3.0e-8) and beats a single
-flagship call by +1 (p=0.50), because those two comparators are 8.6 points
-apart. Note the caveat in the footer: judge calls/item = 1.00, so this is a
+`universal_gate` beats the cheap panel by +25 (p=3.0e-8), merely **ties** a
+single flagship call (net +0, p=0.605), and **loses** to the same token budget
+spent on plain SC@5 sampling (net −6, p=0.981) — because those three
+comparators are 12.1 points apart. Note the caveat in the footer: judge calls/item = 1.00, so this is a
 *scaffolded flagship call*, not cheap seats replacing a flagship.

@@ -684,3 +684,70 @@ def test_the_stale_token_multiple_is_gone_from_the_warning():
     src = pathlib.Path(tb1.__file__).read_text(encoding="utf-8")
     assert "4.5x" not in src and "4.5×" not in src
     assert "4.7x" in src or "4.7×" in src
+
+
+# ---------------------------------------------------------------------------
+# Kill clause 2 -- stated in the spec, unimplemented until an audit found it
+# ---------------------------------------------------------------------------
+
+
+def test_falsification_kill_fires_on_a_pooled_net_of_zero(tmp_path, monkeypatch, capsys):
+    """Spec 6.2: 'or if pooled A-vs-B net <= 0 ... Track-B's central claim is
+    DEAD on GPQA'. Zero satisfies <= 0, and the real data sits exactly there.
+
+    This clause was stated in the spec and evaluated nowhere. Clauses 1 and 4
+    were both implemented carefully; this one was simply missed, and an
+    adversarial audit of the published record found it -- after the result it
+    fires on had already been published.
+    """
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001),
+           [_engine_row(q, "A", "A" if i % 2 else "B") for i, q in enumerate(qs)])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001),
+           [_engine_row(q, "A", "A" if i % 2 else "B") for i, q in enumerate(qs)])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "KILL CLAUSE 2" in out
+    assert "FALSIFICATION KILL FIRES" in out
+    assert "DEAD ON GPQA" in out
+
+
+def test_a_clear_win_does_not_fire_the_falsification_kill(tmp_path, monkeypatch, capsys):
+    """Guard against a clause that fires unconditionally."""
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001),
+           [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001),
+           [_engine_row(q, "A", "B" if i < 8 else "A") for i, q in enumerate(qs)])
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "KILL CLAUSE 2" in out
+    assert "does not fire" in out
+    assert "FALSIFICATION KILL FIRES" not in out
+
+
+def test_a_single_seed_loss_is_noise_not_a_loss(tmp_path, monkeypatch, capsys):
+    """The spec is explicit that net -1 is noise and does not count as a loss.
+    The 2-of-3 branch needs net <= -3 at two seeds."""
+    assert tb1.LOSS_AT_A_SEED == -3
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+    for seed in (1001, 2311, 3407):
+        # arm A loses exactly 1 item at each seed: three -1 seeds, no losses.
+        _write(tmp_path / ARM_FILES["A"].format(seed=seed),
+               [_engine_row(q, "A", "B" if i == 0 else "A") for i, q in enumerate(qs)])
+        _write(tmp_path / ARM_FILES["B"].format(seed=seed),
+               [_engine_row(q, "A", "A") for q in qs])
+
+    r = verify()
+    for seed in (1001, 2311, 3407):
+        assert r["per_seed"][seed]["comparisons"]["B"]["net"] == -1
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "seeds meeting that: none" in out, "net -1 must not count as a loss"
+    # but pooled net is -3, so the OTHER branch fires -- and should.
+    assert "FALSIFICATION KILL FIRES" in out

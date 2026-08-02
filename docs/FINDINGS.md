@@ -173,7 +173,7 @@ dollar figures, which is the tell.*
 
 ## 3. Negative results — the largest artifact here
 
-**[negative-results.md](negative-results.md)** — 22 measured nulls, each with
+**[negative-results.md](negative-results.md)** — 25 measured nulls, each with
 its **mechanism**, plus 6 methodological negatives (errors we caught in our own
 work) and 4 adjudicated contradictions between our own documents.
 

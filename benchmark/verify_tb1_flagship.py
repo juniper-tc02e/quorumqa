@@ -90,6 +90,11 @@ SECONDARY_ALPHA = 0.05 / 3  # Bonferroni over the three seeds
 DEGENERACY_MAX_AGREEMENT = 0.98
 DEGENERACY_MIN_SPLIT_ITEM_RATE = 0.05
 
+#: Kill clause 2 (falsification), spec section 6.2: a "loss at a seed" means arm
+#: A is net <= -3 there. net -1 is explicitly called noise and does not count.
+#: The clause fires on 2-of-3 such seeds OR on a pooled A-vs-B net <= 0.
+LOSS_AT_A_SEED = -3
+
 
 def _load(name: str) -> list[dict]:
     path = RESULTS / name
@@ -373,6 +378,31 @@ def main() -> None:
             print("  win (spec section 6.1: the asymmetry that granted mechanism survival")
             print("  on net >= +1 with no significance requirement was removed).")
         print()
+    # Kill clause 2 (falsification). Stated in spec section 6.2 and, until
+    # 2026-08-03, never evaluated anywhere -- found by an adversarial audit of
+    # the published record, not by me. Clauses 1 and 4 had both been carefully
+    # implemented; this one was simply missed, and it fires.
+    b_pooled = r["pooled"].get("B")
+    if b_pooled:
+        losses = [s for s, e in r["per_seed"].items()
+                  if "B" in e["comparisons"] and e["comparisons"]["B"]["net"] <= LOSS_AT_A_SEED]
+        pooled_dead = b_pooled["net"] <= 0
+        print("-" * 78)
+        print("KILL CLAUSE 2 -- falsification (spec section 6.2)")
+        print("-" * 78)
+        print(f"  'loss at a seed' means net <= {LOSS_AT_A_SEED} for arm A; net -1 is noise.")
+        print(f"  seeds meeting that: {losses or 'none'} "
+              f"({'2-of-3 branch FIRES' if len(losses) >= 2 else '2-of-3 branch does not fire'})")
+        print(f"  pooled A-vs-B net = {b_pooled['net']:+d}")
+        if pooled_dead or len(losses) >= 2:
+            print("  *** FALSIFICATION KILL FIRES. In the spec's words: the society does")
+            print("  *** NOT beat the flagship on this surface, and Track-B's central")
+            print("  *** claim is DEAD ON GPQA. Say so plainly; do not re-cut by subject")
+            print("  *** to find a surviving slice.")
+        else:
+            print("  does not fire")
+        print()
+
     sv = r.get("pooled_sampling_vs_one_call")
     if sv:
         print("-" * 78)
