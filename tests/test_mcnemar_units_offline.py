@@ -82,23 +82,42 @@ def test_five_items_is_not_five_pp_except_at_n_100():
     assert 5 / 50 * 100 == pytest.approx(10.0)
 
 
-def test_most_ledger_benchmarks_are_below_n_100():
-    """Why the old proxy was permissive everywhere it mattered when this was
-    written. Threshold loosened 2026-07-29 when chemistry's pooled n grew to
-    259 (Tier G landed the two missing matched baselines) -- flagship_panel
-    (n=241) was already the one exception; this is a second, expected one,
-    not a regression. The single-row exemption this test used to encode is
-    gone on purpose: any row CAN pool past n=100 now that per-seed pairing is
-    genuinely wired up. What must stay true is that most rows -- the ones
-    still measured at a single n=90-ish benchmark -- remain under 100, which
-    is what made the old percentage-point proxy permissive in the first
-    place."""
-    ns = [
-        n for n in (_to_float_or_none(r.get("n_common_items")) for r in _rows())
-        if n
-    ]
-    assert ns, "ledger has no n_common_items values"
-    assert sum(1 for n in ns if n < 100) >= len(ns) - 3
+def test_single_seed_ledger_rows_are_below_n_100():
+    """Why the old percentage-point proxy was permissive where it mattered.
+
+    This used to assert `sum(n < 100) >= len(ns) - 3` -- "at most three rows
+    may exceed n=100". That allowance had already been widened twice (once for
+    flagship_panel at n=241, once for chemistry at n=259) and was a hard
+    CEILING ON PROGRESS: every properly-pooled multi-seed result added from
+    then on broke it, which is backwards, since pooled multi-seed rows are
+    exactly what this project wants more of. Adding the 2026-08 GPQA/SuperGPQA
+    rows (n=236/265) broke it for a fourth time.
+
+    Rewritten to assert the invariant the old docstring was actually reaching
+    for: a row measured at a SINGLE seed is one n=90-ish benchmark and must
+    stay under 100. A row pooling several seeds may legitimately be any size,
+    and the ledger already records its seed list, so the distinction needs no
+    new bookkeeping.
+    """
+    rows = _rows()
+    single, pooled = [], []
+    for r in rows:
+        n = _to_float_or_none(r.get("n_common_items"))
+        if not n:
+            continue
+        (single if _seed_count(r) <= 1 else pooled).append(
+            (f"{r.get('benchmark_label')}/{r.get('config')}", n)
+        )
+    assert single, "ledger has no single-seed rows with n_common_items"
+
+    too_big = [(label, n) for label, n in single if n >= 100]
+    assert not too_big, (
+        f"single-seed row(s) claim n>=100, which no single n=90-ish benchmark "
+        f"can supply -- check the seeds column: {too_big}"
+    )
+    # And the pooled rows must genuinely be bigger, or the distinction is empty.
+    if pooled:
+        assert max(n for _, n in pooled) > max(n for _, n in single)
 
 
 def test_fill_category_uses_items_not_pp():
