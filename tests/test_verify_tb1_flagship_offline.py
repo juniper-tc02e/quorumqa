@@ -265,3 +265,76 @@ def test_pooled_is_the_primary_test_and_sums_per_seed_tables(tmp_path, monkeypat
     assert p["n"] == 270
     assert sorted(p["seeds"]) == [1001, 2311, 3407]
     assert p["primary_clears"] is True
+
+
+# ---------------------------------------------------------------------------
+# The real committed TB-1 arm B result. Raw .jsonl are gitignored, so these
+# skip where the run did not happen.
+# See benchmark/results/tb1_flagship_comparison_result.md -- a NULL:
+# the scaffolded flagship does not beat the solo flagship.
+# ---------------------------------------------------------------------------
+
+from pathlib import Path as _Path
+
+_REAL = [
+    _Path("benchmark/results") / f"{stem}_gpqa_seed{s}.jsonl"
+    for s in (1001, 2311, 3407)
+    for stem in ("lever_universal_gate", "TB1_flagship1x")
+]
+
+_real_present = pytest.mark.skipif(
+    not all(p.exists() for p in _REAL),
+    reason="TB-1 arm A/B raw runs are gitignored; present only where the queue ran",
+)
+
+
+@_real_present
+def test_real_tb1_arm_b_is_a_null():
+    """The headline: pooled net +1 over 265 items, p=0.50. If a future change
+    turns this into a win, something broke -- investigate before celebrating."""
+    r = verify()
+    p = r["pooled"]["B"]
+    assert p["b"] == 8
+    assert p["c"] == 7
+    assert p["net"] == 1
+    assert p["n"] == 265
+    assert p["p_one_sided"] == pytest.approx(0.5, abs=1e-6)
+    assert p["primary_clears"] is False
+
+
+@_real_present
+def test_real_tb1_every_seed_gate_passed():
+    """All three seeds cleared |S| >= 81, so the null is not an artifact of a
+    collapsed analysis set."""
+    r = verify()
+    sizes = {seed: s["analysis_set_size"] for seed, s in r["per_seed"].items()}
+    assert sizes == {1001: 88, 2311: 88, 3407: 89}
+    assert all(s["gate_ok"] for s in r["per_seed"].values())
+
+
+@_real_present
+def test_real_tb1_no_seed_clears_the_secondary_branch():
+    r = verify()
+    for seed, s in r["per_seed"].items():
+        cmp_ = s["comparisons"]["B"]
+        assert cmp_["p_one_sided"] > SECONDARY_ALPHA, f"seed {seed} unexpectedly clears"
+
+
+@_real_present
+def test_real_tb1_accuracy_difference_is_under_one_point():
+    """238/265 vs 237/265 = +0.38pp. The architecture matches a single flagship
+    call; it does not beat it."""
+    r = verify()
+    total_a = sum(s["comparisons"]["B"]["a_correct"] for s in r["per_seed"].values())
+    total_b = sum(s["comparisons"]["B"]["other_correct"] for s in r["per_seed"].values())
+    n = sum(s["comparisons"]["B"]["n"] for s in r["per_seed"].values())
+    assert (total_a, total_b, n) == (238, 237, 265)
+    assert abs(total_a - total_b) / n < 0.01
+
+
+@_real_present
+def test_arm_c_remains_unrun_by_design():
+    """Arm C was CANCELLED, not deferred: its pre-registered purpose was to
+    attribute a WIN, and there is no win. If C files ever appear, the result
+    doc's section 5 needs revisiting rather than silently absorbing them."""
+    assert verify()["arm_c_run"] is False
