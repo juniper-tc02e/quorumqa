@@ -4411,7 +4411,7 @@ z
     <use xlink:href="#DejaVuSansMono-1a" transform="translate(8849.859375 0)"/>
     <use xlink:href="#DejaVuSansMono-11" transform="translate(8910.0625 0)"/>
    </g>
-   <!-- Commit 8148c4b  |  rendered 2026-08-03 -->
+   <!-- Commit 7884f22  |  rendered 2026-08-03 -->
    <g style="fill: #4a4a4a" transform="translate(9.36 500.289607) scale(0.066 -0.066)">
     <defs>
      <path id="DejaVuSansMono-26" d="M 3353 166 
@@ -4519,13 +4519,13 @@ z
     <use xlink:href="#DejaVuSansMono-4c" transform="translate(240.8125 0)"/>
     <use xlink:href="#DejaVuSansMono-57" transform="translate(301.015625 0)"/>
     <use xlink:href="#DejaVuSansMono-3" transform="translate(361.21875 0)"/>
-    <use xlink:href="#DejaVuSansMono-1b" transform="translate(421.421875 0)"/>
-    <use xlink:href="#DejaVuSansMono-14" transform="translate(481.625 0)"/>
-    <use xlink:href="#DejaVuSansMono-17" transform="translate(541.828125 0)"/>
-    <use xlink:href="#DejaVuSansMono-1b" transform="translate(602.03125 0)"/>
-    <use xlink:href="#DejaVuSansMono-46" transform="translate(662.234375 0)"/>
-    <use xlink:href="#DejaVuSansMono-17" transform="translate(722.4375 0)"/>
-    <use xlink:href="#DejaVuSansMono-45" transform="translate(782.640625 0)"/>
+    <use xlink:href="#DejaVuSansMono-1a" transform="translate(421.421875 0)"/>
+    <use xlink:href="#DejaVuSansMono-1b" transform="translate(481.625 0)"/>
+    <use xlink:href="#DejaVuSansMono-1b" transform="translate(541.828125 0)"/>
+    <use xlink:href="#DejaVuSansMono-17" transform="translate(602.03125 0)"/>
+    <use xlink:href="#DejaVuSansMono-49" transform="translate(662.234375 0)"/>
+    <use xlink:href="#DejaVuSansMono-15" transform="translate(722.4375 0)"/>
+    <use xlink:href="#DejaVuSansMono-15" transform="translate(782.640625 0)"/>
     <use xlink:href="#DejaVuSansMono-3" transform="translate(842.84375 0)"/>
     <use xlink:href="#DejaVuSansMono-3" transform="translate(903.046875 0)"/>
     <use xlink:href="#DejaVuSansMono-5f" transform="translate(963.25 0)"/>

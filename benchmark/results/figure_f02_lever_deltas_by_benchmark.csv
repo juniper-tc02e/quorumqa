@@ -24,3 +24,8 @@ MATH-500-open,flagship_panel,v2,inert,flagship_baseline,1.7,printed_mean,1,59,Fa
 MATH-500-open,cheap_panel,v2,inert,flagship_baseline,0.0,printed_mean,1,59,False,True,hollow,tie
 MATH-500-MC,shipped_engine,v1,negative,flagship_baseline,-6.1,printed_mean,1,49,False,False,hollow,loss
 GSM8K,shipped_engine,v1,negative,flagship_baseline,-4.0,printed_mean,1,50,False,False,hollow,loss
+GPQA-Diamond,universal_gate,v2,negative,flagship_1x_paired,0.0,printed_mean,3,255,False,True,hollow,tie
+GPQA-Diamond,shipped_engine,v2,negative,flagship_1x_paired,-3.6000000000000085,computed_vs_flat_reference,3,265,False,False,solid,loss
+SuperGPQA-hard,flagship_panel,v2,validated,flagship_1x_paired,3.7666666666666657,computed_vs_flat_reference,3,236,False,False,solid,win
+SuperGPQA-hard,flagship_sc3,v2,screen,flagship_1x_paired,2.9666666666666686,computed_vs_flat_reference,3,236,False,False,solid,win
+SuperGPQA-hard,cheap_panel,v2,negative,flagship_1x_paired,-9.433333333333337,computed_vs_flat_reference,2,158,False,False,half,loss

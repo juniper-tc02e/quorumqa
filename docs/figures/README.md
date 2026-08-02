@@ -7,9 +7,9 @@ F10–F13 set — whether any of it was worth its tokens.
 Regenerate with (no API calls, no network — all inputs are committed):
 
 ```bash
-python benchmark/make_figures_progress.py     # F01, F02, F03, F06
-python benchmark/make_figures_analysis.py     # F04, F05, F07, F08, F09
-python benchmark/make_figures_frontier.py     # F10, F11, F12, F13
+python -m benchmark.make_figures_progress     # F01, F02, F03, F06
+python -m benchmark.make_figures_analysis     # F04, F05, F07, F08, F09
+python -m benchmark.make_figures_frontier     # F10, F11, F12, F13
 python -m benchmark.figure_data --check       # verify the ledger against its sources
 ```
 
@@ -176,7 +176,7 @@ Every figure writes the exact frame it plotted to
 `benchmark/results/figure_fNN_<name>.csv`. The claims ledger
 (`benchmark/results/figure_claims_ledger.csv`, 43 rows) is hand-transcribed from
 the findings docs and **self-verifying**: `verify_ledger()` greps every non-empty
-numeric cell for its literal formatted value in the doc it cites — **118 numbers**
+numeric cell for its literal formatted value in the doc it cites — **119 numbers**
 currently verified. A transcription typo fails the check rather than reaching a
 figure.
 
@@ -230,7 +230,7 @@ p-value it died on. The bars are **not mutually comparable** — they come from
 exact McNemar, Fisher exact and permutation nulls depending on design — and are
 ranked only to show that none approaches 0.05.
 
-### F13 — Why +25 and +1 are both true
+### F13 — One lever, three comparators, three verdicts
 
 ![F13](f13_two_comparators.png)
 

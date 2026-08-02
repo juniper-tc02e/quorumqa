@@ -114,7 +114,7 @@ and unanimity is where it stops looking. Everything we tried to detect those:
 | Stronger judge | 9/9 overturns correct, **zero net gain** | 0.50 |
 | Cheap panel scaling N=3→15 | best +3 vs a +5 bar | 0.252 |
 | Deliberation vs self-consistency | tribunal leg +2 of +10 | 0.344 |
-| Whole stack vs one flagship call | net +1 at 4.7× tokens | 0.5000 |
+| Whole stack vs one flagship call | net +0 at ~4.9× tokens (3-arm set, n=255) | 0.6047 |
 | Cheap seats + escalate-all vs flagship | net −2 at 5.1× tokens (TB-1B, §4b) | 0.8906 |
 | **Scaffolding vs the same budget sampled** | **net −6**; 90.6% vs SC@5’s 92.9% (TB-1 arm C, §4c) | **0.9807** |
 
@@ -283,8 +283,21 @@ Publishing these because a record that only grows is not a record.
    exists. It cannot rank candidates, and it should not be used to choose what
    to build next.
 2. **Escalate on unanimity, not just disagreement.** The shipped early-return
-   on unanimity makes ~18% of its own errors structurally unreachable.
-   Escalating everything recovers 25/38 of them while breaking 0/118.
+   on unanimity makes **the majority — 61.6% — of its own errors structurally
+   unreachable**: that share of wrong rows is unanimous, and a
+   disagreement-triggered gate cannot see them by construction. Escalating
+   everything recovers 25/38 of them while breaking 0/118.
+
+   *Corrected 2026-08-03 — this read "~18% of its own errors", which is a
+   **transposed conditional** and understated the blind spot by more than 3×.
+   18.4% is **P(wrong | unanimous)** — the share of *unanimous answers* that are
+   wrong (809/4,405), stated correctly as such in §3. The share of **errors**
+   that are unanimous is **P(unanimous | wrong)**, the repo's canonical 61.6%.
+   Recomputed live on the current 107-file corpus it is **55.6% (681/1,224)** —
+   the same quantity on a larger corpus, drifting the same way
+   `unanimous_gate_headroom.md`'s figures do. Either number supports the
+   recommendation; 18% does not, and it is the number the whole
+   escalate-on-unanimity case rests on.*
 3. **Sampling beats deliberation, repeatedly.** Where multi-agent setups win
    here, a compute-matched self-consistency control explains the win.
 4. **The negative-results corpus itself.** Twelve controlled nulls, each
@@ -359,7 +372,7 @@ python -m benchmark.analyze_cost_frontier --dataset gpqa
 python -m benchmark.analyze_cost_frontier --dataset supergpqa
 python -m benchmark.verify_universal_gate
 python -m benchmark.verify_tb1_flagship
-python benchmark/make_figures_frontier.py
+python -m benchmark.make_figures_frontier
 python -m pytest -q
 ```
 

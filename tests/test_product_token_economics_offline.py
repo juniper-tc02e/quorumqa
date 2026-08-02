@@ -249,7 +249,14 @@ def test_dollar_anchored_claims_quote_the_dollar_run_token_pair():
                 # reconciling the two pairs, not confusing them -- the same
                 # use/mention escape hatch the sibling test uses.
                 labelled = any(k in window for k in ("n=265", "TB-1", "1001/2311/3407"))
-                if "8,690" in window and "9,013" not in window and not labelled:
+                # The bare MULTIPLE, not just the raw pair. An audit found
+                # README line 240 reading "in tokens it is 3.1x more expensive"
+                # directly under the n=90 dollar figures -- the wrong run's
+                # number, and this check walked past it because it only ever
+                # looked for the literal "8,690".
+                wrong_run = any(k in window for k in ("8,690", "3.1×", "3.1x", "3.11×"))
+                right_run = any(k in window for k in ("9,013", "2.64"))
+                if wrong_run and not right_run and not labelled:
                     raise AssertionError(
                         f"{rel}: {anchor!r} is a figure from the n=90 seed-42 run, "
                         f"but the token pair beside it is 8,690/2,792 (the TB-1 "

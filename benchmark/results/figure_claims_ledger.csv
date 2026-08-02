@@ -35,7 +35,7 @@ MATH-500-MC,shipped_engine,v1,flagship_baseline,49,42,,-6.1,93.9,,,negative,FALS
 GSM8K,baseline_3.7max,reference,,50,42,,,100,,,,FALSE,,,,,benchmark/results/math_findings.md,"GSM8K (easy math, distractor-MC) -- the no-harm confirmation"
 GSM8K,shipped_engine,v1,flagship_baseline,50,42,,-4.0,96.0,,,negative,FALSE,,,,,benchmark/results/math_findings.md,"GSM8K (easy math, distractor-MC) -- the no-harm confirmation"
 GPQA-Diamond,baseline_3.7max_seed314,reference,,89,314,,,86.5,,,,FALSE,,,,,benchmark/results/lever_findings.md,chem_thinking_gate: the stack of both validated winners (VALIDATED: three fresh seeds
-GPQA-Diamond,universal_gate,v2,flagship_1x_paired,255,1001;2311;3407,,,90.6,+0,0.605,negative,FALSE,,,,"12,991",docs/FINDINGS-2026-08.md,"What we actually found — QuorumQA, August 2026"
+GPQA-Diamond,universal_gate,v2,flagship_1x_paired,255,1001;2311;3407,,0.0,90.6,+0,0.605,negative,FALSE,,,,"12,991",docs/FINDINGS-2026-08.md,"What we actually found — QuorumQA, August 2026"
 GPQA-Diamond,flagship_1x,reference,,265,1001;2311;3407,,,89.4,,,,FALSE,,,,"2,792",docs/FINDINGS-2026-08.md,"What we actually found — QuorumQA, August 2026"
 GPQA-Diamond,shipped_engine,v2,flagship_1x_paired,265,1001;2311;3407,,,80.8,,,negative,FALSE,,,,"8,690",docs/FINDINGS-2026-08.md,"What we actually found — QuorumQA, August 2026"
 SuperGPQA-hard,flagship_panel,v2,flagship_1x_paired,236,7;42;123,,,82.2,+7,0.0327,validated,FALSE,,,,"9,969",docs/FINDINGS-2026-08.md,"What we actually found — QuorumQA, August 2026"

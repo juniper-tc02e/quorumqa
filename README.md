@@ -74,7 +74,7 @@ python -m benchmark.reproduce_all
 ```
 
 It runs all fifteen analyses and finishes with the claims-ledger check, which
-verifies **118 published numbers against the documents that cite them**. On a
+verifies **119 published numbers against the documents that cite them**. On a
 fresh clone most analyses report **SKIP**, not OK — the raw `.jsonl` runs are
 gitignored, so they only execute on a machine holding them. Skipped is reported
 as skipped, never quietly omitted, and the summary says so in those words.
@@ -237,7 +237,8 @@ the corrections are stated at the point of use in
 
 The shipped submission config is 78.9% — *below* the flagship's 84.4%, at ~11%
 lower cost **in dollars**; that was always a cost claim, and in tokens it is
-3.1× *more* expensive.
+**2.64× *more* expensive** (9,013 vs 3,415 per item — the same n=90 seed-42 run
+every other number in this sentence comes from).
 
 The largest artifact is the negative results:
 **[`docs/negative-results.md`](docs/negative-results.md)** — 25 measured nulls
