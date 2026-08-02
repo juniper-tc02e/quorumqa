@@ -20,7 +20,7 @@ p = 3 × 10⁻⁸** on GPQA-Diamond. But when we finally measured it against the
 obvious alternative — *just call the flagship once* — the whole apparatus came
 out **net +1, p = 0.50, at 4.5× the tokens**. On GPQA-Diamond, QuorumQA is
 dominated by a single flagship call. On SuperGPQA-hard, where the base model
-is 12 points weaker, orchestration **does** win (+7, p = 0.0195) — but a
+is 10 points weaker, orchestration **does** win (+7, p = 0.0327, 3 seeds) — but a
 compute-matched control shows the gain is **self-consistency sampling, not
 deliberation**. Along the way, ten separate mechanisms for detecting a
 confident-but-wrong panel were tested. All ten are null.
@@ -37,17 +37,21 @@ confident-but-wrong panel were tested. All ten are null.
 | `universal_gate` | 89.8% | 13,175 | 0.068 — net +1, p=0.50 |
 | shipped engine | 80.8% | 8,690 | 0.093 — dominated |
 
-| SuperGPQA-hard (n=158 paired) | accuracy | tokens/item | accuracy per 1k tokens |
+| SuperGPQA-hard (3 seeds, n=236 paired) | accuracy | tokens/item | accuracy per 1k tokens |
 |---|---:|---:|---:|
-| `qwen3.7-max` ×1 | 77.2% | 3,029 | 0.255 |
-| `flagship_sc3` | 81.0% | 8,694 | 0.093 — net +6, p=0.055 |
-| **`flagship_panel`** | **81.6%** | 9,987 | 0.082 — net **+7, p=0.0195** ✅ |
-| cheap panel ×3 | 69.0% | 9,836 | 0.070 — net −13 |
+| `qwen3.7-max` ×1 | 79.2% | 2,969 | 0.267 |
+| `flagship_sc3` | 81.4% | 8,470 | 0.096 — net +5, p=0.133 |
+| **`flagship_panel`** | **82.2%** | 9,969 | 0.082 — net **+7, p=0.0327** ✅ |
+| cheap panel ×3 | 69.0% | 9,836 | 0.070 — net −13, p=0.996 |
+
+*(`cheap_panel` has no seed-42 run, so its accuracy is over n=158 while the
+others are over n=236. Its paired statistic still uses only items it shares
+with the reference.)*
 
 The difference between the two tables is **headroom**. On GPQA the flagship is
 already at 89.4% and there is almost nothing left to win. On SuperGPQA-hard it
-sits at 77.2%, and orchestration converts that gap into a real, significant
-gain.
+sits at 79.2%, and orchestration converts that gap into a real, significant
+gain (3 seeds, +7, p=0.0327).
 
 **But the mechanism is not deliberation.** `flagship_panel` against its own
 compute-matched self-consistency control is **net +1, p = 0.50**. Three
@@ -190,7 +194,7 @@ Publishing these because a record that only grows is not a record.
 3. **GPQA's three seeds overlap** — 269 rows over 170 unique items — so its
    pooled figures are quoted conservatively (+21, p = 4.8 × 10⁻⁷ counting each
    item once). SuperGPQA's seeds are near-disjoint (2 shared of 88).
-4. **SuperGPQA's frontier is two seeds**, not three. A third is in flight.
+4. **SuperGPQA's `cheap_panel` arm is two seeds**; every other arm there is three.
 5. **Failure to show superiority is not proof of equivalence.** TB-1's 95%
    interval spans [−6.6, +8.6] items.
 6. **No cross-lab comparison is made or supportable.** No shared item sample,

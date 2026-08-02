@@ -168,7 +168,9 @@ def main() -> None:
         print(f"  EXCLUDED as retired point estimates: {r['retired_excluded']}")
     print()
 
-    print(f"  {'config':<18}{'acc':>8}{'tok/item':>11}{'acc/1k':>9}  {'vs ' + REFERENCE:<28}frontier")
+    print(f"  {'config':<18}{'acc':>8}{'n':>6}{'tok/item':>10}{'acc/1k':>9}  "
+          f"{'vs ' + REFERENCE:<30}frontier")
+    ref_n = r["points"].get(REFERENCE, {}).get("n")
     for config, e in sorted(r["points"].items(), key=lambda kv: kv[1]["tokens_per_item"]):
         if config == REFERENCE:
             versus = "(reference)"
@@ -176,9 +178,20 @@ def main() -> None:
             versus = (f"b={e['b']} c={e['c']} net={e['net']:+d} p={e['p_one_sided']:.4f}"
                       + (" BEATS" if e["beats_reference"] else ""))
         flag = "ON FRONTIER" if e["on_frontier"] else ("RETIRED" if e["retired"] else "dominated")
-        print(f"  {config:<18}{e['accuracy']*100:>7.1f}%{e['tokens_per_item']:>11.0f}"
+        print(f"  {config:<18}{e['accuracy']*100:>7.1f}%{e['n']:>6}{e['tokens_per_item']:>10.0f}"
               f"{e['accuracy_per_1k_tokens']:>9.3f}  {versus:<30}{flag}")
     print()
+    # An arm absent from a seed shrinks ITS n while the reference keeps the
+    # larger one. The PAIRED statistic is unaffected -- it only ever uses items
+    # that arm shares with the reference -- but the ACCURACY column is then not
+    # on one common item set. Say so rather than let it read as if it were.
+    short = {k: e["n"] for k, e in r["points"].items() if ref_n and e["n"] < ref_n}
+    if short:
+        print(f"  NOTE: reference n={ref_n}. These arms ran on fewer seeds, so their ACCURACY "
+              f"column is NOT on the same item set: "
+              + ", ".join(f"{k} (n={n})" for k, n in short.items()))
+        print("        Their b/c/net/p ARE still paired only on items shared with the reference.")
+        print()
     ref = r["points"].get(REFERENCE)
     if ref:
         best = max((e["accuracy_per_1k_tokens"] for k, e in r["points"].items() if k != REFERENCE), default=None)

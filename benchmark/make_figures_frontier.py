@@ -143,9 +143,11 @@ def build_f10() -> None:
     datasets = [("gpqa", "GPQA-Diamond"), ("supergpqa", "SuperGPQA-hard")]
     fig, axes = plt.subplots(1, 2, figsize=(15.2, 7.4), dpi=110)
     rows = []
+    summary: dict[str, dict] = {}
 
     for ax, (ds, pretty) in zip(axes, datasets):
         r = frontier_analyze(ds)
+        summary[ds] = r
         pts = r["points"]
         ref = pts["flagship_1x"]
 
@@ -244,21 +246,36 @@ def build_f10() -> None:
         Patch(facecolor=RIBBON_GREY, alpha=0.5, label=f"±{NOISE_FLOOR_PP:g}pp noise floor"),
     ], loc="upper left", fontsize=7.6, framealpha=0.95)
 
+    # Subtitle and footer are DERIVED, never hand-typed: an earlier version
+    # hardcoded "77.2%" and "p=0.0195" and went stale the moment a third seed
+    # landed. Caption drift is the exact hazard this repo's ledger guards.
+    g, sg = summary["gpqa"], summary["supergpqa"]
+    sg_best = max((v for k, v in sg["points"].items() if k != "flagship_1x"),
+                  key=lambda e: e["accuracy"])
+    sg_best_name = next(k for k, v in sg["points"].items() if v is sg_best)
     draw_title(
         fig, "[PAIRED]",
         "Orchestration pays where the base model is weak — and nowhere else",
-        "Accuracy vs tokens on the per-seed question_id intersection. GPQA: the flagship is already at 89.4%, "
-        "and nothing beats it. SuperGPQA-hard: it sits at 77.2%, and flagship_panel wins by +7 (p=0.0195).",
+        f"Accuracy vs tokens on the per-seed question_id intersection. GPQA: the flagship is already at "
+        f"{g['points']['flagship_1x']['accuracy'] * 100:.1f}%, and nothing beats it. SuperGPQA-hard: it sits at "
+        f"{sg['points']['flagship_1x']['accuracy'] * 100:.1f}%, and {sg_best_name} wins by "
+        f"{sg_best['net']:+d} (p={sg_best['p_one_sided']:.4f}).",
+    )
+    seed_txt = "; ".join(
+        f"{d} seeds {'/'.join(str(x['seed']) for x in summary[d]['seeds_used'])}"
+        for d in ("gpqa", "supergpqa")
     )
     draw_footer(
         fig,
-        "benchmark/analyze_cost_frontier.py over committed run files; GPQA arms TB1_flagship1x_* and "
-        "lever_universal_gate_* (seeds 1001/2311/3407); SuperGPQA arms lever_baseline_*, lever_flagship_panel_*, "
-        "compute_matched_control_*, lever_control_* (seeds 7/123).",
+        f"benchmark/analyze_cost_frontier.py over committed run files ({seed_txt}). GPQA arms "
+        "TB1_flagship1x_*, lever_universal_gate_*; SuperGPQA arms lever_baseline_*, lever_flagship_panel_*, "
+        "compute_matched_control_*, lever_control_*.",
         "Tokens, never dollars (cost_usd logs $0.00 after the Token-Plan migration). GPQA's three seeds overlap — "
-        "269 rows cover 170 unique items — so its pooled figures are quoted conservatively elsewhere; SuperGPQA's "
-        "seeds are near-disjoint (2 shared items of 88). flagship_panel's win is attributed to SAMPLING, not "
-        "deliberation: vs its own compute-matched SC@3 control it is net +1, p=0.50.",
+        "269 rows cover 170 unique items — so its pooled figures are quoted conservatively elsewhere. On "
+        "SuperGPQA the cheap_panel arm has no seed-42 file, so its ACCURACY is over fewer items than the "
+        "reference's; its paired b/c/net/p still use only items it shares with the reference. flagship_panel's "
+        "win is attributed to SAMPLING, not deliberation: vs its own compute-matched SC@3 control it is net +1, "
+        "p=0.50.",
     )
     fig.subplots_adjust(left=0.055, right=0.985, top=0.870, bottom=0.215, wspace=0.19)
     save_figure(fig, "f10_paired_cost_frontier", pd.DataFrame(rows))
