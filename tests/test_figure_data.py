@@ -387,11 +387,17 @@ def test_load_frontier_caveat_names_the_exclusion():
     assert "RECOMPUTED" in caveat
 
 
-def test_load_frontier_recomputes_pareto_rather_than_trusting_the_csv():
-    """The CSV's on_pareto_frontier was computed WITH the retired row present.
-    Dropping the row while keeping its stale consequences would look corrected
-    while still being wrong -- and it was wrong in a load-bearing way: the
-    retracted point had knocked five real GPQA configs off the frontier."""
+def test_load_frontier_recompute_is_idempotent_against_a_correct_csv():
+    """The loader recomputes the Pareto column rather than trusting the CSV.
+
+    An earlier version of this test asserted the recomputed flags DIFFER from
+    the CSV's -- true while the CSV was stale, but it encoded a bug as the
+    expectation. `analyze_family_floor.py` now excludes retired configs from
+    the dominance computation at the source, so the CSV is correct on disk and
+    the loader's recomputation is a no-op. The durable property is AGREEMENT
+    with a correct source, plus the definitional check below that the flags
+    are right in the first place.
+    """
     import pandas as pd
 
     from benchmark.figure_data import FRONTIER_CSV, RETIRED_POINT_ESTIMATES, load_frontier
@@ -400,11 +406,31 @@ def test_load_frontier_recomputes_pareto_rather_than_trusting_the_csv():
     raw = raw[~raw["config"].isin(RETIRED_POINT_ESTIMATES)].reset_index(drop=True)
     live = load_frontier().data.reset_index(drop=True)
     assert len(raw) == len(live)
-    # The flags must actually differ -- otherwise nothing was recomputed.
-    assert (raw["on_pareto_frontier"].values != live["on_pareto_frontier"].values).any()
+    assert (raw["on_pareto_frontier"].values == live["on_pareto_frontier"].values).all(), (
+        "loader and CSV disagree -- regenerate the CSV with "
+        "`python -m benchmark.analyze_family_floor` rather than relying on the "
+        "loader to paper over it"
+    )
 
     gpqa = live[(live["benchmark"] == "GPQA-Diamond") & (live["on_pareto_frontier"])]
     assert len(gpqa) > 1, "the retracted point had suppressed every other GPQA frontier config"
+
+
+def test_csv_marks_the_retired_config_and_keeps_its_row():
+    """The row documents a real run and must survive; only its influence is
+    removed. Deleting raw records to fix a derived flag would be the wrong
+    repair."""
+    import pandas as pd
+
+    from benchmark.figure_data import FRONTIER_CSV
+
+    raw = pd.read_csv(FRONTIER_CSV)
+    assert "retired" in raw.columns, "the CSV must carry the retirement in-band"
+    row = raw[raw["config"] == "qwen3.8_solo"]
+    assert len(row) == 1, "the retired run's row must still be present"
+    assert bool(row["retired"].iloc[0]) is True
+    assert bool(row["on_pareto_frontier"].iloc[0]) is False
+    assert str(row["retired_reason"].iloc[0]).strip()
 
 
 def test_recomputed_frontier_points_are_genuinely_undominated():

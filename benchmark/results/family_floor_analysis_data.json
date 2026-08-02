@@ -8,6 +8,13 @@
       "note": ""
     },
     {
+      "file": "aime_open_baseline_seed101.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 53,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
       "file": "aime_open_baseline_seed42.jsonl",
       "family": "math-open (flat)",
       "n_lines": 48,
@@ -20,6 +27,34 @@
       "n_lines": 28,
       "n_records": 28,
       "note": ""
+    },
+    {
+      "file": "aime_open_sc_cheap_seed101.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 60,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "compute_matched_control_supergpqa_seed123.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 84,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "compute_matched_control_supergpqa_seed42.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 85,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "compute_matched_control_supergpqa_seed7.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 84,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
     },
     {
       "file": "full_run.jsonl",
@@ -43,10 +78,31 @@
       "note": ""
     },
     {
+      "file": "KI1BC_compute_matched_n9_gpqa_seed2311.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 90,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "lever_baseline_gpqa_seed217.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 88,
+      "n_records": 88,
+      "note": ""
+    },
+    {
       "file": "lever_baseline_gpqa_seed314.jsonl",
       "family": "lever_baseline",
       "n_lines": 89,
       "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_gpqa_seed471.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 88,
+      "n_records": 88,
       "note": ""
     },
     {
@@ -75,6 +131,13 @@
       "family": "lever_baseline",
       "n_lines": 86,
       "n_records": 86,
+      "note": ""
+    },
+    {
+      "file": "lever_baseline_supergpqa_seed42.jsonl",
+      "family": "lever_baseline",
+      "n_lines": 88,
+      "n_records": 88,
       "note": ""
     },
     {
@@ -194,6 +257,20 @@
       "family": "lever_engine(+lever/seed/dataset)",
       "n_lines": 90,
       "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_cycled_panel_supergpqa_seed19.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
+      "note": ""
+    },
+    {
+      "file": "lever_diversified_panel_supergpqa_seed19.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 87,
+      "n_records": 87,
       "note": ""
     },
     {
@@ -428,6 +505,27 @@
       "note": ""
     },
     {
+      "file": "lever_universal_gate_gpqa_seed1001.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
+      "file": "lever_universal_gate_gpqa_seed2311.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 89,
+      "n_records": 89,
+      "note": ""
+    },
+    {
+      "file": "lever_universal_gate_gpqa_seed3407.jsonl",
+      "family": "lever_engine(+lever/seed/dataset)",
+      "n_lines": 90,
+      "n_records": 90,
+      "note": ""
+    },
+    {
       "file": "lexam_pilot_seed42.jsonl",
       "family": "combo(baseline+engine[+sc5])",
       "n_lines": 50,
@@ -470,6 +568,48 @@
       "note": ""
     },
     {
+      "file": "META2_control_supergpqa_seed1313.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 88,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "META2_control_supergpqa_seed2027.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 88,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "META2_control_supergpqa_seed909.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 90,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "META2_permuted_panel_supergpqa_seed1313.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 87,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "META2_permuted_panel_supergpqa_seed2027.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 89,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "META2_permuted_panel_supergpqa_seed909.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 88,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
       "file": "mmlu_pro_pilot_seed42.jsonl",
       "family": "combo(baseline+engine[+sc5])",
       "n_lines": 50,
@@ -484,11 +624,53 @@
       "note": ""
     },
     {
+      "file": "pool_supergpqa_cheap_k8_seed411.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 90,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "pool_supergpqa_cheap_k8_seed523.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 90,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "pool_supergpqa_cheap_k8_seed631.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 90,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
       "file": "qwen38_baseline_seed123.jsonl",
       "family": "qwen38_baseline (flat)",
-      "n_lines": 78,
-      "n_records": 78,
+      "n_lines": 80,
+      "n_records": 80,
       "note": ""
+    },
+    {
+      "file": "s7_shipgate_consumed_seed411.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 1,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "s7_shipgate_consumed_seed523.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 1,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "s7_shipgate_consumed_seed631.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 1,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
     },
     {
       "file": "smoke.jsonl",
@@ -517,6 +699,27 @@
       "n_lines": 86,
       "n_records": 172,
       "note": ""
+    },
+    {
+      "file": "TB1_flagship1x_gpqa_seed1001.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 88,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "TB1_flagship1x_gpqa_seed2311.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 89,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
+    },
+    {
+      "file": "TB1_flagship1x_gpqa_seed3407.jsonl",
+      "family": "UNRECOGNIZED",
+      "n_lines": 89,
+      "n_records": 0,
+      "note": "no loader matched -- SKIPPED"
     }
   ],
   "f1_floor": {
@@ -545,17 +748,19 @@
         "subject",
         "thinking",
         "thinking_all",
-        "thinking_gate"
+        "thinking_gate",
+        "universal_gate"
       ],
       "n_items_total": 197,
-      "n_attempted_by_2plus_configs": 192,
-      "n_floor_items": 4,
-      "floor_rate_of_multi": 0.020833333333333332,
+      "n_attempted_by_2plus_configs": 196,
+      "n_floor_items": 5,
+      "floor_rate_of_multi": 0.025510204081632654,
       "floor_question_ids": [
         "rec7qmSnbud4FHSqL",
         "recAYkd96NNuNl1Ei",
         "recUOePh79cp4T2Bg",
-        "recf6ayQmL1SxKbvW"
+        "recf6ayQmL1SxKbvW",
+        "recuyeuT5rQ6qDt8F"
       ]
     },
     "AIME": {
@@ -607,6 +812,8 @@
       "configs_covering_benchmark": [
         "baseline_3.7max",
         "control",
+        "cycled_panel",
+        "diversified_panel",
         "flagship_panel",
         "moo:flagship_panel",
         "moo:rag_presolve",
@@ -621,10 +828,10 @@
         "rag_thinking_gate",
         "shipped_engine"
       ],
-      "n_items_total": 524,
-      "n_attempted_by_2plus_configs": 522,
-      "n_floor_items": 84,
-      "floor_rate_of_multi": 0.16091954022988506,
+      "n_items_total": 607,
+      "n_attempted_by_2plus_configs": 601,
+      "n_floor_items": 119,
+      "floor_rate_of_multi": 0.19800332778702162,
       "floor_question_ids": [
         "01ac3e46a5f04c48b3ad3d21e7a8eacd",
         "01eb5d6dafa04f91b785e456c88d12d7",
@@ -637,15 +844,22 @@
         "0cec965e083d473b91baf8419e499266",
         "10e238c23efe47cf85d9718dfea21752",
         "15be8f8e252644028475951da8318593",
+        "17ac767a0dda4fa4ac527695baa7519d",
+        "18ecdb4991cf4d248296db7f1893c7ea",
+        "1a5707eca8304fb4a0930abf341c6d43",
         "1bb8a86a4ca34595bf2cc53e8c70d488",
         "23ad44902ff945798a7ff404a3bb98d3",
         "25d2d85093d3401b9883e0142407d0ee",
         "2789bb6861f94992954c4df00ec8e656",
         "2811febd3e9a4348a352c0c2b33ee464",
         "28940f5e66204d6d8da272c94357c949",
+        "291b20b80f20452ab35d37928a85b5cc",
         "2a6cd8ccbd7d42ad9cf12e178c94b946",
         "2e1d297065d247068eaa68f6585f9764",
         "2ee372f987304fe882e13238d4c6925e",
+        "319876d9dae8430aa8c25ae3b9da1577",
+        "33f4021880ee450ab42490c299db88d6",
+        "35a725001bd84d4d99770ffdb1aa2aad",
         "3bb9bdcf2aae48e5a62161a1578a5df5",
         "3c4c69c60cc840138881e84e7dfc53c2",
         "3f8989b3db06466787aa75da59bd29f5",
@@ -653,55 +867,83 @@
         "4090034d344442a39f6ac38ffe2cc550",
         "4284e998fada4c82963c98155b243a6d",
         "438f43de355a46e982a21abda8d4f152",
+        "447cecef7ae74a66a5cd4e00e6c8ecd2",
         "45ead910eb784c63aff46227f35006c1",
         "469ab0b1358b48019d3a8f218edbf379",
+        "4a6e1f20cfb94162b9766d55fb8faf5a",
         "4ae91bc0704c4d16891bceda9518416c",
         "4c53840b44904a97b04bf942e34ce522",
+        "4cc09d5121b24752ae88aaade87f5b18",
         "4da6b094f021432e9f07bcff16c36b4e",
         "4e711f17db254dd4953606570f0cc7a7",
         "5a29ea2e0dde4ca89fc25d873f0783f0",
+        "5be153717fd341c9b63d6f25778e5aac",
+        "5cb9e12dbd64468a9ef69d9303febfe6",
         "5d0d7b5d79d448c7b2ffdee0247a0296",
         "5dc0a21f75b44980b701d62896d3edcb",
         "5df707865b404a0697d8fd1791bb9b0b",
         "6012508b88a9421180551fdef0e17a13",
+        "6adc7a620415473da6d5a69d3d3b27e5",
+        "6f900ba491194836a96b960a6ad728bf",
+        "701898aad61a489886c2eb8f4db59cdd",
         "784bc160afa34cc184a98687b152411a",
         "7f8c9e5f1e554ad396060dbe085be0bc",
         "811c704287184f8fa520358dc0ea2493",
         "81bb88e7883d4fc7aae41299e7522a01",
         "8220134735164021974f2c9cb3fe485e",
+        "830cccab332c43ad9425d296af89ab00",
         "83540adee86445058338548a07e2eacd",
         "86ad4780d9e843f7b8a98e208abf3a52",
         "8aca8b27a1674720bcb8271a46213d95",
         "8cb1a3d68036488689cc6279ff47fd5a",
         "8ed91874efe844458592ce5db5ba6aec",
+        "900345e64f964883a76dc1b78ce26f14",
         "925edd1a51234c619cdd2f02bd90e0a3",
         "9658dc48503c49cb840ccc27f9e10eb9",
+        "96de9708bb69463b846fd1c6300b9f0a",
+        "99ff46c39bee42d0a3ff6925e112b257",
         "9a5556075b3047a18d44f2024d367249",
         "9bffaf0a268949899e234cf7a4299f16",
+        "9c1a9d87952f4b258171f48697b8b380",
         "a05ccae7bcc14d9791e97e9f628ca88e",
+        "a1bed481cda3417295912d6db997a9c5",
         "a38723e1b2ea48b9b8d6a723fc64d90d",
         "a596b66d08484915a5c1996add9b104d",
+        "a9cce0ae643b4633bf6d4d9a7e22fa35",
         "a9f34192579d4f448b378d733eb8d3bf",
         "aa75f2e217f34054905f326269e5565f",
+        "ad49a2d77e14436d9866f5882fe884cb",
+        "b4fbaecc4a764ac4ab6d58be984fee6e",
         "b8de1171b4a44ba4bf85615dca222549",
         "b9f43cc8a6ff4438ab18497fc9bf7cf0",
         "ba3e6704deaf4503afd6d5cd103203c9",
+        "bb6098ed7f43413d99b699313fa26228",
         "be091c3945a54db99326f44605f5aadf",
+        "c18165652d764f8283c9ee5e0fcb766c",
         "c247b75bef6843a6bddb467b4f6530c7",
         "c69b37c168c0442d8535be75e705658e",
         "c8bf16ae628348ee96bd7127f5ae6bef",
+        "cf1d87cecba74957b3c7c3054f95be81",
         "d0fc74cd11664ab2a3dbee8d055afb5d",
         "d0fe7c1a74314662ac5ed5f2538e7b13",
+        "d64856ca870f4220924bc661d70468c8",
+        "d69bdd15a4b74cf7800920dbd1928452",
+        "d8509b5a44834ec6ad75db04c1aee8f6",
         "dae4002886484ca9b3f2e329a73e69f9",
+        "dbb72b44038641f093b3190b50f55c07",
+        "de1950516378426e8ffac8edc68cbb86",
         "e086530f5eee4ec3b687fb2ef2bf1e18",
         "e26b923888d1415f9c76de764ba146b0",
         "e301bd85789b4c4fa02b60e3dba62e5c",
         "e407e20ef9774016a7466c88610322ef",
+        "e4446b9edaa946968fbdad0ebcb4b3d4",
         "e4e11a5fc2714133b1c7af4a68f24b7c",
         "e639f6eaf9a542f4a26c1358c0ef3f2c",
         "e7ed8b4f392140368530a851521d82e0",
         "ea96b2f056914d9e853e946a1d96987c",
         "ecbdd9947fd94b588f3873caed11ffeb",
+        "ed8b16d1f60a45a8b8d85bbf0733f4e7",
+        "ee5adda33b484d39ac3b892c6bfcf7f4",
         "f303c96caa884a1d83af52b6df8f2ae9",
         "f3657e5a406947ddb8ad447219321aef",
         "f3dbbb1c935242e287d05399a283167a",
@@ -783,9 +1025,9 @@
     }
   },
   "f1b_gpqa_deficit": {
-    "solo_n_attempted": 78,
-    "solo_n_correct": 73,
-    "solo_accuracy": 0.9358974358974359,
+    "solo_n_attempted": 80,
+    "solo_n_correct": 75,
+    "solo_accuracy": 0.9375,
     "society_files": [
       "lever_chem_thinking_gate_gpqa_seed217.jsonl",
       "lever_chem_thinking_gate_gpqa_seed314.jsonl",
@@ -810,11 +1052,22 @@
         "accuracy": 0.9080459770114943
       }
     },
-    "n_shared_items_solo_and_society": 68,
-    "n_3.8_right_society_wrong": 2,
+    "n_shared_items_solo_and_society": 70,
+    "n_3.8_right_society_wrong": 3,
     "n_never_escalated_blind_spot": 0,
-    "n_escalated_and_lost_selection_failure": 2,
+    "n_escalated_and_lost_selection_failure": 3,
     "deficit_items": [
+      {
+        "question_id": "recDj2Y2BbtV02Wv5",
+        "society_observations": [
+          {
+            "seed_file": "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+            "correct": false,
+            "escalated": true
+          }
+        ],
+        "classification": "escalated_and_lost"
+      },
       {
         "question_id": "recVvpD8miVjmmyfe",
         "society_observations": [
@@ -849,20 +1102,24 @@
       "configs": [
         {
           "config": "baseline_3.7max",
-          "n": 451,
-          "accuracy": 0.8669623059866962,
-          "mean_tokens_per_q": 3282.3348115299336,
+          "n": 627,
+          "accuracy": 0.8724082934609251,
+          "mean_tokens_per_q": 3218.188197767145,
           "n_tokens_missing": 0,
           "seeds": [
             7,
             123,
-            314
+            217,
+            314,
+            471
           ],
           "source_files": [
             "adhoc_check.jsonl",
             "full_run.jsonl",
             "full_run2.jsonl",
+            "lever_baseline_gpqa_seed217.jsonl",
             "lever_baseline_gpqa_seed314.jsonl",
+            "lever_baseline_gpqa_seed471.jsonl",
             "lever_baseline_seed123.jsonl",
             "lever_baseline_seed7.jsonl",
             "smoke.jsonl",
@@ -883,9 +1140,9 @@
         },
         {
           "config": "qwen3.8_solo",
-          "n": 78,
-          "accuracy": 0.9358974358974359,
-          "mean_tokens_per_q": 4229.346153846154,
+          "n": 80,
+          "accuracy": 0.9375,
+          "mean_tokens_per_q": 4317.5625,
           "n_tokens_missing": 0,
           "seeds": [],
           "source_files": [
@@ -1092,6 +1349,23 @@
           ]
         },
         {
+          "config": "universal_gate",
+          "n": 269,
+          "accuracy": 0.8921933085501859,
+          "mean_tokens_per_q": 13353.524163568773,
+          "n_tokens_missing": 0,
+          "seeds": [
+            1001,
+            2311,
+            3407
+          ],
+          "source_files": [
+            "lever_universal_gate_gpqa_seed1001.jsonl",
+            "lever_universal_gate_gpqa_seed2311.jsonl",
+            "lever_universal_gate_gpqa_seed3407.jsonl"
+          ]
+        },
+        {
           "config": "combined",
           "n": 178,
           "accuracy": 0.8595505617977528,
@@ -1183,128 +1457,128 @@
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:single-call",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8620689655172413,
           "dominated_tok": 3739.0344827586205
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "self_consistency_5x",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.6069364161849711,
           "dominated_tok": 6204.774566473989
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "shipped_engine",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.7978142076502732,
           "dominated_tok": 8619.557377049181
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "control",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.7653631284916201,
           "dominated_tok": 8910.95530726257
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "qwen38_judge",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8026315789473685,
           "dominated_tok": 9462.026315789473
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:standard-tribunal",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8,
           "dominated_tok": 10148.5
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "subject",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8314606741573034,
           "dominated_tok": 10690.292134831461
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "rag_presolve",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.7441860465116279,
           "dominated_tok": 10760.802325581395
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "flagship_panel",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8666666666666667,
           "dominated_tok": 11468.222222222223
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "smart_gate",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8314606741573034,
           "dominated_tok": 12014.011235955057
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "thinking",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.85,
           "dominated_tok": 12369.672222222222
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "thinking_gate",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8661710037174721,
           "dominated_tok": 13068.085501858735
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "combined",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8595505617977528,
           "dominated_tok": 13426.314606741573
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "five",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8111111111111111,
           "dominated_tok": 13708.166666666666
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:stem-max",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8275862068965517,
           "dominated_tok": 16155
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "thinking_all",
-          "dominant_acc": 0.8669623059866962,
-          "dominant_tok": 3282.3348115299336,
+          "dominant_acc": 0.8724082934609251,
+          "dominant_tok": 3218.188197767145,
           "dominated_acc": 0.8444444444444444,
           "dominated_tok": 18346.666666666668
         },
@@ -1409,174 +1683,6 @@
           "dominated": "thinking_all",
           "dominant_acc": 0.8620689655172413,
           "dominant_tok": 3739.0344827586205,
-          "dominated_acc": 0.8444444444444444,
-          "dominated_tok": 18346.666666666668
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "self_consistency_5x",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.6069364161849711,
-          "dominated_tok": 6204.774566473989
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "shipped_engine",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.7978142076502732,
-          "dominated_tok": 8619.557377049181
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "control",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.7653631284916201,
-          "dominated_tok": 8910.95530726257
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "qwen38_judge",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8026315789473685,
-          "dominated_tok": 9462.026315789473
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:standard-tribunal",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8,
-          "dominated_tok": 10148.5
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "subject",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8314606741573034,
-          "dominated_tok": 10690.292134831461
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "rag_presolve",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.7441860465116279,
-          "dominated_tok": 10760.802325581395
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "chem_flagship_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8859315589353612,
-          "dominated_tok": 11368.498098859316
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "flagship_panel",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8666666666666667,
-          "dominated_tok": 11468.222222222223
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "smart_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8314606741573034,
-          "dominated_tok": 12014.011235955057
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "thinking",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.85,
-          "dominated_tok": 12369.672222222222
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:flagship_panel",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8928571428571429,
-          "dominated_tok": 12697.464285714286
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "chem_thinking_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.9090909090909091,
-          "dominated_tok": 12804.727272727272
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "thinking_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8661710037174721,
-          "dominated_tok": 13068.085501858735
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "combined",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8595505617977528,
-          "dominated_tok": 13426.314606741573
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "five",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8111111111111111,
-          "dominated_tok": 13708.166666666666
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:rag_presolve",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.9,
-          "dominated_tok": 14012.233333333334
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:stem-max",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.8275862068965517,
-          "dominated_tok": 16155
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:rag_thinking_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.9310344827586207,
-          "dominated_tok": 16503.41379310345
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "moo:thinking_gate",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
-          "dominated_acc": 0.9333333333333333,
-          "dominated_tok": 16967.533333333333
-        },
-        {
-          "dominant": "qwen3.8_solo",
-          "dominated": "thinking_all",
-          "dominant_acc": 0.9358974358974359,
-          "dominant_tok": 4229.346153846154,
           "dominated_acc": 0.8444444444444444,
           "dominated_tok": 18346.666666666668
         },
@@ -1830,6 +1936,14 @@
         },
         {
           "dominant": "moo:flagship_panel",
+          "dominated": "universal_gate",
+          "dominant_acc": 0.8928571428571429,
+          "dominant_tok": 12697.464285714286,
+          "dominated_acc": 0.8921933085501859,
+          "dominated_tok": 13353.524163568773
+        },
+        {
+          "dominant": "moo:flagship_panel",
           "dominated": "combined",
           "dominant_acc": 0.8928571428571429,
           "dominant_tok": 12697.464285714286,
@@ -1867,6 +1981,14 @@
           "dominant_tok": 12804.727272727272,
           "dominated_acc": 0.8661710037174721,
           "dominated_tok": 13068.085501858735
+        },
+        {
+          "dominant": "chem_thinking_gate",
+          "dominated": "universal_gate",
+          "dominant_acc": 0.9090909090909091,
+          "dominant_tok": 12804.727272727272,
+          "dominated_acc": 0.8921933085501859,
+          "dominated_tok": 13353.524163568773
         },
         {
           "dominant": "chem_thinking_gate",
@@ -1941,6 +2063,38 @@
           "dominated_tok": 18346.666666666668
         },
         {
+          "dominant": "universal_gate",
+          "dominated": "combined",
+          "dominant_acc": 0.8921933085501859,
+          "dominant_tok": 13353.524163568773,
+          "dominated_acc": 0.8595505617977528,
+          "dominated_tok": 13426.314606741573
+        },
+        {
+          "dominant": "universal_gate",
+          "dominated": "five",
+          "dominant_acc": 0.8921933085501859,
+          "dominant_tok": 13353.524163568773,
+          "dominated_acc": 0.8111111111111111,
+          "dominated_tok": 13708.166666666666
+        },
+        {
+          "dominant": "universal_gate",
+          "dominated": "moo:stem-max",
+          "dominant_acc": 0.8921933085501859,
+          "dominant_tok": 13353.524163568773,
+          "dominated_acc": 0.8275862068965517,
+          "dominated_tok": 16155
+        },
+        {
+          "dominant": "universal_gate",
+          "dominated": "thinking_all",
+          "dominant_acc": 0.8921933085501859,
+          "dominant_tok": 13353.524163568773,
+          "dominated_acc": 0.8444444444444444,
+          "dominated_tok": 18346.666666666668
+        },
+        {
           "dominant": "combined",
           "dominated": "five",
           "dominant_acc": 0.8595505617977528,
@@ -2000,20 +2154,24 @@
       "pareto_frontier": [
         {
           "config": "baseline_3.7max",
-          "n": 451,
-          "accuracy": 0.8669623059866962,
-          "mean_tokens_per_q": 3282.3348115299336,
+          "n": 627,
+          "accuracy": 0.8724082934609251,
+          "mean_tokens_per_q": 3218.188197767145,
           "n_tokens_missing": 0,
           "seeds": [
             7,
             123,
-            314
+            217,
+            314,
+            471
           ],
           "source_files": [
             "adhoc_check.jsonl",
             "full_run.jsonl",
             "full_run2.jsonl",
+            "lever_baseline_gpqa_seed217.jsonl",
             "lever_baseline_gpqa_seed314.jsonl",
+            "lever_baseline_gpqa_seed471.jsonl",
             "lever_baseline_seed123.jsonl",
             "lever_baseline_seed7.jsonl",
             "smoke.jsonl",
@@ -2022,14 +2180,70 @@
           ]
         },
         {
-          "config": "qwen3.8_solo",
-          "n": 78,
-          "accuracy": 0.9358974358974359,
-          "mean_tokens_per_q": 4229.346153846154,
+          "config": "chem_flagship_gate",
+          "n": 263,
+          "accuracy": 0.8859315589353612,
+          "mean_tokens_per_q": 11368.498098859316,
+          "n_tokens_missing": 0,
+          "seeds": [
+            555,
+            777,
+            888
+          ],
+          "source_files": [
+            "lever_chem_flagship_gate_gpqa_seed777.jsonl",
+            "lever_chem_flagship_gate_gpqa_seed888.jsonl",
+            "lever_chem_flagship_gate_seed555.jsonl"
+          ]
+        },
+        {
+          "config": "moo:flagship_panel",
+          "n": 28,
+          "accuracy": 0.8928571428571429,
+          "mean_tokens_per_q": 12697.464285714286,
           "n_tokens_missing": 0,
           "seeds": [],
           "source_files": [
-            "qwen38_baseline_seed123.jsonl"
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "chem_thinking_gate",
+          "n": 264,
+          "accuracy": 0.9090909090909091,
+          "mean_tokens_per_q": 12804.727272727272,
+          "n_tokens_missing": 0,
+          "seeds": [
+            217,
+            314,
+            471
+          ],
+          "source_files": [
+            "lever_chem_thinking_gate_gpqa_seed217.jsonl",
+            "lever_chem_thinking_gate_gpqa_seed314.jsonl",
+            "lever_chem_thinking_gate_gpqa_seed471.jsonl"
+          ]
+        },
+        {
+          "config": "moo:rag_thinking_gate",
+          "n": 29,
+          "accuracy": 0.9310344827586207,
+          "mean_tokens_per_q": 16503.41379310345,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
+          ]
+        },
+        {
+          "config": "moo:thinking_gate",
+          "n": 30,
+          "accuracy": 0.9333333333333333,
+          "mean_tokens_per_q": 16967.533333333333,
+          "n_tokens_missing": 0,
+          "seeds": [],
+          "source_files": [
+            "moo_m1_eval.jsonl"
           ]
         }
       ]
@@ -2563,16 +2777,18 @@
       "configs": [
         {
           "config": "baseline_3.7max",
-          "n": 260,
-          "accuracy": 0.7730769230769231,
-          "mean_tokens_per_q": 3150.9384615384615,
+          "n": 348,
+          "accuracy": 0.7844827586206896,
+          "mean_tokens_per_q": 3138.0028735632186,
           "n_tokens_missing": 0,
           "seeds": [
             7,
+            42,
             123
           ],
           "source_files": [
             "lever_baseline_supergpqa_seed123.jsonl",
+            "lever_baseline_supergpqa_seed42.jsonl",
             "lever_baseline_supergpqa_seed7.jsonl",
             "supergpqa_hard_pilot_seed42.jsonl"
           ]
@@ -2766,88 +2982,130 @@
           "source_files": [
             "moo_m1_eval.jsonl"
           ]
+        },
+        {
+          "config": "diversified_panel",
+          "n": 87,
+          "accuracy": 0.47126436781609193,
+          "mean_tokens_per_q": 27849.32183908046,
+          "n_tokens_missing": 0,
+          "seeds": [
+            19
+          ],
+          "source_files": [
+            "lever_diversified_panel_supergpqa_seed19.jsonl"
+          ]
+        },
+        {
+          "config": "cycled_panel",
+          "n": 87,
+          "accuracy": 0.4827586206896552,
+          "mean_tokens_per_q": 28842.367816091955,
+          "n_tokens_missing": 0,
+          "seeds": [
+            19
+          ],
+          "source_files": [
+            "lever_cycled_panel_supergpqa_seed19.jsonl"
+          ]
         }
       ],
       "dominance_pairs": [
         {
           "dominant": "baseline_3.7max",
           "dominated": "shipped_engine",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.6744186046511628,
           "dominated_tok": 10342.93023255814
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "control",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.6845637583892618,
           "dominated_tok": 10491.09619686801
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:standard-tribunal",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.5666666666666667,
           "dominated_tok": 10727.033333333333
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:rag_presolve",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7333333333333333,
           "dominated_tok": 12514.7
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "rag_recursive",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7078651685393258,
           "dominated_tok": 12727.269662921348
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "rag_presolve",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7017937219730942,
           "dominated_tok": 12907.789237668161
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:thinking_gate",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7333333333333333,
           "dominated_tok": 15881.566666666668
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:stem-max",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.75,
           "dominated_tok": 16094.07142857143
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "rag_thinking_gate",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7283018867924528,
           "dominated_tok": 17110.856603773584
         },
         {
           "dominant": "baseline_3.7max",
           "dominated": "moo:rag_thinking_gate",
-          "dominant_acc": 0.7730769230769231,
-          "dominant_tok": 3150.9384615384615,
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
           "dominated_acc": 0.7333333333333333,
           "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "baseline_3.7max",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7844827586206896,
+          "dominant_tok": 3138.0028735632186,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
         },
         {
           "dominant": "moo:single-call",
@@ -2928,6 +3186,22 @@
           "dominant_tok": 4105.6551724137935,
           "dominated_acc": 0.7333333333333333,
           "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:single-call",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7931034482758621,
+          "dominant_tok": 4105.6551724137935,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
         },
         {
           "dominant": "qwen38_panel",
@@ -3026,6 +3300,22 @@
           "dominated_tok": 17719.233333333334
         },
         {
+          "dominant": "qwen38_panel",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "qwen38_panel",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.873015873015873,
+          "dominant_tok": 7583.746031746032,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "moo:flagship_panel",
           "dominated": "flagship_panel",
           "dominant_acc": 0.8461538461538461,
@@ -3114,6 +3404,22 @@
           "dominated_tok": 17719.233333333334
         },
         {
+          "dominant": "moo:flagship_panel",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:flagship_panel",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.8461538461538461,
+          "dominant_tok": 9553.23076923077,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "flagship_panel",
           "dominated": "shipped_engine",
           "dominant_acc": 0.8271604938271605,
@@ -3194,6 +3500,22 @@
           "dominated_tok": 17719.233333333334
         },
         {
+          "dominant": "flagship_panel",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "flagship_panel",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.8271604938271605,
+          "dominant_tok": 10114.20987654321,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "shipped_engine",
           "dominated": "moo:standard-tribunal",
           "dominant_acc": 0.6744186046511628,
@@ -3202,12 +3524,60 @@
           "dominated_tok": 10727.033333333333
         },
         {
+          "dominant": "shipped_engine",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.6744186046511628,
+          "dominant_tok": 10342.93023255814,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "shipped_engine",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.6744186046511628,
+          "dominant_tok": 10342.93023255814,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "control",
           "dominated": "moo:standard-tribunal",
           "dominant_acc": 0.6845637583892618,
           "dominant_tok": 10491.09619686801,
           "dominated_acc": 0.5666666666666667,
           "dominated_tok": 10727.033333333333
+        },
+        {
+          "dominant": "control",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.6845637583892618,
+          "dominant_tok": 10491.09619686801,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "control",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.6845637583892618,
+          "dominant_tok": 10491.09619686801,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.5666666666666667,
+          "dominant_tok": 10727.033333333333,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:standard-tribunal",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.5666666666666667,
+          "dominant_tok": 10727.033333333333,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
         },
         {
           "dominant": "moo:rag_presolve",
@@ -3250,6 +3620,22 @@
           "dominated_tok": 17719.233333333334
         },
         {
+          "dominant": "moo:rag_presolve",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:rag_presolve",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 12514.7,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "rag_recursive",
           "dominated": "rag_presolve",
           "dominant_acc": 0.7078651685393258,
@@ -3258,6 +3644,38 @@
           "dominated_tok": 12907.789237668161
         },
         {
+          "dominant": "rag_recursive",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7078651685393258,
+          "dominant_tok": 12727.269662921348,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "rag_recursive",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7078651685393258,
+          "dominant_tok": 12727.269662921348,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
+          "dominant": "rag_presolve",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7017937219730942,
+          "dominant_tok": 12907.789237668161,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "rag_presolve",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7017937219730942,
+          "dominant_tok": 12907.789237668161,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "moo:thinking_gate",
           "dominated": "rag_thinking_gate",
           "dominant_acc": 0.7333333333333333,
@@ -3274,6 +3692,22 @@
           "dominated_tok": 17719.233333333334
         },
         {
+          "dominant": "moo:thinking_gate",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 15881.566666666668,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:thinking_gate",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 15881.566666666668,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
           "dominant": "moo:stem-max",
           "dominated": "rag_thinking_gate",
           "dominant_acc": 0.75,
@@ -3288,21 +3722,71 @@
           "dominant_tok": 16094.07142857143,
           "dominated_acc": 0.7333333333333333,
           "dominated_tok": 17719.233333333334
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.75,
+          "dominant_tok": 16094.07142857143,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:stem-max",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.75,
+          "dominant_tok": 16094.07142857143,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
+          "dominant": "rag_thinking_gate",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7283018867924528,
+          "dominant_tok": 17110.856603773584,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "rag_thinking_gate",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7283018867924528,
+          "dominant_tok": 17110.856603773584,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
+        },
+        {
+          "dominant": "moo:rag_thinking_gate",
+          "dominated": "diversified_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 17719.233333333334,
+          "dominated_acc": 0.47126436781609193,
+          "dominated_tok": 27849.32183908046
+        },
+        {
+          "dominant": "moo:rag_thinking_gate",
+          "dominated": "cycled_panel",
+          "dominant_acc": 0.7333333333333333,
+          "dominant_tok": 17719.233333333334,
+          "dominated_acc": 0.4827586206896552,
+          "dominated_tok": 28842.367816091955
         }
       ],
       "pareto_frontier": [
         {
           "config": "baseline_3.7max",
-          "n": 260,
-          "accuracy": 0.7730769230769231,
-          "mean_tokens_per_q": 3150.9384615384615,
+          "n": 348,
+          "accuracy": 0.7844827586206896,
+          "mean_tokens_per_q": 3138.0028735632186,
           "n_tokens_missing": 0,
           "seeds": [
             7,
+            42,
             123
           ],
           "source_files": [
             "lever_baseline_supergpqa_seed123.jsonl",
+            "lever_baseline_supergpqa_seed42.jsonl",
             "lever_baseline_supergpqa_seed7.jsonl",
             "supergpqa_hard_pilot_seed42.jsonl"
           ]

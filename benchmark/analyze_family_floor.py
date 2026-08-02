@@ -36,6 +36,8 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Optional
 
+from benchmark.figure_data import RETIRED_POINT_ESTIMATES
+
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 
@@ -193,9 +195,41 @@ def load_combo_file(path: Path, records: list[Rec]) -> int:
     return n
 
 
+#: Dataset token in a `lever_baseline_<dataset>_seed<N>.jsonl` filename ->
+#: benchmark label. Longest match wins so "supergpqa" is not read as "gpqa".
+_BASELINE_FNAME_DATASETS = {
+    "supergpqa": "SuperGPQA-hard",
+    "mmlu_pro_stem": "MMLU-Pro",
+    "gpqa": "GPQA-Diamond",
+}
+
+
+def _bench_from_baseline_fname(fname: str) -> Optional[str]:
+    """Benchmark label for a lever_baseline_* file not in the explicit map.
+
+    The map was hand-maintained, so every baseline run added after it was
+    written (the seed-217/471 chemistry comparators, the seed-42 SuperGPQA
+    frontier baseline) fell through to the ENGINE loader and crashed the whole
+    80-file analysis on KeyError. Deriving from the filename means a new
+    baseline run is picked up by the convention it already follows.
+
+    Returns None for a name with no recognised dataset token -- callers skip
+    rather than guess, since guessing a benchmark would silently pool a run
+    into the wrong row.
+    """
+    for token in sorted(_BASELINE_FNAME_DATASETS, key=len, reverse=True):
+        if f"_{token}_" in fname:
+            return _BASELINE_FNAME_DATASETS[token]
+    # `lever_baseline_seed7.jsonl` / `_seed123.jsonl` carry no dataset token;
+    # they are the original GPQA runs and are in the explicit map already.
+    return None
+
+
 def load_lever_baseline_file(path: Path, records: list[Rec]) -> int:
     fname = path.name
-    bench = LEVER_BASELINE_BENCHMARK_BY_FNAME[fname]
+    bench = LEVER_BASELINE_BENCHMARK_BY_FNAME.get(fname) or _bench_from_baseline_fname(fname)
+    if bench is None:
+        return 0
     n = 0
     for row in iter_jsonl(path):
         b = row["baseline"]
@@ -209,6 +243,13 @@ def load_lever_engine_file(path: Path, records: list[Rec]) -> int:
     fname = path.name
     n = 0
     for row in iter_jsonl(path):
+        # A row without an `engine` wrapper is a routing mistake, not data to
+        # guess at. Skip it rather than raising KeyError and taking down an
+        # analysis that reads 80+ files -- one mis-routed file should cost one
+        # file, not the whole report. The inventory's emitted-count makes the
+        # loss visible.
+        if "engine" not in row:
+            continue
         e = row["engine"]
         qid = e["item"]["question_id"]
         bench = classify_benchmark(row.get("dataset"), fname, qid)
@@ -295,7 +336,14 @@ def build_inventory_and_records():
         if fname in COMBO_BENCHMARK_BY_FNAME:
             load_combo_file(path, records)
             family = "combo(baseline+engine[+sc5])"
-        elif fname in LEVER_BASELINE_BENCHMARK_BY_FNAME:
+        elif fname in LEVER_BASELINE_BENCHMARK_BY_FNAME or fname.startswith("lever_baseline_"):
+            # Routed by PREFIX as well as by the explicit map. The map alone
+            # silently mis-routed any newly-added lever_baseline_* file into
+            # the engine loader below, which then died on KeyError('engine')
+            # -- exactly what happened when lever_baseline_supergpqa_seed42
+            # landed on 2026-08-02. The naming convention already carries the
+            # information; the allowlist should not be the only thing that
+            # knows it.
             load_lever_baseline_file(path, records)
             family = "lever_baseline"
         elif fname == "qwen38_baseline_seed123.jsonl":
@@ -467,8 +515,27 @@ def compute_f2_frontier(records: list[Rec]):
 
         # Pareto dominance: cfg A dominates cfg B if tokens(A) <= tokens(B)
         # and accuracy(A) >= accuracy(B) and not identical config.
+        #
+        # RETIRED POINT ESTIMATES CANNOT DOMINATE. A config whose number this
+        # repo has formally withdrawn may not knock a live result off the
+        # frontier -- a frontier is a claim about what is achievable, and a
+        # withdrawn estimate supports no such claim. This is not hypothetical:
+        # until 2026-08-02, `qwen3.8_solo`'s retracted 93.6% (a survivor-only
+        # rate over 73/78 items) was dominating FIVE legitimate GPQA configs
+        # off this very frontier, and the resulting flags were published in
+        # docs/figures/f04_accuracy_vs_tokens_frontier.svg.
+        #
+        # The row is KEPT in the output -- it records a real run, and deleting
+        # raw records to fix a derived flag is the wrong repair -- but it is
+        # excluded from the dominance computation and carries `retired=True`
+        # so any consumer reading the CSV directly sees why.
         dominance = []
-        priced = [r for r in rows if r["mean_tokens_per_q"] is not None and r["accuracy"] is not None]
+        priced = [
+            r for r in rows
+            if r["mean_tokens_per_q"] is not None
+            and r["accuracy"] is not None
+            and r["config"] not in RETIRED_POINT_ESTIMATES
+        ]
         for a in priced:
             for b in priced:
                 if a["config"] == b["config"]:
@@ -723,10 +790,12 @@ def main():
                 "accuracy": row["accuracy"], "mean_tokens_per_q": row["mean_tokens_per_q"],
                 "n_tokens_missing": row["n_tokens_missing"], "seeds": ";".join(map(str, row["seeds"])),
                 "on_pareto_frontier": row["config"] in frontier_names,
+                "retired": row["config"] in RETIRED_POINT_ESTIMATES,
+                "retired_reason": RETIRED_POINT_ESTIMATES.get(row["config"], ""),
             })
     write_csv(RESULTS_DIR / "f2_compute_frontier.csv", frontier_rows,
               ["benchmark", "config", "n", "accuracy", "mean_tokens_per_q", "n_tokens_missing", "seeds",
-               "on_pareto_frontier"])
+               "on_pareto_frontier", "retired", "retired_reason"])
 
     f5_rows = []
     for bucket, d in f5_moo.items():

@@ -1,5 +1,5 @@
 benchmark,config,n,accuracy_pct,mean_tokens_per_q,seeds,n_seeds,on_pareto_frontier,is_baseline,is_contaminated,footnote,dominated_benchmark
-GPQA-Diamond,baseline_3.7max,451,86.69623059866962,3282.3348115299336,7;123;314,3,True,True,False,,False
+GPQA-Diamond,baseline_3.7max,627,87.24082934609251,3218.188197767145,7;123;217;314;471,5,True,True,False,,False
 GPQA-Diamond,moo:single-call,29,86.20689655172413,3739.034482758621,,1,False,False,False,,False
 GPQA-Diamond,self_consistency_5x,173,60.69364161849711,6204.774566473989,,1,False,False,False,,False
 GPQA-Diamond,shipped_engine,183,79.78142076502732,8619.557377049181,,1,False,False,False,,False
@@ -15,6 +15,7 @@ GPQA-Diamond,thinking,180,85.0,12369.672222222222,7;42,2,False,False,False,,Fals
 GPQA-Diamond,moo:flagship_panel,28,89.28571428571429,12697.464285714286,,1,True,False,False,,False
 GPQA-Diamond,chem_thinking_gate,264,90.90909090909092,12804.727272727272,217;314;471,3,True,False,False,,False
 GPQA-Diamond,thinking_gate,269,86.61710037174721,13068.085501858735,7;42;123,3,False,False,False,,False
+GPQA-Diamond,universal_gate,269,89.21933085501858,13353.524163568773,1001;2311;3407,3,False,False,False,,False
 GPQA-Diamond,combined,178,85.95505617977528,13426.314606741573,7;42,2,False,False,False,,False
 GPQA-Diamond,five,90,81.11111111111111,13708.166666666666,42,1,False,False,False,,False
 GPQA-Diamond,moo:rag_presolve,30,90.0,14012.233333333334,,1,False,False,False,,False
@@ -35,7 +36,7 @@ MMLU-Pro,moo:stem-max,30,96.66666666666669,4664.4,,1,False,False,False,,True
 MMLU-Pro,moo:thinking_gate,30,96.66666666666669,5441.333333333333,,1,False,False,False,,True
 MMLU-Pro,moo:rag_thinking_gate,30,96.66666666666669,5704.466666666666,,1,False,False,False,,True
 MMLU-Pro,thinking_gate,50,92.0,6334.02,42,1,False,False,False,,True
-SuperGPQA-hard,baseline_3.7max,260,77.3076923076923,3150.938461538461,7;123,2,True,True,False,,False
+SuperGPQA-hard,baseline_3.7max,348,78.44827586206897,3138.0028735632186,7;42;123,3,True,True,False,,False
 SuperGPQA-hard,moo:single-call,29,79.3103448275862,4105.6551724137935,,1,True,False,False,,False
 SuperGPQA-hard,qwen38_panel,63,87.3015873015873,7583.746031746032,42,1,True,False,True,c,False
 SuperGPQA-hard,moo:flagship_panel,26,84.61538461538461,9553.23076923077,,1,False,False,False,,False
@@ -50,6 +51,8 @@ SuperGPQA-hard,moo:thinking_gate,30,73.33333333333333,15881.566666666668,,1,Fals
 SuperGPQA-hard,moo:stem-max,28,75.0,16094.07142857143,,1,False,False,False,,False
 SuperGPQA-hard,rag_thinking_gate,265,72.83018867924528,17110.856603773584,271;606;838,3,False,False,False,,False
 SuperGPQA-hard,moo:rag_thinking_gate,30,73.33333333333333,17719.233333333334,,1,False,False,False,,False
+SuperGPQA-hard,diversified_panel,87,47.126436781609186,27849.32183908046,19,1,False,False,False,,False
+SuperGPQA-hard,cycled_panel,87,48.275862068965516,28842.367816091955,19,1,False,False,False,,False
 LEXam,baseline_3.7max,50,86.0,1285.02,,1,True,True,False,,True
 LEXam,shipped_engine,50,72.0,3480.28,,1,False,False,False,,True
 LEXam,control,90,74.44444444444444,4466.9,42,1,False,False,False,,True
