@@ -189,7 +189,7 @@ lower cost **in dollars**; that was always a cost claim, and in tokens it is
 3.1× *more* expensive.
 
 The largest artifact is the negative results:
-**[`docs/negative-results.md`](docs/negative-results.md)** — 22 measured nulls
+**[`docs/negative-results.md`](docs/negative-results.md)** — 23 measured nulls
 each with its mechanism, 6 methodological errors we caught in our own work, and
 4 adjudicated contradictions between our own documents.
 

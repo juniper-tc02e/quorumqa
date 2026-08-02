@@ -157,7 +157,7 @@ ceiling case.
 
 ## 3. The catalogue
 
-Twenty-two distinct measured nulls, grouped by mechanism.
+Twenty-three distinct measured nulls, grouped by mechanism.
 
 ### 3.1 Saturation nulls — the benchmark ran out of headroom before the lever could be tested
 
@@ -575,6 +575,51 @@ then **−5.6**. Two mean-positive levers, entirely different confidence.*
   §3 nowhere else in this catalogue because it is a validated **win**, not
   a null — cited here only as the seed-271 counterfactual.
 - *Source.* `benchmark/results/rag_r1_findings.md` ("Fourth seed (271)").
+
+**D5. The unanimous-wrong rate does not predict whether a lever wins — it only bounds it (r=−0.216, p=0.73)**
+
+- *Hypothesis.* Since the escalation gate fires on disagreement, an item
+  where all three cheap solvers agree *and* are wrong is invisible to the
+  cascade. The unanimous-wrong rate is therefore the pool any lever could
+  recover, and README.md claimed it "predicts whether that is even
+  possible." Does it?
+- *Setup.* All 5 benchmarks with both numbers measured
+  (`figure_f05_unanimous_wrong_vs_lever_delta.csv`). Threshold for
+  "predictive" fixed at p<0.05 as a named constant *before* the statistic
+  was computed, not chosen after seeing it.
+- *Result.* **Two claims were hiding in that one word, and only one
+  survives.**
+
+  | | claim | verdict |
+  |---|---|---|
+  | **bound** | a lever cannot move more accuracy than there is unanimous-wrong to recover | **holds, 5 of 5** |
+  | **prediction** | the rate tells you where in that range a lever lands, or its sign | **not supported** |
+
+  Pearson **r = −0.216 (p = 0.7270)**, Spearman **ρ = +0.100 (p = 0.8729)** —
+  the two do not agree on the **sign**, which is the clearest available
+  evidence that neither is measuring anything. The decisive pair sits one
+  point of headroom apart:
+
+  | benchmark | unanimous-wrong | best lever | evidence |
+  |---|---:|---:|---|
+  | LEXam | 22.0% | **−6.0 pp** | 1 seed, screen |
+  | SuperGPQA-hard | 23.0% | **+4.1 pp** | 3 seeds, validated |
+
+  Levers convert between **−27.3% and +50.0%** of the available headroom, a
+  range spanning zero. Only **1 of the 5** points is validated at 3 seeds.
+- *Mechanism.* Headroom says an error pool exists; it says nothing about
+  whether the pool is *reachable by re-reading the panel's own output*. On
+  LEXam it is not — the missing ingredient there is knowledge, so a lever
+  aimed at decorrelation moves accuracy the wrong way. This is the same
+  boundary as the ten mechanism nulls in §5: a large gap is a large gap of
+  *unanimous* error, and unanimity is exactly the condition under which the
+  panel has no internal signal left to exploit.
+- *Consequence.* README.md's "predicts" is retired in favour of "bounds",
+  with the numbers shown at the point of correction rather than the verb
+  quietly swapped. Note this also retires the temptation to use the rate to
+  *choose* which benchmark to work on next — it cannot rank candidates.
+- *Source.* `benchmark/results/headroom_rule_analysis.json`; reproduce with
+  `python -m benchmark.analyze_headroom_rule`.
 
 ### 3.5 Domain/corpus nulls — the architecture is sound but the surface, or the data behind it, cannot support it
 
