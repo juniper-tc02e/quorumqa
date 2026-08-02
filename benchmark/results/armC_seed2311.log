@@ -1406,3 +1406,189 @@
                              'flagship',                                       
                              'no_tribunal': True})                             
                              cost=$0.00000                                     
+[08/03/26 02:40:51] INFO     recuYEkVjdVUwA3c0        lever_experiments.py:2113
+                             [cycled_panel]:                                   
+                             final=D(correct,                                  
+                             escalated=False,                                  
+                             {'seat_answers':                                  
+                             [{'seat_index': 0,                                
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 1,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None},                             
+                             {'seat_index': 2,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             'Answer by recalling the                          
+                             single most relevant                              
+                             fact, law, or formula,                            
+                             then checking each                                
+                             choice against it.',                              
+                             'temperature': 0.9,                               
+                             'permutation': None},                             
+                             {'seat_index': 3,                                 
+                             'letter': 'D',                                    
+                             'confidence': 0.95,                               
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 4,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None}],                            
+                             'unanimous': True,                                
+                             'n_solvers': 5,                                   
+                             'solver_tier':                                    
+                             'flagship',                                       
+                             'no_tribunal': True})                             
+                             cost=$0.00000                                     
+[08/03/26 02:41:20] INFO     recZSGUkn56v9kEp1        lever_experiments.py:2113
+                             [cycled_panel]:                                   
+                             final=A(correct,                                  
+                             escalated=False,                                  
+                             {'seat_answers':                                  
+                             [{'seat_index': 0,                                
+                             'letter': 'A',                                    
+                             'confidence': 0.85,                               
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 1,                                 
+                             'letter': 'A',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None},                             
+                             {'seat_index': 2,                                 
+                             'letter': 'A',                                    
+                             'confidence': 0.75,                               
+                             'procedure_or_lens':                              
+                             'Answer by recalling the                          
+                             single most relevant                              
+                             fact, law, or formula,                            
+                             then checking each                                
+                             choice against it.',                              
+                             'temperature': 0.9,                               
+                             'permutation': None},                             
+                             {'seat_index': 3,                                 
+                             'letter': 'A',                                    
+                             'confidence': 0.8,                                
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 4,                                 
+                             'letter': 'A',                                    
+                             'confidence': 0.95,                               
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None}],                            
+                             'unanimous': True,                                
+                             'n_solvers': 5,                                   
+                             'solver_tier':                                    
+                             'flagship',                                       
+                             'no_tribunal': True})                             
+                             cost=$0.00000                                     
+[08/03/26 02:41:23] INFO     recwW1A85nfyQpReG        lever_experiments.py:2113
+                             [cycled_panel]:                                   
+                             final=D(correct,                                  
+                             escalated=False,                                  
+                             {'seat_answers':                                  
+                             [{'seat_index': 0,                                
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 1,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None},                             
+                             {'seat_index': 2,                                 
+                             'letter': 'D',                                    
+                             'confidence': 0.95,                               
+                             'procedure_or_lens':                              
+                             'Answer by recalling the                          
+                             single most relevant                              
+                             fact, law, or formula,                            
+                             then checking each                                
+                             choice against it.',                              
+                             'temperature': 0.9,                               
+                             'permutation': None},                             
+                             {'seat_index': 3,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             'Answer by reasoning                              
+                             from first principles,                            
+                             step by step.',                                   
+                             'temperature': 0.3,                               
+                             'permutation': None},                             
+                             {'seat_index': 4,                                 
+                             'letter': 'D',                                    
+                             'confidence': 1.0,                                
+                             'procedure_or_lens':                              
+                             "Answer by first                                  
+                             eliminating choices                               
+                             you're confident are                              
+                             wrong, then picking                               
+                             among what remains.",                             
+                             'temperature': 0.6,                               
+                             'permutation': None}],                            
+                             'unanimous': True,                                
+                             'n_solvers': 5,                                   
+                             'solver_tier':                                    
+                             'flagship',                                       
+                             'no_tribunal': True})                             
+                             cost=$0.00000                                     
