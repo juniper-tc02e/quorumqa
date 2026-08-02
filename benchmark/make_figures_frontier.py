@@ -511,7 +511,21 @@ def build_f13() -> None:
         ("qwen3.7-max\n×1 call", fl["accuracy"] * 100, FLAGSHIP_GOLD,
          f"universal_gate is only\nnet {ug['net']:+d} vs this, p={ug['p_one_sided']:.2f}"),
     ]
-    fig, ax = plt.subplots(figsize=(11.6, 7.4), dpi=125)
+    # TB-1 arm C, appended only when it is registered AND has data. Kept
+    # conditional rather than hardcoded so this figure gains its fourth bar the
+    # moment analyze_cost_frontier registers flagship_sc5, without a second
+    # edit here -- and so the figure is never drawn with a partially-fired arm,
+    # since frontier_analyze only returns points for arms it actually loaded.
+    sc5 = r["points"].get("flagship_sc5")
+    if sc5:
+        bars.append((
+            "qwen3.7-max\nSC@5\n(compute-matched)",
+            sc5["accuracy"] * 100, LOSS_RED,
+            f"universal_gate is net\n{-sc5['net']:+d} vs this, p={sc5['p_one_sided']:.2f}"
+            if sc5.get("net") is not None else "",
+        ))
+
+    fig, ax = plt.subplots(figsize=(11.6 + 1.4 * (len(bars) - 3), 7.4), dpi=125)
     xs = range(len(bars))
     ax.bar(list(xs), [b[1] for b in bars], color=[b[2] for b in bars], width=0.56, zorder=2, alpha=0.9)
 
@@ -523,12 +537,12 @@ def build_f13() -> None:
     # The two comparators, ~9 points apart -- the whole explanation. Drawn as a
     # vertical span to the RIGHT of the bars: an earlier diagonal arrow cut
     # straight through the middle bar's own label.
-    gap_x = 2.52
+    gap_x = len(bars) - 0.48
     lo_y, hi_y = 80.8, fl["accuracy"] * 100
     ax.annotate("", xy=(gap_x, lo_y), xytext=(gap_x, hi_y),
                 arrowprops=dict(arrowstyle="<->", color="#444444", lw=1.6))
     for yv in (lo_y, hi_y):
-        ax.plot([2.28, gap_x], [yv, yv], color="#8a8a8a", lw=0.9, ls=":", zorder=1)
+        ax.plot([len(bars) - 0.72, gap_x], [yv, yv], color="#8a8a8a", lw=0.9, ls=":", zorder=1)
     ax.text(gap_x + 0.06, (lo_y + hi_y) / 2,
             f"the two comparators\nare {hi_y - lo_y:.1f} points apart",
             ha="left", va="center", fontsize=8.8, color="#333333", style="italic")
@@ -536,7 +550,7 @@ def build_f13() -> None:
     ax.set_xticks(list(xs))
     ax.set_xticklabels([b[0] for b in bars], fontsize=9.2)
     ax.set_ylabel("GPQA-Diamond accuracy (%)")
-    ax.set_xlim(-0.55, 3.25)
+    ax.set_xlim(-0.55, len(bars) + 0.25)
     ax.set_ylim(70, 95)
     ax.grid(axis="y", alpha=0.22, zorder=0)
     ax.spines[["top", "right"]].set_visible(False)
