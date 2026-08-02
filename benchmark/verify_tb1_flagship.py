@@ -228,10 +228,31 @@ def verify() -> dict:
         for arm in comparators:
             if arm in arms:
                 entry["comparisons"][arm] = _paired(arms["A"], arms[arm], shared)
+        # C vs B -- does SAMPLING beat one call, independent of the scaffold?
+        #
+        # Not an arm-A comparison, so it lives outside `comparisons`, and it is
+        # explicitly NOT a pre-registered test. It is needed to read A-vs-C
+        # correctly: a negative A-vs-C says the stack loses to SC@5, but only
+        # C-vs-B says whether SC@5 is itself worth the budget. Without it,
+        # "the stack loses to the control" is ambiguous between "sampling is
+        # good" and "the stack is bad".
+        if "C" in arms and "B" in arms:
+            entry["sampling_vs_one_call"] = _paired(arms["C"], arms["B"], shared)
         entry["sc_diagnostics"] = _sc_diagnostics(seed)
         per_seed[seed] = entry
 
     pooled = {}
+    sv = [s["sampling_vs_one_call"] for s in per_seed.values()
+          if "sampling_vs_one_call" in s]
+    if sv:
+        b, c = sum(x["b"] for x in sv), sum(x["c"] for x in sv)
+        pooled_sampling = {
+            "b": b, "c": c, "net": b - c, "n": sum(x["n"] for x in sv),
+            "p_one_sided": mcnemar_exact_one_sided(b, c),
+            "seeds": [k for k, s in per_seed.items() if "sampling_vs_one_call" in s],
+        }
+    else:
+        pooled_sampling = None
     for arm in comparators:
         b = sum(s["comparisons"][arm]["b"] for s in per_seed.values() if arm in s["comparisons"])
         c = sum(s["comparisons"][arm]["c"] for s in per_seed.values() if arm in s["comparisons"])
@@ -246,6 +267,7 @@ def verify() -> dict:
     return {
         "per_seed": per_seed,
         "pooled": pooled,
+        "pooled_sampling_vs_one_call": pooled_sampling,
         "arms_present": present,
         "arm_c_run": bool(present["C"]),
     }
@@ -350,6 +372,19 @@ def main() -> None:
             print("  but not significant. Report as ATTRIBUTION UNRESOLVED, never as a")
             print("  win (spec section 6.1: the asymmetry that granted mechanism survival")
             print("  on net >= +1 with no significance requirement was removed).")
+        print()
+    sv = r.get("pooled_sampling_vs_one_call")
+    if sv:
+        print("-" * 78)
+        print("CONTEXT (not a pre-registered test) -- does SAMPLING beat one call?")
+        print("-" * 78)
+        print(f"  C vs B: flagship SC@5 vs one flagship call, on the same S")
+        print(f"    b={sv['b']} c={sv['c']} net={sv['net']:+d} n={sv['n']} "
+              f"p={sv['p_one_sided']:.4f} seeds={sv['seeds']}")
+        print("  Needed to read A-vs-C correctly. A negative A-vs-C says the stack")
+        print("  loses to the control; only this says whether the control is itself")
+        print("  worth the budget. Without it, 'the stack loses' is ambiguous between")
+        print("  'sampling is good' and 'the stack is bad'.")
         print()
     print("  reproduce: python -m benchmark.verify_tb1_flagship")
 
