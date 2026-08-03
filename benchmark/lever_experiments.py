@@ -2211,10 +2211,23 @@ def _build_output_row(
     return row
 
 
+#: Client read-timeout in seconds. 300 is QwenClient's own default, so leaving
+#: this alone reproduces every committed run byte-for-byte -- the drop rates in
+#: the published record were all measured at 300 and must stay reproducible.
+#:
+#: Exposed as --timeout because the default is NOT harmless: TB-1 arm C lost ~5
+#: items per seed to `ReadTimeout: read timeout=300` on long-generation items,
+#: coming within one item of tripping the |S| >= 81 drop kill on a 1.33M-token
+#: run. Those drops are 504/timeout-correlated and therefore NOT missing at
+#: random, so they bias every affected result toward shorter answers.
+DEFAULT_CLIENT_TIMEOUT = 300.0
+
+
 async def main_live(
     lever: str, n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa",
     rag_db: str | None = None, rag_k: int = DEFAULT_RAG_K, rag_gate_threshold: float = DEFAULT_RAG_SCORE_THRESHOLD,
     n_solvers: int = N_SOLVERS, no_tribunal: bool = False, solver_tier: str = "cheap",
+    timeout: float = DEFAULT_CLIENT_TIMEOUT,
 ):
     if lever in ("diversified_panel", "cycled_panel") and solver_tier not in SOLVER_TIER_MODELS:
         # Fails loudly BEFORE any dataset load or paid call -- same posture
@@ -2252,7 +2265,7 @@ async def main_live(
                 f"loader to persist a fine-grained subject/field before running this lever here."
             )
 
-    client = QwenClient()
+    client = QwenClient(timeout=timeout)
     semaphore = asyncio.Semaphore(concurrency)
 
     rag_config = None
@@ -2309,12 +2322,12 @@ async def _run_one_baseline(client, item, semaphore):
     return baseline
 
 
-async def main_baseline(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa"):
+async def main_baseline(n: int, seed: int, concurrency: int, out_path: Path, skip_huggingface: bool, dataset: str = "gpqa", timeout: float = DEFAULT_CLIENT_TIMEOUT):
     """Fresh-seed flagship baseline -- needed because the frozen baseline
     number only covers seed=42, and Lever 3/2 replication at seed=7 needs its
     own fair comparison point, not a cross-seed borrow."""
     items = DATASET_LOADERS[dataset](n, seed, skip_huggingface)
-    client = QwenClient()
+    client = QwenClient(timeout=timeout)
     semaphore = asyncio.Semaphore(concurrency)
     results = []
     tasks = [asyncio.ensure_future(_run_one_baseline(client, item, semaphore)) for item in items]
@@ -2332,11 +2345,11 @@ async def main_baseline(n: int, seed: int, concurrency: int, out_path: Path, ski
     log.info("Wrote %d baseline results to %s", len(results), out_path)
 
 
-async def main_gate_replay(frozen_path: Path, out_path: Path):
+async def main_gate_replay(frozen_path: Path, out_path: Path, timeout: float = DEFAULT_CLIENT_TIMEOUT):
     """Cheap validation: replay the second-opinion gate against SAVED solver
     answers from the frozen run (no new solver calls). For unanimous cases
     the gate flags, actually run the tribunal to see if it self-corrects."""
-    client = QwenClient()
+    client = QwenClient(timeout=timeout)
     records = [json.loads(l) for l in frozen_path.open(encoding="utf-8")]
     unanimous = [r["engine"] for r in records if not r["engine"]["escalated"]]
     log.info("Replaying gate against %d saved unanimous cases (%d wrong, %d correct)",
@@ -2387,6 +2400,11 @@ if __name__ == "__main__":
     parser.add_argument("--n", type=int, default=90)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--concurrency", type=int, default=6)
+    parser.add_argument(
+        "--timeout", type=float, default=DEFAULT_CLIENT_TIMEOUT,
+        help="Client read timeout in seconds (default 300, matching every "
+             "committed run). Raise it for long-generation datasets: TB-1 "
+             "arm C lost ~5 items/seed to read timeouts at the default.")
     parser.add_argument("--out", type=str, default=None)
     parser.add_argument("--skip-huggingface", action="store_true")
     parser.add_argument("--dataset", type=str, default="gpqa", choices=list(DATASET_LOADERS.keys()),
@@ -2427,14 +2445,14 @@ if __name__ == "__main__":
 
     if args.lever == "gate-replay":
         out_path = Path(args.out) if args.out else RESULTS_DIR / "lever_gate_replay.jsonl"
-        asyncio.run(main_gate_replay(RESULTS_DIR / "full_run2.jsonl", out_path))
+        asyncio.run(main_gate_replay(RESULTS_DIR / "full_run2.jsonl", out_path, args.timeout))
     elif args.lever == "baseline":
         out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_baseline_{args.dataset}_seed{args.seed}.jsonl"
-        asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset))
+        asyncio.run(main_baseline(args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset, args.timeout))
     else:
         out_path = Path(args.out) if args.out else RESULTS_DIR / f"lever_{args.lever}_{args.dataset}_seed{args.seed}.jsonl"
         asyncio.run(main_live(
             args.lever, args.n, args.seed, args.concurrency, out_path, args.skip_huggingface, args.dataset,
             args.rag_db, args.rag_k, args.rag_score_threshold,
-            args.n_solvers, args.no_tribunal, args.solver_tier,
+            args.n_solvers, args.no_tribunal, args.solver_tier, args.timeout,
         ))
