@@ -10,15 +10,33 @@ dissent, is recorded verbatim, never papered over into false consensus.
 
 > ### What we actually found — the one-line version
 >
-> **It works, and it is not worth its tokens.** The engine does what it was
-> designed to do: escalating every answer instead of only the split ones is
-> worth **+25 items, zero losses, p = 3×10⁻⁸** against the shipped rule. But
-> against the comparator that decides whether to build it — *the same token
-> budget spent on plain sampling of the same model* — it is **net −6,
-> p = 0.981**, negative at every seed. Twelve mechanisms for catching a
-> confident-but-wrong panel were pre-registered and tested. **All twelve are
-> null.** The negative results, and the discipline that produced them, are the
-> contribution. → [`docs/FINDINGS-2026-08.md`](docs/FINDINGS-2026-08.md)
+> **One thing works. Nothing else does, and two things we published as
+> findings turned out not to be robust.**
+>
+> What holds: escalating **every** answer instead of only the split ones is
+> worth **+25 items, zero losses, p = 3×10⁻⁸** against the shipped rule
+> (**+21** counting each question once). A disagreement-triggered gate cannot
+> see unanimous-but-wrong answers, and removing that blind spot recovers real
+> errors.
+>
+> What does **not** hold — corrected 2026-08-03 after an external review:
+> every paired figure here was a **complete-case** analysis, counting an item
+> only when both arms answered. But this repo's own drops are
+> timeout-correlated and land on long-generation items, so treating a timeout
+> as the failure it would be in deployment **reverses two headline results**:
+>
+> | claim | complete case | timeout = failure |
+> |---|---:|---:|
+> | stack vs the same budget sampled | net −6 | **net +1** |
+> | SuperGPQA orchestration win | net +7, p=0.0327 | **net −4, p=0.85** |
+>
+> **No tested scaffold has shown a robust accuracy-per-token advantage over a
+> strong-model baseline.** Twelve mechanisms for catching a confident-but-wrong
+> panel were pre-registered and tested; all twelve are null. The negative
+> results, and the discipline that eventually caught these two, are the
+> contribution.
+> → [`docs/FINDINGS-2026-08.md`](docs/FINDINGS-2026-08.md) · reproduce with
+> `python -m benchmark.analyze_dropout_sensitivity`
 
 **Measured on the full 90-question GPQA-Diamond set (complete run, no
 dropped questions):** three cheap solvers, plus a flagship Judge called only
@@ -125,9 +143,18 @@ complete account, and the one to read first.**
 > against the stack's 12,991 — a 6% difference — and scores **92.9% against the
 > stack's 90.6%**. Paired, three seeds, n=255: the stack is **net −6, p=0.981**.
 >
-> Every seed points the same way. So the result is not the weak "the tribunal
-> fails to beat one call"; it is **spend its budget on sampling instead and you
-> do better** (`benchmark/results/tb1_flagship_comparison_result.md` §5.2).
+> **⚠ That −6 does not survive a sensitivity check, and neither does the
+> SuperGPQA win.** Both were complete-case analyses. Counting a timeout as the
+> failure it would be in deployment: the −6 becomes **+1**, and SuperGPQA's
+> +7 (p=0.0327) becomes **−4 (p=0.85)**. Nor was "sampling is measurably
+> better" ever supported — p=0.981 tests whether the *stack* is superior; the
+> reverse test is **p=0.073** complete-case and **p=0.668** under
+> timeout-as-failure, so neither direction clears 0.05.
+>
+> The defensible statement is narrower: **no tested scaffold has shown a robust
+> accuracy-per-token advantage over a strong-model baseline.** Run
+> `python -m benchmark.analyze_dropout_sensitivity` for every headline under
+> both readings (`tb1_flagship_comparison_result.md` §5.2).
 >
 > *(The flagship reads **90.6%** here and **84.4%** at the top of this page. Both
 > are measured: 84.4% is the frozen n=90 seed-42 submission run; 90.6% is the
@@ -136,10 +163,14 @@ complete account, and the one to read first.**
 > questions and no run covers all of them. Neither figure is a correction to
 > the other.)*
 >
-> On SuperGPQA-hard, where the base model is 10 points weaker, orchestration
-> **does** win (+7, p = 0.0327, 3 seeds) — but a compute-matched control
-> attributes that gain to **self-consistency sampling, not deliberation**, and
-> the same escalate-everything lever built from *cheap* seats **loses** there
+> On SuperGPQA-hard the base model is 10 points weaker, and orchestration
+> appeared to win there (+7, p = 0.0327, 3 seeds) — but that was the project's
+> only advertised orchestration win and it is **complete-case only**: counting
+> non-completions as failures it is **−4, p = 0.85**. The candidate arm
+> completed 83/79/81 items against the reference's 88/88/86, so it was excused
+> the items it failed to finish. Even taken at face value, a compute-matched
+> control attributed the gain to **sampling, not deliberation**, and the same
+> escalate-everything lever built from *cheap* seats **loses** there
 > (net −2, p = 0.89). Twelve separate mechanisms for detecting a
 > confident-but-wrong panel were tested; all twelve are null.
 >

@@ -205,7 +205,15 @@ single number in both comparisons. Both figures describe the same null.
 Every seed lost 5 items (|S| = 85 of 90), well inside the 9-drop kill. Drops are
 504-correlated and therefore **not MCAR**; with net −6 against a bar the result
 misses by a wide margin, 5 items could not reverse it, but the bias is stated
-rather than assumed harmless. The 300 s client timeout that caused them is
+rather than assumed harmless.
+
+> **⚠ That sentence is WRONG, corrected 2026-08-03.** The drops CAN reverse it
+> and they do. Counting a non-completion as a failure over the intended 270
+> items, A-vs-C goes from **net −6 to net +1** — eight items the stack answered
+> correctly are excluded from the complete-case set solely because arm C
+> returned nothing on them. Excusing an arm the items it failed to finish is
+> exactly the bias "not MCAR" warns about, and I asserted the opposite without
+> computing it. See `python -m benchmark.analyze_dropout_sensitivity`. The 300 s client timeout that caused them is
 filed as separate work — `lever_experiments.py` does not expose the `timeout`
 parameter `QwenClient` already has.
 

@@ -194,7 +194,40 @@ conclusion arrives a second time by a different route: **sampling the strong
 model is what works; deliberation among weak ones is not.** See
 [`tb1b_supergpqa_result.md`](../benchmark/results/tb1b_supergpqa_result.md).
 
-### 4c. TB-1 arm C — the stack loses to its own budget spent on sampling
+### 4c. TB-1 arm C — the stack vs its own budget spent on sampling
+
+> **⚠ CORRECTED 2026-08-03 after an external review. The headline below was
+> complete-case only, and it reverses.**
+>
+> Every paired figure in this document counts an item only when both arms
+> answered. But this repo's own verifiers print, on every seed, that drops are
+> 504/timeout-correlated and land on long-generation items — so the missingness
+> is **not random**, and for a deployed system a timeout IS the failure.
+>
+> | reading | n | net | p(stack sup.) | p(sampling sup.) |
+> |---|---:|---:|---:|---:|
+> | complete case (published) | 256 | **−6** | 0.9807 | 0.0730 |
+> | timeout = failure | 270 | **+1** | 0.5000 | 0.6682 |
+>
+> Eight items the stack got right vanish from the complete-case set purely
+> because SC@5 returned nothing on them. The §5.2 write-up said the drops
+> "could not reverse it"; that was wrong, and it is corrected there too.
+>
+> **A second, separate error.** This section read "sampling is measurably
+> better" off p = 0.9807. That p tests whether the **stack** is superior. The
+> test of the sampling claim is the reverse one-sided p — **0.0730**
+> complete-case, **0.6682** under timeout-as-failure. Neither clears 0.05, so
+> *neither strategy demonstrated superiority*.
+>
+> **What survives:** the stack did not beat an equal budget spent on plain
+> sampling. That is still a real negative result, and it is the only one this
+> arm supports. Reproduce every headline under both readings with
+> `python -m benchmark.analyze_dropout_sensitivity`.
+>
+> *Also note the clustering: these 256 observations cover **164 unique
+> questions** (81 ids recur across seeds), and McNemar assumes independent
+> pairs.*
+
 
 **Measured 2026-08-03. Seeds 1001/2311/3407, n=255 paired, |S|=85 every seed.**
 This is the arm the TB-1 spec called "non-negotiable" and that a later note
