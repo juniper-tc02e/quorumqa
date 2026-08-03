@@ -29,6 +29,7 @@ import re
 import threading
 
 import sympy
+from quorumqa.tools.safe_math import safe_sympify
 
 try:
     from latex2sympy2_extended import latex2sympy
@@ -129,10 +130,10 @@ def _to_expr(s: str):
             s.replace("\\pi", "pi").replace("\\cdot", "*").replace("\\times", "*")
             .replace("{", "(").replace("}", ")").replace("^", "**")
         )
-        try:
-            return sympy.sympify(ascii_s, rational=True)
-        except Exception:
-            return None
+        # safe_sympify, NOT sympy.sympify -- see quorumqa.tools.safe_math.
+        # This path is worse than the tool path: a payload could execute AND
+        # return a value this grader then scored as CORRECT.
+        return safe_sympify(ascii_s, rational=True)
 
     return _run_with_timeout(attempt, 3.0)
 

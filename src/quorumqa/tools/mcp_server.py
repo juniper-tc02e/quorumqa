@@ -16,7 +16,7 @@ from pathlib import Path
 import sympy
 from mcp.server.fastmcp import FastMCP
 
-from quorumqa.tools.safe_math import CONSTANTS, SafeEvalError, safe_eval
+from quorumqa.tools.safe_math import CONSTANTS, SafeEvalError, safe_eval, safe_sympify
 
 try:
     from latex2sympy2_extended import latex2sympy
@@ -146,9 +146,13 @@ def _parse_sympy_expr(s: str):
                 s.replace("\\pi", "pi").replace("\\cdot", "*").replace("\\times", "*")
                 .replace("{", "(").replace("}", ")").replace("^", "**")
             )
-            try:
-                parsed = sympy.sympify(ascii_s, rational=True)
-            except Exception:
+            # safe_sympify, NOT sympy.sympify: sympify evaluates its argument
+            # as Python, and `s` is model-generated. An external review on
+            # 2026-08-03 demonstrated file-write RCE through this line. The
+            # isinstance(Expr) check below runs AFTER evaluation and is
+            # therefore no defence at all.
+            parsed = safe_sympify(ascii_s, rational=True)
+            if parsed is None:
                 return None
         # Only algebraic expressions may escape this function.
         return parsed if isinstance(parsed, sympy.Expr) else None
