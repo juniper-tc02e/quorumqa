@@ -107,9 +107,26 @@ Disagreement isn't staged -- it's whatever the three independent Solvers
 actually produce. When they split, the Skeptic must name the specific
 inferential step it disputes (not a generic critique), the Verifier grounds
 any numeric/factual claim through a real MCP tool call rather than letting
-either side assert from memory, and the Judge rules by weighing arguments,
-never by re-counting votes -- with any unresolved objection recorded
-verbatim as dissent rather than papered over.
+either side assert from memory, and the Judge is *instructed* to rule by
+weighing arguments rather than re-counting votes -- with any unresolved
+objection recorded verbatim as dissent rather than papered over.
+
+> **What is measured, and what is not.** "Rules by weighing arguments, never by
+> re-counting votes" was stated here as fact until 2026-08-03. It is a
+> description of the **prompt** (`JUDGE_SYSTEM`: *"weigh ARGUMENTS, not
+> headcounts; an unrefuted minority position beats a conforming majority"*),
+> not a measured property of the behaviour.
+>
+> The evidence that it is not *merely* tallying: the Judge picks a letter **no
+> solver picked** on 10.2% of escalations and is **right 83.3%** of those times
+> (`benchmark/results/unanimous_gate_headroom.md`). That is a real,
+> non-vote-counting behaviour.
+>
+> The evidence against the word *never*: the Judge re-confirms the plurality on
+> **58.8%** of escalations (the false-escalation rate). Confirming the majority
+> most of the time is exactly what vote-counting would also produce, and no
+> measurement here separates the two. The honest claim is the prompt plus the
+> off-slate rate — not "never".
 
 ## Escalation-integrity metrics
 
