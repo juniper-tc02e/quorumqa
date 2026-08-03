@@ -312,11 +312,20 @@ def build_f10() -> None:
         f"{d} seeds {'/'.join(str(x['seed']) for x in summary[d]['seeds_used'])}"
         for d in ("gpqa", "supergpqa")
     )
+    # Source globs DERIVED from the ARMS registry, not typed. This listed only
+    # two GPQA arms after arm C was registered, so the figure plotted
+    # flagship_sc5 without ever naming the file it came from -- a provenance
+    # footer that omits a plotted arm is worse than none, in a repo whose whole
+    # claim is that every number traces to a committed artifact.
+    from benchmark.analyze_cost_frontier import ARMS as _ARMS
+    arm_txt = "; ".join(
+        f"{ds.upper() if ds == 'gpqa' else 'SuperGPQA'} arms "
+        + ", ".join(sorted(tmpl.replace("{s}", "*") for tmpl, _ in spec.values()))
+        for ds, spec in _ARMS.items()
+    )
     draw_footer(
         fig,
-        f"benchmark/analyze_cost_frontier.py over committed run files ({seed_txt}). GPQA arms "
-        "TB1_flagship1x_*, lever_universal_gate_*; SuperGPQA arms lever_baseline_*, lever_flagship_panel_*, "
-        "compute_matched_control_*, lever_control_*.",
+        f"benchmark/analyze_cost_frontier.py over committed run files ({seed_txt}). {arm_txt}.",
         "Tokens, never dollars (cost_usd logs $0.00 after the Token-Plan migration). GPQA's three seeds overlap — "
         "269 rows cover 170 unique items — so its pooled figures are quoted conservatively elsewhere. On "
         "SuperGPQA the cheap_panel arm has no seed-42 file, so its ACCURACY is over fewer items than the "

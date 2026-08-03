@@ -751,3 +751,51 @@ def test_a_single_seed_loss_is_noise_not_a_loss(tmp_path, monkeypatch, capsys):
     assert "seeds meeting that: none" in out, "net -1 must not count as a loss"
     # but pooled net is -3, so the OTHER branch fires -- and should.
     assert "FALSIFICATION KILL FIRES" in out
+
+
+def test_a_drop_killed_seed_is_excluded_from_the_pooled_test(tmp_path, monkeypatch, capsys):
+    """Kill clause 3: '|S| < 81 on any seed voids that seed for every arm.'
+
+    gate_ok was computed and a 'SEED VOID -- do not analyse this seed' warning
+    printed, and then the pooling summed every seed anyway. No published figure
+    was affected (every real seed sits at |S|=85), but a future voided seed
+    would have entered the PRIMARY test silently, which is exactly what the
+    clause exists to prevent.
+    """
+    monkeypatch.setattr(tb1, "RESULTS", tmp_path)
+    qs = [f"q{i}" for i in range(90)]
+
+    # Good seed: full overlap, arm A wins 4.
+    _write(tmp_path / ARM_FILES["A"].format(seed=1001), [_engine_row(q, "A", "A") for q in qs])
+    _write(tmp_path / ARM_FILES["B"].format(seed=1001),
+           [_engine_row(q, "A", "B" if i < 4 else "A") for i, q in enumerate(qs)])
+
+    # Voided seed: only 40 shared items (< 81), and arm A wins 20 there -- a big
+    # enough contribution that its inclusion would be obvious in the pooled net.
+    _write(tmp_path / ARM_FILES["A"].format(seed=2311), [_engine_row(q, "A", "A") for q in qs[:40]])
+    _write(tmp_path / ARM_FILES["B"].format(seed=2311),
+           [_engine_row(q, "A", "B" if i < 20 else "A") for i, q in enumerate(qs[:40])])
+
+    r = verify()
+    assert r["per_seed"][2311]["gate_ok"] is False
+    p = r["pooled"]["B"]
+    assert p["seeds"] == [1001], "a voided seed must not be pooled"
+    assert p["net"] == 4, f"pooled net should be the good seed alone, got {p['net']:+d}"
+    assert p["seeds_excluded_by_drop_kill"] == [2311]
+
+    tb1.main()
+    out = capsys.readouterr().out
+    assert "SEED VOID" in out
+    assert "EXCLUDED by kill clause 3" in out, "the exclusion must be stated, not silent"
+
+
+def test_all_real_seeds_pass_the_drop_gate():
+    """The enforcement above changes no published number today, and this is the
+    assertion that says so: every real seed clears |S| >= 81."""
+    if not all(p.exists() for p in _REAL):
+        pytest.skip("TB-1 raw runs are gitignored; present only where the queue ran")
+    r = verify()
+    assert all(s["gate_ok"] for s in r["per_seed"].values())
+    for arm in ("B", "C"):
+        if arm in r["pooled"]:
+            assert not r["pooled"][arm]["seeds_excluded_by_drop_kill"]

@@ -258,15 +258,27 @@ def verify() -> dict:
         }
     else:
         pooled_sampling = None
+    # Kill clause 3 (drop kill) ENFORCED, not merely printed. Spec 6.3: "|S| < 81
+    # on any seed voids that seed for every arm". Until 2026-08-03 gate_ok was
+    # computed and a "SEED VOID -- do not analyse this seed" warning printed,
+    # and then the pooling below summed every seed anyway. No published figure
+    # was affected (all seeds sit at |S|=85), but a future voided seed would
+    # have entered the primary test silently, which is precisely what the clause
+    # exists to prevent. Found by an adversarial audit, alongside clause 2.
+    voided = [k for k, s in per_seed.items() if not s["gate_ok"]]
     for arm in comparators:
-        b = sum(s["comparisons"][arm]["b"] for s in per_seed.values() if arm in s["comparisons"])
-        c = sum(s["comparisons"][arm]["c"] for s in per_seed.values() if arm in s["comparisons"])
-        n = sum(s["comparisons"][arm]["n"] for s in per_seed.values() if arm in s["comparisons"])
-        seeds_used = [k for k, s in per_seed.items() if arm in s["comparisons"]]
+        usable = {k: s for k, s in per_seed.items()
+                  if arm in s["comparisons"] and s["gate_ok"]}
+        b = sum(s["comparisons"][arm]["b"] for s in usable.values())
+        c = sum(s["comparisons"][arm]["c"] for s in usable.values())
+        n = sum(s["comparisons"][arm]["n"] for s in usable.values())
         pooled[arm] = {
-            "b": b, "c": c, "net": b - c, "n": n, "seeds": seeds_used,
+            "b": b, "c": c, "net": b - c, "n": n, "seeds": sorted(usable),
             "p_one_sided": mcnemar_exact_one_sided(b, c),
             "primary_clears": mcnemar_exact_one_sided(b, c) < PRIMARY_ALPHA and b - c > 0,
+            "seeds_excluded_by_drop_kill": [
+                k for k in voided if arm in per_seed[k]["comparisons"]
+            ],
         }
 
     return {
@@ -339,6 +351,9 @@ def main() -> None:
         print(f"  A vs {arm}: b={p['b']} c={p['c']} net={p['net']:+d} n={p['n']} "
               f"p={p['p_one_sided']:.6f} seeds={p['seeds']}  "
               f"-> {'CLEARS' if p['primary_clears'] else 'does not clear'}")
+        if p.get("seeds_excluded_by_drop_kill"):
+            print(f"    (seeds {p['seeds_excluded_by_drop_kill']} EXCLUDED by kill clause 3: "
+                  f"|S| < {MIN_ANALYSIS_SET})")
     print()
 
     if not r["arm_c_run"]:

@@ -32,24 +32,26 @@ confident-but-wrong panel were tested. All twelve are null.
 
 ![F10](figures/f10_paired_cost_frontier.png)
 
-| GPQA-Diamond (n=255 paired, 3 arms) | accuracy | tokens/item | accuracy per 1k tokens |
+| GPQA-Diamond (n=255 paired, 3 arms) | accuracy | tokens/item | accuracy pts per 1k tokens |
 |---|---:|---:|---:|
 | **`qwen3.7-max` ×1** | 90.6% | **2,627** | **34.5** |
-| `universal_gate` | 90.6% | 12,991 | 6.97 — net +0, p=0.605 |
-| **`qwen3.7-max` SC@5** (compute-matched) | **92.9%** | 13,833 | 6.72 — the stack is net −6 vs this |
-| shipped engine | 80.8% | 8,690 | — dominated |
+| `universal_gate` | 90.6% | 12,991 | 7.0 — net +0, p=0.605 |
+| **`qwen3.7-max` SC@5** (compute-matched) | **92.9%** | 13,833 | 6.7 — the stack is net −6 vs this |
+| shipped engine † | 80.8% | 8,690 | 9.3 — dominated |
+
+† *The shipped engine has no run at these three seeds, so this row is carried over from the earlier 2-arm TB-1 frontier (n=265) and is **not** measured on the n=255 intersection the other three rows share. Kept because the comparison is still informative; marked because a table header that says n=255 should not silently contain a row that is not.*
 
 *Recomputed 2026-08-03 on the 3-arm intersection. These figures replace an
 earlier 2-arm table (89.4% / 2,792 / net +1 / n=265): adding arm C shrank S from
 265 to 255, and a paired statistic is defined on its item set. Nothing was
 re-measured. See `tb1_flagship_comparison_result.md` §5.2.*
 
-| SuperGPQA-hard (3 seeds, n=236 paired) | accuracy | tokens/item | accuracy per 1k tokens |
+| SuperGPQA-hard (3 seeds, n=236 paired) | accuracy | tokens/item | accuracy pts per 1k tokens |
 |---|---:|---:|---:|
-| `qwen3.7-max` ×1 | 79.2% | 2,969 | 0.267 |
-| `flagship_sc3` | 81.4% | 8,470 | 0.096 — net +5, p=0.133 |
-| **`flagship_panel`** | **82.2%** | 9,969 | 0.082 — net **+7, p=0.0327** ✅ |
-| cheap panel ×3 | 69.0% | 9,836 | 0.070 — net −13, p=0.996 |
+| `qwen3.7-max` ×1 | 79.2% | 2,969 | **26.7** |
+| `flagship_sc3` | 81.4% | 8,470 | 9.6 — net +5, p=0.133 |
+| **`flagship_panel`** | **82.2%** | 9,969 | 8.2 — net **+7, p=0.0327** ✅ |
+| cheap panel ×3 | 69.0% | 9,836 | 7.0 — net −13, p=0.996 |
 
 *(`cheap_panel` has no seed-42 run, so its accuracy is over n=158 while the
 others are over n=236. Its paired statistic still uses only items it shares
