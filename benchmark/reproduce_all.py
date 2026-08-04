@@ -58,6 +58,9 @@ NEEDS_GLOB: dict[str, str] = {
     "benchmark.verify_tb1b_supergpqa": "TB1B_universal_gate_supergpqa_seed*.jsonl",
     # These two read committed CSV/JSON only, so they run anywhere.
     "benchmark.analyze_headroom_rule": "",
+    # Reads the COMMITTED per-item table, so it runs on a fresh clone -- which
+    # is the entire reason that table exists.
+    "benchmark.analyze_dropout_sensitivity": "",
     "benchmark.figure_data": "",
     # Takes its inputs as explicit --control/--permuted paths rather than
     # globbing, so _missing_inputs() already covers it. Declared as "" so the
@@ -79,6 +82,8 @@ ANALYSES: list[tuple[str, list[str], str]] = [
      "The paired accuracy-vs-tokens frontier (Tier A)"),
     ("benchmark.analyze_headroom_rule", [],
      "Does the unanimous-wrong rate PREDICT lever payoff? (it bounds, not predicts)"),
+    ("benchmark.analyze_dropout_sensitivity", [],
+     "Every headline under complete-case AND timeout-as-failure (2 of 4 flip)"),
     ("benchmark.analyze_agent_costs", [],
      "Terminal-Bench agent token accounting"),
     ("benchmark.analyze_stability_repaired", [],

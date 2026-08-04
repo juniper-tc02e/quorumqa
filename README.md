@@ -85,17 +85,34 @@ pytest tests/ -v
 ```
 
 Reproduce every published analysis in one command (no API key, no network, no
-tokens -- every input is a committed file):
+tokens). Not every input is committed -- see the hierarchy below:
 
 ```bash
 python -m benchmark.reproduce_all
 ```
 
-It runs all fifteen analyses and finishes with the claims-ledger check, which
-verifies **119 published numbers against the documents that cite them**. On a
-fresh clone most analyses report **SKIP**, not OK — the raw `.jsonl` runs are
-gitignored, so they only execute on a machine holding them. Skipped is reported
-as skipped, never quietly omitted, and the summary says so in those words.
+It runs all sixteen analyses and finishes with the claims-ledger check, which
+verifies **119 published numbers against the documents that cite them**.
+
+**Honest reproducibility hierarchy** — an external review found the earlier
+wording ("every input is a committed file") was true of the ledger and not much
+else:
+
+| level | status |
+|---|---|
+| prose-to-summary transcription check | ✅ committed, runs anywhere |
+| recompute the **dropout sensitivity** from per-item outcomes | ✅ committed, runs anywhere |
+| recompute the remaining analyses from raw per-item logs | ⚠ local only — raw `.jsonl` is gitignored |
+| regenerate identical model outputs | ❌ impossible: hosted generation, unpinned model |
+
+`benchmark/results/per_item_outcomes.csv` (8,113 rows, 587 KiB) is committed and
+carries what happened per item — id, seed, arm, completed, correct, escalated,
+tokens — and **no question text, choices, answer keys or model reasoning**. The
+raw runs stay out because they contain GPQA content that the dataset asks not be
+revealed online; publishing outcomes rather than the benchmark fixes
+reproducibility without making contamination worse.
+
+Everything still marked SKIP is reported as skipped, never quietly omitted.
 
 Run the live dashboard:
 

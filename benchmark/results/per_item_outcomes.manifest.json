@@ -1,0 +1,468 @@
+{
+  "source_files": {
+    "adhoc_check.jsonl": {
+      "rows": 9,
+      "sha256": "d770421be86e2a5a912c01548f82f092581b0bf2f35ec7870f0e1e0dc94f5166",
+      "bytes": 62528
+    },
+    "compute_matched_control_supergpqa_seed123.jsonl": {
+      "rows": 84,
+      "sha256": "cb0a0b618c1846efe838280e9b2f322ce4559701e9cedf68986b05e172937215",
+      "bytes": 91588
+    },
+    "compute_matched_control_supergpqa_seed42.jsonl": {
+      "rows": 85,
+      "sha256": "e1374455ca188c8f07d030e3155c4049e450316f06a585c3b281664fa9a265f4",
+      "bytes": 89084
+    },
+    "compute_matched_control_supergpqa_seed7.jsonl": {
+      "rows": 84,
+      "sha256": "da1fc9884d291616507a5228825d92cec400e8c10665ab01d35c5b77b284a8ae",
+      "bytes": 93923
+    },
+    "full_run.jsonl": {
+      "rows": 74,
+      "sha256": "4f1a8ed5cad23c2304f105fc9b9cadd4b6627550f7b96543c117411a38000277",
+      "bytes": 530211
+    },
+    "full_run2.jsonl": {
+      "rows": 90,
+      "sha256": "8dd9d9a19401d4fe84e7d6035137e6c700867e7d349ffbe70487e96316c2419d",
+      "bytes": 602836
+    },
+    "gsm8k_pilot_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "e84041ee2eeb07d27d172fade9a75fa35c810f6612a05bab0e3900f108933ea0",
+      "bytes": 154702
+    },
+    "KI1BC_compute_matched_n9_gpqa_seed2311.jsonl": {
+      "rows": 90,
+      "sha256": "8140498bbeb0ee7178a541e8f6cd6af98c178e2476a50588ef84685a5866067a",
+      "bytes": 1025106
+    },
+    "lever_baseline_gpqa_seed217.jsonl": {
+      "rows": 88,
+      "sha256": "0b5ce53db2d5617f63e17add6a60418fa420386d5cae8037a672e9ec4e9337ab",
+      "bytes": 83827
+    },
+    "lever_baseline_gpqa_seed314.jsonl": {
+      "rows": 89,
+      "sha256": "29a8aeb788dff2cded071020bbfc49ad0102576b1e3eb91013e9a6545e021392",
+      "bytes": 87739
+    },
+    "lever_baseline_gpqa_seed471.jsonl": {
+      "rows": 88,
+      "sha256": "67e79bf87d3a58f5b16dc9b585b86f66c4e7a933aaa2b5deeb910d4cfd394ad5",
+      "bytes": 89167
+    },
+    "lever_baseline_mmlu_pro_stem_seed42.jsonl": {
+      "rows": 60,
+      "sha256": "83019c9d56e9b571d8bae0adaf2c9097fc2945142936c90c5394cfd0e3ff1ef9",
+      "bytes": 37981
+    },
+    "lever_baseline_seed123.jsonl": {
+      "rows": 90,
+      "sha256": "bd07eaea966fa8aa7ad60e279c47ac5a7f907a6eee8075a93d7898213d3194d9",
+      "bytes": 89734
+    },
+    "lever_baseline_seed7.jsonl": {
+      "rows": 89,
+      "sha256": "64d92d1216ce8f40327cde1ee384a4e132886afe1321c6af7eb034d728cc46bf",
+      "bytes": 86539
+    },
+    "lever_baseline_supergpqa_seed123.jsonl": {
+      "rows": 86,
+      "sha256": "69bad22b70f299522fe416b5bb46745ce378b2382375d73420e7e3d52b0043f7",
+      "bytes": 75334
+    },
+    "lever_baseline_supergpqa_seed42.jsonl": {
+      "rows": 88,
+      "sha256": "c2940a49528a4ec886bce301d04c40e2c44a548312fad79889f2002cb40458bd",
+      "bytes": 73522
+    },
+    "lever_baseline_supergpqa_seed7.jsonl": {
+      "rows": 88,
+      "sha256": "8f6bf8a9e59be00fe4537a0836410abf41477445078636be7a56f418250c6043",
+      "bytes": 79667
+    },
+    "lever_chem_flagship_gate_gpqa_seed777.jsonl": {
+      "rows": 88,
+      "sha256": "56a649aa0b331b859305720ce598d9888b22951ab430300ea9b7e2344e990066",
+      "bytes": 415728
+    },
+    "lever_chem_flagship_gate_gpqa_seed888.jsonl": {
+      "rows": 87,
+      "sha256": "a0280088759bed6f1131c07196d9f67777d54b4ef76ba3a31bef5adc83dec246",
+      "bytes": 394683
+    },
+    "lever_chem_flagship_gate_seed555.jsonl": {
+      "rows": 88,
+      "sha256": "d080e501df2f96595a4b9fd88286a04aaf0b25e6c6c285adfa23dd71045268c1",
+      "bytes": 396756
+    },
+    "lever_chem_thinking_gate_gpqa_seed217.jsonl": {
+      "rows": 89,
+      "sha256": "74585f6eb53c67d7360f8b840226656b7993597040418fb71be48e9242d37b5b",
+      "bytes": 385982
+    },
+    "lever_chem_thinking_gate_gpqa_seed314.jsonl": {
+      "rows": 88,
+      "sha256": "4714b8a1bcbe8a70ee2cd36f7de1e63e34707b40ccef8ecbf9eacaddee01069f",
+      "bytes": 371306
+    },
+    "lever_chem_thinking_gate_gpqa_seed471.jsonl": {
+      "rows": 87,
+      "sha256": "bceb5e73d8397532b1d95c2e148e447abeb89726686bc2f9fdd394f368f89fc4",
+      "bytes": 401813
+    },
+    "lever_combined_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "9a733f5f491a546d989da592e1fd16c7a8df0f5d387a99216cf4808256773222",
+      "bytes": 439828
+    },
+    "lever_combined_seed7.jsonl": {
+      "rows": 88,
+      "sha256": "b3cb006165963d2fa08b7f37c1741c619fe1c25415a45d55899cfa8b2f8b03c5",
+      "bytes": 427668
+    },
+    "lever_control_lexam_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "86ebda8a683ce756b1330abbca57288c09185a1dadced9527fa46d8a2d00e7f1",
+      "bytes": 359038
+    },
+    "lever_control_seed7.jsonl": {
+      "rows": 90,
+      "sha256": "450e050909cbcccd9ad6915120820973e18002fbebda348bd87f2b6b3a5a69a5",
+      "bytes": 410339
+    },
+    "lever_control_seed7_replicate.jsonl": {
+      "rows": 89,
+      "sha256": "2b6bf30309c4e44ff311760f02c486a2d057a5a45319176aeac731f862527456",
+      "bytes": 390505
+    },
+    "lever_control_supergpqa_seed123.jsonl": {
+      "rows": 88,
+      "sha256": "e3df99708181974752acd0f47a742aa080aa01214d9caadb75ea5966249ddb07",
+      "bytes": 411901
+    },
+    "lever_control_supergpqa_seed271.jsonl": {
+      "rows": 90,
+      "sha256": "b2d3939d75fb3663918aebf61ddda5c47c1327ffed8a7b9c417a386178fce5fb",
+      "bytes": 426352
+    },
+    "lever_control_supergpqa_seed606.jsonl": {
+      "rows": 89,
+      "sha256": "c75632f85d8ac7439830e40857f808deb80e1deb2a8b8ac0062a5e5c8b7bd1ce",
+      "bytes": 425992
+    },
+    "lever_control_supergpqa_seed7.jsonl": {
+      "rows": 90,
+      "sha256": "ae28c80fa1fc7906f53d7b45bff88d5acd0585c76ee714e6197a776ac952efc0",
+      "bytes": 417787
+    },
+    "lever_control_supergpqa_seed838.jsonl": {
+      "rows": 90,
+      "sha256": "47cad34460f571d7c88ad5af0bb224d625b5e199a4006c9f8a0641615d7715d5",
+      "bytes": 437917
+    },
+    "lever_cycled_panel_supergpqa_seed19.jsonl": {
+      "rows": 87,
+      "sha256": "00dac3fe3f239bc55d77eb0af6f113980e04ec0a4694777139a20114eb0ba25f",
+      "bytes": 1395325
+    },
+    "lever_diversified_panel_supergpqa_seed19.jsonl": {
+      "rows": 87,
+      "sha256": "1c7bb9e7ac3505df8f5f203804cb1b9065f04aa95d8a5ce1695f455a210ae22e",
+      "bytes": 1640144
+    },
+    "lever_five_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "4458c6950197cb266d1ffc6a0eb6a222a2fc563a181362054d23ebd14343af48",
+      "bytes": 549513
+    },
+    "lever_flagship_panel_mmlu_pro_stem_seed42.jsonl": {
+      "rows": 60,
+      "sha256": "3117c7aa710eab31f43169edbad99981b80e5cc6bede587fe64e05669b8c9c19",
+      "bytes": 159539
+    },
+    "lever_flagship_panel_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "f8ee60b41ff17fd192d9f423f4b4f3a991e3bd190b594f9254254efdc3eae7a1",
+      "bytes": 317426
+    },
+    "lever_flagship_panel_seed42_replicate.jsonl": {
+      "rows": 90,
+      "sha256": "7046b03c3401385497e56b196c530f01c61431f385786e5d79631eaf3f01cf34",
+      "bytes": 324729
+    },
+    "lever_flagship_panel_seed7.jsonl": {
+      "rows": 90,
+      "sha256": "e4fd3e7847463b134cca176eac2a8046ef04d417b5efd1ed2c0d51c9893cdd12",
+      "bytes": 312123
+    },
+    "lever_flagship_panel_supergpqa_seed123.jsonl": {
+      "rows": 81,
+      "sha256": "157466f819995544cfde110cbc3e4286ba1d96435231d413af95565059c2db0b",
+      "bytes": 252398
+    },
+    "lever_flagship_panel_supergpqa_seed42.jsonl": {
+      "rows": 79,
+      "sha256": "9f460951fbd665358c7d44a4c202ee204bd078bc9a9b787ff8c7d1f99f89f7f6",
+      "bytes": 251853
+    },
+    "lever_flagship_panel_supergpqa_seed7.jsonl": {
+      "rows": 83,
+      "sha256": "c38d75782b048cb2b9ac97c13ed14c5b0d9612476d294607c8aa350f1b8949ab",
+      "bytes": 281192
+    },
+    "lever_qwen38_judge_gpqa_seed42.jsonl": {
+      "rows": 76,
+      "sha256": "a9ecc9f051a53f3f3a1f91ebbcf00b7ef75231408a6b30a100e4f05dc76c8709",
+      "bytes": 316813
+    },
+    "lever_qwen38_panel_supergpqa_seed42.jsonl": {
+      "rows": 63,
+      "sha256": "f19e431cc3d5459d9186c9bd1d14468d4c05d4803cfb63cf2196348f3d4413f2",
+      "bytes": 153052
+    },
+    "lever_rag_presolve_gpqa_seed42.jsonl": {
+      "rows": 86,
+      "sha256": "a4617d38aa37918c626fd0411f31bfc74187549cc3e9a5c418319f74ac23d426",
+      "bytes": 366459
+    },
+    "lever_rag_presolve_supergpqa_seed123.jsonl": {
+      "rows": 89,
+      "sha256": "4ab00b020ff359bf3316963d447afbbbf14e5b61af33be2f56609b3002a2bc89",
+      "bytes": 406624
+    },
+    "lever_rag_presolve_supergpqa_seed271.jsonl": {
+      "rows": 90,
+      "sha256": "cf473402d63959c3a1662bdee679bd16c98583d241c13a8aa7a032acea7fedd6",
+      "bytes": 375031
+    },
+    "lever_rag_presolve_supergpqa_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "6ca0abe9b45a50ae892efd5f0ff96ba203c89da27df78e414ee6dc25e63b0b53",
+      "bytes": 404256
+    },
+    "lever_rag_presolve_supergpqa_seed606.jsonl": {
+      "rows": 90,
+      "sha256": "0229c85c869ea419f9e3aba2aaec119da22b0e88b390e4ad19685af70b60a693",
+      "bytes": 426303
+    },
+    "lever_rag_presolve_supergpqa_seed7.jsonl": {
+      "rows": 87,
+      "sha256": "76e2d2fd65b9aa26ab2be0a4f8f5113b1e8bfd3a478cb21ca1aa43b185afd9bc",
+      "bytes": 394306
+    },
+    "lever_rag_recursive_lexam_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "731a1d76b79d45e6f6126cd59abc428382b3c15956baa70acfa3cb9f0b4fc9ef",
+      "bytes": 575828
+    },
+    "lever_rag_recursive_supergpqa_seed42.jsonl": {
+      "rows": 89,
+      "sha256": "05efd37251d2a42dceb9afcffe29bdf49a45a831f1520805583de50600781fcd",
+      "bytes": 549001
+    },
+    "lever_rag_thinking_gate_supergpqa_seed271.jsonl": {
+      "rows": 89,
+      "sha256": "40dcae4d68c53fcd77f4b06818193620d0bad7a6964fc812cc17ff601aad1cf4",
+      "bytes": 433413
+    },
+    "lever_rag_thinking_gate_supergpqa_seed606.jsonl": {
+      "rows": 87,
+      "sha256": "4360a3a7073bf9e855d72cf5562a0be707dc8a2466f8f2b91467ca79838d5dbb",
+      "bytes": 481470
+    },
+    "lever_rag_thinking_gate_supergpqa_seed838.jsonl": {
+      "rows": 89,
+      "sha256": "86f26f25d02dd2fe5dc17311ddb0bacebe38776da5d4bdf7ac0ed1696d11cbbf",
+      "bytes": 424230
+    },
+    "lever_smart_gate_seed123.jsonl": {
+      "rows": 89,
+      "sha256": "c6ebda9eec4f1de49889017cea11dd33bcffe6128a33e44184b1b48a136f6538",
+      "bytes": 424898
+    },
+    "lever_subject_seed7.jsonl": {
+      "rows": 89,
+      "sha256": "c37549ab6417ca734b3a24c09c9231b1b5b3cc66e94843a2ec6480fe36545ead",
+      "bytes": 446143
+    },
+    "lever_thinking_all_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "46727227b6942f72aeddbbe8a1cfb2601602c0bfff9317a05fe2ba35af802428",
+      "bytes": 322117
+    },
+    "lever_thinking_all_seed7.jsonl": {
+      "rows": 90,
+      "sha256": "1e1bf3ade600ab8795fc109919555a11b142c26cd5e12393de70c3d3fe1c7d03",
+      "bytes": 332453
+    },
+    "lever_thinking_gate_lexam_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "df0cf41b560b01909c623923d4f9320852ab4b4686509891ea3f8199986cbfe4",
+      "bytes": 195008
+    },
+    "lever_thinking_gate_mmlu_pro_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "7fcf7d3d76c17cfae8c080483cf8b07e99603b5c36eca8a73038ede1970f6919",
+      "bytes": 182305
+    },
+    "lever_thinking_gate_seed123.jsonl": {
+      "rows": 90,
+      "sha256": "c20cac0df0cad8a3c59ba878049b74893ff880cee4b0a782e201ca1c03626242",
+      "bytes": 408721
+    },
+    "lever_thinking_gate_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "7905e442dfb54177583658ce4ce353ec4865d1019d5f0793e928a78b2f60b94c",
+      "bytes": 423794
+    },
+    "lever_thinking_gate_seed7.jsonl": {
+      "rows": 89,
+      "sha256": "8df7f94b030a58bcc6807858b9ee44187fe0437011af139bb5c0c21feefc5b51",
+      "bytes": 419316
+    },
+    "lever_thinking_seed42.jsonl": {
+      "rows": 90,
+      "sha256": "84633be54ea6bf72b631165a23893e6b58a05e24a4e80ef7c1cdffaa70f185d0",
+      "bytes": 423681
+    },
+    "lever_thinking_seed7.jsonl": {
+      "rows": 90,
+      "sha256": "3c5f57151ed6de5984946640bc09133dc5a458ddaa546363bc079e938174bdc8",
+      "bytes": 431944
+    },
+    "lever_universal_gate_gpqa_seed1001.jsonl": {
+      "rows": 90,
+      "sha256": "c95587a1d234df273d9099b2dc0be63a4508447a4f2da1a6c00a599c6a44d448",
+      "bytes": 550801
+    },
+    "lever_universal_gate_gpqa_seed2311.jsonl": {
+      "rows": 89,
+      "sha256": "f768bfdf375500824f564fee6ddd155e01204a57a88b4fee5c4833ddd2ae846d",
+      "bytes": 569606
+    },
+    "lever_universal_gate_gpqa_seed3407.jsonl": {
+      "rows": 90,
+      "sha256": "cc6688be837b30a94a7eb237066f0bc97b77f49f39cd9aba03e2cb8c8c4272fb",
+      "bytes": 556284
+    },
+    "lexam_pilot_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "ca917db84198e60f23d7510c45e55d342847c6692c7de01686e4459db48ac3f2",
+      "bytes": 233074
+    },
+    "math500_hard_pilot_seed42.jsonl": {
+      "rows": 49,
+      "sha256": "500b0dbbef493c191431b61c259286649fe21dc4ada78532a4cb14f92a536510",
+      "bytes": 209905
+    },
+    "medqa_pilot_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "aa48c2e12aedb188b6c6c1088aabd500b5e796a6d18bd9d1af60a2b3d4cd86a0",
+      "bytes": 221773
+    },
+    "META2_control_supergpqa_seed1313.jsonl": {
+      "rows": 88,
+      "sha256": "cfbcc6fd8054a0629b08e5c55efbd7fca3735627a222e22923502550d9f5dc9b",
+      "bytes": 417740
+    },
+    "META2_control_supergpqa_seed2027.jsonl": {
+      "rows": 88,
+      "sha256": "b3677b88691a8e0351d9bbe3357bad1819e2fea281d113138ce10bdc57afaa7d",
+      "bytes": 384651
+    },
+    "META2_control_supergpqa_seed909.jsonl": {
+      "rows": 90,
+      "sha256": "925b5d0a9257b9df0f9ee1d0ad98c039503953fd5c6c0ad24e2622312427c39a",
+      "bytes": 440207
+    },
+    "META2_permuted_panel_supergpqa_seed1313.jsonl": {
+      "rows": 87,
+      "sha256": "a38c135141938f2a2afffa1be4385def4c838ef59262a93737b0f492216d7f86",
+      "bytes": 461375
+    },
+    "META2_permuted_panel_supergpqa_seed2027.jsonl": {
+      "rows": 89,
+      "sha256": "e680c5ca5fc50872f53913a64ff5abe5c5b3e5f0414abffa389e3bc9e1f51c61",
+      "bytes": 485401
+    },
+    "META2_permuted_panel_supergpqa_seed909.jsonl": {
+      "rows": 88,
+      "sha256": "6753bb8ee02ae780e0f86c4dcc4012f6d6a282962a77dc426d3ff85661927003",
+      "bytes": 450914
+    },
+    "mmlu_pro_pilot_seed42.jsonl": {
+      "rows": 50,
+      "sha256": "1ab51189edd54ce40555d491c617414ed7157394deaad081b0430e443cb27754",
+      "bytes": 192412
+    },
+    "smoke.jsonl": {
+      "rows": 2,
+      "sha256": "e0d63bad7073577f006d1d066e5e53b819cf5d609b5b6e9a770d3e7fcb76e98e",
+      "bytes": 11979
+    },
+    "smoke2.jsonl": {
+      "rows": 2,
+      "sha256": "ba98369f33ab6c9dc470c3330120a8001a59330d5cdf1274fec188242f450392",
+      "bytes": 8493
+    },
+    "smoke3.jsonl": {
+      "rows": 6,
+      "sha256": "3f3e974532bd4b6bfff8bf5dd332de6d19dd2b6c297d6b36a2882d9e219a153e",
+      "bytes": 36315
+    },
+    "supergpqa_hard_pilot_seed42.jsonl": {
+      "rows": 86,
+      "sha256": "bc768dc0553f02200ee9eaf20688038792c57f6b36e50d7a41224468f80b1eaf",
+      "bytes": 471540
+    },
+    "TB1_flagship1x_gpqa_seed1001.jsonl": {
+      "rows": 88,
+      "sha256": "ba13bc3fe9e107a0f14b3cdcca620014ad595d66a433c68619c3b26f1412545c",
+      "bytes": 87270
+    },
+    "TB1_flagship1x_gpqa_seed2311.jsonl": {
+      "rows": 89,
+      "sha256": "d4890e854baf8e84358942f0b6a8a8d191ebf8a46d0ffe755180d057ffc43798",
+      "bytes": 89528
+    },
+    "TB1_flagship1x_gpqa_seed3407.jsonl": {
+      "rows": 89,
+      "sha256": "a2f2e1d9876efabe28a90fa176ff356066ef3343af5a6a1206f2eaae6a9ad5e7",
+      "bytes": 83772
+    },
+    "TB1_flagship_sc5_gpqa_seed1001.jsonl": {
+      "rows": 86,
+      "sha256": "7c119a6b9947fd308c93a5db6c2dcc25b03c72b0b61e08a2c2fb7f9087128917",
+      "bytes": 487698
+    },
+    "TB1_flagship_sc5_gpqa_seed2311.jsonl": {
+      "rows": 86,
+      "sha256": "9a0ac44ddc31690aedbfc1348c41e1aa6746bb8541f9cb27667f3937912f5e04",
+      "bytes": 496880
+    },
+    "TB1_flagship_sc5_gpqa_seed3407.jsonl": {
+      "rows": 85,
+      "sha256": "9f9b98a1e92a4656f60a9b38f363c7380f173c3a32e08508ba32fe4068e106a5",
+      "bytes": 482620
+    },
+    "TB1B_universal_gate_supergpqa_seed7.jsonl": {
+      "rows": 89,
+      "sha256": "1e476d37b43e34a297924e849edac56d9ff199c9dd1856f47a81167e69bcbcbc",
+      "bytes": 566741
+    }
+  },
+  "generated": "2026-08-03",
+  "regenerate": "python -m benchmark.export_per_item_outcomes --write",
+  "rows": 8113,
+  "arms": 53,
+  "unique_questions": 1556,
+  "incomplete_rows": 795,
+  "what_this_is": "Per-item OUTCOMES only. No question text, no choices, no correct letter, no model reasoning. Sufficient to recompute every paired statistic this repo publishes; insufficient to reconstruct the benchmark.",
+  "why_not_the_raw_runs": "The raw .jsonl files carry full GPQA question text and answer keys. GPQA asks that examples not be revealed online, to avoid training contamination. Committing them to fix reproducibility would trade one problem for a worse one.",
+  "csv_sha256": "167debe66b74230c70bef3bf46683afeb7140bfffefe859c1e41433476412bc7"
+}

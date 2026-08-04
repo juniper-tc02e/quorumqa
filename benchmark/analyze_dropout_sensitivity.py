@@ -74,6 +74,44 @@ COMPARISONS = [
 ]
 
 
+#: The committed, stripped per-item table. Preferred over the raw runs so this
+#: analysis works on a fresh clone -- verified to give byte-identical b/c/net/p.
+OUTCOMES_CSV = RESULTS / "per_item_outcomes.csv"
+_CSV_CACHE: dict | None = None
+
+
+def _csv_outcomes(arm: str, seed: int) -> dict[str, bool] | None:
+    """question_id -> correct, from the COMMITTED table.
+
+    Returns None if the table is absent, so the caller falls back to the raw
+    runs. Only `completed` rows are outcomes; a drop is an absence here exactly
+    as it is in the raw files, which is what makes the two paths agree.
+    """
+    global _CSV_CACHE
+    if _CSV_CACHE is None:
+        if not OUTCOMES_CSV.exists():
+            _CSV_CACHE = {}
+        else:
+            import csv
+            cache: dict = {}
+            with OUTCOMES_CSV.open(encoding="utf-8") as fh:
+                for r in csv.DictReader(fh):
+                    if r["completed"] != "1":
+                        continue
+                    cache.setdefault((r["arm"], r["seed"]), {})[r["question_id"]] = (
+                        r["correct"] == "1")
+            _CSV_CACHE = cache
+    if not _CSV_CACHE:
+        return None
+    return _CSV_CACHE.get((arm, str(seed)))
+
+
+def _arm_key(tmpl: str, seed: int) -> str:
+    """The `arm` label the export writes: the filename stem minus the seed."""
+    import re
+    return tmpl.replace("seed{s}", "").replace(".jsonl", "").rstrip("_")
+
+
 def _outcomes(path: Path) -> dict[str, bool]:
     """question_id -> correct, from either an engine or a baseline row."""
     out: dict[str, bool] = {}
@@ -106,8 +144,15 @@ def compare(x_tmpl: str, y_tmpl: str, seeds, intended: int) -> dict:
         b = c = n = 0
         seen: Counter = Counter()
         for s in seeds:
-            X = _outcomes(RESULTS / x_tmpl.format(s=s))
-            Y = _outcomes(RESULTS / y_tmpl.format(s=s))
+            # Committed table first, raw runs as fallback. Both give the same
+            # numbers (pinned in tests/test_per_item_outcomes_offline.py); the
+            # table is what lets a fresh clone run this at all.
+            X = _csv_outcomes(_arm_key(x_tmpl, s), s)
+            if X is None:
+                X = _outcomes(RESULTS / x_tmpl.format(s=s))
+            Y = _csv_outcomes(_arm_key(y_tmpl, s), s)
+            if Y is None:
+                Y = _outcomes(RESULTS / y_tmpl.format(s=s))
             if not X or not Y:
                 continue
             # complete case: both answered.
